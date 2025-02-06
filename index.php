@@ -1,7 +1,7 @@
 <?php require_once("./includes/header.php"); ?>
 <?php require_once("./includes/sidebar.php"); ?>
 
-<!-- Page Wrapper Test Test 2-->
+<!-- Page Wrapper Test Test 2 Test3-->
 <div class="page-wrapper">
 	<div class="content">
 
