@@ -9,3 +9,4 @@ git add .
 git commit -m "Initial commit"
 git push origin HEAD
 Create PR and merge - (Example: https://github.com/Thangarasua/hrm/pull/1)
+
