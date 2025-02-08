@@ -699,7 +699,7 @@
 						"lengthMenu": false,
 						"pageLength": 20,
 						"language": {
-							"info": "Show _START_ To _END_ of _TOTAL_ Total",
+							"info": "Shows _START_ To _END_ of _TOTAL_ Total",
 							"sLengthMenu": "_MENU_ ",
 							"zeroRecords": "No records available.",
 							"search": "",
@@ -709,8 +709,7 @@
 							},
 						},
 						// Add buttons for export functionality
-						dom: 'Bfrtip',
-						// dom: 'tip',
+						dom: 'Bfrtip', 
 						buttons: [{
 								extend: 'excelHtml5',
 								text: 'Export to Excel',
@@ -806,7 +805,7 @@
 					/*-----------JQuery(data table) css (style) end----------*/
 
 					val = $('#tableRecords_info').html();
-					const myArray = val.split(" ");
+					const myArray = val.split("");
 					$('#totalCount').html('Total:' + myArray[5]);
 				},
 			});
