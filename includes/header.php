@@ -38,7 +38,7 @@ if (!isset($_SESSION['hrm_username']) || empty($_SESSION['hrm_username'])) {
 	<!-- Select2 CSS -->
 	<link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
 
-	<!-- Fontawesome CSS -->
+	<!-- Fontawesome CSS --> 
 	<link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
 	<link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
 
@@ -69,6 +69,9 @@ if (!isset($_SESSION['hrm_username']) || empty($_SESSION['hrm_username'])) {
 
 	<!--toastr alert added-->
 	<link rel="stylesheet" href="assets/css/toastr.min.css">
+
+	<!-- data table excel download added -->
+	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
 
 </head>
 
