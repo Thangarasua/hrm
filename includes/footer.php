@@ -1,9 +1,9 @@
 </div>
 <!-- /Main Wrapper -->
 <!-- jQuery -->
-<script data-cfasync="false" src="assets/js/email-decode.min.js"></script> 
+<script data-cfasync="false" src="assets/js/email-decode.min.js"></script>
 
-<script src="assets/js/jquery.min.js" type="text/javascript"></script> 
+<script src="assets/js/jquery.min.js" type="text/javascript"></script>
 
 <script src="assets/js/theme-script.js"></script>
 
@@ -28,9 +28,8 @@
 <script src="assets/js/moment.js"></script>
 
 <!-- Datatable JS -->
-<!-- <script src="assets/js/jquery.dataTables.min.js"></script> -->
- <script src="assets/js/dataTables.min.js"></script>
- <script src="assets/js/dataTables.bootstrap5.min.js"></script>
+<script src="assets/js/dataTables.min.js"></script>
+<script src="assets/js/dataTables.bootstrap5.min.js"></script>
 
 <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
 
@@ -61,4 +60,11 @@
 <!-- own scripts added -->
 <script src="scripts/myscript.js" type="text/javascript"></script>
 
-
+<!-- DataTables Buttons JS excel pdf download added --> 
+<script src="https://cdn.datatables.net/buttons/3.2.1/js/dataTables.buttons.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.2.1/js/buttons.dataTables.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.2.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.2.1/js/buttons.print.min.js"></script>

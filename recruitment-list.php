@@ -32,12 +32,11 @@
 							<i class="ti ti-file-export me-1"></i>Export
 						</a>
 						<ul class="dropdown-menu  dropdown-menu-end p-3">
-							<li>
-								<a href="javascript:void(0);" class="dropdown-item rounded-1"><i class="ti ti-file-type-pdf me-1"></i>Export as PDF</a>
-							</li>
-							<li>
-								<a href="javascript:void(0);" class="dropdown-item rounded-1"><i class="ti ti-file-type-xls me-1"></i>Export as Excel </a>
-							</li>
+							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="excel_button"><i class="ti ti-file-type-xls me-1"></i>Export as Excel </a></li>
+							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="pdf_button"><i class="ti ti-file-type-pdf me-1"></i>Export as PDF</a></li>
+							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="copy_button"><i class="ti ti-file-type-xls me-1"></i>Copy as Text </a></li>
+							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="csv_button"><i class="ti ti-file-type-xls me-1"></i>Export as CSV </a></li>
+							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="print_button"><i class="ti ti-file-type-xls me-1"></i>Export as Print </a></li>
 						</ul>
 					</div>
 				</div>
@@ -58,12 +57,29 @@
 				<h5>Job List</h5>
 				<div class="d-flex my-xl-auto right-content align-items-center flex-wrap row-gap-3">
 					<div class="me-3">
+						<div class="form-group">
+							<input type="text" id="myInputTextField" class="form-control" placeholder="Search anything..." title="Search any thing in the table you want">
+						</div>
+					</div>
+					<div class="me-3">
 						<div class="input-icon-end position-relative">
-							<input type="text" class="form-control date-range bookingrange" placeholder="dd/mm/yyyy - dd/mm/yyyy">
+							<input type="text" class="form-control date-range bookingrange" id="dateRange" placeholder="dd/mm/yyyy - dd/mm/yyyy">
 							<span class="input-icon-addon">
 								<i class="ti ti-chevron-down"></i>
 							</span>
 						</div>
+					</div>
+					<div class="dropdown me-3">
+						<select id="customLengthMenu" name="tableRecords_length" aria-controls="tableRecords" class="dropdown-toggle btn btn-white">
+							<option value="5">5</option>
+							<option value="10">10</option>
+							<option value="15">15</option>
+							<option value="20" selected>20</option>
+							<option value="50">50</option>
+							<option value="72">72</option>
+							<option value="100">100</option>
+							<option value="-1">All</option>
+						</select>
 					</div>
 					<div class="dropdown me-3">
 						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
@@ -126,324 +142,20 @@
 			</div>
 			<div class="card-body p-0">
 				<div class="custom-datatable-filter table-responsive">
-					<table class="table datatable">
+					<table class="table datatable" id="tableRecords">
 						<thead class="thead-light">
 							<tr>
-								<th class="no-sort">
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox" id="select-all">
-									</div>
-								</th>
+								<th>S.No</th>
 								<th>Job ID</th>
+								<th>Raised By</th>
 								<th>Job Title</th>
-								<th>Category</th>
-								<th>Location</th>
-								<th>Salary Range</th>
+								<th>Description</th>
+								<th>Skill</th>
 								<th>Posted Date</th>
-								<th></th>
+								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox">
-									</div>
-								</td>
-								<td>Job-001</td>
-								<td>
-									<div class="d-flex align-items-center file-name-icon">
-										<a href="#" class="avatar avatar-md bg-light rounded">
-											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/apple.svg" class="img-fluid rounded-circle" alt="img">
-										</a>
-										<div class="ms-2">
-											<h6 class="fw-medium"><a href="#">Senior IOS Developer</a></h6>
-											<span class="d-block mt-1">25 Applicants</span>
-										</div>
-									</div>
-								</td>
-								<td>Software</td>
-								<td>New York , USA</td>
-								<td>30, 000 - 35, 000 / month</td>
-								<td>12 Sep 2024 </td>
-
-								<td>
-									<div class="action-icon d-inline-flex">
-										<a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit_post"><i class="ti ti-edit"></i></a>
-										<a href="#" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox">
-									</div>
-								</td>
-								<td>Job-002</td>
-								<td>
-									<div class="d-flex align-items-center file-name-icon">
-										<a href="#" class="avatar avatar-md bg-light rounded">
-											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/php.svg" class="img-fluid rounded-circle" alt="img">
-										</a>
-										<div class="ms-2">
-											<h6 class="fw-medium"><a href="#">Junior PHP Developer</a></h6>
-											<span class="d-block mt-1">20 Applicants</span>
-										</div>
-									</div>
-								</td>
-								<td>Software</td>
-								<td>Los Angeles, USA</td>
-								<td>20, 000 - 25, 000 / month</td>
-								<td>24 Oct 2024 </td>
-
-								<td>
-									<div class="action-icon d-inline-flex">
-										<a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit_post"><i class="ti ti-edit"></i></a>
-										<a href="#" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox">
-									</div>
-								</td>
-								<td>Job-003</td>
-								<td>
-									<div class="d-flex align-items-center file-name-icon">
-										<a href="#" class="avatar avatar-md bg-light rounded">
-											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/black.svg" class="img-fluid rounded-circle" alt="img">
-										</a>
-										<div class="ms-2">
-											<h6 class="fw-medium"><a href="#">Junior PHP Developer</a></h6>
-											<span class="d-block mt-1">20 Applicants</span>
-										</div>
-									</div>
-								</td>
-								<td>Software</td>
-								<td>Los Angeles, USA</td>
-								<td>20, 000 - 25, 000 / month</td>
-								<td>24 Oct 2024 </td>
-
-								<td>
-									<div class="action-icon d-inline-flex">
-										<a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit_post"><i class="ti ti-edit"></i></a>
-										<a href="#" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox">
-									</div>
-								</td>
-								<td>Job-004</td>
-								<td>
-									<div class="d-flex align-items-center file-name-icon">
-										<a href="#" class="avatar avatar-md bg-light rounded">
-											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/react.svg" class="img-fluid rounded-circle" alt="img">
-										</a>
-										<div class="ms-2">
-											<h6 class="fw-medium"><a href="#">Junior React Developer </a></h6>
-											<span class="d-block mt-1">35 Applicants</span>
-										</div>
-									</div>
-								</td>
-								<td>Software</td>
-								<td>Bristol, UK</td>
-								<td>30, 000 - 35, 000 / month</td>
-								<td>18 Feb 2024 </td>
-
-								<td>
-									<div class="action-icon d-inline-flex">
-										<a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit_post"><i class="ti ti-edit"></i></a>
-										<a href="#" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox">
-									</div>
-								</td>
-								<td>Job-005</td>
-								<td>
-									<div class="d-flex align-items-center file-name-icon">
-										<a href="#" class="avatar avatar-md bg-light rounded">
-											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/laravel.svg" class="img-fluid rounded-circle" alt="img">
-										</a>
-										<div class="ms-2">
-											<h6 class="fw-medium"><a href="#">Senior Laravel Developer </a></h6>
-											<span class="d-block mt-1">40 Applicants</span>
-										</div>
-									</div>
-								</td>
-								<td>Software</td>
-								<td>Washington, USA</td>
-								<td>32, 000 - 36, 000 / month</td>
-								<td>20 Jul 2024</td>
-
-								<td>
-									<div class="action-icon d-inline-flex">
-										<a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit_post"><i class="ti ti-edit"></i></a>
-										<a href="#" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox">
-									</div>
-								</td>
-								<td>Job-006</td>
-								<td>
-									<div class="d-flex align-items-center file-name-icon">
-										<a href="#" class="avatar avatar-md bg-light rounded">
-											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/devops.svg" class="img-fluid rounded-circle" alt="img">
-										</a>
-										<div class="ms-2">
-											<h6 class="fw-medium"><a href="#">DevOps Engineer</a></h6>
-											<span class="d-block mt-1">20 Applicants</span>
-										</div>
-									</div>
-								</td>
-								<td>Software</td>
-								<td>Coventry, UK</td>
-								<td>25, 000 - 35, 000 / month</td>
-								<td>10 Apr 2024</td>
-
-								<td>
-									<div class="action-icon d-inline-flex">
-										<a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit_post"><i class="ti ti-edit"></i></a>
-										<a href="#" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox">
-									</div>
-								</td>
-								<td>Job-007</td>
-								<td>
-									<div class="d-flex align-items-center file-name-icon">
-										<a href="#" class="avatar avatar-md bg-light rounded">
-											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/android.svg" class="img-fluid rounded-circle" alt="img">
-										</a>
-										<div class="ms-2">
-											<h6 class="fw-medium"><a href="#">Junior Android Developer</a></h6>
-											<span class="d-block mt-1">25 Applicants</span>
-										</div>
-									</div>
-								</td>
-								<td>Software</td>
-								<td>Chicago, USA</td>
-								<td>28, 000 - 32, 000 / month</td>
-								<td>29 Aug 2024</td>
-
-								<td>
-									<div class="action-icon d-inline-flex">
-										<a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit_post"><i class="ti ti-edit"></i></a>
-										<a href="#" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox">
-									</div>
-								</td>
-								<td>Job-008</td>
-								<td>
-									<div class="d-flex align-items-center file-name-icon">
-										<a href="#" class="avatar avatar-md bg-light rounded">
-											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/html.svg" class="img-fluid rounded-circle" alt="img">
-										</a>
-										<div class="ms-2">
-											<h6 class="fw-medium"><a href="#">Senior HTML Developer</a></h6>
-											<span class="d-block mt-1">35 Applicants</span>
-										</div>
-									</div>
-								</td>
-								<td>Software</td>
-								<td>Carlisle, UK</td>
-								<td>25, 000 - 28, 000 / month</td>
-								<td>22 Feb 2024</td>
-
-								<td>
-									<div class="action-icon d-inline-flex">
-										<a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit_post"><i class="ti ti-edit"></i></a>
-										<a href="#" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox">
-									</div>
-								</td>
-								<td>Job-009</td>
-								<td>
-									<div class="d-flex align-items-center file-name-icon">
-										<a href="#" class="avatar avatar-md bg-light rounded">
-											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/ui.svg" class="img-fluid rounded-circle" alt="img">
-										</a>
-										<div class="ms-2">
-											<h6 class="fw-medium"><a href="#">Junior UI/UX Designer</a></h6>
-											<span class="d-block mt-1">20 Applicants</span>
-										</div>
-									</div>
-								</td>
-								<td>Software</td>
-								<td>Lancaster, UK</td>
-								<td>20, 000 - 25, 000 / month</td>
-								<td>03 Nov 2024</td>
-
-								<td>
-									<div class="action-icon d-inline-flex">
-										<a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit_post"><i class="ti ti-edit"></i></a>
-										<a href="#" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox">
-									</div>
-								</td>
-								<td>Job-010</td>
-								<td>
-									<div class="d-flex align-items-center file-name-icon">
-										<a href="#" class="avatar avatar-md bg-light rounded">
-											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/grafic.svg" class="img-fluid rounded-circle" alt="img">
-										</a>
-										<div class="ms-2">
-											<h6 class="fw-medium"><a href="#">Senior Graphic Designer</a></h6>
-											<span class="d-block mt-1">25 Applicants</span>
-										</div>
-									</div>
-								</td>
-								<td>Software</td>
-								<td>San Diego, USA</td>
-								<td>22, 000 - 28, 000 / month</td>
-								<td>17 Dec 2024</td>
-
-								<td>
-									<div class="action-icon d-inline-flex">
-										<a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit_post"><i class="ti ti-edit"></i></a>
-										<a href="#" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a>
-									</div>
-								</td>
-							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -471,97 +183,96 @@
 				</button>
 			</div>
 			<form id="resourseForm">
-				<div class="modal-body pb-0"> 
-						<div class="tab-content" id="myTabContent">
-							<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
-								<div class="row">
-									 
-									<div class="col-md-12">
-										<div class="mb-3">
-											<label class="form-label">Job Title <span class="text-danger"> *</span></label>
-											<input type="text" class="form-control" name="jobTitle">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="mb-3">
-											<label class="form-label">Job Description <span class="text-danger"> *</span></label>
-											<textarea rows="3" class="form-control" name="jobDescription"></textarea>
-										</div>
-									</div> 
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Job Type <span class="text-danger"> *</span></label>
-											<select class="select" name="jobType">
-												<option value="">Select</option>
-												<option value="Full Time">Full Time</option>
-												<option value="Part Time">Part Time</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Job Level <span class="text-danger"> *</span></label>
-											<select class="select" name="jobLevel">
-												<option value="">Select</option>
-												<option value="Team Lead">Team Lead</option>
-												<option value="Manager">Manager</option>
-												<option value="Senior">Senior</option>
-												<option value="junior">junior</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Experience <span class="text-danger"> *</span></label>
-											<select class="select" name="experience">
-												<option value="">Select</option>
-												<option value="Entry Level">Entry Level</option>
-												<option value="Mid Level">Mid Level</option>
-												<option value="Expert">Expert</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Qualification <span class="text-danger"> *</span></label>
-											<select class="select" name="qualification">
-												<option value="">Select</option>
-												<option value="Bachelore Degree">Bachelore Degree</option>
-												<option value="Master Degree">Master Degree</option>
-												<option value="Others">Others</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Gender <span class="text-danger"> *</span></label>
-											<select class="select" name="gender">
-												<option value="">Select</option>
-												<option value="Male">Male</option>
-												<option value="Female">Female</option>
-												<option value="Any">Any</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Required Skills</label>
-											<input type="text" class="form-control" name="requiredSkills">
-										</div>
+				<div class="modal-body pb-0">
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Job Title <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" name="jobTitle" id="jobTitle">
 									</div>
 								</div>
-								<div class="modal-footer">
-									<input type="text" name="purpose" value="addResource">
-									<button type="button" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</button>
-									<button type="submit" class="btn btn-primary">Save & Next</button>
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Job Description <span class="text-danger"> *</span></label>
+										<textarea rows="3" class="form-control" name="jobDescription" id="jobDescription"></textarea>
+									</div>
 								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Job Type <span class="text-danger"> *</span></label>
+										<select class="select" name="jobType" id="jobType">
+											<option value="">Select</option>
+											<option value="Full Time">Full Time</option>
+											<option value="Part Time">Part Time</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Job Level <span class="text-danger"> *</span></label>
+										<select class="select" name="jobLevel" id="jobLevel">
+											<option value="">Select</option>
+											<option value="Team Lead">Team Lead</option>
+											<option value="Manager">Manager</option>
+											<option value="Senior">Senior</option>
+											<option value="junior">junior</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Experience <span class="text-danger"> *</span></label>
+										<select class="select" name="experience" id="experience">
+											<option value="">Select</option>
+											<option value="Entry Level">Entry Level</option>
+											<option value="Mid Level">Mid Level</option>
+											<option value="Expert">Expert</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Qualification <span class="text-danger"> *</span></label>
+										<select class="select" name="qualification" id="qualification">
+											<option value="">Select</option>
+											<option value="Bachelore Degree">Bachelore Degree</option>
+											<option value="Master Degree">Master Degree</option>
+											<option value="Others">Others</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Gender <span class="text-danger"> *</span></label>
+										<select class="select" name="gender" id="gender">
+											<option value="">Select</option>
+											<option value="Male">Male</option>
+											<option value="Female">Female</option>
+											<option value="Any">Any</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Required Skills</label>
+										<input type="text" class="form-control" name="requiredSkills" id="requiredSkills">
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<input type="hidden" name="purpose" id="purpose" value="addResource">
+								<button type="button" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</button>
+								<button type="submit" class="btn btn-primary">Save & Next</button>
 							</div>
 						</div>
 					</div>
 				</div>
-			</form>
 		</div>
+		</form>
 	</div>
+</div>
 </div>
 <!-- /Post Job -->
 
@@ -571,13 +282,15 @@
 		<div class="modal-content">
 			<div class="modal-body">
 				<div class="text-center p-3">
-					<span class="avatar avatar-lg avatar-rounded bg-success mb-3"><i class="ti ti-check fs-24"></i></span>
-					<h5 class="mb-2">Job Posted Successfully</h5>
+					<span class="avatar avatar-lg avatar-rounded bg-success mb-3">
+						<i class="fa-solid fa-check"></i>
+					</span>
+					<h5 class="mb-2">Request add Successfully</h5>
 					</p>
 					<div>
 						<div class="row g-2">
 							<div class="col-12">
-								<a href="https://smarthr.dreamstechnologies.com/html/template/job-list.html" class="btn btn-dark w-100">Back to List</a>
+								<a href="#" class="btn btn-dark w-100" data-bs-dismiss="modal">Back to List</a>
 							</div>
 						</div>
 					</div>
@@ -837,7 +550,7 @@
 				<p class="mb-3">You want to delete all the marked items, this cant be undone once you delete.</p>
 				<div class="d-flex justify-content-center">
 					<a href="javascript:void(0);" class="btn btn-light me-3" data-bs-dismiss="modal">Cancel</a>
-					<a href="https://smarthr.dreamstechnologies.com/html/template/job-list.html" class="btn btn-danger">Yes, Delete</a>
+					<a href="/job-list.html" class="btn btn-danger">Yes, Delete</a>
 				</div>
 			</div>
 		</div>
@@ -850,9 +563,14 @@
 <script>
 	//creat profile
 	$(document).ready(function() {
+
 		// Submit form data via Ajax
 		$("#resourseForm").on("submit", function(e) {
 			e.preventDefault();
+			form = formValidate();
+			if (form == 0) {
+				return false;
+			}
 			$.ajax({
 				type: "POST",
 				url: "queries/resource.php",
@@ -862,13 +580,239 @@
 				cache: false,
 				processData: false,
 				success: function(response) {
-					if (response.status == "success") { 
-						$('#success_modal').model('show');
-					}else{
+					if (response.status == "success") {
+						$('#success_modal').modal('show');
+						$('#resourseForm')[0].reset();
+						$('#add_post').modal('hide');
+					} else {
 						toastr.error(response.message, "Error");
 					}
 				},
 			});
 		});
+
+		function formValidate() {
+			$(".error").remove(); // Remove previous error messages
+
+			let jobTitle = $("#jobTitle").val().trim();
+			if (jobTitle.length < 1) {
+				$("#jobTitle").focus();
+				$("#jobTitle").after("<small class='error text-danger'> mandatory field.</small>");
+				return 0;
+			}
+			let jobDescription = $("#jobDescription").val().trim();
+			if (jobDescription.length == 0) {
+				$("#jobDescription").focus();
+				$("#jobDescription").after("<small class='error text-danger'> mandatory field.</small>");
+				return 0;
+			}
+			let jobType = $("#jobType").val().trim();
+			if (jobType.length == 0) {
+				$("#jobType").focus();
+				$("#jobType").after("<small class='error text-danger'> mandatory field.</small>");
+				return 0;
+			}
+			let jobLevel = $("#jobLevel").val().trim();
+			if (jobLevel.length == 0) {
+				$("#jobLevel").focus();
+				$("#jobLevel").after("<small class='error text-danger'> mandatory field.</small>");
+				return 0;
+			}
+			let experience = $("#experience").val().trim();
+			if (experience.length == 0) {
+				$("#experience").focus();
+				$("#experience").after("<small class='error text-danger'> mandatory field.</small>");
+				return 0;
+			}
+			let qualification = $("#qualification").val().trim();
+			if (qualification.length == 0) {
+				$("#qualification").focus();
+				$("#qualification").after("<small class='error text-danger'> mandatory field.</small>");
+				return 0;
+			}
+			let gender = $("#gender").val().trim();
+			if (gender.length == 0) {
+				$("#gender").focus();
+				$("#gender").after("<small class='error text-danger'> mandatory field.</small>");
+				return 0;
+			}
+			let requiredSkills = $("#requiredSkills").val().trim();
+			if (requiredSkills.length == 0) {
+				$("#requiredSkills").focus();
+				$("#requiredSkills").after("<small class='error text-danger'> mandatory field.</small>");
+				return 0;
+			}
+
+			return 1;
+		}
+
+		$("#resourseForm").click(function() {
+			$(".error").remove(); // Remove previous error messages for filling form
+		});
+
+		fromDate = '';
+		toDate = '';
+		dateRange = '';
+		companyType = '';
+		purpose = "getAll";
+		loadData(fromDate, toDate, dateRange, companyType, purpose);
+
+		function loadData(fromDate, toDate, dateRange, companyType, purpose) {
+			$.ajax({
+				url: 'queries/resource.php',
+				type: 'POST',
+				dataType: 'json',
+				data: {
+					'fromDate': fromDate,
+					'toDate': toDate,
+					'dateRange': dateRange,
+					'companyType': companyType,
+					'purpose': purpose
+				},
+				success: function(data) {
+					var tableBody = $('#tableRecords tbody');
+
+					if ($.fn.DataTable.isDataTable('#tableRecords')) {
+						$('#tableRecords').DataTable().destroy();
+					}
+
+					tableBody.empty();
+					// Check if data is not empty
+					if (data.length > 0) {
+						$.each(data, function(index, row) {
+
+							var newRow = '<tr>' +
+								'<td>' + (index + 1) + '</td>' +
+								'<td>' + row.ticket_request_id + '</td>' +
+								'<td>' + row.raised_by + '</td>' +
+								'<td><div class="d-flex align-items-center file-name-icon"><div class="ms-2"><h6 class="fw-medium"><a href="#">' + row.job_position + '</a></h6><span class="d-block mt-1">0 Applicants</span></div></div></td>' +
+								'<td>' + row.job_descriptions.slice(0, 30) + '</td>' +
+								'<td>' + row.required_skills.slice(0, 30) + '</td>' +
+								'<td>' + row.created_at.split(' ')[0] + '</td>' +
+								'<td><div class="action-icon d-inline-flex"><a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit_post"><i class="ti ti-edit"></i></a><a href="#" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a></div></td>' +
+								'</tr>';
+							tableBody.append(newRow);
+						});
+					}
+					table = $('#tableRecords').DataTable({
+						//  "bFilter": false,
+						"lengthMenu": false,
+						"pageLength": 20,
+						"language": {
+							"info": "Show _START_ To _END_ of _TOTAL_ Total",
+							"sLengthMenu": "_MENU_ ",
+							"zeroRecords": "No records available.",
+							"search": "",
+							oPaginate: {
+								sNext: '<i class="fa fa-chevron-right"></i>',
+								sPrevious: '<i class="fa fa-chevron-left"></i>'
+							},
+						},
+						// Add buttons for export functionality
+						dom: 'Bfrtip',
+						// dom: 'tip',
+						buttons: [{
+								extend: 'excelHtml5',
+								text: 'Export to Excel',
+								title: 'Download Excel',
+								className: 'btn btn-success',
+								exportOptions: {
+									columns: ':visible'
+								},
+								className: 'd-none'
+							},
+							{
+								extend: 'pdf',
+								text: 'Export to PDF',
+								title: 'Download PDF',
+								className: 'buttons-pdf',
+								exportOptions: {
+									columns: ':visible'
+								},
+								className: 'd-none'
+							},
+							{
+								extend: 'copy',
+								text: 'Export to copy',
+								title: 'Download copy',
+								className: 'buttons-copy',
+								exportOptions: {
+									columns: ':visible'
+								},
+								className: 'd-none'
+							},
+							{
+								extend: 'csv',
+								text: 'Export to csv',
+								title: 'Download csv',
+								className: 'buttons-csv',
+								exportOptions: {
+									columns: ':visible'
+								},
+								className: 'd-none'
+							},
+							{
+								extend: 'print',
+								text: 'Export to print',
+								title: 'Download print',
+								className: 'buttons-print',
+								exportOptions: {
+									columns: ':visible'
+								},
+								className: 'd-none'
+							}
+						]
+					});
+
+					// When the custom button is clicked, trigger the DataTable's Excel export
+					$('#excel_button').on('click', function() {
+						table.button('.buttons-excel').trigger();
+					});
+					$('#pdf_button').on('click', function() {
+						table.button('.buttons-pdf').trigger();
+					});
+					$('#copy_button').on('click', function() {
+						table.button('.buttons-copy').trigger();
+					});
+					$('#csv_button').on('click', function() {
+						table.button('.buttons-csv').trigger();
+					});
+					$('#print_button').on('click', function() {
+						table.button('.buttons-print').trigger();
+					}); 
+
+					//customise the dataTable search table column value
+					oTable = $('#tableRecords').DataTable();
+					$('#myInputTextField').keyup(function() {
+						oTable.search($(this).val()).draw();
+					})
+
+					//customise the dataTable no of records show
+					$('#customLengthMenu').on('change', function() {
+						var length = $(this).val();
+						table.page.len(length).draw();
+					});
+
+					/*-----------JQuery(data table) css (style) start----------*/
+					$('#tableRecords').css('width', '100%');
+					$('.dataTables_filter input').css('width', '350px');
+					$('.dataTables_length').css({
+						'position': 'absolute',
+						'right': '33%'
+					});
+					$('#tableRecords_length select').addClass('form-control');
+					$('#tableRecords_filter input').addClass('form-control');
+
+					/*-----------JQuery(data table) css (style) end----------*/
+
+					val = $('#tableRecords_info').html();
+					const myArray = val.split(" ");
+					$('#totalCount').html('Total:' + myArray[5]);
+				},
+			});
+		}
+
+
+
 	});
 </script>
