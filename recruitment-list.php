@@ -29,7 +29,7 @@
 
 					<div class="dropdown">
 						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
-							<i class="ti ti-file-export me-1"></i>Export
+						<i class="ti ti-file-export me-1"></i> Export
 						</a>
 						<ul class="dropdown-menu  dropdown-menu-end p-3">
 							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="excel_button"><i class="ti ti-file-type-xls me-1"></i>Export as Excel </a></li>
@@ -269,10 +269,9 @@
 						</div>
 					</div>
 				</div>
+			</form>
 		</div>
-		</form>
 	</div>
-</div>
 </div>
 <!-- /Post Job -->
 
@@ -302,232 +301,98 @@
 <!-- /Add Job Success -->
 
 <!-- Edit Post -->
-<div class="modal fade" id="edit_post">
+<div class="modal fade" id="edit_recruitment">
 	<div class="modal-dialog modal-dialog-centered modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title">Edit Job</h4>
+				<h4 class="modal-title">Edit Resource Recruitment</h4>
 				<button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
 					<i class="ti ti-x"></i>
 				</button>
 			</div>
-			<form action="#">
+			<form id="resourseForm">
 				<div class="modal-body pb-0">
-					<div class="row">
-						<div class="contact-grids-tab pt-0">
-							<ul class="nav nav-underline" id="myTabs" role="tablist">
-								<li class="nav-item" role="presentation">
-									<button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#basic-infos" type="button" role="tab" aria-selected="true">Basic Information</button>
-								</li>
-								<li class="nav-item" role="presentation">
-									<button class="nav-link" id="address-tabs" data-bs-toggle="tab" data-bs-target="#addresss" type="button" role="tab" aria-selected="false">Location</button>
-								</li>
-							</ul>
-						</div>
-						<div class="tab-content" id="myTabContents">
-							<div class="tab-pane fade show active" id="basic-infos" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
-								<div class="row">
-									<div class="col-md-12">
-										<div class="d-flex align-items-center flex-wrap row-gap-3 bg-light w-100 rounded p-3 mb-4">
-											<div class="d-flex align-items-center justify-content-center avatar avatar-xxl rounded-circle border border-dashed me-2 flex-shrink-0 text-dark frames">
-												<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-30.jpg" alt="img" class="rounded-circle">
-											</div>
-											<div class="profile-upload">
-												<div class="mb-2">
-													<h6 class="mb-1">Upload Profile Image</h6>
-													<p class="fs-12">Image should be below 4 mb</p>
-												</div>
-												<div class="profile-uploader d-flex align-items-center">
-													<div class="drag-upload-btn btn btn-sm btn-primary me-2">
-														Upload
-														<input type="file" class="form-control image-sign" multiple="">
-													</div>
-													<a href="javascript:void(0);" class="btn btn-light btn-sm">Cancel</a>
-												</div>
-
-											</div>
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="mb-3">
-											<label class="form-label">Job Title <span class="text-danger"> *</span></label>
-											<input type="text" class="form-control" value="Senior IOS Developer">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="mb-3">
-											<label class="form-label">Job Description <span class="text-danger"> *</span></label>
-											<textarea rows="3" class="form-control"></textarea>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Job Category <span class="text-danger"> *</span></label>
-											<select class="select">
-												<option value="">Select</option>
-												<option selected>IOS</option>
-												<option>Web & Application</option>
-												<option>Networking</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Job Type <span class="text-danger"> *</span></label>
-											<select class="select">
-												<option value="">Select</option>
-												<option>Full Time</option>
-												<option>Part Time</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Job Level <span class="text-danger"> *</span></label>
-											<select class="select">
-												<option value="">Select</option>
-												<option selected>Team Lead</option>
-												<option>Manager</option>
-												<option>Senior</option>
-												<option>junior</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Experience <span class="text-danger"> *</span></label>
-											<select class="select">
-												<option value="">Select</option>
-												<option selected>Entry Level</option>
-												<option>Mid Level</option>
-												<option>Expert</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Qualification <span class="text-danger"> *</span></label>
-											<select class="select">
-												<option value="">Select</option>
-												<option selected>Bachelore Degree</option>
-												<option>Master Degree</option>
-												<option>Others</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Gender <span class="text-danger"> *</span></label>
-											<select class="select">
-												<option value="">Select</option>
-												<option>Male</option>
-												<option selected>Female</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Min. Sallary <span class="text-danger"> *</span></label>
-											<select class="select">
-												<option value="">Select</option>
-												<option selected>10k - 15k</option>
-												<option>15k -20k</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Max. Sallary <span class="text-danger"> *</span></label>
-											<select class="select">
-												<option value="">Select</option>
-												<option selected>40k - 50k</option>
-												<option>50k - 60k</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3 ">
-											<label class="form-label">Job Expired Date <span class="text-danger"> *</span></label>
-											<div class="input-icon-end position-relative">
-												<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" value="29 Aug 2024">
-												<span class="input-icon-addon">
-													<i class="ti ti-calendar text-gray-7"></i>
-												</span>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Required Skills</label>
-											<input type="text" class="form-control">
-										</div>
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Job Title <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" name="jobTitle" id="edit_jobTitle">
 									</div>
 								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</button>
-									<button type="button" class="btn btn-primary">Save & Next</button>
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Job Description <span class="text-danger"> *</span></label>
+										<textarea rows="3" class="form-control" name="jobDescription" id="edit_jobDescription"></textarea>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Job Type <span class="text-danger"> *</span></label>
+										<select class="select" name="jobType" id="edit_jobType">
+											<option value="">Select</option>
+											<option value="Full Time">Full Time</option>
+											<option value="Part Time">Part Time</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Job Level <span class="text-danger"> *</span></label>
+										<select class="select" name="jobLevel" id="edit_jobLevel">
+											<option value="">Select</option>
+											<option value="Team Lead">Team Lead</option>
+											<option value="Manager">Manager</option>
+											<option value="Senior">Senior</option>
+											<option value="junior">junior</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Experience <span class="text-danger"> *</span></label>
+										<select class="select" name="experience" id="edit_experience">
+											<option value="">Select</option>
+											<option value="Entry Level">Entry Level</option>
+											<option value="Mid Level">Mid Level</option>
+											<option value="Expert">Expert</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Qualification <span class="text-danger"> *</span></label>
+										<select class="select" name="qualification" id="edit_qualification">
+											<option value="">Select</option>
+											<option value="Bachelore Degree">Bachelore Degree</option>
+											<option value="Master Degree">Master Degree</option>
+											<option value="Others">Others</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Gender <span class="text-danger"> *</span></label>
+										<select class="select" name="gender" id="edit_gender">
+											<option value="">Select</option>
+											<option value="Male">Male</option>
+											<option value="Female">Female</option>
+											<option value="Any">Any</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Required Skills</label>
+										<input type="text" class="form-control" name="requiredSkills" id="edit_requiredSkills">
+									</div>
 								</div>
 							</div>
-							<div class="tab-pane fade" id="addresss" role="tabpanel" aria-labelledby="address-tab" tabindex="0">
-								<div class="row">
-									<div class="col-md-12">
-										<div class="mb-3">
-											<label class="form-label">Address <span class="text-danger"> *</span></label>
-											<input type="text" class="form-control">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Country <span class="text-danger"> *</span></label>
-											<select class="select">
-												<option value="">Select</option>
-												<option selected>USA</option>
-												<option>Canada</option>
-												<option>Germany</option>
-												<option>France</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">State <span class="text-danger"> *</span></label>
-											<select class="select">
-												<option value="">Select</option>
-												<option selected>California</option>
-												<option>New York</option>
-												<option>Texas</option>
-												<option>Florida</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">City <span class="text-danger"> *</span></label>
-											<select class="select">
-												<option value="">Select</option>
-												<option selected>Los Angeles</option>
-												<option>San Diego</option>
-												<option>Fresno</option>
-												<option>San Francisco</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Zip Code <span class="text-danger"> *</span></label>
-											<input type="text" class="form-control">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="map-grid mb-3">
-											<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6509170.989457427!2d-123.80081967108484!3d37.192957227641294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb9fe5f285e3d%3A0x8b5109a227086f55!2sCalifornia%2C%20USA!5e0!3m2!1sen!2sin!4v1669181581381!5m2!1sen!2sin" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="w-100"></iframe>
-										</div>
-									</div>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</button>
-									<button type="button" class="btn btn-primary">Post</button>
-								</div>
+							<div class="modal-footer">
+								<input type="hidden" name="purpose" id="purpose" value="editResource">
+								<button type="button" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</button>
+								<button type="submit" class="btn btn-primary">Save & Next</button>
 							</div>
 						</div>
 					</div>
@@ -536,7 +401,7 @@
 		</div>
 	</div>
 </div>
-<!-- /Post Job -->
+<!-- /Edit Post -->
 
 <!-- Delete Modal -->
 <div class="modal fade" id="delete_modal">
@@ -550,7 +415,7 @@
 				<p class="mb-3">You want to delete all the marked items, this cant be undone once you delete.</p>
 				<div class="d-flex justify-content-center">
 					<a href="javascript:void(0);" class="btn btn-light me-3" data-bs-dismiss="modal">Cancel</a>
-					<a href="/job-list.html" class="btn btn-danger">Yes, Delete</a>
+					<a href="recruitment-list" class="btn btn-danger">Yes, Delete</a>
 				</div>
 			</div>
 		</div>
@@ -563,7 +428,6 @@
 <script>
 	//creat profile
 	$(document).ready(function() {
-
 		// Submit form data via Ajax
 		$("#resourseForm").on("submit", function(e) {
 			e.preventDefault();
@@ -650,11 +514,11 @@
 			$(".error").remove(); // Remove previous error messages for filling form
 		});
 
-		fromDate = '';
-		toDate = '';
-		dateRange = '';
-		companyType = '';
-		purpose = "getAll";
+		var fromDate = '';
+		var toDate = '';
+		var dateRange = '';
+		var companyType = '';
+		var purpose = "getAll";
 		loadData(fromDate, toDate, dateRange, companyType, purpose);
 
 		function loadData(fromDate, toDate, dateRange, companyType, purpose) {
@@ -689,7 +553,7 @@
 								'<td>' + row.job_descriptions.slice(0, 30) + '</td>' +
 								'<td>' + row.required_skills.slice(0, 30) + '</td>' +
 								'<td>' + row.created_at.split(' ')[0] + '</td>' +
-								'<td><div class="action-icon d-inline-flex"><a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit_post"><i class="ti ti-edit"></i></a><a href="#" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a></div></td>' +
+								'<td><div class="action-icon d-inline-flex"><a href="#" data-id="' + row.id + '" class="me-2 edit_recruitment"><i class="fa-solid fa-pen-to-square"></i></a><a href="#" data-id="' + row.id + '" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="fa-solid fa-trash-can"></i></a></div></td>' +
 								'</tr>';
 							tableBody.append(newRow);
 						});
@@ -709,7 +573,7 @@
 							},
 						},
 						// Add buttons for export functionality
-						dom: 'Bfrtip', 
+						dom: 'Bfrtip',
 						buttons: [{
 								extend: 'excelHtml5',
 								text: 'Export to Excel',
@@ -778,7 +642,7 @@
 					});
 					$('#print_button').on('click', function() {
 						table.button('.buttons-print').trigger();
-					}); 
+					});
 
 					//customise the dataTable search table column value
 					oTable = $('#tableRecords').DataTable();
@@ -811,7 +675,38 @@
 			});
 		}
 
+		$(document).on('click', '.edit_recruitment', function() {
+			$('#edit_recruitment').modal('show');
+			id = $(this).data('id');
 
+			$.ajax({
+				type: "POST",
+				url: "queries/resource.php",
+				data: {
+					'id': id,
+					'purpose': 'getDetails',
+				},
+				cache: false,
+				success: function(res) {
+					if (res.status == 'success') {
+						$('#edit_jobTitle').val(res.data.job_position)
+						$('#edit_jobDescription').val(res.data.job_descriptions)
+						$('#edit_jobType').val(res.data.job_type)
+						$('#edit_jobLevel').val(res.data.job_level)
+						$('#edit_experience').val(res.data.job_experience)
+						$('#edit_qualification').val(res.data.qualification)
+						$('#edit_jobType').append('<option value="'+res.data.job_type+'" selected>'+res.data.job_type+'</option>');
+						$('#edit_jobLevel').append('<option value="'+res.data.job_level+'" selected>'+res.data.job_level+'</option>');
+						$('#edit_experience').append('<option value="'+res.data.job_experience+'" selected>'+res.data.job_experience+'</option>');
+						$('#edit_qualification').append('<option value="'+res.data.qualification+'" selected>'+res.data.qualification+'</option>');
+						$('#edit_gender').append('<option value="'+res.data.gender+'" selected>'+res.data.gender+'</option>');
+						$('#edit_requiredSkills').val(res.data.required_skills)
+					} else {
+						Swal.fire(res.data.message);
+					}
+				}
+			})
+		})
 
 	});
 </script>

@@ -1,4 +1,4 @@
-<?php include "../database/config.php";
+<?php include "../includes/config.php";
 // Initialize the session
 session_start();
 error_reporting(E_ALL);
