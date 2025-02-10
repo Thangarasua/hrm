@@ -77,9 +77,9 @@ if (!isset($_SESSION['hrm_username']) || empty($_SESSION['hrm_username'])) {
 
 <body>
 
-	<!-- <div id="global-loader">
+	<div id="global-loader">
 		<div class="page-loader"></div>
-	</div> -->
+	</div>
 
 	<!-- Main Wrapper -->
 	<div class="main-wrapper">
