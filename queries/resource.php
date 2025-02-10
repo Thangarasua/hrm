@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && $purpose == 'addResource') {
         echo json_encode(array('status' => 'failure', 'message' => 'Resorce requested failure'));
     }
     exit;
-} elseif ($purpose == 'getAll' || $purpose == 'getReport' || $purpose == 'companyType') {
+} elseif ($_SERVER['REQUEST_METHOD'] === "POST" && $purpose == 'getAll' || $purpose == 'getReport' || $purpose == 'companyType') {
 
     // $companyType = $_POST['companyType'] ?? '';
     // if ($companyType == '') {
@@ -85,7 +85,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && $purpose == 'addResource') {
     }
     echo json_encode($response);
     exit;
-} elseif ($purpose == 'getDetails') {
+
+} elseif ($_SERVER['REQUEST_METHOD'] === "POST" && $purpose == 'getDetails') {
     $id = $_POST['id'];
     $query = "SELECT * FROM `resourse_requests` WHERE `id` = '$id'";
     $result = mysqli_query($conn, $query);
