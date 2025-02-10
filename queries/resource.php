@@ -1,4 +1,4 @@
-<?php include "../database/config.php";
+<?php include "../includes/config.php";
 
 header('Content-Type: application/json');
 $currentDatetime = date('Y-m-d H:i:s');
@@ -11,7 +11,7 @@ $month = date('m');
 $year = date('y');
 $date = date('d');
 
-if ($purpose == 'addResource') {
+if ($_SERVER['REQUEST_METHOD'] === "POST" && $purpose == 'addResource') {
     $lastTicketId = "SELECT `ticket_request_id` FROM `resourse_requests` ORDER BY `id` DESC";
     $result = mysqli_query($conn, $lastTicketId);
     $rowCount = mysqli_num_rows($result);

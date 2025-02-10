@@ -1,4 +1,4 @@
-<?php include "../database/config.php";
+<?php include "../includes/config.php";
 
 header('Content-Type: application/json');
 $currentDatetime = date('Y-m-d H:i:s');

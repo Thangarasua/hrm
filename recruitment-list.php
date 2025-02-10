@@ -29,7 +29,7 @@
 
 					<div class="dropdown">
 						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
-							<i class="ti ti-file-export me-1"></i>Export
+						<i class="ti ti-file-export me-1"></i> Export
 						</a>
 						<ul class="dropdown-menu  dropdown-menu-end p-3">
 							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="excel_button"><i class="ti ti-file-type-xls me-1"></i>Export as Excel </a></li>
@@ -514,11 +514,11 @@
 			$(".error").remove(); // Remove previous error messages for filling form
 		});
 
-		fromDate = '';
-		toDate = '';
-		dateRange = '';
-		companyType = '';
-		purpose = "getAll";
+		var fromDate = '';
+		var toDate = '';
+		var dateRange = '';
+		var companyType = '';
+		var purpose = "getAll";
 		loadData(fromDate, toDate, dateRange, companyType, purpose);
 
 		function loadData(fromDate, toDate, dateRange, companyType, purpose) {

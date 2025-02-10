@@ -1,4 +1,4 @@
-<?php include("./database/config.php") ; //connecting Database
+<?php include("config.php") ; //connecting Database
 if (!isset($_SESSION['hrm_username']) || empty($_SESSION['hrm_username'])) {
     header('Location: login');
     exit();
@@ -27,51 +27,51 @@ if (!isset($_SESSION['hrm_username']) || empty($_SESSION['hrm_username'])) {
 	<link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
 
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/plugins/bootstrap.min.css">
 
 	<!-- Feather CSS -->
-	<link rel="stylesheet" href="assets/plugins/icons/feather/feather.css">
+	<link rel="stylesheet" href="plugins/icons/feather/feather.css">
 
 	<!-- Tabler Icon CSS -->
-	<link rel="stylesheet" href="assets/plugins/tabler-icons/tabler-icons.css">
+	<link rel="stylesheet" href="plugins/tabler-icons/tabler-icons.css">
 
 	<!-- Select2 CSS -->
-	<link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
+	<link rel="stylesheet" href="plugins/select2/css/select2.min.css">
 
 	<!-- Fontawesome CSS --> 
-	<link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-	<link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+	<link rel="stylesheet" href="plugins/fontawesome/css/fontawesome.min.css">
+	<link rel="stylesheet" href="plugins/fontawesome/css/all.min.css"> 
 
 	<!-- Datetimepicker CSS -->
-	<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
+	<link rel="stylesheet" href="css/plugins/bootstrap-datetimepicker.min.css">
 
 	<!-- Bootstrap Tagsinput CSS -->
-	<link rel="stylesheet" href="assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css">
+	<link rel="stylesheet" href="plugins/bootstrap-tagsinput/bootstrap-tagsinput.css">
 
 	<!-- Summernote CSS -->
-	<link rel="stylesheet" href="assets/plugins/summernote/summernote-lite.min.css">
+	<link rel="stylesheet" href="plugins/summernote/summernote-lite.min.css">
 
 	<!-- Daterangepikcer CSS -->
-	<link rel="stylesheet" href="assets/plugins/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
 
 	<!-- Datatable CSS -->
-	<link rel="stylesheet" href="assets/css/dataTables.bootstrap5.min.css">
+	<link rel="stylesheet" href="css/plugins/dataTables.bootstrap5.min.css">
 
 	<!-- Color Picker Css -->
-	<link rel="stylesheet" href="assets/plugins/flatpickr/flatpickr.min.css">
-	<link rel="stylesheet" href="assets/plugins/%40simonwep/pickr/themes/nano.min.css">
+	<link rel="stylesheet" href="plugins/flatpickr/flatpickr.min.css">
+	<link rel="stylesheet" href="plugins/%40simonwep/pickr/themes/nano.min.css">
 
 	<!-- Main CSS -->
-	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="css/plugins/style.css">
 
 	<!--themify Icons CSS-->
-	<link rel="stylesheet" href="assets/plugins/themify-icons/themify-icons.min.css">
+	<link rel="stylesheet" href="plugins/themify-icons/themify-icons.min.css">
 
 	<!--toastr alert added-->
-	<link rel="stylesheet" href="assets/css/toastr.min.css">
+	<link rel="stylesheet" href="css/plugins/toastr.min.css">
 
 	<!-- data table excel download added -->
-	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
+	<link rel="stylesheet" href="css/plugins/buttons.dataTables.min.css">
 
 </head>
 
