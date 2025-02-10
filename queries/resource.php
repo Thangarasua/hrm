@@ -4,9 +4,9 @@ header('Content-Type: application/json');
 $currentDatetime = date('Y-m-d H:i:s');
 
 $hrm_userid = $_SESSION['hrm_userid'];
- 
+
 $purpose = $_POST['purpose'];
- 
+
 $month = date('m');
 $year = date('y');
 $date = date('d');
@@ -37,12 +37,10 @@ if ($purpose == 'addResource') {
     $result = mysqli_query($conn, $query);
     if ($result) {
         echo json_encode(array('status' => 'success', 'message' => 'Resorce requested successfully'));
-        exit;
     } else {
         echo json_encode(array('status' => 'failure', 'message' => 'Resorce requested failure'));
-        exit;
     }
-
+    exit;
 } elseif ($purpose == 'getAll' || $purpose == 'getReport' || $purpose == 'companyType') {
 
     // $companyType = $_POST['companyType'] ?? '';
@@ -79,12 +77,23 @@ if ($purpose == 'addResource') {
     $sql = "SELECT * FROM `resourse_requests`";
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) { 
+        while ($row = mysqli_fetch_assoc($result)) {
             $response[] = $row;
         }
     } else {
         $response = array();
     }
     echo json_encode($response);
+    exit;
+} elseif ($purpose == 'getDetails') {
+    $id = $_POST['id'];
+    $query = "SELECT * FROM `resourse_requests` WHERE `id` = '$id'";
+    $result = mysqli_query($conn, $query);
+    if ($result) {
+        $row = mysqli_fetch_assoc($result); 
+        echo json_encode(array('status' => 'success', 'data' => $row));
+    } else {
+        echo json_encode(array('status' => 'failure', 'message' => 'something went wrong'));
+    }
     exit;
 }
