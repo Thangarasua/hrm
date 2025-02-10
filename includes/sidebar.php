@@ -194,7 +194,7 @@
 				<li>
 					<ul>
 						<li>
-							<a href="recruitment-list">
+							<a href="recruitment">
 								<i class="ti ti-timeline"></i><span>Recruitment</span>
 							</a>
 						</li>
