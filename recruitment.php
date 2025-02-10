@@ -415,7 +415,7 @@
 				<p class="mb-3">You want to delete all the marked items, this cant be undone once you delete.</p>
 				<div class="d-flex justify-content-center">
 					<a href="javascript:void(0);" class="btn btn-light me-3" data-bs-dismiss="modal">Cancel</a>
-					<a href="recruitment-list" class="btn btn-danger">Yes, Delete</a>
+					<a href="recruitment" class="btn btn-danger">Yes, Delete</a>
 				</div>
 			</div>
 		</div>
@@ -437,7 +437,7 @@
 			}
 			$.ajax({
 				type: "POST",
-				url: "queries/resource.php",
+				url: "queries/recruitment.php",
 				data: new FormData(this),
 				dataType: "json",
 				contentType: false,
@@ -523,7 +523,7 @@
 
 		function loadData(fromDate, toDate, dateRange, companyType, purpose) {
 			$.ajax({
-				url: 'queries/resource.php',
+				url: 'queries/recruitment.php',
 				type: 'POST',
 				dataType: 'json',
 				data: {
@@ -681,7 +681,7 @@
 
 			$.ajax({
 				type: "POST",
-				url: "queries/resource.php",
+				url: "queries/recruitment.php",
 				data: {
 					'id': id,
 					'purpose': 'getDetails',
