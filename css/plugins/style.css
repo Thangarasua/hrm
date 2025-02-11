@@ -5507,7 +5507,7 @@ svg.feather-14 {
 }
 
 .bg-01 {
-  background: url("../img/bg/upgrade-bg.svg");
+  background: url("../../assets/img/bg/upgrade-bg.svg");
 }
 
 .access-wrap {
@@ -13207,7 +13207,7 @@ svg.collapse-open, svg.collapse-close {
   top: 0;
   right: 10%;
   content: "";
-  background: url(../img/bg/theme-bg.svg) no-repeat;
+  background: url(../../assets/img/bg/theme-bg.svg) no-repeat;
   width: 171px;
   height: 54px;
 }
@@ -14182,7 +14182,7 @@ button.swal2-cancel {
   color: #FFF;
 }
 .header .header-user .user-menu.nav > li.flag-nav .dropdown-menu .dropdown-item.active, .header .header-user .user-menu.nav > li.flag-nav .dropdown-menu .dropdown-item:hover {
-  background: #F7F7F7 url(../img/icons/check.html) no-repeat calc(100% - 12px) center;
+  background: #F7F7F7 url(../../assets/img/icons/check.html) no-repeat calc(100% - 12px) center;
 }
 .header .header-user .user-menu.nav > li.flag-nav .dropdown-menu a img {
   width: 20px;
@@ -16807,7 +16807,7 @@ button.swal2-cancel {
 [data-layout=modern] .page-wrapper::after {
   content: none;
   height: 168px;
-  background: url("../img/bg/modern-bg.png");
+  background: url("../../assets/img/bg/modern-bg.png");
   background-repeat: no-repeat;
   width: 60%;
   position: absolute;
@@ -16903,7 +16903,7 @@ button.swal2-cancel {
 [data-layout=horizontal-overlay] .sidebar-horizontal.sidebar::before {
   content: none;
   height: 100%;
-  background: url("../img/bg/overlay-bg.png");
+  background: url("../../assets/img/bg/overlay-bg.png");
   background-repeat: no-repeat;
   width: 100%;
   position: absolute;
@@ -19719,7 +19719,7 @@ body.data-layout-transparent .page-wrapper .head-icons {
 }
 
 [data-sidebarbg=sidebarbg1] #sidebar {
-  background-image: url(../img/theme/bg-01.jpg);
+  background-image: url(../../assets/img/theme/bg-01.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 50%;
@@ -19795,7 +19795,7 @@ body.data-layout-transparent .page-wrapper .head-icons {
 }
 
 [data-sidebarbg=sidebarbg1] #sidebar {
-  background-image: url(../img/theme/bg-01.jpg);
+  background-image: url(../../assets/img/theme/bg-01.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 50%;
@@ -19811,8 +19811,8 @@ body.data-layout-transparent .page-wrapper .head-icons {
   z-index: -1;
 }
 
-[data-sidebarbg=sidebarbg2] #sidebar {
-  background-image: url(../img/theme/bg-02.jpg);
+[data-sidebarbg=sidebarbg2] #sidebar { 
+  background-image: url(../../assets/img/theme/bg-02.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 50%;
@@ -19828,7 +19828,7 @@ body.data-layout-transparent .page-wrapper .head-icons {
 }
 
 [data-sidebarbg=sidebarbg3] #sidebar {
-  background-image: url(../img/theme/bg-03.jpg);
+  background-image: url(../../assets/img/theme/bg-03.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 50%;
@@ -19844,7 +19844,7 @@ body.data-layout-transparent .page-wrapper .head-icons {
 }
 
 [data-sidebarbg=sidebarbg4] #sidebar {
-  background-image: url(../img/theme/bg-04.jpg);
+  background-image: url(../../assets/img/theme/bg-04.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 50%;
@@ -19860,7 +19860,7 @@ body.data-layout-transparent .page-wrapper .head-icons {
 }
 
 [data-sidebarbg=sidebarbg5] #sidebar {
-  background-image: url(../img/theme/bg-05.jpg);
+  background-image: url(../../assets/img/theme/bg-05.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 50%;
@@ -19876,7 +19876,7 @@ body.data-layout-transparent .page-wrapper .head-icons {
 }
 
 [data-sidebarbg=sidebarbg6] #sidebar {
-  background-image: url(../img/theme/bg-06.jpg);
+  background-image: url(../../assets/img/theme/bg-06.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 50%;
@@ -19957,17 +19957,17 @@ body.data-layout-transparent .page-wrapper .head-icons {
 
 [data-layout=horizontal-overlay] [data-topbarbg=pattern1] .main-wrapper::after,
 [data-layout=horizontal-sidemenu] [data-topbarbg=pattern1] .main-wrapper::after {
-  background: url("../img/theme/pattern-01.svg");
+  background: url("../../assets/img/theme/pattern-01.svg");
 }
 
 [data-layout=horizontal-overlay] [data-topbarbg=pattern2] .main-wrapper::after,
 [data-layout=horizontal-sidemenu] [data-topbarbg=pattern2] .main-wrapper::after {
-  background: url("../img/theme/pattern-01.svg");
+  background: url("../../assets/img/theme/pattern-01.svg");
 }
 
 [data-layout=horizontal-overlay] [data-topbarbg=pattern3] .main-wrapper::after,
 [data-layout=horizontal-sidemenu] [data-topbarbg=pattern3] .main-wrapper::after {
-  background: url("../img/theme/pattern-03.svg");
+  background: url("../../assets/img/theme/pattern-03.svg");
 }
 
 [data-layout=horizontal-overlay][data-topbarcolor=maroon] [data-topbarbg=pattern3] .main-wrapper::before,
@@ -22716,7 +22716,7 @@ body.layout-mode-rtl .nav-list::before {
   top: 0;
   right: 20%;
   content: "";
-  background: url(../img/bg/theme-bg.svg) no-repeat;
+  background: url(../../assets/img/bg/theme-bg.svg) no-repeat;
   width: 171px;
   height: 78px;
 }
@@ -23691,7 +23691,7 @@ table.dataTable > thead .sorting_desc_disabled:before {
 
 .custom-select {
   min-width: 80px;
-  background: url(../img/icons/dropdown.html) no-repeat 95% 50%;
+  background: url(../../assets/img/icons/dropdown.html) no-repeat 95% 50%;
 }
 
 .dataTables_paginate .pagination {
@@ -24080,7 +24080,7 @@ table.table.dataTable > thead > tr th {
 }
 .tag-with-img .bootstrap-tagsinput .label-info::before {
   content: "";
-  background-image: url(../img/profiles/mail-user.jpg);
+  background-image: url(../../assets/img/profiles/mail-user.jpg);
   background-repeat: no-repeat;
   width: 15px;
   height: 15px;
@@ -25789,7 +25789,7 @@ a.edit-icon:hover {
 }
 .card-bg-1::before {
   content: "";
-  background-image: url(../img/bg/card-bg.png);
+  background-image: url(../../assets/img/bg/card-bg.png);
   background-repeat: no-repeat;
   background-position: top;
   position: absolute;
@@ -26460,56 +26460,56 @@ a.edit-icon:hover {
 }
 
 .bg-green-img {
-  background-image: url(../img/bg/bg-green-01.svg);
+  background-image: url(../../assets/img/bg/bg-green-01.svg);
   background-position: left top;
   background-repeat: no-repeat;
   background-size: contain;
 }
 
 .bg-pink-img {
-  background-image: url(../img/bg/bg-pink-01.svg);
+  background-image: url(../../assets/img/bg/bg-pink-01.svg);
   background-position: left top;
   background-repeat: no-repeat;
   background-size: contain;
 }
 
 .bg-yellow-img {
-  background-image: url(../img/bg/bg-yellow-01.svg);
+  background-image: url(../../assets/img/bg/bg-yellow-01.svg);
   background-position: left top;
   background-repeat: no-repeat;
   background-size: contain;
 }
 
 .bg-blue-img {
-  background-image: url(../img/bg/bg-blue-01.svg);
+  background-image: url(../../assets/img/bg/bg-blue-01.svg);
   background-position: left top;
   background-repeat: no-repeat;
   background-size: contain;
 }
 
 .bg-black-le {
-  background-image: url(../img/bg/bg-black-le.svg);
+  background-image: url(../../assets/img/bg/bg-black-le.svg);
   background-position: right top;
   background-repeat: no-repeat;
   background-size: contain;
 }
 
 .bg-blue-le {
-  background-image: url(../img/bg/bg-blue-le.svg);
+  background-image: url(../../assets/img/bg/bg-blue-le.svg);
   background-position: right top;
   background-repeat: no-repeat;
   background-size: contain;
 }
 
 .bg-purple-le {
-  background-image: url(../img/bg/bg-purple-le.svg);
+  background-image: url(../../assets/img/bg/bg-purple-le.svg);
   background-position: right top;
   background-repeat: no-repeat;
   background-size: contain;
 }
 
 .bg-pink-le {
-  background-image: url(../img/bg/bg-pink-le.svg);
+  background-image: url(../../assets/img/bg/bg-pink-le.svg);
   background-position: right top;
   background-repeat: no-repeat;
   background-size: contain;
@@ -26942,7 +26942,7 @@ a.edit-icon:hover {
 }
 .attendance-bg::after {
   content: "";
-  background-image: url(../img/bg/card-bg-02.png);
+  background-image: url(../../assets/img/bg/card-bg-02.png);
   background-position: right top;
   background-repeat: no-repeat;
   background-size: contain;
@@ -27029,7 +27029,7 @@ a.edit-icon:hover {
 }
 .card-bg-5::before {
   content: "";
-  background-image: url(../img/bg/card-bg-05.png);
+  background-image: url(../../assets/img/bg/card-bg-05.png);
   background-position: top;
   background-repeat: no-repeat;
   background-size: contain;
@@ -27439,7 +27439,7 @@ input[type=password]::-ms-clear {
   content: "";
   width: 100%;
   height: 100%;
-  background-image: url(../img/bg/card-bg-03.png);
+  background-image: url(../../assets/img/bg/card-bg-03.png);
   background-repeat: no-repeat;
   position: absolute;
   left: 0;
