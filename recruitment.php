@@ -426,6 +426,7 @@
 </div>
 <!-- /Edit Post -->
 
+
 <!-- Delete Modal -->
 <div class="modal fade" id="delete_modal">
 	<div class="modal-dialog modal-dialog-centered">

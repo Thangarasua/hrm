@@ -89,6 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             echo json_encode(array('status' => 'failure', 'message' => 'Recruitment update failure'));
         }
         exit;
+        
     } elseif ($flag === "delete") {
         $id = $_POST['id'];
         $query = "DELETE FROM `resourse_requests` WHERE `id` = '$id'";
