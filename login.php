@@ -1,5 +1,5 @@
 <?php
-include("./database/config.php");
+include("./includes/config.php");
 
 if (isset($_SESSION['hrm_username'])) {
 	header('Location: index');
@@ -24,23 +24,23 @@ if (isset($_SESSION['hrm_username'])) {
 	<link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
 
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/plugins/bootstrap.min.css">
 
 	<!-- Feather CSS -->
-	<link rel="stylesheet" href="assets/plugins/icons/feather/feather.css">
+	<link rel="stylesheet" href="plugins/icons/feather/feather.css">
 
 	<!-- Tabler Icon CSS -->
-	<link rel="stylesheet" href="assets/plugins/tabler-icons/tabler-icons.css">
+	<link rel="stylesheet" href="plugins/tabler-icons/tabler-icons.css">
 
 	<!-- Fontawesome CSS -->
-	<link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-	<link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+	<link rel="stylesheet" href="plugins/fontawesome/css/fontawesome.min.css">
+	<link rel="stylesheet" href="plugins/fontawesome/css/all.min.css">
 
 	<!-- Main CSS -->
-	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="css/plugins/style.css">
 
 	<!--toastr alert added-->
-	<link rel="stylesheet" href="assets/css/toastr.min.css">
+	<link rel="stylesheet" href="css/plugins/toastr.min.css">
 
 </head>
 
@@ -132,21 +132,21 @@ if (isset($_SESSION['hrm_username'])) {
 	<!-- /Main Wrapper -->
 
 	<!-- jQuery -->
-	<script src="assets/js/jquery.min.js" type="text/javascript"></script>
+	<script src="js/plugins/jquery.min.js" type="text/javascript"></script>
 
 	<!-- Bootstrap Core JS -->
-	<script src="assets/js/bootstrap.bundle.min.js"></script>
+	<script src="js/plugins/bootstrap.bundle.min.js"></script>
 
 	<!-- Feather Icon JS -->
-	<script src="assets/js/feather.min.js"></script>
+	<script src="js/plugins/feather.min.js"></script>
 
 	<!-- Custom JS -->
-	<script src="assets/js/script.js"></script>
+	<script src="js/plugins/script.js"></script>
 
-	<script src="assets/js/rocket-loader.min.js" data-cf-settings="68bc30b0ce4e888e5ae80754-|49" defer></script>
+	<script src="js/plugins/rocket-loader.min.js" data-cf-settings="68bc30b0ce4e888e5ae80754-|49" defer></script>
 
 	<!-- toastr alert added -->
-	<script src="assets/js/toastr.min.js" type="text/javascript"></script>
+	<script src="js/plugins/toastr.min.js" type="text/javascript"></script>
 
 </body>
 <script>

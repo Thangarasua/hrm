@@ -182,7 +182,7 @@
 					<i class="ti ti-x"></i>
 				</button>
 			</div>
-			<form id="resourseForm">
+			<form id="recruitment_form">
 				<div class="modal-body pb-0">
 					<div class="tab-content" id="myTabContent">
 						<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
@@ -310,7 +310,7 @@
 					<i class="ti ti-x"></i>
 				</button>
 			</div>
-			<form id="resourseForm">
+			<form id="edit_recruitment_form">
 				<div class="modal-body pb-0">
 					<div class="tab-content" id="myTabContent">
 						<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
