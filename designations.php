@@ -10,12 +10,8 @@
 				<h2 class="mb-1">Designations</h2>
 				<nav>
 					<ol class="breadcrumb mb-0">
-						<li class="breadcrumb-item">
-							<a href="https://smarthr.dreamstechnologies.com/html/template/index.html"><i class="ti ti-smart-home"></i></a>
-						</li>
-						<li class="breadcrumb-item">
-							Employee
-						</li>
+						<li class=""><a href="index"><i class="ti ti-smart-home"></i></a></li> /
+						<li class="">Administration</li> /
 						<li class="breadcrumb-item active" aria-current="page">Designations</li>
 					</ol>
 				</nav>
@@ -114,287 +110,12 @@
 									</div>
 								</th>
 								<th>Designation </th>
-								<th>Department</th>
-								<th>No of Employees</th>
 								<th>Status</th>
 								<th></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox">
-									</div>
-								</td>
-								<td>
-									
-										<h6 class="fw-medium fs-14 text-dark">Accountant</h6>
-									
-								
-								</td>
-								<td>Finance</td>
-								<td>
-									10
-								</td>
-								<td>
-									<span class="badge badge-success d-inline-flex align-items-center badge-xs">
-										<i class="ti ti-point-filled me-1"></i>Active
-									</span>
-								</td>
-								<td>
-									<div class="action-icon d-inline-flex">
-										<a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit_designation"><i class="ti ti-edit"></i></a>
-										<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox">
-									</div>
-								</td>
-								<td>
-									
-										<h6 class="fw-medium fs-14 text-dark">App Developer</h6>
-								
-								
-								</td>
-								<td>Application Development</td>
-								<td>
-									15
-								</td>
-								<td>
-									<span class="badge badge-success d-inline-flex align-items-center badge-xs">
-										<i class="ti ti-point-filled me-1"></i>Active
-									</span>
-								</td>
-								<td>
-									<div class="action-icon d-inline-flex">
-										<a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit_designation"><i class="ti ti-edit"></i></a>
-										<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox">
-									</div>
-								</td>
-								<td>
-									
-									<h6 class="fw-medium fs-14 text-dark">Technician</h6>
-									
-								
-								</td>
-								<td>IT Management</td>
-								<td>
-									08
-								</td>
-								<td>
-									<span class="badge badge-success d-inline-flex align-items-center badge-xs">
-										<i class="ti ti-point-filled me-1"></i>Active
-									</span>
-								</td>
-								<td>
-									<div class="action-icon d-inline-flex">
-										<a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit_designation"><i class="ti ti-edit"></i></a>
-										<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox">
-									</div>
-								</td>
-								<td>
-									
-									<h6 class="fw-medium fs-14 text-dark">Web Developer</h6>
-									
-								
-								</td>
-								<td>Web Development</td>
-								<td>
-									10
-								</td>
-								<td>
-									<span class="badge badge-success d-inline-flex align-items-center badge-xs">
-										<i class="ti ti-point-filled me-1"></i>Active
-									</span>
-								</td>
-								<td>
-									<div class="action-icon d-inline-flex">
-										<a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit_designation"><i class="ti ti-edit"></i></a>
-										<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox">
-									</div>
-								</td>
-								<td>
-									
-									<h6 class="fw-medium fs-14 text-dark">Sales Executive Officer</h6>
-								
-								</td>
-								<td>Sales</td>
-								<td>
-									10
-								</td>
-								<td>
-									<span class="badge badge-success d-inline-flex align-items-center badge-xs">
-										<i class="ti ti-point-filled me-1"></i>Active
-									</span>
-								</td>
-								<td>
-									<div class="action-icon d-inline-flex">
-										<a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit_designation"><i class="ti ti-edit"></i></a>
-										<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox">
-									</div>
-								</td>
-								<td>
-									
-									<h6 class="fw-medium fs-14 text-dark">Designer</h6>
-								
-								</td>
-								<td>UI / UX</td>
-								<td>
-									15
-								</td>
-								<td>
-									<span class="badge badge-success d-inline-flex align-items-center badge-xs">
-										<i class="ti ti-point-filled me-1"></i>Active
-									</span>
-								</td>
-								<td>
-									<div class="action-icon d-inline-flex">
-										<a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit_designation"><i class="ti ti-edit"></i></a>
-										<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox">
-									</div>
-								</td>
-								<td>
-									
-									<h6 class="fw-medium fs-14 text-dark">Account Manager</h6>
-								
-								</td>
-								<td>Account Management</td>
-								<td>
-									08
-								</td>
-								<td>
-									<span class="badge badge-success d-inline-flex align-items-center badge-xs">
-										<i class="ti ti-point-filled me-1"></i>Active
-									</span>
-								</td>
-								<td>
-									<div class="action-icon d-inline-flex">
-										<a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit_designation"><i class="ti ti-edit"></i></a>
-										<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox">
-									</div>
-								</td>
-								<td>
-									
-									<h6 class="fw-medium fs-14 text-dark">SEO Analyst</h6>
-								
-								</td>
-								<td>Marketing</td>
-								<td>
-									10
-								</td>
-								<td>
-									<span class="badge badge-danger d-inline-flex align-items-center badge-xs">
-										<i class="ti ti-point-filled me-1"></i>Inactive
-									</span>
-								</td>
-								<td>
-									<div class="action-icon d-inline-flex">
-										<a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit_designation"><i class="ti ti-edit"></i></a>
-										<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox">
-									</div>
-								</td>
-								<td>
-									
-									<h6 class="fw-medium fs-14 text-dark">Admin</h6>
-								
-								</td>
-								<td>Administration</td>
-								<td>
-									05
-								</td>
-								<td>
-									<span class="badge badge-success d-inline-flex align-items-center badge-xs">
-										<i class="ti ti-point-filled me-1"></i>Active
-									</span>
-								</td>
-								<td>
-									<div class="action-icon d-inline-flex">
-										<a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit_designation"><i class="ti ti-edit"></i></a>
-										<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox">
-									</div>
-								</td>
-								<td>
-									
-									<h6 class="fw-medium fs-14 text-dark">Business Analyst</h6>
-								
-								</td>
-								<td>Business Development</td>
-								<td>
-									07
-								</td>
-								<td>
-									<span class="badge badge-success d-inline-flex align-items-center badge-xs">
-										<i class="ti ti-point-filled me-1"></i>Active
-									</span>
-								</td>
-								<td>
-									<div class="action-icon d-inline-flex">
-										<a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit_designation"><i class="ti ti-edit"></i></a>
-										<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a>
-									</div>
-								</td>
-							</tr>
+							
 						</tbody>
 					</table>
 				</div>
@@ -422,28 +143,22 @@
 					<i class="ti ti-x"></i>
 				</button>
 			</div>
-			<form action="https://smarthr.dreamstechnologies.com/html/template/designations.html">
+			<form action="" id="addDesignation">
 				<div class="modal-body pb-0">
 					<div class="row">
 						<div class="col-md-12">
 							<div class="mb-3">
 								<label class="form-label">Designation Name</label>
-								<input type="text" class="form-control">
-							</div>	
-						</div>
-						<div class="col-md-12">
-							<div class="mb-3">
-								<label class="form-label">Department Name</label>
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" name="designationName">
 							</div>	
 						</div>
 						<div class="col-md-12">
 							<div class="mb-3">
 								<label class="form-label">Status</label>
-								<select class="select">
-									<option>Select</option>
-									<option>Active</option>
-									<option>Inactive</option>
+								<select class="select" name="status">
+									<option value="">Select</option>
+									<option value="1">Active</option>
+									<option value="0">Inactive</option>
 								</select>
 							</div>
 						</div>
@@ -526,4 +241,28 @@
 </div>
 <!-- /Delete Modal -->
 
+<!-- Add Job Success -->
+<div class="modal fade" id="success_modal" role="dialog">
+	<div class="modal-dialog modal-dialog-centered modal-xm">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="text-center p-3">
+					<span class="avatar avatar-lg avatar-rounded bg-success mb-3"><i class="ti ti-check fs-24"></i></span>
+					<h5 class="mb-2">Designations Added Successfully</h5>
+					</p>
+					<div>
+						<div class="row g-2">
+							<div class="col-12">
+								<a href="" class="btn btn-dark w-100">Back to List</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /Add Job Success -->
+
 <?php require_once("./includes/footer.php"); ?>
+<script src="./js/designations.js"></script>
