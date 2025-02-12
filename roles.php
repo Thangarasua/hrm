@@ -7,12 +7,12 @@
 		<!-- Breadcrumb -->
 		<div class="d-md-flex d-block align-items-center justify-content-between page-breadcrumb mb-3">
 			<div class="my-auto mb-2">
-				<h2 class="mb-1">Departments</h2>
+				<h2 class="mb-1">Roles</h2>
 				<nav>
 					<ol class="breadcrumb mb-0">
 						<li class=""><a href="index"><i class="ti ti-smart-home"></i></a></li> /
 						<li class="">Administration</li> /
-						<li class="breadcrumb-item active" aria-current="page">Departments</li>
+						<li class="breadcrumb-item active" aria-current="page">Roles</li>
 					</ol>
 				</nav>
 			</div>
@@ -33,7 +33,7 @@
 					</div>
 				</div>
 				<div class="mb-2">
-					<a href="#" data-bs-toggle="modal" data-bs-target="#add_department" class="btn btn-primary d-flex align-items-center"><i class="ti ti-circle-plus me-2"></i>Add Department</a>
+					<a href="#" data-bs-toggle="modal" data-bs-target="#add_roles" class="btn btn-primary d-flex align-items-center"><i class="ti ti-circle-plus me-2"></i>Add Roles</a>
 				</div>
 				<div class="head-icons ms-2">
 					<a href="javascript:void(0);" class="" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Collapse" id="collapse-header">
@@ -47,7 +47,7 @@
 		<!-- Performance Indicator list -->
 		<div class="card">
 			<div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-				<h5>Department List</h5>
+				<h5>Roles List</h5>
 				<div class="d-flex my-xl-auto right-content align-items-center flex-wrap row-gap-3">
 					<div class="dropdown me-3">
 						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
@@ -96,7 +96,7 @@
 										<input class="form-check-input" type="checkbox" id="select-all">
 									</div>
 								</th>
-								<th>Department </th>
+								<th>Role Name </th>
 								<th>Status</th>
 								<th></th>
 							</tr>
@@ -120,23 +120,23 @@
 </div>
 <!-- /Page Wrapper -->
 
-<!-- Add Department -->
-<div class="modal fade" id="add_department">
+<!-- Add Role -->
+<div class="modal fade" id="add_roles">
 	<div class="modal-dialog modal-dialog-centered modal-md">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title">Add Department</h4>
+				<h4 class="modal-title">Add Role</h4>
 				<button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
 					<i class="ti ti-x"></i>
 				</button>
 			</div>
-			<form action="" id="addDepartment">
+			<form action="" id="addRole">
 				<div class="modal-body pb-0">
 					<div class="row">
 						<div class="col-md-12">
 							<div class="mb-3">
-								<label class="form-label">Department Name</label>
-								<input type="text" class="form-control" name="departmentName">
+								<label class="form-label">Role Name</label>
+								<input type="text" class="form-control" name="roleName">
 							</div>	
 						</div>
 						<div class="col-md-12">
@@ -153,30 +153,30 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</button>
-					<button type="submit" class="btn btn-primary">Add Department</button>
+					<button type="submit" class="btn btn-primary">Add Role</button>
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
-<!-- /Add Department -->
+<!-- /Add Role -->
 
-<!-- Edit Department -->
-<div class="modal fade" id="edit_department">
+<!-- Edit Role -->
+<div class="modal fade" id="edit_role">
 	<div class="modal-dialog modal-dialog-centered modal-md">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title">Edit Department</h4>
+				<h4 class="modal-title">Edit Role</h4>
 				<button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
 					<i class="ti ti-x"></i>
 				</button>
 			</div>
-			<form action="https://smarthr.dreamstechnologies.com/html/template/departments.html">
+			<form action="">
 				<div class="modal-body pb-0">
 					<div class="row">
 						<div class="col-md-12">
 							<div class="mb-3">
-								<label class="form-label">Department Name</label>
+								<label class="form-label">Role Name</label>
 								<input type="text" class="form-control" value="Finance">
 							</div>	
 						</div>
@@ -194,13 +194,13 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</button>
-					<button type="submit" class="btn btn-primary">Save Department</button>
+					<button type="submit" class="btn btn-primary">Save Role</button>
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
-<!-- /Edit Department -->
+<!-- /Edit Role -->
 
 <!-- Delete Modal -->
 <div class="modal fade" id="delete_modal">
@@ -214,7 +214,7 @@
 				<p class="mb-3">You want to delete all the marked items, this cant be undone once you delete.</p>
 				<div class="d-flex justify-content-center">
 					<a href="javascript:void(0);" class="btn btn-light me-3" data-bs-dismiss="modal">Cancel</a>
-					<a href="https://smarthr.dreamstechnologies.com/html/template/departments.html" class="btn btn-danger">Yes, Delete</a>
+					<a href="" class="btn btn-danger">Yes, Delete</a>
 				</div>
 			</div>
 		</div>
@@ -229,7 +229,7 @@
 			<div class="modal-body">
 				<div class="text-center p-3">
 					<span class="avatar avatar-lg avatar-rounded bg-success mb-3"><i class="ti ti-check fs-24"></i></span>
-					<h5 class="mb-2">Department Added Successfully</h5>
+					<h5 class="mb-2">Roles Added Successfully</h5>
 					</p>
 					<div>
 						<div class="row g-2">
@@ -246,4 +246,4 @@
 <!-- /Add Job Success -->
 
 <?php require_once("./includes/footer.php"); ?>
-<script src="./js/departments.js"></script>
+<script src="./js/roles.js"></script>

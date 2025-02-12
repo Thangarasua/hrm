@@ -110,6 +110,7 @@
 								<li><a href="employee-details.php">Employee Details</a></li>
 								<li><a href="departments.php">Departments</a></li>
 								<li><a href="designations.php">Designations</a></li>
+								<li><a href="roles.php">Roles</a></li>
 								<li><a href="policy.php">Policies</a></li>
 							</ul>
 						</li>
