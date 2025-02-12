@@ -29,7 +29,7 @@
 
 					<div class="dropdown">
 						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
-						<i class="ti ti-file-export me-1"></i> Export
+							<i class="ti ti-file-export me-1"></i> Export
 						</a>
 						<ul class="dropdown-menu  dropdown-menu-end p-3">
 							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="excel_button"><i class="ti ti-file-type-xls me-1"></i>Export as Excel </a></li>
@@ -182,7 +182,7 @@
 					<i class="ti ti-x"></i>
 				</button>
 			</div>
-			<form id="recruitment_form">
+			<form id="create">
 				<div class="modal-body pb-0">
 					<div class="tab-content" id="myTabContent">
 						<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
@@ -262,7 +262,6 @@
 								</div>
 							</div>
 							<div class="modal-footer">
-								<input type="hidden" name="purpose" id="purpose" value="addResource">
 								<button type="button" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</button>
 								<button type="submit" class="btn btn-primary">Save & Next</button>
 							</div>
@@ -299,9 +298,33 @@
 	</div>
 </div>
 <!-- /Add Job Success -->
+<!-- Update Job Success -->
+<div class="modal fade" id="update_modal" role="dialog">
+	<div class="modal-dialog modal-dialog-centered modal-xm">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="text-center p-3">
+					<span class="avatar avatar-lg avatar-rounded bg-success mb-3">
+						<i class="fa-solid fa-check"></i>
+					</span>
+					<h5 class="mb-2">Recruitment update Successfully</h5>
+					</p>
+					<div>
+						<div class="row g-2">
+							<div class="col-12">
+								<a href="#" class="btn btn-dark w-100" data-bs-dismiss="modal">Back to List</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /Update Job Success -->
 
 <!-- Edit Post -->
-<div class="modal fade" id="edit_recruitment">
+<div class="modal fade" id="editModal">
 	<div class="modal-dialog modal-dialog-centered modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -310,7 +333,7 @@
 					<i class="ti ti-x"></i>
 				</button>
 			</div>
-			<form id="edit_recruitment_form">
+			<form id="update">
 				<div class="modal-body pb-0">
 					<div class="tab-content" id="myTabContent">
 						<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
@@ -389,8 +412,8 @@
 									</div>
 								</div>
 							</div>
+							<input type="hidden" name="rowId" id="rowId">
 							<div class="modal-footer">
-								<input type="hidden" name="purpose" id="purpose" value="editResource">
 								<button type="button" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</button>
 								<button type="submit" class="btn btn-primary">Save & Next</button>
 							</div>
@@ -403,26 +426,30 @@
 </div>
 <!-- /Edit Post -->
 
+
 <!-- Delete Modal -->
 <div class="modal fade" id="delete_modal">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
-			<div class="modal-body text-center">
-				<span class="avatar avatar-xl bg-transparent-danger text-danger mb-3">
-					<i class="ti ti-trash-x fs-36"></i>
-				</span>
-				<h4 class="mb-1">Confirm Delete</h4>
-				<p class="mb-3">You want to delete all the marked items, this cant be undone once you delete.</p>
-				<div class="d-flex justify-content-center">
-					<a href="javascript:void(0);" class="btn btn-light me-3" data-bs-dismiss="modal">Cancel</a>
-					<a href="recruitment" class="btn btn-danger">Yes, Delete</a>
+			<form id="delete">
+				<div class="modal-body text-center">
+					<span class="avatar avatar-xl bg-transparent-danger text-danger mb-3">
+						<i class="ti ti-trash-x fs-36"></i>
+					</span>
+					<h4 class="mb-1">Confirm Delete</h4>
+					<p class="mb-3">You want to delete all the marked items, this cant be undone once you delete.</p>
+					<div class="d-flex justify-content-center">
+						<input type="hidden" name="deleteId" id="deleteId">
+						<a href="javascript:void(0);" class="btn btn-light me-3" data-bs-dismiss="modal">Cancel</a>
+						<button type="submit" class="btn btn-danger">Yes, Delete</button>
+					</div>
 				</div>
-			</div>
+			</form>
 		</div>
 	</div>
 </div>
 <!-- /Delete Modal -->
- 
+
 <?php require_once("./includes/footer.php"); ?>
 
 <!-- this page java scripts codes -->

@@ -1,15 +1,18 @@
 $(document).ready(function () {
   // Submit form data via Ajax
-  $("#recruitment_form").on("submit", function (e) {
+  $("#create").on("submit", function (e) {
     e.preventDefault();
     form = formValidate();
     if (form == 0) {
       return false;
     }
+
+    let formData = new FormData(this);
+    formData.append("flag", "insert");
     $.ajax({
       type: "POST",
       url: "queries/recruitment.php",
-      data: new FormData(this),
+      data: formData,
       dataType: "json",
       contentType: false,
       cache: false,
@@ -17,8 +20,15 @@ $(document).ready(function () {
       success: function (response) {
         if (response.status == "success") {
           $("#success_modal").modal("show");
-          $("#recruitment_form")[0].reset();
+          $("#create")[0].reset();
           $("#add_post").modal("hide");
+          loadData(
+            (fromDate = ""),
+            (toDate = ""),
+            (dateRange = ""),
+            (companyType = ""),
+            (flag = "getAll")
+          );
         } else {
           toastr.error(response.message, "Error");
         }
@@ -26,78 +36,7 @@ $(document).ready(function () {
     });
   });
 
-  function formValidate() {
-    $(".error").remove(); // Remove previous error messages
-
-    let jobTitle = $("#jobTitle").val().trim();
-    if (jobTitle.length < 1) {
-      $("#jobTitle").focus();
-      $("#jobTitle").after(
-        "<small class='error text-danger'> mandatory field.</small>"
-      );
-      return 0;
-    }
-    let jobDescription = $("#jobDescription").val().trim();
-    if (jobDescription.length == 0) {
-      $("#jobDescription").focus();
-      $("#jobDescription").after(
-        "<small class='error text-danger'> mandatory field.</small>"
-      );
-      return 0;
-    }
-    let jobType = $("#jobType").val().trim();
-    if (jobType.length == 0) {
-      $("#jobType").focus();
-      $("#jobType").after(
-        "<small class='error text-danger'> mandatory field.</small>"
-      );
-      return 0;
-    }
-    let jobLevel = $("#jobLevel").val().trim();
-    if (jobLevel.length == 0) {
-      $("#jobLevel").focus();
-      $("#jobLevel").after(
-        "<small class='error text-danger'> mandatory field.</small>"
-      );
-      return 0;
-    }
-    let experience = $("#experience").val().trim();
-    if (experience.length == 0) {
-      $("#experience").focus();
-      $("#experience").after(
-        "<small class='error text-danger'> mandatory field.</small>"
-      );
-      return 0;
-    }
-    let qualification = $("#qualification").val().trim();
-    if (qualification.length == 0) {
-      $("#qualification").focus();
-      $("#qualification").after(
-        "<small class='error text-danger'> mandatory field.</small>"
-      );
-      return 0;
-    }
-    let gender = $("#gender").val().trim();
-    if (gender.length == 0) {
-      $("#gender").focus();
-      $("#gender").after(
-        "<small class='error text-danger'> mandatory field.</small>"
-      );
-      return 0;
-    }
-    let requiredSkills = $("#requiredSkills").val().trim();
-    if (requiredSkills.length == 0) {
-      $("#requiredSkills").focus();
-      $("#requiredSkills").after(
-        "<small class='error text-danger'> mandatory field.</small>"
-      );
-      return 0;
-    }
-
-    return 1;
-  }
-
-  $("#recruitment_form").click(function () {
+  $("#create").click(function () {
     $(".error").remove(); // Remove previous error messages for filling form
   });
 
@@ -105,10 +44,10 @@ $(document).ready(function () {
   var toDate = "";
   var dateRange = "";
   var companyType = "";
-  var purpose = "getAll";
-  loadData(fromDate, toDate, dateRange, companyType, purpose);
+  var flag = "getAll";
+  loadData(fromDate, toDate, dateRange, companyType, flag);
 
-  function loadData(fromDate, toDate, dateRange, companyType, purpose) {
+  function loadData(fromDate, toDate, dateRange, companyType, flag) {
     $.ajax({
       url: "queries/recruitment.php",
       type: "POST",
@@ -118,7 +57,7 @@ $(document).ready(function () {
         toDate: toDate,
         dateRange: dateRange,
         companyType: companyType,
-        purpose: purpose,
+        flag: flag,
       },
       success: function (data) {
         var tableBody = $("#tableRecords tbody");
@@ -156,9 +95,11 @@ $(document).ready(function () {
               "</td>" +
               '<td><div class="action-icon d-inline-flex"><a href="#" data-id="' +
               row.id +
-              '" class="me-2 edit_recruitment"><i class="fa-solid fa-pen-to-square"></i></a><a href="#" data-id="' +
+              '" class="open"><i class="fa-regular fa-folder-open"></i></a><a href="#" data-id="' +
               row.id +
-              '" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="fa-solid fa-trash-can"></i></a></div></td>' +
+              '" class="edit"><i class="fa-solid fa-pen-to-square"></i></a><a href="#" data-id="' +
+              row.id +
+              '" class="delete"><i class="fa-solid fa-trash-can"></i></a></div></td>' +
               "</tr>";
             tableBody.append(newRow);
           });
@@ -282,8 +223,8 @@ $(document).ready(function () {
     });
   }
 
-  $(document).on("click", ".edit_recruitment", function () {
-    $("#edit_recruitment").modal("show");
+  $(document).on("click", ".edit", function () {
+    $("#editModal").modal("show");
     var id = $(this).data("id");
 
     $.ajax({
@@ -291,11 +232,12 @@ $(document).ready(function () {
       url: "queries/recruitment.php",
       data: {
         id: id,
-        purpose: "getDetails",
+        flag: "getDetails",
       },
       cache: false,
       success: function (res) {
         if (res.status == "success") {
+          $("#rowId").val(res.data.id);
           $("#edit_jobTitle").val(res.data.job_position);
           $("#edit_jobDescription").val(res.data.job_descriptions);
           $("#edit_jobType").val(res.data.job_type);
@@ -345,29 +287,215 @@ $(document).ready(function () {
     });
   });
 
-  $(document).on("submit", ".edit_recruitment", function (e) {
+  $(document).on("submit", "#update", function (e) {
     e.preventDefault();
-    form = formValidate();
+    form = formValidate2();
     if (form == 0) {
       return false;
     }
+    let formData = new FormData(this);
+    formData.append("flag", "update");
     $.ajax({
       type: "POST",
       url: "queries/recruitment.php",
-      data: new FormData(this),
+      data: formData,
       dataType: "json",
       contentType: false,
       cache: false,
       processData: false,
       success: function (response) {
         if (response.status == "success") {
-          $("#success_modal").modal("show");
-          $("#recruitment_form")[0].reset();
-          $("#add_post").modal("hide");
+          $("#update_modal").modal("show");
+          $("#update")[0].reset();
+          $("#editModal").modal("hide");
+          loadData(
+            (fromDate = ""),
+            (toDate = ""),
+            (dateRange = ""),
+            (companyType = ""),
+            (flag = "getAll")
+          );
         } else {
           toastr.error(response.message, "Error");
         }
       },
     });
   });
+
+  $(document).on("click", ".delete", function () {
+    $("#delete_modal").modal("show");
+    var id = $(this).data("id");
+    $("#deleteId").val(id);
+  });
+
+  $(document).on("submit", "#delete", function (e) {
+    e.preventDefault();
+    var id = $("#deleteId").val();
+    $.ajax({
+      type: "POST",
+      url: "queries/recruitment.php",
+      data: {
+        id: id,
+        flag: "delete",
+      },
+      cache: false,
+      success: function (response) {
+        if (response.status == "success") {
+          $("#delete")[0].reset();
+          $("#delete_modal").modal("hide");
+          loadData(
+            (fromDate = ""),
+            (toDate = ""),
+            (dateRange = ""),
+            (companyType = ""),
+            (flag = "getAll")
+          );
+        } else {
+          toastr.error(response.message, "Error");
+        }
+      },
+    });
+  });
+
+  function formValidate() {
+    $(".error").remove(); // Remove previous error messages
+
+    let jobTitle = $("#jobTitle").val().trim();
+    if (jobTitle.length < 1) {
+      $("#jobTitle").focus();
+      $("#jobTitle").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+    let jobDescription = $("#jobDescription").val().trim();
+    if (jobDescription.length == 0) {
+      $("#jobDescription").focus();
+      $("#jobDescription").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+    let jobType = $("#jobType").val().trim();
+    if (jobType.length == 0) {
+      $("#jobType").focus();
+      $("#jobType").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+    let jobLevel = $("#jobLevel").val().trim();
+    if (jobLevel.length == 0) {
+      $("#jobLevel").focus();
+      $("#jobLevel").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+    let experience = $("#experience").val().trim();
+    if (experience.length == 0) {
+      $("#experience").focus();
+      $("#experience").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+    let qualification = $("#qualification").val().trim();
+    if (qualification.length == 0) {
+      $("#qualification").focus();
+      $("#qualification").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+    let gender = $("#gender").val().trim();
+    if (gender.length == 0) {
+      $("#gender").focus();
+      $("#gender").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+    let requiredSkills = $("#requiredSkills").val().trim();
+    if (requiredSkills.length == 0) {
+      $("#requiredSkills").focus();
+      $("#requiredSkills").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+
+    return 1;
+  }
+
+  function formValidate2() {
+    $(".error").remove(); // Remove previous error messages
+
+    let jobTitle = $("#edit_jobTitle").val().trim();
+    if (jobTitle.length < 1) {
+      $("#edit_jobTitle").focus();
+      $("#edit_jobTitle").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+    let jobDescription = $("#edit_jobDescription").val().trim();
+    if (jobDescription.length == 0) {
+      $("#edit_jobDescription").focus();
+      $("#edit_jobDescription").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+    let jobType = $("#edit_jobType").val().trim();
+    if (jobType.length == 0) {
+      $("#edit_jobType").focus();
+      $("#edit_jobType").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+    let jobLevel = $("#edit_jobLevel").val().trim();
+    if (jobLevel.length == 0) {
+      $("#edit_jobLevel").focus();
+      $("#edit_jobLevel").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+    let experience = $("#edit_experience").val().trim();
+    if (experience.length == 0) {
+      $("#edit_experience").focus();
+      $("#edit_experience").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+    let qualification = $("#edit_qualification").val().trim();
+    if (qualification.length == 0) {
+      $("#edit_qualification").focus();
+      $("#edit_qualification").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+    let gender = $("#edit_gender").val().trim();
+    if (gender.length == 0) {
+      $("#edit_gender").focus();
+      $("#edit_gender").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+    let requiredSkills = $("#edit_requiredSkills").val().trim();
+    if (requiredSkills.length == 0) {
+      $("#edit_requiredSkills").focus();
+      $("#edit_requiredSkills").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+
+    return 1;
+  }
 });

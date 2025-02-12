@@ -57,6 +57,9 @@
 <!-- toastr alert added -->
 <script src="js/plugins/toastr.min.js" type="text/javascript"></script>
 
+<!-- sweetalert2 alert added -->
+<script src="js/plugins/sweetalert2.js" type="text/javascript"></script>
+
 <!-- own scripts added -->
 <script src="scripts/myscript.js" type="text/javascript"></script>
 
