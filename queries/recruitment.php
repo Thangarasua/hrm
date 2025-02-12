@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $gender = $_POST['gender'];
         $requiredSkills = $_POST['requiredSkills'];
 
-        $query = "INSERT INTO `resourse_requests`(`ticket_request_id`, `raised_by`, `job_position`, `job_descriptions`, `required_skills`, `job_type`, `job_level`, `job_experience`, `qualification`, `gender`, `hr_contacted`, `status`, `created_at`) VALUES ('$ticketRequestId','$hrm_userid','$jobTitle','$jobDescription','$requiredSkills','$jobType','$jobLevel','$experience','$qualification','$gender','','Active','$currentDatetime')";
+        $query = "INSERT INTO `resourse_requests`(`ticket_request_id`, `raised_by`, `job_position`, `job_descriptions`, `required_skills`, `job_type`, `job_level`, `job_experience`, `qualification`, `gender`, `hr_contacted`, `status`, `created_at`) VALUES ('$ticketRequestId','$hrm_userid','$jobTitle','$jobDescription','$requiredSkills','$jobType','$jobLevel','$experience','$qualification','$gender','',1,'$currentDatetime')";
         $result = mysqli_query($conn, $query);
         if ($result) {
             echo json_encode(array('status' => 'success', 'message' => 'Resorce requested successfully'));

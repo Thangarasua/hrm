@@ -1,3 +1,7 @@
+$(document).ready(function(){
+  $('body').addClass('mini-sidebar'); //Default sidebar set mini
+})
+
 //check only numbers allowed condition
 function isNumber(input) {
   var charCode = input.which ? input.which : input.keyCode;
@@ -36,4 +40,4 @@ function isEmail(input) {
     } 
     return true;
 }
- 
+

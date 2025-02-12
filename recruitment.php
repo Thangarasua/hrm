@@ -150,7 +150,7 @@
 								<th>Raised By</th>
 								<th>Job Title</th>
 								<th>Description</th>
-								<th>Skill</th>
+								<th>Status</th>
 								<th>Posted Date</th>
 								<th>Action</th>
 							</tr>
@@ -325,6 +325,103 @@
 <!-- /Update Job Success -->
 
 <!-- Edit Post -->
+<div class="modal fade" id="viewModal">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Recruitment Details</h4>
+				<button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
+					<i class="ti ti-x"></i>
+				</button>
+			</div>
+			<form id="update">
+				<div class="modal-body pb-0">
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Job Title <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" id="view_jobTitle">
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Job Description <span class="text-danger"> *</span></label>
+										<textarea rows="3" class="form-control" id="view_jobDescription"></textarea>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Job Type <span class="text-danger"> *</span></label>
+										<select class="select" id="view_jobType">
+											<option value="">Select</option>
+											<option value="Full Time">Full Time</option>
+											<option value="Part Time">Part Time</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Job Level <span class="text-danger"> *</span></label>
+										<select class="select" id="view_jobLevel">
+											<option value="">Select</option>
+											<option value="Team Lead">Team Lead</option>
+											<option value="Manager">Manager</option>
+											<option value="Senior">Senior</option>
+											<option value="junior">junior</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Experience <span class="text-danger"> *</span></label>
+										<select class="select" id="view_experience">
+											<option value="">Select</option>
+											<option value="Entry Level">Entry Level</option>
+											<option value="Mid Level">Mid Level</option>
+											<option value="Expert">Expert</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Qualification <span class="text-danger"> *</span></label>
+										<select class="select" id="view_qualification">
+											<option value="">Select</option>
+											<option value="Bachelore Degree">Bachelore Degree</option>
+											<option value="Master Degree">Master Degree</option>
+											<option value="Others">Others</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Gender <span class="text-danger"> *</span></label>
+										<select class="select" id="view_gender">
+											<option value="">Select</option>
+											<option value="Male">Male</option>
+											<option value="Female">Female</option>
+											<option value="Any">Any</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Required Skills</label>
+										<input type="text" class="form-control" id="view_requiredSkills">
+									</div>
+								</div>
+							</div> 
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- /Edit Post -->
+<!-- Edit Post -->
 <div class="modal fade" id="editModal">
 	<div class="modal-dialog modal-dialog-centered modal-lg">
 		<div class="modal-content">
@@ -416,7 +513,7 @@
 							<input type="hidden" name="rowId" id="rowId">
 							<div class="modal-footer">
 								<button type="button" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</button>
-								<button type="submit" class="btn btn-primary">Save & Next</button>
+								<button type="submit" class="btn btn-primary">Update</button>
 							</div>
 						</div>
 					</div>

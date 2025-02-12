@@ -95,7 +95,7 @@ $(document).ready(function () {
               "</td>" +
               '<td><div class="action-icon d-inline-flex"><a href="#" data-id="' +
               row.id +
-              '" class="open"><i class="fa-regular fa-folder-open"></i></a><a href="#" data-id="' +
+              '" class="view"><i class="fa-regular fa-folder-open"></i></a><a href="#" data-id="' +
               row.id +
               '" class="edit"><i class="fa-solid fa-pen-to-square"></i></a><a href="#" data-id="' +
               row.id +
@@ -280,6 +280,69 @@ $(document).ready(function () {
               "</option>"
           );
           $("#edit_requiredSkills").val(res.data.required_skills);
+        } else {
+          Swal.fire(res.data.message);
+        }
+      },
+    });
+  });
+  $(document).on("click", ".view", function () {
+    $("#viewModal").modal("show");
+    var id = $(this).data("id");
+
+    $.ajax({
+      type: "POST",
+      url: "queries/recruitment.php",
+      data: {
+        id: id,
+        flag: "getDetails",
+      },
+      cache: false,
+      success: function (res) {
+        if (res.status == "success") {
+          $("#rowId").val(res.data.id);
+          $("#view_jobTitle").val(res.data.job_position);
+          $("#view_jobDescription").val(res.data.job_descriptions);
+          $("#view_jobType").val(res.data.job_type);
+          $("#view_jobLevel").val(res.data.job_level);
+          $("#view_experience").val(res.data.job_experience);
+          $("#view_qualification").val(res.data.qualification);
+          $("#view_jobType").append(
+            '<option value="' +
+              res.data.job_type +
+              '" selected>' +
+              res.data.job_type +
+              "</option>"
+          );
+          $("#view_jobLevel").append(
+            '<option value="' +
+              res.data.job_level +
+              '" selected>' +
+              res.data.job_level +
+              "</option>"
+          );
+          $("#view_experience").append(
+            '<option value="' +
+              res.data.job_experience +
+              '" selected>' +
+              res.data.job_experience +
+              "</option>"
+          );
+          $("#view_qualification").append(
+            '<option value="' +
+              res.data.qualification +
+              '" selected>' +
+              res.data.qualification +
+              "</option>"
+          );
+          $("#view_gender").append(
+            '<option value="' +
+              res.data.gender +
+              '" selected>' +
+              res.data.gender +
+              "</option>"
+          );
+          $("#view_requiredSkills").val(res.data.required_skills);
         } else {
           Swal.fire(res.data.message);
         }
