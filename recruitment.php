@@ -172,6 +172,7 @@
 </div>
 <!-- /Page Wrapper -->
 
+
 <!-- Add Post -->
 <div class="modal fade" id="add_post">
 	<div class="modal-dialog modal-dialog-centered modal-lg">
