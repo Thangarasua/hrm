@@ -314,6 +314,5 @@ $(document).ready(function() {
 			},
 		});
 	});
-	// Test
 });
 </script>

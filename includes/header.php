@@ -90,7 +90,8 @@ if (!isset($_SESSION['hrm_username']) || empty($_SESSION['hrm_username'])) {
 
 				<div class="header-left">
 					<a href="index.php" class="logo">
-						<img src="assets/img/logo.svg" alt="Logo">
+						<!-- <img src="assets/img/logo.svg" alt="Logo"> -->
+						 <h3>Markerz HRM</h3>
 					</a>
 					<a href="index.php" class="dark-logo">
 						<img src="assets/img/logo-white.svg" alt="Logo">
