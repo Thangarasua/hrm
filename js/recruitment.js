@@ -6,7 +6,7 @@ $(document).ready(function () {
     if (form == 0) {
       return false;
     }
-    
+
     let formData = new FormData(this);
     formData.append("flag", "insert");
     $.ajax({
