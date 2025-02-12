@@ -99,7 +99,9 @@ $(document).ready(function () {
               row.id +
               '" class="edit"><i class="fa-solid fa-pen-to-square"></i></a><a href="#" data-id="' +
               row.id +
-              '" class="delete"><i class="fa-solid fa-trash-can"></i></a></div></td>' +
+              '" class="delete"><i class="fa-solid fa-trash-can"></i></a><a href="#" data-id="' +
+              row.id +
+              '" class="send"><i class="fa-solid fa-paper-plane"></i></a></div></td>' +
               "</tr>";
             tableBody.append(newRow);
           });
@@ -223,7 +225,8 @@ $(document).ready(function () {
     });
   }
 
-  $(document).on("click", ".edit", function () {
+  $(document).on("click", ".edit", function (e) {
+    e.preventDefault();
     $("#editModal").modal("show");
     var id = $(this).data("id");
 
@@ -280,13 +283,23 @@ $(document).ready(function () {
               "</option>"
           );
           $("#edit_requiredSkills").val(res.data.required_skills);
+          $("#edit_priority").append(
+            '<option value="' +
+              res.data.priority +
+              '" selected>' +
+              res.data.priority +
+              "</option>"
+          );
+          $("#edit_location").val(res.data.location);
         } else {
           Swal.fire(res.data.message);
         }
       },
     });
   });
-  $(document).on("click", ".view", function () {
+
+  $(document).on("click", ".view", function (e) {
+    e.preventDefault();
     $("#viewModal").modal("show");
     var id = $(this).data("id");
 
@@ -343,8 +356,16 @@ $(document).ready(function () {
               "</option>"
           );
           $("#view_requiredSkills").val(res.data.required_skills);
+          $("#view_priority").append(
+            '<option value="' +
+              res.data.priority +
+              '" selected>' +
+              res.data.priority +
+              "</option>"
+          );
+          $("#view_location").val(res.data.location);
         } else {
-          Swal.fire(res.data.message);
+          Swal.fire(res.data.location);
         }
       },
     });
@@ -385,7 +406,8 @@ $(document).ready(function () {
     });
   });
 
-  $(document).on("click", ".delete", function () {
+  $(document).on("click", ".delete", function (e) {
+    e.preventDefault();
     $("#delete_modal").modal("show");
     var id = $(this).data("id");
     $("#deleteId").val(id);
@@ -420,11 +442,72 @@ $(document).ready(function () {
     });
   });
 
+  $(document).on("click", ".send", function (e) {
+    e.preventDefault();
+    $("#sendModal").modal("show");
+    var id = $(this).data("id");
+
+    $.ajax({
+      type: "POST",
+      url: "queries/recruitment.php",
+      data: {
+        id: id,
+        flag: "getDetails",
+      },
+      cache: false,
+      success: function (res) {
+        if (res.status == "success") {
+          $("#jobSno").val(res.data.id);
+          $("#send_jobIt").val(res.data.ticket_request_id);
+          $("#send_jobTitle").val(res.data.job_position);
+          $("#send_jobDescription").val(res.data.job_descriptions);
+        } else {
+          Swal.fire(res.data.message);
+        }
+      },
+    });
+  });
+
+  $(document).on("submit", "#send", function (e) {
+    e.preventDefault();
+    form = formValidate3();
+    if (form == 0) {
+      return false;
+    }
+    let formData = new FormData(this);
+    formData.append("flag", "send");
+    $.ajax({
+      type: "POST",
+      url: "queries/recruitment.php",
+      data: formData,
+      dataType: "json",
+      contentType: false,
+      cache: false,
+      processData: false,
+      success: function (response) {
+        if (response.status == "success") {
+          $("#update_modal").modal("show");
+          $("#update")[0].reset();
+          $("#editModal").modal("hide");
+          loadData(
+            (fromDate = ""),
+            (toDate = ""),
+            (dateRange = ""),
+            (companyType = ""),
+            (flag = "getAll")
+          );
+        } else {
+          toastr.error(response.message, "Error");
+        }
+      },
+    });
+  });
+
   function formValidate() {
     $(".error").remove(); // Remove previous error messages
 
     let jobTitle = $("#jobTitle").val().trim();
-    if (jobTitle.length < 1) {
+    if (jobTitle.length == 0) {
       $("#jobTitle").focus();
       $("#jobTitle").after(
         "<small class='error text-danger'> mandatory field.</small>"
@@ -487,6 +570,22 @@ $(document).ready(function () {
       );
       return 0;
     }
+    let priority = $("#priority").val().trim();
+    if (priority.length == 0) {
+      $("#priority").focus();
+      $("#priority").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+    let location = $("#location").val().trim();
+    if (location.length == 0) {
+      $("#location").focus();
+      $("#location").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
 
     return 1;
   }
@@ -495,7 +594,7 @@ $(document).ready(function () {
     $(".error").remove(); // Remove previous error messages
 
     let jobTitle = $("#edit_jobTitle").val().trim();
-    if (jobTitle.length < 1) {
+    if (jobTitle.length == 0) {
       $("#edit_jobTitle").focus();
       $("#edit_jobTitle").after(
         "<small class='error text-danger'> mandatory field.</small>"
@@ -558,7 +657,63 @@ $(document).ready(function () {
       );
       return 0;
     }
+    let priority = $("#edit_priority").val().trim();
+    if (priority.length == 0) {
+      $("#edit_priority").focus();
+      $("#edit_priority").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+    let location = $("#edit_location").val().trim();
+    if (location.length == 0) {
+      $("#edit_location").focus();
+      $("#edit_location").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
 
     return 1;
+  }
+
+  function formValidate3() {
+    $(".error").remove(); // Remove previous error messages
+
+    let candidateName = $("#candidateName").val().trim();
+    if (candidateName.length == 0) {
+      $("#candidateName").focus();
+      $("#candidateName").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+    let candidateMail = $("#candidateMail").val().trim();
+    if (candidateMail.length == 0) {
+      $("#candidateMail").focus();
+      $("#candidateMail").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+
+    var filter = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!filter.test(candidateMail)) {
+        toastr["warning"]("Please enter a valid email!"); 
+        $("#candidateMail").focus();
+        $("#candidateMail").after(
+          "<small class='error text-danger'>Please enter a valid email!.</small>"
+        );
+        return 0;
+    }  
+
+    let candidateContact = $("#candidateContact").val().trim();
+    if (candidateContact.length == 0) {
+      $("#candidateContact").focus();
+      $("#candidateContact").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
   }
 });

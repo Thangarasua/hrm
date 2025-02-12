@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
     if ($flag === "insert") {
 
-        $lastTicketId = "SELECT `ticket_request_id` FROM `resourse_requests` ORDER BY `id` DESC";
+        $lastTicketId = "SELECT `ticket_request_id` FROM `recruitment` ORDER BY `id` DESC";
         $result = mysqli_query($conn, $lastTicketId);
         $rowCount = mysqli_num_rows($result);
         if ($rowCount > 0) {
@@ -35,8 +35,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $qualification = $_POST['qualification'];
         $gender = $_POST['gender'];
         $requiredSkills = $_POST['requiredSkills'];
+        $priority = $_POST['priority'];
+        $location = $_POST['location'];
 
-        $query = "INSERT INTO `resourse_requests`(`ticket_request_id`, `raised_by`, `job_position`, `job_descriptions`, `required_skills`, `job_type`, `job_level`, `job_experience`, `qualification`, `gender`, `hr_contacted`, `status`, `created_at`) VALUES ('$ticketRequestId','$hrm_userid','$jobTitle','$jobDescription','$requiredSkills','$jobType','$jobLevel','$experience','$qualification','$gender','',1,'$currentDatetime')";
+        $query = "INSERT INTO `recruitment`(`ticket_request_id`, `raised_by`, `job_position`, `job_descriptions`, `required_skills`, `job_type`, `job_level`, `job_experience`, `qualification`, `gender`, `priority`, `location`, `hr_contacted`, `status`, `created_at`) VALUES ('$ticketRequestId','$hrm_userid','$jobTitle','$jobDescription','$requiredSkills','$jobType','$jobLevel','$experience','$qualification','$gender','$priority','$location','',1,'$currentDatetime')";
         $result = mysqli_query($conn, $query);
         if ($result) {
             echo json_encode(array('status' => 'success', 'message' => 'Resorce requested successfully'));
@@ -46,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         exit;
     } elseif ($flag === 'getAll' || $flag === 'getReport' || $flag === 'type') {
 
-        $sql = "SELECT * FROM `resourse_requests`";
+        $sql = "SELECT * FROM `recruitment`";
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
@@ -60,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     } elseif ($flag === "getDetails") {
 
         $id = $_POST['id'];
-        $query = "SELECT * FROM `resourse_requests` WHERE `id` = '$id'";
+        $query = "SELECT * FROM `recruitment` WHERE `id` = '$id'";
         $result = mysqli_query($conn, $query);
         if ($result) {
             $row = mysqli_fetch_assoc($result);
@@ -80,8 +82,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $qualification = $_POST['qualification'];
         $gender = $_POST['gender'];
         $requiredSkills = $_POST['requiredSkills'];
+        $priority = $_POST['priority'];
+        $location = $_POST['location'];
 
-        $query = "UPDATE `resourse_requests` SET `job_position`='$jobTitle',`job_descriptions`='$jobDescription',`required_skills`='$requiredSkills',`job_type`='$jobType',`job_level`='$jobLevel',`job_experience`='$experience',`qualification`='$qualification',`gender`='$gender',`updated_at`='$currentDatetime' WHERE `id`='$rowId'";
+        $query = "UPDATE `recruitment` SET `job_position`='$jobTitle',`job_descriptions`='$jobDescription',`required_skills`='$requiredSkills',`job_type`='$jobType',`job_level`='$jobLevel',`job_experience`='$experience',`qualification`='$qualification',`gender`='$gender',`priority`='$priority',`location`='$location',`updated_at`='$currentDatetime' WHERE `id`='$rowId'";
         $result = mysqli_query($conn, $query);
         if ($result) {
             echo json_encode(array('status' => 'success', 'message' => 'Recruitment update successfully'));
@@ -89,13 +93,28 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             echo json_encode(array('status' => 'failure', 'message' => 'Recruitment update failure'));
         }
         exit;
-        
     } elseif ($flag === "delete") {
         $id = $_POST['id'];
-        $query = "DELETE FROM `resourse_requests` WHERE `id` = '$id'";
+        $query = "DELETE FROM `recruitment` WHERE `id` = '$id'";
         $result = mysqli_query($conn, $query);
         if ($result) {
             echo json_encode(array('status' => 'success', 'message' => 'Deleted successfull'));
+        } else {
+            echo json_encode(array('status' => 'failure', 'message' => 'something went wrong'));
+        }
+        exit;
+    } elseif ($flag === "send") {
+
+        $candidateName = $_POST['candidateName'];
+        $candidateMail = $_POST['candidateMail'];
+        $candidateContact = $_POST['candidateContact'];
+        $id = $_POST['jobSno'];
+
+        $query = "SELECT * FROM `recruitment` WHERE `id` = '$id'";
+        $result = mysqli_query($conn, $query);
+        if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            echo json_encode(array('status' => 'success', 'data' => $row));
         } else {
             echo json_encode(array('status' => 'failure', 'message' => 'something went wrong'));
         }

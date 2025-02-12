@@ -185,7 +185,7 @@
 			</div>
 			<form id="create">
 				<div class="modal-body pb-0">
-					<div class="tab-content" id="myTabContent">
+					<div class="tab-content" id="">
 						<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
 							<div class="row">
 								<div class="col-md-12">
@@ -261,6 +261,26 @@
 										<input type="text" class="form-control" name="requiredSkills" id="requiredSkills">
 									</div>
 								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Priority <span class="text-danger"> *</span></label>
+										<select class="select" name="priority" id="priority">
+											<option value="">Select</option>
+											<option value="Immediate">Immediate</option>
+											<option value="15 Days">15 Days</option>
+											<option value="01 Month">01 Month</option>
+											<option value="45 Days">45 Days</option>
+											<option value="02 Month">02 Month</option>
+											<option value="No Limite">No Limite</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Location</label>
+										<input type="text" class="form-control" name="location" id="location">
+									</div>
+								</div>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</button>
@@ -274,6 +294,73 @@
 	</div>
 </div>
 <!-- /Post Job -->
+
+<!-- Recruitment form send -->
+<div class="modal fade" id="sendModal">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Recruitment Form send</h4>
+				<button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
+					<i class="ti ti-x"></i>
+				</button>
+			</div>
+			<form id="send">
+				<div class="modal-body pb-0">
+					<div class="tab-content" id="">
+						<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Job ID <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" name="jobId" id="send_jobIt">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Job Title <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" name="jobTitle" id="send_jobTitle">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-8">
+								<div class="mb-3">
+									<h4>Candidate Details</h4>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Candidate Name</label>
+										<input type="text" class="form-control" name="candidateName" id="candidateName" onkeypress="return isAlphabets(event)" placeholder="Candidate Name">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Candidate Mail</label>
+										<input type="text" class="form-control" name="candidateMail" id="candidateMail" onblur="return isEmail(this)" placeholder="user@example.com">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Candidate Contact</label>
+										<input type="text" class="form-control" name="candidateContact" id="candidateContact" onkeypress="return isNumber(event)" placeholder="9876543210">
+									</div>
+								</div>
+							</div>
+							<input type="hidden" class="form-control" name="jobSno" id="jobSno">
+							<div class="modal-footer">
+								<button type="button" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</button>
+								<button type="submit" class="btn btn-primary">Send Mail <i class="fa-solid fa-paper-plane"></i></button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- /Recruitment form send -->
 
 <!-- Add Job Success -->
 <div class="modal fade" id="success_modal" role="dialog">
@@ -336,7 +423,7 @@
 			</div>
 			<form id="update">
 				<div class="modal-body pb-0">
-					<div class="tab-content" id="myTabContent">
+					<div class="tab-content" id="">
 						<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
 							<div class="row">
 								<div class="col-md-12">
@@ -412,7 +499,27 @@
 										<input type="text" class="form-control" id="view_requiredSkills">
 									</div>
 								</div>
-							</div> 
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Priority <span class="text-danger"> *</span></label>
+										<select class="select" name="priority" id="view_priority">
+											<option value="">Select</option>
+											<option value="Immediate">Immediate</option>
+											<option value="15 Days">15 Days</option>
+											<option value="01 Month">01 Month</option>
+											<option value="45 Days">45 Days</option>
+											<option value="02 Month">02 Month</option>
+											<option value="No Limite">No Limite</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Location</label>
+										<input type="text" class="form-control" name="location" id="view_location">
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -433,7 +540,7 @@
 			</div>
 			<form id="update">
 				<div class="modal-body pb-0">
-					<div class="tab-content" id="myTabContent">
+					<div class="tab-content" id="">
 						<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
 							<div class="row">
 								<div class="col-md-12">
@@ -507,6 +614,26 @@
 									<div class="mb-3">
 										<label class="form-label">Required Skills</label>
 										<input type="text" class="form-control" name="requiredSkills" id="edit_requiredSkills">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Priority <span class="text-danger"> *</span></label>
+										<select class="select" name="priority" id="edit_priority">
+											<option value="">Select</option>
+											<option value="Immediate">Immediate</option>
+											<option value="15 Days">15 Days</option>
+											<option value="01 Month">01 Month</option>
+											<option value="45 Days">45 Days</option>
+											<option value="02 Month">02 Month</option>
+											<option value="No Limite">No Limite</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Location</label>
+										<input type="text" class="form-control" name="location" id="edit_location">
 									</div>
 								</div>
 							</div>
