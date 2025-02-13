@@ -458,6 +458,7 @@ $(document).ready(function () {
       success: function (res) {
         if (res.status == "success") {
           $("#jobSno").val(res.data.id);
+          $("#send_raised_by").val(res.data.raised_by);
           $("#send_jobIt").val(res.data.ticket_request_id);
           $("#send_jobTitle").val(res.data.job_position);
           $("#send_jobDescription").val(res.data.job_descriptions);
@@ -484,19 +485,53 @@ $(document).ready(function () {
       contentType: false,
       cache: false,
       processData: false,
+      beforeSend: function() {
+        // setting a timeout
+        $('#sendButton').text('loading');
+        $('#sendButton').prop('disabled', true);
+        Swal.fire({
+            title: 'Recruitment form sending...',
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+    },
       success: function (response) {
         if (response.status == "success") {
-          $("#update_modal").modal("show");
-          $("#update")[0].reset();
-          $("#editModal").modal("hide");
-          loadData(
-            (fromDate = ""),
-            (toDate = ""),
-            (dateRange = ""),
-            (companyType = ""),
-            (flag = "getAll")
-          );
+          $.ajax({
+            type: "POST",
+            url: "mails/recruitment-mail.php",
+            data: {
+              email: response.mailId,
+              flag: response.flag
+            },
+            dataType: "json",
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (response) {
+              if (response.status == "success") {
+                $("#update_modal").modal("show");
+                $("#update")[0].reset();
+                $("#editModal").modal("hide");
+                loadData(
+                  (fromDate = ""),
+                  (toDate = ""),
+                  (dateRange = ""),
+                  (companyType = ""),
+                  (flag = "getAll")
+                );
+              } else {
+                toastr.error(response.message, "Error");
+              }
+            },
+          });
         } else {
+          swal.close();
+          $('#sendButton').text('Send Mail ');
+          $('#sendButton').prop('disabled', false);
           toastr.error(response.message, "Error");
         }
       },
@@ -699,13 +734,13 @@ $(document).ready(function () {
 
     var filter = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!filter.test(candidateMail)) {
-        toastr["warning"]("Please enter a valid email!"); 
-        $("#candidateMail").focus();
-        $("#candidateMail").after(
-          "<small class='error text-danger'>Please enter a valid email!.</small>"
-        );
-        return 0;
-    }  
+      toastr["warning"]("Please enter a valid email!");
+      $("#candidateMail").focus();
+      $("#candidateMail").after(
+        "<small class='error text-danger'>Please enter a valid email!.</small>"
+      );
+      return 0;
+    }
 
     let candidateContact = $("#candidateContact").val().trim();
     if (candidateContact.length == 0) {
