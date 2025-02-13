@@ -313,7 +313,7 @@
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Job ID <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="jobId" id="send_jobIt">
+										<input type="text" class="form-control" name="ticketRequestId" id="send_jobIt">
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -332,26 +332,27 @@
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Candidate Name</label>
-										<input type="text" class="form-control" name="candidateName" id="candidateName" onkeypress="return isAlphabets(event)" placeholder="Candidate Name">
+										<input type="text" class="form-control" name="candidateName" id="candidateName" onkeypress="return isAlphabets(event)" placeholder="Candidate Name" value="Test">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Candidate Mail</label>
-										<input type="text" class="form-control" name="candidateMail" id="candidateMail" onblur="return isEmail(this)" placeholder="user@example.com">
+										<input type="text" class="form-control" name="candidateMail" id="candidateMail" onblur="return isEmail(this)" placeholder="user@example.com" value="learnernila@gmail.com">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Candidate Contact</label>
-										<input type="text" class="form-control" name="candidateContact" id="candidateContact" onkeypress="return isNumber(event)" placeholder="9876543210">
+										<input type="text" class="form-control" name="candidateContact" id="candidateContact" onkeypress="return isNumber(event)" placeholder="9876543210" value="7894651325">
 									</div>
 								</div>
 							</div>
+							<input type="hidden" class="form-control" name="raisedBy" id="send_raised_by">
 							<input type="hidden" class="form-control" name="jobSno" id="jobSno">
 							<div class="modal-footer">
 								<button type="button" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</button>
-								<button type="submit" class="btn btn-primary">Send Mail <i class="fa-solid fa-paper-plane"></i></button>
+								<button type="submit" id="sendButton" class="btn btn-primary">Send Mail <i class="fa-solid fa-paper-plane"></i></button>
 							</div>
 						</div>
 					</div>

@@ -105,19 +105,50 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         exit;
     } elseif ($flag === "send") {
 
+        $ticketRequestId = $_POST['ticketRequestId'];
+        $jobTitle = $_POST['jobTitle'];
         $candidateName = $_POST['candidateName'];
         $candidateMail = $_POST['candidateMail'];
         $candidateContact = $_POST['candidateContact'];
-        $id = $_POST['jobSno'];
+        $raisedBy = $_POST['raisedBy'];
+        $jobSno = $_POST['jobSno']; 
+        
+        // Enable MySQLi Exception Mode
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-        $query = "SELECT * FROM `recruitment` WHERE `id` = '$id'";
-        $result = mysqli_query($conn, $query);
-        if ($result) {
-            $row = mysqli_fetch_assoc($result);
-            echo json_encode(array('status' => 'success', 'data' => $row));
-        } else {
-            echo json_encode(array('status' => 'failure', 'message' => 'something went wrong'));
+        try {
+            $query = "INSERT INTO `candidates` (`candidate_name`, `email`, `contact_number`, `created_by`, `ticket_request_id`, `created_at`) 
+              VALUES ('$candidateName', '$candidateMail', '$candidateContact', '$raisedBy', '$ticketRequestId', '$currentDatetime')";
+
+            $result = mysqli_query($conn, $query);
+
+            if ($result) {
+                echo json_encode(array(
+                    'status' => 'success',
+                    'message' => 'Recruitment form sent successfully',
+                    'flag' => 'recruitmentForm',
+                    'mailId' => $candidateMail
+                ));
+            }
+        } catch (mysqli_sql_exception $e) {
+            // Check if the error is a duplicate entry (MySQL error code 1062)
+            if ($e->getCode() == 1062) {
+                echo json_encode(array(
+                    'status' => 'failure',
+                    'message' => 'Duplicate entry detected. Email or Contact Number already exists!',
+                    'error' => $e->getMessage()
+                ));
+            } else {
+                // Handle other MySQL errors
+                echo json_encode(array(
+                    'status' => 'failure',
+                    'message' => 'Something went wrong',
+                    'error' => $e->getMessage()
+                ));
+            }
         }
+
+        // Exit to prevent further execution
         exit;
     }
 }
