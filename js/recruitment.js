@@ -22,13 +22,7 @@ $(document).ready(function () {
           $("#success_modal").modal("show");
           $("#create")[0].reset();
           $("#add_post").modal("hide");
-          loadData(
-            (fromDate = ""),
-            (toDate = ""),
-            (dateRange = ""),
-            (companyType = ""),
-            (flag = "getAll")
-          );
+          loadData("", "", "", "", "getAll");
         } else {
           toastr.error(response.message, "Error");
         }
@@ -392,13 +386,7 @@ $(document).ready(function () {
           $("#update_modal").modal("show");
           $("#update")[0].reset();
           $("#editModal").modal("hide");
-          loadData(
-            (fromDate = ""),
-            (toDate = ""),
-            (dateRange = ""),
-            (companyType = ""),
-            (flag = "getAll")
-          );
+          loadData("", "", "", "", "getAll");
         } else {
           toastr.error(response.message, "Error");
         }
@@ -428,13 +416,7 @@ $(document).ready(function () {
         if (response.status == "success") {
           $("#delete")[0].reset();
           $("#delete_modal").modal("hide");
-          loadData(
-            (fromDate = ""),
-            (toDate = ""),
-            (dateRange = ""),
-            (companyType = ""),
-            (flag = "getAll")
-          );
+          loadData("", "", "", "", "getAll");
         } else {
           toastr.error(response.message, "Error");
         }
@@ -471,12 +453,15 @@ $(document).ready(function () {
 
   $(document).on("submit", "#send", function (e) {
     e.preventDefault();
-    form = formValidate3();
-    if (form == 0) {
+
+    let form = formValidate3();
+    if (form === 0) {
       return false;
     }
+
     let formData = new FormData(this);
     formData.append("flag", "send");
+
     $.ajax({
       type: "POST",
       url: "queries/recruitment.php",
@@ -485,58 +470,59 @@ $(document).ready(function () {
       contentType: false,
       cache: false,
       processData: false,
-      beforeSend: function() {
-        // setting a timeout
-        $('#sendButton').text('loading');
-        $('#sendButton').prop('disabled', true);
+      beforeSend: function () {
+        $("#sendButton").text("Loading...").prop("disabled", true);
         Swal.fire({
-            title: 'Recruitment form sending...',
-            allowEscapeKey: false,
-            allowOutsideClick: false,
-            didOpen: () => {
-                Swal.showLoading();
-            }
+          title: "Recruitment form sending...",
+          allowEscapeKey: false,
+          allowOutsideClick: false,
+          didOpen: () => {
+            Swal.showLoading();
+          },
         });
-    },
+      },
       success: function (response) {
-        if (response.status == "success") {
-          $.ajax({
-            type: "POST",
-            url: "mails/recruitment-mail.php",
-            data: {
-              email: response.mailId,
-              flag: response.flag
-            },
-            dataType: "json",
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function (response) {
-              if (response.status == "success") {
-                $("#update_modal").modal("show");
-                $("#update")[0].reset();
-                $("#editModal").modal("hide");
-                loadData(
-                  (fromDate = ""),
-                  (toDate = ""),
-                  (dateRange = ""),
-                  (companyType = ""),
-                  (flag = "getAll")
-                );
-              } else {
-                toastr.error(response.message, "Error");
-              }
-            },
-          });
+        if (response.status === "success") {
+          sendRecruitmentMail(response.mailId, response.flag);
         } else {
-          swal.close();
-          $('#sendButton').text('Send Mail ');
-          $('#sendButton').prop('disabled', false);
-          toastr.error(response.message, "Error");
+          handleError(response.message);
         }
+      },
+      error: function (xhr, status, error) {
+        handleError("An error occurred: " + error);
       },
     });
   });
+
+  /** Function to Send Recruitment Mail */
+  function sendRecruitmentMail(email, flag) {
+    $.ajax({
+      type: "POST",
+      url: "mails/recruitment-mail.php",
+      data: { email: email, flag: flag },
+      dataType: "json",
+      success: function (response) {
+        if (response.status === "success") {
+          $("#send")[0].reset();
+          $("#sendModal").modal("hide");
+          Swal.fire("Mail sent successfully!", "", "success");
+          loadData("", "", "", "", "getAll");
+        } else {
+          toastr.error(response.message, "Mail Error");
+        }
+      },
+      error: function (xhr, status, error) {
+        toastr.error("Failed to send mail: " + error, "Mail Error");
+      },
+    });
+  }
+
+  /** Function to Handle Errors */
+  function handleError(message) {
+    Swal.close();
+    $("#sendButton").text("Send Mail").prop("disabled", false);
+    toastr.error(message, "Error");
+  }
 
   function formValidate() {
     $(".error").remove(); // Remove previous error messages
