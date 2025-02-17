@@ -6,7 +6,7 @@ $currentDatetime = date('Y-m-d H:i:s');
 $username = $_POST['username'];
 $password = $_POST['password'];
 
-$key = "ACTECRM2025";
+$key = "ACTEHRM2025";
 $method = "AES-256-CBC";
 $iv = substr(hash('sha256', $key), 0, 16);
 $inputPassword = openssl_encrypt($password, $method, $key, 0, $iv);
