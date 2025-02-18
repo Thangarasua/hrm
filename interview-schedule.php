@@ -105,7 +105,7 @@ if (mysqli_num_rows($result) > 0) {
 													<figcaption>Click to upload</figcaption>
 												</figure>
 												<input type="file" class="item-img file center-block" />
-												<input type="hidden" id="vendor_profile" name="vendor_profile">
+												<input type="hidden" id="candidate_profile" name="candidate_profile">
 											</label>
 										</div>
 									</div>
@@ -337,7 +337,7 @@ if (mysqli_num_rows($result) > 0) {
 					quality: 1 // 0 to 1; 1 is the highest quality with less compression
 				}).then(function(resp) {
 					$('#cropedImage').attr('src', resp);
-					$('#vendor_profile').val(resp);
+					$('#candidate_profile').val(resp);
 					$('#cropImagePop').modal('hide');
 				});
 			});
@@ -423,7 +423,7 @@ if (mysqli_num_rows($result) > 0) {
 				formData.append("flag", "interviewForm");
 				$.ajax({
 					type: "POST",
-					url: "queries/recruitment.php",
+					url: "queries/interview-schedule.php",
 					data: formData,
 					dataType: "json",
 					contentType: false,
@@ -463,6 +463,11 @@ if (mysqli_num_rows($result) > 0) {
 			function validateForm() {
 				$(".error").remove(); // Remove previous error messages
 
+				let candidate_profile = $("#candidate_profile").val().trim();
+				if (candidate_profile.length == 0) {
+					Swal.fire("Kindly Upload Your Profile Picture."); 
+					return 0;
+				}
 				let name = $("#name").val().trim();
 				if (name.length == 0) {
 					$("#name").focus();
