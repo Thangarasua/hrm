@@ -241,6 +241,15 @@
 	}
 
 	/* added styles */
+	label{
+		color: #1f52cc;
+	}
+	.mandatory{
+		color: red;
+	}
+	.error{
+		color:red;
+	}
 	fieldset {
 		border: 1px solid black;
 		padding: 5px;
@@ -268,6 +277,11 @@
 		margin: 0.5rem;
 	}
  
+	.thanksTitle { 
+		margin: 20% 0;
+		text-align: center;
+		color: #1b538c;
+	}
 
 	/* added styles */
 	@keyframes animationLeftRight {

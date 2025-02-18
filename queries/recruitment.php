@@ -48,7 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         exit;
     } elseif ($flag === 'getAll' || $flag === 'getReport' || $flag === 'type') {
 
-        $sql = "SELECT * FROM `recruitment`";
+        // $sql = "SELECT * FROM `recruitment`";
+        $sql = "SELECT r.*, SUM(CASE WHEN c.responce_status = 1 THEN 1 ELSE 0 END) AS candidate_count FROM recruitment AS r LEFT JOIN candidates AS c ON r.ticket_request_id = c.ticket_request_id GROUP BY r.ticket_request_id";
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
@@ -111,8 +112,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $candidateMail = $_POST['candidateMail'];
         $candidateContact = $_POST['candidateContact'];
         $raisedBy = $_POST['raisedBy'];
-        $jobSno = $_POST['jobSno']; 
-        
+        $jobSno = $_POST['jobSno'];
+
         // Enable MySQLi Exception Mode
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
@@ -127,7 +128,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
                     'status' => 'success',
                     'message' => 'Recruitment form sent successfully',
                     'flag' => 'recruitmentForm',
-                    'mailId' => $candidateMail
+                    'id' => $jobSno,
+                    'email' => $candidateMail
                 ));
             }
         } catch (mysqli_sql_exception $e) {

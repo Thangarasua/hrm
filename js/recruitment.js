@@ -30,9 +30,7 @@ $(document).ready(function () {
     });
   });
 
-  $("#create").click(function () {
-    $(".error").remove(); // Remove previous error messages for filling form
-  });
+ 
 
   var fromDate = "";
   var toDate = "";
@@ -77,7 +75,7 @@ $(document).ready(function () {
               "</td>" +
               '<td><div class="d-flex align-items-center file-name-icon"><div class="ms-2"><h6 class="fw-medium"><a href="#">' +
               row.job_position +
-              '</a></h6><span class="d-block mt-1">0 Applicants</span></div></div></td>' +
+              '</a></h6><span class="d-block mt-1"> ' + row.candidate_count + ' Applicants</span></div></div></td>' +
               "<td>" +
               row.job_descriptions.slice(0, 30) +
               "</td>" +
@@ -483,7 +481,7 @@ $(document).ready(function () {
       },
       success: function (response) {
         if (response.status === "success") {
-          sendRecruitmentMail(response.mailId, response.flag);
+          sendRecruitmentMail(response.id,response.email, response.flag);
         } else {
           handleError(response.message);
         }
@@ -495,11 +493,11 @@ $(document).ready(function () {
   });
 
   /** Function to Send Recruitment Mail */
-  function sendRecruitmentMail(email, flag) {
+  function sendRecruitmentMail(id, email, flag) {
     $.ajax({
       type: "POST",
       url: "mails/recruitment-mail.php",
-      data: { email: email, flag: flag },
+      data: {id:id, email: email, flag: flag },
       dataType: "json",
       success: function (response) {
         if (response.status === "success") {

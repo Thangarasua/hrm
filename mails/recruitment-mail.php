@@ -25,8 +25,11 @@ try {
 
     if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
-        $email = $_POST['email'];
         $flag = $_POST['flag'];
+        $email = $_POST['email'];
+        $id = $_POST['id'];
+        $encryptedID = base64_encode($id);
+        $encryptedMail = base64_encode($email);
 
         if ($flag === "recruitmentForm") {
 
@@ -35,7 +38,7 @@ try {
 
             //Content
             $mail->Subject = 'Here is the subject';
-            $mail->Body    = 'Candidate register form <a href="http://localhost/actecrm/hrm/interview-schedule" target="_blank">click the Link </a> <b>in bold!</b>';
+            $mail->Body    = 'Candidate register form <a href="http://localhost/actecrm/hrm/interview-schedule?id='.$encryptedID.'&mail='.$encryptedMail.'" target="_blank">click the Link </a> <b>in bold!</b>';
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
             $mail->send();

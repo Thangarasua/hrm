@@ -3,12 +3,29 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 date_default_timezone_set("Asia/Kolkata");
 
-// $encryptedID = $_GET['id'];
-// $id = base64_decode($encryptedID);
+$encryptedID = $_GET['id'];
+$encryptedMail = $_GET['mail'];
+$id = base64_decode($encryptedID);
+$email = base64_decode($encryptedMail);
 
-$sql = "SELECT * FROM `recruitment` WHERE `id` = 31";
+$sql = "SELECT * FROM `recruitment` AS `r` INNER JOIN `candidates` AS `c` ON `r`.`ticket_request_id` = `c`.`ticket_request_id` WHERE `id` = '$id' AND `c`.`email` = '$email'";
 $result = mysqli_query($conn, $sql);
-$data = $result->fetch_assoc(); 
+if (mysqli_num_rows($result) > 0) {
+	$data = $result->fetch_assoc();
+	$status = $data['responce_status'];
+
+	if ($status == 0) {
+		$formDisplay = 'd-block';
+	$thanksDivDisplay = 'd-none';
+	} else {
+		$formDisplay = 'd-none';
+		$thanksDivDisplay = 'd-block'; 
+	}
+} else {
+	echo "access denied.";
+	exit;
+}
+ 
 ?>
 
 <!DOCTYPE html>
@@ -17,13 +34,20 @@ $data = $result->fetch_assoc();
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>Interview Form</title>
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="css/plugins/bootstrap.min.css">
+	<!-- page css -->
 	<link rel="stylesheet" href="css/interview-schedule.css">
-
+	<!-- Image crop-->
+	<link rel="stylesheet" href="css/plugins/croppie.css">
+	<!--toastr alert added-->
+	<link rel="stylesheet" href="css/plugins/toastr.min.css">
+	<!-- sweetalert2 alert added -->
+	<script src="js/plugins/sweetalert2.js" type="text/javascript"></script>
+	<!-- Daterangepikcer CSS -->
+	<!-- <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css"> -->
 </head>
-
 
 <body>
 	<div class="login-root">
@@ -65,155 +89,161 @@ $data = $result->fetch_assoc();
 				<div class="formbg-outer">
 					<div class="formbg">
 						<div class="formbg-inner padding-horizontal--48">
-
-							<div class="row">
-								<div class="col-sm">
-								</div>
-								<div class="col-sm vendor-heading">
-									<h4 class="flex-flex flex-justifyContent--center company-title"><b><a href="https://actetechnologies.com" target="_blank" rel="dofollow">MARKERZ SOLUTION</a></b></h4>
-									<h6 class="flex-flex flex-justifyContent--center form-title">INTERVIEW SCHEDULE FORM</h6>
-								</div>
-								<div class="col-sm">
-									<div class="profile-images-card">
-										<label class="cabinet center-block">
-											<figure>
-												<img src="https://actecrm.com/img/no-image.png" class="gambar img-responsive img-thumbnail" id="cropedImage" />
-												<figcaption>Click to upload</figcaption>
-											</figure>
-											<input type="file" class="item-img file center-block" />
-											<input type="hidden" id="vendor_profile" name="vendor_profile">
-										</label>
+							<form id="interviewForm" class="<?php echo $formDisplay; ?>">
+								<div class="row">
+									<div class="col-sm">
 									</div>
-								</div>
-							</div>
-							<br>
-							<fieldset class="">
-								<legend class="float-none">Job details</legend>
-
-								<div class="responsive">
-									<div class="form-group">
-										<label for="text">Job Title</label>
-										<input type="text" class="form-control" value="<?php echo $data['job_position']?>" readonly>
+									<div class="col-sm vendor-heading">
+										<h4 class="flex-flex flex-justifyContent--center company-title"><b><a href="https://actetechnologies.com" target="_blank" rel="dofollow">MARKERZ SOLUTION</a></b></h4>
+										<h6 class="flex-flex flex-justifyContent--center form-title">INTERVIEW SCHEDULE FORM</h6>
 									</div>
-									<div class="form-group">
-										<label for="text">Job Type</label>
-										<input type="text" class="form-control" value="<?php echo $data['job_type']?>" readonly>
-									</div>
-									<div class="form-group">
-										<label for="email">Job Level</label>
-										<input type="email" class="form-control" value="<?php echo $data['job_level']?>" readonly>
-									</div>
-									<div class="form-group">
-										<label for="text">Experience</label>
-										<input type="text" class="form-control" value="<?php echo $data['job_experience']?>" readonly>
-									</div>
-								</div>
-								<div class="responsive">
-									<div class="form-group">
-										<label for="text">Qualification</label>
-										<input type="text" class="form-control" value="<?php echo $data['qualification']; ?>" readonly>
-									</div>
-									<div class="form-group">
-										<label for="text">Gender</label>
-										<input type="text" class="form-control" value="<?php echo $data['gender']; ?>" readonly>
-									</div>
-									<div class="form-group">
-										<label for="text">Required Skills</label>
-										<input type="text" class="form-control" value="<?php echo $data['required_skills']; ?>" readonly>
-									</div>
-									<div class="form-group">
-										<label for="text">Location</label>
-										<input type="text" class="form-control" value="<?php echo $data['location']; ?>" readonly>
-									</div>
-								</div>
-								<div class="responsive">
-									<div class="form-group">
-										<label for="text">Job Description</label>
-										<input type="text" class="form-control" value="<?php echo $data['job_descriptions']; ?>" readonly>
+									<div class="col-sm">
+										<div class="profile-images-card">
+											<label class="cabinet center-block">
+												<figure>
+													<img src="https://actecrm.com/img/no-image.png" class="gambar img-responsive img-thumbnail" id="cropedImage" />
+													<figcaption>Click to upload</figcaption>
+												</figure>
+												<input type="file" class="item-img file center-block" />
+												<input type="hidden" id="candidate_profile" name="candidate_profile">
+											</label>
+										</div>
 									</div>
 								</div>
 								<br>
-							</fieldset>
+								<fieldset class="">
+									<legend class="float-none">Job details</legend>
 
-							<br>
-							<fieldset class="">
-								<legend class="float-none">Candidate Details</legend>
-								<div class="responsive">
-									<div class="form-group">
-										<label for="text">Name<em class="mandatory">*</em><small class="lowercase text-danger">(change if other)</small></label>
-										<div class="input-group">
-											<input type="text" class="form-control" id="whatsappno" name="whatsappno" value="" placeholder="Whatsapp No">
-											<span id="whatsappnoError" class="error"></span>
+									<div class="responsive">
+										<div class="form-group">
+											<label for="text">Job Title</label>
+											<input type="text" class="form-control" value="<?php echo $data['job_position']; ?>" readonly>
+										</div>
+										<div class="form-group">
+											<label for="text">Job Type</label>
+											<input type="text" class="form-control" value="<?php echo $data['job_type']; ?>" readonly>
+										</div>
+										<div class="form-group">
+											<label for="email">Job Level</label>
+											<input type="email" class="form-control" value="<?php echo $data['job_level']; ?>" readonly>
+										</div>
+										<div class="form-group">
+											<label for="text">Experience</label>
+											<input type="text" class="form-control" value="<?php echo $data['job_experience']; ?>" readonly>
 										</div>
 									</div>
-									<div class="form-group">
-										<label for="text">Email<em class="mandatory">*</em></label>
-										<input type="email" class="form-control course" id="course" name="course">
-										<span id='' class='error'></span>
+									<div class="responsive">
+										<div class="form-group">
+											<label for="text">Qualification</label>
+											<input type="text" class="form-control" value="<?php echo $data['qualification']; ?>" readonly>
+										</div>
+										<div class="form-group">
+											<label for="text">Gender</label>
+											<input type="text" class="form-control" value="<?php echo $data['gender']; ?>" readonly>
+										</div>
+										<div class="form-group">
+											<label for="text">Required Skills</label>
+											<input type="text" class="form-control" value="<?php echo $data['required_skills']; ?>" readonly>
+										</div>
+										<div class="form-group">
+											<label for="text">Location</label>
+											<input type="text" class="form-control" value="<?php echo $data['location']; ?>" readonly>
+										</div>
 									</div>
-									<div class="form-group">
-										<label for="text">phone<em class="mandatory">*</em></label>
-										<input type="text" class="form-control course" id="course" name="course">
-										<span id='' class='error'></span>
+									<div class="responsive">
+										<div class="form-group">
+											<label for="text">Job Description</label>
+											<input type="text" class="form-control" value="<?php echo $data['job_descriptions']; ?>" readonly>
+										</div>
 									</div>
-									<div class="form-group">
-										<label for="text">Overall experience<em class="mandatory">*</em></label>
-										<span class="d-flex">
-											<input type="text" class="form-control totalEpx" id="totalExpYear" name="totalExpYear" placeholder="Year">
-											<input type="text" class="form-control totalEpx" id="totalExpMonth" name="totalExpMonth" placeholder="Month">
-										</span>
-										<span id='totalEpxError' class='error'></span>
+									<br>
+								</fieldset>
+								<br>
+								<fieldset class="">
+									<legend class="float-none">Candidate Details</legend>
+									<div class="responsive">
+										<div class="form-group">
+											<label for="text">Name <em class="mandatory">*</em><small>(if change)</small></label>
+											<input type="text" class="form-control" id="name" name="name" placeholder="Candidate full name" value="<?php echo $data['candidate_name']; ?>">
+											<small id="name_error" class="error"></small>
+										</div>
+										<div class="form-group">
+											<label for="text">Email <em class="mandatory">*</em></label>
+											<input type="email" class="form-control" id="email" name="email" placeholder="proper email" value="<?php echo $data['email']; ?>">
+											<small id="email_error" class="error"></small>
+										</div>
+										<div class="form-group">
+											<label for="text">phone <em class="mandatory">*</em></label>
+											<input type="text" class="form-control" id="phone" name="phone" placeholder="valid mobile number" value="<?php echo $data['contact_number']; ?>">
+											<small id="number_error" class="error"></small>
+										</div>
+										<div class="form-group">
+											<label for="text">Qualification <em class="mandatory">*</em></label>
+											<input type="text" class="form-control" id="qualification" name="qualification" placeholder="Enter your Highest Qualification" value="BE CSE">
+										</div>
 									</div>
+									<div class="responsive">
+										<div class="form-group">
+											<label for="text">Overall experience <em class="mandatory">*</em></label>
+											<span class="d-flex">
+												<input type="text" class="form-control totalEpx" id="totalExpYear" name="totalExpYear" placeholder="Year" value="3">
+												<input type="text" class="form-control totalEpx" id="totalExpMonth" name="totalExpMonth" placeholder="Month" value="3">
+											</span>
+											<small id='experienceError' class='error'></small>
+										</div>
+										<div class="form-group">
+											<label for="text">Resume <em class="mandatory">*</em> <small>(pdf only)</small> </label>
+											<input type="file" class="form-control" id="resume" name="resume" placeholder="Select Recent resume PDF" accept="application/pdf" />
+											<span id='' class='error'></span>
+										</div>
+										<div class="form-group">
+											<label for="text">Skills <em class="mandatory">*</em></label>
+											<input type="text" class="form-control" id="skills" name="skills" placeholder="eg: Data Analysis, Python" value="test">
+											<span id='' class='error'></span>
+										</div>
+										<div class="form-group">
+											<label for="text">Current Location <em class="mandatory">*</em></label>
+											<input type="text" name="location" id="location" class="form-control" placeholder="eg:Area,district,state" value="test">
+										</div>
+									</div>
+									<div class="responsive">
+										<div class="form-group">
+											<label for="text">Availability time 1 <em class="mandatory">*</em></label>
+											<div class="availability availabilityDate1">
+												<input type="date" class="form-control domainEpx" id="availabilityDate1" name="availabilityDate1">
+												<input type="time" class="form-control domainEpx" id="availabilityTime1" name="availabilityTime1">
+											</div>
+											<span id='availabilityDateError' class='error'></span>
+										</div>
+										<div class="form-group">
+											<label for="text">Availability time 2 <small>(opional)</small></label>
+											<div class="availability">
+												<input type="date" class="form-control domainEpx" id="availabilityDate2" name="availabilityDate2">
+												<input type="time" class="form-control domainEpx" id="availabilityTime2" name="availabilityTime2">
+											</div>
+											<span id='availabilityDate' class='error'></span>
+										</div>
+										<div class="form-group">
+											<label for="text">Availability time 3 <small>(opional)</small></label>
+											<div class="availability">
+												<input type="date" class="form-control domainEpx" id="availabilityDate3" name="availabilityDate3">
+												<input type="time" class="form-control domainEpx" id="availabilityTime3" name="availabilityTime3">
+											</div>
+											<span id='availabilityDate' class='error'></span>
+										</div>
+									</div>
+								</fieldset>
+								<br>
+								<div class="terms">
+									<a href="#" data-toggle="modal" data-target="#termModel"><i class="fa fa-hand-o-right text-danger" aria-hidden="true"></i> Terms and Conditions.</a>
 								</div>
-								<div class="responsive">
-									<div class="form-group">
-										<label for="text">Availability time 1<em class="mandatory">*</em></label>
-										<div class="availability">
-											<input type="date" class="form-control domainEpx" id="domainExpYear" name="domainExpYear" placeholder="Year">
-											<input type="time" class="form-control domainEpx" id="domainExpMonth" name="domainExpMonth" placeholder="Month">
-										</div>
-										<span id='domainEpxError' class='error'></span>
-									</div>
-									<div class="form-group">
-										<label for="text">Availability time 2<em class="mandatory">*</em></label>
-										<div class="availability">
-											<input type="date" class="form-control domainEpx" id="domainExpYear" name="domainExpYear" placeholder="Year">
-											<input type="time" class="form-control domainEpx" id="domainExpMonth" name="domainExpMonth" placeholder="Month">
-										</div>
-										<span id='domainEpxError' class='error'></span>
-									</div>
-									<div class="form-group">
-										<label for="text">Availability time 3<em class="mandatory">*</em></label>
-										<div class="availability">
-											<input type="date" class="form-control domainEpx" id="domainExpYear" name="domainExpYear" placeholder="Year">
-											<input type="time" class="form-control domainEpx" id="domainExpMonth" name="domainExpMonth" placeholder="Month">
-										</div>
-										<span id='domainEpxError' class='error'></span>
-									</div>
-								</div>
-
-								<div class="responsive">
-									<div class="form-group">
-										<label for="text">Skills<em class="mandatory">*</em></label>
-										<input type="text" class="form-control" id="skills" name="skills" placeholder="eg: Data Analysis, Python">
-										<span id='' class='error'></span>
-									</div>
-									<div class="form-group">
-										<label for="text">Location<em class="mandatory">*</em></label>
-										<input type="text" name="location" id="location" class="form-control" placeholder="eg:Area,district,state" />
-									</div>
-								</div>
-							</fieldset>
-
-							<br>
-							<div class="terms">
-								<a href="#" data-toggle="modal" data-target="#termModel"><i class="fa fa-hand-o-right text-danger" aria-hidden="true"></i>Please read the Terms and Conditions and select the checkbox to proceed (Click to open).</a>
+								<br>
+								<input type="hidden" name="id" id="id" value="<?php echo $data['candidate_id']; ?>">
+								<button type="submit" id="formSubmit" class="btn btn-primary">Submit</button>
+							</form>
+							<div class="thanksDiv <?php echo $thanksDivDisplay; ?>">
+								<h1 class="thanksTitle">Thank you for your submission.👍</h1>
 							</div>
-							<br>
-							<input type="hidden" name="type" id="type" value="">
-							<input type="hidden" name="id" id="id" value="">
-							<button type="submit" id="formSubmit" class="btn btn-primary">Submit</button>
-
 						</div>
 					</div>
 
@@ -221,6 +251,319 @@ $data = $result->fetch_assoc();
 			</div>
 		</div>
 	</div>
+
+	<!-- image crop model start -->
+	<div class="modal fade" id="cropImagePop" tabindex="-1" role="dialog" aria-labelledby="cropImageModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="cropImageModalLabel">Edit Photo</h4>
+				</div>
+				<div class="modal-body">
+					<div id="upload-demo"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" id="cropImageBtn" class="btn btn-primary">Crop</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- image crop model end -->
+
+	<script src="js/plugins/jquery.min.js" type="text/javascript"></script>
+	<!-- Bootstrap Core JS -->
+	<script src="js/plugins/bootstrap.bundle.min.js"></script>
+	<!-- crop script added -->
+	<script src="js/plugins/croppie.js"></script>
+	<!-- toastr alert added -->
+	<script src="js/plugins/toastr.min.js" type="text/javascript"></script>
+	<!-- Daterangepikcer JS -->
+	<!-- <script src="plugins/daterangepicker/daterangepicker.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script>
+		$(document).ready(function() {
+
+			/*----------------- Start upload preview image with crop -----------------*/
+			var $uploadCrop,
+				tempFilename,
+				rawImg,
+				imageId;
+
+			function readFile(input) {
+				if (input.files && input.files[0]) {
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						$('.upload-demo').addClass('ready');
+						$('#cropImagePop').modal('show');
+						rawImg = e.target.result;
+					}
+					reader.readAsDataURL(input.files[0]);
+				} else {
+					swal("Sorry - Image formate dosn't accepted.");
+				}
+			}
+
+			$uploadCrop = $('#upload-demo').croppie({
+				viewport: {
+					width: 150,
+					height: 200,
+				},
+				enforceBoundary: false,
+				enableExif: true
+			});
+			$('#cropImagePop').on('shown.bs.modal', function() {
+				$uploadCrop.croppie('bind', {
+					url: rawImg
+				}).then(function() {
+					console.log('jQuery bind complete');
+				});
+			});
+			$('.item-img').on('change', function() {
+				imageId = $(this).data('id');
+				tempFilename = $(this).val();
+				$('#cancelCropBtn').data('id', imageId);
+				readFile(this);
+			});
+			$('#cropImageBtn').on('click', function(ev) {
+				$uploadCrop.croppie('result', {
+					type: 'base64',
+					format: 'jpeg', // set image formate by manually
+					size: {
+						width: 600, // Increase this for better quality
+						height: 800 // Increase this for better quality
+					},
+					quality: 1 // 0 to 1; 1 is the highest quality with less compression
+				}).then(function(resp) {
+					$('#cropedImage').attr('src', resp);
+					$('#candidate_profile').val(resp);
+					$('#cropImagePop').modal('hide');
+				});
+			});
+			/*----------------- End upload preview image -----------------*/
+
+			$("#name").on("input", function() {
+				let value = $(this).val();
+
+				if (!/^[a-zA-Z\s]*$/.test(value)) {
+					toastr.warning("Only alphabets and spaces are allowed!");
+					$("#name_error").html('Please enter letters only.');
+					$(this).val(value.replace(/[^a-zA-Z\s]/g, '')); // Remove non-alphabetic characters
+				} else {
+					$("#name_error").html('');
+				}
+			});
+
+			$("#phone").on("input", function() {
+				const value = $(this).val();
+				if (!/^\d*$/.test(value)) {
+					toastr.warning("Only numbers are allowed!");
+					$("#number_error").html('Please enter numbers only, e.g., 123..');
+					$(this).val(value.replace(/\D/g, ''));
+					$(this).focus();
+				} else if (value.length > 10) {
+					toastr.warning("Maximum 10 digits allowed!");
+					$("#number_error").html('Maximum 10 digits allowed');
+					$(this).val(value.substring(0, 10));
+				} else {
+					$("#number_error").html('');
+				}
+			});
+
+			$(".totalEpx").on("input", function() {
+				const value = $(this).val();
+				if (!/^\d*$/.test(value)) {
+					toastr.warning("Only numbers are allowed!");
+					$("#experienceError").html('Please enter numbers only, e.g., "03"');
+					$(this).val(value.replace(/\D/g, ''));
+					$(this).focus();
+				} else if (value.length > 2) {
+					toastr.warning("Maximum 2 digits allowed!");
+					$("#experienceError").removeClass('d-none');
+					$("#experienceError").html('Maximum 2 digits allowed');
+					$(this).val(value.substring(0, 2));
+				} else {
+					$("#experienceError").html('');
+				}
+			});
+			$("#totalExpMonth").on("input", function() {
+				const value = $(this).val();
+				if (!/^\d*$/.test(value)) {
+					toastr.warning("Only numbers are allowed!");
+					$("#experienceError").html('Please enter numbers only, e.g., "03"');
+					$(this).val(value.replace(/\D/g, ''));
+					$(this).focus();
+				} else if (value.length > 2) {
+					toastr.warning("Maximum 11 months allowed!");
+					$("#experienceError").removeClass('d-none');
+					$("#experienceError").html('Maximum 2 digits allowed');
+					$(this).val(value.substring(0, 2));
+				} else if (value > 11) {
+					toastr.warning("Maximum 11 months allowed!");
+					$("#experienceError").removeClass('d-none');
+					$("#experienceError").html('Maximum 11 months allowed');
+					$(this).val(value.slice(0, -1));
+				} else {
+					$("#experienceError").html('');
+				}
+			});
+
+			$("#interviewForm").click(function() {
+				$(".error").html(''); // Remove previous error messages for filling form
+			});
+
+			$("#interviewForm").on("submit", function(e) {
+				e.preventDefault();
+				var response = validateForm();
+				if (response == 0) {
+					return;
+				}
+				let formData = new FormData(this);
+				formData.append("flag", "interviewForm");
+				$.ajax({
+					type: "POST",
+					url: "queries/interview-schedule.php",
+					data: formData,
+					dataType: "json",
+					contentType: false,
+					cache: false,
+					processData: false,
+					beforeSend: function() {
+						$("#formSubmit").attr("disabled", "disabled");
+						$("#formSubmit").css("opacity", ".5");
+					},
+					success: function(response) {
+						if (response.status == 'success') {
+							Swal.fire({
+								title: "Success!",
+								text: "Your form has been submitted!",
+								icon: "success",
+								confirmButtonText: "OK"
+							}).then((result) => {
+								if (result.isConfirmed) {
+									location.reload();
+								}
+							});
+						} else {
+							Swal.fire({
+								icon: "error",
+								title: "Oops...",
+								text: response.error
+							});
+							// Enable the submit button and restore opacity
+							$("#formSubmit").removeAttr("disabled");
+							$("#formSubmit").css("opacity", "1");
+						}
+					},
+				});
+			});
+
+
+			function validateForm() {
+				$(".error").remove(); // Remove previous error messages
+
+				let candidate_profile = $("#candidate_profile").val().trim();
+				if (candidate_profile.length == 0) {
+					Swal.fire("Kindly Upload Your Profile Picture."); 
+					return 0;
+				}
+				let name = $("#name").val().trim();
+				if (name.length == 0) {
+					$("#name").focus();
+					$("#name").after(
+						"<small class='error text-danger'> mandatory field.</small>"
+					);
+					return 0;
+				}
+				let email = $("#email").val().trim();
+				if (email.length == 0) {
+					$("#email").focus();
+					$("#email").after(
+						"<small class='error text-danger'> mandatory field.</small>"
+					);
+					return 0;
+				}
+
+				var filter = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+				if (!filter.test(email)) {
+					toastr["warning"]("Please enter a valid email!");
+					$("#email").focus();
+					$("#email").after(
+						"<small class='error text-danger'>Please enter a valid email!.</small>"
+					);
+					return 0;
+				}
+
+				let phone = $("#phone").val().trim();
+				if (phone.length == 0) {
+					$("#phone").focus();
+					$("#phone").after(
+						"<small class='error text-danger'> mandatory field.</small>"
+					);
+					return 0;
+				}
+				let qualification = $("#qualification").val().trim();
+				if (qualification.length == 0) {
+					$("#qualification").focus();
+					$("#qualification").after(
+						"<small class='error text-danger'> mandatory field.</small>"
+					);
+					return 0;
+				}
+				let totalExpYear = $("#totalExpYear").val().trim();
+				if (totalExpYear.length == 0) {
+					$("#totalExpYear").focus();
+					$("#experienceError").html('mandatory field.');
+					return 0;
+				}
+				let resume = $("#resume").val().trim();
+				if (resume.length == 0) {
+					$("#resume").focus();
+					$("#resume").after(
+						"<small class='error text-danger'> mandatory field.</small>"
+					);
+					return 0;
+				}
+				let skills = $("#skills").val().trim();
+				if (skills.length == 0) {
+					$("#skills").focus();
+					$("#skills").after(
+						"<small class='error text-danger'> mandatory field.</small>"
+					);
+					return 0;
+				}
+				let location = $("#location").val().trim();
+				if (location.length == 0) {
+					$("#location").focus();
+					$("#location").after(
+						"<small class='error text-danger'> mandatory field.</small>"
+					);
+
+					return 0;
+				}
+				let availabilityDate1 = $("#availabilityDate1").val().trim();
+				if (availabilityDate1.length == 0) {
+					$(".availabilityDate1").after(
+						"<small class='error text-danger'> mandatory field.</small>"
+					);
+					$("#availabilityDate1").focus();
+					return 0;
+				}
+				let availabilityTime1 = $("#availabilityTime1").val().trim();
+				if (availabilityTime1.length == 0) {
+					$(".availabilityDate1").after(
+						"<small class='error text-danger'> mandatory field.</small>"
+					);
+					$("#availabilityTime1").focus();
+					return 0;
+				}
+			}
+
+
+
+		});
+	</script>
 </body>
 
 </html>
