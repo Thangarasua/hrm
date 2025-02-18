@@ -111,8 +111,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $candidateMail = $_POST['candidateMail'];
         $candidateContact = $_POST['candidateContact'];
         $raisedBy = $_POST['raisedBy'];
-        $jobSno = $_POST['jobSno']; 
-        
+        $jobSno = $_POST['jobSno'];
+
         // Enable MySQLi Exception Mode
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
@@ -127,7 +127,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
                     'status' => 'success',
                     'message' => 'Recruitment form sent successfully',
                     'flag' => 'recruitmentForm',
-                    'mailId' => $candidateMail
+                    'id' => $jobSno,
+                    'email' => $candidateMail
                 ));
             }
         } catch (mysqli_sql_exception $e) {
@@ -149,6 +150,54 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         }
 
         // Exit to prevent further execution
+        exit;
+    } elseif ($flag === "interviewForm") {
+
+        $vendor_profile = $_POST['vendor_profile'];
+        $name = $_POST['name'];
+        $phone = $_POST['phone'];
+        $qualification = $_POST['qualification'];
+        $totalExpYear = $_POST['totalExpYear'];
+        $totalExpMonth = $_POST['totalExpMonth'];
+        $experience = $_POST['totalExpYear'] . ':' . $_POST['totalExpMonth'];
+        $skills = $_POST['skills'];
+        $location = $_POST['location'];
+        $available_time1 = $_POST['availabilityDate1'] . ' ' . $_POST['availabilityTime1'];
+        $available_time2 = $_POST['availabilityDate2'] . ' ' . $_POST['availabilityTime2'];
+        $available_time3 = $_POST['availabilityDate3'] . ' ' . $_POST['availabilityTime3'];
+        $id = $_POST['id'];
+
+        if (!empty($_FILES["resume"]["name"])) {
+            $resumeName = basename($_FILES["resume"]["name"]);
+            $fileType = pathinfo($resumeName, PATHINFO_EXTENSION); // Get the file extension
+
+            if (strtolower($fileType) !== 'pdf') {
+                $response = array(
+                    'status' => 'failed',
+                    'message' => 'Only PDF files are allowed.'
+                );
+                echo json_encode($response);
+                exit;
+            } else {
+                $resume = "{$name}_{$id}_resume.pdf";
+                $targetFilePath = '../uploads/candidate_resume/' . $resume;
+                if (move_uploaded_file($_FILES["resume"]["tmp_name"], $targetFilePath)) {
+                } else {
+                    echo "Sorry, there was an error uploading your file.";
+                }
+            }
+        } else {
+            $resume = 'No resume';
+        }
+
+        $query = "UPDATE `candidates` SET `candidate_name`='$name',`contact_number`='$phone',`address`='$location',`resume`='$resume',`experience`='$experience',`skills`='$skills',`available_time1`='$available_time1',`available_time2`='$available_time2',`available_time3`='$available_time3',`created_at`='$currentDatetime',`responce_status`= 1 WHERE `candidate_id`='$id'";
+        
+        $result = mysqli_query($conn, $query);
+        if ($result) {
+            echo json_encode(array('status' => 'success', 'message' => 'Form submited successfully'));
+        } else {
+            echo json_encode(array('status' => 'failure', 'message' => 'something went wrong'));
+        }
         exit;
     }
 }
