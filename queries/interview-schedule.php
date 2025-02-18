@@ -1,7 +1,7 @@
 <?php include "../includes/config.php";
 
 header('Content-Type: application/json');
- 
+
 $month = date('m');
 $year = date('y');
 $date = date('d');
@@ -10,25 +10,26 @@ $currentDatetime = date('Y-m-d H:i:s');
 if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
     $flag = $_POST['flag'];
-    
+
     if ($flag === "interviewForm") {
- 
+
         $name = $_POST['name'];
         $phone = $_POST['phone'];
         $qualification = $_POST['qualification'];
-        $totalExpYear = $_POST['totalExpYear'];
-        $totalExpMonth = $_POST['totalExpMonth'];
-        $experience = $_POST['totalExpYear'] . ':' . $_POST['totalExpMonth'];
-        $skills = $_POST['skills'];
+        $experience = $_POST['totalExpYear'] . 'year' . $_POST['totalExpMonth'] .'month';
+        $skills = json_encode($_POST['skills']);
         $location = $_POST['location'];
-        $available_time1 = $_POST['availabilityDate1'] . ' ' . $_POST['availabilityTime1'];
-        $available_time2 = $_POST['availabilityDate2'] . ' ' . $_POST['availabilityTime2'];
-        $available_time3 = $_POST['availabilityDate3'] . ' ' . $_POST['availabilityTime3'];
+        $timing1 = $_POST['availabilityDate1'] . ' ' . $_POST['availabilityTime1'];
+        $available_time1 = date('Y-m-d H:i:s', strtotime($timing1));
+        $timing2 = $_POST['availabilityDate2'] . ' ' . $_POST['availabilityTime2'];
+        $available_time2 = date('Y-m-d H:i:s', strtotime($timing2));
+        $timing3 = $_POST['availabilityDate3'] . ' ' . $_POST['availabilityTime3'];
+        $available_time3 = date('Y-m-d H:i:s', strtotime($timing3));
         $id = $_POST['id'];
 
         if (isset($_POST['candidate_profile']) && !empty($_POST['candidate_profile'])) {
             $base64_image = $_POST['candidate_profile'];
-        
+
             $image_parts = explode(";base64,", $base64_image);
             $image_type_aux = explode("image/", $image_parts[0]);
             $image_type = $image_type_aux[1];
@@ -66,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         }
 
         $query = "UPDATE `candidates` SET `candidate_name`='$name',`contact_number`='$phone',`address`='$location',`profile`='$profile',`resume`='$resume',`experience`='$experience',`skills`='$skills',`available_time1`='$available_time1',`available_time2`='$available_time2',`available_time3`='$available_time3',`created_at`='$currentDatetime',`responce_status`= 1 WHERE `candidate_id`='$id'";
-        
+
         $result = mysqli_query($conn, $query);
         if ($result) {
             echo json_encode(array('status' => 'success', 'message' => 'Form submited successfully'));

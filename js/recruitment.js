@@ -73,9 +73,9 @@ $(document).ready(function () {
               "<td>" +
               row.raised_by +
               "</td>" +
-              '<td><div class="d-flex align-items-center file-name-icon"><div class="ms-2"><h6 class="fw-medium"><a href="#">' +
+              '<td><div class="d-flex align-items-center file-name-icon"><div class="ms-2"><h6 class="fw-medium">' +
               row.job_position +
-              '</a></h6><span class="d-block mt-1"> ' + row.candidate_count + ' Applicants</span></div></div></td>' +
+              '</h6> <a href="#"><span class="d-block mt-1"> '+ row.candidate_count + ' Applicants</span></a></div></div></td>' +
               "<td>" +
               row.job_descriptions.slice(0, 30) +
               "</td>" +

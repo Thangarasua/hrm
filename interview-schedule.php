@@ -179,15 +179,15 @@ if (mysqli_num_rows($result) > 0) {
 										</div>
 										<div class="form-group">
 											<label for="text">Qualification <em class="mandatory">*</em></label>
-											<input type="text" class="form-control" id="qualification" name="qualification" placeholder="Enter your Highest Qualification" value="BE CSE">
+											<input type="text" class="form-control" id="qualification" name="qualification" placeholder="Enter your Highest Qualification">
 										</div>
 									</div>
 									<div class="responsive">
 										<div class="form-group">
 											<label for="text">Overall experience <em class="mandatory">*</em></label>
 											<span class="d-flex">
-												<input type="text" class="form-control totalEpx" id="totalExpYear" name="totalExpYear" placeholder="Year" value="3">
-												<input type="text" class="form-control totalEpx" id="totalExpMonth" name="totalExpMonth" placeholder="Month" value="3">
+												<input type="text" class="form-control totalEpx" id="totalExpYear" name="totalExpYear" placeholder="Year">
+												<input type="text" class="form-control totalEpx" id="totalExpMonth" name="totalExpMonth" placeholder="Month">
 											</span>
 											<small id='experienceError' class='error'></small>
 										</div>
@@ -198,12 +198,12 @@ if (mysqli_num_rows($result) > 0) {
 										</div>
 										<div class="form-group">
 											<label for="text">Skills <em class="mandatory">*</em></label>
-											<input type="text" class="form-control" id="skills" name="skills" placeholder="eg: Data Analysis, Python" value="test">
+											<input type="text" class="form-control" id="skills" name="skills" placeholder="eg: Data Analysis, Python">
 											<span id='' class='error'></span>
 										</div>
 										<div class="form-group">
 											<label for="text">Current Location <em class="mandatory">*</em></label>
-											<input type="text" name="location" id="location" class="form-control" placeholder="eg:Area,district,state" value="test">
+											<input type="text" name="location" id="location" class="form-control" placeholder="eg:Area,district,state">
 										</div>
 									</div>
 									<div class="responsive">
