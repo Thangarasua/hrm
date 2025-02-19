@@ -47,8 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         }
         exit;
     } elseif ($flag === 'getAll' || $flag === 'getReport' || $flag === 'type') {
-
-        // $sql = "SELECT * FROM `recruitment`";
+ 
         $sql = "SELECT c.*,r.job_position FROM `candidates` AS c INNER JOIN recruitment AS r ON c.ticket_request_id = r.ticket_request_id WHERE c.`responce_status` = 1";
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
@@ -60,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         }
         echo json_encode($response);
         exit;
+        
     } elseif ($flag === "getDetails") {
 
         $id = $_POST['id'];
