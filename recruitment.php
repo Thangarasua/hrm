@@ -26,7 +26,6 @@
 					</div>
 				</div>
 				<div class="me-2 mb-2">
-
 					<div class="dropdown">
 						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
 							<i class="ti ti-file-export me-1"></i> Export
@@ -157,27 +156,7 @@
 						</thead>
 						<tbody>
 						</tbody>
-					</table>
-					
-					<div class="row mt-2 justify-content-between">
-						<div class="d-md-flex justify-content-between align-items-center dt-layout-start col-md-auto me-auto">
-							<div class="dt-info" aria-live="polite" id="DataTables_Table_0_info" role="status">Showing 1 - 10 of 10 entries</div>
-						</div>
-						<div class="d-md-flex justify-content-between align-items-center dt-layout-end col-md-auto ms-auto">
-							<div class="dt-paging">
-								<nav aria-label="pagination">
-									<ul class="pagination">
-										<li class="dt-paging-button page-item disabled"><button class="page-link first" role="link" type="button" aria-controls="DataTables_Table_0" aria-disabled="true" aria-label="First" data-dt-idx="first" tabindex="-1">«</button></li>
-										<li class="dt-paging-button page-item disabled"><button class="page-link previous" role="link" type="button" aria-controls="DataTables_Table_0" aria-disabled="true" aria-label="Previous" data-dt-idx="previous" tabindex="-1"><i class="ti ti-chevron-left"></i> </button></li>
-										<li class="dt-paging-button page-item active"><button class="page-link" role="link" type="button" aria-controls="DataTables_Table_0" aria-current="page" data-dt-idx="0">1</button></li>
-										<li class="dt-paging-button page-item disabled"><button class="page-link next" role="link" type="button" aria-controls="DataTables_Table_0" aria-disabled="true" aria-label="Next" data-dt-idx="next" tabindex="-1"><i class="ti ti-chevron-right"></i></button></li>
-										<li class="dt-paging-button page-item disabled"><button class="page-link last" role="link" type="button" aria-controls="DataTables_Table_0" aria-disabled="true" aria-label="Last" data-dt-idx="last" tabindex="-1">»</button></li>
-									</ul>
-								</nav>
-							</div>
-						</div>
-					</div>
-
+					</table> 
 				</div>
 			</div>
 		</div>

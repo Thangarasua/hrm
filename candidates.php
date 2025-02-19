@@ -29,19 +29,16 @@
 					</div>
 				</div>
 				<div class="me-2 mb-2">
-					<div class="dropdown">
-						<a href="javascript:void(0);"
-							class="dropdown-toggle btn btn-white d-inline-flex align-items-center"
-							data-bs-toggle="dropdown">
-							<i class="ti ti-file-export me-1"></i>Export
+				<div class="dropdown">
+						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
+							<i class="ti ti-file-export me-1"></i> Export
 						</a>
 						<ul class="dropdown-menu  dropdown-menu-end p-3">
-							<li>
-								<a href="javascript:void(0);" class="dropdown-item rounded-1"><i class="ti ti-file-type-pdf me-1"></i>Export as PDF</a>
-							</li>
-							<li>
-								<a href="javascript:void(0);" class="dropdown-item rounded-1"><i class="ti ti-file-type-xls me-1"></i>Export as Excel </a>
-							</li>
+							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="excel_button"><i class="ti ti-file-type-xls me-1"></i>Export as Excel </a></li>
+							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="pdf_button"><i class="ti ti-file-type-pdf me-1"></i>Export as PDF</a></li>
+							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="copy_button"><i class="ti ti-file-type-xls me-1"></i>Copy as Text </a></li>
+							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="csv_button"><i class="ti ti-file-type-xls me-1"></i>Export as CSV </a></li>
+							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="print_button"><i class="ti ti-file-type-xls me-1"></i>Export as Print </a></li>
 						</ul>
 					</div>
 				</div>

@@ -282,6 +282,16 @@
 		text-align: center;
 		color: #1b538c;
 	}
+	.form-control:focus {
+		border-color: #86b7fe;
+		outline: 0;
+		box-shadow: none;
+	}
+	.accordion-button:focus {
+		z-index: 3;
+		outline: 0; 
+		box-shadow: 10px 10px 10px #999;
+	}
 
 	/* added styles */
 	@keyframes animationLeftRight {

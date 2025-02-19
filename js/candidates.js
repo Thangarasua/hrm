@@ -1,6 +1,4 @@
 $(document).ready(function () {
-
-
   var fromDate = "";
   var toDate = "";
   var dateRange = "";
@@ -9,35 +7,37 @@ $(document).ready(function () {
   loadData(fromDate, toDate, dateRange, companyType, flag);
 
   function loadData(fromDate, toDate, dateRange, companyType, flag) {
-
-
     $.ajax({
-    url: "queries/candidates.php",
-    type: "POST",
-    dataType: "json",
-    data: {
+      url: "queries/candidates.php",
+      type: "POST",
+      dataType: "json",
+      data: {
         fromDate: fromDate,
         toDate: toDate,
         dateRange: dateRange,
         companyType: companyType,
         flag: flag,
-    },
-    success: function (data) {
+      },
+      success: function (data) {
         var tableBody = $("#tableRecords tbody");
 
         if ($.fn.DataTable.isDataTable("#tableRecords")) {
-            $("#tableRecords").DataTable().destroy();
+          $("#tableRecords").DataTable().destroy();
         }
 
         tableBody.empty();
 
         // Check if data is not empty
         if (data.length > 0) {
-            $.each(data, function (index, row) {
-                var profileImage = row.profile ? `./uploads/candidate_profile/${row.profile}` : "default-avatar.png";
-                var resumeLink = row.resume ? `./uploads/candidate_resume/${row.resume}` : "#";
+          $.each(data, function (index, row) {
+            var profileImage = row.profile
+              ? `./uploads/candidate_profile/${row.profile}`
+              : "default-avatar.png";
+            var resumeLink = row.resume
+              ? `./uploads/candidate_resume/${row.resume}`
+              : "#";
 
-                var newRow = `
+            var newRow = `
                 <tr>
                      <td>${index + 1}</td>
                     <td>${row.candidate_id}</td>
@@ -47,7 +47,9 @@ $(document).ready(function () {
                                 <img src="${profileImage}" class="img-fluid rounded-circle" alt="Profile">
                             </a>
                             <div class="ms-2">
-                                <h6 class="fw-medium"><a href="#">${row.candidate_name}</a></h6>
+                                <h6 class="fw-medium"><a href="#">${
+                                  row.candidate_name
+                                }</a></h6>
                                 <span class="d-block mt-1">${row.email}</span>
                             </div>
                         </div>
@@ -61,29 +63,46 @@ $(document).ready(function () {
                             <a href="${resumeLink}" class="text-gray fs-16" download><i class="fa-solid fa-download"></i></a>
                         </div>
                     </td>
-                    <td><span class="badge border border-purple text-purple"><i class="fa-solid fa-circle-dot"></i> ${row.responce_status == "0" ? "Pending" : "Reviewed"}</span></td>
+                    <td><span class="badge border border-purple text-purple"><i class="fa-solid fa-circle-dot"></i> ${
+                      row.responce_status == "0" ? "Pending" : "Reviewed"
+                    }</span></td>
                     <td>
                         <div class="action-icon d-inline-flex">
-                            <a href="javascript:void(0);" class="delete-candidate" data-id="${row.candidate_id}" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="fa-solid fa-trash-can"></i></a>
+                            <a href="javascript:void(0);" class="delete-candidate" data-id="${
+                              row.candidate_id
+                            }" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="fa-solid fa-trash-can"></i></a>
                         </div>
                     </td>
                 </tr>`;
 
-                tableBody.append(newRow);
-            });
+            tableBody.append(newRow);
+          });
         } else {
-            tableBody.append('<tr><td colspan="9" class="text-center">No candidates found</td></tr>');
+          tableBody.append(
+            '<tr><td colspan="9" class="text-center">No candidates found</td></tr>'
+          );
         }
+        new DataTable("#tableRecords",{
+            lengthMenu: false,
+          pageLength: 20,
+          language: {
+            info: "Shows _START_ To _END_ of _TOTAL_ Total",
+            sLengthMenu: "_MENU_ ",
+            zeroRecords: "No records available.",
+            search: "", 
+          },
+        });
 
-        // Reinitialize DataTable
-        $("#tableRecords").DataTable();
-    },
-    error: function (xhr, status, error) {
+        $("#excel_button").on("click", function () {
+          table.button(".buttons-excel").trigger();
+        });
+        
+
+        
+      },
+      error: function (xhr, status, error) {
         console.error("AJAX Error:", error);
-    }
-});
-
-
-
+      },
+    });
   }
 });
