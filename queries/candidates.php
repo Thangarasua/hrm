@@ -149,7 +149,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
                 ));
             }
         }
-
         // Exit to prevent further execution
         exit;
     }
