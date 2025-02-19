@@ -98,16 +98,6 @@ if (mysqli_num_rows($result) > 0) {
 										<h6 class="flex-flex flex-justifyContent--center form-title">INTERVIEW SCHEDULE FORM</h6>
 									</div>
 									<div class="col-sm">
-										<div class="profile-images-card">
-											<label class="cabinet center-block">
-												<figure>
-													<img src="https://actecrm.com/img/no-image.png" class="gambar img-responsive img-thumbnail" id="cropedImage" />
-													<figcaption>Click to upload</figcaption>
-												</figure>
-												<input type="file" class="item-img file center-block" />
-												<input type="hidden" id="candidate_profile" name="candidate_profile">
-											</label>
-										</div>
 									</div>
 								</div>
 								<br>
@@ -150,7 +140,7 @@ if (mysqli_num_rows($result) > 0) {
 													</div>
 													<div class="form-group">
 														<label for="text">Required Skills</label>
-														<input type="text" class="form-control" value="<?php echo $data['required_skills']; ?>" readonly>
+														<textarea class="form-control" rows="1" readonly><?php echo $data['required_skills']; ?></textarea>
 													</div>
 													<div class="form-group">
 														<label for="text">Location</label>
@@ -174,78 +164,99 @@ if (mysqli_num_rows($result) > 0) {
 										</h2>
 										<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
 											<div class="accordion-body">
-										 
-													<div class="responsive">
-														<div class="form-group">
-															<label for="text">Name <em class="mandatory">*</em><small>(if change)</small></label>
-															<input type="text" class="form-control" id="name" name="name" placeholder="Candidate full name" value="<?php echo $data['candidate_name']; ?>">
-															<small id="name_error" class="error"></small>
-														</div>
-														<div class="form-group">
-															<label for="text">Email <em class="mandatory">*</em></label>
-															<input type="email" class="form-control" id="email" name="email" placeholder="proper email" value="<?php echo $data['email']; ?>">
-															<small id="email_error" class="error"></small>
-														</div>
-														<div class="form-group">
-															<label for="text">phone <em class="mandatory">*</em></label>
-															<input type="text" class="form-control" id="phone" name="phone" placeholder="valid mobile number" value="<?php echo $data['contact_number']; ?>">
-															<small id="number_error" class="error"></small>
-														</div>
-														<div class="form-group">
-															<label for="text">Qualification <em class="mandatory">*</em></label>
-															<input type="text" class="form-control" id="qualification" name="qualification" placeholder="Enter your Highest Qualification">
+												<div class="profile-position">
+													<div>
+														<div class="row">
+															<div class="col-sm">
+																<label for="">profile <em class="mandatory">*</em></label>
+																<div class="profile-images-card">
+																	<label class="cabinet center-block">
+																		<figure>
+																			<img src="https://actecrm.com/img/no-image.png" class="gambar img-responsive img-thumbnail" id="cropedImage" />
+																			<figcaption>Click to upload</figcaption>
+																		</figure>
+																		<input type="file" class="item-img file center-block" accept="image/*">
+																		<input type="hidden" id="candidate_profile" name="candidate_profile">
+																	</label>
+																</div>
+															</div>
 														</div>
 													</div>
-													<div class="responsive">
-														<div class="form-group">
-															<label for="text">Overall experience <em class="mandatory">*</em></label>
-															<span class="d-flex">
-																<input type="text" class="form-control totalEpx" id="totalExpYear" name="totalExpYear" placeholder="Year">
-																<input type="text" class="form-control totalEpx" id="totalExpMonth" name="totalExpMonth" placeholder="Month">
-															</span>
-															<small id='experienceError' class='error'></small>
+													<div>
+														<div class="responsive">
+															<div class="form-group">
+																<label for="text">Name <em class="mandatory">*</em><small>(if change)</small></label>
+																<input type="text" class="form-control" id="name" name="name" placeholder="Candidate full name" value="<?php echo $data['candidate_name']; ?>">
+																<small id="name_error" class="error d-none"> "Please enter letters only".</small>
+															</div>
+															<div class="form-group">
+																<label for="text">Email <em class="mandatory">*</em></label>
+																<input type="email" class="form-control" id="email" name="email" placeholder="proper email" value="<?php echo $data['email']; ?>">
+																<small id="email_error" class="error"></small>
+															</div>
+															<div class="form-group">
+																<label for="text">phone <em class="mandatory">*</em></label>
+																<input type="text" class="form-control" id="phone" name="phone" placeholder="valid mobile number" value="<?php echo $data['contact_number']; ?>">
+																<small id="number_error" class="error d-none"></small>
+															</div>
+															<div class="form-group">
+																<label for="text">Qualification <em class="mandatory">*</em></label>
+																<input type="text" class="form-control" id="qualification" name="qualification" placeholder="Enter your Highest Qualification">
+															</div>
 														</div>
-														<div class="form-group">
-															<label for="text">Resume <em class="mandatory">*</em> <small>(pdf only)</small> </label>
-															<input type="file" class="form-control" id="resume" name="resume" placeholder="Select Recent resume PDF" accept="application/pdf" />
-															<span id='' class='error'></span>
-														</div>
-														<div class="form-group">
-															<label for="text">Skills <em class="mandatory">*</em></label>
-															<input type="text" class="form-control" id="skills" name="skills" placeholder="eg: Data Analysis, Python">
-															<span id='' class='error'></span>
-														</div>
-														<div class="form-group">
-															<label for="text">Current Location <em class="mandatory">*</em></label>
-															<input type="text" name="location" id="location" class="form-control" placeholder="eg:Area,district,state">
+														<div class="responsive">
+															<div class="form-group">
+																<label for="text">Overall experience <em class="mandatory">*</em></label>
+																<span class="d-flex">
+																	<input type="text" class="form-control totalEpx" id="totalExpYear" name="totalExpYear" placeholder="Year">
+																	<input type="text" class="form-control totalEpx" id="totalExpMonth" name="totalExpMonth" placeholder="Month">
+																</span>
+																<small id='experienceError' class='error d-none'></small>
+															</div>
+															<div class="form-group">
+																<label for="text">Resume <em class="mandatory">*</em> <small>(pdf only)</small> </label>
+																<input type="file" class="form-control" id="resume" name="resume" placeholder="Select Recent resume PDF" accept="application/pdf" />
+																<span id='' class='error'></span>
+															</div>
+															<div class="form-group">
+																<label for="text">Skills <em class="mandatory">*</em></label>
+																<textarea class="form-control" rows="1" id="skills" name="skills" placeholder="eg: Data Analysis, Python"></textarea>
+																<span id='' class='error'></span>
+															</div>
+															<div class="form-group">
+																<label for="text">Current Location <em class="mandatory">*</em></label>
+																<input type="text" name="location" id="location" class="form-control" placeholder="eg:Area,district,state">
+															</div>
 														</div>
 													</div>
-													<div class="responsive">
-														<div class="form-group">
-															<label for="text">Availability time 1 <em class="mandatory">*</em></label>
-															<div class="availability availabilityDate1">
-																<input type="date" class="form-control domainEpx" id="availabilityDate1" name="availabilityDate1">
-																<input type="time" class="form-control domainEpx" id="availabilityTime1" name="availabilityTime1">
-															</div>
-															<span id='availabilityDateError' class='error'></span>
+												</div>
+
+												<div class="responsive">
+													<div class="form-group">
+														<label for="text">Availability time 1 <em class="mandatory">*</em></label>
+														<div class="availability availabilityDate1">
+															<input type="date" class="form-control domainEpx" id="availabilityDate1" name="availabilityDate1">
+															<input type="time" class="form-control domainEpx" id="availabilityTime1" name="availabilityTime1">
 														</div>
-														<div class="form-group">
-															<label for="text">Availability time 2 <small>(opional)</small></label>
-															<div class="availability">
-																<input type="date" class="form-control domainEpx" id="availabilityDate2" name="availabilityDate2">
-																<input type="time" class="form-control domainEpx" id="availabilityTime2" name="availabilityTime2">
-															</div>
-															<span id='availabilityDate' class='error'></span>
+														<span id='availabilityDateError' class='error'></span>
+													</div>
+													<div class="form-group">
+														<label for="text">Availability time 2 <small>(opional)</small></label>
+														<div class="availability">
+															<input type="date" class="form-control domainEpx" id="availabilityDate2" name="availabilityDate2" placeholder="Date">
+															<input type="time" class="form-control domainEpx" id="availabilityTime2" name="availabilityTime2" placeholder="Time">
 														</div>
-														<div class="form-group">
-															<label for="text">Availability time 3 <small>(opional)</small></label>
-															<div class="availability">
-																<input type="date" class="form-control domainEpx" id="availabilityDate3" name="availabilityDate3">
-																<input type="time" class="form-control domainEpx" id="availabilityTime3" name="availabilityTime3">
-															</div>
-															<span id='availabilityDate' class='error'></span>
+														<span id='availabilityDate' class='error'></span>
+													</div>
+													<div class="form-group">
+														<label for="text">Availability time 3 <small>(opional)</small></label>
+														<div class="availability">
+															<input type="date" class="form-control domainEpx" id="availabilityDate3" name="availabilityDate3">
+															<input type="time" class="form-control domainEpx" id="availabilityTime3" name="availabilityTime3">
 														</div>
-													</div> 
+														<span id='availabilityDate' class='error'></span>
+													</div>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -262,18 +273,12 @@ if (mysqli_num_rows($result) > 0) {
 										</div>
 									</div>
 								</div>
-
-
-
-								<br>
-
-								<br>
 								<div class="terms">
 									<a href="#" data-toggle="modal" data-target="#termModel"><i class="fa fa-hand-o-right text-danger" aria-hidden="true"></i> Terms and Conditions.</a>
 								</div>
 								<br>
 								<input type="hidden" name="id" id="id" value="<?php echo $data['candidate_id']; ?>">
-								<button type="submit" id="formSubmit" class="btn btn-primary">Submit</button>
+								<button type="submit" id="formSubmit" class="btn btn-primary">Submit </button>
 							</form>
 							<div class="thanksDiv <?php echo $thanksDivDisplay; ?>">
 								<h1 class="thanksTitle">Thank you for your submission.👍</h1>
@@ -382,10 +387,10 @@ if (mysqli_num_rows($result) > 0) {
 
 				if (!/^[a-zA-Z\s]*$/.test(value)) {
 					toastr.warning("Only alphabets and spaces are allowed!");
-					$("#name_error").html('Please enter letters only.');
+					$("#name_error").removeClass('d-none');
 					$(this).val(value.replace(/[^a-zA-Z\s]/g, '')); // Remove non-alphabetic characters
 				} else {
-					$("#name_error").html('');
+					$("#name_error").addClass('d-none');
 				}
 			});
 
@@ -393,15 +398,17 @@ if (mysqli_num_rows($result) > 0) {
 				const value = $(this).val();
 				if (!/^\d*$/.test(value)) {
 					toastr.warning("Only numbers are allowed!");
+					$("#number_error").removeClass('d-none');
 					$("#number_error").html('Please enter numbers only, e.g., 123..');
 					$(this).val(value.replace(/\D/g, ''));
 					$(this).focus();
 				} else if (value.length > 10) {
 					toastr.warning("Maximum 10 digits allowed!");
+					$("#number_error").removeClass('d-none');
 					$("#number_error").html('Maximum 10 digits allowed');
 					$(this).val(value.substring(0, 10));
 				} else {
-					$("#number_error").html('');
+					$("#number_error").addClass('d-none');
 				}
 			});
 
@@ -409,6 +416,7 @@ if (mysqli_num_rows($result) > 0) {
 				const value = $(this).val();
 				if (!/^\d*$/.test(value)) {
 					toastr.warning("Only numbers are allowed!");
+					$("#experienceError").removeClass('d-none');
 					$("#experienceError").html('Please enter numbers only, e.g., "03"');
 					$(this).val(value.replace(/\D/g, ''));
 					$(this).focus();
@@ -418,7 +426,7 @@ if (mysqli_num_rows($result) > 0) {
 					$("#experienceError").html('Maximum 2 digits allowed');
 					$(this).val(value.substring(0, 2));
 				} else {
-					$("#experienceError").html('');
+					$("#experienceError").addClass('d-none');
 				}
 			});
 			$("#totalExpMonth").on("input", function() {
@@ -439,12 +447,12 @@ if (mysqli_num_rows($result) > 0) {
 					$("#experienceError").html('Maximum 11 months allowed');
 					$(this).val(value.slice(0, -1));
 				} else {
-					$("#experienceError").html('');
+					$("#experienceError").addClass('d-none');
 				}
 			});
 
 			$("#interviewForm").click(function() {
-				$(".error").html(''); // Remove previous error messages for filling form
+				$(".error").addClass('d-none');
 			});
 
 			$("#interviewForm").on("submit", function(e) {
@@ -499,7 +507,6 @@ if (mysqli_num_rows($result) > 0) {
 
 				let candidate_profile = $("#candidate_profile").val().trim();
 				if (candidate_profile.length == 0) {
-					// Swal.fire("Kindly Upload Your Profile Picture.");
 					toastr.warning("Kindly Upload Your Profile Picture.");
 					return 0;
 				}
@@ -518,6 +525,7 @@ if (mysqli_num_rows($result) > 0) {
 					$("#email").after(
 						"<small class='error text-danger'> mandatory field.</small>"
 					);
+					toastr.warning("Kindly fill your email.");
 					return 0;
 				}
 
@@ -528,6 +536,7 @@ if (mysqli_num_rows($result) > 0) {
 					$("#email").after(
 						"<small class='error text-danger'>Please enter a valid email!.</small>"
 					);
+					toastr.warning("Kindly fill your proper email.");
 					return 0;
 				}
 
@@ -537,6 +546,7 @@ if (mysqli_num_rows($result) > 0) {
 					$("#phone").after(
 						"<small class='error text-danger'> mandatory field.</small>"
 					);
+					toastr.warning("Kindly fill your cantact number");
 					return 0;
 				}
 				let qualification = $("#qualification").val().trim();
@@ -545,12 +555,14 @@ if (mysqli_num_rows($result) > 0) {
 					$("#qualification").after(
 						"<small class='error text-danger'> mandatory field.</small>"
 					);
+					toastr.warning("Kindly fill your education qualification.");
 					return 0;
 				}
 				let totalExpYear = $("#totalExpYear").val().trim();
 				if (totalExpYear.length == 0) {
 					$("#totalExpYear").focus();
 					$("#experienceError").html('mandatory field.');
+					toastr.warning("Kindly fill your experience.");
 					return 0;
 				}
 				let resume = $("#resume").val().trim();
@@ -559,6 +571,7 @@ if (mysqli_num_rows($result) > 0) {
 					$("#resume").after(
 						"<small class='error text-danger'> mandatory field.</small>"
 					);
+					toastr.warning("Kindly Upload Your resume pdf.");
 					return 0;
 				}
 				let skills = $("#skills").val().trim();
@@ -567,6 +580,7 @@ if (mysqli_num_rows($result) > 0) {
 					$("#skills").after(
 						"<small class='error text-danger'> mandatory field.</small>"
 					);
+					toastr.warning("Kindly fill your skills.");
 					return 0;
 				}
 				let location = $("#location").val().trim();
@@ -575,7 +589,7 @@ if (mysqli_num_rows($result) > 0) {
 					$("#location").after(
 						"<small class='error text-danger'> mandatory field.</small>"
 					);
-
+					toastr.warning("Kindly enter your current location.");
 					return 0;
 				}
 				let availabilityDate1 = $("#availabilityDate1").val().trim();
@@ -584,6 +598,7 @@ if (mysqli_num_rows($result) > 0) {
 						"<small class='error text-danger'> mandatory field.</small>"
 					);
 					$("#availabilityDate1").focus();
+					toastr.warning("Kindly fill the available date.");
 					return 0;
 				}
 				let availabilityTime1 = $("#availabilityTime1").val().trim();
@@ -592,6 +607,7 @@ if (mysqli_num_rows($result) > 0) {
 						"<small class='error text-danger'> mandatory field.</small>"
 					);
 					$("#availabilityTime1").focus();
+					toastr.warning("Kindly fill the available timing.");
 					return 0;
 				}
 			}
