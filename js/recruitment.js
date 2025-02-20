@@ -62,39 +62,41 @@ $(document).ready(function () {
         // Check if data is not empty
         if (data.length > 0) {
           $.each(data, function (index, row) {
-            var newRow =
-              "<tr>" +
-              "<td>" +
-              (index + 1) +
-              "</td>" +
-              "<td>" +
-              row.ticket_request_id +
-              "</td>" +
-              "<td>" +
-              row.raised_by +
-              "</td>" +
-              '<td><div class="d-flex align-items-center file-name-icon"><div class="ms-2"><h6 class="fw-medium">' +
-              row.job_position +
-              '</h6> <a href="#"><span class="d-block mt-1"> '+ row.candidate_count + ' Applicants</span></a></div></div></td>' +
-              "<td>" +
-              row.job_descriptions.slice(0, 30) +
-              "</td>" +
-              "<td>" +
-              row.required_skills.slice(0, 30) +
-              "</td>" +
-              "<td>" +
-              row.created_at.split(" ")[0] +
-              "</td>" +
-              '<td><div class="action-icon d-inline-flex"><a href="#" data-id="' +
-              row.id +
-              '" class="view"><i class="fa-regular fa-folder-open"></i></a><a href="#" data-id="' +
-              row.id +
-              '" class="edit"><i class="fa-solid fa-pen-to-square"></i></a><a href="#" data-id="' +
-              row.id +
-              '" class="delete"><i class="fa-solid fa-trash-can"></i></a><a href="#" data-id="' +
-              row.id +
-              '" class="send"><i class="fa-solid fa-paper-plane"></i></a></div></td>' +
-              "</tr>";
+            var newRow = ` <tr>
+                            <td>${index + 1}</td>
+                            <td>${row.ticket_request_id}</td>
+                            <td>${row.raised_by}</td>
+                            <td>
+                              <div class="d-flex align-items-center file-name-icon">
+                                <div class="ms-2">
+                                  <h6 class="fw-medium">${row.job_position}</h6>
+                                  <a href="#"><span class="d-block mt-1">${
+                                    row.candidate_count
+                                  } Applicants</span></a>
+                                </div>
+                              </div>
+                            </td>
+                            <td>${row.job_descriptions.slice(0, 30)}</td>
+                            <td>${row.required_skills.slice(0, 30)}</td>
+                            <td>${row.created_at.split(" ")[0]}</td>
+                            <td>
+                              <div class="action-icon d-inline-flex">
+                                <a href="#" data-id="${row.id}" class="view">
+                                  <i class="fa-solid fa-folder-open"></i>
+                                </a>
+                                <a href="#" data-id="${row.id}" class="edit">
+                                  <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <a href="#" data-id="${row.id}" class="delete">
+                                  <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                                <a href="#" data-id="${row.id}" class="send">
+                                  <i class="fa-solid fa-paper-plane"></i>
+                                </a>
+                              </div>
+                            </td>
+                          </tr>
+                        `;
             tableBody.append(newRow);
           });
         }
@@ -236,6 +238,34 @@ $(document).ready(function () {
           $("#edit_jobDescription").val(res.data.job_descriptions); 
           $("#edit_experience").val(res.data.job_experience);
           $("#edit_qualification").val(res.data.qualification);
+          $("#edit_jobType").append(
+            '<option value="' +
+              res.data.job_type +
+              '" selected>' +
+              res.data.job_type +
+              "</option>"
+          );
+          $("#edit_jobLevel").append(
+            '<option value="' +
+              res.data.job_level +
+              '" selected>' +
+              res.data.job_level +
+              "</option>"
+          );
+          $("#edit_experience").append(
+            '<option value="' +
+              res.data.job_experience +
+              '" selected>' +
+              res.data.job_experience +
+              "</option>"
+          );
+          $("#edit_qualification").append(
+            '<option value="' +
+              res.data.qualification +
+              '" selected>' +
+              res.data.qualification +
+              "</option>"
+          ); 
           $("#edit_jobType").val(res.data.job_type).trigger("change");
           $("#edit_jobLevel").val(res.data.job_level).trigger("change");
           $("#edit_experience").val(res.data.job_experience).trigger("change");
