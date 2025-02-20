@@ -216,7 +216,6 @@ $(document).ready(function () {
       },
     });
   }
-
   $(document).on("click", ".edit", function (e) {
     e.preventDefault();
     $("#editModal").modal("show");
@@ -234,54 +233,16 @@ $(document).ready(function () {
         if (res.status == "success") {
           $("#rowId").val(res.data.id);
           $("#edit_jobTitle").val(res.data.job_position);
-          $("#edit_jobDescription").val(res.data.job_descriptions);
-          $("#edit_jobType").val(res.data.job_type);
-          $("#edit_jobLevel").val(res.data.job_level);
+          $("#edit_jobDescription").val(res.data.job_descriptions); 
           $("#edit_experience").val(res.data.job_experience);
           $("#edit_qualification").val(res.data.qualification);
-          $("#edit_jobType").append(
-            '<option value="' +
-              res.data.job_type +
-              '" selected>' +
-              res.data.job_type +
-              "</option>"
-          );
-          $("#edit_jobLevel").append(
-            '<option value="' +
-              res.data.job_level +
-              '" selected>' +
-              res.data.job_level +
-              "</option>"
-          );
-          $("#edit_experience").append(
-            '<option value="' +
-              res.data.job_experience +
-              '" selected>' +
-              res.data.job_experience +
-              "</option>"
-          );
-          $("#edit_qualification").append(
-            '<option value="' +
-              res.data.qualification +
-              '" selected>' +
-              res.data.qualification +
-              "</option>"
-          );
-          $("#edit_gender").append(
-            '<option value="' +
-              res.data.gender +
-              '" selected>' +
-              res.data.gender +
-              "</option>"
-          );
+          $("#edit_jobType").val(res.data.job_type).trigger("change");
+          $("#edit_jobLevel").val(res.data.job_level).trigger("change");
+          $("#edit_experience").val(res.data.job_experience).trigger("change");
+          $("#edit_qualification").val(res.data.qualification).trigger("change");
+          $("#edit_gender").val(res.data.gender).trigger("change");
+          $("#edit_priority").val(res.data.priority).trigger("change");
           $("#edit_requiredSkills").val(res.data.required_skills);
-          $("#edit_priority").append(
-            '<option value="' +
-              res.data.priority +
-              '" selected>' +
-              res.data.priority +
-              "</option>"
-          );
           $("#edit_location").val(res.data.location);
         } else {
           Swal.fire(res.data.message);
