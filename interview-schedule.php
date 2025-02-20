@@ -138,19 +138,21 @@ if (mysqli_num_rows($result) > 0) {
 														<label for="text">Gender</label>
 														<input type="text" class="form-control" value="<?php echo $data['gender']; ?>" readonly>
 													</div>
-													<div class="form-group">
-														<label for="text">Required Skills</label>
-														<textarea class="form-control" rows="1" readonly><?php echo $data['required_skills']; ?></textarea>
-													</div>
+													
 													<div class="form-group">
 														<label for="text">Location</label>
 														<input type="text" class="form-control" value="<?php echo $data['location']; ?>" readonly>
 													</div>
 												</div>
 												<div class="responsive">
+												<div class="form-group">
+														<label for="text">Required Skills</label>
+														<textarea class="form-control" readonly><?php echo $data['required_skills']; ?></textarea>
+													</div>
 													<div class="form-group">
 														<label for="text">Job Description</label>
-														<input type="text" class="form-control" value="<?php echo $data['job_descriptions']; ?>" readonly>
+														<!-- <input type="text" class="form-control" value="<?php echo $data['job_descriptions']; ?>" readonly> -->
+														<textarea name="" id="" class="form-control" ><?php echo $data['job_descriptions']; ?></textarea>
 													</div>
 												</div>
 											</div>
@@ -164,15 +166,16 @@ if (mysqli_num_rows($result) > 0) {
 										</h2>
 										<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
 											<div class="accordion-body">
-												<div class="profile-position">
-													<div>
+												<!-- <div class="profile-position"> -->
+												<div class="row">
+													<div class="col-md-3">
 														<div class="row">
 															<div class="col-sm">
-																<label for="">profile <em class="mandatory">*</em></label>
+																<label for="" class="text-center">profile <em class="mandatory">*</em></label>
 																<div class="profile-images-card">
 																	<label class="cabinet center-block">
 																		<figure>
-																			<img src="https://actecrm.com/img/no-image.png" class="gambar img-responsive img-thumbnail" id="cropedImage" />
+																			<img src="https://actecrm.com/hrm/assets/img/user.jpeg" class="gambar img-responsive img-thumbnail" id="cropedImage" />
 																			<figcaption>Click to upload</figcaption>
 																		</figure>
 																		<input type="file" class="item-img file center-block" accept="image/*">
@@ -182,7 +185,7 @@ if (mysqli_num_rows($result) > 0) {
 															</div>
 														</div>
 													</div>
-													<div>
+													<div class="col-md-9">
 														<div class="responsive">
 															<div class="form-group">
 																<label for="text">Name <em class="mandatory">*</em><small>(if change)</small></label>
@@ -199,12 +202,12 @@ if (mysqli_num_rows($result) > 0) {
 																<input type="text" class="form-control" id="phone" name="phone" placeholder="valid mobile number" value="<?php echo $data['contact_number']; ?>">
 																<small id="number_error" class="error d-none"></small>
 															</div>
+														</div>
+														<div class="responsive">
 															<div class="form-group">
 																<label for="text">Qualification <em class="mandatory">*</em></label>
 																<input type="text" class="form-control" id="qualification" name="qualification" placeholder="Enter your Highest Qualification">
 															</div>
-														</div>
-														<div class="responsive">
 															<div class="form-group">
 																<label for="text">Overall experience <em class="mandatory">*</em></label>
 																<span class="d-flex">
@@ -218,19 +221,21 @@ if (mysqli_num_rows($result) > 0) {
 																<input type="file" class="form-control" id="resume" name="resume" placeholder="Select Recent resume PDF" accept="application/pdf" />
 																<span id='' class='error'></span>
 															</div>
-															<div class="form-group">
-																<label for="text">Skills <em class="mandatory">*</em></label>
-																<textarea class="form-control" rows="1" id="skills" name="skills" placeholder="eg: Data Analysis, Python"></textarea>
-																<span id='' class='error'></span>
-															</div>
-															<div class="form-group">
-																<label for="text">Current Location <em class="mandatory">*</em></label>
-																<input type="text" name="location" id="location" class="form-control" placeholder="eg:Area,district,state">
-															</div>
+															
 														</div>
 													</div>
 												</div>
-
+												<div class="responsive">
+																<div class="form-group">
+																	<label for="text">Skills <em class="mandatory">*</em></label>
+																	<textarea class="form-control" rows="1" id="skills" name="skills" placeholder="eg: Data Analysis, Python"></textarea>
+																	<span id='' class='error'></span>
+																</div>
+																<div class="form-group">
+																	<label for="text">Current Location <em class="mandatory">*</em></label>
+																	<input type="text" name="location" id="location" class="form-control" placeholder="eg:Area,district,state">
+																</div>
+															</div>
 												<div class="responsive">
 													<div class="form-group">
 														<label for="text">Availability time 1 <em class="mandatory">*</em></label>
@@ -611,9 +616,6 @@ if (mysqli_num_rows($result) > 0) {
 					return 0;
 				}
 			}
-
-
-
 		});
 	</script>
 </body>
