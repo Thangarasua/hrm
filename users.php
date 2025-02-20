@@ -1,5 +1,7 @@
 <?php require_once("./includes/header.php"); ?>
 <?php require_once("./includes/sidebar.php"); ?>
+<?php include("./queries/commonFunctions.php"); ?>
+
 <!-- Page Wrapper -->
 <div class="page-wrapper">
 	<div class="content">
@@ -285,10 +287,7 @@
 										<label class="form-label">Department</label>
 										<select class="select" name="department">
 											<option value="">Select</option>
-											<option value="1">HUMAN RESOURCE</option>
-											<option value="2">Associate</option>
-											<option value="3">Manager</option>
-											<option value="4">Supervisors (TL)</option>
+											<?php echo getDepartments(); ?>
 										</select>
 									</div>
 								</div>
@@ -297,10 +296,7 @@
 										<label class="form-label">Role</label>
 										<select class="select" name="role">
 											<option value="">Select</option>
-											<option value="2">MANAGER</option>
-                                            <option value="3">HR</option>
-                                            <option value="4">BDES</option>
-											<option value="5">SALES</option>
+											<?php echo getRoles(); ?>
 										</select>
 									</div>
 								</div>
