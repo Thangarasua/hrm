@@ -1,6 +1,3 @@
-$(document).ready(function(){
-  $('body').addClass('mini-sidebar'); //Default sidebar set mini
-})
 
 //check only numbers allowed condition
 function isNumber(input) {

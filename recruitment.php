@@ -8,11 +8,10 @@
 		<!-- Breadcrumb -->
 		<div class="d-md-flex d-block align-items-center justify-content-between page-breadcrumb mb-3">
 			<div class="my-auto mb-2">
-				<h2 class="mb-1">Jobs</h2>
+				<h2 class="mb-1">Recruitments</h2>
 				<nav>
 					<ol class="breadcrumb mb-0">
-						<li class=""><a href="index"><i class="ti ti-smart-home"></i></a></li> /
-						<li class="">Administration</li> /
+						<li class=""><a href="index"><i class="ti ti-smart-home"></i> Home </a></li> / 
 						<li class=" active" aria-current="page">Recruitment List</li>
 					</ol>
 				</nav>
@@ -26,7 +25,6 @@
 					</div>
 				</div>
 				<div class="me-2 mb-2">
-
 					<div class="dropdown">
 						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
 							<i class="ti ti-file-export me-1"></i> Export
@@ -72,9 +70,9 @@
 					<div class="dropdown me-3">
 						<select id="customLengthMenu" name="tableRecords_length" aria-controls="tableRecords" class="dropdown-toggle btn btn-white">
 							<option value="5">5</option>
-							<option value="10">10</option>
+							<option value="10" selected>10</option>
 							<option value="15">15</option>
-							<option value="20" selected>20</option>
+							<option value="20">20</option>
 							<option value="50">50</option>
 							<option value="72">72</option>
 							<option value="100">100</option>
@@ -157,7 +155,7 @@
 						</thead>
 						<tbody>
 						</tbody>
-					</table>
+					</table> 
 				</div>
 			</div>
 		</div>
@@ -332,19 +330,19 @@
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Candidate Name</label>
-										<input type="text" class="form-control" name="candidateName" id="candidateName" onkeypress="return isAlphabets(event)" placeholder="Candidate Name" value="Test">
+										<input type="text" class="form-control" name="candidateName" id="candidateName" onkeypress="return isAlphabets(event)" placeholder="Candidate Name">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Candidate Mail</label>
-										<input type="text" class="form-control" name="candidateMail" id="candidateMail" onblur="return isEmail(this)" placeholder="user@example.com" value="learnernila@gmail.com">
+										<input type="text" class="form-control" name="candidateMail" id="candidateMail" onblur="return isEmail(this)" placeholder="user@example.com">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Candidate Contact</label>
-										<input type="text" class="form-control" name="candidateContact" id="candidateContact" onkeypress="return isNumber(event)" placeholder="9876543210" value="7894651325">
+										<input type="text" class="form-control" name="candidateContact" id="candidateContact" onkeypress="return isNumber(event)" placeholder="9876543210">
 									</div>
 								</div>
 							</div>
@@ -475,7 +473,7 @@
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Qualification <span class="text-danger"> *</span></label>
-										<select class="select" id="view_qualification">
+										<select class="select" id="view_qual">
 											<option value="">Select</option>
 											<option value="Bachelore Degree">Bachelore Degree</option>
 											<option value="Master Degree">Master Degree</option>
@@ -592,7 +590,7 @@
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Qualification <span class="text-danger"> *</span></label>
-										<select class="select" name="qualification" id="edit_qualification">
+										<select class="select" name="qualification" id="edit_qual">
 											<option value="">Select</option>
 											<option value="Bachelore Degree">Bachelore Degree</option>
 											<option value="Master Degree">Master Degree</option>

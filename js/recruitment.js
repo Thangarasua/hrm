@@ -30,8 +30,6 @@ $(document).ready(function () {
     });
   });
 
- 
-
   var fromDate = "";
   var toDate = "";
   var dateRange = "";
@@ -62,63 +60,64 @@ $(document).ready(function () {
         // Check if data is not empty
         if (data.length > 0) {
           $.each(data, function (index, row) {
-            var newRow =
-              "<tr>" +
-              "<td>" +
-              (index + 1) +
-              "</td>" +
-              "<td>" +
-              row.ticket_request_id +
-              "</td>" +
-              "<td>" +
-              row.raised_by +
-              "</td>" +
-              '<td><div class="d-flex align-items-center file-name-icon"><div class="ms-2"><h6 class="fw-medium"><a href="#">' +
-              row.job_position +
-              '</a></h6><span class="d-block mt-1"> ' + row.candidate_count + ' Applicants</span></div></div></td>' +
-              "<td>" +
-              row.job_descriptions.slice(0, 30) +
-              "</td>" +
-              "<td>" +
-              row.required_skills.slice(0, 30) +
-              "</td>" +
-              "<td>" +
-              row.created_at.split(" ")[0] +
-              "</td>" +
-              '<td><div class="action-icon d-inline-flex"><a href="#" data-id="' +
-              row.id +
-              '" class="view"><i class="fa-regular fa-folder-open"></i></a><a href="#" data-id="' +
-              row.id +
-              '" class="edit"><i class="fa-solid fa-pen-to-square"></i></a><a href="#" data-id="' +
-              row.id +
-              '" class="delete"><i class="fa-solid fa-trash-can"></i></a><a href="#" data-id="' +
-              row.id +
-              '" class="send"><i class="fa-solid fa-paper-plane"></i></a></div></td>' +
-              "</tr>";
+            var newRow = `<tr>
+                            <td>${index + 1}</td>
+                            <td>${row.ticket_request_id}</td>
+                            <td>${row.raised_by}</td>
+                            <td>
+                              <div class="d-flex align-items-center file-name-icon">
+                                <div class="ms-2">
+                                  <h6 class="fw-medium">${row.job_position}</h6>
+                                  <a href="#"><span class="d-block mt-1">${
+                                    row.candidate_count
+                                  } Applicants</span></a>
+                                </div>
+                              </div>
+                            </td>
+                            <td>${row.job_descriptions.slice(0, 30)}</td>
+                            <td>${row.required_skills.slice(0, 30)}</td>
+                            <td>${row.created_at.split(" ")[0]}</td>
+                            <td>
+                              <div class="action-icon d-inline-flex">
+                                <a href="#" data-id="${row.id}" class="view">
+                                  <i class="fa-solid fa-folder-open"></i>
+                                </a>
+                                <a href="#" data-id="${row.id}" class="edit">
+                                  <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <a href="#" data-id="${row.id}" class="delete">
+                                  <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                                <a href="#" data-id="${row.id}" class="send">
+                                  <i class="fa-solid fa-paper-plane"></i>
+                                </a>
+                              </div>
+                            </td>
+                          </tr>`;
             tableBody.append(newRow);
           });
         }
+
+        var lastSegment = $(location).attr("pathname").split("/").pop();
+
         table = $("#tableRecords").DataTable({
-          //  "bFilter": false,
-          lengthMenu: false,
-          pageLength: 20,
+          pageLength: 10,
+          lengthChange: false,
           language: {
-            info: "Shows _START_ To _END_ of _TOTAL_ Total",
-            sLengthMenu: "_MENU_ ",
-            zeroRecords: "No records available.",
             search: "",
-            oPaginate: {
-              sNext: '<i class="fa fa-chevron-right"></i>',
-              sPrevious: '<i class="fa fa-chevron-left"></i>',
-            },
           },
-          // Add buttons for export functionality
-          dom: "Bfrtip",
+          lengthChange: false,
+          search: false,
+          dom:
+            "<'row'<'col-md-6'B><'col-md-6 text-end'f>>" +
+            "<'row'<'col-12'tr>>" +
+            "<'datatable-footer'<i><p>>",
+
           buttons: [
             {
               extend: "excelHtml5",
               text: "Export to Excel",
-              title: "Download Excel",
+              title: lastSegment + " List",
               className: "btn btn-success",
               exportOptions: {
                 columns: ":visible",
@@ -128,7 +127,7 @@ $(document).ready(function () {
             {
               extend: "pdf",
               text: "Export to PDF",
-              title: "Download PDF",
+              title: lastSegment + " List",
               className: "buttons-pdf",
               exportOptions: {
                 columns: ":visible",
@@ -138,7 +137,7 @@ $(document).ready(function () {
             {
               extend: "copy",
               text: "Export to copy",
-              title: "Download copy",
+              title: lastSegment + " List",
               className: "buttons-copy",
               exportOptions: {
                 columns: ":visible",
@@ -148,7 +147,7 @@ $(document).ready(function () {
             {
               extend: "csv",
               text: "Export to csv",
-              title: "Download csv",
+              title: lastSegment + " List",
               className: "buttons-csv",
               exportOptions: {
                 columns: ":visible",
@@ -158,7 +157,7 @@ $(document).ready(function () {
             {
               extend: "print",
               text: "Export to print",
-              title: "Download print",
+              title: lastSegment + " List",
               className: "buttons-print",
               exportOptions: {
                 columns: ":visible",
@@ -167,7 +166,6 @@ $(document).ready(function () {
             },
           ],
         });
-
         // When the custom button is clicked, trigger the DataTable's Excel export
         $("#excel_button").on("click", function () {
           table.button(".buttons-excel").trigger();
@@ -190,33 +188,14 @@ $(document).ready(function () {
         $("#myInputTextField").keyup(function () {
           oTable.search($(this).val()).draw();
         });
-        $("#dt-search-1").css("display", "none");
-
         //customise the dataTable no of records show
         $("#customLengthMenu").on("change", function () {
           var length = $(this).val();
           table.page.len(length).draw();
         });
-
-        /*-----------JQuery(data table) css (style) start----------*/
-        $("#tableRecords").css("width", "100%");
-        $(".dataTables_filter input").css("width", "350px");
-        $(".dataTables_length").css({
-          position: "absolute",
-          right: "33%",
-        });
-        $("#tableRecords_length select").addClass("form-control");
-        $("#tableRecords_filter input").addClass("form-control");
-
-        /*-----------JQuery(data table) css (style) end----------*/
-
-        val = $("#tableRecords_info").html();
-        const myArray = val.split("");
-        $("#totalCount").html("Total:" + myArray[5]);
       },
     });
   }
-
   $(document).on("click", ".edit", function (e) {
     e.preventDefault();
     $("#editModal").modal("show");
@@ -235,53 +214,13 @@ $(document).ready(function () {
           $("#rowId").val(res.data.id);
           $("#edit_jobTitle").val(res.data.job_position);
           $("#edit_jobDescription").val(res.data.job_descriptions);
-          $("#edit_jobType").val(res.data.job_type);
-          $("#edit_jobLevel").val(res.data.job_level);
-          $("#edit_experience").val(res.data.job_experience);
-          $("#edit_qualification").val(res.data.qualification);
-          $("#edit_jobType").append(
-            '<option value="' +
-              res.data.job_type +
-              '" selected>' +
-              res.data.job_type +
-              "</option>"
-          );
-          $("#edit_jobLevel").append(
-            '<option value="' +
-              res.data.job_level +
-              '" selected>' +
-              res.data.job_level +
-              "</option>"
-          );
-          $("#edit_experience").append(
-            '<option value="' +
-              res.data.job_experience +
-              '" selected>' +
-              res.data.job_experience +
-              "</option>"
-          );
-          $("#edit_qualification").append(
-            '<option value="' +
-              res.data.qualification +
-              '" selected>' +
-              res.data.qualification +
-              "</option>"
-          );
-          $("#edit_gender").append(
-            '<option value="' +
-              res.data.gender +
-              '" selected>' +
-              res.data.gender +
-              "</option>"
-          );
+          $("#edit_jobType").val(res.data.job_type).trigger("change");
+          $("#edit_jobLevel").val(res.data.job_level).trigger("change");
+          $("#edit_experience").val(res.data.job_experience).trigger("change");
+          $("#edit_qual").val(res.data.qualification).trigger("change");
+          $("#edit_gender").val(res.data.gender).trigger("change");
+          $("#edit_priority").val(res.data.priority).trigger("change");
           $("#edit_requiredSkills").val(res.data.required_skills);
-          $("#edit_priority").append(
-            '<option value="' +
-              res.data.priority +
-              '" selected>' +
-              res.data.priority +
-              "</option>"
-          );
           $("#edit_location").val(res.data.location);
         } else {
           Swal.fire(res.data.message);
@@ -308,53 +247,13 @@ $(document).ready(function () {
           $("#rowId").val(res.data.id);
           $("#view_jobTitle").val(res.data.job_position);
           $("#view_jobDescription").val(res.data.job_descriptions);
-          $("#view_jobType").val(res.data.job_type);
-          $("#view_jobLevel").val(res.data.job_level);
-          $("#view_experience").val(res.data.job_experience);
-          $("#view_qualification").val(res.data.qualification);
-          $("#view_jobType").append(
-            '<option value="' +
-              res.data.job_type +
-              '" selected>' +
-              res.data.job_type +
-              "</option>"
-          );
-          $("#view_jobLevel").append(
-            '<option value="' +
-              res.data.job_level +
-              '" selected>' +
-              res.data.job_level +
-              "</option>"
-          );
-          $("#view_experience").append(
-            '<option value="' +
-              res.data.job_experience +
-              '" selected>' +
-              res.data.job_experience +
-              "</option>"
-          );
-          $("#view_qualification").append(
-            '<option value="' +
-              res.data.qualification +
-              '" selected>' +
-              res.data.qualification +
-              "</option>"
-          );
-          $("#view_gender").append(
-            '<option value="' +
-              res.data.gender +
-              '" selected>' +
-              res.data.gender +
-              "</option>"
-          );
+          $("#view_jobType").val(res.data.job_type).trigger("change");
+          $("#view_jobLevel").val(res.data.job_level).trigger("change");
+          $("#view_experience").val(res.data.job_experience).trigger("change");
+          $("#view_qual").val(res.data.qualification).trigger("change");
+          $("#view_gender").val(res.data.gender).trigger("change");
+          $("#view_priority").val(res.data.priority).trigger("change");
           $("#view_requiredSkills").val(res.data.required_skills);
-          $("#view_priority").append(
-            '<option value="' +
-              res.data.priority +
-              '" selected>' +
-              res.data.priority +
-              "</option>"
-          );
           $("#view_location").val(res.data.location);
         } else {
           Swal.fire(res.data.location);
@@ -481,7 +380,7 @@ $(document).ready(function () {
       },
       success: function (response) {
         if (response.status === "success") {
-          sendRecruitmentMail(response.id,response.email, response.flag);
+          sendRecruitmentMail(response.id, response.email, response.flag);
         } else {
           handleError(response.message);
         }
@@ -497,7 +396,7 @@ $(document).ready(function () {
     $.ajax({
       type: "POST",
       url: "mails/recruitment-mail.php",
-      data: {id:id, email: email, flag: flag },
+      data: { id: id, email: email, flag: flag },
       dataType: "json",
       success: function (response) {
         if (response.status === "success") {
@@ -652,10 +551,10 @@ $(document).ready(function () {
       );
       return 0;
     }
-    let qualification = $("#edit_qualification").val().trim();
+    let qualification = $("#edit_qual").val().trim();
     if (qualification.length == 0) {
-      $("#edit_qualification").focus();
-      $("#edit_qualification").after(
+      $("#edit_qual").focus();
+      $("#edit_qual").after(
         "<small class='error text-danger'> mandatory field.</small>"
       );
       return 0;
