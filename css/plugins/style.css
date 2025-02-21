@@ -28288,4 +28288,22 @@ span.flatpickr-weekday {
 
 /* End:: swiper js */
 
+/* Start:: own style added */
+
+.datatable-footer{
+display: flex;
+justify-content: space-between;
+margin: 5px 10px 1px;
+}
+
+.dt-search{
+  display: none;
+}
+
+.dt-column-order{
+  width: 7px!important;
+}
+
+/* End:: own style added */
+
 /*# sourceMappingURL=style.css.map */

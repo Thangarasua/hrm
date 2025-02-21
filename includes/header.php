@@ -1,8 +1,8 @@
-<?php include("config.php") ; //connecting Database
+<?php include("config.php"); //connecting Database
 if (!isset($_SESSION['hrm_username']) || empty($_SESSION['hrm_username'])) {
-    header('Location: login');
-    exit();
-} 
+	header('Location: login');
+	exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,9 +38,9 @@ if (!isset($_SESSION['hrm_username']) || empty($_SESSION['hrm_username'])) {
 	<!-- Select2 CSS -->
 	<link rel="stylesheet" href="plugins/select2/css/select2.min.css">
 
-	<!-- Fontawesome CSS --> 
+	<!-- Fontawesome CSS -->
 	<link rel="stylesheet" href="plugins/fontawesome/css/fontawesome.min.css">
-	<link rel="stylesheet" href="plugins/fontawesome/css/all.min.css"> 
+	<link rel="stylesheet" href="plugins/fontawesome/css/all.min.css">
 
 	<!-- Datetimepicker CSS -->
 	<link rel="stylesheet" href="css/plugins/bootstrap-datetimepicker.min.css">
@@ -56,6 +56,11 @@ if (!isset($_SESSION['hrm_username']) || empty($_SESSION['hrm_username'])) {
 
 	<!-- Datatable CSS -->
 	<link rel="stylesheet" href="css/plugins/dataTables.bootstrap5.min.css">
+
+	<!-- <link rel="stylesheet" href="//cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css"> -->
+
+	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.bootstrap5.css"> -->
 
 	<!-- Color Picker Css -->
 	<link rel="stylesheet" href="plugins/flatpickr/flatpickr.min.css">
@@ -91,7 +96,7 @@ if (!isset($_SESSION['hrm_username']) || empty($_SESSION['hrm_username'])) {
 				<div class="header-left">
 					<a href="index.php" class="logo">
 						<!-- <img src="assets/img/logo.svg" alt="Logo"> -->
-						 <h3>Markerz HRM</h3>
+						<h3>Markerz HRM</h3>
 					</a>
 					<a href="index.php" class="dark-logo">
 						<img src="assets/img/logo-white.svg" alt="Logo">
@@ -1109,10 +1114,10 @@ if (!isset($_SESSION['hrm_username']) || empty($_SESSION['hrm_username'])) {
 													<img src="assets/img/profiles/avatar-12.jpg" alt="img">
 												</span>
 												<div>
-													<h5 class="mb-0"><?php echo $_SESSION["hrm_username"];?></h5>
+													<h5 class="mb-0"><?php echo $_SESSION["hrm_username"]; ?></h5>
 													<p class="mb-0">test@gmail.com</p>
 
-													
+
 												</div>
 											</div>
 										</div>

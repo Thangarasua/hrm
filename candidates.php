@@ -10,13 +10,8 @@
 				<h2 class="mb-1">Candidates List</h2>
 				<nav>
 					<ol class="breadcrumb mb-0">
-						<li class="breadcrumb-item">
-							<a href=""><i class="ti ti-smart-home"></i></a>
-						</li>
-						<li class="breadcrumb-item">
-							Administration
-						</li>
-						<li class="breadcrumb-item active" aria-current="page">Candidates List</li>
+						<li class=""><a href="index"><i class="ti ti-smart-home"></i> Home </a></li> /
+						<li class=" active" aria-current="page">Candidate List</li>
 					</ol>
 				</nav>
 			</div>
@@ -29,7 +24,7 @@
 					</div>
 				</div>
 				<div class="me-2 mb-2">
-				<div class="dropdown">
+					<div class="dropdown">
 						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
 							<i class="ti ti-file-export me-1"></i> Export
 						</a>
@@ -55,6 +50,11 @@
 			<div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
 				<h5>Candidates List</h5>
 				<div class="d-flex my-xl-auto right-content align-items-center flex-wrap row-gap-3">
+					<div class="me-3">
+						<div class="form-group">
+							<input type="text" id="myInputTextField" class="form-control" placeholder="Search anything..." title="Search any thing in the table you want">
+						</div>
+					</div>
 					<div class="me-3">
 						<div class="input-icon-end position-relative">
 							<input type="text" class="form-control date-range bookingrange"
@@ -145,7 +145,7 @@
 								<th>Action</th>
 							</tr>
 						</thead>
-						 
+
 					</table>
 				</div>
 			</div>
