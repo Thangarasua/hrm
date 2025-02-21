@@ -49,7 +49,7 @@ $(document).ready(function() {
                         <td>
                             <div class="action-icon d-inline-flex">
                                 <a href="#" class="me-2 edit_user" data-id="${row.id}" data-bs-toggle="modal" data-bs-target="#add_edit_user"><i class="ti ti-edit"></i></a>
-                                <a href="javascript:void(0);" class="delete-department" data-id="${row.id}" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a>
+                                <a href="#" class="delete-users" data-id="${row.id}" data-bs-toggle="modal" data-bs-target=""><i class="fa-solid fa-check-circle"></i></a>
                             </div>
                         </td>
                     </tr>`;
@@ -117,6 +117,26 @@ $(document).ready(function() {
             }
         });
     });
+
+    $(document).on('click', '.delete-users', function() {
+        var userId = $(this).data('id');
+        $.ajax({
+            url: 'queries/users.php',
+            type: 'POST',
+            data: { id: userId, flag: "delete" },
+            success: function (data) {
+                if (data.status == "success") { 
+					$('#delete_modal').modal('show');
+                    $('.statusMessage').text('Successfully '+ data.newStatus);
+				}else{
+					toastr.error(data.message, "Error");
+				}
+            },
+            error: function() {
+                alert('Error fetching user data');
+            }
+        });
+    });  
 
     $(document).on('click', '.add_user', function() {
         $('#addEditUser')[0].reset();
