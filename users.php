@@ -305,9 +305,7 @@
 										<label class="form-label">Supervisors</label>
 										<select class="select" name="supervisors">
 											<option value="">Select</option>
-											<option value="1000">STL-BDE</option>
-                                            <option value="1001">STL-SALES</option>
-                                            <option value="1002">STL-ONE</option>
+											<?php echo getManagerUsers('SUPERVISOR'); ?>
 										</select>
 									</div>
 								</div>
@@ -316,9 +314,7 @@
 										<label class="form-label">Manager</label>
 										<select class="select" name="manager">
 											<option value="">Select</option>
-											<option value="1000">QM</option>
-                                            <option value="1001">SM</option>
-                                            <option value="1002">BM</option>
+											<?php echo getManagerUsers(user: 'MANAGER'); ?>
 										</select>
 									</div>
 								</div>
@@ -327,9 +323,7 @@
 										<label class="form-label">HR</label>
 										<select class="select" name="hr">
 											<option value="">Select</option>
-											<option value="1000">QM HR</option>
-                                            <option value="1001">SM HR</option>
-                                            <option value="1002">BM HR</option>
+											<?php echo getManagerUsers(user: 'HR'); ?>
 										</select>
 									</div>
 								</div>
@@ -401,11 +395,11 @@
 				<span class="avatar avatar-xl bg-transparent-danger text-danger mb-3">
 					<i class="ti ti-trash-x fs-36"></i>
 				</span>
-				<h4 class="mb-1">Confirm Delete</h4>
-				<p class="mb-3">You want to delete all the marked items, this cant be undone once you delete.</p>
+				<h4 class="mb-1 statusMessage"> </h4>
+				<p class="mb-3"></p>
 				<div class="d-flex justify-content-center">
 					<a href="javascript:void(0);" class="btn btn-light me-3" data-bs-dismiss="modal">Cancel</a>
-					<a href="users" class="btn btn-danger">Yes, Delete</a>
+					<a href="users" class="btn btn-danger confirmUpdate">Yes</a>
 				</div>
 			</div>
 		</div>
