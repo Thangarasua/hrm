@@ -12,13 +12,8 @@
 				<h2 class="mb-1">User</h2>
 				<nav>
 					<ol class="breadcrumb mb-0">
-						<li class="breadcrumb-item">
-							<a href="https://smarthr.dreamstechnologies.com/html/template/index.html"><i class="ti ti-smart-home"></i></a>
-						</li>
-						<li class="breadcrumb-item">
-							User
-						</li>
-						<li class="breadcrumb-item active" aria-current="page">User List</li>
+						<li class=""><a href="index"><i class="ti ti-smart-home"></i> Home </a></li> /
+						<li class=" active" aria-current="page">User List</li>
 					</ol>
 				</nav>
 			</div>
@@ -30,17 +25,16 @@
 					</div>
 				</div>
 				<div class="me-2 mb-2">
-					<div class="dropdown">
+				<div class="dropdown">
 						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
-							<i class="ti ti-file-export me-1"></i>Export
+							<i class="ti ti-file-export me-1"></i> Export
 						</a>
 						<ul class="dropdown-menu  dropdown-menu-end p-3">
-							<li>
-								<a href="javascript:void(0);" class="dropdown-item rounded-1"><i class="ti ti-file-type-pdf me-1"></i>Export as PDF</a>
-							</li>
-							<li>
-								<a href="javascript:void(0);" class="dropdown-item rounded-1"><i class="ti ti-file-type-xls me-1"></i>Export as Excel </a>
-							</li>
+							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="excel_button"><i class="ti ti-file-type-xls me-1"></i>Export as Excel </a></li>
+							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="pdf_button"><i class="ti ti-file-type-pdf me-1"></i>Export as PDF</a></li>
+							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="copy_button"><i class="ti ti-file-type-xls me-1"></i>Copy as Text </a></li>
+							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="csv_button"><i class="ti ti-file-type-xls me-1"></i>Export as CSV </a></li>
+							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="print_button"><i class="ti ti-file-type-xls me-1"></i>Export as Print </a></li>
 						</ul>
 					</div>
 				</div>
@@ -161,12 +155,29 @@
 				<h5>Plan List</h5>
 				<div class="d-flex my-xl-auto right-content align-items-center flex-wrap row-gap-3">
 					<div class="me-3">
+						<div class="form-group">
+							<input type="text" id="myInputTextField" class="form-control" placeholder="Search anything..." title="Search any thing in the table you want">
+						</div>
+					</div>
+					<div class="me-3">
 						<div class="input-icon-end position-relative">
 							<input type="text" class="form-control date-range bookingrange" placeholder="dd/mm/yyyy - dd/mm/yyyy">
 							<span class="input-icon-addon">
 								<i class="ti ti-chevron-down"></i>
 							</span>
 						</div>
+					</div>
+					<div class="dropdown me-3">
+						<select id="customLengthMenu" name="tableRecords_length" aria-controls="tableRecords" class="dropdown-toggle btn btn-white">
+							<option value="5">5</option>
+							<option value="10" selected>10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
+							<option value="50">50</option>
+							<option value="72">72</option>
+							<option value="100">100</option>
+							<option value="-1">All</option>
+						</select>
 					</div>
 					<div class="dropdown me-3">
 						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
@@ -211,14 +222,10 @@
 			</div>
 			<div class="card-body p-0">
 				<div class="custom-datatable-filter table-responsive">
-					<table class="table datatable">
+					<table class="table datatable" id="tableRecords">
 						<thead class="thead-light">
 							<tr>
-								<th class="no-sort">
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox" id="select-all">
-									</div>
-								</th>
+								<th class="no-sort">S.No</th>
 								<th>Emp/User ID </th>
 								<th>Name</th>
 								<th>Password</th>
@@ -227,7 +234,7 @@
 								<th>Supervisor</th>
 								<th>Manager</th>
 								<th>HR</th>
-                                <th>Status</th>
+								<th>Status</th>
 								<th>Action</th>
 							</tr>
 						</thead>
@@ -270,7 +277,7 @@
 					<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
 						<div class="modal-body pb-0 ">
 							<div class="row">
-                            <div class="col-md-6">
+								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">User ID <span class="text-danger"> *</span></label>
 										<input type="text" class="form-control" name="UserID">
@@ -282,7 +289,7 @@
 										<input type="text" class="form-control" onkeypress="return isAlphabets(event)" name="UserName">
 									</div>
 								</div>
-                                <div class="col-md-6">
+								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Department</label>
 										<select class="select" name="department">
@@ -291,7 +298,7 @@
 										</select>
 									</div>
 								</div>
-                                <div class="col-md-6">
+								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Role</label>
 										<select class="select" name="role">
@@ -300,7 +307,7 @@
 										</select>
 									</div>
 								</div>
-                                <div class="col-md-6">
+								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Supervisors</label>
 										<select class="select" name="supervisors">
@@ -309,7 +316,7 @@
 										</select>
 									</div>
 								</div>
-                                <div class="col-md-6">
+								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Manager</label>
 										<select class="select" name="manager">
@@ -318,7 +325,7 @@
 										</select>
 									</div>
 								</div>
-                                <div class="col-md-6">
+								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">HR</label>
 										<select class="select" name="hr">

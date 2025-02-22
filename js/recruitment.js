@@ -193,6 +193,7 @@ $(document).ready(function () {
           var length = $(this).val();
           table.page.len(length).draw();
         });
+        
       },
     });
   }
