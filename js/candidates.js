@@ -1,12 +1,16 @@
 $(document).ready(function () {
+
+  
   var fromDate = "";
   var toDate = "";
   var dateRange = "";
   var companyType = "";
-  var flag = "getAll";
-  loadData(fromDate, toDate, dateRange, companyType, flag);
+  var flag = $('#flag').val(); 
+  var jobID = $('#jobID').val(); 
 
-  function loadData(fromDate, toDate, dateRange, companyType, flag) {
+  loadData(fromDate, toDate, dateRange, companyType, flag, jobID);
+
+  function loadData(fromDate, toDate, dateRange, companyType, flag, jobID) {
     $.ajax({
       url: "queries/candidates.php",
       type: "POST",
@@ -17,6 +21,7 @@ $(document).ready(function () {
         dateRange: dateRange,
         companyType: companyType,
         flag: flag,
+        jobID: jobID
       },
       success: function (data) {
         var tableBody = $("#tableRecords tbody");

@@ -68,7 +68,7 @@ $(document).ready(function () {
                               <div class="d-flex align-items-center file-name-icon">
                                 <div class="ms-2">
                                   <h6 class="fw-medium">${row.job_position}</h6>
-                                  <a href="#"><span class="d-block mt-1">${
+                                  <a href="candidates?id=${row.encoded_id}"><span class="d-block mt-1">${
                                     row.candidate_count
                                   } Applicants</span></a>
                                 </div>

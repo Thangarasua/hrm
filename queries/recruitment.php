@@ -46,13 +46,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             echo json_encode(array('status' => 'failure', 'message' => 'Resorce requested failure'));
         }
         exit;
-    } elseif ($flag === 'getAll' || $flag === 'getReport' || $flag === 'type') {
+    } elseif ($flag === 'getAll') {
 
         // $sql = "SELECT * FROM `recruitment`";
         $sql = "SELECT r.*, SUM(CASE WHEN c.responce_status = 1 THEN 1 ELSE 0 END) AS candidate_count FROM recruitment AS r LEFT JOIN candidates AS c ON r.ticket_request_id = c.ticket_request_id GROUP BY r.ticket_request_id";
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
+                $row['encoded_id'] = base64_encode($row['ticket_request_id']);
                 $response[] = $row;
             }
         } else {

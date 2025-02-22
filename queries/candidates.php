@@ -46,12 +46,19 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             echo json_encode(array('status' => 'failure', 'message' => 'Resorce requested failure'));
         }
         exit;
-    } elseif ($flag === 'getAll' || $flag === 'getReport' || $flag === 'type') {
+    } elseif ($flag === 'getAll' || $flag === 'jobApplications') {
+
+        if($flag === 'jobApplications'){
+            $jobID = $_POST['jobID'];
+            $condition = "AND `c`.`ticket_request_id`= '$jobID'";
+        }elseif($flag === 'getAll'){
+            $condition = '';
+        }
  
-        $sql = "SELECT c.*,r.job_position FROM `candidates` AS c INNER JOIN recruitment AS r ON c.ticket_request_id = r.ticket_request_id WHERE c.`responce_status` = 1";
+        $sql = "SELECT c.*,r.job_position FROM `candidates` AS c INNER JOIN recruitment AS r ON c.ticket_request_id = r.ticket_request_id WHERE c.`responce_status` = 1 $condition";
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
+            while ($row = mysqli_fetch_assoc($result)) {  
                 $response[] = $row;
             }
         } else {

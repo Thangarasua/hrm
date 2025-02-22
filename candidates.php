@@ -1,5 +1,14 @@
 <?php require_once("./includes/header.php"); ?>
 <?php require_once("./includes/sidebar.php"); ?>
+<?php
+if (isset($_GET['id'])) {
+	$jobID = base64_decode($_GET['id']);
+	$flag = 'jobApplications';
+} else {
+	$jobID = '';
+	$flag = 'getAll';
+} 
+?>
 <!-- Page Wrapper -->
 <div class="page-wrapper">
 	<div class="content">
@@ -180,6 +189,9 @@
 	</div>
 </div>
 <!-- /Delete Modal -->
+
+<input type="hidden" name="flag" id="flag" value="<?php echo $flag; ?>">
+<input type="hidden" name="jobID" id="jobID" value="<?php echo $jobID; ?>">
 
 <?php require_once("./includes/footer.php"); ?>
 <!-- this page java scripts codes -->
