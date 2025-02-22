@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     } elseif ($flag === "getDetails") {
 
         $id = $_POST['id'];
-        $query = "SELECT * FROM `recruitment` WHERE `id` = '$id'";
+        $query = "SELECT `candidate_id`, `candidate_name`, `interview_status` FROM `candidates` WHERE `candidate_id` = '$id'";
         $result = mysqli_query($conn, $query);
         if ($result) {
             $row = mysqli_fetch_assoc($result);
@@ -82,23 +82,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     } elseif ($flag === "update") {
 
         $rowId = $_POST['rowId'];
-        $jobTitle = $_POST['jobTitle'];
-        $jobDescription = $_POST['jobDescription'];
-        $jobType = $_POST['jobType'];
-        $jobLevel = $_POST['jobLevel'];
-        $experience = $_POST['experience'];
-        $qualification = $_POST['qualification'];
-        $gender = $_POST['gender'];
-        $requiredSkills = $_POST['requiredSkills'];
-        $priority = $_POST['priority'];
-        $location = $_POST['location'];
+        $interview_status = $_POST['interview_status']; 
 
-        $query = "UPDATE `recruitment` SET `job_position`='$jobTitle',`job_descriptions`='$jobDescription',`required_skills`='$requiredSkills',`job_type`='$jobType',`job_level`='$jobLevel',`job_experience`='$experience',`qualification`='$qualification',`gender`='$gender',`priority`='$priority',`location`='$location',`updated_at`='$currentDatetime' WHERE `id`='$rowId'";
+        $query = "UPDATE `candidates` SET `interview_status`='$interview_status' WHERE `candidate_id`='$rowId'";
         $result = mysqli_query($conn, $query);
         if ($result) {
-            echo json_encode(array('status' => 'success', 'message' => 'Recruitment update successfully'));
+            echo json_encode(array('status' => 'success', 'message' => 'Candidate status update successfully'));
         } else {
-            echo json_encode(array('status' => 'failure', 'message' => 'Recruitment update failure'));
+            echo json_encode(array('status' => 'failure', 'message' => 'Candidate status update failure'));
         }
         exit;
     } elseif ($flag === "delete") {

@@ -1,12 +1,10 @@
 $(document).ready(function () {
-
-  
   var fromDate = "";
   var toDate = "";
   var dateRange = "";
   var companyType = "";
-  var flag = $('#flag').val(); 
-  var jobID = $('#jobID').val(); 
+  var flag = $("#flag").val();
+  var jobID = $("#jobID").val();
 
   loadData(fromDate, toDate, dateRange, companyType, flag, jobID);
 
@@ -21,7 +19,7 @@ $(document).ready(function () {
         dateRange: dateRange,
         companyType: companyType,
         flag: flag,
-        jobID: jobID
+        jobID: jobID,
       },
       success: function (data) {
         var tableBody = $("#tableRecords tbody");
@@ -41,6 +39,32 @@ $(document).ready(function () {
             var resumeLink = row.resume
               ? `./uploads/candidate_resume/${row.resume}`
               : "#";
+
+            if (row.interview_status == 1) {
+              inertview_status =
+                '<span class="badge border border-purple text-purple"><i class="ti ti-point-filled"></i>Applied</span>';
+            } else if (row.interview_status == 2) {
+              inertview_status =
+                '<span class="badge border border-pink text-pink"><i class="ti ti-point-filled"></i>Shortlisted</span>';
+            } else if (row.interview_status == 3) {
+              inertview_status =
+                '<span class="badge border border-info text-info"><i class="ti ti-point-filled"></i>Scheduled </span>';
+            } else if (row.interview_status == 4) {
+              inertview_status =
+                '<span class="badge border border-info text-info"><i class="ti ti-point-filled"></i>Interviewed </span>';
+            } else if (row.interview_status == 5) {
+              inertview_status =
+                '<span class="badge border border-warning text-warning"><i class="ti ti-point-filled"></i>Offered </span>';
+            } else if (row.interview_status == 6) {
+              inertview_status =
+                '<span class="badge border border-warning text-warning"><i class="ti ti-point-filled"></i>On Hold </span>';
+            } else if (row.interview_status == 7) {
+              inertview_status =
+                '<span class="badge border border-danger text-danger"><i class="ti ti-point-filled"></i>Rejected </span>';
+            } else if (row.interview_status == 8) {
+              inertview_status =
+                '<span class="badge border border-success text-success"><i class="ti ti-point-filled"></i>Hired</span>';
+            }
 
             var newRow = `
                 <tr>
@@ -68,13 +92,13 @@ $(document).ready(function () {
                             <a href="${resumeLink}" class="text-gray fs-16" download><i class="fa-solid fa-download"></i></a>
                         </div>
                     </td>
-                    <td><span class="badge border border-purple text-purple"><i class="fa-solid fa-circle-dot"></i> ${
-                      row.responce_status == "0" ? "Pending" : "Reviewed"
-                    }</span></td>
+                    <td>${inertview_status}</td>
                     <td>
-                        <div class="action-icon d-inline-flex">
-                            <a href="javascript:void(0);" class="edit-candidate" data-id="${row.candidate_id}" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="javascript:void(0);" class="delete-candidate" data-id="${row.candidate_id}" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="fa-solid fa-trash-can"></i></a>
+                        <div class="action-icon d-inline-flex"> <a href="#" data-id="${
+                          row.candidate_id
+                        }" class="edit">
+                                  <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
                         </div>
                     </td>
                 </tr>`;
@@ -184,4 +208,67 @@ $(document).ready(function () {
       },
     });
   }
+
+  $(document).on("click", ".edit", function (e) {
+    e.preventDefault();
+    $("#editModal").modal("show");
+    var id = $(this).data("id");
+
+    $.ajax({
+      type: "POST",
+      url: "queries/candidates.php",
+      data: {
+        id: id,
+        flag: "getDetails",
+      },
+      cache: false,
+      success: function (res) {
+        if (res.status == "success") {
+          $("#rowId").val(res.data.candidate_id);
+          $("#candidate_name").val(res.data.candidate_name);
+          $("#interview_status")
+            .val(res.data.interview_status)
+            .trigger("change");
+        } else {
+          Swal.fire(res.data.message);
+        }
+      },
+    });
+  });
+
+  $(document).on("submit", "#update", function (e) {
+    e.preventDefault();
+
+    let interview_status = $("#interview_status").val().trim();
+    if (interview_status.length == 0) {
+      $("#interview_status").focus();
+      $("#interview_status_error").removeClass("d-none");
+      return;
+    } else {
+      $("#interview_status_error").addClass("d-none");
+    }
+
+    let formData = new FormData(this);
+    formData.append("flag", "update");
+    $.ajax({
+      type: "POST",
+      url: "queries/candidates.php",
+      data: formData,
+      dataType: "json",
+      contentType: false,
+      cache: false,
+      processData: false,
+      success: function (response) {
+        if (response.status == "success") {
+          $("#update_modal").modal("show");
+          $("#update")[0].reset();
+          $("#editModal").modal("hide");
+          // loadData("", "", "", "", "getAll", "");
+          loadData(fromDate, toDate, dateRange, companyType, flag, jobID);
+        } else {
+          toastr.error(response.message, "Error");
+        }
+      },
+    });
+  });
 });
