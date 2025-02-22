@@ -11,7 +11,7 @@
 				<h2 class="mb-1">Recruitments</h2>
 				<nav>
 					<ol class="breadcrumb mb-0">
-						<li class=""><a href="index"><i class="ti ti-smart-home"></i> Home </a></li> / 
+						<li class=""><a href="index"><i class="ti ti-smart-home"></i> Home </a></li> /
 						<li class=" active" aria-current="page">Recruitment List</li>
 					</ol>
 				</nav>
@@ -155,7 +155,7 @@
 						</thead>
 						<tbody>
 						</tbody>
-					</table> 
+					</table>
 				</div>
 			</div>
 		</div>
@@ -203,8 +203,14 @@
 										<label class="form-label">Job Type <span class="text-danger"> *</span></label>
 										<select class="select" name="jobType" id="jobType">
 											<option value="">Select</option>
-											<option value="Full Time">Full Time</option>
-											<option value="Part Time">Part Time</option>
+											<option value="Permenant">Permenant</option>
+											<option value="Temporary">Temporary</option>
+											<option value="Seasonal">Seasonal</option>
+											<option value="Full-time">Full-time</option>
+											<option value="Part-Time">Part-Time</option>
+											<option value="Student">Student</option>
+											<option value="Apprenticeship">Apprenticeship</option>
+											<option value="Employee">Employee</option>
 										</select>
 									</div>
 								</div>
@@ -442,8 +448,14 @@
 										<label class="form-label">Job Type <span class="text-danger"> *</span></label>
 										<select class="select" id="view_jobType">
 											<option value="">Select</option>
-											<option value="Full Time">Full Time</option>
-											<option value="Part Time">Part Time</option>
+											<option value="Permenant">Permenant</option>
+											<option value="Temporary">Temporary</option>
+											<option value="Seasonal">Seasonal</option>
+											<option value="Full-time">Full-time</option>
+											<option value="Part-Time">Part-Time</option>
+											<option value="Student">Student</option>
+											<option value="Apprenticeship">Apprenticeship</option>
+											<option value="Employee">Employee</option>
 										</select>
 									</div>
 								</div>
@@ -557,10 +569,16 @@
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Job Type <span class="text-danger"> *</span></label>
-										<select class="select" name="jobType" id="edit_jobType">
+										<select class="select" name="jobType" id="edit_jobType"> 
 											<option value="">Select</option>
-											<option value="Full Time">Full Time</option>
-											<option value="Part Time">Part Time</option>
+											<option value="Permenant">Permenant</option>
+											<option value="Temporary">Temporary</option>
+											<option value="Seasonal">Seasonal</option>
+											<option value="Full-time">Full-time</option>
+											<option value="Part-Time">Part-Time</option>
+											<option value="Student">Student</option>
+											<option value="Apprenticeship">Apprenticeship</option>
+											<option value="Employee">Employee</option>
 										</select>
 									</div>
 								</div>

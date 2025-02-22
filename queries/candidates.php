@@ -46,12 +46,19 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             echo json_encode(array('status' => 'failure', 'message' => 'Resorce requested failure'));
         }
         exit;
-    } elseif ($flag === 'getAll' || $flag === 'getReport' || $flag === 'type') {
+    } elseif ($flag === 'getAll' || $flag === 'jobApplications') {
+
+        if($flag === 'jobApplications'){
+            $jobID = $_POST['jobID'];
+            $condition = "AND `c`.`ticket_request_id`= '$jobID'";
+        }elseif($flag === 'getAll'){
+            $condition = '';
+        }
  
-        $sql = "SELECT c.*,r.job_position FROM `candidates` AS c INNER JOIN recruitment AS r ON c.ticket_request_id = r.ticket_request_id WHERE c.`responce_status` = 1";
+        $sql = "SELECT c.*,r.job_position FROM `candidates` AS c INNER JOIN recruitment AS r ON c.ticket_request_id = r.ticket_request_id WHERE c.`responce_status` = 1 $condition";
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
+            while ($row = mysqli_fetch_assoc($result)) {  
                 $response[] = $row;
             }
         } else {
@@ -63,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     } elseif ($flag === "getDetails") {
 
         $id = $_POST['id'];
-        $query = "SELECT * FROM `recruitment` WHERE `id` = '$id'";
+        $query = "SELECT `candidate_id`, `candidate_name`, `interview_status` FROM `candidates` WHERE `candidate_id` = '$id'";
         $result = mysqli_query($conn, $query);
         if ($result) {
             $row = mysqli_fetch_assoc($result);
@@ -75,23 +82,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     } elseif ($flag === "update") {
 
         $rowId = $_POST['rowId'];
-        $jobTitle = $_POST['jobTitle'];
-        $jobDescription = $_POST['jobDescription'];
-        $jobType = $_POST['jobType'];
-        $jobLevel = $_POST['jobLevel'];
-        $experience = $_POST['experience'];
-        $qualification = $_POST['qualification'];
-        $gender = $_POST['gender'];
-        $requiredSkills = $_POST['requiredSkills'];
-        $priority = $_POST['priority'];
-        $location = $_POST['location'];
+        $interview_status = $_POST['interview_status']; 
 
-        $query = "UPDATE `recruitment` SET `job_position`='$jobTitle',`job_descriptions`='$jobDescription',`required_skills`='$requiredSkills',`job_type`='$jobType',`job_level`='$jobLevel',`job_experience`='$experience',`qualification`='$qualification',`gender`='$gender',`priority`='$priority',`location`='$location',`updated_at`='$currentDatetime' WHERE `id`='$rowId'";
+        $query = "UPDATE `candidates` SET `interview_status`='$interview_status' WHERE `candidate_id`='$rowId'";
         $result = mysqli_query($conn, $query);
         if ($result) {
-            echo json_encode(array('status' => 'success', 'message' => 'Recruitment update successfully'));
+            echo json_encode(array('status' => 'success', 'message' => 'Candidate status update successfully'));
         } else {
-            echo json_encode(array('status' => 'failure', 'message' => 'Recruitment update failure'));
+            echo json_encode(array('status' => 'failure', 'message' => 'Candidate status update failure'));
         }
         exit;
     } elseif ($flag === "delete") {

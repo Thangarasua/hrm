@@ -1,5 +1,14 @@
 <?php require_once("./includes/header.php"); ?>
 <?php require_once("./includes/sidebar.php"); ?>
+<?php
+if (isset($_GET['id'])) {
+	$jobID = base64_decode($_GET['id']);
+	$flag = 'jobApplications';
+} else {
+	$jobID = '';
+	$flag = 'getAll';
+}
+?>
 <!-- Page Wrapper -->
 <div class="page-wrapper">
 	<div class="content">
@@ -161,6 +170,59 @@
 </div>
 <!-- /Page Wrapper -->
 
+<!-- Recruitment form send -->
+<div class="modal fade" id="editModal">
+	<div class="modal-dialog modal-dialog-centered modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Interview status update</h4>
+				<button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
+					<i class="ti ti-x"></i>
+				</button>
+			</div>
+			<form id="update">
+				<div class="modal-body pb-0">
+					<div class="tab-content" id="">
+						<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
+
+							<div class="col">
+								<div class="mb-3">
+									<label class="form-label">Candidate Name <span class="text-danger"> *</span></label>
+									<input type="text" class="form-control" name="candidate_name" id="candidate_name">
+								</div>
+							</div>
+							<div class="col">
+								<div class="mb-3">
+									<label class="form-label">Interview Status <span class="text-danger"> *</span></label>
+									<select class="select" name="interview_status" id="interview_status">
+										<option value="">Select</option>
+										<option value="1">Applied</option>
+										<option value="2">Shortlisted</option>
+										<option value="3">Scheduled</option>
+										<option value="4">Interviewed</option>
+										<option value="5">Offered</option>
+										<option value="6">On Hold</option>
+										<option value="7">Rejected</option>
+										<option value="8">Hired</option>
+									</select>
+								</div>
+								<small class="error text-danger d-none" id="interview_status_error"> mandatory field.</small>
+							</div>
+
+							<input type="hidden" class="form-control" name="rowId" id="rowId">
+							<div class="modal-footer">
+								<button type="button" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</button>
+								<button type="submit" id="sendButton" class="btn btn-primary">Update</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- /Recruitment form send -->
+
 <!-- Delete Modal -->
 <div class="modal fade" id="delete_modal">
 	<div class="modal-dialog modal-dialog-centered">
@@ -180,6 +242,9 @@
 	</div>
 </div>
 <!-- /Delete Modal -->
+
+<input type="hidden" name="flag" id="flag" value="<?php echo $flag; ?>">
+<input type="hidden" name="jobID" id="jobID" value="<?php echo $jobID; ?>">
 
 <?php require_once("./includes/footer.php"); ?>
 <!-- this page java scripts codes -->

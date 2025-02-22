@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             $resume = 'No resume';
         }
 
-        $query = "UPDATE `candidates` SET `candidate_name`='$name',`contact_number`='$phone',`address`='$location',`profile`='$profile',`resume`='$resume',`experience`='$experience',`skills`='$skills',`available_time1`='$available_time1',`available_time2`='$available_time2',`available_time3`='$available_time3',`created_at`='$currentDatetime',`responce_status`= 1 WHERE `candidate_id`='$id'";
+        $query = "UPDATE `candidates` SET `candidate_name`='$name',`contact_number`='$phone',`address`='$location',`profile`='$profile',`resume`='$resume',`experience`='$experience',`skills`='$skills',`available_time1`='$available_time1',`available_time2`='$available_time2',`available_time3`='$available_time3',`created_at`='$currentDatetime',`responce_status`= 1,`interview_status`= 1 WHERE `candidate_id`='$id'";
 
         $result = mysqli_query($conn, $query);
         if ($result) {
