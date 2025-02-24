@@ -45,8 +45,6 @@ if (mysqli_num_rows($result) > 0) {
 	<link rel="stylesheet" href="css/plugins/toastr.min.css">
 	<!-- sweetalert2 alert added -->
 	<script src="js/plugins/sweetalert2.js" type="text/javascript"></script>
-	<!-- Daterangepikcer CSS -->
-	<!-- <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css"> -->
 </head>
 
 <body>
@@ -138,21 +136,20 @@ if (mysqli_num_rows($result) > 0) {
 														<label for="text">Gender</label>
 														<input type="text" class="form-control" value="<?php echo $data['gender']; ?>" readonly>
 													</div>
-													
+
 													<div class="form-group">
 														<label for="text">Location</label>
 														<input type="text" class="form-control" value="<?php echo $data['location']; ?>" readonly>
 													</div>
 												</div>
 												<div class="responsive">
-												<div class="form-group">
+													<div class="form-group">
 														<label for="text">Required Skills</label>
 														<textarea class="form-control" readonly><?php echo $data['required_skills']; ?></textarea>
 													</div>
 													<div class="form-group">
 														<label for="text">Job Description</label>
-														<!-- <input type="text" class="form-control" value="<?php echo $data['job_descriptions']; ?>" readonly> -->
-														<textarea name="" id="" class="form-control" ><?php echo $data['job_descriptions']; ?></textarea>
+														<textarea name="" id="" class="form-control"><?php echo $data['job_descriptions']; ?></textarea>
 													</div>
 												</div>
 											</div>
@@ -166,7 +163,6 @@ if (mysqli_num_rows($result) > 0) {
 										</h2>
 										<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
 											<div class="accordion-body">
-												<!-- <div class="profile-position"> -->
 												<div class="row">
 													<div class="col-md-3">
 														<div class="row">
@@ -221,21 +217,21 @@ if (mysqli_num_rows($result) > 0) {
 																<input type="file" class="form-control" id="resume" name="resume" placeholder="Select Recent resume PDF" accept="application/pdf" />
 																<span id='' class='error'></span>
 															</div>
-															
+
 														</div>
 													</div>
 												</div>
 												<div class="responsive">
-																<div class="form-group">
-																	<label for="text">Skills <em class="mandatory">*</em></label>
-																	<textarea class="form-control" rows="1" id="skills" name="skills" placeholder="eg: Data Analysis, Python"></textarea>
-																	<span id='' class='error'></span>
-																</div>
-																<div class="form-group">
-																	<label for="text">Current Location <em class="mandatory">*</em></label>
-																	<input type="text" name="location" id="location" class="form-control" placeholder="eg:Area,district,state">
-																</div>
-															</div>
+													<div class="form-group">
+														<label for="text">Skills <em class="mandatory">*</em></label>
+														<textarea class="form-control" rows="1" id="skills" name="skills" placeholder="eg: Data Analysis, Python"></textarea>
+														<span id='' class='error'></span>
+													</div>
+													<div class="form-group">
+														<label for="text">Current Location <em class="mandatory">*</em></label>
+														<input type="text" name="location" id="location" class="form-control" placeholder="eg:Area,district,state">
+													</div>
+												</div>
 												<div class="responsive">
 													<div class="form-group">
 														<label for="text">Availability time 1 <em class="mandatory">*</em></label>
@@ -323,9 +319,7 @@ if (mysqli_num_rows($result) > 0) {
 	<script src="js/plugins/croppie.js"></script>
 	<!-- toastr alert added -->
 	<script src="js/plugins/toastr.min.js" type="text/javascript"></script>
-	<!-- Daterangepikcer JS -->
-	<!-- <script src="plugins/daterangepicker/daterangepicker.js"></script> -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 	<script>
 		$(document).ready(function() {
 
@@ -454,7 +448,18 @@ if (mysqli_num_rows($result) > 0) {
 				} else {
 					$("#experienceError").addClass('d-none');
 				}
-			});
+			}); 
+
+			$("input[type='time']").change(function(){
+				let minTime = "09:00";
+				let maxTime = "18:00";
+				let selectedTime = this.value;
+
+				if (selectedTime < minTime || selectedTime > maxTime) { 
+					toastr.warning("Please select a time between 09:00 AM and 06:00 PM.");
+					this.value = ""; // Clear invalid time
+				}
+			})
 
 			$("#interviewForm").click(function() {
 				$(".error").addClass('d-none');
