@@ -13,7 +13,6 @@ $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
 	$data = $result->fetch_assoc();
 	$status = $data['responce_status'];
-
 	if ($status == 0) {
 		$formDisplay = 'd-block';
 		$thanksDivDisplay = 'd-none';
@@ -45,8 +44,6 @@ if (mysqli_num_rows($result) > 0) {
 	<link rel="stylesheet" href="css/plugins/toastr.min.css">
 	<!-- sweetalert2 alert added -->
 	<script src="js/plugins/sweetalert2.js" type="text/javascript"></script>
-	<!-- Daterangepikcer CSS -->
-	<!-- <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css"> -->
 </head>
 
 <body>
@@ -101,7 +98,6 @@ if (mysqli_num_rows($result) > 0) {
 									</div>
 								</div>
 								<br>
-
 								<div class="accordion" id="accordionExample">
 									<div class="accordion-item">
 										<h2 class="accordion-header" id="headingOne">
@@ -138,21 +134,19 @@ if (mysqli_num_rows($result) > 0) {
 														<label for="text">Gender</label>
 														<input type="text" class="form-control" value="<?php echo $data['gender']; ?>" readonly>
 													</div>
-													
 													<div class="form-group">
 														<label for="text">Location</label>
 														<input type="text" class="form-control" value="<?php echo $data['location']; ?>" readonly>
 													</div>
 												</div>
 												<div class="responsive">
-												<div class="form-group">
+													<div class="form-group">
 														<label for="text">Required Skills</label>
 														<textarea class="form-control" readonly><?php echo $data['required_skills']; ?></textarea>
 													</div>
 													<div class="form-group">
 														<label for="text">Job Description</label>
-														<!-- <input type="text" class="form-control" value="<?php echo $data['job_descriptions']; ?>" readonly> -->
-														<textarea name="" id="" class="form-control" ><?php echo $data['job_descriptions']; ?></textarea>
+														<textarea name="" id="" class="form-control"><?php echo $data['job_descriptions']; ?></textarea>
 													</div>
 												</div>
 											</div>
@@ -166,7 +160,6 @@ if (mysqli_num_rows($result) > 0) {
 										</h2>
 										<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
 											<div class="accordion-body">
-												<!-- <div class="profile-position"> -->
 												<div class="row">
 													<div class="col-md-3">
 														<div class="row">
@@ -221,43 +214,42 @@ if (mysqli_num_rows($result) > 0) {
 																<input type="file" class="form-control" id="resume" name="resume" placeholder="Select Recent resume PDF" accept="application/pdf" />
 																<span id='' class='error'></span>
 															</div>
-															
 														</div>
 													</div>
 												</div>
 												<div class="responsive">
-																<div class="form-group">
-																	<label for="text">Skills <em class="mandatory">*</em></label>
-																	<textarea class="form-control" rows="1" id="skills" name="skills" placeholder="eg: Data Analysis, Python"></textarea>
-																	<span id='' class='error'></span>
-																</div>
-																<div class="form-group">
-																	<label for="text">Current Location <em class="mandatory">*</em></label>
-																	<input type="text" name="location" id="location" class="form-control" placeholder="eg:Area,district,state">
-																</div>
-															</div>
+													<div class="form-group">
+														<label for="text">Skills <em class="mandatory">*</em></label>
+														<textarea class="form-control" rows="1" id="skills" name="skills" placeholder="eg: Data Analysis, Python"></textarea>
+														<span id='' class='error'></span>
+													</div>
+													<div class="form-group">
+														<label for="text">Current Location <em class="mandatory">*</em></label>
+														<input type="text" name="location" id="location" class="form-control" placeholder="eg:Area,district,state">
+													</div>
+												</div>
 												<div class="responsive">
 													<div class="form-group">
 														<label for="text">Availability time 1 <em class="mandatory">*</em></label>
 														<div class="availability availabilityDate1">
-															<input type="date" class="form-control domainEpx" id="availabilityDate1" name="availabilityDate1">
-															<input type="time" class="form-control domainEpx" id="availabilityTime1" name="availabilityTime1">
+															<input type="date" class="form-control" id="availabilityDate1" name="availabilityDate1" min=<?php echo date('Y-m-d'); ?>>
+															<input type="time" class="form-control" id="availabilityTime1" name="availabilityTime1">
 														</div>
 														<span id='availabilityDateError' class='error'></span>
 													</div>
 													<div class="form-group">
 														<label for="text">Availability time 2 <small>(opional)</small></label>
 														<div class="availability">
-															<input type="date" class="form-control domainEpx" id="availabilityDate2" name="availabilityDate2" placeholder="Date">
-															<input type="time" class="form-control domainEpx" id="availabilityTime2" name="availabilityTime2" placeholder="Time">
+															<input type="date" class="form-control" id="availabilityDate2" name="availabilityDate2" placeholder="Date" min=<?php echo date('Y-m-d'); ?>>
+															<input type="time" class="form-control" id="availabilityTime2" name="availabilityTime2" placeholder="Time">
 														</div>
 														<span id='availabilityDate' class='error'></span>
 													</div>
 													<div class="form-group">
 														<label for="text">Availability time 3 <small>(opional)</small></label>
 														<div class="availability">
-															<input type="date" class="form-control domainEpx" id="availabilityDate3" name="availabilityDate3">
-															<input type="time" class="form-control domainEpx" id="availabilityTime3" name="availabilityTime3">
+															<input type="date" class="form-control" id="availabilityDate3" name="availabilityDate3" min=<?php echo date('Y-m-d'); ?>>
+															<input type="time" class="form-control" id="availabilityTime3" name="availabilityTime3">
 														</div>
 														<span id='availabilityDate' class='error'></span>
 													</div>
@@ -290,7 +282,6 @@ if (mysqli_num_rows($result) > 0) {
 							</div>
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>
@@ -323,9 +314,7 @@ if (mysqli_num_rows($result) > 0) {
 	<script src="js/plugins/croppie.js"></script>
 	<!-- toastr alert added -->
 	<script src="js/plugins/toastr.min.js" type="text/javascript"></script>
-	<!-- Daterangepikcer JS -->
-	<!-- <script src="plugins/daterangepicker/daterangepicker.js"></script> -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 	<script>
 		$(document).ready(function() {
 
@@ -455,6 +444,26 @@ if (mysqli_num_rows($result) > 0) {
 					$("#experienceError").addClass('d-none');
 				}
 			});
+			$("#resume").on("change", function() {
+				let file = this.files[0];
+				if (file) {
+					let fileType = file.name.split('.').pop().toLowerCase();
+					if (fileType !== "pdf") {
+						$(this).val(""); // Clear the file input
+						toastr.error("Only PDF files are allowed.");
+					}
+				}
+			});
+			$("input[type='time']").change(function() {
+				let minTime = "09:00";
+				let maxTime = "18:00";
+				let selectedTime = this.value;
+
+				if (selectedTime < minTime || selectedTime > maxTime) {
+					toastr.warning("Please select a time between 09:00 AM and 06:00 PM.");
+					this.value = ""; // Clear invalid time
+				}
+			})
 
 			$("#interviewForm").click(function() {
 				$(".error").addClass('d-none');
@@ -506,7 +515,6 @@ if (mysqli_num_rows($result) > 0) {
 				});
 			});
 
-
 			function validateForm() {
 				$(".error").remove(); // Remove previous error messages
 
@@ -533,7 +541,6 @@ if (mysqli_num_rows($result) > 0) {
 					toastr.warning("Kindly fill your email.");
 					return 0;
 				}
-
 				var filter = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 				if (!filter.test(email)) {
 					toastr["warning"]("Please enter a valid email!");
@@ -544,7 +551,6 @@ if (mysqli_num_rows($result) > 0) {
 					toastr.warning("Kindly fill your proper email.");
 					return 0;
 				}
-
 				let phone = $("#phone").val().trim();
 				if (phone.length == 0) {
 					$("#phone").focus();

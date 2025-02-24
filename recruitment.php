@@ -147,8 +147,8 @@
 								<th>Job ID</th>
 								<th>Raised By</th>
 								<th>Job Title</th>
-								<th>Description</th>
-								<th>Status</th>
+								<th>Job Level</th>
+								<th>Notice period</th>
 								<th>Posted Date</th>
 								<th>Action</th>
 							</tr>
@@ -267,7 +267,7 @@
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
-										<label class="form-label">Priority <span class="text-danger"> *</span></label>
+										<label class="form-label">Notice period<span class="text-danger"> *</span></label>
 										<select class="select" name="priority" id="priority">
 											<option value="">Select</option>
 											<option value="Immediate">Immediate</option>
@@ -512,7 +512,7 @@
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
-										<label class="form-label">Priority <span class="text-danger"> *</span></label>
+										<label class="form-label">Notice period <span class="text-danger"> *</span></label>
 										<select class="select" name="priority" id="view_priority">
 											<option value="">Select</option>
 											<option value="Immediate">Immediate</option>
@@ -635,7 +635,7 @@
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
-										<label class="form-label">Priority <span class="text-danger"> *</span></label>
+										<label class="form-label">Notice period <span class="text-danger"> *</span></label>
 										<select class="select" name="priority" id="edit_priority">
 											<option value="">Select</option>
 											<option value="Immediate">Immediate</option>

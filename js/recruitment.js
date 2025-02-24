@@ -74,8 +74,8 @@ $(document).ready(function () {
                                 </div>
                               </div>
                             </td>
-                            <td>${row.job_descriptions.slice(0, 30)}</td>
-                            <td>${row.required_skills.slice(0, 30)}</td>
+                            <td>${row.job_level}</td>
+                            <td>${row.priority}</td>
                             <td>${row.created_at.split(" ")[0]}</td>
                             <td>
                               <div class="action-icon d-inline-flex">
@@ -193,6 +193,7 @@ $(document).ready(function () {
           var length = $(this).val();
           table.page.len(length).draw();
         });
+        
       },
     });
   }
