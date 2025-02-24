@@ -115,12 +115,24 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $raisedBy = $_POST['raisedBy'];
         $jobSno = $_POST['jobSno'];
 
+        $lastTicketId = "SELECT `candidate_register_id` FROM `candidates` ORDER BY `candidate_id` DESC";
+        $result = mysqli_query($conn, $lastTicketId);
+        $rowCount = mysqli_num_rows($result);
+        if ($rowCount > 0) {
+            $data = mysqli_fetch_assoc($result);
+            $lastInteger = (int) substr($data['candidate_register_id'], 7, 3);
+            $newInteger = sprintf("%03d", $lastInteger + 1);
+            $candidateRequestId = 'CND' . $month . $year . $newInteger;
+        } else {
+            $candidateRequestId = 'CND' . $month . $year . '001';
+        }
+
         // Enable MySQLi Exception Mode
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
         try {
-            $query = "INSERT INTO `candidates` (`candidate_name`, `email`, `contact_number`, `created_by`, `ticket_request_id`, `created_at`) 
-              VALUES ('$candidateName', '$candidateMail', '$candidateContact', '$raisedBy', '$ticketRequestId', '$currentDatetime')";
+            $query = "INSERT INTO `candidates` (`candidate_register_id`,`candidate_name`, `email`, `contact_number`, `created_by`, `ticket_request_id`, `created_at`) 
+              VALUES ('$candidateRequestId','$candidateName', '$candidateMail', '$candidateContact', '$raisedBy', '$ticketRequestId', '$currentDatetime')";
 
             $result = mysqli_query($conn, $query);
 
