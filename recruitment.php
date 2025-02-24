@@ -147,8 +147,8 @@
 								<th>Job ID</th>
 								<th>Raised By</th>
 								<th>Job Title</th>
-								<th>Description</th>
-								<th>Status</th>
+								<th>Job Level</th>
+								<th>Priority</th>
 								<th>Posted Date</th>
 								<th>Action</th>
 							</tr>
