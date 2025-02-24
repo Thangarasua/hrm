@@ -13,7 +13,6 @@ $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
 	$data = $result->fetch_assoc();
 	$status = $data['responce_status'];
-
 	if ($status == 0) {
 		$formDisplay = 'd-block';
 		$thanksDivDisplay = 'd-none';
@@ -99,7 +98,6 @@ if (mysqli_num_rows($result) > 0) {
 									</div>
 								</div>
 								<br>
-
 								<div class="accordion" id="accordionExample">
 									<div class="accordion-item">
 										<h2 class="accordion-header" id="headingOne">
@@ -136,7 +134,6 @@ if (mysqli_num_rows($result) > 0) {
 														<label for="text">Gender</label>
 														<input type="text" class="form-control" value="<?php echo $data['gender']; ?>" readonly>
 													</div>
-
 													<div class="form-group">
 														<label for="text">Location</label>
 														<input type="text" class="form-control" value="<?php echo $data['location']; ?>" readonly>
@@ -217,7 +214,6 @@ if (mysqli_num_rows($result) > 0) {
 																<input type="file" class="form-control" id="resume" name="resume" placeholder="Select Recent resume PDF" accept="application/pdf" />
 																<span id='' class='error'></span>
 															</div>
-
 														</div>
 													</div>
 												</div>
@@ -236,24 +232,24 @@ if (mysqli_num_rows($result) > 0) {
 													<div class="form-group">
 														<label for="text">Availability time 1 <em class="mandatory">*</em></label>
 														<div class="availability availabilityDate1">
-															<input type="date" class="form-control domainEpx" id="availabilityDate1" name="availabilityDate1">
-															<input type="time" class="form-control domainEpx" id="availabilityTime1" name="availabilityTime1">
+															<input type="date" class="form-control" id="availabilityDate1" name="availabilityDate1" min=<?php echo date('Y-m-d'); ?>>
+															<input type="time" class="form-control" id="availabilityTime1" name="availabilityTime1">
 														</div>
 														<span id='availabilityDateError' class='error'></span>
 													</div>
 													<div class="form-group">
 														<label for="text">Availability time 2 <small>(opional)</small></label>
 														<div class="availability">
-															<input type="date" class="form-control domainEpx" id="availabilityDate2" name="availabilityDate2" placeholder="Date">
-															<input type="time" class="form-control domainEpx" id="availabilityTime2" name="availabilityTime2" placeholder="Time">
+															<input type="date" class="form-control" id="availabilityDate2" name="availabilityDate2" placeholder="Date" min=<?php echo date('Y-m-d'); ?>>
+															<input type="time" class="form-control" id="availabilityTime2" name="availabilityTime2" placeholder="Time">
 														</div>
 														<span id='availabilityDate' class='error'></span>
 													</div>
 													<div class="form-group">
 														<label for="text">Availability time 3 <small>(opional)</small></label>
 														<div class="availability">
-															<input type="date" class="form-control domainEpx" id="availabilityDate3" name="availabilityDate3">
-															<input type="time" class="form-control domainEpx" id="availabilityTime3" name="availabilityTime3">
+															<input type="date" class="form-control" id="availabilityDate3" name="availabilityDate3" min=<?php echo date('Y-m-d'); ?>>
+															<input type="time" class="form-control" id="availabilityTime3" name="availabilityTime3">
 														</div>
 														<span id='availabilityDate' class='error'></span>
 													</div>
@@ -286,7 +282,6 @@ if (mysqli_num_rows($result) > 0) {
 							</div>
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>
@@ -448,14 +443,23 @@ if (mysqli_num_rows($result) > 0) {
 				} else {
 					$("#experienceError").addClass('d-none');
 				}
-			}); 
-
-			$("input[type='time']").change(function(){
+			});
+			$("#resume").on("change", function() {
+				let file = this.files[0];
+				if (file) {
+					let fileType = file.name.split('.').pop().toLowerCase();
+					if (fileType !== "pdf") {
+						$(this).val(""); // Clear the file input
+						toastr.error("Only PDF files are allowed.");
+					}
+				}
+			});
+			$("input[type='time']").change(function() {
 				let minTime = "09:00";
 				let maxTime = "18:00";
 				let selectedTime = this.value;
 
-				if (selectedTime < minTime || selectedTime > maxTime) { 
+				if (selectedTime < minTime || selectedTime > maxTime) {
 					toastr.warning("Please select a time between 09:00 AM and 06:00 PM.");
 					this.value = ""; // Clear invalid time
 				}
@@ -511,7 +515,6 @@ if (mysqli_num_rows($result) > 0) {
 				});
 			});
 
-
 			function validateForm() {
 				$(".error").remove(); // Remove previous error messages
 
@@ -538,7 +541,6 @@ if (mysqli_num_rows($result) > 0) {
 					toastr.warning("Kindly fill your email.");
 					return 0;
 				}
-
 				var filter = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 				if (!filter.test(email)) {
 					toastr["warning"]("Please enter a valid email!");
@@ -549,7 +551,6 @@ if (mysqli_num_rows($result) > 0) {
 					toastr.warning("Kindly fill your proper email.");
 					return 0;
 				}
-
 				let phone = $("#phone").val().trim();
 				if (phone.length == 0) {
 					$("#phone").focus();
