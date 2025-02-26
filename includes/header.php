@@ -55,12 +55,7 @@ if (!isset($_SESSION['hrm_username']) || empty($_SESSION['hrm_username'])) {
 	<link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
 
 	<!-- Datatable CSS -->
-	<link rel="stylesheet" href="css/plugins/dataTables.bootstrap5.min.css">
-
-	<!-- <link rel="stylesheet" href="//cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css"> -->
-
-	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.bootstrap5.css"> -->
+	<link rel="stylesheet" href="css/plugins/dataTables.bootstrap5.min.css"> 
 
 	<!-- Color Picker Css -->
 	<link rel="stylesheet" href="plugins/flatpickr/flatpickr.min.css">

@@ -1,4 +1,3 @@
-
 //check only numbers allowed condition
 function isNumber(input) {
   var charCode = input.which ? input.which : input.keyCode;
@@ -27,14 +26,111 @@ function isAlphabets(input) {
 }
 
 function isEmail(input) {
-    var email = input.value.trim(); 
-    var filter = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  var email = input.value.trim();
+  var filter = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    if (!filter.test(email)) {
-        toastr["warning"]("Please enter a valid email!");
-        input.focus(); 
-        return false;
-    } 
-    return true;
+  if (!filter.test(email)) {
+    toastr["warning"]("Please enter a valid email!");
+    input.focus();
+    return false;
+  }
+  return true;
 }
 
+function dataTableDesigns() {
+  var lastSegment = $(location).attr("pathname").split("/").pop();
+
+  table = $("#tableRecords").DataTable({
+    pageLength: 10,
+    lengthChange: false,
+    language: {
+      search: "",
+    },
+    lengthChange: false,
+    search: false,
+    dom:
+      "<'row'<'col-md-6'B><'col-md-6 text-end'f>>" +
+      "<'row'<'col-12'tr>>" +
+      "<'datatable-footer'<i><p>>",
+
+    buttons: [
+      {
+        extend: "excelHtml5",
+        text: "Export to Excel",
+        title: lastSegment + " List",
+        className: "btn btn-success",
+        exportOptions: {
+          columns: ":visible",
+        },
+        className: "d-none",
+      },
+      {
+        extend: "pdf",
+        text: "Export to PDF",
+        title: lastSegment + " List",
+        className: "buttons-pdf",
+        exportOptions: {
+          columns: ":visible",
+        },
+        className: "d-none",
+      },
+      {
+        extend: "copy",
+        text: "Export to copy",
+        title: lastSegment + " List",
+        className: "buttons-copy",
+        exportOptions: {
+          columns: ":visible",
+        },
+        className: "d-none",
+      },
+      {
+        extend: "csv",
+        text: "Export to csv",
+        title: lastSegment + " List",
+        className: "buttons-csv",
+        exportOptions: {
+          columns: ":visible",
+        },
+        className: "d-none",
+      },
+      {
+        extend: "print",
+        text: "Export to print",
+        title: lastSegment + " List",
+        className: "buttons-print",
+        exportOptions: {
+          columns: ":visible",
+        },
+        className: "d-none",
+      },
+    ],
+  });
+  // When the custom button is clicked, trigger the DataTable's Excel export
+  $("#excel_button").on("click", function () {
+    table.button(".buttons-excel").trigger();
+  });
+  $("#pdf_button").on("click", function () {
+    table.button(".buttons-pdf").trigger();
+  });
+  $("#copy_button").on("click", function () {
+    table.button(".buttons-copy").trigger();
+  });
+  $("#csv_button").on("click", function () {
+    table.button(".buttons-csv").trigger();
+  });
+  $("#print_button").on("click", function () {
+    table.button(".buttons-print").trigger();
+  });
+
+  //customise the dataTable search table column value
+  oTable = $("#tableRecords").DataTable();
+  $("#myInputTextField").keyup(function () {
+    oTable.search($(this).val()).draw();
+  });
+  //customise the dataTable no of records show
+  $("#customLengthMenu").on("change", function () {
+    var length = $(this).val();
+    table.page.len(length).draw();
+  });
+}

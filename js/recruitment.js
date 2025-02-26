@@ -68,9 +68,11 @@ $(document).ready(function () {
                               <div class="d-flex align-items-center file-name-icon">
                                 <div class="ms-2">
                                   <h6 class="fw-medium">${row.job_position}</h6>
-                                  <a href="candidates?id=${row.encoded_id}"><span class="d-block mt-1">${
-                                    row.candidate_count
-                                  } Applicants</span></a>
+                                  <a href="candidates?id=${
+                                    row.encoded_id
+                                  }"><span class="d-block mt-1">${
+              row.candidate_count
+            } Applicants</span></a>
                                 </div>
                               </div>
                             </td>
@@ -97,103 +99,8 @@ $(document).ready(function () {
             tableBody.append(newRow);
           });
         }
-
-        var lastSegment = $(location).attr("pathname").split("/").pop();
-
-        table = $("#tableRecords").DataTable({
-          pageLength: 10,
-          lengthChange: false,
-          language: {
-            search: "",
-          },
-          lengthChange: false,
-          search: false,
-          dom:
-            "<'row'<'col-md-6'B><'col-md-6 text-end'f>>" +
-            "<'row'<'col-12'tr>>" +
-            "<'datatable-footer'<i><p>>",
-
-          buttons: [
-            {
-              extend: "excelHtml5",
-              text: "Export to Excel",
-              title: lastSegment + " List",
-              className: "btn btn-success",
-              exportOptions: {
-                columns: ":visible",
-              },
-              className: "d-none",
-            },
-            {
-              extend: "pdf",
-              text: "Export to PDF",
-              title: lastSegment + " List",
-              className: "buttons-pdf",
-              exportOptions: {
-                columns: ":visible",
-              },
-              className: "d-none",
-            },
-            {
-              extend: "copy",
-              text: "Export to copy",
-              title: lastSegment + " List",
-              className: "buttons-copy",
-              exportOptions: {
-                columns: ":visible",
-              },
-              className: "d-none",
-            },
-            {
-              extend: "csv",
-              text: "Export to csv",
-              title: lastSegment + " List",
-              className: "buttons-csv",
-              exportOptions: {
-                columns: ":visible",
-              },
-              className: "d-none",
-            },
-            {
-              extend: "print",
-              text: "Export to print",
-              title: lastSegment + " List",
-              className: "buttons-print",
-              exportOptions: {
-                columns: ":visible",
-              },
-              className: "d-none",
-            },
-          ],
-        });
-        // When the custom button is clicked, trigger the DataTable's Excel export
-        $("#excel_button").on("click", function () {
-          table.button(".buttons-excel").trigger();
-        });
-        $("#pdf_button").on("click", function () {
-          table.button(".buttons-pdf").trigger();
-        });
-        $("#copy_button").on("click", function () {
-          table.button(".buttons-copy").trigger();
-        });
-        $("#csv_button").on("click", function () {
-          table.button(".buttons-csv").trigger();
-        });
-        $("#print_button").on("click", function () {
-          table.button(".buttons-print").trigger();
-        });
-
-        //customise the dataTable search table column value
-        oTable = $("#tableRecords").DataTable();
-        $("#myInputTextField").keyup(function () {
-          oTable.search($(this).val()).draw();
-        });
-        //customise the dataTable no of records show
-        $("#customLengthMenu").on("change", function () {
-          var length = $(this).val();
-          table.page.len(length).draw();
-        });
-        
+        /*-----data table common comments includes-----*/
+        dataTableDesigns();
       },
     });
   }

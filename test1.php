@@ -192,31 +192,49 @@
 									</div>
 								</div>
 								<div class="col-md-6">
-									<div class="mb-3 position-relative">
+									<div class="mb-3">
 										<label class="form-label">Job Type <span class="text-danger"> *</span></label>
-										<input type="text" name="jobType" id="jobTypeSearch" placeholder="Work Job Type " class="form-control" />
-										<ul class="list-group addFields" id="jobTypeResult"></ul>
+										<select class="select" name="jobType" id="jobType">
+											<option value="">Select</option>
+											<option value="Permenant">Permenant</option>
+											<option value="Temporary">Temporary</option>
+											<option value="Seasonal">Seasonal</option>
+											<option value="Full-time">Full-time</option>
+											<option value="Part-Time">Part-Time</option>
+											<option value="Student">Student</option>
+											<option value="Apprenticeship">Apprenticeship</option>
+											<option value="Employee">Employee</option>
+										</select>
 									</div>
 								</div>
 								<div class="col-md-6">
-									<div class="mb-3 position-relative">
+									<div class="mb-3">
 										<label class="form-label">Job Level <span class="text-danger"> *</span></label>
-										<input type="text" name="jobLevel" id="jobLevelSearch" placeholder="Work Job Level " class="form-control" />
-										<ul class="list-group addFields" id="jobLevelResult"></ul>
+										<select class="select" name="jobLevel" id="jobLevel">
+											<option value="">Select</option>
+											<option value="Team Lead">Team Lead</option>
+											<option value="Manager">Manager</option>
+											<option value="Senior">Senior</option>
+											<option value="junior">junior</option>
+										</select>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Experience <span class="text-danger"> *</span></label>
-										<input type="text" name="experience" id="experienceSearch" placeholder="Work Experience level" class="form-control" />
-										<ul class="list-group addFields" id="experienceResult"></ul>
+										<input type="text" name="search" id="search" placeholder="Work Experience level" class="form-control" />
+										<ul class="list-group addFields" id="result"></ul>
 									</div>
 								</div>
 								<div class="col-md-6">
-									<div class="mb-3 position-relative">
+									<div class="mb-3">
 										<label class="form-label">Qualification <span class="text-danger"> *</span></label>
-										<input type="text" name="qualification" id="qualificationSearch" placeholder="Education qualification" class="form-control" />
-										<ul class="list-group addFields" id="qualificationResult"></ul>
+										<select class="select" name="qualification" id="qualification">
+											<option value="">Select</option>
+											<option value="Bachelore Degree">Bachelore Degree</option>
+											<option value="Master Degree">Master Degree</option>
+											<option value="Others">Others</option>
+										</select>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -668,7 +686,97 @@
 <!-- this page java scripts codes -->
 <script src="./js/recruitment.js"></script>
 
-<script src="./ajax/job-type.js"></script>
-<script src="./ajax/job-level.js"></script>
-<script src="./ajax/experience.js"></script>
-<script src="./ajax/qualification.js"></script>
+<script>
+	$(document).ready(function() {
+
+		$.ajaxSetup({
+			cache: false
+		});
+
+		$(document).ready(function() {
+
+			let resultList = $('#result');
+
+			// Function to show suggestions
+			function showSuggestions(searchField = '') {
+				resultList.empty(); 
+
+				let found = false;
+				// let expression = new RegExp(searchField, "i");
+
+				$.ajax({
+					url: "queries/experience.php",
+					type: "GET",
+					data: {
+						flag: "fetch",
+						data: searchField
+					},
+					dataType: "json",
+					success: function(data) { 
+						$.each(data, function(key, value) {
+							// if (expression.test(value.experience_type) || searchField === '') {
+								resultList.append(`<li class="list-group-item link-class"><a>${value.experience_type}</a></li>`);
+								found = true;
+							// }
+						});
+						resultList.append(`<span class="list-group-item link-class text-info">Enter any text to add more.</span>`);
+						if (!found && searchField.length > 0) {
+							resultList.append(`<li class="list-group-item text-primary create-new"><a>Create new: <strong>${searchField}</strong></a></li>`);
+						}
+					},
+				});
+			}
+
+			$('#search').on('focus', function() {
+				showSuggestions();
+			});
+
+			$('#search').on('keyup', function() {
+				let searchField = $(this).val().trim();
+				showSuggestions(searchField);
+			});
+
+			// Hide suggestions when clicking outside
+			$(document).on('click', function(event) {
+				if (!$(event.target).closest('#search, #result').length) {
+					resultList.empty();
+				}
+			});
+		});
+
+
+		// Click event for selecting a value from the search results
+		$('#result').on('click', 'li', function() {
+			$('#search').val($(this).text().trim());
+			$('#result').empty();
+		}); 
+
+		$('#result').on('click', '.create-new', function() {
+			let newValue = $(this).find('strong').text().trim();
+			$('#search').val(newValue);
+			$('#result').empty();
+
+			$.ajax({
+				type: "POST",
+				url: "queries/experience.php",
+				data: {
+					flag: "insert",
+					experienceType: newValue
+				},
+				dataType: "json",
+				success: function(response) {
+					if (response.status === "success") {
+						toastr.success("Experience added successfully"); 
+					} else {
+						toastr.error(response.message || "Failed to add Experience", "Error");
+					}
+				},
+				error: function(xhr, status, error) {
+					console.error("AJAX Error:", error);
+					toastr.error("Something went wrong. Please try again.", "Error");
+				}
+			});
+		});
+
+	});
+</script>
