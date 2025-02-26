@@ -415,31 +415,17 @@
 									</div>
 								</div>
 								<div class="col-md-6">
-									<div class="mb-3">
+									<div class="mb-3 position-relative">
 										<label class="form-label">Job Type <span class="text-danger"> *</span></label>
-										<select class="select" id="view_jobType">
-											<option value="">Select</option>
-											<option value="Permenant">Permenant</option>
-											<option value="Temporary">Temporary</option>
-											<option value="Seasonal">Seasonal</option>
-											<option value="Full-time">Full-time</option>
-											<option value="Part-Time">Part-Time</option>
-											<option value="Student">Student</option>
-											<option value="Apprenticeship">Apprenticeship</option>
-											<option value="Employee">Employee</option>
-										</select>
+										<input type="text" name="jobType" id="jobTypeSearch" placeholder="Work Job Type " class="form-control" />
+										<ul class="list-group addFields" id="jobTypeResult"></ul>
 									</div>
 								</div>
-								<div class="col-md-6">
-									<div class="mb-3">
+								<div class="col-md-6"> 
+									<div class="mb-3 position-relative">
 										<label class="form-label">Job Level <span class="text-danger"> *</span></label>
-										<select class="select" id="view_jobLevel">
-											<option value="">Select</option>
-											<option value="Team Lead">Team Lead</option>
-											<option value="Manager">Manager</option>
-											<option value="Senior">Senior</option>
-											<option value="junior">junior</option>
-										</select>
+										<input type="text" name="jobLevel" id="view_jobLevel" placeholder="Work Job Level " class="form-control" />
+										<ul class="list-group addFields" id="jobLevelResult"></ul>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -454,14 +440,10 @@
 									</div>
 								</div>
 								<div class="col-md-6">
-									<div class="mb-3">
+									<div class="mb-3 position-relative">
 										<label class="form-label">Qualification <span class="text-danger"> *</span></label>
-										<select class="select" id="view_qual">
-											<option value="">Select</option>
-											<option value="Bachelore Degree">Bachelore Degree</option>
-											<option value="Master Degree">Master Degree</option>
-											<option value="Others">Others</option>
-										</select>
+										<input type="text" name="qualification" id="qualificationSearch" placeholder="Education qualification" class="form-control" />
+										<ul class="list-group addFields" id="qualificationResult"></ul>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -538,53 +520,31 @@
 									</div>
 								</div>
 								<div class="col-md-6">
-									<div class="mb-3">
+									<div class="mb-3 position-relative">
 										<label class="form-label">Job Type <span class="text-danger"> *</span></label>
-										<select class="select" name="jobType" id="edit_jobType">
-											<option value="">Select</option>
-											<option value="Permenant">Permenant</option>
-											<option value="Temporary">Temporary</option>
-											<option value="Seasonal">Seasonal</option>
-											<option value="Full-time">Full-time</option>
-											<option value="Part-Time">Part-Time</option>
-											<option value="Student">Student</option>
-											<option value="Apprenticeship">Apprenticeship</option>
-											<option value="Employee">Employee</option>
-										</select>
+										<input type="text" name="jobType" id="edit_jobType" placeholder="Work Job Type " class="form-control" />
+										<ul class="list-group addFields" id="jobTypeResult"></ul>
 									</div>
 								</div>
-								<div class="col-md-6">
-									<div class="mb-3">
+								<div class="col-md-6"> 
+									<div class="mb-3 position-relative">
 										<label class="form-label">Job Level <span class="text-danger"> *</span></label>
-										<select class="select" name="jobLevel" id="edit_jobLevel">
-											<option value="">Select</option>
-											<option value="Team Lead">Team Lead</option>
-											<option value="Manager">Manager</option>
-											<option value="Senior">Senior</option>
-											<option value="junior">junior</option>
-										</select>
+										<input type="text" name="jobLevel" id="edit_jobLevel" placeholder="Work Job Level " class="form-control" />
+										<ul class="list-group addFields" id="jobLevelResult"></ul>
 									</div>
 								</div>
 								<div class="col-md-6">
-									<div class="mb-3">
+									<div class="mb-3 position-relative">
 										<label class="form-label">Experience <span class="text-danger"> *</span></label>
-										<select class="select" name="experience" id="edit_experience">
-											<option value="">Select</option>
-											<option value="Entry Level">Entry Level</option>
-											<option value="Mid Level">Mid Level</option>
-											<option value="Expert">Expert</option>
-										</select>
+										<input type="text" name="experience" id="edit_experience" placeholder="Work Experience level" class="form-control" />
+										<ul class="list-group addFields" id="experienceResult"></ul>
 									</div>
 								</div>
 								<div class="col-md-6">
-									<div class="mb-3">
+									<div class="mb-3 position-relative">
 										<label class="form-label">Qualification <span class="text-danger"> *</span></label>
-										<select class="select" name="qualification" id="edit_qual">
-											<option value="">Select</option>
-											<option value="Bachelore Degree">Bachelore Degree</option>
-											<option value="Master Degree">Master Degree</option>
-											<option value="Others">Others</option>
-										</select>
+										<input type="text" name="qualification" id="edit_qual" placeholder="Education qualification" class="form-control" />
+										<ul class="list-group addFields" id="qualificationResult"></ul>
 									</div>
 								</div>
 								<div class="col-md-6">
