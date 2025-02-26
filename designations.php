@@ -50,8 +50,20 @@
 				<h5>Designation List</h5>
 				<div class="d-flex my-xl-auto right-content align-items-center flex-wrap row-gap-3">
 					<div class="dropdown me-3">
+						<select id="customLengthMenu" name="tableRecords_length" aria-controls="tableRecords" class="dropdown-toggle btn btn-white">
+							<option value="5">5</option>
+							<option value="10" selected>10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
+							<option value="50">50</option>
+							<option value="72">72</option>
+							<option value="100">100</option>
+							<option value="-1">All</option>
+						</select>
+					</div>
+					<div class="dropdown me-3">
 						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
-							Department
+						Designation
 						</a>
 						<ul class="dropdown-menu  dropdown-menu-end p-3">
 							<li>
@@ -101,14 +113,10 @@
 			</div>
 			<div class="card-body p-0">
 				<div class="custom-datatable-filter table-responsive">
-					<table class="table datatable">
+					<table class="table datatable" id="tableRecords">
 						<thead class="thead-light">
 							<tr>
-								<th class="no-sort">
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox" id="select-all">
-									</div>
-								</th>
+								<th class="no-sort">S.No</th>
 								<th>Designation </th>
 								<th>Status</th>
 								<th></th>
