@@ -33,14 +33,20 @@ try {
 
         if ($flag === "recruitmentForm") {
 
+            $name = $_POST['candidateName'];
+            $link = "http://localhost/actecrm/hrm/interview-schedule?id=$encryptedID&mail=$encryptedMail";
+            $hrName = $_POST['hrName'];
             //Recipients
             $mail->addAddress($_POST['email'], 'Joe User');
 
+            $mail->Subject = 'Job Application form';
             //Content
-            $mail->Subject = 'Here is the subject';
-            $mail->Body    = 'Candidate register form <a href="http://localhost/actecrm/hrm/interview-schedule?id='.$encryptedID.'&mail='.$encryptedMail.'" target="_blank">click the Link </a> <b>in bold!</b>';
-            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+            $htmlContent = file_get_contents('./templates/candidate-invite1.html');
+            $htmlContent = str_replace('{{Name}}', $name, $htmlContent);
+            $htmlContent = str_replace('{{Link}}', $link, $htmlContent);
+            $htmlContent = str_replace('{{HR Name}}', $hrName, $htmlContent);
 
+            $mail->Body = $htmlContent;
             $mail->send();
 
             $response = array(

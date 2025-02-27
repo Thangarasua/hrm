@@ -299,7 +299,7 @@ $(document).ready(function () {
       },
       success: function (response) {
         if (response.status === "success") {
-          sendRecruitmentMail(response.id, response.email, response.flag);
+          sendRecruitmentMail(response.flag, response.id, response.email, response.candidateName, response.hrName);
         } else {
           handleError(response.message);
         }
@@ -311,11 +311,11 @@ $(document).ready(function () {
   });
 
   /** Function to Send Recruitment Mail */
-  function sendRecruitmentMail(id, email, flag) {
+  function sendRecruitmentMail(flag, id, email, candidateName, hrName) {
     $.ajax({
       type: "POST",
       url: "mails/recruitment-mail.php",
-      data: { id: id, email: email, flag: flag },
+      data: { flag: flag, id: id, email: email, candidateName: candidateName, hrName: hrName },
       dataType: "json",
       success: function (response) {
         if (response.status === "success") {
