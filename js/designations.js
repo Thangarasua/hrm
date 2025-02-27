@@ -7,7 +7,7 @@ $(document).ready(function () {
       dataType: "json",
       success: function (data) {
         var tableBody = $("#tableRecords tbody");
-
+ 
         if ($.fn.DataTable.isDataTable("#tableRecords")) {
           $("#tableRecords").DataTable().destroy();
         }
@@ -143,7 +143,7 @@ $(document).ready(function () {
  
     } else {
       $("#delete_modal").modal("show");
-      $("#deleteId").val(id);
+      $("#deleteId").val(id); 
     }
   });
 
