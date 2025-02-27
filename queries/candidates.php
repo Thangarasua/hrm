@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     } elseif ($flag === "getDetails") {
 
         $id = $_POST['id'];
-        $query = "SELECT `candidate_id`, `candidate_name`, `interview_status` FROM `candidates` WHERE `candidate_id` = '$id'";
+        $query = "SELECT * FROM `candidates` WHERE `candidate_id` = '$id'";
         $result = mysqli_query($conn, $query);
         if ($result) {
             $row = mysqli_fetch_assoc($result);

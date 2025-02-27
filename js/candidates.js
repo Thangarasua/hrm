@@ -94,11 +94,17 @@ $(document).ready(function () {
                     </td>
                     <td>${inertview_status}</td>
                     <td>
-                        <div class="action-icon d-inline-flex"> <a href="#" data-id="${
-                          row.candidate_id
-                        }" class="edit">
-                                  <i class="fa-solid fa-pen-to-square"></i>
-                                </a>
+                        <div class="action-icon d-inline-flex"> 
+                          <a href="#" data-id="${
+                            row.candidate_id
+                          }" class="view">
+                            <i class="fa-solid fa-folder-open"></i>
+                          </a>
+                          <a href="#" data-id="${
+                            row.candidate_id
+                          }" class="edit">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                          </a>
                         </div>
                     </td>
                 </tr>`;
@@ -107,8 +113,8 @@ $(document).ready(function () {
           });
         }
 
-      /*-----data table common comments includes-----*/
-      dataTableDesigns();
+        /*-----data table common comments includes-----*/
+        dataTableDesigns();
       },
       error: function (xhr, status, error) {
         console.error("AJAX Error:", error);
@@ -116,6 +122,39 @@ $(document).ready(function () {
     });
   }
 
+  $(document).on("click", ".view", function (e) {
+    e.preventDefault();
+    $("#viewModal").modal("show");
+    var id = $(this).data("id");
+
+    $.ajax({
+      type: "POST",
+      url: "queries/candidates.php",
+      data: {
+        id: id,
+        flag: "getDetails",
+      },
+      cache: false,
+      success: function (res) {
+        console.log(res);
+        if (res.status == "success") { 
+          $("#candidate_register_id").val(res.data.candidate_register_id); 
+          $("#contact_number").val(res.data.contact_number);
+          $("#created_by").val(res.data.created_by);
+          $("#ticket_request_id").val(res.data.ticket_request_id);
+          $("#address").val(res.data.address); 
+          $("#experience").val(res.data.experience);
+          $("#skills").val(res.data.skills);
+          $("#available_time1").val(res.data.available_time1);
+          $("#available_time2").val(res.data.available_time2);
+          $("#available_time3").val(res.data.available_time3);
+          $("#created_at").val(res.data.created_at); 
+        } else {
+          Swal.fire(res.data.message);
+        }
+      },
+    });
+  });
   $(document).on("click", ".edit", function (e) {
     e.preventDefault();
     $("#editModal").modal("show");

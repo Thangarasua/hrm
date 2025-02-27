@@ -163,7 +163,90 @@ if (isset($_GET['id'])) {
 </div>
 <!-- /Page Wrapper -->
 
-<!-- Recruitment form send -->
+<!-- View candidate details -->
+<div class="modal fade" id="viewModal">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Candidate Details</h4>
+				<button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
+					<i class="ti ti-x"></i>
+				</button>
+			</div> 
+				<div class="modal-body pb-0">
+					<div class="tab-content" id="">
+						<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Candidate Register ID <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" id="candidate_register_id">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Ticket Request ID <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" id="ticket_request_id">
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">address<span class="text-danger"> *</span></label>
+										<textarea rows="3" class="form-control" id="address"></textarea>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3 position-relative">
+										<label class="form-label">experience <span class="text-danger"> *</span></label>
+										<input type="text" name="jobType" id="experience" class="form-control" /> 
+									</div>
+								</div>
+								<div class="col-md-6"> 
+									<div class="mb-3 position-relative">
+										<label class="form-label">skills <span class="text-danger"> *</span></label>
+										<input type="text" name="jobLevel" id="skills" class="form-control" /> 
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">available_time1 <span class="text-danger"> *</span></label>
+										<input type="text" name="jobLevel" id="available_time1" class="form-control" /> 
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">available_time2 <span class="text-danger"> *</span></label>
+										<input type="text" name="jobLevel" id="available_time2" class="form-control" /> 
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">available_time3 <span class="text-danger"> *</span></label>
+										<input type="text" name="jobLevel" id="available_time3" class="form-control" /> 
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3 position-relative">
+										<label class="form-label">created_by <span class="text-danger"> *</span></label>
+										<input type="text" name="created_by" id="created_by" class="form-control" /> 
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3 position-relative">
+										<label class="form-label">job created date <span class="text-danger"> *</span></label>
+										<input type="text" name="created_by" id="created_at" class="form-control" /> 
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> 
+		</div>
+	</div>
+</div>
+<!-- /View candidate details -->
+
+<!-- Edit candidate interview status -->
 <div class="modal fade" id="editModal">
 	<div class="modal-dialog modal-dialog-centered modal-sm">
 		<div class="modal-content">
@@ -214,7 +297,7 @@ if (isset($_GET['id'])) {
 		</div>
 	</div>
 </div>
-<!-- /Recruitment form send -->
+<!-- /Edit candidate interview status-->
 
 <!-- Delete Modal -->
 <div class="modal fade" id="delete_modal">
