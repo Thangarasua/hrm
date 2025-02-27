@@ -62,23 +62,7 @@
 							<option value="72">72</option>
 							<option value="100">100</option>
 							<option value="-1">All</option>
-						</select>
-<<<<<<< HEAD
-=======
-					</div>
-					<div class="dropdown me-3">
-						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
-						Designation
-						</a>
-						<ul class="dropdown-menu  dropdown-menu-end p-3">
-							<li>
-								<a href="javascript:void(0);" class="dropdown-item rounded-1">Finance</a>
-							</li>
-							<li>
-								<a href="javascript:void(0);" class="dropdown-item rounded-1">Application Development</a>
-							</li>
-						</ul>
->>>>>>> 048da71d65c7c70260a814182c862f8a089b72f4
+						</select> 
 					</div>
 					<div class="dropdown me-3">
 						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
