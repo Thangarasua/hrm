@@ -199,12 +199,7 @@
 							<a href="recruitment">
 								<i class="ti ti-timeline"></i><span>Recruitment</span>
 							</a>
-						</li>
-						<li>
-							<a href="job-list">
-								<i class="ti ti-timeline"></i><span>Jobs</span>
-							</a>
-						</li>
+						</li> 
 						<li>
 							<a href="candidates">
 								<i class="ti ti-user-shield"></i><span>Candidates</span>

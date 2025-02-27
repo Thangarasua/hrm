@@ -26,19 +26,20 @@
 
 <!-- Datetimepicker JS -->
 <script src="js/plugins/moment.js"></script>
+<script src="js/plugins/bootstrap-datetimepicker.min.js"></script>
 
 <!-- Datatable JS -->
 <script src="js/plugins/dataTables.min.js"></script>
 <script src="js/plugins/dataTables.bootstrap5.min.js"></script>
 
-<!-- <script src="//cdn.datatables.net/2.2.2/js/dataTables.min.js"></script> -->
-
-<!-- <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
-<script src="https://cdn.datatables.net/2.2.2/js/dataTables.bootstrap5.js"></script> -->
-
-<script src="js/plugins/bootstrap-datetimepicker.min.js"></script>
+<!--added DataTables Buttons JS excel pdf download added --> 
+<script src="js/plugins/dataTables.buttons.js"></script>
+<script src="js/plugins/buttons.dataTables.js"></script>
+<script src="js/plugins/jszip.min.js"></script>
+<script src="js/plugins/pdfmake.min.js"></script>
+<script src="js/plugins/vfs_fonts.js"></script>
+<script src="js/plugins/buttons.html5.min.js"></script>
+<script src="js/plugins/buttons.print.min.js"></script>
 
 <!-- Daterangepikcer JS -->
 <script src="plugins/daterangepicker/daterangepicker.js"></script>
@@ -70,11 +71,3 @@
 <!-- own scripts added -->
 <script src="scripts/myscript.js" type="text/javascript"></script>
 
-<!-- DataTables Buttons JS excel pdf download added --> 
-<script src="js/plugins/dataTables.buttons.js"></script>
-<script src="js/plugins/buttons.dataTables.js"></script>
-<script src="js/plugins/jszip.min.js"></script>
-<script src="js/plugins/pdfmake.min.js"></script>
-<script src="js/plugins/vfs_fonts.js"></script>
-<script src="js/plugins/buttons.html5.min.js"></script>
-<script src="js/plugins/buttons.print.min.js"></script>

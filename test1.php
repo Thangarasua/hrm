@@ -152,6 +152,7 @@
 				</div>
 			</div>
 		</div>
+
 	</div>
 
 	<div class="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
@@ -161,6 +162,7 @@
 
 </div>
 <!-- /Page Wrapper -->
+
 
 <!-- Add Post -->
 <div class="modal fade" id="add_post">
@@ -190,31 +192,49 @@
 									</div>
 								</div>
 								<div class="col-md-6">
-									<div class="mb-3 position-relative">
+									<div class="mb-3">
 										<label class="form-label">Job Type <span class="text-danger"> *</span></label>
-										<input type="text" name="jobType" id="jobTypeSearch" placeholder="Work Job Type " class="form-control" />
-										<ul class="list-group addFields" id="jobTypeResult"></ul>
+										<select class="select" name="jobType" id="jobType">
+											<option value="">Select</option>
+											<option value="Permenant">Permenant</option>
+											<option value="Temporary">Temporary</option>
+											<option value="Seasonal">Seasonal</option>
+											<option value="Full-time">Full-time</option>
+											<option value="Part-Time">Part-Time</option>
+											<option value="Student">Student</option>
+											<option value="Apprenticeship">Apprenticeship</option>
+											<option value="Employee">Employee</option>
+										</select>
 									</div>
 								</div>
 								<div class="col-md-6">
-									<div class="mb-3 position-relative">
+									<div class="mb-3">
 										<label class="form-label">Job Level <span class="text-danger"> *</span></label>
-										<input type="text" name="jobLevel" id="jobLevelSearch" placeholder="Work Job Level " class="form-control" />
-										<ul class="list-group addFields" id="jobLevelResult"></ul>
+										<select class="select" name="jobLevel" id="jobLevel">
+											<option value="">Select</option>
+											<option value="Team Lead">Team Lead</option>
+											<option value="Manager">Manager</option>
+											<option value="Senior">Senior</option>
+											<option value="junior">junior</option>
+										</select>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Experience <span class="text-danger"> *</span></label>
-										<input type="text" name="experience" id="experienceSearch" placeholder="Work Experience level" class="form-control" />
-										<ul class="list-group addFields" id="experienceResult"></ul>
+										<input type="text" name="search" id="search" placeholder="Work Experience level" class="form-control" />
+										<ul class="list-group addFields" id="result"></ul>
 									</div>
 								</div>
 								<div class="col-md-6">
-									<div class="mb-3 position-relative">
+									<div class="mb-3">
 										<label class="form-label">Qualification <span class="text-danger"> *</span></label>
-										<input type="text" name="qualification" id="qualificationSearch" placeholder="Education qualification" class="form-control" />
-										<ul class="list-group addFields" id="qualificationResult"></ul>
+										<select class="select" name="qualification" id="qualification">
+											<option value="">Select</option>
+											<option value="Bachelore Degree">Bachelore Degree</option>
+											<option value="Master Degree">Master Degree</option>
+											<option value="Others">Others</option>
+										</select>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -384,32 +404,8 @@
 	</div>
 </div>
 <!-- /Update Job Success -->
-<!-- Update Job Success -->
-<div class="modal fade" id="info_modal" role="dialog">
-	<div class="modal-dialog modal-dialog-centered modal-xm">
-		<div class="modal-content">
-			<div class="modal-body">
-				<div class="text-center p-3">
-					<span class="avatar avatar-lg avatar-rounded bg-success mb-3"> 
-						<i class="fa-solid fa-info"></i>
-					</span> 
-					<h5 class="mb-2"> <span class="text-danger">Cannot delete;</span> Already <span id="candidateCount"></span> candidates registered.</h5>
-					</p>
-					<div>
-						<div class="row g-2">
-							<div class="col-12">
-								<a href="#" class="btn btn-dark w-100" data-bs-dismiss="modal">Back to List</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- /Update Job Success -->
 
-<!-- View Post -->
+<!-- Edit Post -->
 <div class="modal fade" id="viewModal">
 	<div class="modal-dialog modal-dialog-centered modal-lg">
 		<div class="modal-content">
@@ -437,28 +433,53 @@
 									</div>
 								</div>
 								<div class="col-md-6">
-									<div class="mb-3 position-relative">
+									<div class="mb-3">
 										<label class="form-label">Job Type <span class="text-danger"> *</span></label>
-										<input type="text" name="jobType" id="view_jobType" class="form-control" /> 
+										<select class="select" id="view_jobType">
+											<option value="">Select</option>
+											<option value="Permenant">Permenant</option>
+											<option value="Temporary">Temporary</option>
+											<option value="Seasonal">Seasonal</option>
+											<option value="Full-time">Full-time</option>
+											<option value="Part-Time">Part-Time</option>
+											<option value="Student">Student</option>
+											<option value="Apprenticeship">Apprenticeship</option>
+											<option value="Employee">Employee</option>
+										</select>
 									</div>
 								</div>
-								<div class="col-md-6"> 
-									<div class="mb-3 position-relative">
+								<div class="col-md-6">
+									<div class="mb-3">
 										<label class="form-label">Job Level <span class="text-danger"> *</span></label>
-										<input type="text" name="jobLevel" id="view_jobLevel" class="form-control" /> 
+										<select class="select" id="view_jobLevel">
+											<option value="">Select</option>
+											<option value="Team Lead">Team Lead</option>
+											<option value="Manager">Manager</option>
+											<option value="Senior">Senior</option>
+											<option value="junior">junior</option>
+										</select>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Experience <span class="text-danger"> *</span></label>
-										<input type="text" name="jobLevel" id="view_experience" class="form-control" /> 
+										<select class="select" id="view_experience">
+											<option value="">Select</option>
+											<option value="Entry Level">Entry Level</option>
+											<option value="Mid Level">Mid Level</option>
+											<option value="Expert">Expert</option>
+										</select>
 									</div>
 								</div>
 								<div class="col-md-6">
-									<div class="mb-3 position-relative">
+									<div class="mb-3">
 										<label class="form-label">Qualification <span class="text-danger"> *</span></label>
-										<input type="text" name="qualification" id="view_qual" class="form-control" />
-										<ul class="list-group addFields" id="qualificationResult"></ul>
+										<select class="select" id="view_qual">
+											<option value="">Select</option>
+											<option value="Bachelore Degree">Bachelore Degree</option>
+											<option value="Master Degree">Master Degree</option>
+											<option value="Others">Others</option>
+										</select>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -506,7 +527,7 @@
 		</div>
 	</div>
 </div>
-<!-- /View Post -->
+<!-- /Edit Post -->
 <!-- Edit Post -->
 <div class="modal fade" id="editModal">
 	<div class="modal-dialog modal-dialog-centered modal-lg">
@@ -535,31 +556,53 @@
 									</div>
 								</div>
 								<div class="col-md-6">
-									<div class="mb-3 position-relative">
+									<div class="mb-3">
 										<label class="form-label">Job Type <span class="text-danger"> *</span></label>
-										<input type="text" name="jobType" id="edit_jobType" placeholder="Work Job Type " class="form-control" />
-										<ul class="list-group addFields" id="jobTypeResult"></ul>
+										<select class="select" name="jobType" id="edit_jobType">
+											<option value="">Select</option>
+											<option value="Permenant">Permenant</option>
+											<option value="Temporary">Temporary</option>
+											<option value="Seasonal">Seasonal</option>
+											<option value="Full-time">Full-time</option>
+											<option value="Part-Time">Part-Time</option>
+											<option value="Student">Student</option>
+											<option value="Apprenticeship">Apprenticeship</option>
+											<option value="Employee">Employee</option>
+										</select>
 									</div>
 								</div>
-								<div class="col-md-6"> 
-									<div class="mb-3 position-relative">
+								<div class="col-md-6">
+									<div class="mb-3">
 										<label class="form-label">Job Level <span class="text-danger"> *</span></label>
-										<input type="text" name="jobLevel" id="edit_jobLevel" placeholder="Work Job Level " class="form-control" />
-										<ul class="list-group addFields" id="jobLevelResult"></ul>
+										<select class="select" name="jobLevel" id="edit_jobLevel">
+											<option value="">Select</option>
+											<option value="Team Lead">Team Lead</option>
+											<option value="Manager">Manager</option>
+											<option value="Senior">Senior</option>
+											<option value="junior">junior</option>
+										</select>
 									</div>
 								</div>
 								<div class="col-md-6">
-									<div class="mb-3 position-relative">
+									<div class="mb-3">
 										<label class="form-label">Experience <span class="text-danger"> *</span></label>
-										<input type="text" name="experience" id="edit_experience" placeholder="Work Experience level" class="form-control" />
-										<ul class="list-group addFields" id="experienceResult"></ul>
+										<select class="select" name="experience" id="edit_experience">
+											<option value="">Select</option>
+											<option value="Entry Level">Entry Level</option>
+											<option value="Mid Level">Mid Level</option>
+											<option value="Expert">Expert</option>
+										</select>
 									</div>
 								</div>
 								<div class="col-md-6">
-									<div class="mb-3 position-relative">
+									<div class="mb-3">
 										<label class="form-label">Qualification <span class="text-danger"> *</span></label>
-										<input type="text" name="qualification" id="edit_qual" placeholder="Education qualification" class="form-control" />
-										<ul class="list-group addFields" id="qualificationResult"></ul>
+										<select class="select" name="qualification" id="edit_qual">
+											<option value="">Select</option>
+											<option value="Bachelore Degree">Bachelore Degree</option>
+											<option value="Master Degree">Master Degree</option>
+											<option value="Others">Others</option>
+										</select>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -643,7 +686,97 @@
 <!-- this page java scripts codes -->
 <script src="./js/recruitment.js"></script>
 
-<script src="./ajax/job-type.js"></script>
-<script src="./ajax/job-level.js"></script>
-<script src="./ajax/experience.js"></script>
-<script src="./ajax/qualification.js"></script>
+<script>
+	$(document).ready(function() {
+
+		$.ajaxSetup({
+			cache: false
+		});
+
+		$(document).ready(function() {
+
+			let resultList = $('#result');
+
+			// Function to show suggestions
+			function showSuggestions(searchField = '') {
+				resultList.empty(); 
+
+				let found = false;
+				// let expression = new RegExp(searchField, "i");
+
+				$.ajax({
+					url: "queries/experience.php",
+					type: "GET",
+					data: {
+						flag: "fetch",
+						data: searchField
+					},
+					dataType: "json",
+					success: function(data) { 
+						$.each(data, function(key, value) {
+							// if (expression.test(value.experience_type) || searchField === '') {
+								resultList.append(`<li class="list-group-item link-class"><a>${value.experience_type}</a></li>`);
+								found = true;
+							// }
+						});
+						resultList.append(`<span class="list-group-item link-class text-info">Enter any text to add more.</span>`);
+						if (!found && searchField.length > 0) {
+							resultList.append(`<li class="list-group-item text-primary create-new"><a>Create new: <strong>${searchField}</strong></a></li>`);
+						}
+					},
+				});
+			}
+
+			$('#search').on('focus', function() {
+				showSuggestions();
+			});
+
+			$('#search').on('keyup', function() {
+				let searchField = $(this).val().trim();
+				showSuggestions(searchField);
+			});
+
+			// Hide suggestions when clicking outside
+			$(document).on('click', function(event) {
+				if (!$(event.target).closest('#search, #result').length) {
+					resultList.empty();
+				}
+			});
+		});
+
+
+		// Click event for selecting a value from the search results
+		$('#result').on('click', 'li', function() {
+			$('#search').val($(this).text().trim());
+			$('#result').empty();
+		}); 
+
+		$('#result').on('click', '.create-new', function() {
+			let newValue = $(this).find('strong').text().trim();
+			$('#search').val(newValue);
+			$('#result').empty();
+
+			$.ajax({
+				type: "POST",
+				url: "queries/experience.php",
+				data: {
+					flag: "insert",
+					experienceType: newValue
+				},
+				dataType: "json",
+				success: function(response) {
+					if (response.status === "success") {
+						toastr.success("Experience added successfully"); 
+					} else {
+						toastr.error(response.message || "Failed to add Experience", "Error");
+					}
+				},
+				error: function(xhr, status, error) {
+					console.error("AJAX Error:", error);
+					toastr.error("Something went wrong. Please try again.", "Error");
+				}
+			});
+		});
+
+	});
+</script>

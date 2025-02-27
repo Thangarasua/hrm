@@ -16,12 +16,13 @@ if (isset($_GET['flag']) && $_GET['flag'] === "fetch") {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
-    $roleName = $_POST['roleName'];
-    $status = $_POST['status'];
+
     $flag = $_POST['flag'];
 
     if ($flag === "insert") {
-        $query = "INSERT INTO `roles` (`role_name`, `status`) VALUES ('$roleName', $status)";
+        $rolesName = $_POST['rolesName'];
+        $status = 1;
+        $query = "INSERT INTO `roles` (`role_name`, `status`) VALUES ('$rolesName', $status)";
         $result = mysqli_query($conn, $query);
         if ($result) {
             echo json_encode(array('status' => 'success', 'message' => 'Role Added Successfully'));
@@ -30,5 +31,41 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             echo json_encode(array('status' => 'failure', 'message' => 'Role Added Requested Failure'));
             exit;
         }
-    }
+    } elseif ($flag === "getDetails") {
+
+        $id = $_POST['id'];
+        $query = "SELECT * FROM `roles` WHERE `role_id` = '$id'";
+        $result = mysqli_query($conn, $query);
+        if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            echo json_encode(array('status' => 'success', 'data' => $row));
+        } else {
+            echo json_encode(array('status' => 'failure', 'message' => 'something went wrong'));
+        }
+        exit;
+    }elseif ($flag === "update") {
+
+        $rowId = $_POST['rowId'];
+        $role = $_POST['role'];
+        $status = $_POST['status']; 
+
+        $query = "UPDATE `roles` SET `role_name`='$role',`status`='$status' WHERE `role_id`='$rowId'";
+        $result = mysqli_query($conn, $query);
+        if ($result) {
+            echo json_encode(array('status' => 'success', 'message' => 'Role update successfully'));
+        } else {
+            echo json_encode(array('status' => 'failure', 'message' => 'Role update failure'));
+        }
+        exit;
+    } elseif ($flag === "delete") {
+        $id = $_POST['id'];
+        $query = "DELETE FROM `roles` WHERE `role_id` = '$id'";
+        $result = mysqli_query($conn, $query);
+        if ($result) {
+            echo json_encode(array('status' => 'success', 'message' => 'Deleted successfull'));
+        } else {
+            echo json_encode(array('status' => 'failure', 'message' => 'something went wrong'));
+        }
+        exit;
+    } 
 }

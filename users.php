@@ -17,13 +17,7 @@
 					</ol>
 				</nav>
 			</div>
-			<div class="d-flex my-xl-auto right-content align-items-center flex-wrap ">
-				<div class="me-2 mb-2">
-					<div class="d-flex align-items-center border bg-white rounded p-1 me-2 icon-list">
-						<a href="users" class="btn btn-icon btn-sm active bg-primary text-white me-1"><i class="ti ti-list-tree"></i></a>
-						<a href="#" class="btn btn-icon btn-sm"><i class="ti ti-layout-grid"></i></a>
-					</div>
-				</div>
+			<div class="d-flex my-xl-auto right-content align-items-center flex-wrap"> 
 				<div class="me-2 mb-2">
 				<div class="dropdown">
 						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">

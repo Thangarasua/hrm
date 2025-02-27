@@ -5,13 +5,15 @@ $currentDatetime = date('Y-m-d H:i:s');
 $hrm_userid = $_SESSION['hrm_userid'];
 
 if (isset($_GET['flag']) && $_GET['flag'] === "fetch") {
-    $query = "SELECT * FROM departments ORDER BY department_name ASC";
+    $data = $_GET['data'];
+
+    $query = "SELECT * FROM experience_levels WHERE experience_type LIKE '%$data%'  ORDER BY experience_type ASC";
     $result = mysqli_query($conn, $query);
-    $departments = [];
+    $data = [];
     while ($row = $result->fetch_assoc()) {
-        $departments[] = $row;
+        $data[] = $row;
     }
-    echo json_encode($departments);
+    echo json_encode($data);
     exit;
 }
 
@@ -21,16 +23,23 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     if ($flag === "insert") {
 
         $status = 1;
-        $departmentName = $_POST['departmentName'];
+        $value = $_POST['value'];
 
-        $query = "INSERT INTO `departments` (`department_name`, `status`) VALUES ('$departmentName', $status)";
+        $query = "SELECT * FROM experience_levels WHERE experience_type = '$value'";
         $result = mysqli_query($conn, $query);
-        if ($result) {
-            echo json_encode(array('status' => 'success', 'message' => 'Department Added Successfully'));
+        if (mysqli_num_rows($result) > 0) {
+            echo json_encode(array('status' => 'failure', 'message' => 'Same value existing'));
             exit;
         } else {
-            echo json_encode(array('status' => 'failure', 'message' => 'Department Added Requested Failure'));
-            exit;
+            $query = "INSERT INTO `experience_levels` (`experience_type`, `status`) VALUES ('$value', $status)";
+            $result = mysqli_query($conn, $query);
+            if ($result) {
+                echo json_encode(array('status' => 'success', 'message' => 'Experience Added Successfully'));
+                exit;
+            } else {
+                echo json_encode(array('status' => 'failure', 'message' => 'Experience Added Requested Failure'));
+                exit;
+            }
         }
     } elseif ($flag === "getDetails") {
 
@@ -48,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
         $rowId = $_POST['rowId'];
         $department = $_POST['department'];
-        $status = $_POST['status']; 
+        $status = $_POST['status'];
 
         $query = "UPDATE `departments` SET `department_name`='$department',`status`='$status' WHERE `department_id`='$rowId'";
         $result = mysqli_query($conn, $query);
@@ -68,5 +77,5 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             echo json_encode(array('status' => 'failure', 'message' => 'something went wrong'));
         }
         exit;
-    } 
+    }
 }

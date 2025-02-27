@@ -1,626 +1,692 @@
-<?php require_once "./includes/config.php";
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-date_default_timezone_set("Asia/Kolkata");
+<?php require_once("./includes/header.php"); ?>
+<?php require_once("./includes/sidebar.php"); ?>
 
-$encryptedID = $_GET['id'];
-$encryptedMail = $_GET['mail'];
-$id = base64_decode($encryptedID);
-$email = base64_decode($encryptedMail);
+<!-- Page Wrapper -->
+<div class="page-wrapper">
+	<div class="content">
 
-$sql = "SELECT * FROM `recruitment` AS `r` INNER JOIN `candidates` AS `c` ON `r`.`ticket_request_id` = `c`.`ticket_request_id` WHERE `id` = '$id' AND `c`.`email` = '$email'";
-$result = mysqli_query($conn, $sql);
-if (mysqli_num_rows($result) > 0) {
-	$data = $result->fetch_assoc();
-	$status = $data['responce_status'];
+		<!-- Breadcrumb -->
+		<div class="d-md-flex d-block align-items-center justify-content-between page-breadcrumb mb-3">
+			<div class="my-auto mb-2">
+				<h2 class="mb-1">Recruitments</h2>
+				<nav>
+					<ol class="breadcrumb mb-0">
+						<li class=""><a href="index"><i class="ti ti-smart-home"></i> Home </a></li> /
+						<li class=" active" aria-current="page">Recruitment List</li>
+					</ol>
+				</nav>
+			</div>
+			<div class="d-flex my-xl-auto right-content align-items-center flex-wrap ">
+				<div class="me-2 mb-2">
+					<div class="dropdown">
+						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
+							<i class="ti ti-file-export me-1"></i> Export
+						</a>
+						<ul class="dropdown-menu  dropdown-menu-end p-3">
+							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="excel_button"><i class="ti ti-file-type-xls me-1"></i>Export as Excel </a></li>
+							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="pdf_button"><i class="ti ti-file-type-pdf me-1"></i>Export as PDF</a></li>
+							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="copy_button"><i class="ti ti-file-type-xls me-1"></i>Copy as Text </a></li>
+							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="csv_button"><i class="ti ti-file-type-xls me-1"></i>Export as CSV </a></li>
+							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="print_button"><i class="ti ti-file-type-xls me-1"></i>Export as Print </a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="mb-2">
+					<a href="#" data-bs-toggle="modal" data-bs-target="#add_post" class="btn btn-primary d-flex align-items-center"><i class="ti ti-circle-plus me-2"></i>Post job</a>
+				</div>
+				<div class="head-icons ms-2">
+					<a href="javascript:void(0);" class="" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Collapse" id="collapse-header">
+						<i class="ti ti-chevrons-up"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+		<!-- /Breadcrumb -->
 
-	if ($status == 0) {
-		$formDisplay = 'd-block';
-		$thanksDivDisplay = 'd-none';
-	} else {
-		$formDisplay = 'd-none';
-		$thanksDivDisplay = 'd-block';
-	}
-} else {
-	echo "access denied.";
-	exit;
-}
-
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Interview Form</title>
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="css/plugins/bootstrap.min.css">
-	<!-- page css -->
-	<link rel="stylesheet" href="css/interview-schedule.css">
-	<!-- Image crop-->
-	<link rel="stylesheet" href="css/plugins/croppie.css">
-	<!--toastr alert added-->
-	<link rel="stylesheet" href="css/plugins/toastr.min.css">
-	<!-- sweetalert2 alert added -->
-	<script src="js/plugins/sweetalert2.js" type="text/javascript"></script>
-	<!-- Daterangepikcer CSS -->
-	<!-- <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css"> -->
-</head>
-
-<body>
-	<div class="login-root">
-		<div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
-			<div class="loginbackground box-background--white padding-top--64">
-				<div class="loginbackground-gridContainer">
-					<div class="box-root flex-flex" style="grid-area: top / start / 8 / end;">
-						<div class="box-root" style="background-image: linear-gradient(white 0%, rgb(247, 250, 252) 33%); flex-grow: 1;">
+		<div class="card">
+			<div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
+				<h5>Job List</h5>
+				<div class="d-flex my-xl-auto right-content align-items-center flex-wrap row-gap-3">
+					<div class="me-3">
+						<div class="form-group">
+							<input type="text" id="myInputTextField" class="form-control" placeholder="Search anything..." title="Search any thing in the table you want">
 						</div>
 					</div>
-					<div class="box-root flex-flex" style="grid-area: 4 / 2 / auto / 5;">
-						<div class="box-root box-divider--light-all-2 animationLeftRight tans3s" style="flex-grow: 1;"></div>
+					<div class="me-3">
+						<div class="input-icon-end position-relative">
+							<input type="text" class="form-control date-range bookingrange" id="dateRange" placeholder="dd/mm/yyyy - dd/mm/yyyy">
+							<span class="input-icon-addon">
+								<i class="ti ti-chevron-down"></i>
+							</span>
+						</div>
 					</div>
-					<div class="box-root flex-flex" style="grid-area: 6 / start / auto / 2;">
-						<div class="box-root box-background--blue800 animationRightLeft tans4s" style="flex-grow: 1;"></div>
+					<div class="dropdown me-3">
+						<select id="customLengthMenu" name="tableRecords_length" aria-controls="tableRecords" class="dropdown-toggle btn btn-white">
+							<option value="5">5</option>
+							<option value="10" selected>10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
+							<option value="50">50</option>
+							<option value="72">72</option>
+							<option value="100">100</option>
+							<option value="-1">All</option>
+						</select>
 					</div>
-					<div class="box-root flex-flex" style="grid-area: 7 / start / auto / 4;">
-						<div class="box-root box-background--blue animationLeftRight" style="flex-grow: 1;"></div>
+					<div class="dropdown me-3">
+						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
+							Role
+						</a>
+						<ul class="dropdown-menu  dropdown-menu-end p-3">
+							<li>
+								<a href="javascript:void(0);" class="dropdown-item rounded-1">Senior IOS Developer</a>
+							</li>
+							<li>
+								<a href="javascript:void(0);" class="dropdown-item rounded-1">Junior PHP Developer</a>
+							</li>
+							<li>
+								<a href="javascript:void(0);" class="dropdown-item rounded-1">Network Engineer</a>
+							</li>
+						</ul>
 					</div>
-					<div class="box-root flex-flex" style="grid-area: 8 / 4 / auto / 6;">
-						<div class="box-root box-background--gray100 animationLeftRight tans3s" style="flex-grow: 1;"></div>
+					<div class="dropdown me-3">
+						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
+							Select Status
+						</a>
+						<ul class="dropdown-menu  dropdown-menu-end p-3">
+							<li>
+								<a href="javascript:void(0);" class="dropdown-item rounded-1">Accepted</a>
+							</li>
+							<li>
+								<a href="javascript:void(0);" class="dropdown-item rounded-1">sent</a>
+							</li>
+							<li>
+								<a href="javascript:void(0);" class="dropdown-item rounded-1">Expired</a>
+							</li>
+							<li>
+								<a href="javascript:void(0);" class="dropdown-item rounded-1">Declined</a>
+							</li>
+						</ul>
 					</div>
-					<div class="box-root flex-flex" style="grid-area: 2 / 15 / auto / end;">
-						<div class="box-root box-background--cyan200 animationRightLeft tans4s" style="flex-grow: 1;"></div>
-					</div>
-					<div class="box-root flex-flex" style="grid-area: 3 / 14 / auto / end;">
-						<div class="box-root box-background--blue animationRightLeft" style="flex-grow: 1;"></div>
-					</div>
-					<div class="box-root flex-flex" style="grid-area: 4 / 17 / auto / 20;">
-						<div class="box-root box-background--gray100 animationRightLeft tans4s" style="flex-grow: 1;"></div>
-					</div>
-					<div class="box-root flex-flex" style="grid-area: 5 / 14 / auto / 17;">
-						<div class="box-root box-divider--light-all-2 animationRightLeft tans3s" style="flex-grow: 1;"></div>
+					<div class="dropdown">
+						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
+							Sort By : Last 7 Days
+						</a>
+						<ul class="dropdown-menu  dropdown-menu-end p-3">
+							<li>
+								<a href="javascript:void(0);" class="dropdown-item rounded-1">Recently Added</a>
+							</li>
+							<li>
+								<a href="javascript:void(0);" class="dropdown-item rounded-1">Ascending</a>
+							</li>
+							<li>
+								<a href="javascript:void(0);" class="dropdown-item rounded-1">Desending</a>
+							</li>
+							<li>
+								<a href="javascript:void(0);" class="dropdown-item rounded-1">Last Month</a>
+							</li>
+							<li>
+								<a href="javascript:void(0);" class="dropdown-item rounded-1">Last 7 Days</a>
+							</li>
+						</ul>
 					</div>
 				</div>
 			</div>
-			<div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
+			<div class="card-body p-0">
+				<div class="custom-datatable-filter table-responsive">
+					<table class="table datatable" id="tableRecords">
+						<thead class="thead-light">
+							<tr>
+								<th>S.No</th>
+								<th>Job ID</th>
+								<th>Raised By</th>
+								<th>Job Title</th>
+								<th>Job Level</th>
+								<th>Notice period</th>
+								<th>Posted Date</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
 
-				<div class="formbg-outer">
-					<div class="formbg">
-						<div class="formbg-inner padding-horizontal--48">
-							<form id="interviewForm" class="<?php echo $formDisplay; ?>">
-								<div class="row">
-									<div class="col-sm">
-									</div>
-									<div class="col-sm vendor-heading">
-										<h4 class="flex-flex flex-justifyContent--center company-title"><b><a href="https://actetechnologies.com" target="_blank" rel="dofollow">MARKERZ SOLUTION</a></b></h4>
-										<h6 class="flex-flex flex-justifyContent--center form-title">INTERVIEW SCHEDULE FORM</h6>
-									</div>
-									<div class="col-sm">
-									</div>
-								</div>
-								<br>
+	</div>
 
-								<div class="accordion" id="accordionExample">
-									<div class="accordion-item">
-										<h2 class="accordion-header" id="headingOne">
-											<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="background: #f7ebda;">
-												JOB DETAILS
-											</button>
-										</h2>
-										<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-											<div class="accordion-body">
-												<div class="responsive">
-													<div class="form-group">
-														<label for="text">Job Title</label>
-														<input type="text" class="form-control" value="<?php echo $data['job_position']; ?>" readonly>
-													</div>
-													<div class="form-group">
-														<label for="text">Job Type</label>
-														<input type="text" class="form-control" value="<?php echo $data['job_type']; ?>" readonly>
-													</div>
-													<div class="form-group">
-														<label for="email">Job Level</label>
-														<input type="email" class="form-control" value="<?php echo $data['job_level']; ?>" readonly>
-													</div>
-													<div class="form-group">
-														<label for="text">Experience</label>
-														<input type="text" class="form-control" value="<?php echo $data['job_experience']; ?>" readonly>
-													</div>
-												</div>
-												<div class="responsive">
-													<div class="form-group">
-														<label for="text">Qualification</label>
-														<input type="text" class="form-control" value="<?php echo $data['qualification']; ?>" readonly>
-													</div>
-													<div class="form-group">
-														<label for="text">Gender</label>
-														<input type="text" class="form-control" value="<?php echo $data['gender']; ?>" readonly>
-													</div>
-													
-													<div class="form-group">
-														<label for="text">Location</label>
-														<input type="text" class="form-control" value="<?php echo $data['location']; ?>" readonly>
-													</div>
-												</div>
-												<div class="responsive">
-												<div class="form-group">
-														<label for="text">Required Skills</label>
-														<textarea class="form-control" readonly><?php echo $data['required_skills']; ?></textarea>
-													</div>
-													<div class="form-group">
-														<label for="text">Job Description</label>
-														<!-- <input type="text" class="form-control" value="<?php echo $data['job_descriptions']; ?>" readonly> -->
-														<textarea name="" id="" class="form-control" ><?php echo $data['job_descriptions']; ?></textarea>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="accordion-item">
-										<h2 class="accordion-header" id="headingTwo">
-											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="background: #f7ebda;">
-												Candidate Details
-											</button>
-										</h2>
-										<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-											<div class="accordion-body">
-												<!-- <div class="profile-position"> -->
-												<div class="row">
-													<div class="col-md-3">
-														<div class="row">
-															<div class="col-sm">
-																<label for="" class="text-center">profile <em class="mandatory">*</em></label>
-																<div class="profile-images-card">
-																	<label class="cabinet center-block">
-																		<figure>
-																			<img src="https://actecrm.com/hrm/assets/img/user.jpeg" class="gambar img-responsive img-thumbnail" id="cropedImage" />
-																			<figcaption>Click to upload</figcaption>
-																		</figure>
-																		<input type="file" class="item-img file center-block" accept="image/*">
-																		<input type="hidden" id="candidate_profile" name="candidate_profile">
-																	</label>
-																</div>
-															</div>
-														</div>
-													</div>
-													<div class="col-md-9">
-														<div class="responsive">
-															<div class="form-group">
-																<label for="text">Name <em class="mandatory">*</em><small>(if change)</small></label>
-																<input type="text" class="form-control" id="name" name="name" placeholder="Candidate full name" value="<?php echo $data['candidate_name']; ?>">
-																<small id="name_error" class="error d-none"> "Please enter letters only".</small>
-															</div>
-															<div class="form-group">
-																<label for="text">Email <em class="mandatory">*</em></label>
-																<input type="email" class="form-control" id="email" name="email" placeholder="proper email" value="<?php echo $data['email']; ?>">
-																<small id="email_error" class="error"></small>
-															</div>
-															<div class="form-group">
-																<label for="text">phone <em class="mandatory">*</em></label>
-																<input type="text" class="form-control" id="phone" name="phone" placeholder="valid mobile number" value="<?php echo $data['contact_number']; ?>">
-																<small id="number_error" class="error d-none"></small>
-															</div>
-														</div>
-														<div class="responsive">
-															<div class="form-group">
-																<label for="text">Qualification <em class="mandatory">*</em></label>
-																<input type="text" class="form-control" id="qualification" name="qualification" placeholder="Enter your Highest Qualification">
-															</div>
-															<div class="form-group">
-																<label for="text">Overall experience <em class="mandatory">*</em></label>
-																<span class="d-flex">
-																	<input type="text" class="form-control totalEpx" id="totalExpYear" name="totalExpYear" placeholder="Year">
-																	<input type="text" class="form-control totalEpx" id="totalExpMonth" name="totalExpMonth" placeholder="Month">
-																</span>
-																<small id='experienceError' class='error d-none'></small>
-															</div>
-															<div class="form-group">
-																<label for="text">Resume <em class="mandatory">*</em> <small>(pdf only)</small> </label>
-																<input type="file" class="form-control" id="resume" name="resume" placeholder="Select Recent resume PDF" accept="application/pdf" />
-																<span id='' class='error'></span>
-															</div>
-															
-														</div>
-													</div>
-												</div>
-												<div class="responsive">
-																<div class="form-group">
-																	<label for="text">Skills <em class="mandatory">*</em></label>
-																	<textarea class="form-control" rows="1" id="skills" name="skills" placeholder="eg: Data Analysis, Python"></textarea>
-																	<span id='' class='error'></span>
-																</div>
-																<div class="form-group">
-																	<label for="text">Current Location <em class="mandatory">*</em></label>
-																	<input type="text" name="location" id="location" class="form-control" placeholder="eg:Area,district,state">
-																</div>
-															</div>
-												<div class="responsive">
-													<div class="form-group">
-														<label for="text">Availability time 1 <em class="mandatory">*</em></label>
-														<div class="availability availabilityDate1">
-															<input type="date" class="form-control domainEpx" id="availabilityDate1" name="availabilityDate1">
-															<input type="time" class="form-control domainEpx" id="availabilityTime1" name="availabilityTime1">
-														</div>
-														<span id='availabilityDateError' class='error'></span>
-													</div>
-													<div class="form-group">
-														<label for="text">Availability time 2 <small>(opional)</small></label>
-														<div class="availability">
-															<input type="date" class="form-control domainEpx" id="availabilityDate2" name="availabilityDate2" placeholder="Date">
-															<input type="time" class="form-control domainEpx" id="availabilityTime2" name="availabilityTime2" placeholder="Time">
-														</div>
-														<span id='availabilityDate' class='error'></span>
-													</div>
-													<div class="form-group">
-														<label for="text">Availability time 3 <small>(opional)</small></label>
-														<div class="availability">
-															<input type="date" class="form-control domainEpx" id="availabilityDate3" name="availabilityDate3">
-															<input type="time" class="form-control domainEpx" id="availabilityTime3" name="availabilityTime3">
-														</div>
-														<span id='availabilityDate' class='error'></span>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="accordion-item">
-										<h2 class="accordion-header" id="headingThree">
-											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="background: #f7ebda;">
-												Terms & Condition
-											</button>
-										</h2>
-										<div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-											<div class="accordion-body">
-												<strong>Lorem Ipsum es simplemente </strong> el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.
-											</div>
-										</div>
+	<div class="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
+		<p class="mb-0">2024 - 2025 &copy; MARKERZ.</p>
+		<p>Designed &amp; Developed By <a href="javascript:void(0);" class="text-primary">MARKERZ</a></p>
+	</div>
+
+</div>
+<!-- /Page Wrapper -->
+
+
+<!-- Add Post -->
+<div class="modal fade" id="add_post">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Resource Recruitment</h4>
+				<button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
+					<i class="ti ti-x"></i>
+				</button>
+			</div>
+			<form id="create">
+				<div class="modal-body pb-0">
+					<div class="tab-content" id="">
+						<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Job Title <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" name="jobTitle" id="jobTitle">
 									</div>
 								</div>
-								<div class="terms">
-									<a href="#" data-toggle="modal" data-target="#termModel"><i class="fa fa-hand-o-right text-danger" aria-hidden="true"></i> Terms and Conditions.</a>
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Job Description <span class="text-danger"> *</span></label>
+										<textarea rows="3" class="form-control" name="jobDescription" id="jobDescription"></textarea>
+									</div>
 								</div>
-								<br>
-								<input type="hidden" name="id" id="id" value="<?php echo $data['candidate_id']; ?>">
-								<button type="submit" id="formSubmit" class="btn btn-primary">Submit </button>
-							</form>
-							<div class="thanksDiv <?php echo $thanksDivDisplay; ?>">
-								<h1 class="thanksTitle">Thank you for your submission.👍</h1>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Job Type <span class="text-danger"> *</span></label>
+										<select class="select" name="jobType" id="jobType">
+											<option value="">Select</option>
+											<option value="Permenant">Permenant</option>
+											<option value="Temporary">Temporary</option>
+											<option value="Seasonal">Seasonal</option>
+											<option value="Full-time">Full-time</option>
+											<option value="Part-Time">Part-Time</option>
+											<option value="Student">Student</option>
+											<option value="Apprenticeship">Apprenticeship</option>
+											<option value="Employee">Employee</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Job Level <span class="text-danger"> *</span></label>
+										<select class="select" name="jobLevel" id="jobLevel">
+											<option value="">Select</option>
+											<option value="Team Lead">Team Lead</option>
+											<option value="Manager">Manager</option>
+											<option value="Senior">Senior</option>
+											<option value="junior">junior</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3 position-relative">
+										<label class="form-label">Experience <span class="text-danger"> *</span></label>
+										<input type="text" name="search" id="experienceSearch" placeholder="Work Experience level" class="form-control" />
+										<ul class="list-group addFields" id="experienceResult"></ul>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Qualification <span class="text-danger"> *</span></label>
+										<select class="select" name="qualification" id="qualification">
+											<option value="">Select</option>
+											<option value="Bachelore Degree">Bachelore Degree</option>
+											<option value="Master Degree">Master Degree</option>
+											<option value="Others">Others</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Gender <span class="text-danger"> *</span></label>
+										<select class="select" name="gender" id="gender">
+											<option value="">Select</option>
+											<option value="Male">Male</option>
+											<option value="Female">Female</option>
+											<option value="Any">Any</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Required Skills</label>
+										<input type="text" class="form-control" name="requiredSkills" id="requiredSkills">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Notice period<span class="text-danger"> *</span></label>
+										<select class="select" name="priority" id="priority">
+											<option value="">Select</option>
+											<option value="Immediate">Immediate</option>
+											<option value="15 Days">15 Days</option>
+											<option value="01 Month">01 Month</option>
+											<option value="45 Days">45 Days</option>
+											<option value="02 Month">02 Month</option>
+											<option value="No Limite">No Limite</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Location</label>
+										<input type="text" class="form-control" name="location" id="location">
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</button>
+								<button type="submit" class="btn btn-primary">Save & Next</button>
 							</div>
 						</div>
 					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- /Post Job -->
 
+<!-- Recruitment form send -->
+<div class="modal fade" id="sendModal">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Recruitment Form send</h4>
+				<button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
+					<i class="ti ti-x"></i>
+				</button>
+			</div>
+			<form id="send">
+				<div class="modal-body pb-0">
+					<div class="tab-content" id="">
+						<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Job ID <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" name="ticketRequestId" id="send_jobIt">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Job Title <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" name="jobTitle" id="send_jobTitle">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-8">
+								<div class="mb-3">
+									<h4>Candidate Details</h4>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Candidate Name</label>
+										<input type="text" class="form-control" name="candidateName" id="candidateName" onkeypress="return isAlphabets(event)" placeholder="Candidate Name">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Candidate Mail</label>
+										<input type="text" class="form-control" name="candidateMail" id="candidateMail" onblur="return isEmail(this)" placeholder="user@example.com">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Candidate Contact</label>
+										<input type="text" class="form-control" name="candidateContact" id="candidateContact" onkeypress="return isNumber(event)" placeholder="9876543210">
+									</div>
+								</div>
+							</div>
+							<input type="hidden" class="form-control" name="raisedBy" id="send_raised_by">
+							<input type="hidden" class="form-control" name="jobSno" id="jobSno">
+							<div class="modal-footer">
+								<button type="button" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</button>
+								<button type="submit" id="sendButton" class="btn btn-primary">Send Mail <i class="fa-solid fa-paper-plane"></i></button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- /Recruitment form send -->
+
+<!-- Add Job Success -->
+<div class="modal fade" id="success_modal" role="dialog">
+	<div class="modal-dialog modal-dialog-centered modal-xm">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="text-center p-3">
+					<span class="avatar avatar-lg avatar-rounded bg-success mb-3">
+						<i class="fa-solid fa-check"></i>
+					</span>
+					<h5 class="mb-2">Request add Successfully</h5>
+					</p>
+					<div>
+						<div class="row g-2">
+							<div class="col-12">
+								<a href="#" class="btn btn-dark w-100" data-bs-dismiss="modal">Back to List</a>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<!-- image crop model start -->
-	<div class="modal fade" id="cropImagePop" tabindex="-1" role="dialog" aria-labelledby="cropImageModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="cropImageModalLabel">Edit Photo</h4>
-				</div>
-				<div class="modal-body">
-					<div id="upload-demo"></div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" id="cropImageBtn" class="btn btn-primary">Crop</button>
+</div>
+<!-- /Add Job Success -->
+<!-- Update Job Success -->
+<div class="modal fade" id="update_modal" role="dialog">
+	<div class="modal-dialog modal-dialog-centered modal-xm">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="text-center p-3">
+					<span class="avatar avatar-lg avatar-rounded bg-success mb-3">
+						<i class="fa-solid fa-check"></i>
+					</span>
+					<h5 class="mb-2">Recruitment update Successfully</h5>
+					</p>
+					<div>
+						<div class="row g-2">
+							<div class="col-12">
+								<a href="#" class="btn btn-dark w-100" data-bs-dismiss="modal">Back to List</a>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- image crop model end -->
+</div>
+<!-- /Update Job Success -->
 
-	<script src="js/plugins/jquery.min.js" type="text/javascript"></script>
-	<!-- Bootstrap Core JS -->
-	<script src="js/plugins/bootstrap.bundle.min.js"></script>
-	<!-- crop script added -->
-	<script src="js/plugins/croppie.js"></script>
-	<!-- toastr alert added -->
-	<script src="js/plugins/toastr.min.js" type="text/javascript"></script>
-	<!-- Daterangepikcer JS -->
-	<!-- <script src="plugins/daterangepicker/daterangepicker.js"></script> -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script>
-		$(document).ready(function() {
-
-			/*----------------- Start upload preview image with crop -----------------*/
-			var $uploadCrop,
-				tempFilename,
-				rawImg,
-				imageId;
-
-			function readFile(input) {
-				if (input.files && input.files[0]) {
-					var reader = new FileReader();
-					reader.onload = function(e) {
-						$('.upload-demo').addClass('ready');
-						$('#cropImagePop').modal('show');
-						rawImg = e.target.result;
-					}
-					reader.readAsDataURL(input.files[0]);
-				} else {
-					swal("Sorry - Image formate dosn't accepted.");
-				}
-			}
-
-			$uploadCrop = $('#upload-demo').croppie({
-				viewport: {
-					width: 150,
-					height: 200,
-				},
-				enforceBoundary: false,
-				enableExif: true
-			});
-			$('#cropImagePop').on('shown.bs.modal', function() {
-				$uploadCrop.croppie('bind', {
-					url: rawImg
-				}).then(function() {
-					console.log('jQuery bind complete');
-				});
-			});
-			$('.item-img').on('change', function() {
-				imageId = $(this).data('id');
-				tempFilename = $(this).val();
-				$('#cancelCropBtn').data('id', imageId);
-				readFile(this);
-			});
-			$('#cropImageBtn').on('click', function(ev) {
-				$uploadCrop.croppie('result', {
-					type: 'base64',
-					format: 'jpeg', // set image formate by manually
-					size: {
-						width: 600, // Increase this for better quality
-						height: 800 // Increase this for better quality
-					},
-					quality: 1 // 0 to 1; 1 is the highest quality with less compression
-				}).then(function(resp) {
-					$('#cropedImage').attr('src', resp);
-					$('#candidate_profile').val(resp);
-					$('#cropImagePop').modal('hide');
-				});
-			});
-			/*----------------- End upload preview image -----------------*/
-
-			$("#name").on("input", function() {
-				let value = $(this).val();
-
-				if (!/^[a-zA-Z\s]*$/.test(value)) {
-					toastr.warning("Only alphabets and spaces are allowed!");
-					$("#name_error").removeClass('d-none');
-					$(this).val(value.replace(/[^a-zA-Z\s]/g, '')); // Remove non-alphabetic characters
-				} else {
-					$("#name_error").addClass('d-none');
-				}
-			});
-
-			$("#phone").on("input", function() {
-				const value = $(this).val();
-				if (!/^\d*$/.test(value)) {
-					toastr.warning("Only numbers are allowed!");
-					$("#number_error").removeClass('d-none');
-					$("#number_error").html('Please enter numbers only, e.g., 123..');
-					$(this).val(value.replace(/\D/g, ''));
-					$(this).focus();
-				} else if (value.length > 10) {
-					toastr.warning("Maximum 10 digits allowed!");
-					$("#number_error").removeClass('d-none');
-					$("#number_error").html('Maximum 10 digits allowed');
-					$(this).val(value.substring(0, 10));
-				} else {
-					$("#number_error").addClass('d-none');
-				}
-			});
-
-			$(".totalEpx").on("input", function() {
-				const value = $(this).val();
-				if (!/^\d*$/.test(value)) {
-					toastr.warning("Only numbers are allowed!");
-					$("#experienceError").removeClass('d-none');
-					$("#experienceError").html('Please enter numbers only, e.g., "03"');
-					$(this).val(value.replace(/\D/g, ''));
-					$(this).focus();
-				} else if (value.length > 2) {
-					toastr.warning("Maximum 2 digits allowed!");
-					$("#experienceError").removeClass('d-none');
-					$("#experienceError").html('Maximum 2 digits allowed');
-					$(this).val(value.substring(0, 2));
-				} else {
-					$("#experienceError").addClass('d-none');
-				}
-			});
-			$("#totalExpMonth").on("input", function() {
-				const value = $(this).val();
-				if (!/^\d*$/.test(value)) {
-					toastr.warning("Only numbers are allowed!");
-					$("#experienceError").html('Please enter numbers only, e.g., "03"');
-					$(this).val(value.replace(/\D/g, ''));
-					$(this).focus();
-				} else if (value.length > 2) {
-					toastr.warning("Maximum 11 months allowed!");
-					$("#experienceError").removeClass('d-none');
-					$("#experienceError").html('Maximum 2 digits allowed');
-					$(this).val(value.substring(0, 2));
-				} else if (value > 11) {
-					toastr.warning("Maximum 11 months allowed!");
-					$("#experienceError").removeClass('d-none');
-					$("#experienceError").html('Maximum 11 months allowed');
-					$(this).val(value.slice(0, -1));
-				} else {
-					$("#experienceError").addClass('d-none');
-				}
-			});
-
-			$("#interviewForm").click(function() {
-				$(".error").addClass('d-none');
-			});
-
-			$("#interviewForm").on("submit", function(e) {
-				e.preventDefault();
-				var response = validateForm();
-				if (response == 0) {
-					return;
-				}
-				let formData = new FormData(this);
-				formData.append("flag", "interviewForm");
-				$.ajax({
-					type: "POST",
-					url: "queries/interview-schedule.php",
-					data: formData,
-					dataType: "json",
-					contentType: false,
-					cache: false,
-					processData: false,
-					beforeSend: function() {
-						$("#formSubmit").attr("disabled", "disabled");
-						$("#formSubmit").css("opacity", ".5");
-					},
-					success: function(response) {
-						if (response.status == 'success') {
-							Swal.fire({
-								title: "Success!",
-								text: "Your form has been submitted!",
-								icon: "success",
-								confirmButtonText: "OK"
-							}).then((result) => {
-								if (result.isConfirmed) {
-									location.reload();
-								}
-							});
-						} else {
-							Swal.fire({
-								icon: "error",
-								title: "Oops...",
-								text: response.error
-							});
-							// Enable the submit button and restore opacity
-							$("#formSubmit").removeAttr("disabled");
-							$("#formSubmit").css("opacity", "1");
-						}
-					},
-				});
-			});
-
-
-			function validateForm() {
-				$(".error").remove(); // Remove previous error messages
-
-				let candidate_profile = $("#candidate_profile").val().trim();
-				if (candidate_profile.length == 0) {
-					toastr.warning("Kindly Upload Your Profile Picture.");
-					return 0;
-				}
-				let name = $("#name").val().trim();
-				if (name.length == 0) {
-					$("#name").focus();
-					$("#name").after(
-						"<small class='error text-danger'>mandatory field.</small>"
-					);
-					toastr.warning("Kindly Upload Your Profile Picture.");
-					return 0;
-				}
-				let email = $("#email").val().trim();
-				if (email.length == 0) {
-					$("#email").focus();
-					$("#email").after(
-						"<small class='error text-danger'> mandatory field.</small>"
-					);
-					toastr.warning("Kindly fill your email.");
-					return 0;
-				}
-
-				var filter = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-				if (!filter.test(email)) {
-					toastr["warning"]("Please enter a valid email!");
-					$("#email").focus();
-					$("#email").after(
-						"<small class='error text-danger'>Please enter a valid email!.</small>"
-					);
-					toastr.warning("Kindly fill your proper email.");
-					return 0;
-				}
-
-				let phone = $("#phone").val().trim();
-				if (phone.length == 0) {
-					$("#phone").focus();
-					$("#phone").after(
-						"<small class='error text-danger'> mandatory field.</small>"
-					);
-					toastr.warning("Kindly fill your cantact number");
-					return 0;
-				}
-				let qualification = $("#qualification").val().trim();
-				if (qualification.length == 0) {
-					$("#qualification").focus();
-					$("#qualification").after(
-						"<small class='error text-danger'> mandatory field.</small>"
-					);
-					toastr.warning("Kindly fill your education qualification.");
-					return 0;
-				}
-				let totalExpYear = $("#totalExpYear").val().trim();
-				if (totalExpYear.length == 0) {
-					$("#totalExpYear").focus();
-					$("#experienceError").html('mandatory field.');
-					toastr.warning("Kindly fill your experience.");
-					return 0;
-				}
-				let resume = $("#resume").val().trim();
-				if (resume.length == 0) {
-					$("#resume").focus();
-					$("#resume").after(
-						"<small class='error text-danger'> mandatory field.</small>"
-					);
-					toastr.warning("Kindly Upload Your resume pdf.");
-					return 0;
-				}
-				let skills = $("#skills").val().trim();
-				if (skills.length == 0) {
-					$("#skills").focus();
-					$("#skills").after(
-						"<small class='error text-danger'> mandatory field.</small>"
-					);
-					toastr.warning("Kindly fill your skills.");
-					return 0;
-				}
-				let location = $("#location").val().trim();
-				if (location.length == 0) {
-					$("#location").focus();
-					$("#location").after(
-						"<small class='error text-danger'> mandatory field.</small>"
-					);
-					toastr.warning("Kindly enter your current location.");
-					return 0;
-				}
-				let availabilityDate1 = $("#availabilityDate1").val().trim();
-				if (availabilityDate1.length == 0) {
-					$(".availabilityDate1").after(
-						"<small class='error text-danger'> mandatory field.</small>"
-					);
-					$("#availabilityDate1").focus();
-					toastr.warning("Kindly fill the available date.");
-					return 0;
-				}
-				let availabilityTime1 = $("#availabilityTime1").val().trim();
-				if (availabilityTime1.length == 0) {
-					$(".availabilityDate1").after(
-						"<small class='error text-danger'> mandatory field.</small>"
-					);
-					$("#availabilityTime1").focus();
-					toastr.warning("Kindly fill the available timing.");
-					return 0;
-				}
-			}
+<!-- Edit Post -->
+<div class="modal fade" id="viewModal">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Recruitment Details</h4>
+				<button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
+					<i class="ti ti-x"></i>
+				</button>
+			</div>
+			<form id="update">
+				<div class="modal-body pb-0">
+					<div class="tab-content" id="">
+						<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Job Title <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" id="view_jobTitle">
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Job Description <span class="text-danger"> *</span></label>
+										<textarea rows="3" class="form-control" id="view_jobDescription"></textarea>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Job Type <span class="text-danger"> *</span></label>
+										<select class="select" id="view_jobType">
+											<option value="">Select</option>
+											<option value="Permenant">Permenant</option>
+											<option value="Temporary">Temporary</option>
+											<option value="Seasonal">Seasonal</option>
+											<option value="Full-time">Full-time</option>
+											<option value="Part-Time">Part-Time</option>
+											<option value="Student">Student</option>
+											<option value="Apprenticeship">Apprenticeship</option>
+											<option value="Employee">Employee</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Job Level <span class="text-danger"> *</span></label>
+										<select class="select" id="view_jobLevel">
+											<option value="">Select</option>
+											<option value="Team Lead">Team Lead</option>
+											<option value="Manager">Manager</option>
+											<option value="Senior">Senior</option>
+											<option value="junior">junior</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Experience <span class="text-danger"> *</span></label>
+										<select class="select" id="view_experience">
+											<option value="">Select</option>
+											<option value="Entry Level">Entry Level</option>
+											<option value="Mid Level">Mid Level</option>
+											<option value="Expert">Expert</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Qualification <span class="text-danger"> *</span></label>
+										<select class="select" id="view_qual">
+											<option value="">Select</option>
+											<option value="Bachelore Degree">Bachelore Degree</option>
+											<option value="Master Degree">Master Degree</option>
+											<option value="Others">Others</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Gender <span class="text-danger"> *</span></label>
+										<select class="select" id="view_gender">
+											<option value="">Select</option>
+											<option value="Male">Male</option>
+											<option value="Female">Female</option>
+											<option value="Any">Any</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Required Skills</label>
+										<input type="text" class="form-control" id="view_requiredSkills">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Notice period <span class="text-danger"> *</span></label>
+										<select class="select" name="priority" id="view_priority">
+											<option value="">Select</option>
+											<option value="Immediate">Immediate</option>
+											<option value="15 Days">15 Days</option>
+											<option value="01 Month">01 Month</option>
+											<option value="45 Days">45 Days</option>
+											<option value="02 Month">02 Month</option>
+											<option value="No Limite">No Limite</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Location</label>
+										<input type="text" class="form-control" name="location" id="view_location">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- /Edit Post -->
+<!-- Edit Post -->
+<div class="modal fade" id="editModal">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Edit Resource Recruitment</h4>
+				<button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
+					<i class="ti ti-x"></i>
+				</button>
+			</div>
+			<form id="update">
+				<div class="modal-body pb-0">
+					<div class="tab-content" id="">
+						<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Job Title <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" name="jobTitle" id="edit_jobTitle">
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Job Description <span class="text-danger"> *</span></label>
+										<textarea rows="3" class="form-control" name="jobDescription" id="edit_jobDescription"></textarea>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Job Type <span class="text-danger"> *</span></label>
+										<select class="select" name="jobType" id="edit_jobType">
+											<option value="">Select</option>
+											<option value="Permenant">Permenant</option>
+											<option value="Temporary">Temporary</option>
+											<option value="Seasonal">Seasonal</option>
+											<option value="Full-time">Full-time</option>
+											<option value="Part-Time">Part-Time</option>
+											<option value="Student">Student</option>
+											<option value="Apprenticeship">Apprenticeship</option>
+											<option value="Employee">Employee</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Job Level <span class="text-danger"> *</span></label>
+										<select class="select" name="jobLevel" id="edit_jobLevel">
+											<option value="">Select</option>
+											<option value="Team Lead">Team Lead</option>
+											<option value="Manager">Manager</option>
+											<option value="Senior">Senior</option>
+											<option value="junior">junior</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Experience <span class="text-danger"> *</span></label>
+										<select class="select" name="experience" id="edit_experience">
+											<option value="">Select</option>
+											<option value="Entry Level">Entry Level</option>
+											<option value="Mid Level">Mid Level</option>
+											<option value="Expert">Expert</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Qualification <span class="text-danger"> *</span></label>
+										<select class="select" name="qualification" id="edit_qual">
+											<option value="">Select</option>
+											<option value="Bachelore Degree">Bachelore Degree</option>
+											<option value="Master Degree">Master Degree</option>
+											<option value="Others">Others</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Gender <span class="text-danger"> *</span></label>
+										<select class="select" name="gender" id="edit_gender">
+											<option value="">Select</option>
+											<option value="Male">Male</option>
+											<option value="Female">Female</option>
+											<option value="Any">Any</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Required Skills</label>
+										<input type="text" class="form-control" name="requiredSkills" id="edit_requiredSkills">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Notice period <span class="text-danger"> *</span></label>
+										<select class="select" name="priority" id="edit_priority">
+											<option value="">Select</option>
+											<option value="Immediate">Immediate</option>
+											<option value="15 Days">15 Days</option>
+											<option value="01 Month">01 Month</option>
+											<option value="45 Days">45 Days</option>
+											<option value="02 Month">02 Month</option>
+											<option value="No Limite">No Limite</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Location</label>
+										<input type="text" class="form-control" name="location" id="edit_location">
+									</div>
+								</div>
+							</div>
+							<input type="hidden" name="rowId" id="rowId">
+							<div class="modal-footer">
+								<button type="button" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</button>
+								<button type="submit" class="btn btn-primary">Update</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- /Edit Post -->
 
 
+<!-- Delete Modal -->
+<div class="modal fade" id="delete_modal">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<form id="delete">
+				<div class="modal-body text-center">
+					<span class="avatar avatar-xl bg-transparent-danger text-danger mb-3">
+						<i class="ti ti-trash-x fs-36"></i>
+					</span>
+					<h4 class="mb-1">Confirm Delete</h4>
+					<p class="mb-3">You want to delete all the marked items, this cant be undone once you delete.</p>
+					<div class="d-flex justify-content-center">
+						<input type="hidden" name="deleteId" id="deleteId">
+						<a href="javascript:void(0);" class="btn btn-light me-3" data-bs-dismiss="modal">Cancel</a>
+						<button type="submit" class="btn btn-danger">Yes, Delete</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- /Delete Modal -->
 
-		});
-	</script>
-</body>
+<?php require_once("./includes/footer.php"); ?>
 
-</html>
+<!-- this page java scripts codes -->
+<script src="./js/recruitment.js"></script>
+
+<script src="./ajax/job-type.js"></script>
+<script src="./ajax/job-level.js"></script>
+<script src="./ajax/experience.js"></script>
+

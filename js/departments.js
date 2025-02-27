@@ -1,154 +1,177 @@
-$(document).ready(function() {
+ 
+$(document).ready(function () {
+  function fetchDepartments() {
+    $.ajax({
+      url: "queries/departments.php",
+      type: "GET",
+      data: { flag: "fetch" },
+      dataType: "json",
+      success: function (data) {
+        var tableBody = $("#tableRecords tbody");
 
-	function fetchDepartments() {
-        $.ajax({
-            url: "queries/departments.php",
-            type: "GET",
-			data: { flag: "fetch" },
-            dataType: "json",
-            success: function (data) {
-                var tableBody = $("#tableRecords tbody");
-                if ($.fn.DataTable.isDataTable("#tableRecords")) {
-                    $("#tableRecords").DataTable().destroy();
+        if ($.fn.DataTable.isDataTable("#tableRecords")) {
+          $("#tableRecords").DataTable().destroy();
+        }
+
+        tableBody.empty();
+        // Check if data is not empty
+        if (data.length > 0) {
+          $.each(data, function (index, row) {
+            let statusClass =
+              row.status === "1" ? "badge-success" : "badge-danger";
+            let statusValue = row.status === "1" ? "Active" : "Inactive";
+            var newRow = `<tr>
+                        <td>${index + 1}</td>
+                        <td>
+                            <h6 class="fw-medium"><a href="#">${
+                              row.department_name
+                            }</a></h6>
+                        </td>
+                        <td>
+                            <span class="badge ${statusClass} d-inline-flex align-items-center badge-xs">
+                                <i class="ti ti-point-filled me-1"></i>${statusValue}
+                            </span>
+                        </td>
+                        <td>
+                              <div class="action-icon d-inline-flex">
+                                <a href="#" data-id="${
+                                  row.department_id
+                                }" class="edit">
+                                  <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <a href="#" data-id="${
+                                  row.department_id
+                                }" class="delete">
+                                  <i class="fa-solid fa-trash-can"></i>
+                                </a> 
+                              </div>
+                            </td>
+                    </tr>`;
+            tableBody.append(newRow);
+          });
+        }
+
+        /*-----data table common comments includes-----*/
+        dataTableDesigns();
+        
+      },
+    });
+  }
+
+  fetchDepartments();
+
+  $("#addDepartment").on("submit", function (e) {
+    e.preventDefault();
+    let formData = new FormData(this);
+    formData.append("flag", "insert");
+    $.ajax({
+      type: "POST",
+      url: "queries/departments.php",
+      data: formData,
+      dataType: "json",
+      contentType: false,
+      cache: false,
+      processData: false,
+      success: function (response) {
+        if (response.status == "success") {
+          $("#add_department").modal("hide");
+          toastr.success("Department added successfully");
+          fetchDepartments();
+        } else {
+          toastr.error(response.message, "Error");
+        }
+      },
+    });
+  });
+
+  $(document).on("click", ".edit", function (e) {
+    e.preventDefault();
+    $("#editModal").modal("show");
+    var id = $(this).data("id");
+
+    $.ajax({
+      type: "POST",
+      url: "queries/departments.php",
+      data: {
+        id: id,
+        flag: "getDetails",
+      },
+      cache: false,
+      success: function (res) {
+        if (res.status == "success") {
+          $("#rowId").val(res.data.department_id);
+          $("#edit_department").val(res.data.department_name);
+          $("#status").val(res.data.status).trigger("change");
+        } else {
+          Swal.fire(res.data.message);
+        }
+      },
+    });
+  });
+
+  $(document).on("submit", "#update", function (e) {
+    e.preventDefault();
+
+    let formData = new FormData(this);
+    formData.append("flag", "update");
+    $.ajax({
+      type: "POST",
+      url: "queries/departments.php",
+      data: formData,
+      dataType: "json",
+      contentType: false,
+      cache: false,
+      processData: false,
+      success: function (response) {
+        if (response.status == "success") {
+          $("#update_modal").modal("show");
+          $("#update")[0].reset();
+          $("#editModal").modal("hide");
+          fetchDepartments();
+        } else {
+          toastr.error(response.message, "Error");
+        }
+      },
+    });
+  });
+
+
+  $(document).on("click", ".delete", function (e) {
+    e.preventDefault(); 
+    var id = $(this).data("id"); 
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "POST",
+                url: "queries/departments.php",
+                data: {
+                  id: id,
+                  flag: "delete",
+                },
+                cache: false,
+                success: function (response) {
+                  if (response.status == "success") { 
+                    fetchDepartments();
+                  } else {
+                    toastr.error(response.message, "Error");
                   }
-                tableBody.empty();
+                },
+              });
+        }
+      });
 
-                if (data.length > 0) {
-                    $.each(data, function (index, row) {
-                      let statusClass =
-                        row.status === "1" ? "badge-success" : "badge-danger";
-                      let statusValue = row.status === "1" ? "Active" : "Inactive";
-                      var newRow = `<tr>
-                                      <td>${index + 1}</td>
-                                      <td><h6 class="fw-medium">${row.department_name}</h6></td>
-                                      <td><span class="badge ${statusClass} d-inline-flex align-items-center badge-xs"><i class="ti ti-point-filled me-1"></i>${statusValue}</span></td>
-                                      <td><div class="action-icon d-inline-flex"><a href="#" class="me-2 edit_user" data-id="${row.department_id}" data-bs-toggle="modal" data-bs-target="#add_edit_user"><i class="ti ti-edit"></i></a>
-                                      <a href="#" class="delete-users" data-id="${row.department_id}" data-bs-toggle="modal" data-bs-target=""><i class="fa-solid fa-check-circle"></i></a>
-                                      </div>
-                                      </td>
-                                  </tr>`;
-                      tableBody.append(newRow);
-                    });
-                }
-                var lastSegment = $(location).attr("pathname").split("/").pop();
 
-                table = $("#tableRecords").DataTable({
-                    pageLength: 10,
-                    lengthChange: false,
-                    language: {
-                        search: "",
-                    },
-                    lengthChange: false,
-                    search: false,
-                    dom:
-                        "<'row'<'col-md-6'B><'col-md-6 text-end'f>>" +
-                        "<'row'<'col-12'tr>>" +
-                        "<'datatable-footer'<i><p>>",
-            
-                    buttons: [
-                        {
-                        extend: "excelHtml5",
-                        text: "Export to Excel",
-                        title: lastSegment + " List",
-                        className: "btn btn-success",
-                        exportOptions: {
-                            columns: ":visible",
-                        },
-                        className: "d-none",
-                        },
-                        {
-                        extend: "pdf",
-                        text: "Export to PDF",
-                        title: lastSegment + " List",
-                        className: "buttons-pdf",
-                        exportOptions: {
-                            columns: ":visible",
-                        },
-                        className: "d-none",
-                        },
-                        {
-                        extend: "copy",
-                        text: "Export to copy",
-                        title: lastSegment + " List",
-                        className: "buttons-copy",
-                        exportOptions: {
-                            columns: ":visible",
-                        },
-                        className: "d-none",
-                        },
-                        {
-                        extend: "csv",
-                        text: "Export to csv",
-                        title: lastSegment + " List",
-                        className: "buttons-csv",
-                        exportOptions: {
-                            columns: ":visible",
-                        },
-                        className: "d-none",
-                        },
-                        {
-                        extend: "print",
-                        text: "Export to print",
-                        title: lastSegment + " List",
-                        className: "buttons-print",
-                        exportOptions: {
-                            columns: ":visible",
-                        },
-                        className: "d-none",
-                        },
-                    ],
-                });
+  });
 
-                $("#excel_button").on("click", function () {
-                table.button(".buttons-excel").trigger();
-                });
-                $("#pdf_button").on("click", function () {
-                table.button(".buttons-pdf").trigger();
-                });
-                $("#copy_button").on("click", function () {
-                table.button(".buttons-copy").trigger();
-                });
-                $("#csv_button").on("click", function () {
-                table.button(".buttons-csv").trigger();
-                });
-                $("#print_button").on("click", function () {
-                table.button(".buttons-print").trigger();
-                });
 
-                oTable = $("#tableRecords").DataTable();
-                $("#myInputTextField").keyup(function () {
-                oTable.search($(this).val()).draw();
-                });
-                $("#customLengthMenu").on("change", function () {
-                var length = $(this).val();
-                table.page.len(length).draw();
-                });
-            },
-        });
-    }
 
-	fetchDepartments();
 
-	
-	$("#addDepartment").on("submit", function(e) {
-		e.preventDefault();
-		let formData = new FormData(this);
-    	formData.append("flag", "insert");
-		$.ajax({
-			type: "POST",
-			url: "queries/departments.php",
-			data: formData,
-			dataType: "json",
-			contentType: false,
-			cache: false,
-			processData: false,
-			success: function(response) {
-				if (response.status == "success") { 
-					$('#success_modal').modal('show');
-				}else{
-					toastr.error(response.message, "Error");
-				}
-			},
-		});
-	});
 });
