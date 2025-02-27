@@ -152,7 +152,6 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 
 	<div class="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
@@ -162,7 +161,6 @@
 
 </div>
 <!-- /Page Wrapper -->
-
 
 <!-- Add Post -->
 <div class="modal fade" id="add_post">
@@ -392,11 +390,10 @@
 		<div class="modal-content">
 			<div class="modal-body">
 				<div class="text-center p-3">
-					<span class="avatar avatar-lg avatar-rounded bg-success mb-3">
-						<!-- <i class="fa-solid fa-check"></i> -->
+					<span class="avatar avatar-lg avatar-rounded bg-success mb-3"> 
 						<i class="fa-solid fa-info"></i>
 					</span> 
-					<h5 class="mb-2">"Cannot delete; Already <span id="candidateCount"></span> candidates registered."</h5>
+					<h5 class="mb-2"> <span class="text-danger">Cannot delete;</span> Already <span id="candidateCount"></span> candidates registered.</h5>
 					</p>
 					<div>
 						<div class="row g-2">
@@ -412,7 +409,7 @@
 </div>
 <!-- /Update Job Success -->
 
-<!-- Edit Post -->
+<!-- View Post -->
 <div class="modal fade" id="viewModal">
 	<div class="modal-dialog modal-dialog-centered modal-lg">
 		<div class="modal-content">
@@ -442,32 +439,25 @@
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Job Type <span class="text-danger"> *</span></label>
-										<input type="text" name="jobType" id="view_jobType" placeholder="Work Job Type " class="form-control" />
-										<ul class="list-group addFields" id="jobTypeResult"></ul>
+										<input type="text" name="jobType" id="view_jobType" class="form-control" /> 
 									</div>
 								</div>
 								<div class="col-md-6"> 
 									<div class="mb-3 position-relative">
 										<label class="form-label">Job Level <span class="text-danger"> *</span></label>
-										<input type="text" name="jobLevel" id="view_jobLevel" placeholder="Work Job Level " class="form-control" />
-										<ul class="list-group addFields" id="jobLevelResult"></ul>
+										<input type="text" name="jobLevel" id="view_jobLevel" class="form-control" /> 
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Experience <span class="text-danger"> *</span></label>
-										<select class="select" id="view_experience">
-											<option value="">Select</option>
-											<option value="Entry Level">Entry Level</option>
-											<option value="Mid Level">Mid Level</option>
-											<option value="Expert">Expert</option>
-										</select>
+										<input type="text" name="jobLevel" id="view_experience" class="form-control" /> 
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Qualification <span class="text-danger"> *</span></label>
-										<input type="text" name="qualification" id="view_qual" placeholder="Education qualification" class="form-control" />
+										<input type="text" name="qualification" id="view_qual" class="form-control" />
 										<ul class="list-group addFields" id="qualificationResult"></ul>
 									</div>
 								</div>
@@ -516,7 +506,7 @@
 		</div>
 	</div>
 </div>
-<!-- /Edit Post -->
+<!-- /View Post -->
 <!-- Edit Post -->
 <div class="modal fade" id="editModal">
 	<div class="modal-dialog modal-dialog-centered modal-lg">
