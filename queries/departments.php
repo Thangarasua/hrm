@@ -21,17 +21,34 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     if ($flag === "insert") {
 
         $status = 1;
-        $departmentName = $_POST['departmentName'];
+        $departmentName = $_POST['departmentName']; 
 
-        $query = "INSERT INTO `departments` (`department_name`, `status`) VALUES ('$departmentName', $status)";
-        $result = mysqli_query($conn, $query);
-        if ($result) {
-            echo json_encode(array('status' => 'success', 'message' => 'Department Added Successfully'));
-            exit;
-        } else {
-            echo json_encode(array('status' => 'failure', 'message' => 'Department Added Requested Failure'));
-            exit;
+        try {
+            $query = "INSERT INTO `departments` (`department_name`, `status`) VALUES ('$departmentName', $status)";
+            $result = mysqli_query($conn, $query);
+            if ($result) {
+                echo json_encode(array('status' => 'success', 'message' => 'Department Added Successfully'));
+            } else {
+                echo json_encode(array('status' => 'failure', 'message' => 'Department Added Requested Failure'));
+            }
+        } catch (mysqli_sql_exception $e) {
+            // Check if the error is a duplicate entry (MySQL error code 1062)
+            if ($e->getCode() == 1062) {
+                echo json_encode(array(
+                    'status' => 'failure',
+                    'message' => 'Duplicate entries were found.Already in existence.',
+                    'error' => $e->getMessage()
+                ));
+            } else {
+                // Handle other MySQL errors
+                echo json_encode(array(
+                    'status' => 'failure',
+                    'message' => 'Something went wrong',
+                    'error' => $e->getMessage()
+                ));
+            }
         }
+        exit;
     } elseif ($flag === "getDetails") {
 
         $id = $_POST['id'];
@@ -48,14 +65,32 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
         $rowId = $_POST['rowId'];
         $department = $_POST['department'];
-        $status = $_POST['status']; 
+        $status = $_POST['status'];  
 
-        $query = "UPDATE `departments` SET `department_name`='$department',`status`='$status' WHERE `department_id`='$rowId'";
-        $result = mysqli_query($conn, $query);
-        if ($result) {
-            echo json_encode(array('status' => 'success', 'message' => 'Department update successfully'));
-        } else {
-            echo json_encode(array('status' => 'failure', 'message' => 'Department update failure'));
+        try {
+            $query = "UPDATE `departments` SET `department_name`='$department',`status`='$status' WHERE `department_id`='$rowId'";
+            $result = mysqli_query($conn, $query);
+            if ($result) {
+                echo json_encode(array('status' => 'success', 'message' => 'update successfully'));
+            } else {
+                echo json_encode(array('status' => 'failure', 'message' => 'update failure'));
+            }
+        } catch (mysqli_sql_exception $e) {
+            // Check if the error is a duplicate entry (MySQL error code 1062)
+            if ($e->getCode() == 1062) {
+                echo json_encode(array(
+                    'status' => 'failure',
+                    'message' => 'Duplicate entries were found.Already in existence.',
+                    'error' => $e->getMessage()
+                ));
+            } else {
+                // Handle other MySQL errors
+                echo json_encode(array(
+                    'status' => 'failure',
+                    'message' => 'Something went wrong',
+                    'error' => $e->getMessage()
+                ));
+            }
         }
         exit;
     } elseif ($flag === "delete") {

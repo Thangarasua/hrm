@@ -3,6 +3,7 @@
 header('Content-Type: application/json');
 
 $hrm_userid = $_SESSION['hrm_userid'];
+$hrm_username = $_SESSION['hrm_username'];
 
 $month = date('m');
 $year = date('y');
@@ -142,7 +143,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
                     'message' => 'Recruitment form sent successfully',
                     'flag' => 'recruitmentForm',
                     'id' => $jobSno,
-                    'email' => $candidateMail
+                    'email' => $candidateMail,
+                    'candidateName' => $candidateName,
+                    'hrName' => $hrm_username
                 ));
             }
         } catch (mysqli_sql_exception $e) {

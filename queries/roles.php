@@ -22,15 +22,33 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     if ($flag === "insert") {
         $rolesName = $_POST['rolesName'];
         $status = 1;
-        $query = "INSERT INTO `roles` (`role_name`, `status`) VALUES ('$rolesName', $status)";
-        $result = mysqli_query($conn, $query);
-        if ($result) {
-            echo json_encode(array('status' => 'success', 'message' => 'Role Added Successfully'));
-            exit;
-        } else {
-            echo json_encode(array('status' => 'failure', 'message' => 'Role Added Requested Failure'));
-            exit;
+
+        try {
+            $query = "INSERT INTO `roles` (`role_name`, `status`) VALUES ('$rolesName', $status)";
+            $result = mysqli_query($conn, $query);
+            if ($result) {
+                echo json_encode(array('status' => 'success', 'message' => 'Role Added Successfully'));
+            } else {
+                echo json_encode(array('status' => 'failure', 'message' => 'Role Added Requested Failure'));
+            }
+        } catch (mysqli_sql_exception $e) {
+            // Check if the error is a duplicate entry (MySQL error code 1062)
+            if ($e->getCode() == 1062) {
+                echo json_encode(array(
+                    'status' => 'failure',
+                    'message' => 'Duplicate entries were found.Already in existence.',
+                    'error' => $e->getMessage()
+                ));
+            } else {
+                // Handle other MySQL errors
+                echo json_encode(array(
+                    'status' => 'failure',
+                    'message' => 'Something went wrong',
+                    'error' => $e->getMessage()
+                ));
+            }
         }
+        exit;
     } elseif ($flag === "getDetails") {
 
         $id = $_POST['id'];
@@ -43,18 +61,36 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             echo json_encode(array('status' => 'failure', 'message' => 'something went wrong'));
         }
         exit;
-    }elseif ($flag === "update") {
+    } elseif ($flag === "update") {
 
         $rowId = $_POST['rowId'];
         $role = $_POST['role'];
         $status = $_POST['status']; 
 
-        $query = "UPDATE `roles` SET `role_name`='$role',`status`='$status' WHERE `role_id`='$rowId'";
-        $result = mysqli_query($conn, $query);
-        if ($result) {
-            echo json_encode(array('status' => 'success', 'message' => 'Role update successfully'));
-        } else {
-            echo json_encode(array('status' => 'failure', 'message' => 'Role update failure'));
+        try {
+            $query = "UPDATE `roles` SET `role_name`='$role',`status`='$status' WHERE `role_id`='$rowId'";
+            $result = mysqli_query($conn, $query);
+            if ($result) {
+                echo json_encode(array('status' => 'success', 'message' => 'update successfully'));
+            } else {
+                echo json_encode(array('status' => 'failure', 'message' => 'update failure'));
+            }
+        } catch (mysqli_sql_exception $e) {
+            // Check if the error is a duplicate entry (MySQL error code 1062)
+            if ($e->getCode() == 1062) {
+                echo json_encode(array(
+                    'status' => 'failure',
+                    'message' => 'Duplicate entries were found.Already in existence.',
+                    'error' => $e->getMessage()
+                ));
+            } else {
+                // Handle other MySQL errors
+                echo json_encode(array(
+                    'status' => 'failure',
+                    'message' => 'Something went wrong',
+                    'error' => $e->getMessage()
+                ));
+            }
         }
         exit;
     } elseif ($flag === "delete") {
@@ -67,5 +103,5 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             echo json_encode(array('status' => 'failure', 'message' => 'something went wrong'));
         }
         exit;
-    } 
+    }
 }
