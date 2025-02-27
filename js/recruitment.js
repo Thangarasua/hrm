@@ -208,11 +208,9 @@ $(document).ready(function () {
     var id = $(this).data("id");
     var formfilling = $(this).data("formfilling");
     if (formfilling > 0) {
-      Swal.fire({
-        title: "Can't Delete",
-        text: `Can't delete this post, already ${formfilling} candidate register this job`,
-        icon: "info"
-      });
+      $("#candidateCount").html(formfilling);
+      $("#info_modal").modal("show");
+ 
     } else {
       $("#delete_modal").modal("show");
       $("#deleteId").val(id);
