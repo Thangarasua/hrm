@@ -137,27 +137,55 @@ $(document).ready(function () {
       cache: false,
       success: function (res) {
         console.log(res);
-        if (res.status == "success") { 
-          $("#candidate_register_id").val(res.data.candidate_register_id); 
+        if (res.status == "success") {
+          $("#candidate_register_id").val(res.data.candidate_register_id);
           $("#contact_number").val(res.data.contact_number);
           $("#created_by").val(res.data.created_by);
           $("#ticket_request_id").val(res.data.ticket_request_id);
-          $("#address").val(res.data.address); 
+          $("#address").val(res.data.address);
           $("#experience").val(res.data.experience);
           $("#skills").val(res.data.skills);
           $("#available_time1").val(res.data.available_time1);
           $("#available_time2").val(res.data.available_time2);
           $("#available_time3").val(res.data.available_time3);
-          $("#created_at").val(res.data.created_at); 
+          $("#created_at").val(res.data.created_at);
         } else {
           Swal.fire(res.data.message);
         }
       },
     });
   });
+
+  // $(document).on("click", ".edit", function (e) {
+  //   e.preventDefault();
+  //   $("#editModal").modal("show");
+  //   var id = $(this).data("id");
+
+  //   $.ajax({
+  //     type: "POST",
+  //     url: "queries/candidates.php",
+  //     data: {
+  //       id: id,
+  //       flag: "getDetails",
+  //     },
+  //     cache: false,
+  //     success: function (res) {
+  //       if (res.status == "success") {
+  //         $("#rowId").val(res.data.candidate_id);
+  //         $("#candidate_name").val(res.data.candidate_name);
+  //         $("#interview_status")
+  //           .val(res.data.interview_status)
+  //           .trigger("change");
+  //       } else {
+  //         Swal.fire(res.data.message);
+  //       }
+  //     },
+  //   });
+  // });
+
   $(document).on("click", ".edit", function (e) {
     e.preventDefault();
-    $("#editModal").modal("show");
+    $("#interviewModal").modal("show");
     var id = $(this).data("id");
 
     $.ajax({
@@ -172,9 +200,14 @@ $(document).ready(function () {
         if (res.status == "success") {
           $("#rowId").val(res.data.candidate_id);
           $("#candidate_name").val(res.data.candidate_name);
-          $("#interview_status")
-            .val(res.data.interview_status)
-            .trigger("change");
+          $("input[name='interview_status']").prop("checked", false); // Uncheck all first
+          $(
+            `input[name='interview_status'][value='${res.data.interview_status}']`
+          ).prop("checked", true);
+          $("#existingStatus").val(res.data.interview_status);
+          $("#schedule_time1").val(res.data.available_time1);
+          $("#schedule_time2").val(res.data.available_time2);
+          $("#schedule_time3").val(res.data.available_time3);
         } else {
           Swal.fire(res.data.message);
         }
@@ -182,20 +215,41 @@ $(document).ready(function () {
     });
   });
 
+  $("input[name='interview_status']").change(function () {
+    let existingStatus = $("#existingStatus").val();
+    let selectedValue = $("input[name='interview_status']:checked").val(); // Get the selected value
+    let selectedText = $(
+      "label[for='" +
+        $("input[name='interview_status']:checked").attr("id") +
+        "']"
+    ).text(); // Get the label text
+    if (selectedValue == 2) {
+      $(".shortlisted").show();
+    } else {
+      $(".shortlisted").hide();
+    }
+    if (selectedValue == 5) {
+      $(".offered").show();
+    } else {
+      $(".offered").hide();
+    }
+  });
+
   $(document).on("submit", "#update", function (e) {
     e.preventDefault();
-
-    let interview_status = $("#interview_status").val().trim();
-    if (interview_status.length == 0) {
-      $("#interview_status").focus();
-      $("#interview_status_error").removeClass("d-none");
-      return;
+    let interview_status = $('input[name="interview_status"]:checked').val();
+    // return;
+    if (interview_status == 2) {
+      let form = shortlistForm();
+      if (form === 0) {
+        return false;
+      }
     } else {
-      $("#interview_status_error").addClass("d-none");
     }
 
     let formData = new FormData(this);
     formData.append("flag", "update");
+
     $.ajax({
       type: "POST",
       url: "queries/candidates.php",
@@ -204,17 +258,100 @@ $(document).ready(function () {
       contentType: false,
       cache: false,
       processData: false,
+      beforeSend: function () {
+        $("#updateBtn").text("Loading...").prop("disabled", true);
+        Swal.fire({
+          title: "Its processing Please wait...",
+          allowEscapeKey: false,
+          allowOutsideClick: false,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
+      },
       success: function (response) {
-        if (response.status == "success") {
-          $("#update_modal").modal("show");
-          $("#update")[0].reset();
-          $("#editModal").modal("hide");
-          // loadData("", "", "", "", "getAll", "");
-          loadData(fromDate, toDate, dateRange, companyType, flag, jobID);
+        if (response.status === "success") {
+          interview_status = response.data.interview_status;
+          if (interview_status == 2) { // 2->shortlisted candidate send mail
+            sendRecruitmentMail(response.data);
+          } else {
+            $("#update")[0].reset();
+            $("#interviewModal").modal("hide");
+            $("#updateBtn").text("Update").prop("disabled", false);
+            Swal.fire("Interview status successfully!", "", "success");
+            loadData("", "", "", "", "getAll");
+          }
         } else {
-          toastr.error(response.message, "Error");
+          handleError(response.message);
         }
+      },
+      error: function (xhr, status, error) {
+        handleError("An error occurred: " + error);
       },
     });
   });
+
+  /** Function to Send Recruitment Mail */
+  function sendRecruitmentMail(data) {
+    console.log(data);
+    $.ajax({
+      type: "POST",
+      url: "mails/recruitment-mail.php",
+      data: data,
+      dataType: "json",
+      beforeSend: function () {
+        $("#updateBtn").text("Loading...").prop("disabled", true);
+        Swal.fire({
+          title: "Interview status update mail sending...",
+          allowEscapeKey: false,
+          allowOutsideClick: false,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
+      },
+      success: function (response) {
+        if (response.status === "success") {
+          $("#update")[0].reset();
+          $("#interviewModal").modal("hide");
+          $("#updateBtn").text("Update").prop("disabled", false);
+          Swal.fire("Mail send successfully!", "", "success");
+          loadData("", "", "", "", "getAll");
+        } else {
+          toastr.error(response.message, "Mail Error");
+        }
+      },
+      error: function (xhr, status, error) {
+        toastr.error("Failed to send mail: " + error, "Mail Error");
+      },
+    });
+  }
+
+  /** Function to Handle Errors */
+  function handleError(message) {
+    Swal.close();
+    $("#sendButton").text("Send Mail").prop("disabled", false);
+    toastr.error(message, "Error");
+  }
+
+  /** Interview status update form validate */
+  function shortlistForm() {
+    let interview_date = $("#interview_date").val().trim();
+    if (interview_date.length == 0) {
+      $("#interview_date").focus();
+      $("#interview_date").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+    let interview_time = $("#interview_time").val().trim();
+    if (interview_time.length == 0) {
+      $("#interview_time").focus();
+      $("#interview_time").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+  }
+  /** Interview status update form validate */
 });

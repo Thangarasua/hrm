@@ -16,20 +16,16 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $name = $_POST['name'];
         $phone = $_POST['phone'];
         $qualification = $_POST['qualification'];
-        $experience = $_POST['totalExpYear'] . 'year' . $_POST['totalExpMonth'] .'month';
+        $experience = $_POST['totalExpYear'] . '.' . $_POST['totalExpMonth'] .' year'; 
         $skills = json_encode($_POST['skills']);
         $location = $_POST['location'];
-        $timing1 = $_POST['availabilityDate1'] . ' ' . $_POST['availabilityTime1'];
-        $available_time1 = date('Y-m-d H:i:s', strtotime($timing1));
-        $timing2 = $_POST['availabilityDate2'] . ' ' . $_POST['availabilityTime2'];
-        $available_time2 = date('Y-m-d H:i:s', strtotime($timing2));
-        $timing3 = $_POST['availabilityDate3'] . ' ' . $_POST['availabilityTime3'];
-        $available_time3 = date('Y-m-d H:i:s', strtotime($timing3));
+        $available_time1 = $_POST['availabilityDate1'] . ' ' . $_POST['availabilityTime1']; 
+        $available_time2 = !empty($_POST['availabilityDate2']) ? $_POST['availabilityDate2'] . ' ' . $_POST['availabilityTime2'] : NULL;
+        $available_time3 = !empty($_POST['availabilityDate3']) ? $_POST['availabilityDate3'] . ' ' . $_POST['availabilityTime3'] : NULL; 
         $id = $_POST['id'];
 
         if (isset($_POST['candidate_profile']) && !empty($_POST['candidate_profile'])) {
             $base64_image = $_POST['candidate_profile'];
-
             $image_parts = explode(";base64,", $base64_image);
             $image_type_aux = explode("image/", $image_parts[0]);
             $image_type = $image_type_aux[1];

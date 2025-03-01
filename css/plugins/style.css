@@ -28312,6 +28312,11 @@ margin: 5px 10px 1px;
   max-height: 200PX;
 }
 
+.interview-status label{
+border-radius: 50px;
+margin: 2px;
+}
+
 /* End:: own style added */
 
 /*# sourceMappingURL=style.css.map */

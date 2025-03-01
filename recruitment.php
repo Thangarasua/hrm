@@ -394,7 +394,6 @@
 						<i class="fa-solid fa-info"></i>
 					</span> 
 					<h5 class="mb-2"> <span class="text-danger">Cannot delete;</span> Already <span id="candidateCount"></span> candidates registered.</h5>
-					</p>
 					<div>
 						<div class="row g-2">
 							<div class="col-12">

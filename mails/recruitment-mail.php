@@ -54,6 +54,34 @@ try {
                 'message' => 'Email sent successfully.'
             );
         }
+    } else if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['interview_status'])) {
+        $interview_status = $_POST['interview_status'];
+        $candidate_name = $_POST['candidate_name'];
+        $email = $_POST['email'];
+        $interview_date = $_POST['interview_date'];
+        $job_position = $_POST['job_position']; 
+        $user_name = $_POST['user_name'];
+        //Recipients
+        $mail->addAddress($_POST['email'], 'Joe User');
+
+        $mail->Subject = 'Congratulations! You Have Been Shortlisted';
+        //Content
+        $htmlContent = file_get_contents('./templates/shortlist-mail.html');
+        $htmlContent = str_replace('{{Name}}', $candidate_name, $htmlContent);
+        $htmlContent = str_replace('{{Job Position}}', $job_position, $htmlContent);
+        $htmlContent = str_replace('{{Date}}', $interview_date, $htmlContent);
+        $htmlContent = str_replace('{{HR Name}}', $user_name, $htmlContent);
+
+        $mail->Body = $htmlContent;
+        $mail->send();
+
+        $response = array(
+            'status' => 'success',
+            'message' => 'Email sent successfully.'
+        );
+
+
+
     } else {
         $response = array(
             'status' => 'failure',
