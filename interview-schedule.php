@@ -573,7 +573,14 @@ if (mysqli_num_rows($result) > 0) {
 				if (totalExpYear.length == 0) {
 					$("#totalExpYear").focus();
 					$("#experienceError").html('mandatory field.');
-					toastr.warning("Kindly fill your experience.");
+					toastr.warning("Kindly fill your experience year.");
+					return 0;
+				}
+				let totalExpMonth = $("#totalExpMonth").val().trim();
+				if (totalExpMonth.length == 0) {
+					$("#totalExpMonth").focus();
+					$("#experienceError").html('mandatory field.');
+					toastr.warning("Kindly fill your experience month.");
 					return 0;
 				}
 				let resume = $("#resume").val().trim();

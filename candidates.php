@@ -24,7 +24,7 @@ if (isset($_GET['id'])) {
 					</ol>
 				</nav>
 			</div>
-			<div class="d-flex my-xl-auto right-content align-items-center flex-wrap"> 
+			<div class="d-flex my-xl-auto right-content align-items-center flex-wrap">
 				<div class="me-2 mb-2">
 					<div class="dropdown">
 						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
@@ -163,6 +163,123 @@ if (isset($_GET['id'])) {
 </div>
 <!-- /Page Wrapper -->
 
+<!-- Edit interview details -->
+<div class="modal fade" id="interviewModal">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">interview Details update</h4>
+				<button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
+					<i class="ti ti-x"></i>
+				</button>
+			</div>
+			<form id="update">
+				<div class="modal-body pb-0">
+					<div class="tab-content" id="">
+						<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
+							<div class="mb-3">
+								<h4 class="text-center">Current Status:</h4>
+							</div>
+							<input type="hidden" id="existingStatus">
+							<div class="row">
+								<div class="interview-status" role="group">
+									<input type="radio" class="btn-check" name="interview_status" id="applied" value="1" autocomplete="off">
+									<label class="btn border" for="applied">Applied</label>
+
+									<input type="radio" class="btn-check" name="interview_status" id="shortlisted" value="2" autocomplete="off">
+									<label class="btn border" for="shortlisted">Shortlisted</label>
+
+									<input type="radio" class="btn-check" name="interview_status" id="scheduled" value="3" autocomplete="off">
+									<label class="btn border" for="scheduled">Scheduled</label>
+
+									<input type="radio" class="btn-check" name="interview_status" id="interviewed" value="4" autocomplete="off">
+									<label class="btn border" for="interviewed">Interviewed</label>
+
+									<input type="radio" class="btn-check" name="interview_status" id="offered" value="5" autocomplete="off">
+									<label class="btn border" for="offered">Offered</label>
+
+									<input type="radio" class="btn-check" name="interview_status" id="onhold" value="6" autocomplete="off">
+									<label class="btn border" for="onhold">On Hold</label>
+
+									<input type="radio" class="btn-check" name="interview_status" id="rejected" value="7" autocomplete="off">
+									<label class="btn border" for="rejected">Rejected</label>
+
+									<input type="radio" class="btn-check" name="interview_status" id="hired" value="8" autocomplete="off">
+									<label class="btn border" for="hired">Hired</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="modal-body pb-0">
+					<div class="shortlisted" style="display: none;">
+						<div class="row">
+							<div class="mb-3">
+								<h4 class="text-center">Candidate Available Date's</h4>
+							</div>
+							<div class="col-md-4">
+								<div class="mb-3">
+									<label class="form-label">Date 1</label>
+									<input type="text" class="form-control" id="schedule_time1" disabled>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="mb-3">
+									<label class="form-label">Date 2</label>
+									<input type="text" class="form-control" id="schedule_time2" disabled>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="mb-3">
+									<label class="form-label">Date 3</label>
+									<input type="text" class="form-control" id="schedule_time3" disabled>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="mb-3">
+								<h4 class="text-center">Select scheduled Date</h4>
+							</div>
+							<div class="col-md-4">
+								<div class="mb-3">
+									<label class="form-label">Select the interview Date</label>
+									<input type="date" class="form-control" id="interview_date" name="interview_date" min=<?php echo date('Y-m-d'); ?>>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="mb-3">
+									<label class="form-label">Select the interview time</label>
+									<input type="time" class="form-control" id="interview_time" name="interview_time">
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row offered" style="display: none;">
+						<div class="mb-3">
+							<h4 class="text-center">offered details</h4>
+						</div>
+						<div class="col-md-12">
+							<div class="mb-3">
+								<label class="form-label">Offer comments <span class="text-danger"> *</span></label>
+								<textarea class="form-control" name="offer_comments" id="" rows="3"></textarea>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<input type="hidden" name="rowId" id="rowId">
+				<div class="modal-footer">
+					<button type="submit" id="updateBtn" class="btn btn-primary btn-sm">Update</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- /View candidate details -->
+
+
 <!-- View candidate details -->
 <div class="modal fade" id="viewModal">
 	<div class="modal-dialog modal-dialog-centered modal-lg">
@@ -172,82 +289,82 @@ if (isset($_GET['id'])) {
 				<button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
 					<i class="ti ti-x"></i>
 				</button>
-			</div> 
-				<div class="modal-body pb-0">
-					<div class="tab-content" id="">
-						<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
-							<div class="row">
-								<div class="col-md-6">
-									<div class="mb-3">
-										<label class="form-label">Candidate Register ID <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" id="candidate_register_id">
-									</div>
+			</div>
+			<div class="modal-body pb-0">
+				<div class="tab-content" id="">
+					<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="mb-3">
+									<label class="form-label">Candidate Register ID <span class="text-danger"> *</span></label>
+									<input type="text" class="form-control" id="candidate_register_id">
 								</div>
-								<div class="col-md-6">
-									<div class="mb-3">
-										<label class="form-label">Ticket Request ID <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" id="ticket_request_id">
-									</div>
+							</div>
+							<div class="col-md-6">
+								<div class="mb-3">
+									<label class="form-label">Ticket Request ID <span class="text-danger"> *</span></label>
+									<input type="text" class="form-control" id="ticket_request_id">
 								</div>
-								<div class="col-md-12">
-									<div class="mb-3">
-										<label class="form-label">address<span class="text-danger"> *</span></label>
-										<textarea rows="3" class="form-control" id="address"></textarea>
-									</div>
+							</div>
+							<div class="col-md-12">
+								<div class="mb-3">
+									<label class="form-label">address<span class="text-danger"> *</span></label>
+									<textarea rows="3" class="form-control" id="address"></textarea>
 								</div>
-								<div class="col-md-6">
-									<div class="mb-3 position-relative">
-										<label class="form-label">experience <span class="text-danger"> *</span></label>
-										<input type="text" name="jobType" id="experience" class="form-control" /> 
-									</div>
+							</div>
+							<div class="col-md-6">
+								<div class="mb-3 position-relative">
+									<label class="form-label">experience <span class="text-danger"> *</span></label>
+									<input type="text" name="jobType" id="experience" class="form-control" />
 								</div>
-								<div class="col-md-6"> 
-									<div class="mb-3 position-relative">
-										<label class="form-label">skills <span class="text-danger"> *</span></label>
-										<input type="text" name="jobLevel" id="skills" class="form-control" /> 
-									</div>
+							</div>
+							<div class="col-md-6">
+								<div class="mb-3 position-relative">
+									<label class="form-label">skills <span class="text-danger"> *</span></label>
+									<input type="text" name="jobLevel" id="skills" class="form-control" />
 								</div>
-								<div class="col-md-6">
-									<div class="mb-3">
-										<label class="form-label">available_time1 <span class="text-danger"> *</span></label>
-										<input type="text" name="jobLevel" id="available_time1" class="form-control" /> 
-									</div>
+							</div>
+							<div class="col-md-6">
+								<div class="mb-3">
+									<label class="form-label">available_time1 <span class="text-danger"> *</span></label>
+									<input type="text" name="jobLevel" id="available_time1" class="form-control" />
 								</div>
-								<div class="col-md-6">
-									<div class="mb-3">
-										<label class="form-label">available_time2 <span class="text-danger"> *</span></label>
-										<input type="text" name="jobLevel" id="available_time2" class="form-control" /> 
-									</div>
+							</div>
+							<div class="col-md-6">
+								<div class="mb-3">
+									<label class="form-label">available_time2 <span class="text-danger"> *</span></label>
+									<input type="text" name="jobLevel" id="available_time2" class="form-control" />
 								</div>
-								<div class="col-md-6">
-									<div class="mb-3">
-										<label class="form-label">available_time3 <span class="text-danger"> *</span></label>
-										<input type="text" name="jobLevel" id="available_time3" class="form-control" /> 
-									</div>
+							</div>
+							<div class="col-md-6">
+								<div class="mb-3">
+									<label class="form-label">available_time3 <span class="text-danger"> *</span></label>
+									<input type="text" name="jobLevel" id="available_time3" class="form-control" />
 								</div>
-								<div class="col-md-6">
-									<div class="mb-3 position-relative">
-										<label class="form-label">created_by <span class="text-danger"> *</span></label>
-										<input type="text" name="created_by" id="created_by" class="form-control" /> 
-									</div>
+							</div>
+							<div class="col-md-6">
+								<div class="mb-3 position-relative">
+									<label class="form-label">created_by <span class="text-danger"> *</span></label>
+									<input type="text" name="created_by" id="created_by" class="form-control" />
 								</div>
-								<div class="col-md-6">
-									<div class="mb-3 position-relative">
-										<label class="form-label">job created date <span class="text-danger"> *</span></label>
-										<input type="text" name="created_by" id="created_at" class="form-control" /> 
-									</div>
+							</div>
+							<div class="col-md-6">
+								<div class="mb-3 position-relative">
+									<label class="form-label">job created date <span class="text-danger"> *</span></label>
+									<input type="text" name="created_by" id="created_at" class="form-control" />
 								</div>
 							</div>
 						</div>
 					</div>
-				</div> 
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
 <!-- /View candidate details -->
 
 <!-- Edit candidate interview status -->
-<div class="modal fade" id="editModal">
+<!-- <div class="modal fade" id="editModal">
 	<div class="modal-dialog modal-dialog-centered modal-sm">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -272,7 +389,6 @@ if (isset($_GET['id'])) {
 									<label class="form-label">Interview Status <span class="text-danger"> *</span></label>
 									<select class="select" name="interview_status" id="interview_status">
 										<option value="">Select</option>
-										<option value="1">Applied</option>
 										<option value="2">Shortlisted</option>
 										<option value="3">Scheduled</option>
 										<option value="4">Interviewed</option>
@@ -296,7 +412,7 @@ if (isset($_GET['id'])) {
 			</form>
 		</div>
 	</div>
-</div>
+</div> -->
 <!-- /Edit candidate interview status-->
 
 <!-- Delete Modal -->

@@ -48,17 +48,17 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         exit;
     } elseif ($flag === 'getAll' || $flag === 'jobApplications') {
 
-        if($flag === 'jobApplications'){
+        if ($flag === 'jobApplications') {
             $jobID = $_POST['jobID'];
             $condition = "AND `c`.`ticket_request_id`= '$jobID'";
-        }elseif($flag === 'getAll'){
+        } elseif ($flag === 'getAll') {
             $condition = '';
         }
- 
+
         $sql = "SELECT c.*,r.job_position FROM `candidates` AS c INNER JOIN recruitment AS r ON c.ticket_request_id = r.ticket_request_id WHERE c.`responce_status` = 1 $condition";
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {  
+            while ($row = mysqli_fetch_assoc($result)) {
                 $response[] = $row;
             }
         } else {
@@ -66,7 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         }
         echo json_encode($response);
         exit;
-        
     } elseif ($flag === "getDetails") {
 
         $id = $_POST['id'];
@@ -79,15 +78,24 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             echo json_encode(array('status' => 'failure', 'message' => 'something went wrong'));
         }
         exit;
-    } elseif ($flag === "update") {
+    } elseif ($flag === "update") { 
 
         $rowId = $_POST['rowId'];
         $interview_status = $_POST['interview_status']; 
+        
+        if ($interview_status == 2) {
+            $interview_date = ", interview_date = '" . $_POST['interview_date'] . " " . $_POST['interview_time'] . "' ";
+        }else{
+            $interview_date = '';
+        }
 
-        $query = "UPDATE `candidates` SET `interview_status`='$interview_status' WHERE `candidate_id`='$rowId'";
+        $query = "UPDATE `candidates` SET `interview_status`= $interview_status $interview_date  WHERE `candidate_id`='$rowId'";  
         $result = mysqli_query($conn, $query);
         if ($result) {
-            echo json_encode(array('status' => 'success', 'message' => 'Candidate status update successfully'));
+            $query = "SELECT c.*,r.job_position,u.user_name FROM `candidates` AS c INNER JOIN `recruitment` AS r ON `c`.`ticket_request_id`=`r`.`ticket_request_id` INNER JOIN `users` AS u ON `c`.`created_by`=`u`.`user_id` WHERE `candidate_id` = '$rowId'";
+            $result = mysqli_query($conn, $query);
+            $row = mysqli_fetch_assoc($result);
+            echo json_encode(array('status' => 'success', 'data' => $row));
         } else {
             echo json_encode(array('status' => 'failure', 'message' => 'Candidate status update failure'));
         }
