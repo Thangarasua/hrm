@@ -4,56 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Email Template</title>
-    <style>
-        body {
-            font-family: 'Arial', 'Helvetica', 'sans-serif';
-            font-size: 14px;
-            background-color: #e0f7fa;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
-        .container {
-            width: 100%;
-            max-width: 600px;
-            margin: 20px auto;
-            background: #ffffff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            text-align: left;
-        }
-        .header img, .footer img {
-            width: 100%;
-            max-width: 600px;
-            display: block;
-            border-radius: 5px 5px 0 0;
-        }
-        .content {
-            padding: 20px;
-            font-size: 14px;
-            color: #333;
-            line-height: 1.6;
-        }
-        .button {
-            display: inline-block;
-            padding: 12px 25px;
-            font-size: 16px;
-            color: white;
-            background: #28a745;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        @media (max-width: 600px) {
-            .container {
-                padding: 3px;
-                max-width: 93%;
-            }
-            html, body {
-                overflow-x: hidden;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../../css/shortlist-mail-content.css">
 </head>
 <body>
     <div class="container">
@@ -63,7 +14,7 @@
         <div class="content">
             <p>Dear {{Name}},</p>
             <p> Thank you for your interest in the opportunity with us. Please complete the recruitment form by clicking the link below:</p>
-            <a href="{{Link}}" target="_blank" class="button">Form Link</a>
+            <a href="{{Link}}" target="_blank" class="form-control button yes"><span>Form Link</span></a>
             <p>Kindly fill in the required details at your earliest convenience. If you have any questions, feel free to reach out.</p>
             <p><b>Best regards</b>, <br> {{HR Name}} <br> Markerz Global solution </p> 
         </div>

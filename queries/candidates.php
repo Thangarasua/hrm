@@ -78,18 +78,18 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             echo json_encode(array('status' => 'failure', 'message' => 'something went wrong'));
         }
         exit;
-    } elseif ($flag === "update") { 
+    } elseif ($flag === "update") {
 
         $rowId = $_POST['rowId'];
-        $interview_status = $_POST['interview_status']; 
-        
+        $interview_status = $_POST['interview_status'];
+
         if ($interview_status == 2) {
             $interview_date = ", interview_date = '" . $_POST['interview_date'] . " " . $_POST['interview_time'] . "' ";
-        }else{
+        } else {
             $interview_date = '';
         }
 
-        $query = "UPDATE `candidates` SET `interview_status`= $interview_status $interview_date  WHERE `candidate_id`='$rowId'";  
+        $query = "UPDATE `candidates` SET `interview_status`= $interview_status $interview_date  WHERE `candidate_id`='$rowId'";
         $result = mysqli_query($conn, $query);
         if ($result) {
             $query = "SELECT c.*,r.job_position,u.user_name FROM `candidates` AS c INNER JOIN `recruitment` AS r ON `c`.`ticket_request_id`=`r`.`ticket_request_id` INNER JOIN `users` AS u ON `c`.`created_by`=`u`.`user_id` WHERE `candidate_id` = '$rowId'";
@@ -156,6 +156,21 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             }
         }
         // Exit to prevent further execution
+        exit;
+    } elseif ($flag === "interviewDateUpdate") {
+
+        $rowId = $_POST['rowId']; 
+        $interview_date = $_POST['interview_date'] . ' ' . $_POST['interview_time'];
+
+        $sheduled = 3;
+
+        $query = "UPDATE `candidates` SET `interview_status`= $sheduled, `date_confirm_status`= 2 , `interview_re_date`= '$interview_date'  WHERE `candidate_id`='$rowId'";
+        $result = mysqli_query($conn, $query);
+        if ($result) {
+            echo json_encode(array('status' => 'success', 'message' => 'Interview date update successfully'));
+        } else {
+            echo json_encode(array('status' => 'failure', 'message' => 'Interview date update failure'));
+        }
         exit;
     }
 }
