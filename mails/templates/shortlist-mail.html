@@ -37,12 +37,24 @@
         }
         .button {
             display: inline-block;
-            padding: 12px 25px;
+            padding: 8px 25px;
             font-size: 16px;
-            color: white;
-            background: #28a745;
+            font-weight: bold;
+            color: white; 
             text-decoration: none;
-            border-radius: 5px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+        .yes{
+            background: white;
+            color: #28a745 !important;
+            border: 1px solid #28a745;
+        }
+        .no{
+            background: white;
+            color: #ec0505 !important;
+            border: 1px solid red;
         }
         @media (max-width: 600px) {
             .container {
@@ -64,6 +76,11 @@
             <p>Dear {{Name}},</p>
             <p> We are pleased to inform you that you have been shortlisted for the <b>{{Job Position}}</b> at <b>Markerz Global Solutions</b>. Your skills and experience align well with our requirements</p> 
             <p>Your interview is scheduled for <b>{{Date}} (IST)</b>. Our team will share further details soon. If you have any questions, feel free to reach out.</p>
+            <p>Are you attend the interview at the scheduled date </p>
+            <a href="http://localhost/actecrm/hrm/shortlist-form?id={{id}}&val=MQ==" target="_blank" class="button yes">Yes</a>
+            <a href="http://localhost/actecrm/hrm/shortlist-form?id={{id}}&val=Mg==" target="_blank" class="button no">No</a>
+            <br>
+            <small>if no means click & choice the date.</small>
             <p><b>Best regards</b>, <br> {{HR Name}}, <br> 7894561325, <br> Markerz Global Solutions, <br>Velachery, Chennai, Tamil Nadu 600042. </p> 
         </div>
         <div class="footer"> 
