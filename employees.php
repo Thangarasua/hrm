@@ -10,13 +10,8 @@
 				<h2 class="mb-1">Employee</h2>
 				<nav>
 					<ol class="breadcrumb mb-0">
-						<li class="breadcrumb-item">
-							<a href="https://smarthr.dreamstechnologies.com/html/template/index.html"><i class="ti ti-smart-home"></i></a>
-						</li>
-						<li class="breadcrumb-item">
-							Employee
-						</li>
-						<li class="breadcrumb-item active" aria-current="page">Employee List</li>
+						<li class=""><a href="index"><i class="ti ti-smart-home"></i> Home </a></li> /
+						<li class=" active" aria-current="page">Employee List</li>
 					</ol>
 				</nav>
 			</div>
@@ -396,7 +391,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<div class="d-flex align-items-center">
-					<h4 class="modal-title me-2">Add New Employee</h4><span>Employee ID : EMP -0024</span>
+					<h4 class="modal-title me-2">Add New Employee</h4>
 				</div>
 				<button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
 					<i class="ti ti-x"></i>
@@ -406,12 +401,24 @@
 				<div class="contact-grids-tab">
 					<ul class="nav nav-underline" id="myTab" role="tablist">
 						<li class="nav-item" role="presentation">
-							<button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#basic-info" type="button" role="tab" aria-selected="true">Basic Information</button>
+							<button class="nav-link active" id="basic-tab" data-bs-toggle="tab" data-bs-target="#basic-info" type="button" role="tab" aria-selected="true">Basic Information</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link" id="office-tab" data-bs-toggle="tab" data-bs-target="#office-info" type="button" role="tab" aria-selected="true">Officeal Information</button>
+						</li>
+						<li class="nav-item" role="presentation"></li>
+							<button class="nav-link" id="carrier-tab" data-bs-toggle="tab" data-bs-target="#carrier-info" type="button" role="tab" aria-selected="true">Carrier Information</button>
+						</li>
+						<li class="nav-item" role="presentation"></li>
+							<button class="nav-link" id="personal-tab" data-bs-toggle="tab" data-bs-target="#personal-info" type="button" role="tab" aria-selected="true">Personal Information</button>
+						</li>
+						<li class="nav-item" role="presentation"></li>
+							<button class="nav-link" id="bank-tab" data-bs-toggle="tab" data-bs-target="#bank-info" type="button" role="tab" aria-selected="true">Bank Information</button>
 						</li>
 					</ul>
 				</div>
 				<div class="tab-content" id="myTabContent">
-					<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
+					<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="basic-tab" tabindex="0">
 						<div class="modal-body pb-0 ">
 							<div class="row">
 								<div class="col-md-12">
@@ -530,6 +537,18 @@
 							<button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">Cancel</button>
 							<button type="submit" class="btn btn-primary addEmployeeSaveBtn">Save </button>
 						</div>
+					</div>
+					<div class="tab-pane fade" id="office-info" role="tabpanel" aria-labelledby="office-tab" tabindex="0">
+						<h>Officeal Info</h1>
+					</div>
+					<div class="tab-pane fade" id="carrier-info" role="tabpanel" aria-labelledby="carrier-tab" tabindex="0">
+						<h>Carrier Info</h1>
+					</div>
+					<div class="tab-pane fade" id="personal-info" role="tabpanel" aria-labelledby="personal-tab" tabindex="0">
+						<h>Personal Info</h1>
+					</div>
+					<div class="tab-pane fade" id="bank-info" role="tabpanel" aria-labelledby="bank-tab" tabindex="0">
+						<h>Bank Info</h1>
 					</div>
 				</div>
 			</form>
