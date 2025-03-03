@@ -156,33 +156,6 @@ $(document).ready(function () {
     });
   });
 
-  // $(document).on("click", ".edit", function (e) {
-  //   e.preventDefault();
-  //   $("#editModal").modal("show");
-  //   var id = $(this).data("id");
-
-  //   $.ajax({
-  //     type: "POST",
-  //     url: "queries/candidates.php",
-  //     data: {
-  //       id: id,
-  //       flag: "getDetails",
-  //     },
-  //     cache: false,
-  //     success: function (res) {
-  //       if (res.status == "success") {
-  //         $("#rowId").val(res.data.candidate_id);
-  //         $("#candidate_name").val(res.data.candidate_name);
-  //         $("#interview_status")
-  //           .val(res.data.interview_status)
-  //           .trigger("change");
-  //       } else {
-  //         Swal.fire(res.data.message);
-  //       }
-  //     },
-  //   });
-  // });
-
   $(document).on("click", ".edit", function (e) {
     e.preventDefault();
     $("#interviewModal").modal("show");
