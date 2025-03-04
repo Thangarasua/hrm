@@ -706,7 +706,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<div class="d-flex align-items-center">
-					<h4 class="modal-title me-2">Edit Employee</h4><span>Employee ID : EMP -0024</span>
+					<h4 class="modal-title me-2">Edit Employee</h4>
 				</div>
 				<button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
 					<i class="ti ti-x"></i>
@@ -714,23 +714,33 @@
 			</div>
 			<form id="editEmployee">
 				<div class="contact-grids-tab">
-					<ul class="nav nav-underline" id="myTab2" role="tablist">
+					<ul class="nav nav-underline" id="myTab" role="tablist">
 						<li class="nav-item" role="presentation">
-							<button class="nav-link active" id="info-tab2" data-bs-toggle="tab" data-bs-target="#basic-info2" type="button" role="tab" aria-selected="true">Basic Information</button>
+							<button class="nav-link active" id="edit-basic-tab" data-bs-toggle="tab" data-bs-target="#edit-basic-info" type="button" role="tab" aria-selected="true">Basic Information</button>
 						</li>
 						<li class="nav-item" role="presentation">
-							<button class="nav-link" id="address-tab2" data-bs-toggle="tab" data-bs-target="#address2" type="button" role="tab" aria-selected="false">Permissions</button>
+							<button class="nav-link" id="edit-office-tab" data-bs-toggle="tab" data-bs-target="#edit-office-info" type="button" role="tab" aria-selected="true">Official Information</button>
+						</li>
+						<li class="nav-item" role="presentation"></li>
+							<button class="nav-link" id="edit-carrier-tab" data-bs-toggle="tab" data-bs-target="#edit-carrier-info" type="button" role="tab" aria-selected="true">Carrier Information</button>
+						</li>
+						<li class="nav-item" role="presentation"></li>
+							<button class="nav-link" id="edit-personal-tab" data-bs-toggle="tab" data-bs-target="#edit-personal-info" type="button" role="tab" aria-selected="true">Personal Information</button>
+						</li>
+						<li class="nav-item" role="presentation"></li>
+							<button class="nav-link" id="edit-bank-tab" data-bs-toggle="tab" data-bs-target="#edit-bank-info" type="button" role="tab" aria-selected="true">Bank Information</button>
 						</li>
 					</ul>
 				</div>
-				<div class="tab-content" id="myTabContent2">
-					<div class="tab-pane fade show active" id="basic-info2" role="tabpanel" aria-labelledby="info-tab2" tabindex="0">
+				<div class="tab-content" id="myTabContent">
+					<!-- Basic Information Tab -->
+					<div class="tab-pane fade show active" id="edit-basic-info" role="tabpanel" aria-labelledby="edit-basic-tab" tabindex="0">
 						<div class="modal-body pb-0 ">
 							<div class="row">
 								<div class="col-md-12">
 									<div class="d-flex align-items-center flex-wrap row-gap-3 bg-light w-100 rounded p-3 mb-4">
 										<div class="d-flex align-items-center justify-content-center avatar avatar-xxl rounded-circle border border-dashed me-2 flex-shrink-0 text-dark frames">
-											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-13.jpg" alt="img" class="rounded-circle">
+											<i class="ti ti-photo text-gray-2 fs-16"></i>
 										</div>
 										<div class="profile-upload">
 											<div class="mb-2">
@@ -740,7 +750,7 @@
 											<div class="profile-uploader d-flex align-items-center">
 												<div class="drag-upload-btn btn btn-sm btn-primary me-2">
 													Upload
-													<input type="file" class="form-control image-sign" multiple="">
+													<input type="file" class="form-control image-sign" multiple="" name="profile">
 												</div>
 												<a href="javascript:void(0);" class="btn btn-light btn-sm">Cancel</a>
 											</div>
@@ -750,27 +760,33 @@
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
-										<label class="form-label">First Name <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" value="Anthony">
+										<label class="form-label">User ID<span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" name="userId" readonly>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
-										<label class="form-label">Last Name</label>
-										<input type="email" class="form-control" value="Lewis">
+										<label class="form-label">User Name <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" name="userName" readonly>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Full Name <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" onkeypress="return isAlphabets(event)" name="employeeName">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Employee ID <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" value="Emp-001">
+										<input type="text" class="form-control" name="employeeID">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Joining Date <span class="text-danger"> *</span></label>
 										<div class="input-icon-end position-relative">
-											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" value="17-10-2022">
+											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="doj">
 											<span class="input-icon-addon">
 												<i class="ti ti-calendar text-gray-7"></i>
 											</span>
@@ -779,579 +795,218 @@
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
-										<label class="form-label">Username <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" value="Anthony">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="mb-3">
 										<label class="form-label">Email <span class="text-danger"> *</span></label>
-										<!-- <input type="email" class="form-control" onblur="return isEmail(this)" value="anthony@example.com	"> -->
-										<input type="email" class="form-control email-input" value="anthony@example.com">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="mb-3 ">
-										<label class="form-label">Password <span class="text-danger"> *</span></label>
-										<div class="pass-group">
-											<input type="password" class="pass-input form-control">
-											<span class="ti toggle-password ti-eye-off"></span>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="mb-3 ">
-										<label class="form-label">Confirm Password <span class="text-danger"> *</span></label>
-										<div class="pass-group">
-											<input type="password" class="pass-inputs form-control">
-											<span class="ti toggle-passwords ti-eye-off"></span>
-										</div>
+										<input type="email" class="form-control" onblur="return isEmail(this)" value="" name="email">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Phone Number <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" value="(123) 4567 890">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="mb-3">
-										<label class="form-label">Company<span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" value="Abac Company">
+										<input type="text" class="form-control" onkeypress="return isNumber(event)" name="phone">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Department</label>
-										<select class="select">
-											<option>Select</option>
-											<option>All Department</option>
-											<option selected>Finance</option>
-											<option>Developer</option>
-											<option>Executive</option>
+										<select class="select" name="department">
+											<option value="">Select</option>
+											<option value="All Department">All Department</option>
+											<option value="Finance">Finance</option>
+											<option value="Developer">Developer</option>
+											<option value="Executive">Executive</option>
 										</select>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Designation</label>
-										<select class="select">
-											<option>Select</option>
-											<option selected>Finance</option>
-											<option>Developer</option>
-											<option>Executive</option>
+										<select class="select" name="designation">
+											<option value="">Select</option>
+											<option value="Finance">Finance</option>
+											<option value="Developer">Developer</option>
+											<option value="Executive">Executive</option>
 										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Grade <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" name="grade">
 									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="mb-3">
 										<label class="form-label">About <span class="text-danger"> *</span></label>
-										<textarea class="form-control" rows="3"></textarea>
+										<textarea class="form-control" rows="3" name="about"></textarea>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">Cancel</button>
-							<button type="submit" class="btn btn-primary">Save </button>
 						</div>
 					</div>
-					<div class="tab-pane fade" id="address2" role="tabpanel" aria-labelledby="address-tab2" tabindex="0">
-						<div class="modal-body">
-							<div class="card bg-light-500 shadow-none">
-								<div class="card-body d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-									<h6>Enable Options</h6>
-									<div class="d-flex align-items-center justify-content-end">
-										<div class="form-check form-switch me-2">
-											<label class="form-check-label mt-0">
-												<input class="form-check-input me-2" type="checkbox" role="switch">
-												Enable all Module
-											</label>
+					<!-- Official Information Tab -->
+					<div class="tab-pane fade" id="edit-office-info" role="tabpanel" aria-labelledby="edit-office-tab" tabindex="0">
+							<div class="modal-body pb-0">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Work Location</label>
+											<input type="text" class="form-control" name="workLocation">
 										</div>
-										<div class="form-check d-flex align-items-center">
-											<label class="form-check-label mt-0">
-												<input class="form-check-input" type="checkbox" checked="">
-												Select All
-											</label>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Manager</label>
+											<input type="text" class="form-control" name="manager">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Supervisor</label>
+											<input type="text" class="form-control" name="supervisor">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Team</label>
+											<input type="text" class="form-control" name="team">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Employee Type</label>
+											<select class="select" name="employeeType">
+												<option value="">Select</option>
+												<option value="Full-Time">Full-Time</option>
+												<option value="Part-Time">Part-Time</option>
+												<option value="Contract">Contract</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Salary</label>
+											<input type="text" class="form-control" name="salary">
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="table-responsive border rounded">
-								<table class="table">
-									<tbody>
-										<tr>
-											<td>
-												<div class="form-check form-switch me-2">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input me-2" type="checkbox" role="switch" checked>
-														Holidays
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox" checked="">
-														Read
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Write
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Create
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox" checked="">
-														Delete
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Import
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Export
-													</label>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="form-check form-switch me-2">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input me-2" type="checkbox" role="switch">
-														Leaves
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Read
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Write
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Create
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Delete
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Import
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Export
-													</label>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="form-check form-switch me-2">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input me-2" type="checkbox" role="switch">
-														Clients
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Read
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Write
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Create
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Delete
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Import
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Export
-													</label>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="form-check form-switch me-2">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input me-2" type="checkbox" role="switch">
-														Projects
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Read
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Write
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Create
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Delete
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Import
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Export
-													</label>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="form-check form-switch me-2">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input me-2" type="checkbox" role="switch">
-														Tasks
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Read
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Write
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Create
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Delete
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Import
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Export
-													</label>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="form-check form-switch me-2">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input me-2" type="checkbox" role="switch">
-														Chats
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Read
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Write
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Create
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Delete
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Import
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Export
-													</label>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="form-check form-switch me-2">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input me-2" type="checkbox" role="switch" checked>
-														Assets
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Read
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Write
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox" checked="">
-														Create
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Delete
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox" checked="">
-														Import
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Export
-													</label>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="form-check form-switch me-2">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input me-2" type="checkbox" role="switch">
-														Timing Sheets
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Read
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Write
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Create
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Delete
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Import
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="form-check d-flex align-items-center">
-													<label class="form-check-label mt-0">
-														<input class="form-check-input" type="checkbox">
-														Export
-													</label>
-												</div>
-											</td>
-										</tr>
-									</tbody>
-								</table>
+						</div>
+
+						<!-- Career Information Tab -->
+						<div class="tab-pane fade" id="edit-carrier-info" role="tabpanel" aria-labelledby="edit-carrier-tab" tabindex="0">
+							<div class="modal-body pb-0">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Previous Employer</label>
+											<input type="text" class="form-control" name="previousEmployer">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Work Experience (Years)</label>
+											<input type="text" class="form-control" name="workExperience">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Skills</label>
+											<input type="text" class="form-control" name="skills">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Certifications</label>
+											<input type="text" class="form-control" name="certifications">
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">Cancel</button>
-							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#success_modal">Save </button>
+
+						<!-- Personal Information Tab -->
+						<div class="tab-pane fade" id="edit-personal-info" role="tabpanel" aria-labelledby="edit-personal-tab" tabindex="0">
+							<div class="modal-body pb-0">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Date of Birth</label>
+											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="dob">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Gender</label>
+											<select class="select" name="gender">
+												<option value="">Select</option>
+												<option value="Male">Male</option>
+												<option value="Female">Female</option>
+												<option value="Other">Other</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Nationality</label>
+											<input type="text" class="form-control" name="nationality">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Marital Status</label>
+											<select class="select" name="maritalStatus">
+												<option value="">Select</option>
+												<option value="Single">Single</option>
+												<option value="Married">Married</option>
+												<option value="Divorced">Divorced</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Address <span class="text-danger"> *</span></label>
+										<textarea class="form-control" rows="3" name="address"></textarea>
+									</div>
+								</div>
+								</div>
+							</div>
 						</div>
+
+						<!-- Bank Information Tab -->
+						<div class="tab-pane fade" id="edit-bank-info" role="tabpanel" aria-labelledby="edit-bank-tab" tabindex="0">
+							<div class="modal-body pb-0">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Bank Name</label>
+											<input type="text" class="form-control" name="bankName">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Bank Account Number</label>
+											<input type="text" class="form-control" name="bankAccountNumber">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">IFSC Code</label>
+											<input type="text" class="form-control" name="ifscCode">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Branch Name</label>
+											<input type="text" class="form-control" name="branchName">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">Cancel</button>
+						<button type="submit" class="btn btn-primary addEmployeeSaveBtn">Save</button>
 					</div>
 				</div>
 			</form>
