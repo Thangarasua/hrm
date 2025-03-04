@@ -35,7 +35,7 @@ $(document).ready(function () {
           $.each(data, function (index, row) {
             var profileImage = row.profile
               ? `./uploads/candidate_profile/${row.profile}`
-              : "default-avatar.png";
+              : "./uploads/candidate_profile/default-avatar.jpeg";
             var resumeLink = row.resume
               ? `./uploads/candidate_resume/${row.resume}`
               : "#";

@@ -2,8 +2,6 @@
 
 header('Content-Type: application/json');
 
-$hrm_userid = $_SESSION['hrm_userid'];
-
 $month = date('m');
 $year = date('y');
 $date = date('d');
@@ -14,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     $flag = $_POST['flag'];
 
     if ($flag === "insert") {
+        $hrm_userid = $_SESSION['hrm_userid'];
 
         $lastTicketId = "SELECT `ticket_request_id` FROM `recruitment` ORDER BY `id` DESC";
         $result = mysqli_query($conn, $lastTicketId);
