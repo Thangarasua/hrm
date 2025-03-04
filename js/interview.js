@@ -136,25 +136,21 @@ $(document).ready(function () {
       },
       cache: false,
       success: function (res) {
-        data = res.data; 
+        console.log(res);
         if (res.status == "success") {
-          $("#candidate_register_id").val(data.candidate_register_id);
-          $("#contact_number").val(data.contact_number);
-          $("#created_by").val(data.created_by);
-          $("#ticket_request_id").val(data.ticket_request_id);
-          $("#address").val(data.address);
-          $("#experience").val(data.experience);
-          $("#skills").val(data.skills);
-          $("#available_time1").val(data.available_time1); 
-          $("#available_time2").val(res.data.available_time2 || "Not define");
-          $("#available_time3").val(res.data.available_time3 || "Not define");
-          $("#created_at").val(data.created_at);
-          $("#interview_status").val(data.interview_status); 
-          $("#interview_date_view").val(data.interview_date || "---Still not update---"); 
-          $("#interview_re_date_view").val(data.interview_re_date || "---Not Define---"); 
-
+          $("#candidate_register_id").val(res.data.candidate_register_id);
+          $("#contact_number").val(res.data.contact_number);
+          $("#created_by").val(res.data.created_by);
+          $("#ticket_request_id").val(res.data.ticket_request_id);
+          $("#address").val(res.data.address);
+          $("#experience").val(res.data.experience);
+          $("#skills").val(res.data.skills);
+          $("#available_time1").val(res.data.available_time1);
+          $("#available_time2").val(res.data.available_time2);
+          $("#available_time3").val(res.data.available_time3);
+          $("#created_at").val(res.data.created_at);
         } else {
-          Swal.fire(data.message);
+          Swal.fire(res.data.message);
         }
       },
     });
@@ -185,19 +181,6 @@ $(document).ready(function () {
           $("#schedule_time1").val(res.data.available_time1);
           $("#schedule_time2").val(res.data.available_time2);
           $("#schedule_time3").val(res.data.available_time3);
-          $("#schedule_time3").val(res.data.available_time3);
-          $("#interview_date_edit").val(res.data.interview_date); 
-          $("#interview_re_date_edit").val(res.data.interview_re_date || "---Not Define---");  
-          interviewStatus = res.data.interview_status;
-          if(interviewStatus == 2){
-            $(".shortlisted").show();
-            $(".sheduleDate").hide();
-            $(".sheduledDate").show();
-          }else{
-            $(".shortlisted").hide();
-            $(".sheduleDate").show();
-            $(".sheduledDate").hide();
-          }
         } else {
           Swal.fire(res.data.message);
         }
@@ -206,7 +189,7 @@ $(document).ready(function () {
   });
 
   $("input[name='interview_status']").change(function () {
-    let existingStatus = $("#existingStatus").val(); 
+    let existingStatus = $("#existingStatus").val();
     let selectedValue = $("input[name='interview_status']:checked").val(); // Get the selected value
     let selectedText = $(
       "label[for='" +
@@ -215,15 +198,14 @@ $(document).ready(function () {
     ).text(); // Get the label text
     if (selectedValue == 2) {
       $(".shortlisted").show();
-      if(existingStatus > 1){
-        $(".sheduleDate").hide();
-        $(".sheduledDate").show();
-      }else{
-        $(".sheduleDate").show();
-        $(".sheduledDate").hide();
-      }
-    } else { 
-    } 
+    } else {
+      $(".shortlisted").hide();
+    }
+    if (selectedValue == 5) {
+      $(".offered").show();
+    } else {
+      $(".offered").hide();
+    }
   });
 
   $(document).on("submit", "#update", function (e) {

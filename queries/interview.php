@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     } elseif ($flag === "getDetails") {
 
         $id = $_POST['id'];
-        $query = "SELECT c.*,r.job_position,u.user_name FROM `candidates` AS c INNER JOIN `recruitment` AS r ON c.ticket_request_id =r.ticket_request_id  INNER JOIN `users` AS u ON c.created_by=u.user_id WHERE `candidate_id` = '$id'";
+        $query = "SELECT * FROM `candidates` WHERE `candidate_id` = '$id'";
         $result = mysqli_query($conn, $query);
         if ($result) {
             $row = mysqli_fetch_assoc($result);

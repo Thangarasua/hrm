@@ -206,6 +206,11 @@
 							</a>
 						</li>
 						<li>
+							<a href="interview">
+								<i class="ti ti-headset"></i><span>Interview</span>
+							</a>
+						</li>
+						<li>
 							<a href="refferals">
 								<i class="ti ti-ux-circle"></i><span>Referrals</span>
 							</a>
