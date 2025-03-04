@@ -404,7 +404,7 @@
 							<button class="nav-link active" id="basic-tab" data-bs-toggle="tab" data-bs-target="#basic-info" type="button" role="tab" aria-selected="true">Basic Information</button>
 						</li>
 						<li class="nav-item" role="presentation">
-							<button class="nav-link" id="office-tab" data-bs-toggle="tab" data-bs-target="#office-info" type="button" role="tab" aria-selected="true">Officeal Information</button>
+							<button class="nav-link" id="office-tab" data-bs-toggle="tab" data-bs-target="#office-info" type="button" role="tab" aria-selected="true">Official Information</button>
 						</li>
 						<li class="nav-item" role="presentation"></li>
 							<button class="nav-link" id="carrier-tab" data-bs-toggle="tab" data-bs-target="#carrier-info" type="button" role="tab" aria-selected="true">Carrier Information</button>
@@ -418,6 +418,7 @@
 					</ul>
 				</div>
 				<div class="tab-content" id="myTabContent">
+					<!-- Basic Information Tab -->
 					<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="basic-tab" tabindex="0">
 						<div class="modal-body pb-0 ">
 							<div class="row">
@@ -440,6 +441,18 @@
 											</div>
 
 										</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">User ID<span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" name="userId" readonly>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">User Name <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" name="userName" readonly>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -468,19 +481,13 @@
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Email <span class="text-danger"> *</span></label>
-										<input type="email" class="form-control" onblur="return isEmail(this)" value="anthony@example.com" name="email">
+										<input type="email" class="form-control" onblur="return isEmail(this)" value="" name="email">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Phone Number <span class="text-danger"> *</span></label>
 										<input type="text" class="form-control" onkeypress="return isNumber(event)" name="phone">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="mb-3">
-										<label class="form-label">Company<span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="company">
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -507,21 +514,9 @@
 									</div>
 								</div>
 								<div class="col-md-6">
-									<div class="mb-3 ">
-										<label class="form-label">Password <span class="text-danger"> *</span></label>
-										<div class="pass-group">
-											<input type="password" class="pass-input form-control" name="password">
-											<span class="ti toggle-password ti-eye-off"></span>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="mb-3 ">
-										<label class="form-label">Confirm Password <span class="text-danger"> *</span></label>
-										<div class="pass-group">
-											<input type="password" class="pass-inputs form-control" name="confirmPassword">
-											<span class="ti toggle-passwords ti-eye-off"></span>
-										</div>
+									<div class="mb-3">
+										<label class="form-label">Grade <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" name="grade">
 									</div>
 								</div>
 								<div class="col-md-12">
@@ -532,23 +527,171 @@
 								</div>
 							</div>
 						</div>
-						<input type="hidden" name="purpose" value="addEmployee">
-						<div class="modal-footer">
-							<button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">Cancel</button>
-							<button type="submit" class="btn btn-primary addEmployeeSaveBtn">Save </button>
+					</div>
+					<!-- Official Information Tab -->
+					<div class="tab-pane fade" id="office-info" role="tabpanel" aria-labelledby="office-tab" tabindex="0">
+							<div class="modal-body pb-0">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Work Location</label>
+											<input type="text" class="form-control" name="workLocation">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Manager</label>
+											<input type="text" class="form-control" name="manager">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Supervisor</label>
+											<input type="text" class="form-control" name="supervisor">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Team</label>
+											<input type="text" class="form-control" name="team">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Employee Type</label>
+											<select class="select" name="employeeType">
+												<option value="">Select</option>
+												<option value="Full-Time">Full-Time</option>
+												<option value="Part-Time">Part-Time</option>
+												<option value="Contract">Contract</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Salary</label>
+											<input type="text" class="form-control" name="salary">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Career Information Tab -->
+						<div class="tab-pane fade" id="carrier-info" role="tabpanel" aria-labelledby="carrier-tab" tabindex="0">
+							<div class="modal-body pb-0">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Previous Employer</label>
+											<input type="text" class="form-control" name="previousEmployer">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Work Experience (Years)</label>
+											<input type="text" class="form-control" name="workExperience">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Skills</label>
+											<input type="text" class="form-control" name="skills">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Certifications</label>
+											<input type="text" class="form-control" name="certifications">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Personal Information Tab -->
+						<div class="tab-pane fade" id="personal-info" role="tabpanel" aria-labelledby="personal-tab" tabindex="0">
+							<div class="modal-body pb-0">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Date of Birth</label>
+											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="dob">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Gender</label>
+											<select class="select" name="gender">
+												<option value="">Select</option>
+												<option value="Male">Male</option>
+												<option value="Female">Female</option>
+												<option value="Other">Other</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Nationality</label>
+											<input type="text" class="form-control" name="nationality">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Marital Status</label>
+											<select class="select" name="maritalStatus">
+												<option value="">Select</option>
+												<option value="Single">Single</option>
+												<option value="Married">Married</option>
+												<option value="Divorced">Divorced</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Address <span class="text-danger"> *</span></label>
+										<textarea class="form-control" rows="3" name="address"></textarea>
+									</div>
+								</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Bank Information Tab -->
+						<div class="tab-pane fade" id="bank-info" role="tabpanel" aria-labelledby="bank-tab" tabindex="0">
+							<div class="modal-body pb-0">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Bank Name</label>
+											<input type="text" class="form-control" name="bankName">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Bank Account Number</label>
+											<input type="text" class="form-control" name="bankAccountNumber">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">IFSC Code</label>
+											<input type="text" class="form-control" name="ifscCode">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Branch Name</label>
+											<input type="text" class="form-control" name="branchName">
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
-					<div class="tab-pane fade" id="office-info" role="tabpanel" aria-labelledby="office-tab" tabindex="0">
-						<h>Officeal Info</h1>
-					</div>
-					<div class="tab-pane fade" id="carrier-info" role="tabpanel" aria-labelledby="carrier-tab" tabindex="0">
-						<h>Carrier Info</h1>
-					</div>
-					<div class="tab-pane fade" id="personal-info" role="tabpanel" aria-labelledby="personal-tab" tabindex="0">
-						<h>Personal Info</h1>
-					</div>
-					<div class="tab-pane fade" id="bank-info" role="tabpanel" aria-labelledby="bank-tab" tabindex="0">
-						<h>Bank Info</h1>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">Cancel</button>
+						<button type="submit" class="btn btn-primary addEmployeeSaveBtn">Save</button>
 					</div>
 				</div>
 			</form>
