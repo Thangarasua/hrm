@@ -11,41 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
     $flag = $_POST['flag'];
 
-    if ($flag === "insert") {
-        $hrm_userid = $_SESSION['hrm_userid'];
-
-        $lastTicketId = "SELECT `ticket_request_id` FROM `recruitment` ORDER BY `id` DESC";
-        $result = mysqli_query($conn, $lastTicketId);
-        $rowCount = mysqli_num_rows($result);
-        if ($rowCount > 0) {
-            $data = mysqli_fetch_assoc($result);
-            $lastInteger = substr($data['ticket_request_id'], 7, 3);
-            $newInteger = sprintf("%03d", $lastInteger + 1);
-            $ticketRequestId = 'RTR' . $month . $year . $newInteger;
-        } else {
-            $ticketRequestId = 'RTR' . $month . $year . '001';
-        }
-
-        $jobTitle = $_POST['jobTitle'];
-        $jobDescription = $_POST['jobDescription'];
-        $jobType = $_POST['jobType'];
-        $jobLevel = $_POST['jobLevel'];
-        $experience = $_POST['experience'];
-        $qualification = $_POST['qualification'];
-        $gender = $_POST['gender'];
-        $requiredSkills = $_POST['requiredSkills'];
-        $priority = $_POST['priority'];
-        $location = $_POST['location'];
-
-        $query = "INSERT INTO `recruitment`(`ticket_request_id`, `raised_by`, `job_position`, `job_descriptions`, `required_skills`, `job_type`, `job_level`, `job_experience`, `qualification`, `gender`, `priority`, `location`, `hr_contacted`, `status`, `created_at`) VALUES ('$ticketRequestId','$hrm_userid','$jobTitle','$jobDescription','$requiredSkills','$jobType','$jobLevel','$experience','$qualification','$gender','$priority','$location','',1,'$currentDatetime')";
-        $result = mysqli_query($conn, $query);
-        if ($result) {
-            echo json_encode(array('status' => 'success', 'message' => 'Resorce requested successfully'));
-        } else {
-            echo json_encode(array('status' => 'failure', 'message' => 'Resorce requested failure'));
-        }
-        exit;
-    } elseif ($flag === 'getAll' || $flag === 'jobApplications') {
+     if ($flag === 'getAll' || $flag === 'jobApplications') {
 
         if ($flag === 'jobApplications') {
             $jobID = $_POST['jobID'];

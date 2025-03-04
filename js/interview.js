@@ -10,7 +10,7 @@ $(document).ready(function () {
 
   function loadData(fromDate, toDate, dateRange, companyType, flag, jobID) {
     $.ajax({
-      url: "queries/candidates.php",
+      url: "queries/interview.php",
       type: "POST",
       dataType: "json",
       data: {
@@ -69,7 +69,7 @@ $(document).ready(function () {
             var newRow = `
                 <tr>
                      <td>${index + 1}</td>
-                    <td>${row.candidate_id}</td>
+                    <td>${row.candidate_register_id}</td>
                     <td>
                         <div class="d-flex align-items-center file-name-icon">
                             <a href="${profileImage}" target="_blank" class="avatar avatar-md">
@@ -129,7 +129,7 @@ $(document).ready(function () {
 
     $.ajax({
       type: "POST",
-      url: "queries/candidates.php",
+      url: "queries/interview.php",
       data: {
         id: id,
         flag: "getDetails",
@@ -163,7 +163,7 @@ $(document).ready(function () {
 
     $.ajax({
       type: "POST",
-      url: "queries/candidates.php",
+      url: "queries/interview.php",
       data: {
         id: id,
         flag: "getDetails",
@@ -225,7 +225,7 @@ $(document).ready(function () {
 
     $.ajax({
       type: "POST",
-      url: "queries/candidates.php",
+      url: "queries/interview.php",
       data: formData,
       dataType: "json",
       contentType: false,

@@ -22,8 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         if ($rowCount > 0) {
             $data = mysqli_fetch_assoc($result);
             $lastInteger = substr($data['ticket_request_id'], 7, 3);
+            if($lastInteger > 999){
+                $lastInteger = 0;
+            }
             $newInteger = sprintf("%03d", $lastInteger + 1);
-            $ticketRequestId = 'RTR' . $month . $year . $newInteger;
+            $ticketRequestId = 'RTR' . $year . $month . $newInteger;
         } else {
             $ticketRequestId = 'RTR' . $month . $year . '001';
         }
@@ -122,10 +125,13 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         if ($rowCount > 0) {
             $data = mysqli_fetch_assoc($result);
             $lastInteger = (int) substr($data['candidate_register_id'], 7, 3);
+            if($lastInteger > 999){
+                $lastInteger = 0;
+            }
             $newInteger = sprintf("%03d", $lastInteger + 1);
-            $candidateRequestId = 'CND' . $month . $year . $newInteger;
+            $candidateRequestId = 'CND' . $year . $month . $newInteger;
         } else {
-            $candidateRequestId = 'CND' . $month . $year . '001';
+            $candidateRequestId = 'CND' . $year . $month . '001';
         }
 
         // Enable MySQLi Exception Mode

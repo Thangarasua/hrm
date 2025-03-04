@@ -69,7 +69,7 @@ $(document).ready(function () {
             var newRow = `
                 <tr>
                      <td>${index + 1}</td>
-                    <td>${row.candidate_id}</td>
+                    <td>${row.candidate_register_id}</td>
                     <td>
                         <div class="d-flex align-items-center file-name-icon">
                             <a href="${profileImage}" target="_blank" class="avatar avatar-md">
