@@ -49,12 +49,17 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $interview_status = $_POST['interview_status'];
 
         if ($interview_status == 2) {
-            $interview_date = ", interview_date = '" . $_POST['interview_date'] . " " . $_POST['interview_time'] . "' ";
-        } else {
-            $interview_date = '';
+            $interview_date = $_POST['interview_date'].' '. $_POST['interview_time'];
+            $query = "UPDATE `candidates` SET `interview_status`= $interview_status,interview_date = '$interview_date' WHERE `candidate_id`='$rowId'";
+        } elseif ($interview_status == 3) { 
+            $insertQuery = "INSERT INTO `interview_process`(`candidate_table_id`, `interview_process_status`, `ratings`, `rating_date`) VALUES ('$rowId','$interview_status','$currentDatetime')";
+            mysqli_query($conn, $insertQuery);
+            
+            $query = "UPDATE `candidates` SET `interview_status`= $interview_status WHERE `candidate_id`='$rowId'";
+        } else { 
+            $query = "UPDATE `candidates` SET `interview_status`= $interview_status WHERE `candidate_id`='$rowId'";
         }
 
-        $query = "UPDATE `candidates` SET `interview_status`= $interview_status $interview_date  WHERE `candidate_id`='$rowId'";
         $result = mysqli_query($conn, $query);
         if ($result) {
             $query = "SELECT c.*,r.job_position,u.user_name FROM `candidates` AS c INNER JOIN `recruitment` AS r ON `c`.`ticket_request_id`=`r`.`ticket_request_id` INNER JOIN `users` AS u ON `c`.`created_by`=`u`.`user_id` WHERE `candidate_id` = '$rowId'";

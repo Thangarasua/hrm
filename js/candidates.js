@@ -136,7 +136,7 @@ $(document).ready(function () {
       },
       cache: false,
       success: function (res) {
-        data = res.data; 
+        data = res.data;
         if (res.status == "success") {
           $("#candidate_register_id").val(data.candidate_register_id);
           $("#contact_number").val(data.contact_number);
@@ -145,14 +145,17 @@ $(document).ready(function () {
           $("#address").val(data.address);
           $("#experience").val(data.experience);
           $("#skills").val(data.skills);
-          $("#available_time1").val(data.available_time1); 
-          $("#available_time2").val(res.data.available_time2 || "Not define");
-          $("#available_time3").val(res.data.available_time3 || "Not define");
+          $("#available_time1").val(data.available_time1);
+          $("#available_time2").val(data.available_time2 || "Not define");
+          $("#available_time3").val(data.available_time3 || "Not define");
           $("#created_at").val(data.created_at);
-          $("#interview_status").val(data.interview_status); 
-          $("#interview_date_view").val(data.interview_date || "---Still not update---"); 
-          $("#interview_re_date_view").val(data.interview_re_date || "---Not Define---"); 
-
+          $("#interview_status").val(data.interview_status);
+          $("#interview_date_view").val(
+            data.interview_date || "---Still not update---"
+          );
+          $("#interview_re_date_view").val(
+            data.interview_re_date || "---Not Define---"
+          );
         } else {
           Swal.fire(data.message);
         }
@@ -183,21 +186,18 @@ $(document).ready(function () {
           ).prop("checked", true);
           $("#existingStatus").val(res.data.interview_status);
           $("#schedule_time1").val(res.data.available_time1);
-          $("#schedule_time2").val(res.data.available_time2);
-          $("#schedule_time3").val(res.data.available_time3);
-          $("#schedule_time3").val(res.data.available_time3);
-          $("#interview_date_edit").val(res.data.interview_date); 
-          $("#interview_re_date_edit").val(res.data.interview_re_date || "---Not Define---");  
-          interviewStatus = res.data.interview_status;
-          if(interviewStatus == 2){
-            $(".shortlisted").show();
-            $(".sheduleDate").hide();
-            $(".sheduledDate").show();
-          }else{
-            $(".shortlisted").hide();
-            $(".sheduleDate").show();
-            $(".sheduledDate").hide();
-          }
+          $("#schedule_time2").val(
+            res.data.available_time2 || "---Not Define---"
+          );
+          $("#schedule_time3").val(
+            res.data.available_time3 || "---Not Define---"
+          );
+          $("#interview_date_edit").val(res.data.interview_date);
+          $("#interview_re_date_edit").val(
+            res.data.interview_re_date || "---Not Define---"
+          );
+          let val = res.data.interview_status;
+          dynamicInputs(val, val);
         } else {
           Swal.fire(res.data.message);
         }
@@ -206,25 +206,37 @@ $(document).ready(function () {
   });
 
   $("input[name='interview_status']").change(function () {
-    let existingStatus = $("#existingStatus").val(); 
+    let existingStatus = $("#existingStatus").val();
     let selectedValue = $("input[name='interview_status']:checked").val(); // Get the selected value
-    let selectedText = $(
-      "label[for='" +
-        $("input[name='interview_status']:checked").attr("id") +
-        "']"
-    ).text(); // Get the label text
+    dynamicInputs(selectedValue, existingStatus);
+  });
+
+  function dynamicInputs(val1, val2) {
+    selectedValue = val1;
+    existingStatus = val2;
+
+    $("#updateBtn").hide();
+    $(".shortlisted").hide();
+
+    if (selectedValue == 1) {
+      $("#updateBtn").hide();
+    } 
     if (selectedValue == 2) {
       $(".shortlisted").show();
-      if(existingStatus > 1){
+      if (existingStatus > 1) {
         $(".sheduleDate").hide();
         $(".sheduledDate").show();
-      }else{
+        $("#updateBtn").hide();
+      } else {
         $(".sheduleDate").show();
         $(".sheduledDate").hide();
+        $("#updateBtn").show();
       }
-    } else { 
+    }  
+    if (selectedValue == 7) {
+      $("#updateBtn").show();
     } 
-  });
+  }
 
   $(document).on("submit", "#update", function (e) {
     e.preventDefault();
@@ -263,7 +275,8 @@ $(document).ready(function () {
       success: function (response) {
         if (response.status === "success") {
           interview_status = response.data.interview_status;
-          if (interview_status == 2) { // 2->shortlisted candidate send mail
+          if (interview_status == 2) {
+            // 2->shortlisted candidate send mail
             sendRecruitmentMail(response.data);
           } else {
             $("#update")[0].reset();

@@ -147,12 +147,10 @@ if (isset($_GET['id'])) {
 								<th>Action</th>
 							</tr>
 						</thead>
-
 					</table>
 				</div>
 			</div>
 		</div>
-
 	</div>
 
 	<div class="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
@@ -165,7 +163,7 @@ if (isset($_GET['id'])) {
 
 <!-- Edit interview details -->
 <div class="modal fade" id="interviewModal">
-	<div class="modal-dialog modal-dialog-centered modal-lg">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<span>.</span>
@@ -226,13 +224,13 @@ if (isset($_GET['id'])) {
 							</div>
 							<div class="col-md-4">
 								<div class="mb-3">
-									<label class="form-label">Select the interview Date</label>
+									<label class="form-label">Interview Date</label>
 									<input type="date" class="form-control" id="interview_date" name="interview_date" min=<?php echo date('Y-m-d'); ?>>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="mb-3">
-									<label class="form-label">Select the interview time</label>
+									<label class="form-label">Interview Time</label>
 									<input type="time" class="form-control" id="interview_time" name="interview_time">
 								</div>
 							</div> 
@@ -243,13 +241,13 @@ if (isset($_GET['id'])) {
 							</div>
 							<div class="col-md-4">
 								<div class="mb-3">
-									<label class="form-label">Scheduled Interview Date</label>
+									<label class="form-label">Scheduled Date</label>
 									<input type="text" class="form-control" id="interview_date_edit">
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="mb-3">
-									<label class="form-label">Scheduled Interview Re-Date</label>
+									<label class="form-label">Scheduled Re-Date</label>
 									<input type="text" class="form-control" id="interview_re_date_edit">
 								</div>
 							</div>
@@ -264,8 +262,7 @@ if (isset($_GET['id'])) {
 		</div>
 	</div>
 </div>
-<!-- /View candidate details -->
-
+<!-- /Edit interview details -->
 
 <!-- View candidate details -->
 <div class="modal fade" id="viewModal">
@@ -361,59 +358,7 @@ if (isset($_GET['id'])) {
 	</div>
 </div>
 <!-- /View candidate details -->
-
-<!-- Edit candidate interview status -->
-<!-- <div class="modal fade" id="editModal">
-	<div class="modal-dialog modal-dialog-centered modal-sm">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">Interview status update</h4>
-				<button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
-					<i class="ti ti-x"></i>
-				</button>
-			</div>
-			<form id="update">
-				<div class="modal-body pb-0">
-					<div class="tab-content" id="">
-						<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
-
-							<div class="col">
-								<div class="mb-3">
-									<label class="form-label">Candidate Name <span class="text-danger"> *</span></label>
-									<input type="text" class="form-control" name="candidate_name" id="candidate_name">
-								</div>
-							</div>
-							<div class="col">
-								<div class="mb-3">
-									<label class="form-label">Interview Status <span class="text-danger"> *</span></label>
-									<select class="select" name="interview_status" id="interview_status">
-										<option value="">Select</option>
-										<option value="2">Shortlisted</option>
-										<option value="3">Scheduled</option>
-										<option value="4">Interviewed</option>
-										<option value="5">Offered</option>
-										<option value="6">On Hold</option>
-										<option value="7">Rejected</option>
-										<option value="8">Hired</option>
-									</select>
-								</div>
-								<small class="error text-danger d-none" id="interview_status_error"> mandatory field.</small>
-							</div>
-
-							<input type="hidden" class="form-control" name="rowId" id="rowId">
-							<div class="modal-footer">
-								<button type="button" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</button>
-								<button type="submit" id="sendButton" class="btn btn-primary">Update</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-</div> -->
-<!-- /Edit candidate interview status-->
-
+ 
 <!-- Delete Modal -->
 <div class="modal fade" id="delete_modal">
 	<div class="modal-dialog modal-dialog-centered">

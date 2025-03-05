@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $phone = $_POST['phone'];
         $qualification = $_POST['qualification'];
         $experience = $_POST['totalExpYear'] . '.' . $_POST['totalExpMonth'] .' year'; 
-        $skills = json_encode($_POST['skills']);
+        $skills = $_POST['skills'];
         $location = $_POST['location'];
         $available_time1 = $_POST['availabilityDate1'] . ' ' . $_POST['availabilityTime1']; 
         $available_time2 = !empty($_POST['availabilityDate2']) ? $_POST['availabilityDate2'] . ' ' . $_POST['availabilityTime2'] : NULL;

@@ -28317,6 +28317,16 @@ border-radius: 50px;
 margin: 2px;
 }
 
+.stars i {
+  color: #ddd8d3;
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.stars i.active {
+  color: #ff9c1a;
+}
 /* End:: own style added */
 
 /*# sourceMappingURL=style.css.map */
