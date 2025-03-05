@@ -20,7 +20,7 @@ try {
     $mail->Password = 'wonlprkyskanwqrd';
     $mail->SMTPSecure = 'ssl';
     $mail->Port = 465;
-    $mail->setFrom('notify@acte.in', 'ACTE');
+    $mail->setFrom('notify@acte.in', 'MARKERZ');
     $mail->isHTML(true);
 
     if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
@@ -34,12 +34,13 @@ try {
         if ($flag === "recruitmentForm") {
 
             $name = $_POST['candidateName'];
-            $link = "http://localhost/actecrm/hrm/interview-schedule?id=$encryptedID&mail=$encryptedMail";
+            $link = "https://actecrm.com/hrm/interview-schedule?id=$encryptedID&mail=$encryptedMail";
             $hrName = $_POST['hrName'];
             //Recipients
             $mail->addAddress($_POST['email'], 'Joe User');
 
             $mail->Subject = 'Job Application form';
+            $mail->Subject = mb_encode_mimeheader("Job Application form! 📧📝", 'UTF-8');
             //Content
             $htmlContent = file_get_contents('./templates/candidate-invite1.html');
             $htmlContent = str_replace('{{Name}}', $name, $htmlContent);
@@ -64,8 +65,8 @@ try {
         $user_name = $_POST['user_name'];
         //Recipients
         $mail->addAddress($_POST['email'], 'Joe User');
-
-        $mail->Subject = 'Congratulations! You Have Been Shortlisted';
+ 
+        $mail->Subject = mb_encode_mimeheader("Congratulations! You Have Been Shortlisted 🎉🎊", 'UTF-8');
         //Content
         $htmlContent = file_get_contents('./templates/shortlist-mail.html');
         $htmlContent = str_replace('{{id}}', $encryptID, $htmlContent);
@@ -81,8 +82,6 @@ try {
             'status' => 'success',
             'message' => 'Email sent successfully.'
         );
-
-
 
     } else {
         $response = array(

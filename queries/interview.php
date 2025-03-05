@@ -11,16 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
     $flag = $_POST['flag'];
 
-     if ($flag === 'getAll' || $flag === 'jobApplications') {
+    if ($flag === 'getAll') {
 
-        if ($flag === 'jobApplications') {
-            $jobID = $_POST['jobID'];
-            $condition = "AND `c`.`ticket_request_id`= '$jobID'";
-        } elseif ($flag === 'getAll') {
-            $condition = '';
-        }
-
-        $sql = "SELECT c.*,r.job_position FROM `candidates` AS c INNER JOIN recruitment AS r ON c.ticket_request_id = r.ticket_request_id WHERE c.`responce_status` = 1 $condition";
+        $sql = "SELECT c.*,r.job_position FROM `candidates` AS c INNER JOIN recruitment AS r ON c.ticket_request_id = r.ticket_request_id WHERE c.`responce_status` = 1 AND `interview_status` IN (3,4,5,6,7,8)";
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
@@ -34,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     } elseif ($flag === "getDetails") {
 
         $id = $_POST['id'];
-        $query = "SELECT c.*,r.job_position,u.user_name FROM `candidates` AS c INNER JOIN `recruitment` AS r ON c.ticket_request_id =r.ticket_request_id  INNER JOIN `users` AS u ON c.created_by=u.user_id WHERE `candidate_id` = '$id'";
+        $query = "SELECT * FROM `candidates` AS `c` LEFT JOIN `interview_process` AS `ip` ON `c`.`candidate_id`=`ip`.`candidate_table_id` WHERE `c`.`candidate_id` = '$id'";
         $result = mysqli_query($conn, $query);
         if ($result) {
             $row = mysqli_fetch_assoc($result);
@@ -46,26 +39,29 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     } elseif ($flag === "update") {
 
         $rowId = $_POST['rowId'];
-        $interview_status = $_POST['interview_status'];
+        $interviewStatus = $_POST['interview_status'];
 
-        if ($interview_status == 2) {
-            $interview_date = $_POST['interview_date'].' '. $_POST['interview_time'];
-            $query = "UPDATE `candidates` SET `interview_status`= $interview_status,interview_date = '$interview_date' WHERE `candidate_id`='$rowId'";
-        } elseif ($interview_status == 3) { 
-            $insertQuery = "INSERT INTO `interview_process`(`candidate_table_id`, `interview_process_status`, `ratings`, `rating_date`) VALUES ('$rowId','$interview_status','$currentDatetime')";
-            mysqli_query($conn, $insertQuery);
-            
-            $query = "UPDATE `candidates` SET `interview_status`= $interview_status WHERE `candidate_id`='$rowId'";
-        } else { 
-            $query = "UPDATE `candidates` SET `interview_status`= $interview_status WHERE `candidate_id`='$rowId'";
+        if ($interviewStatus == 4) {
+            // Create an associative array for the ratings
+            $ratingsArray = array(
+                "dressCodeRate" => $_POST['dressCodeRate'],
+                "softSkillRate" => $_POST['softSkillRate'],
+                "technicalSkillRate" => $_POST['technicalSkillRate'],
+                "performanceRate" => $_POST['performanceRate'],
+                "overallRate" => $_POST['overallRate']
+            );
+
+            // Convert the array to JSON format
+            $ratingsJson = json_encode($ratingsArray, JSON_UNESCAPED_UNICODE);
+
+            $query = "UPDATE `interview_process` SET `interview_process_status`='$interviewStatus',`ratings`='$ratingsJson',`rating_date`='$currentDatetime' WHERE `candidate_table_id`='$rowId'";
         }
 
         $result = mysqli_query($conn, $query);
         if ($result) {
-            $query = "SELECT c.*,r.job_position,u.user_name FROM `candidates` AS c INNER JOIN `recruitment` AS r ON `c`.`ticket_request_id`=`r`.`ticket_request_id` INNER JOIN `users` AS u ON `c`.`created_by`=`u`.`user_id` WHERE `candidate_id` = '$rowId'";
+            $query = "UPDATE `candidates` SET `interview_status`= $interviewStatus WHERE `candidate_id`='$rowId'";
             $result = mysqli_query($conn, $query);
-            $row = mysqli_fetch_assoc($result);
-            echo json_encode(array('status' => 'success', 'data' => $row));
+            echo json_encode(array('status' => 'success', 'interviewStatus' => $interviewStatus, 'message' => 'Candidate status update successfully'));
         } else {
             echo json_encode(array('status' => 'failure', 'message' => 'Candidate status update failure'));
         }
@@ -129,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         exit;
     } elseif ($flag === "interviewDateUpdate") {
 
-        $rowId = $_POST['rowId']; 
+        $rowId = $_POST['rowId'];
         $interview_date = $_POST['interview_date'] . ' ' . $_POST['interview_time'];
 
         $sheduled = 3;

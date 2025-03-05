@@ -1,14 +1,6 @@
 <?php require_once("./includes/header.php"); ?>
 <?php require_once("./includes/sidebar.php"); ?>
-<?php
-if (isset($_GET['id'])) {
-	$jobID = base64_decode($_GET['id']);
-	$flag = 'jobApplications';
-} else {
-	$jobID = '';
-	$flag = 'getAll';
-}
-?>
+
 <!-- Page Wrapper -->
 <div class="page-wrapper">
 	<div class="content">
@@ -16,11 +8,11 @@ if (isset($_GET['id'])) {
 		<!-- Breadcrumb -->
 		<div class="d-md-flex d-block align-items-center justify-content-between page-breadcrumb mb-3">
 			<div class="my-auto mb-2">
-				<h2 class="mb-1">Candidates List</h2>
+				<h2 class="mb-1">Interview List</h2>
 				<nav>
 					<ol class="breadcrumb mb-0">
 						<li class=""><a href="index"><i class="ti ti-smart-home"></i> Home </a></li> /
-						<li class=" active" aria-current="page">Candidate List</li>
+						<li class=" active" aria-current="page">Interview List</li>
 					</ol>
 				</nav>
 			</div>
@@ -50,7 +42,7 @@ if (isset($_GET['id'])) {
 
 		<div class="card">
 			<div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-				<h5>Candidates List</h5>
+				<h5>Interview List</h5>
 				<div class="d-flex my-xl-auto right-content align-items-center flex-wrap row-gap-3">
 					<div class="me-3">
 						<div class="form-group">
@@ -147,10 +139,12 @@ if (isset($_GET['id'])) {
 								<th>Action</th>
 							</tr>
 						</thead>
+
 					</table>
 				</div>
 			</div>
 		</div>
+
 	</div>
 
 	<div class="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
@@ -163,7 +157,7 @@ if (isset($_GET['id'])) {
 
 <!-- Edit interview details -->
 <div class="modal fade" id="interviewModal">
-	<div class="modal-dialog modal-dialog-centered">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
 				<span>.</span>
@@ -179,14 +173,23 @@ if (isset($_GET['id'])) {
 							<input type="hidden" id="existingStatus">
 							<div class="d-flex justify-content-center">
 								<div class="interview-status" role="group">
-									<input type="radio" class="btn-check" name="interview_status" id="applied" value="1" autocomplete="off">
-									<label class="btn border" for="applied">Applied</label>
+									<input type="radio" class="btn-check" name="interview_status" id="scheduled" value="3" autocomplete="off">
+									<label class="btn border" for="scheduled">Scheduled</label>
 
-									<input type="radio" class="btn-check" name="interview_status" id="shortlisted" value="2" autocomplete="off">
-									<label class="btn border" for="shortlisted">Shortlisted</label>
+									<input type="radio" class="btn-check" name="interview_status" id="interviewed" value="4" autocomplete="off">
+									<label class="btn border" for="interviewed">Interviewed</label>
+
+									<input type="radio" class="btn-check" name="interview_status" id="offered" value="5" autocomplete="off">
+									<label class="btn border" for="offered">Offered</label>
+
+									<input type="radio" class="btn-check" name="interview_status" id="onhold" value="6" autocomplete="off">
+									<label class="btn border" for="onhold">On Hold</label>
 
 									<input type="radio" class="btn-check" name="interview_status" id="rejected" value="7" autocomplete="off">
 									<label class="btn border" for="rejected">Rejected</label>
+
+									<input type="radio" class="btn-check" name="interview_status" id="hired" value="8" autocomplete="off">
+									<label class="btn border" for="hired">Hired</label>
 								</div>
 							</div>
 						</div>
@@ -194,65 +197,101 @@ if (isset($_GET['id'])) {
 				</div>
 				<br>
 				<div class="modal-body pb-0">
-					<div class="shortlisted" style="display: none;">
-						<div class="row">
-							<div class="mb-3">
-								<h4 class="text-center">Candidate Available Date's</h4>
-							</div>
-							<div class="col-md-4">
-								<div class="mb-3">
-									<label class="form-label">Date 1</label>
-									<input type="text" class="form-control" id="schedule_time1" disabled>
+					<div class="rating-content" style="display: none;">
+						<div class="start-rating-input col-6 m-auto">
+							<div class="d-flex p-1">
+								<div class="col">
+									<h6>Candidate Dress code:</h6>
+								</div>
+								<div class="col">
+									<input type="hidden" id="dressCodeRate" name="dressCodeRate">
+									<div class="stars" id="dressCode">
+										<i class="fa-regular fa-star" data-val="1"></i>
+										<i class="fa-regular fa-star" data-val="2"></i>
+										<i class="fa-regular fa-star" data-val="3"></i>
+										<i class="fa-regular fa-star" data-val="4"></i>
+										<i class="fa-regular fa-star" data-val="5"></i>
+									</div>
 								</div>
 							</div>
-							<div class="col-md-4">
-								<div class="mb-3">
-									<label class="form-label">Date 2</label>
-									<input type="text" class="form-control" id="schedule_time2" disabled>
+							<div class="d-flex p-1">
+								<div class="col">
+									<h6>Candidate Soft skill:</h6>
+								</div>
+								<div class="col">
+									<input type="hidden" id="softSkillRate" name="softSkillRate">
+									<div class="stars" id="softSkill">
+										<i class="fa-regular fa-star" data-val="1"></i>
+										<i class="fa-regular fa-star" data-val="2"></i>
+										<i class="fa-regular fa-star" data-val="3"></i>
+										<i class="fa-regular fa-star" data-val="4"></i>
+										<i class="fa-regular fa-star" data-val="5"></i>
+									</div>
 								</div>
 							</div>
-							<div class="col-md-4">
-								<div class="mb-3">
-									<label class="form-label">Date 3</label>
-									<input type="text" class="form-control" id="schedule_time3" disabled>
+							<div class="d-flex p-1">
+								<div class="col">
+									<h6>Candidate technical skill:</h6>
+								</div>
+								<div class="col">
+									<input type="hidden" id="technicalSkillRate" name="technicalSkillRate">
+									<div class="stars" id="technicalSkill">
+										<i class="fa-regular fa-star" data-val="1"></i>
+										<i class="fa-regular fa-star" data-val="2"></i>
+										<i class="fa-regular fa-star" data-val="3"></i>
+										<i class="fa-regular fa-star" data-val="4"></i>
+										<i class="fa-regular fa-star" data-val="5"></i>
+									</div>
+								</div>
+							</div>
+							<div class="d-flex p-1">
+								<div class="col">
+									<h6>Candidate Performance :</h6>
+								</div>
+								<div class="col">
+									<input type="hidden" id="performanceRate" name="performanceRate">
+									<div class="stars" id="performance">
+										<i class="fa-regular fa-star" data-val="1"></i>
+										<i class="fa-regular fa-star" data-val="2"></i>
+										<i class="fa-regular fa-star" data-val="3"></i>
+										<i class="fa-regular fa-star" data-val="4"></i>
+										<i class="fa-regular fa-star" data-val="5"></i>
+									</div>
+								</div>
+							</div>
+							<div class="d-flex p-1">
+								<div class="col">
+									<h6>Candidate Overall rating :</h6>
+								</div>
+								<div class="col">
+									<input type="hidden" id="overallRate" name="overallRate">
+									<div class="stars" id="overall">
+										<i class="fa-regular fa-star" data-val="1"></i>
+										<i class="fa-regular fa-star" data-val="2"></i>
+										<i class="fa-regular fa-star" data-val="3"></i>
+										<i class="fa-regular fa-star" data-val="4"></i>
+										<i class="fa-regular fa-star" data-val="5"></i>
+									</div>
 								</div>
 							</div>
 						</div>
-						<div class="row sheduleDate" style="display: none;">
-							<div class="mb-3">
-								<h4 class="text-center">Select scheduled Date</h4>
-							</div>
-							<div class="col-md-4">
-								<div class="mb-3">
-									<label class="form-label">Interview Date</label>
-									<input type="date" class="form-control" id="interview_date" name="interview_date" min=<?php echo date('Y-m-d'); ?>>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="mb-3">
-									<label class="form-label">Interview Time</label>
-									<input type="time" class="form-control" id="interview_time" name="interview_time">
-								</div>
-							</div> 
+						<div class="start-rating-result col-6 m-auto">
+							<h4>Ratings Results</h4>
+							<span id="ratings"></span>
 						</div>
-						<div class="row sheduledDate" style="display: none;">
+					</div>
+
+					<div class="row offered" style="display: none;">
 						<div class="mb-3">
-								<h4 class="text-center">Scheduled Date</h4>
-							</div>
-							<div class="col-md-4">
-								<div class="mb-3">
-									<label class="form-label">Scheduled Date</label>
-									<input type="text" class="form-control" id="interview_date_edit">
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="mb-3">
-									<label class="form-label">Scheduled Re-Date</label>
-									<input type="text" class="form-control" id="interview_re_date_edit">
-								</div>
+							<h4 class="text-center">offered details</h4>
+						</div>
+						<div class="col-md-12">
+							<div class="mb-3">
+								<label class="form-label">Offer comments <span class="text-danger"> *</span></label>
+								<textarea class="form-control" name="offer_comments" id="" rows="3"></textarea>
 							</div>
 						</div>
-					</div> 
+					</div>
 				</div>
 				<input type="hidden" name="rowId" id="rowId">
 				<div class="modal-footer">
@@ -293,7 +332,7 @@ if (isset($_GET['id'])) {
 							<div class="col-md-4">
 								<div class="mb-3">
 									<label class="form-label">addres</label>
-									<input type="text" id="address" class="form-control" /> 
+									<input type="text" id="address" class="form-control" />
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -358,7 +397,7 @@ if (isset($_GET['id'])) {
 	</div>
 </div>
 <!-- /View candidate details -->
- 
+
 <!-- Delete Modal -->
 <div class="modal fade" id="delete_modal">
 	<div class="modal-dialog modal-dialog-centered">
@@ -379,9 +418,7 @@ if (isset($_GET['id'])) {
 </div>
 <!-- /Delete Modal -->
 
-<input type="hidden" name="flag" id="flag" value="<?php echo $flag; ?>">
-<input type="hidden" name="jobID" id="jobID" value="<?php echo $jobID; ?>">
-
 <?php require_once("./includes/footer.php"); ?>
 <!-- this page java scripts codes -->
-<script src="./js/candidates.js"></script>
+<script src="./js/interview.js"></script>
+ 

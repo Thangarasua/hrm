@@ -200,6 +200,7 @@ if (mysqli_num_rows($result) > 0) {
 															<div class="form-group">
 																<label for="text">Qualification <em class="mandatory">*</em></label>
 																<input type="text" class="form-control" id="qualification" name="qualification" placeholder="Enter your Highest Qualification">
+																<small id="qualification_error" class="error d-none"></small>
 															</div>
 															<div class="form-group">
 																<label for="text">Overall experience <em class="mandatory">*</em></label>
@@ -405,6 +406,21 @@ if (mysqli_num_rows($result) > 0) {
 					$("#number_error").addClass('d-none');
 				}
 			});
+
+			$("#qualification").on("input", function() {
+				const value = $(this).val();
+
+				// Allow only alphabets (a-z, A-Z), dots (.), and apostrophes (')
+				if (!/^[a-zA-Z.'\s]+$/.test(value)) {
+					toastr.warning("Only alphabets, dots, and apostrophes are allowed!");
+					$("#qualification_error").removeClass('d-none');
+					$("#qualification_error").html("Please enter alphabets only, e.g., B.Sc, M.A, Bachelor's..");
+					$(this).val(value.replace(/[^a-zA-Z.'\s]/g, ''));
+				} else {
+					$("#qualification_error").addClass('d-none');
+				}
+			});
+
 
 			$(".totalEpx").on("input", function() {
 				const value = $(this).val();
