@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $fullName = $_POST['employeeName'];
         $employeeId = $_POST['employeeID'];
         $doj = $_POST['doj'];
+        $doj = date('Y-m-d', strtotime(str_replace('-', '/', $doj)));
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $department = $_POST['department'];
@@ -29,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
         // Personal Info fields
         $dob = $_POST['dob'];
+        $dob = date('Y-m-d', strtotime(str_replace('-', '/', $dob)));
         $gender = $_POST['gender'];
         $nationality = $_POST['nationality'];
         $maritalStatus = $_POST['maritalStatus'];
