@@ -1,5 +1,6 @@
 <?php require_once("./includes/header.php"); ?>
 <?php require_once("./includes/sidebar.php"); ?>
+<?php include("./queries/commonFunctions.php"); ?>
 <!-- Page Wrapper -->
 <div class="page-wrapper">
 	<div class="content">
@@ -446,13 +447,13 @@
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">User ID<span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="userId" readonly>
+										<input type="text" class="form-control" name="userId" value = "ACTE001" readonly>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">User Name <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="userName" readonly>
+										<input type="text" class="form-control" name="userName" value = "Test" readonly>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -493,13 +494,7 @@
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Department</label>
-										<select class="select" name="department">
-											<option value="">Select</option>
-											<option value="All Department">All Department</option>
-											<option value="Finance">Finance</option>
-											<option value="Developer">Developer</option>
-											<option value="Executive">Executive</option>
-										</select>
+										<input type="text" class="form-control" name="department" value = "BRANCH" readonly>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -507,9 +502,9 @@
 										<label class="form-label">Designation</label>
 										<select class="select" name="designation">
 											<option value="">Select</option>
-											<option value="Finance">Finance</option>
-											<option value="Developer">Developer</option>
-											<option value="Executive">Executive</option>
+											<option value="2">Finance</option>
+											<option value="2">Developer</option>
+											<option value="3">Executive</option>
 										</select>
 									</div>
 								</div>
@@ -541,13 +536,13 @@
 									<div class="col-md-6">
 										<div class="mb-3">
 											<label class="form-label">Manager</label>
-											<input type="text" class="form-control" name="manager">
+											<input type="text" class="form-control" name="manager" value ='1001' readonly>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="mb-3">
 											<label class="form-label">Supervisor</label>
-											<input type="text" class="form-control" name="supervisor">
+											<input type="text" class="form-control" name="supervisor" value ='1002' readonly>
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -561,9 +556,10 @@
 											<label class="form-label">Employee Type</label>
 											<select class="select" name="employeeType">
 												<option value="">Select</option>
-												<option value="Full-Time">Full-Time</option>
-												<option value="Part-Time">Part-Time</option>
-												<option value="Contract">Contract</option>
+												<option value="1">Full-Time</option>
+												<option value="2">Part-Time</option>
+												<option value="3">Contract</option>
+												<option value="4">Contract</option>
 											</select>
 										</div>
 									</div>
@@ -1063,47 +1059,4 @@
 <!-- /Delete Modal -->
 
 <?php require_once("./includes/footer.php"); ?>
-<script>
-	//creat profile
-	$(document).ready(function() {
-		// Submit form data via Ajax
-		$("#addEmployee").on("submit", function(e) {
-			e.preventDefault();
-			$.ajax({
-				type: "POST",
-				url: "queries/employees.php",
-				data: new FormData(this),
-				dataType: "json",
-				contentType: false,
-				cache: false,
-				processData: false,
-				// beforeSend: function() {
-				// 	$(".addEmployeeSaveBtn").attr("disabled", 'disabled');
-				// 	$(".addEmployeeSaveBtn").text("Processing...");
-				// },
-				success: function(response) {
-					if (response.status == "success") {
-						// toastr.options = {
-						// 	timeOut: "1500"
-						// };
-						toastr.success(response.message, "Success");
-						$("#addEmployee")[0].reset(); // Clear input fields
-
-						$('#success_modal').modal('show');
-					}
-					if (response.status == "failure") {
-						toastr.options = {
-							timeOut: "1500"
-						};
-						toastr.error(response.message, "Error");
-					}
-				},
-			});
-		});
-	});
-</script>
-
-</body>
-
-
-</html>
+<script src="./js/employees.js"></script>
