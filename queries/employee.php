@@ -4,6 +4,20 @@ header('Content-Type: application/json');
 $currentDatetime = date('Y-m-d H:i:s');
 $hrm_userid = $_SESSION['hrm_userid'];
 
+if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['flag'])) {
+    $flag = $_GET['flag'];
+    if ($flag === "getAll") {
+        $query = "SELECT * FROM `employees` ORDER BY `employees`.`employee_id` ASC";
+        $result = mysqli_query($conn, $query);
+        $employess = [];
+        while ($row = $result->fetch_assoc()) {
+            $employess[] = $row;
+        }
+        echo json_encode($employess);
+        exit;
+    }
+}
+
 if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     $flag = $_POST['flag'];
     if ($flag === "insert") {
