@@ -384,7 +384,7 @@ $(document).ready(function () {
     }
     if (selectedValue == 4) {
       $(".rating-content").show();
-      if (existingStatus == 4) {
+      if (existingStatus >= 4) {
         $("#updateBtn").hide();
       } else {
         $("#updateBtn").show();
