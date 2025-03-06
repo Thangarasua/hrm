@@ -444,7 +444,7 @@ $(document).ready(function () {
 
           
           if (res.interviewStatus == 4) {
-            feedbackMail(res);
+             feedbackMail(data)
           } else {
              
           }
