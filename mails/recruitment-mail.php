@@ -20,7 +20,7 @@ try {
     $mail->Password = 'wonlprkyskanwqrd';
     $mail->SMTPSecure = 'ssl';
     $mail->Port = 465;
-    $mail->setFrom('notify@acte.in', 'MARKERZ');
+    $mail->setFrom('server@acte.in', 'MARKERZ GLOBAL SOLUTION');
     $mail->isHTML(true);
 
     if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
@@ -37,9 +37,8 @@ try {
             $link = "https://actecrm.com/hrm/interview-schedule?id=$encryptedID&mail=$encryptedMail";
             $hrName = $_POST['hrName'];
             //Recipients
-            $mail->addAddress($_POST['email'], 'Joe User');
-
-            $mail->Subject = 'Job Application form';
+            $mail->addAddress($_POST['email'], $_POST['candidateName']);
+ 
             $mail->Subject = mb_encode_mimeheader("Job Application form! 📧📝", 'UTF-8');
             //Content
             $htmlContent = file_get_contents('./templates/candidate-invite1.html');
@@ -64,7 +63,7 @@ try {
         $job_position = $_POST['job_position']; 
         $user_name = $_POST['user_name'];
         //Recipients
-        $mail->addAddress($_POST['email'], 'Joe User');
+        $mail->addAddress($_POST['email'], $_POST['candidate_name']);
  
         $mail->Subject = mb_encode_mimeheader("Congratulations! You Have Been Shortlisted 🎉🎊", 'UTF-8');
         //Content

@@ -146,8 +146,8 @@ $(document).ready(function () {
           $("#experience").val(data.experience);
           $("#skills").val(data.skills);
           $("#available_time1").val(data.available_time1);
-          $("#available_time2").val(data.available_time2 || "Not define");
-          $("#available_time3").val(data.available_time3 || "Not define");
+          $("#available_time2").val(data.available_time2 || "---Not define---");
+          $("#available_time3").val(data.available_time3 || "---Not define---");
           $("#created_at").val(data.created_at);
           $("#interview_status").val(data.interview_status);
           $("#interview_date_view").val(
@@ -234,7 +234,12 @@ $(document).ready(function () {
       }
     }  
     if (selectedValue == 7) {
-      $("#updateBtn").show();
+      if (existingStatus == 7) {
+        $("#updateBtn").hide();
+      }else{
+        $("#updateBtn").show();
+      }
+
     } 
   }
 
@@ -283,7 +288,7 @@ $(document).ready(function () {
             $("#interviewModal").modal("hide");
             $("#updateBtn").text("Update").prop("disabled", false);
             Swal.fire("Interview status successfully!", "", "success");
-            loadData("", "", "", "", "getAll");
+            loadData(fromDate, toDate, dateRange, companyType, flag, jobID);
           }
         } else {
           handleError(response.message);
@@ -320,7 +325,7 @@ $(document).ready(function () {
           $("#interviewModal").modal("hide");
           $("#updateBtn").text("Update").prop("disabled", false);
           Swal.fire("Mail send successfully!", "", "success");
-          loadData("", "", "", "", "getAll");
+          loadData(fromDate, toDate, dateRange, companyType, flag, jobID);
         } else {
           toastr.error(response.message, "Mail Error");
         }

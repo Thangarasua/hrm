@@ -197,8 +197,8 @@
 				</div>
 				<br>
 				<div class="modal-body pb-0">
-					<div class="rating-content" style="display: none;">
-						<div class="start-rating-input col-6 m-auto">
+					<div class="rating-content">
+						<div class="col-6 m-auto">
 							<div class="d-flex p-1">
 								<div class="col">
 									<h6>Candidate Dress code:</h6>
@@ -274,11 +274,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="start-rating-result col-6 m-auto">
-							<h4>Ratings Results</h4>
-							<span id="ratings"></span>
-						</div>
+						</div> 
 					</div>
 
 					<div class="row offered" style="display: none;">

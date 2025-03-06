@@ -55,6 +55,13 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             $ratingsJson = json_encode($ratingsArray, JSON_UNESCAPED_UNICODE);
 
             $query = "UPDATE `interview_process` SET `interview_process_status`='$interviewStatus',`ratings`='$ratingsJson',`rating_date`='$currentDatetime' WHERE `candidate_table_id`='$rowId'";
+        } else if ($interviewStatus == 5) {
+            $query = "UPDATE `interview_process` SET `interview_process_status`='$interviewStatus' WHERE `candidate_table_id`='$rowId'";
+        } else if ($interviewStatus == 6) {
+            $query = "UPDATE `interview_process` SET `interview_process_status`='$interviewStatus' WHERE `candidate_table_id`='$rowId'";
+        } else if ($interviewStatus == 8) {
+            $query = "UPDATE `interview_process` SET `interview_process_status`='$interviewStatus' WHERE `candidate_table_id`='$rowId'";
+        } else {
         }
 
         $result = mysqli_query($conn, $query);
