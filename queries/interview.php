@@ -62,6 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         } else if ($interviewStatus == 8) {
             $query = "UPDATE `interview_process` SET `interview_process_status`='$interviewStatus' WHERE `candidate_table_id`='$rowId'";
         } else {
+            $query = "UPDATE `interview_process` SET `interview_process_status`='$interviewStatus' WHERE `candidate_table_id`='$rowId'";
         }
 
         $result = mysqli_query($conn, $query);
