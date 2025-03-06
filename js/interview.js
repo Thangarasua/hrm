@@ -298,32 +298,31 @@ $(document).ready(function () {
       }
     });
   }
-  function unSetStars() { 
-
+  function unSetStars() {
     $("#dressCode i").each(function (index) {
       $(this)
-          .removeClass("fa-solid fa-star active")
-          .addClass("fa-regular fa-star");
+        .removeClass("fa-solid fa-star active")
+        .addClass("fa-regular fa-star");
     });
     $("#softSkill i").each(function (index) {
       $(this)
-          .removeClass("fa-solid fa-star active")
-          .addClass("fa-regular fa-star");
+        .removeClass("fa-solid fa-star active")
+        .addClass("fa-regular fa-star");
     });
     $("#technicalSkill i").each(function (index) {
       $(this)
-          .removeClass("fa-solid fa-star active")
-          .addClass("fa-regular fa-star");
+        .removeClass("fa-solid fa-star active")
+        .addClass("fa-regular fa-star");
     });
     $("#performance i").each(function (index) {
       $(this)
-          .removeClass("fa-solid fa-star active")
-          .addClass("fa-regular fa-star");
+        .removeClass("fa-solid fa-star active")
+        .addClass("fa-regular fa-star");
     });
     $("#overall i").each(function (index) {
       $(this)
-          .removeClass("fa-solid fa-star active")
-          .addClass("fa-regular fa-star");
+        .removeClass("fa-solid fa-star active")
+        .addClass("fa-regular fa-star");
     });
   }
 
@@ -352,13 +351,13 @@ $(document).ready(function () {
           $("#existingStatus").val(res.data.interview_status);
           $("#schedule_time1").val(res.data.available_time1);
           $("#schedule_time2").val(res.data.available_time2);
-          $("#schedule_time3").val(res.data.available_time3); 
+          $("#schedule_time3").val(res.data.available_time3);
           if (!res.data.ratings || res.data.ratings.trim() === "") {
             console.log("No ratings available.");
-            unSetStars()
-        } else {
+            unSetStars();
+          } else {
             setStars(res.data.ratings);
-        }
+          }
           dynamicInputs(res.data.interview_status, res.data.interview_status);
         } else {
           Swal.fire(res.data.message);
@@ -441,18 +440,19 @@ $(document).ready(function () {
       },
       success: function (res) {
         if (res.status === "success") {
-
-          
           if (res.interviewStatus == 4) {
-             feedbackMail(data)
+            $("#updateBtn").text("Update").prop("disabled", false);
+            $("#interviewModal").modal("hide");
+            Swal.fire("Interview status successfully!", "", "success");
+            $("#update")[0].reset();
+            loadData("", "", "", "", "getAll");
           } else {
-             
+            $("#updateBtn").text("Update").prop("disabled", false);
+            $("#interviewModal").modal("hide");
+            Swal.fire("Interview status successfully!", "", "success");
+            $("#update")[0].reset();
+            loadData("", "", "", "", "getAll");
           }
-          $("#updateBtn").text("Update").prop("disabled", false);
-          $("#interviewModal").modal("hide");
-          Swal.fire("Interview status successfully!", "", "success");
-          $("#update")[0].reset();
-          loadData("", "", "", "", "getAll");
         } else {
           handleError(res.message);
         }
