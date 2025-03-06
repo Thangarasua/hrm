@@ -152,7 +152,7 @@
 
 		<div class="card">
 			<div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-				<h5>Plan List</h5>
+				<h5>Employees List</h5>
 				<div class="d-flex my-xl-auto right-content align-items-center flex-wrap row-gap-3">
 					<div class="me-3">
 						<div class="input-icon-end position-relative">
@@ -161,6 +161,18 @@
 								<i class="ti ti-chevron-down"></i>
 							</span>
 						</div>
+					</div>
+					<div class="dropdown me-3">
+						<select id="customLengthMenu" name="tableRecords_length" aria-controls="tableRecords" class="dropdown-toggle btn btn-white">
+							<option value="5">5</option>
+							<option value="10" selected>10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
+							<option value="50">50</option>
+							<option value="72">72</option>
+							<option value="100">100</option>
+							<option value="-1">All</option>
+						</select>
 					</div>
 					<div class="dropdown me-3">
 						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
@@ -205,171 +217,21 @@
 			</div>
 			<div class="card-body p-0">
 				<div class="custom-datatable-filter table-responsive">
-					<table class="table datatable">
+					<table class="table datatable" id="tableRecords">
 						<thead class="thead-light">
 							<tr>
-								<th class="no-sort">
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox" id="select-all">
-									</div>
-								</th>
+								<th>S.No</th>
 								<th>Emp ID</th>
 								<th>Name</th>
 								<th>Email</th>
 								<th>Phone</th>
 								<th>Designation</th>
 								<th>Joining Date</th>
-								<th>Status</th>
+								<th>Emp Type</th>
 								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox">
-									</div>
-								</td>
-								<td><a href="employee-details">Emp-001</a></td>
-								<td>
-									<div class="d-flex align-items-center">
-										<a href="employee-details" class="avatar avatar-md" data-bs-toggle="modal" data-bs-target="#view_details"><img
-												src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-32.jpg" class="img-fluid rounded-circle" alt="img"></a>
-										<div class="ms-2">
-											<p class="text-dark mb-0"><a href="employee-details" data-bs-toggle="modal"
-													data-bs-target="#view_details">Anthony Lewis</a></p>
-											<span class="fs-12">Finance</span>
-										</div>
-									</div>
-								</td>
-								<td><a href="https://smarthr.dreamstechnologies.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d5b4bba1bdbabbac95b0adb4b8a5b9b0fbb6bab8">[email&#160;protected]</a></td>
-								<td>(123) 4567 890</td>
-								<td>
-									<div class="dropdown me-3">
-										<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
-											Finance
-										</a>
-										<ul class="dropdown-menu  dropdown-menu-end p-3">
-											<li>
-												<a href="javascript:void(0);" class="dropdown-item rounded-1">Developer</a>
-											</li>
-											<li>
-												<a href="javascript:void(0);" class="dropdown-item rounded-1">Executive</a>
-											</li>
-										</ul>
-									</div>
-								</td>
-								<td>12 Sep 2024</td>
-								<td>
-									<span class="badge badge-success d-inline-flex align-items-center badge-xs">
-										<i class="ti ti-point-filled me-1"></i>Active
-									</span>
-								</td>
-								<td>
-									<div class="action-icon d-inline-flex">
-										<a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit_employee"><i class="ti ti-edit"></i></a>
-										<a href="#" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox">
-									</div>
-								</td>
-								<td><a href="employee-details">Emp-002</a></td>
-								<td>
-									<div class="d-flex align-items-center">
-										<a href="employee-details" class="avatar avatar-md" data-bs-toggle="modal" data-bs-target="#view_details"><img
-												src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-09.jpg" class="img-fluid rounded-circle" alt="img"></a>
-										<div class="ms-2">
-											<p class="text-dark mb-0"><a href="employee-details" data-bs-toggle="modal"
-													data-bs-target="#view_details">Brian Villalobos</a></p>
-											<span class="fs-12">Developer</span>
-										</div>
-									</div>
-								</td>
-								<td><a href="https://smarthr.dreamstechnologies.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1476667d757a54716c75796478713a777b79">[email&#160;protected]</a></td>
-								<td>(179) 7382 829</td>
-								<td>
-									<div class="dropdown me-3">
-										<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
-											Developer
-										</a>
-										<ul class="dropdown-menu  dropdown-menu-end p-3">
-											<li>
-												<a href="javascript:void(0);" class="dropdown-item rounded-1">Finance</a>
-											</li>
-											<li>
-												<a href="javascript:void(0);" class="dropdown-item rounded-1">Executive</a>
-											</li>
-										</ul>
-									</div>
-								</td>
-								<td>24 Oct 2024</td>
-								<td>
-									<span class="badge badge-success d-inline-flex align-items-center badge-xs">
-										<i class="ti ti-point-filled me-1"></i>Active
-									</span>
-								</td>
-								<td>
-									<div class="action-icon d-inline-flex">
-										<a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit_employee"><i class="ti ti-edit"></i></a>
-										<a href="#" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a>
-									</div>
-								</td>
-							</tr>
-
-							<tr>
-								<td>
-									<div class="form-check form-check-md">
-										<input class="form-check-input" type="checkbox">
-									</div>
-								</td>
-								<td><a href="employee-details">Emp-008</a></td>
-								<td>
-									<div class="d-flex align-items-center">
-										<a href="employee-details" class="avatar avatar-md" data-bs-toggle="modal" data-bs-target="#view_details"><img
-												src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-36.jpg" class="img-fluid rounded-circle" alt="img"></a>
-										<div class="ms-2">
-											<p class="text-dark mb-0"><a href="employee-details" data-bs-toggle="modal"
-													data-bs-target="#view_details">Rebecca Smtih</a></p>
-											<span class="fs-12">Executive</span>
-										</div>
-									</div>
-								</td>
-								<td><a href="https://smarthr.dreamstechnologies.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="88fbe5fce1e0c8edf0e9e5f8e4eda6ebe7e5">[email&#160;protected]</a></td>
-								<td>(162) 8920 713</td>
-								<td>
-									<div class="dropdown me-3">
-										<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
-											Executive
-										</a>
-										<ul class="dropdown-menu  dropdown-menu-end p-3">
-											<li>
-												<a href="javascript:void(0);" class="dropdown-item rounded-1">Finance</a>
-											</li>
-											<li>
-												<a href="javascript:void(0);" class="dropdown-item rounded-1">Developer</a>
-											</li>
-										</ul>
-									</div>
-								</td>
-								<td>22 Feb 2024</td>
-								<td>
-									<span class="badge badge-danger d-inline-flex align-items-center badge-sm">
-										<i class="ti ti-point-filled me-1"></i>Inactive
-									</span>
-								</td>
-								<td>
-									<div class="action-icon d-inline-flex">
-										<a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit_employee"><i class="ti ti-edit"></i></a>
-										<a href="#" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a>
-									</div>
-								</td>
-							</tr>
-
 						</tbody>
 					</table>
 				</div>
