@@ -232,6 +232,7 @@ $(document).ready(function () {
     var selectStarValue = $(this).data("val");
     $("#overallRate").val(selectStarValue);
   });
+  
   /*--------------------start rating -end---------------------*/
 
   function setStars(jsonData) {
