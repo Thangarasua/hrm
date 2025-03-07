@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
     $flag = $_POST['flag'];
 
-     if ($flag === 'getAll' || $flag === 'jobApplications') {
+    if ($flag === 'getAll' || $flag === 'jobApplications') {
 
         if ($flag === 'jobApplications') {
             $jobID = $_POST['jobID'];
@@ -49,14 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $interview_status = $_POST['interview_status'];
 
         if ($interview_status == 2) {
-            $interview_date = $_POST['interview_date'].' '. $_POST['interview_time'];
+            $interview_date = $_POST['interview_date'] . ' ' . $_POST['interview_time'];
             $query = "UPDATE `candidates` SET `interview_status`= $interview_status,interview_date = '$interview_date' WHERE `candidate_id`='$rowId'";
-        } elseif ($interview_status == 3) { 
-            $insertQuery = "INSERT INTO `interview_process`(`candidate_table_id`, `interview_process_status`, `ratings`, `rating_date`) VALUES ('$rowId','$interview_status','$currentDatetime')";
-            mysqli_query($conn, $insertQuery);
-            
+        } elseif ($interview_status == 3) {
             $query = "UPDATE `candidates` SET `interview_status`= $interview_status WHERE `candidate_id`='$rowId'";
-        } else { 
+        } else {
             $query = "UPDATE `candidates` SET `interview_status`= $interview_status WHERE `candidate_id`='$rowId'";
         }
 
@@ -129,13 +126,16 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         exit;
     } elseif ($flag === "interviewDateUpdate") {
 
-        $rowId = $_POST['rowId']; 
+        $rowId = $_POST['rowId'];
         $interview_date = $_POST['interview_date'] . ' ' . $_POST['interview_time'];
 
         $sheduled = 3;
-
         $query = "UPDATE `candidates` SET `interview_status`= $sheduled, `date_confirm_status`= 2 , `interview_re_date`= '$interview_date'  WHERE `candidate_id`='$rowId'";
-        $result = mysqli_query($conn, $query);
+        mysqli_query($conn, $query);
+
+        $insertQuery = "INSERT INTO `interview_process`(`candidate_table_id`, `interview_process_status`, `scheduled_date`) VALUES ('$rowId','$sheduled','$currentDatetime')";
+        $result = mysqli_query($conn, $insertQuery);
+
         if ($result) {
             echo json_encode(array('status' => 'success', 'message' => 'Interview date update successfully'));
         } else {

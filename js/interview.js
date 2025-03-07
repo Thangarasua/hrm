@@ -164,7 +164,6 @@ $(document).ready(function () {
   /*--------------------start rating -start---------------------*/
   $("#dressCode i").click(function () {
     var index1 = $(this).index();
-    console.log(index1);
     $("#dressCode i").each(function (index2) {
       if (index1 >= index2) {
         $(this).removeClass("fa-regular fa-star");
@@ -232,82 +231,101 @@ $(document).ready(function () {
     });
     var selectStarValue = $(this).data("val");
     $("#overallRate").val(selectStarValue);
-  });
-  /*--------------------start rating -end---------------------*/
-
-function starRating(){
-  $("#dressCode i").click(function () {
-    var index1 = $(this).index();
-    $("#dressCode i").each(function (index2) {
-      if (index1 >= index2) {
-        $(this).removeClass("fa-regular fa-star");
-        $(this).addClass("fa-solid fa-star active");
-      } else {
-        $(this).removeClass("fa-solid fa-star active");
-        $(this).addClass("fa-regular fa-star");
-      }
-    });
-    var selectStarValue = $(this).data("val");
-    $("#dressCodeRate").val(selectStarValue);
   });
   
-  $("#softSkill i").click(function () {
-    var index1 = $(this).index();
-    $("#softSkill i").each(function (index2) {
-      if (index1 >= index2) {
-        $(this).removeClass("fa-regular fa-star");
-        $(this).addClass("fa-solid fa-star active");
+  /*--------------------start rating -end---------------------*/
+
+  function setStars(jsonData) {
+    var data = JSON.parse(jsonData);
+    var dressCodeRate = data.dressCodeRate;
+    var softSkillRate = data.softSkillRate;
+    var technicalSkillRate = data.technicalSkillRate;
+    var performanceRate = data.performanceRate;
+    var overallRate = data.overallRate;
+
+    $("#dressCode i").each(function (index) {
+      if (index < dressCodeRate) {
+        $(this)
+          .removeClass("fa-regular fa-star")
+          .addClass("fa-solid fa-star active");
       } else {
-        $(this).removeClass("fa-solid fa-star active");
-        $(this).addClass("fa-regular fa-star");
+        $(this)
+          .removeClass("fa-solid fa-star active")
+          .addClass("fa-regular fa-star");
       }
     });
-    var selectStarValue = $(this).data("val");
-    $("#softSkillRate").val(selectStarValue);
-  });
-  $("#technicalSkill i").click(function () {
-    var index1 = $(this).index();
-    $("#technicalSkill i").each(function (index2) {
-      if (index1 >= index2) {
-        $(this).removeClass("fa-regular fa-star");
-        $(this).addClass("fa-solid fa-star active");
+    $("#softSkill i").each(function (index) {
+      if (index < softSkillRate) {
+        $(this)
+          .removeClass("fa-regular fa-star")
+          .addClass("fa-solid fa-star active");
       } else {
-        $(this).removeClass("fa-solid fa-star active");
-        $(this).addClass("fa-regular fa-star");
+        $(this)
+          .removeClass("fa-solid fa-star active")
+          .addClass("fa-regular fa-star");
       }
     });
-    var selectStarValue = $(this).data("val");
-    $("#technicalSkillRate").val(selectStarValue);
-  });
-  $("#performance i").click(function () {
-    var index1 = $(this).index();
-    $("#performance i").each(function (index2) {
-      if (index1 >= index2) {
-        $(this).removeClass("fa-regular fa-star");
-        $(this).addClass("fa-solid fa-star active");
+    $("#technicalSkill i").each(function (index) {
+      if (index < technicalSkillRate) {
+        $(this)
+          .removeClass("fa-regular fa-star")
+          .addClass("fa-solid fa-star active");
       } else {
-        $(this).removeClass("fa-solid fa-star active");
-        $(this).addClass("fa-regular fa-star");
+        $(this)
+          .removeClass("fa-solid fa-star active")
+          .addClass("fa-regular fa-star");
       }
     });
-    var selectStarValue = $(this).data("val");
-    $("#performanceRate").val(selectStarValue);
-  });
-  $("#overall i").click(function () {
-    var index1 = $(this).index();
-    $("#overall i").each(function (index2) {
-      if (index1 >= index2) {
-        $(this).removeClass("fa-regular fa-star");
-        $(this).addClass("fa-solid fa-star active");
+    $("#performance i").each(function (index) {
+      if (index < performanceRate) {
+        $(this)
+          .removeClass("fa-regular fa-star")
+          .addClass("fa-solid fa-star active");
       } else {
-        $(this).removeClass("fa-solid fa-star active");
-        $(this).addClass("fa-regular fa-star");
+        $(this)
+          .removeClass("fa-solid fa-star active")
+          .addClass("fa-regular fa-star");
       }
     });
-    var selectStarValue = $(this).data("val");
-    $("#overallRate").val(selectStarValue);
-  });
-}
+    $("#overall i").each(function (index) {
+      if (index < overallRate) {
+        $(this)
+          .removeClass("fa-regular fa-star")
+          .addClass("fa-solid fa-star active");
+      } else {
+        $(this)
+          .removeClass("fa-solid fa-star active")
+          .addClass("fa-regular fa-star");
+      }
+    });
+  }
+  function unSetStars() {
+    $("#dressCode i").each(function (index) {
+      $(this)
+        .removeClass("fa-solid fa-star active")
+        .addClass("fa-regular fa-star");
+    });
+    $("#softSkill i").each(function (index) {
+      $(this)
+        .removeClass("fa-solid fa-star active")
+        .addClass("fa-regular fa-star");
+    });
+    $("#technicalSkill i").each(function (index) {
+      $(this)
+        .removeClass("fa-solid fa-star active")
+        .addClass("fa-regular fa-star");
+    });
+    $("#performance i").each(function (index) {
+      $(this)
+        .removeClass("fa-solid fa-star active")
+        .addClass("fa-regular fa-star");
+    });
+    $("#overall i").each(function (index) {
+      $(this)
+        .removeClass("fa-solid fa-star active")
+        .addClass("fa-regular fa-star");
+    });
+  }
 
   $(document).on("click", ".edit", function (e) {
     e.preventDefault();
@@ -335,7 +353,12 @@ function starRating(){
           $("#schedule_time1").val(res.data.available_time1);
           $("#schedule_time2").val(res.data.available_time2);
           $("#schedule_time3").val(res.data.available_time3);
-          $("#ratings").html(res.data.ratings);
+          if (!res.data.ratings || res.data.ratings.trim() === "") {
+            console.log("No ratings available.");
+            unSetStars();
+          } else {
+            setStars(res.data.ratings);
+          }
           dynamicInputs(res.data.interview_status, res.data.interview_status);
         } else {
           Swal.fire(res.data.message);
@@ -353,22 +376,18 @@ function starRating(){
   function dynamicInputs(val1, val2) {
     selectedValue = val1;
     existingStatus = val2;
-    
+
     $("#updateBtn").hide();
     $(".rating-content").hide();
     $(".offered").hide();
-    if (selectedValue == 3) { 
+    if (selectedValue == 3) {
       $("#updateBtn").hide();
     }
     if (selectedValue == 4) {
       $(".rating-content").show();
-      if (existingStatus == 4) {
-        $(".start-rating-input").hide();
-        $(".start-rating-result").show();
+      if (existingStatus >= 4) {
         $("#updateBtn").hide();
       } else {
-        $(".start-rating-input").show();
-        $(".start-rating-result").hide();
         $("#updateBtn").show();
       }
     }
@@ -376,16 +395,15 @@ function starRating(){
       $(".offered").show();
       $("#updateBtn").show();
     }
-    if (selectedValue == 6) { 
+    if (selectedValue == 6) {
       $("#updateBtn").show();
     }
-    if (selectedValue == 7) { 
+    if (selectedValue == 7) {
       $("#updateBtn").show();
     }
-    if (selectedValue == 8) { 
+    if (selectedValue == 8) {
       $("#updateBtn").show();
     }
-    
   }
 
   $(document).on("submit", "#update", function (e) {
@@ -397,7 +415,7 @@ function starRating(){
       if (form === 0) {
         return false;
       }
-    }  
+    }
 
     let formData = new FormData(this);
     formData.append("flag", "update");
@@ -422,17 +440,18 @@ function starRating(){
         });
       },
       success: function (res) {
-        if (res.status === "success") { 
+        if (res.status === "success") {
           if (res.interviewStatus == 4) {
-            $("#update")[0].reset();
+            $("#updateBtn").text("Update").prop("disabled", false);
             $("#interviewModal").modal("hide");
             Swal.fire("Interview status successfully!", "", "success");
+            $("#update")[0].reset();
             loadData("", "", "", "", "getAll");
           } else {
-            $("#update")[0].reset();
-            $("#interviewModal").modal("hide");
             $("#updateBtn").text("Update").prop("disabled", false);
+            $("#interviewModal").modal("hide");
             Swal.fire("Interview status successfully!", "", "success");
+            $("#update")[0].reset();
             loadData("", "", "", "", "getAll");
           }
         } else {
@@ -446,7 +465,7 @@ function starRating(){
   });
 
   /** Function to Send Recruitment Mail */
-  function sendRecruitmentMail(data) {
+  function feedbackMail(data) {
     console.log(data);
     $.ajax({
       type: "POST",
@@ -489,32 +508,32 @@ function starRating(){
   }
 
   /** Interview status update form validate */
-  function ratingsForm() { 
+  function ratingsForm() {
     if ($("#dressCodeRate").val().length == 0) {
       $("#dressCode").focus();
       toastr.error("Kindly rating the candidate dress code");
       return 0;
-    }  
+    }
     if ($("#softSkillRate").val().length == 0) {
       $("#softSkill").focus();
       toastr.error("Kindly rating the soft skill");
       return 0;
-    } 
+    }
     if ($("#technicalSkillRate").val().length == 0) {
       $("#technicalSkill").focus();
       toastr.error("Kindly rating the technical skill");
       return 0;
-    } 
+    }
     if ($("#performanceRate").val().length == 0) {
       $("#performance").focus();
       toastr.error("Kindly rating the performance");
       return 0;
-    } 
+    }
     if ($("#overallRate").val().length == 0) {
       $("#overall").focus();
       toastr.error("Kindly rating the overall");
       return 0;
-    } 
+    }
   }
   /** Interview status update form validate */
 });

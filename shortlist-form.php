@@ -14,8 +14,14 @@ if($interviewDate == ''){
 
 if ($status == 0) {
     if ($value == 1) {
-        $query = "UPDATE `candidates` SET `interview_status`= 3 AND `date_confirm_status`= 1 WHERE `candidate_id`='$id'";
+        $currentDatetime = date('Y-m-d H:i:s');
+        $interview_status = 3;
+
+        $query = "UPDATE `candidates` SET `interview_status`= $interview_status, `date_confirm_status`= 1 WHERE `candidate_id`='$id'";
         $result = mysqli_query($conn, $query);
+        
+        $insertQuery = "INSERT INTO `interview_process`(`candidate_table_id`, `interview_process_status`, `scheduled_date`) VALUES ('$id', $interview_status, '$currentDatetime')";
+        $result = mysqli_query($conn, $insertQuery);
 
         $content = 'scheduledDate';
     } elseif ($value == 2) {
