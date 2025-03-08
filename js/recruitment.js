@@ -20,6 +20,7 @@ $(document).ready(function () {
       success: function (response) {
         if (response.status == "success") {
           $("#success_modal").modal("show");
+          $("#success_modal_content").html("Request add Successfully");
           $("#create")[0].reset();
           $("#add_post").modal("hide");
           loadData("", "", "", "", "getAll");
@@ -210,7 +211,6 @@ $(document).ready(function () {
     if (formfilling > 0) {
       $("#candidateCount").html(formfilling);
       $("#info_modal").modal("show");
- 
     } else {
       $("#delete_modal").modal("show");
       $("#deleteId").val(id);
@@ -287,7 +287,9 @@ $(document).ready(function () {
       cache: false,
       processData: false,
       beforeSend: function () {
-        $("#sendButton").text("Loading...").prop("disabled", true);
+        $("#sendButton")
+          .html("Loading <i class='fa-solid fa-spinner'></i>")
+          .prop("disabled", true);
         Swal.fire({
           title: "Recruitment form sending...",
           allowEscapeKey: false,
@@ -299,7 +301,13 @@ $(document).ready(function () {
       },
       success: function (response) {
         if (response.status === "success") {
-          sendRecruitmentMail(response.flag, response.id, response.email, response.candidateName, response.hrName);
+          sendRecruitmentMail(
+            response.flag,
+            response.id,
+            response.email,
+            response.candidateName,
+            response.hrName
+          );
         } else {
           handleError(response.message);
         }
@@ -315,13 +323,26 @@ $(document).ready(function () {
     $.ajax({
       type: "POST",
       url: "mails/recruitment-mail.php",
-      data: { flag: flag, id: id, email: email, candidateName: candidateName, hrName: hrName },
+      data: {
+        flag: flag,
+        id: id,
+        email: email,
+        candidateName: candidateName,
+        hrName: hrName,
+      },
       dataType: "json",
       success: function (response) {
         if (response.status === "success") {
           $("#send")[0].reset();
           $("#sendModal").modal("hide");
-          Swal.fire("Mail sent successfully!", "", "success");
+          $("#sendButton")
+            .html("Send Mail <i class='fa-solid fa-paper-plane'></i>")
+            .prop("disabled", false);
+          $("#success_modal").modal("show");
+          $("#success_modal_content").html(
+            "Job application Mail send successfully"
+          );
+          Swal.close();
           loadData("", "", "", "", "getAll");
         } else {
           toastr.error(response.message, "Mail Error");
@@ -336,7 +357,9 @@ $(document).ready(function () {
   /** Function to Handle Errors */
   function handleError(message) {
     Swal.close();
-    $("#sendButton").text("Send Mail").prop("disabled", false);
+    $("#sendButton")
+      .html("Send Mail <i class='fa-solid fa-paper-plane'></i>")
+      .prop("disabled", false);
     toastr.error(message, "Error");
   }
 

@@ -67,9 +67,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
         $result = mysqli_query($conn, $query);
         if ($result) {
-            $query = "UPDATE `candidates` SET `interview_status`= $interviewStatus WHERE `candidate_id`='$rowId'";
-            $result = mysqli_query($conn, $query);
-            echo json_encode(array('status' => 'success', 'interviewStatus' => $interviewStatus, 'message' => 'Candidate status update successfully'));
+            $updateQuery = "UPDATE `candidates` SET `interview_status`= $interviewStatus WHERE `candidate_id`='$rowId'";
+            mysqli_query($conn, $updateQuery);
+
+            $getQuery = "SELECT `c`.*,r.`job_position`,u.`user_name` FROM `candidates` AS c INNER JOIN recruitment AS r ON c.ticket_request_id = r.ticket_request_id INNER JOIN users AS u ON u.user_id = c.created_by WHERE `candidate_id`='$rowId'";
+            $getQueryResult = mysqli_query($conn, $getQuery);
+            $row = mysqli_fetch_assoc($getQueryResult);
+
+            echo json_encode(array('status' => 'success', 'message' => 'Candidate status update successfully', 'data' => $row));
         } else {
             echo json_encode(array('status' => 'failure', 'message' => 'Candidate status update failure'));
         }

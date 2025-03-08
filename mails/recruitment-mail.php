@@ -38,7 +38,7 @@ try {
             $hrName = $_POST['hrName'];
             //Recipients
             $mail->addAddress($_POST['email'], $_POST['candidateName']);
- 
+
             $mail->Subject = mb_encode_mimeheader("Job Application form! 📧📝", 'UTF-8');
             //Content
             $htmlContent = file_get_contents('./templates/candidate-invite1.html');
@@ -54,34 +54,64 @@ try {
                 'message' => 'Email sent successfully.'
             );
         }
-    } else if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['interview_status'])) { 
-        $interview_status = $_POST['interview_status']; 
-        $encryptID = base64_encode($_POST['candidate_id']);
-        $candidate_name = $_POST['candidate_name'];
-        $email = $_POST['email'];
-        $interview_date = $_POST['interview_date'];
-        $job_position = $_POST['job_position']; 
-        $user_name = $_POST['user_name'];
-        //Recipients
-        $mail->addAddress($_POST['email'], $_POST['candidate_name']);
- 
-        $mail->Subject = mb_encode_mimeheader("Congratulations! You Have Been Shortlisted 🎉🎊", 'UTF-8');
-        //Content
-        $htmlContent = file_get_contents('./templates/shortlist-mail.html');
-        $htmlContent = str_replace('{{id}}', $encryptID, $htmlContent);
-        $htmlContent = str_replace('{{Name}}', $candidate_name, $htmlContent);
-        $htmlContent = str_replace('{{Job Position}}', $job_position, $htmlContent);
-        $htmlContent = str_replace('{{Date}}', $interview_date, $htmlContent);
-        $htmlContent = str_replace('{{HR Name}}', $user_name, $htmlContent);
+    } else if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['interview_status'])) {
+        $interviewStatus = $_POST['interview_status'];
+        //3->shortlist mail content
+        if ($interviewStatus == 3) { 
+            $encryptID = base64_encode($_POST['candidate_id']);
+            $candidate_name = $_POST['candidate_name'];
+            $email = $_POST['email'];
+            $interview_date = $_POST['interview_date'];
+            $job_position = $_POST['job_position'];
+            $user_name = $_POST['user_name'];
+            //Recipients
+            $mail->addAddress($_POST['email'], $_POST['candidate_name']);
 
-        $mail->Body = $htmlContent;
-        $mail->send();
+            $mail->Subject = mb_encode_mimeheader("Congratulations! You Have Been Shortlisted 🎉🎊", 'UTF-8');
+            //Content
+            $htmlContent = file_get_contents('./templates/shortlist-mail.html');
+            $htmlContent = str_replace('{{id}}', $encryptID, $htmlContent);
+            $htmlContent = str_replace('{{Name}}', $candidate_name, $htmlContent);
+            $htmlContent = str_replace('{{Job Position}}', $job_position, $htmlContent);
+            $htmlContent = str_replace('{{Date}}', $interview_date, $htmlContent);
+            $htmlContent = str_replace('{{HR Name}}', $user_name, $htmlContent);
 
-        $response = array(
-            'status' => 'success',
-            'message' => 'Email sent successfully.'
-        );
+            $mail->Body = $htmlContent;
+            $mail->send();
 
+            $response = array(
+                'status' => 'success',
+                'message' => 'Email sent successfully.'
+            );
+            //4->interview feedback mail content
+        } elseif ($interviewStatus == 4) { 
+            $encryptID = base64_encode($_POST['candidate_id']);
+            $candidate_name = $_POST['candidate_name'];
+            $email = $_POST['email']; 
+            $job_position = $_POST['job_position'];  
+            $user_name = $_POST['user_name'];
+            $interview_date = !empty($_POST['interview_re_date']) ? $_POST['interview_re_date'] : $_POST['interview_date'];
+
+            //Recipients
+            $mail->addAddress($_POST['email'], $_POST['candidate_name']);
+
+            $mail->Subject = mb_encode_mimeheader("Interview Feedback for '.$job_position.' ⭐⭐⭐⭐⭐", 'UTF-8');
+            //Content
+            $htmlContent = file_get_contents('./templates/interview-feedback.html');
+            $htmlContent = str_replace('{{id}}', $encryptID, $htmlContent);
+            $htmlContent = str_replace('{{Name}}', $candidate_name, $htmlContent);
+            $htmlContent = str_replace('{{Job Position}}', $job_position, $htmlContent);
+            $htmlContent = str_replace('{{Date}}', $interview_date, $htmlContent);
+            $htmlContent = str_replace('{{HR Name}}', $user_name, $htmlContent);
+
+            $mail->Body = $htmlContent;
+            $mail->send();
+
+            $response = array(
+                'status' => 'success',
+                'message' => 'Email sent successfully.'
+            );
+        }
     } else {
         $response = array(
             'status' => 'failure',

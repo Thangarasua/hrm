@@ -266,14 +266,43 @@ if (mysqli_num_rows($result) > 0) {
 										</h2>
 										<div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
 											<div class="accordion-body">
-												<strong>Lorem Ipsum es simplemente </strong> el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.
+												<h6>1.Eligibility Criteria</h6>
+												<p>Applicants must provide accurate and complete information.</p>
+												<p>Any false information may lead to disqualification.</p>
+												
+												<h6>2.Document Submission</h6>
+												<p>Candidates must upload all required documents (resume, ID proof, certificates, etc.).</p>
+												<p>Incomplete applications will not be considered.</p>
+												
+												<h6>3.Selection Process</h6>
+												<p>Shortlisted candidates will be contacted for further rounds.</p>
+												<p>Selection is based on qualifications, experience, and interview performance.</p>
+												
+												<h6>4.Background Verification</h6>
+												<p>The company reserves the right to verify the provided information.</p>
+												<p>Any discrepancies may result in application rejection.</p>
+												
+												<h6>5.Confidentiality</h6>
+												<p>Candidate details will be used solely for recruitment purposes.</p>
+												<p>The company will not share personal information with third parties without consent.</p>
+												
+												<h6>6.Job Offer & Joining</h6>
+												<p>An offer letter will be issued to selected candidates.</p>
+												<p>The company reserves the right to withdraw the offer under special circumstances.</p>
+												
+												<h6>7.Company Policies</h6>
+												<p>Selected candidates must adhere to company rules and regulations.</p>
+												<p>Any misconduct may lead to termination of employment.</p>
+												
+												<h6>8.Equal Opportunity Employment</h6>
+												<p>The company follows a fair recruitment policy without discrimination.</p>
+												<p>Updates & Changes</p>
+
+												The company may modify these terms at any time.
 											</div>
 										</div>
 									</div>
-								</div>
-								<div class="terms">
-									<a href="#" data-toggle="modal" data-target="#termModel"><i class="fa fa-hand-o-right text-danger" aria-hidden="true"></i> Terms and Conditions.</a>
-								</div>
+								</div> 
 								<br>
 								<input type="hidden" name="id" id="id" value="<?php echo $data['candidate_id']; ?>">
 								<button type="submit" id="formSubmit" class="btn btn-primary">Submit </button>
