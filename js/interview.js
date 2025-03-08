@@ -232,7 +232,7 @@ $(document).ready(function () {
     var selectStarValue = $(this).data("val");
     $("#overallRate").val(selectStarValue);
   });
-  
+
   /*--------------------start rating -end---------------------*/
 
   function setStars(jsonData) {
@@ -377,33 +377,51 @@ $(document).ready(function () {
     selectedValue = val1;
     existingStatus = val2;
 
-    $("#updateBtn").hide();
+    $("#updateButton").hide();
     $(".rating-content").hide();
     $(".offered").hide();
     if (selectedValue == 3) {
-      $("#updateBtn").hide();
+      $("#updateButton").hide();
     }
     if (selectedValue == 4) {
       $(".rating-content").show();
-      if (existingStatus >= 4) {
-        $("#updateBtn").hide();
+      if (existingStatus == 4) {
+        $("#updateButton").hide();
       } else {
-        $("#updateBtn").show();
+        $("#updateButton").show();
       }
     }
     if (selectedValue == 5) {
-      $(".offered").show();
-      $("#updateBtn").show();
+      if (existingStatus == 5) {
+        $(".offered").hide();
+        $("#updateButton").hide();
+      } else {
+        $(".offered").show();
+        $("#updateButton").show();
+      }
     }
     if (selectedValue == 6) {
-      $("#updateBtn").show();
+      if (existingStatus == 6) {
+        $("#updateButton").hide();
+      } else {
+        $("#updateButton").show();
+      }
     }
     if (selectedValue == 7) {
-      $("#updateBtn").show();
+      if (existingStatus == 7) {
+        $("#updateButton").hide();
+      } else {
+        $("#updateButton").show();
+      }
     }
     if (selectedValue == 8) {
-      $("#updateBtn").show();
+      if (existingStatus == 8) {
+        $("#updateButton").hide();
+      } else {
+        $("#updateButton").show();
+      }
     }
+   
   }
 
   $(document).on("submit", "#update", function (e) {
@@ -429,9 +447,11 @@ $(document).ready(function () {
       cache: false,
       processData: false,
       beforeSend: function () {
-        $("#updateBtn").text("Loading...").prop("disabled", true);
+        $("#updateButton")
+          .html("Loading <i class='fa-solid fa-spinner'></i>")
+          .prop("disabled", true);
         Swal.fire({
-          title: "Its processing Please wait...",
+          title: "It's processing Please wait...",
           allowEscapeKey: false,
           allowOutsideClick: false,
           didOpen: () => {
@@ -440,18 +460,21 @@ $(document).ready(function () {
         });
       },
       success: function (res) {
+        console.log(res);
         if (res.status === "success") {
-          if (res.interviewStatus == 4) {
-            $("#updateBtn").text("Update").prop("disabled", false);
-            $("#interviewModal").modal("hide");
-            Swal.fire("Interview status successfully!", "", "success");
-            $("#update")[0].reset();
-            loadData("", "", "", "", "getAll");
+          if (res.data.interview_status == 4) {
+            feedbackMail(res.data)
           } else {
-            $("#updateBtn").text("Update").prop("disabled", false);
-            $("#interviewModal").modal("hide");
-            Swal.fire("Interview status successfully!", "", "success");
             $("#update")[0].reset();
+            $("#updateButton")
+              .html("Update <i class='fa-solid fa-cloud-arrow-up'></i>")
+              .prop("disabled", false);
+            $("#interviewModal").modal("hide");
+            $("#success_modal").modal("show");
+            $("#success_modal_content").html(
+              "Interview status Updated successfully!"
+            );
+            Swal.close();
             loadData("", "", "", "", "getAll");
           }
         } else {
@@ -465,17 +488,18 @@ $(document).ready(function () {
   });
 
   /** Function to Send Recruitment Mail */
-  function feedbackMail(data) {
-    console.log(data);
+  function feedbackMail(data) { 
     $.ajax({
       type: "POST",
       url: "mails/recruitment-mail.php",
       data: data,
       dataType: "json",
       beforeSend: function () {
-        $("#updateBtn").text("Loading...").prop("disabled", true);
+        $("#updateButton")
+          .html("Loading <i class='fa-solid fa-spinner'></i>")
+          .prop("disabled", true);
         Swal.fire({
-          title: "Interview status update mail sending...",
+          title: "Interview feed back mail sending...",
           allowEscapeKey: false,
           allowOutsideClick: false,
           didOpen: () => {
@@ -486,9 +510,15 @@ $(document).ready(function () {
       success: function (response) {
         if (response.status === "success") {
           $("#update")[0].reset();
+          $("#updateButton")
+            .html("Update <i class='fa-solid fa-cloud-arrow-up'></i>")
+            .prop("disabled", false);
           $("#interviewModal").modal("hide");
-          $("#updateBtn").text("Update").prop("disabled", false);
-          Swal.fire("Mail send successfully!", "", "success");
+          $("#success_modal").modal("show");
+          $("#success_modal_content").html(
+            "Interview status Updated successfully!"
+          );
+          Swal.close();
           loadData("", "", "", "", "getAll");
         } else {
           toastr.error(response.message, "Mail Error");

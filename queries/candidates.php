@@ -142,5 +142,19 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             echo json_encode(array('status' => 'failure', 'message' => 'Interview date update failure'));
         }
         exit;
+    } elseif ($flag === "interviewFeedback") {
+
+        $rowId = $_POST['rowId'];
+        $comments = $_POST['comments']; 
+ 
+        $query = "UPDATE `interview_process` SET `interview_feedback`= '$comments' WHERE `interview_id`='$rowId'"; 
+        $result = mysqli_query($conn, $query);
+
+        if ($result) {
+            echo json_encode(array('status' => 'success', 'message' => 'Feed back update successfully'));
+        } else {
+            echo json_encode(array('status' => 'failure', 'message' => 'Feed back update failure'));
+        }
+        exit;
     }
 }
