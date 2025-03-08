@@ -20,6 +20,7 @@ $(document).ready(function () {
       success: function (response) {
         if (response.status == "success") {
           $("#success_modal").modal("show");
+          $("#success_modal_content").html("Request add Successfully");
           $("#create")[0].reset();
           $("#add_post").modal("hide");
           loadData("", "", "", "", "getAll");
@@ -321,7 +322,10 @@ $(document).ready(function () {
         if (response.status === "success") {
           $("#send")[0].reset();
           $("#sendModal").modal("hide");
-          Swal.fire("Mail sent successfully!", "", "success");
+          $("#sendButton").html("Send Mail <i class='fa-solid fa-paper-plane'></i>").prop("disabled", false);
+          $("#success_modal").modal("show");
+          $("#success_modal_content").html("Job application Mail send successfully"); 
+          Swal.close();
           loadData("", "", "", "", "getAll");
         } else {
           toastr.error(response.message, "Mail Error");

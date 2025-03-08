@@ -336,7 +336,7 @@
 </div>
 <!-- /Recruitment form send -->
 
-<!-- Add Job Success -->
+<!-- Success common modal with dynamic content message set  -->
 <div class="modal fade" id="success_modal" role="dialog">
 	<div class="modal-dialog modal-dialog-centered modal-xm">
 		<div class="modal-content">
@@ -345,7 +345,7 @@
 					<span class="avatar avatar-lg avatar-rounded bg-success mb-3">
 						<i class="fa-solid fa-check"></i>
 					</span>
-					<h5 class="mb-2">Request add Successfully</h5>
+					<h5 class="mb-2" id="success_modal_content"></h5>
 					</p>
 					<div>
 						<div class="row g-2">
@@ -359,7 +359,8 @@
 		</div>
 	</div>
 </div>
-<!-- /Add Job Success -->
+<!-- //Success common modal with dynamic content message set  -->
+
 <!-- Update Job Success -->
 <div class="modal fade" id="update_modal" role="dialog">
 	<div class="modal-dialog modal-dialog-centered modal-xm">

@@ -300,27 +300,27 @@ $(document).ready(function () {
     });
   }
   function unSetStars() {
-    $("#dressCode i").each(function (index) {
+    $("#dressCode i").each(function () {
       $(this)
         .removeClass("fa-solid fa-star active")
         .addClass("fa-regular fa-star");
     });
-    $("#softSkill i").each(function (index) {
+    $("#softSkill i").each(function () {
       $(this)
         .removeClass("fa-solid fa-star active")
         .addClass("fa-regular fa-star");
     });
-    $("#technicalSkill i").each(function (index) {
+    $("#technicalSkill i").each(function () {
       $(this)
         .removeClass("fa-solid fa-star active")
         .addClass("fa-regular fa-star");
     });
-    $("#performance i").each(function (index) {
+    $("#performance i").each(function () {
       $(this)
         .removeClass("fa-solid fa-star active")
         .addClass("fa-regular fa-star");
     });
-    $("#overall i").each(function (index) {
+    $("#overall i").each(function () {
       $(this)
         .removeClass("fa-solid fa-star active")
         .addClass("fa-regular fa-star");
