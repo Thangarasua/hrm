@@ -73,7 +73,8 @@ if ($status == 0) {
                 <p>Interview Details:</p>
                 <p>📅 Date: <?php echo date("Y-m-d", strtotime($interviewDate)); ?></p>
                 <p>⏰ Time: <?php echo date(" h:i a", strtotime($interviewDate)); ?></p>
-                <p>📍 Location/Mode: [No 1A Sai Adhithya Building, Taramani Link Rd, next to Athipathi Hospital, Velachery, Chennai, Tamil Nadu 600042 / Offline]</p>
+                <p>🏦 Address/Mode: [No 1A Sai Adhithya Building, Taramani Link Rd, next to Athipathi Hospital, Velachery, Chennai, Tamil Nadu 600042 / Offline]</p>
+                <p>📍 Location Map: <a href="https://www.google.com/maps/place/Markerz+Global+Solutions/@12.9768843,80.2230204,17z/data=!3m1!4b1!4m6!3m5!1s0x3a525d9cd2874057:0xf15ce020001d7f19!8m2!3d12.9768843!4d80.2230204!16s%2Fg%2F11hdr7dyb8?entry=ttu&g_ep=EgoyMDI1MDMwNC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">www.google.com/maps/Markerz Global Solutions</a></p>
 
                 <p>Please confirm your availability by replying to this email. If you have any questions, feel free to reach out.</p>
 
