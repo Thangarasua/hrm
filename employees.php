@@ -269,15 +269,6 @@
 						<li class="nav-item" role="presentation">
 							<button class="nav-link" id="office-tab" data-bs-toggle="tab" data-bs-target="#office-info" type="button" role="tab" aria-selected="true">Official Information</button>
 						</li>
-						<li class="nav-item" role="presentation"></li>
-							<button class="nav-link" id="carrier-tab" data-bs-toggle="tab" data-bs-target="#carrier-info" type="button" role="tab" aria-selected="true">Carrier Information</button>
-						</li>
-						<li class="nav-item" role="presentation"></li>
-							<button class="nav-link" id="personal-tab" data-bs-toggle="tab" data-bs-target="#personal-info" type="button" role="tab" aria-selected="true">Personal Information</button>
-						</li>
-						<li class="nav-item" role="presentation"></li>
-							<button class="nav-link" id="bank-tab" data-bs-toggle="tab" data-bs-target="#bank-info" type="button" role="tab" aria-selected="true">Bank Information</button>
-						</li>
 					</ul>
 				</div>
 				<div class="tab-content" id="myTabContent">
@@ -285,7 +276,7 @@
 					<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="basic-tab" tabindex="0">
 						<div class="modal-body pb-0 ">
 							<div class="row">
-								<div class="col-md-12">
+								<!-- <div class="col-md-12">
 									<div class="d-flex align-items-center flex-wrap row-gap-3 bg-light w-100 rounded p-3 mb-4">
 										<div class="d-flex align-items-center justify-content-center avatar avatar-xxl rounded-circle border border-dashed me-2 flex-shrink-0 text-dark frames">
 											<i class="ti ti-photo text-gray-2 fs-16"></i>
@@ -305,36 +296,30 @@
 
 										</div>
 									</div>
-								</div>
+								</div> -->
 								<div class="col-md-6">
 									<div class="mb-3">
-										<label class="form-label">User ID<span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="userId" value = "ACTE001" readonly>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="mb-3">
-										<label class="form-label">User Name <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="userName" value = "Test" readonly>
+										<label class="form-label">Employee ID <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" name="employeeID" value="<?php echo getNewEmployeeId(); ?>" readonly>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Full Name <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" onkeypress="return isAlphabets(event)" name="employeeName">
+										<input type="text" class="form-control" onkeypress="return isAlphabets(event)" name="employeeName" required>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
-										<label class="form-label">Employee ID <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="employeeID">
+										<label class="form-label">Email <span class="text-danger"> *</span></label>
+										<input type="email" class="form-control" onblur="return isEmail(this)" placeholder="@actetechnologies.com" name="email" required>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Joining Date <span class="text-danger"> *</span></label>
 										<div class="input-icon-end position-relative">
-											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="doj">
+											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="doj" required>
 											<span class="input-icon-addon">
 												<i class="ti ti-calendar text-gray-7"></i>
 											</span>
@@ -343,37 +328,26 @@
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
-										<label class="form-label">Email <span class="text-danger"> *</span></label>
-										<input type="email" class="form-control" onblur="return isEmail(this)" value="" name="email">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="mb-3">
 										<label class="form-label">Phone Number <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" onkeypress="return isNumber(event)" name="phone">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="mb-3">
-										<label class="form-label">Department</label>
-										<input type="text" class="form-control" name="department" value = "BRANCH" readonly>
+										<input type="text" class="form-control" onkeypress="return isNumber(event)" name="phone" required>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Designation</label>
-										<select class="select" name="designation">
-											<option value="">Select</option>
-											<option value="2">Finance</option>
-											<option value="2">Developer</option>
-											<option value="3">Executive</option>
-										</select>
+										<input type="text" class="form-control" name="designation" value="" required>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
-										<label class="form-label">Grade <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="grade">
+										<label class="form-label">Password <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" name="password" required>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Confirm Password <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" name="confirmPassword" required>
 									</div>
 								</div>
 								<div class="col-md-12">
@@ -391,26 +365,44 @@
 								<div class="row">
 									<div class="col-md-6">
 										<div class="mb-3">
-											<label class="form-label">Work Location</label>
-											<input type="text" class="form-control" name="workLocation">
+											<label class="form-label">Department</label>
+											<select class="select" name="department" id="department">
+												<option value="">Select</option>
+												<?php echo getDepartments(); ?>
+											</select>
 										</div>
 									</div>
 									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Role</label>
+											<select class="select" name="role" id="role">
+												<option value="">Select</option>
+												<!-- <?php echo getRoles(); ?> -->
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6" id="manager-container">
 										<div class="mb-3">
 											<label class="form-label">Manager</label>
-											<input type="text" class="form-control" name="manager" value ='1001' readonly>
+											<select class="select" name="manager" id="manager">
+												<option value="">Select</option>
+												<?php echo getManagerUsers(user: 3); ?>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6" id="supervisors-container">
+										<div class="mb-3">
+											<label class="form-label">Supervisors</label>
+											<select class="select" name="supervisors" id="supervisors">
+												<option value="">Select</option>
+												<?php echo getManagerUsers(4); ?>
+											</select>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="mb-3">
-											<label class="form-label">Supervisor</label>
-											<input type="text" class="form-control" name="supervisor" value ='1002' readonly>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Team</label>
-											<input type="text" class="form-control" name="team">
+											<label class="form-label">Work Location</label>
+											<input type="text" class="form-control" name="workLocation">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -425,132 +417,13 @@
 											</select>
 										</div>
 									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Salary</label>
-											<input type="text" class="form-control" name="salary">
-										</div>
-									</div>
 								</div>
 							</div>
-						</div>
-
-						<!-- Career Information Tab -->
-						<div class="tab-pane fade" id="carrier-info" role="tabpanel" aria-labelledby="carrier-tab" tabindex="0">
-							<div class="modal-body pb-0">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Previous Employer</label>
-											<input type="text" class="form-control" name="previousEmployer">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Work Experience (Years)</label>
-											<input type="text" class="form-control" name="workExperience">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Skills</label>
-											<input type="text" class="form-control" name="skills">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Certifications</label>
-											<input type="text" class="form-control" name="certifications">
-										</div>
-									</div>
-								</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">Cancel</button>
+								<button type="submit" class="btn btn-primary addEmployeeSaveBtn">Save</button>
 							</div>
 						</div>
-
-						<!-- Personal Information Tab -->
-						<div class="tab-pane fade" id="personal-info" role="tabpanel" aria-labelledby="personal-tab" tabindex="0">
-							<div class="modal-body pb-0">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Date of Birth</label>
-											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="dob">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Gender</label>
-											<select class="select" name="gender">
-												<option value="">Select</option>
-												<option value="Male">Male</option>
-												<option value="Female">Female</option>
-												<option value="Other">Other</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Nationality</label>
-											<input type="text" class="form-control" name="nationality">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Marital Status</label>
-											<select class="select" name="maritalStatus">
-												<option value="">Select</option>
-												<option value="Single">Single</option>
-												<option value="Married">Married</option>
-												<option value="Divorced">Divorced</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-12">
-									<div class="mb-3">
-										<label class="form-label">Address <span class="text-danger"> *</span></label>
-										<textarea class="form-control" rows="3" name="address"></textarea>
-									</div>
-								</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Bank Information Tab -->
-						<div class="tab-pane fade" id="bank-info" role="tabpanel" aria-labelledby="bank-tab" tabindex="0">
-							<div class="modal-body pb-0">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Bank Name</label>
-											<input type="text" class="form-control" name="bankName">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Bank Account Number</label>
-											<input type="text" class="form-control" name="bankAccountNumber">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">IFSC Code</label>
-											<input type="text" class="form-control" name="ifscCode">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Branch Name</label>
-											<input type="text" class="form-control" name="branchName">
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">Cancel</button>
-						<button type="submit" class="btn btn-primary addEmployeeSaveBtn">Save</button>
-					</div>
 				</div>
 			</form>
 		</div>
