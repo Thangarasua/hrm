@@ -4,6 +4,10 @@ header('Content-Type: application/json');
 $currentDatetime = date('Y-m-d H:i:s');
 $hrm_userid = $_SESSION['hrm_userid'];
 
+$key = "ACTEHRM2025";
+$method = "AES-256-CBC";
+$iv = substr(hash('sha256', $key), 0, 16);
+
 if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['flag'])) {
     $flag = $_GET['flag'];
     if ($flag === "getAll") {
@@ -16,68 +20,46 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['flag'])) {
         echo json_encode($employess);
         exit;
     }
+
+    if ($flag === "getRole") {
+        $flag = $_GET['flag'];
+        $departmentId = $_GET['departmentId'];
+        $query = "SELECT * FROM roles WHERE department_id = $departmentId AND status = 1 ORDER BY role_name ASC";
+        $result = mysqli_query($conn, $query);
+        $options = "<option value=''>Select</option>";
+        while ($row = $result->fetch_assoc()) {
+            $options .= '<option value="' . $row['role_id'] . '">' . htmlspecialchars($row['role_name']) . '</option>';
+        }
+        echo json_encode($options);
+        exit;
+    }
 }
 
 if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     $flag = $_POST['flag'];
     if ($flag === "insert") {
-        // Basic Info fields
-        $userId = $_POST['userId'];
-        $userName = $_POST['userName'];
-        $fullName = $_POST['employeeName'];
         $employeeId = $_POST['employeeID'];
-        $doj = $_POST['doj'];
-        $doj = date('Y-m-d', strtotime(str_replace('-', '/', $doj)));
+        $fullName = $_POST['employeeName'];
         $email = $_POST['email'];
         $phone = $_POST['phone'];
-        $department = $_POST['department'];
+        $doj = $_POST['doj'];
+        $doj = date('Y-m-d', strtotime(str_replace('-', '/', $doj)));
+
+        $password = $_POST['password'];
+        $encryptedPassword = openssl_encrypt($password, $method, $key, 0, $iv);
+
         $designation = $_POST['designation'];
-        $grade = $_POST['grade'];
+        $department = $_POST['department'];
+        $role = $_POST['role'];
+        $manager = isset($_POST['manager']) ? $_POST['manager'] : '';
+        $supervisor = isset($_POST['supervisors']) ? $_POST['supervisors'] : '';
+        $workLocation = $_POST['workLocation'];
+        $employeeType = $_POST['employeeType'];
         $about = $_POST['about'];
 
-        $workLocation = $_POST['workLocation'];
-        $manager = $_POST['manager'];
-        $supervisor = $_POST['supervisor'];
-        $team = $_POST['team'];
-        $employeeType = $_POST['employeeType'];
-        $salary = $_POST['salary'];
-
-        // Personal Info fields
-        $dob = $_POST['dob'];
-        $dob = date('Y-m-d', strtotime(str_replace('-', '/', $dob)));
-        $gender = $_POST['gender'];
-        $nationality = $_POST['nationality'];
-        $maritalStatus = $_POST['maritalStatus'];
-        $address = $_POST['address'];
-
-        // Bank Info fields
-        $bankName = $_POST['bankName'];
-        $bankAccountNumber = $_POST['bankAccountNumber'];
-        $ifscCode = $_POST['ifscCode'];
-        $branchName = $_POST['branchName'];
-
-        // Career Info fields
-        $previousEmployer = $_POST['previousEmployer'];
-        $workExperience = $_POST['workExperience'];
-        $skills = $_POST['skills'];
-        $certifications = $_POST['certifications'];
-
-        $effectiveDate = date("Y-m-d");
-
-        $basicInfoQuery = "INSERT INTO employees (user_id, user_name, full_name, employee_id, doj, email, phone, department_id, designation, grade, about, work_location, manager_id, supervisor_id, team, employee_type_id)    VALUES ('$userId', '$userName', '$fullName', '$employeeId', '$doj', '$email', '$phone', '$department', '$designation', '$grade', '$about', '$workLocation', '$manager', '$supervisor', '$team', $employeeType)";
+        $query = "INSERT INTO employees (employee_id, full_name, email, phone, doj, `password`, designation, department_id, role_id, manager_id, supervisor_id, work_location, employee_type_id, about, `status`) VALUES ('$employeeId', '$fullName', '$email', '$phone', '$doj', '$encryptedPassword', '$designation', $department, $role, '$manager', '$supervisor', '$workLocation', $employeeType, '$about', 1)";
         
-        $personalInfoQuery = "INSERT INTO personal_info (employee_id, dob, gender, nationality, marital_status, address)VALUES ('$employeeId', '$dob', '$gender', '$nationality', '$maritalStatus', '$address')";
-
-        $bankInfoQuery = "INSERT INTO bank_info (employee_id, bank_name, bank_account_number, ifsc_code, branch_name) VALUES ('$employeeId', '$bankName', $bankAccountNumber, '$ifscCode', '$branchName')";
-
-        $careerInfoQuery = "INSERT INTO career_info (employee_id, previous_employer, work_experience, skills, certifications) VALUES ('$employeeId', '$previousEmployer', '$workExperience', '$skills', '$certifications')";
-
-        $salaryInfoQuery = "INSERT INTO salary_history (employee_id, salary, effective_date) VALUES ('$employeeId', '$salary', '$effectiveDate'
-        )";
-        
-        if (mysqli_query($conn, $basicInfoQuery) && mysqli_query($conn, $personalInfoQuery) &&
-        mysqli_query($conn, $bankInfoQuery) && mysqli_query($conn, $careerInfoQuery) &&
-        mysqli_query($conn, $salaryInfoQuery)) {
+        if (mysqli_query($conn, $query)) {
             echo json_encode(array('status' => 'success', 'message' => 'Employee data added successfully.'));
         } else {
             echo json_encode(array('status' => 'failure', 'message' => 'Error adding employee data.'));

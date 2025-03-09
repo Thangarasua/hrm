@@ -1,6 +1,6 @@
 <?php require_once("./includes/header.php"); ?>
 <?php require_once("./includes/sidebar.php"); ?>
-
+<?php include("./queries/commonFunctions.php"); ?>
 <!-- Page Wrapper -->
 <div class="page-wrapper">
 	<div class="content">
@@ -141,6 +141,15 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="mb-3">
+								<label class="form-label">Department</label>
+								<select class="select" name="department">
+									<option value="">Select</option>
+									<?php echo getDepartments(); ?>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="mb-3">
 								<label class="form-label">Roles Name</label>
 								<input type="text" class="form-control" name="rolesName">
 							</div>
@@ -171,6 +180,15 @@
 			<form id="update">
 				<div class="modal-body pb-0">
 					<div class="row">
+					<div class="col-md-12">
+							<div class="mb-3">
+								<label class="form-label">Department</label>
+								<select class="select" name="department">
+									<option value="">Select</option>
+									<?php echo getDepartments(); ?>
+								</select>
+							</div>
+						</div>
 						<div class="col-md-12">
 							<div class="mb-3">
 								<label class="form-label">Roles Name</label>
