@@ -11,12 +11,12 @@ $method = "AES-256-CBC";
 $iv = substr(hash('sha256', $key), 0, 16);
 $inputPassword = openssl_encrypt($password, $method, $key, 0, $iv);
 
-$query = "SELECT * FROM `users` WHERE `user_id` = '$username'";
+$query = "SELECT * FROM `employees` WHERE `employee_id` = '$username'";
 $result = mysqli_query($conn, $query);
 if (mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_array($result); 
-    $userName = $row['user_name']; 
-    $userId = $row['user_id']; 
+    $userName = $row['full_name']; 
+    $userId = $row['employee_id']; 
     $dbPassword = $row['password'];
 
     if ($dbPassword == $inputPassword) {
