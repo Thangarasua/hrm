@@ -1,4 +1,5 @@
 <?php include(__DIR__ . "/../includes/config.php");
+$hrm_userid = $_SESSION['hrm_userid'];
 
 // Get current year and month
 $year = date('y'); 
@@ -59,4 +60,20 @@ function getNewEmployeeId() {
 
     $newEmployeeId = $baseId . str_pad($newSequence, 3, '0', STR_PAD_LEFT);
     return $newEmployeeId;
+}
+
+function getBankInfo() {
+    global $conn, $hrm_userid;
+    $sql = "SELECT * FROM bank_info WHERE employee_id = '$hrm_userid'";
+    $result = mysqli_query($conn, $sql);
+    if ($result && $row = $result->fetch_assoc()) {
+        return [
+            'bankName' => $row['bank_name'],
+            'bankAccountNumber' => $row['bank_account_number'],
+            'ifscCode' => $row['ifsc_code'],
+            'branchName' => $row['branch_name']
+        ];
+    } else {
+        return null;
+    }
 }

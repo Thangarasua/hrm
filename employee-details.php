@@ -1,6 +1,8 @@
 <?php require_once("./includes/header.php"); ?>
 <?php require_once("./includes/sidebar.php"); ?>
-
+<?php include("./queries/commonFunctions.php"); 
+$bankInfo = getBankInfo();
+?>
 <!-- Page Wrapper -->
 <div class="page-wrapper">
 	<div class="content">
@@ -259,25 +261,25 @@
 													<span class="d-inline-flex align-items-center">
 														Bank Name
 													</span>
-													<h6 class="d-flex align-items-center fw-medium mt-1">Swiz Intenational Bank</h6>
+													<h6 class="d-flex align-items-center fw-medium mt-1"><?php echo $bankInfo ? $bankInfo['bankName'] : ''; ?></h6>
 												</div>
 												<div class="col-md-3">
 													<span class="d-inline-flex align-items-center">
 														Bank account no
 													</span>
-													<h6 class="d-flex align-items-center fw-medium mt-1">159843014641</h6>
+													<h6 class="d-flex align-items-center fw-medium mt-1"><?php echo $bankInfo ? $bankInfo['bankAccountNumber'] : ''; ?></h6>
 												</div>
 												<div class="col-md-3">
 													<span class="d-inline-flex align-items-center">
 														IFSC Code
 													</span>
-													<h6 class="d-flex align-items-center fw-medium mt-1">ICI24504</h6>
+													<h6 class="d-flex align-items-center fw-medium mt-1"><?php echo $bankInfo ? $bankInfo['ifscCode'] : ''; ?></h6>
 												</div>
 												<div class="col-md-3">
 													<span class="d-inline-flex align-items-center">
 														Branch
 													</span>
-													<h6 class="d-flex align-items-center fw-medium mt-1">Alabama USA</h6>
+													<h6 class="d-flex align-items-center fw-medium mt-1"><?php echo $bankInfo ? $bankInfo['branchName'] : ''; ?></h6>
 												</div>
 											</div>
 										</div>
@@ -1469,31 +1471,31 @@
 					<i class="ti ti-x"></i>
 				</button>
 			</div>
-			<form action="https://smarthr.dreamstechnologies.com/html/template/employee-details.html">
+			<form action="#" id="addBankInfo">
 				<div class="modal-body pb-0">
 					<div class="row">
 						<div class="col-md-12">
 							<div class="mb-3">
 								<label class="form-label">Bank Details <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" name="bankName" value="<?php echo $bankInfo ? $bankInfo['bankName'] : ''; ?>" required>
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="mb-3">
 								<label class="form-label">Bank account No </label>
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" name="bankAccountNumber" value="<?php echo $bankInfo ? $bankInfo['bankAccountNumber'] : ''; ?>" required>
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="mb-3">
 								<label class="form-label">IFSC Code</label>
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" name="ifscCode" value="<?php echo $bankInfo ? $bankInfo['ifscCode'] : ''; ?>" required>
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="mb-3">
 								<label class="form-label">Branch Address</label>
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" name="branchName" value="<?php echo $bankInfo ? $bankInfo['branchName'] : ''; ?>" required>
 							</div>
 						</div>
 					</div>
@@ -1995,3 +1997,4 @@
 <!-- /Delete Modal -->
 
 <?php require_once("./includes/footer.php"); ?>
+<script src="./js/employee-details.js"></script>

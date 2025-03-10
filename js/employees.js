@@ -12,16 +12,16 @@ $(document).ready(function () {
       cache: false,
       processData: false,
       success: function (response) {
-      if (response.status == "success") {
-        $("#add_employee").modal("hide");
-        toastr.success("Employee added successfully");
-        $('#addEmployee')[0].reset();
-        setTimeout(function() {
-          location.reload();
-        }, 2000);
-      } else {
-        toastr.error(response.message, "Error");
-      }
+        if (response.status == "success") {
+          $("#add_employee").modal("hide");
+          toastr.success("Employee added successfully");
+          $('#addEmployee')[0].reset();
+          setTimeout(function() {
+            location.reload();
+          }, 2000);
+        } else {
+          toastr.error(response.message, "Error");
+        }
       },
     });
   });
