@@ -58,9 +58,11 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $about = $_POST['about'];
 
         $query = "INSERT INTO employees (employee_id, full_name, email, phone, doj, `password`, designation, department_id, role_id, manager_id, supervisor_id, work_location, employee_type_id, about, `status`) VALUES ('$employeeId', '$fullName', '$email', '$phone', '$doj', '$encryptedPassword', '$designation', $department, $role, '$manager', '$supervisor', '$workLocation', $employeeType, '$about', 1)";
+
+        $data = array('flag'=>'welcomeMail','employeeId'=>$employeeId,'fullName'=>$fullName,'email'=>$email,'password'=>$password);
         
         if (mysqli_query($conn, $query)) {
-            echo json_encode(array('status' => 'success', 'message' => 'Employee data added successfully.'));
+            echo json_encode(array('status' => 'success', 'message' => 'Employee data added successfully.', 'data'=> $data));
         } else {
             echo json_encode(array('status' => 'failure', 'message' => 'Error adding employee data.'));
         }
