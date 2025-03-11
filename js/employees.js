@@ -59,10 +59,9 @@ $(document).ready(function () {
                             <td>${row.phone}</td>
                             <td>${row.designation}</td>
                             <td>${row.doj}</td>
-                            <td>${row.employee_type_id}</td>
                             <td>
                               <div class="action-icon d-inline-flex">
-                                <a href="employee-details" data-id="${row.id}" class="view">
+                                <a href="employee-details" data-id="${row.employee_id}" class="view" id="employeeDetails">
                                   <i class="fa-solid fa-folder-open"></i>
                                 </a>
                               </div>
@@ -101,6 +100,17 @@ $(document).ready(function () {
       } else {
           $('#role').html('<option value="">Select</option>');
       }
+  });
+
+  function encryptEmployeeId(employeeId) {
+    return btoa(employeeId);
+  }
+
+  $(document).on('click', '#employeeDetails', function(e) {
+    e.preventDefault();
+    var employeeId = $(this).data('id');
+    var encryptedId = encryptEmployeeId(employeeId);
+    window.location.href = `employee-details.php?empId=${encryptedId}`;
   });
 
 });

@@ -62,9 +62,9 @@ function getNewEmployeeId() {
     return $newEmployeeId;
 }
 
-function getBankInfo() {
-    global $conn, $hrm_userid;
-    $sql = "SELECT * FROM bank_info WHERE employee_id = '$hrm_userid'";
+function getBankInfo($employeeId) {
+    global $conn;
+    $sql = "SELECT * FROM bank_info WHERE employee_id = '$employeeId'";
     $result = mysqli_query($conn, $sql);
     if ($result && $row = $result->fetch_assoc()) {
         return [
@@ -72,6 +72,31 @@ function getBankInfo() {
             'bankAccountNumber' => $row['bank_account_number'],
             'ifscCode' => $row['ifsc_code'],
             'branchName' => $row['branch_name']
+        ];
+    } else {
+        return null;
+    }
+}
+
+function getEmployeeInfo($employeeId) {
+    global $conn;
+    $query = "SELECT * FROM `employees` WHERE `employee_id` = '$employeeId'";
+    $result = mysqli_query($conn, $query);
+    if ($result && $row = $result->fetch_assoc()) {
+        return [
+            'employeeId' => $row['employee_id'],
+            'fullName' => $row['full_name'],
+            'email' => $row['email'],
+            'phone' => $row['phone'],
+            'doj' => $row['doj'],
+            'designation' => $row['designation'],
+            'department' => $row['department_id'],
+            'role' => $row['role_id'],
+            'manager' => $row['manager_id'],
+            'supervisor' => $row['supervisor_id'],
+            'workLocation' => $row['work_location'],
+            'employeeType' => $row['employee_type_id'],
+            'about' => $row['about'],
         ];
     } else {
         return null;
