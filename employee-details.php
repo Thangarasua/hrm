@@ -1,7 +1,12 @@
 <?php require_once("./includes/header.php"); ?>
 <?php require_once("./includes/sidebar.php"); ?>
 <?php include("./queries/commonFunctions.php"); 
-$bankInfo = getBankInfo();
+if (isset($_GET['empId'])) {
+	$encryptedId = $_GET['empId'];
+    $employeeId = base64_decode($encryptedId);
+}
+$bankInfo = getBankInfo($employeeId);
+$employeeInfo = getEmployeeInfo($employeeId);
 ?>
 <!-- Page Wrapper -->
 <div class="page-wrapper">
@@ -11,7 +16,7 @@ $bankInfo = getBankInfo();
 		<div class="d-md-flex d-block align-items-center justify-content-between page-breadcrumb mb-3">
 			<div class="my-auto mb-2">
 				<h6 class="fw-medium d-inline-flex align-items-center mb-3 mb-sm-0"><a href="https://smarthr.dreamstechnologies.com/html/template/employees.html">
-						<i class="ti ti-arrow-left me-2"></i>Employee Details</a>
+						<i class="ti ti-arrow-left me-2"></i>Employee Details - <?php echo $employeeId ? $employeeId : ''; ?></a>
 				</h6>
 			</div>
 			<div class="d-flex my-xl-auto right-content align-items-center flex-wrap ">
@@ -36,9 +41,9 @@ $bankInfo = getBankInfo();
 						</span>
 						<div class="text-center px-3 pb-3 border-bottom">
 							<div class="mb-3">
-								<h5 class="d-flex align-items-center justify-content-center mb-1">Stephan Peralt<i class="ti ti-discount-check-filled text-success ms-1"></i></h5>
+								<h5 class="d-flex align-items-center justify-content-center mb-1"><?php echo $employeeInfo ? $employeeInfo['fullName'] : ''; ?><i class="ti ti-discount-check-filled text-success ms-1"></i></h5>
 								<span class="badge badge-soft-dark fw-medium me-2">
-									<i class="ti ti-point-filled me-1"></i>Software Developer
+									<i class="ti ti-point-filled me-1"></i><?php echo $employeeInfo ? $employeeInfo['designation'] : ''; ?>
 								</span>
 								<span class="badge badge-soft-secondary fw-medium">10+ years of Experience</span>
 							</div>
@@ -46,23 +51,30 @@ $bankInfo = getBankInfo();
 								<div class="d-flex align-items-center justify-content-between mb-2">
 									<span class="d-inline-flex align-items-center">
 										<i class="ti ti-id me-2"></i>
-										Client ID
+										Employee ID
 									</span>
-									<p class="text-dark">CLT-0024</p>
+									<p class="text-dark"><?php echo $employeeInfo ? $employeeInfo['employeeId'] : ''; ?></p>
 								</div>
 								<div class="d-flex align-items-center justify-content-between mb-2">
 									<span class="d-inline-flex align-items-center">
-										<i class="ti ti-star me-2"></i>
-										Team
+										<i class="ti ti-calendar-check me-2"></i>
+										Department
 									</span>
-									<p class="text-dark">UI/UX Design</p>
+									<p class="text-dark"><?php echo $employeeInfo ? $employeeInfo['department'] : ''; ?></p>
+								</div>
+								<div class="d-flex align-items-center justify-content-between mb-2">
+									<span class="d-inline-flex align-items-center">
+										<i class="ti ti-calendar-check me-2"></i>
+										Role
+									</span>
+									<p class="text-dark"><?php echo $employeeInfo ? $employeeInfo['role'] : ''; ?></p>
 								</div>
 								<div class="d-flex align-items-center justify-content-between mb-2">
 									<span class="d-inline-flex align-items-center">
 										<i class="ti ti-calendar-check me-2"></i>
 										Date Of Join
 									</span>
-									<p class="text-dark">1st Jan 2023</p>
+									<p class="text-dark"><?php echo $employeeInfo ? $employeeInfo['doj'] : ''; ?></p>
 								</div>
 								<div class="d-flex align-items-center justify-content-between">
 									<span class="d-inline-flex align-items-center">
@@ -73,7 +85,7 @@ $bankInfo = getBankInfo();
 										<span class="avatar avatar-sm avatar-rounded me-2">
 											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-12.jpg" alt="Img">
 										</span>
-										<p class="text-gray-9 mb-0">Doglas Martini</p>
+										<p class="text-gray-9 mb-0"><?php echo $employeeInfo ? $employeeInfo['workLocation'] : ''; ?></p>
 									</div>
 								</div>
 								<div class="row gx-2 mt-3">
@@ -100,14 +112,14 @@ $bankInfo = getBankInfo();
 									<i class="ti ti-phone me-2"></i>
 									Phone
 								</span>
-								<p class="text-dark">(163) 2459 315</p>
+								<p class="text-dark"><?php echo $employeeInfo ? $employeeInfo['phone'] : ''; ?></p>
 							</div>
 							<div class="d-flex align-items-center justify-content-between mb-2">
 								<span class="d-inline-flex align-items-center">
 									<i class="ti ti-mail-check me-2"></i>
 									Email
 								</span>
-								<a href="javascript:void(0);" class="text-info d-inline-flex align-items-center"><span class="__cf_email__" data-cfemail="3242574040535e46030072574a535f425e571c515d5f">[email&#160;protected]</span><i class="ti ti-copy text-dark ms-2"></i></a>
+								<a href="javascript:void(0);" class="text-info d-inline-flex align-items-center"><span class="__cf_email__" data-cfemail=""><?php echo $employeeInfo ? $employeeInfo['email'] : ''; ?></span><i class="ti ti-copy text-dark ms-2"></i></a>
 							</div>
 							<div class="d-flex align-items-center justify-content-between mb-2">
 								<span class="d-inline-flex align-items-center">

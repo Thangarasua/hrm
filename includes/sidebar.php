@@ -108,7 +108,7 @@
 							<ul>
 								<li><a href="users">User Lists</a></li>
 								<li><a href="employees">Employee Lists</a></li>
-								<li><a href="employee-details">Employee Details</a></li>
+								<!-- <li><a href="employee-details">Employee Details</a></li> -->
 								<li><a href="departments">Departments</a></li>
 								<li><a href="designations">Designations</a></li>
 								<li><a href="roles">Roles</a></li>
@@ -569,7 +569,7 @@
 								<li><a href="users">User Lists</a></li>
 								<li><a href="employees.html">Employee Lists</a></li>
 								<li><a href="employees-grid.html">Employee Grid</a></li>
-								<li><a href="employee-details.php">Employee Details</a></li>
+								<!-- <li><a href="employee-details.php">Employee Details</a></li> -->
 								<li><a href="departments.php">Departments</a></li>
 								<li><a href="designations.php">Designations</a></li>
 								<li><a href="policy.php">Policies</a></li>

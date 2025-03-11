@@ -227,7 +227,6 @@
 								<th>Phone</th>
 								<th>Designation</th>
 								<th>Joining Date</th>
-								<th>Emp Type</th>
 								<th>Action</th>
 							</tr>
 						</thead>
