@@ -28,13 +28,14 @@ function isAlphabets(input) {
 function isEmail(input) {
   var email = input.value.trim();
   var filter = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-  if (!filter.test(email)) {
-    toastr["warning"]("Please enter a valid email!");
-    input.focus();
-    return false;
+  if (email.length > 0) {
+    if (!filter.test(email)) {
+      toastr["warning"]("Please enter a valid email!");
+      input.focus();
+      return false;
+    }
+    return true;
   }
-  return true;
 }
 
 function dataTableDesigns() {
