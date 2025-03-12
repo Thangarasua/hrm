@@ -1,10 +1,6 @@
 <?php include(__DIR__ . "/../includes/config.php");
 $hrm_userid = $_SESSION['hrm_userid'];
 
-// Get current year and month
-$year = date('y'); 
-$month = date('m');
-
 function getDepartments() {
     global $conn;
     $query = "SELECT * FROM departments WHERE status = 1 ORDER BY department_name ASC";
@@ -38,11 +34,19 @@ function getManagerUsers($user) {
     return $options;
 }
 
-function getNewEmployeeId() {
-    global $conn, $year, $month;
+if (isset($_POST['month']) && isset($_POST['year'])) {
+    $month = $_POST['month'];
+    $year = $_POST['year'];
+    echo getNewEmployeeId($month, $year);
+}
+
+function getNewEmployeeId($month, $year) {
+    global $conn;
+    $year = date('y', strtotime($year . '-01-01')); 
+    $month = date('m', strtotime($year . '-' . $month . '-01')); 
     $baseId = "ACTE" . $year . $month;
 
-    $sql = "SELECT employee_id FROM employees WHERE employee_id LIKE 'ACTE%' ORDER BY employee_id DESC LIMIT 1";
+    $sql = "SELECT * FROM `employees` ORDER BY `employees`.`id` DESC LIMIT 1";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {

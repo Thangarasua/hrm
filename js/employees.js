@@ -113,4 +113,23 @@ $(document).ready(function () {
     window.location.href = `employee-details.php?empId=${encryptedId}`;
   });
 
+  $(document).on('dp.change', '#doj', function(e) {
+    const doj = $(this).val();
+    updateEmployeeId(doj);
+  });
+
+  function updateEmployeeId(doj) {
+    if (doj) {
+        const [day, month, year] = doj.split('-');
+        $.ajax({
+          url: 'queries/commonFunctions.php', 
+          type: 'POST',
+          data: { month: month, year: year, flag: 'getEmpId' },
+          success: function(response) {
+            $('#employeeID').val(response);
+          }
+        });
+    }
+}
+
 });
