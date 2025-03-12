@@ -16,11 +16,11 @@ try {
     $mail->isSMTP();
     $mail->Host       = 'smtp.gmail.com';
     $mail->SMTPAuth   = true;
-    $mail->Username = 'server@acte.in';
-    $mail->Password = 'wonlprkyskanwqrd';
+    $mail->Username = 'notify@acte.in';
+    $mail->Password = 'kaizxqhrltqzsxgr';
     $mail->SMTPSecure = 'ssl';
     $mail->Port = 465;
-    $mail->setFrom('server@acte.in', 'MARKERZ GLOBAL SOLUTION');
+    $mail->setFrom('info@acte.in', 'MARKERZ GLOBAL SOLUTION');
     $mail->isHTML(true);
 
     if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
@@ -57,7 +57,7 @@ try {
     } else if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['interview_status'])) {
         $interviewStatus = $_POST['interview_status'];
         //3->shortlist mail content
-        if ($interviewStatus == 3) { 
+        if ($interviewStatus == 3) {
             $encryptID = base64_encode($_POST['candidate_id']);
             $candidate_name = $_POST['candidate_name'];
             $email = $_POST['email'];
@@ -84,11 +84,11 @@ try {
                 'message' => 'Email sent successfully.'
             );
             //4->interview feedback mail content
-        } elseif ($interviewStatus == 4) { 
+        } elseif ($interviewStatus == 4) {
             $encryptID = base64_encode($_POST['candidate_id']);
             $candidate_name = $_POST['candidate_name'];
-            $email = $_POST['email']; 
-            $job_position = $_POST['job_position'];  
+            $email = $_POST['email'];
+            $job_position = $_POST['job_position'];
             $user_name = $_POST['user_name'];
             $interview_date = !empty($_POST['interview_re_date']) ? $_POST['interview_re_date'] : $_POST['interview_date'];
 

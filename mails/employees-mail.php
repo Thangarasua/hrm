@@ -16,22 +16,22 @@ try {
     $mail->isSMTP();
     $mail->Host       = 'smtp.gmail.com';
     $mail->SMTPAuth   = true;
-    $mail->Username = 'server@acte.in';
-    $mail->Password = 'wonlprkyskanwqrd';
+    $mail->Username = 'notify@acte.in';
+    $mail->Password = 'kaizxqhrltqzsxgr';
     $mail->SMTPSecure = 'ssl';
     $mail->Port = 465;
-    $mail->setFrom('server@acte.in', 'MARKERZ GLOBAL SOLUTION');
+    $mail->setFrom('info@acte.in', 'MARKERZ GLOBAL SOLUTION');
     $mail->isHTML(true);
 
     if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
-        $flag = $_POST['flag']; 
+        $flag = $_POST['flag'];
 
         if ($flag === "welcomeMail") {
             $employeeId = $_POST['employeeId'];
             $fullName = $_POST['fullName'];
             $email = $_POST['email'];
-            $password = $_POST['password']; 
+            $password = $_POST['password'];
             //Recipients
             $mail->addAddress($_POST['email'], $_POST['fullName']);
 
