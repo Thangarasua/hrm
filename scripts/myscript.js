@@ -38,6 +38,12 @@ function isEmail(input) {
   }
 }
 
+function capitalizeWords(input) {
+  input.value = input.value.replace(/\b\w/g, function (char) {
+    return char.toUpperCase();
+  });
+}
+
 function dataTableDesigns() {
   var lastSegment = $(location).attr("pathname").split("/").pop();
 
