@@ -73,8 +73,11 @@ $(document).ready(function () {
         if (response.status == "success") {
           $("#addDesignation")[0].reset();
           $("#add_designation").modal("hide");
-          fetchDesignation();
-          $("#update_modal").modal("show");
+          $("#success_modal").modal("show");
+          $("#success_modal_content").html(
+            "Designation added Successfully"
+          ); 
+          fetchDesignation(); 
         } else {
           toastr.error(response.message, "Error");
         }
@@ -124,7 +127,10 @@ $(document).ready(function () {
         if (response.status == "success") {
           $("#update")[0].reset();
           $("#editModal").modal("hide");
-          $("#update_modal").modal("show");
+          $("#success_modal").modal("show");
+          $("#success_modal_content").html(
+            "Designation Updated Successfully"
+          );  
           fetchDesignation();
         } else {
           toastr.error(response.message, "Error");

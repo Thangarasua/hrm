@@ -20,12 +20,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     $flag = $_POST['flag'];
 
     if ($flag === "insert") {
-
+       
+        $department = $_POST['department'];
+        $role = $_POST['role'];
         $designationName = $_POST['designationName'];
         $status = 1;
 
         try {
-            $query = "INSERT INTO `designations` (`designation_title`, `status`) VALUES ('$designationName', $status)";
+            $query = "INSERT INTO `designations` (`department_table_id`, `role_table_id`, `designation_title`, `status`) VALUES ('$department','$role','$designationName', $status)";
             $result = mysqli_query($conn, $query);
             if ($result) {
                 echo json_encode(array('status' => 'success', 'message' => 'Designations Added Successfully'));
