@@ -16,7 +16,7 @@
 					</ol>
 				</nav>
 			</div>
-			<div class="d-flex my-xl-auto right-content align-items-center flex-wrap "> 
+			<div class="d-flex my-xl-auto right-content align-items-center flex-wrap ">
 				<div class="me-2 mb-2">
 					<div class="dropdown">
 						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
@@ -32,7 +32,7 @@
 					</div>
 				</div>
 				<div class="mb-2">
-				<a href="#" data-bs-toggle="modal" data-bs-target="#add_roles" class="btn btn-primary d-flex align-items-center"><i class="ti ti-circle-plus me-2"></i>Add Roles</a>
+					<a href="#" data-bs-toggle="modal" data-bs-target="#add_roles" class="btn btn-primary d-flex align-items-center"><i class="ti ti-circle-plus me-2"></i>Add Roles</a>
 				</div>
 				<div class="head-icons ms-2">
 					<a href="javascript:void(0);" class="" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Collapse" id="collapse-header">
@@ -141,15 +141,6 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="mb-3">
-								<label class="form-label">Department</label>
-								<select class="select" name="department">
-									<option value="">Select</option>
-									<?php echo getDepartments(); ?>
-								</select>
-							</div>
-						</div>
-						<div class="col-md-12">
-							<div class="mb-3">
 								<label class="form-label">Roles Name</label>
 								<input type="text" class="form-control" name="rolesName">
 							</div>
@@ -165,7 +156,7 @@
 	</div>
 </div>
 <!-- /Add Role -->
- 
+
 
 <!-- Edit Roles -->
 <div class="modal fade" id="editModal">
@@ -180,15 +171,6 @@
 			<form id="update">
 				<div class="modal-body pb-0">
 					<div class="row">
-					<div class="col-md-12">
-							<div class="mb-3">
-								<label class="form-label">Department</label>
-								<select class="select" name="department">
-									<option value="">Select</option>
-									<?php echo getDepartments(); ?>
-								</select>
-							</div>
-						</div>
 						<div class="col-md-12">
 							<div class="mb-3">
 								<label class="form-label">Roles Name</label>
