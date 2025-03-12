@@ -75,8 +75,11 @@ $(document).ready(function() {
 				if (response.status == "success") { 
           $("#addRoles")[0].reset();
           $("#add_roles").modal("hide");
-          toastr.success('Add successfully'); 
-          fetchRoles();
+          $("#success_modal").modal("show");
+          $("#success_modal_content").html(
+            "Role added Successfully"
+          ); 
+          fetchRoles(); 
 				}else{
 					toastr.error(response.message, "Error");
 				}
@@ -125,9 +128,12 @@ $(document).ready(function() {
       processData: false,
       success: function (response) {
         if (response.status == "success") {
-          $("#update_modal").modal("show");
           $("#update")[0].reset();
           $("#editModal").modal("hide");
+          $("#success_modal").modal("show");
+          $("#success_modal_content").html(
+            "Role Updated Successfully"
+          );  
           fetchRoles();
         } else {
           toastr.error(response.message, "Error");

@@ -27,6 +27,16 @@ $(document).ready(function () {
                                 }</a></h6>
                             </td>
                             <td>
+                                <h6 class="fw-medium"><a href="#">${
+                                  row.department_name
+                                }</a></h6>
+                            </td>
+                            <td>
+                                <h6 class="fw-medium"><a href="#">${
+                                  row.role_name
+                                }</a></h6>
+                            </td>
+                            <td>
                                 <span class="badge ${statusClass} d-inline-flex align-items-center badge-xs">
                                     <i class="ti ti-point-filled me-1"></i>${statusValue}
                                 </span>
@@ -73,8 +83,11 @@ $(document).ready(function () {
         if (response.status == "success") {
           $("#addDesignation")[0].reset();
           $("#add_designation").modal("hide");
-          fetchDesignation();
-          $("#update_modal").modal("show");
+          $("#success_modal").modal("show");
+          $("#success_modal_content").html(
+            "Designation added Successfully"
+          ); 
+          fetchDesignation(); 
         } else {
           toastr.error(response.message, "Error");
         }
@@ -124,7 +137,10 @@ $(document).ready(function () {
         if (response.status == "success") {
           $("#update")[0].reset();
           $("#editModal").modal("hide");
-          $("#update_modal").modal("show");
+          $("#success_modal").modal("show");
+          $("#success_modal_content").html(
+            "Designation Updated Successfully"
+          );  
           fetchDesignation();
         } else {
           toastr.error(response.message, "Error");

@@ -1,6 +1,6 @@
 <?php require_once("./includes/header.php"); ?>
 <?php require_once("./includes/sidebar.php"); ?>
-
+<?php include("./queries/commonFunctions.php"); ?>
 <!-- Page Wrapper -->
 <div class="page-wrapper">
 	<div class="content">
@@ -16,7 +16,7 @@
 					</ol>
 				</nav>
 			</div>
-			<div class="d-flex my-xl-auto right-content align-items-center flex-wrap "> 
+			<div class="d-flex my-xl-auto right-content align-items-center flex-wrap ">
 				<div class="me-2 mb-2">
 					<div class="dropdown">
 						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
@@ -32,7 +32,7 @@
 					</div>
 				</div>
 				<div class="mb-2">
-				<a href="#" data-bs-toggle="modal" data-bs-target="#add_designation" class="btn btn-primary d-flex align-items-center"><i class="ti ti-circle-plus me-2"></i>Add designations</a>
+					<a href="#" data-bs-toggle="modal" data-bs-target="#add_designation" class="btn btn-primary d-flex align-items-center"><i class="ti ti-circle-plus me-2"></i>Add Designations</a>
 				</div>
 				<div class="head-icons ms-2">
 					<a href="javascript:void(0);" class="" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Collapse" id="collapse-header">
@@ -62,7 +62,7 @@
 							<option value="72">72</option>
 							<option value="100">100</option>
 							<option value="-1">All</option>
-						</select> 
+						</select>
 					</div>
 					<div class="dropdown me-3">
 						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
@@ -105,9 +105,11 @@
 				<div class="custom-datatable-filter table-responsive">
 					<table class="table datatable" id="tableRecords">
 						<thead class="thead-light">
-							<tr> 
+							<tr>
 								<th>S.No</th>
 								<th>Designation</th>
+								<th>Department</th>
+								<th>Role</th>
 								<th>Status</th>
 								<th>Action</th>
 							</tr>
@@ -131,7 +133,7 @@
 	<div class="modal-dialog modal-dialog-centered modal-md">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title">Add designation</h4>
+				<h4 class="modal-title">Add Designation</h4>
 				<button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
 					<i class="ti ti-x"></i>
 				</button>
@@ -139,10 +141,30 @@
 			<form id="addDesignation">
 				<div class="modal-body pb-0">
 					<div class="row">
+						<div class="col-md-6">
+							<div class="mb-3">
+								<label class="form-label">Department</label>
+								<select class="select" name="department" id="department">
+									<option value="">Select</option>
+									<?php echo getDepartments(); ?>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="mb-3">
+								<label class="form-label">Role</label>
+								<select class="select" name="role" id="role">
+									<option value="">Select</option>
+									<?php echo getRoles(); ?>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
 						<div class="col-md-12">
 							<div class="mb-3">
 								<label class="form-label">designations Name</label>
-								<input type="text" class="form-control" name="designationName">
+								<input type="text" class="form-control" name="designationName" oninput="capitalizeWords(this)" placeholder="eg : Os Associate">
 							</div>
 						</div>
 					</div>
@@ -156,7 +178,7 @@
 	</div>
 </div>
 <!-- /Add designations -->
- 
+
 
 <!-- Edit designation -->
 <div class="modal fade" id="editModal">
@@ -198,31 +220,6 @@
 	</div>
 </div>
 <!-- /Edit designation -->
-
-<!-- Update Job Success -->
-<div class="modal fade" id="update_modal" role="dialog">
-	<div class="modal-dialog modal-dialog-centered modal-xm">
-		<div class="modal-content">
-			<div class="modal-body">
-				<div class="text-center p-3">
-					<span class="avatar avatar-lg avatar-rounded bg-success mb-3">
-						<i class="fa-solid fa-check"></i>
-					</span>
-					<h5 class="mb-2">Designation update Successfully</h5>
-					</p>
-					<div>
-						<div class="row g-2">
-							<div class="col-12">
-								<a href="#" class="btn btn-dark w-100" data-bs-dismiss="modal">Back to List</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- /Update Job Success -->
 
 <!-- Delete Modal -->
 <div class="modal fade" id="delete_modal">
