@@ -16,7 +16,7 @@
 					</ol>
 				</nav>
 			</div>
-			<div class="d-flex my-xl-auto right-content align-items-center flex-wrap "> 
+			<div class="d-flex my-xl-auto right-content align-items-center flex-wrap ">
 				<div class="me-2 mb-2">
 					<div class="dropdown">
 						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
@@ -63,7 +63,7 @@
 							<option value="100">100</option>
 							<option value="-1">All</option>
 						</select>
-					</div>  
+					</div>
 					<div class="dropdown me-3">
 						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
 							Status
@@ -105,7 +105,7 @@
 				<div class="custom-datatable-filter table-responsive">
 					<table class="table datatable" id="tableRecords">
 						<thead class="thead-light">
-							<tr> 
+							<tr>
 								<th>S.No</th>
 								<th>Department </th>
 								<th>Status</th>
@@ -137,13 +137,13 @@
 					<i class="ti ti-x"></i>
 				</button>
 			</div>
-			<form action="" id="addDepartment">
+			<form id="addDepartment">
 				<div class="modal-body pb-0">
 					<div class="row">
 						<div class="col-md-12">
 							<div class="mb-3">
 								<label class="form-label">Department Name</label>
-								<input type="text" class="form-control" name="departmentName">
+								<input type="text" class="form-control" name="departmentName" oninput="capitalizeWords(this)" placeholder="eg : Online Sale">
 							</div>
 						</div>
 					</div>
@@ -199,7 +199,9 @@
 </div>
 <!-- /Edit Department -->
 
+
+
 <?php require_once("./includes/footer.php"); ?>
 
 <!-- this page java scripts codes -->
-<script src="./js/departments.js"></script>
+<script src="./js/departments.js"></script> 
