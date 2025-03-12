@@ -108,6 +108,8 @@
 							<tr>
 								<th>S.No</th>
 								<th>Designation</th>
+								<th>Department</th>
+								<th>Role</th>
 								<th>Status</th>
 								<th>Action</th>
 							</tr>

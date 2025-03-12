@@ -5,7 +5,7 @@ $currentDatetime = date('Y-m-d H:i:s');
 $hrm_userid = $_SESSION['hrm_userid'];
 
 if (isset($_GET['flag']) && $_GET['flag'] === "fetch") {
-    $query = "SELECT * FROM designations ORDER BY designation_title ASC";
+    $query = "SELECT * FROM designations AS ds INNER JOIN departments AS dp ON ds.department_table_id = dp.department_id INNER JOIN roles AS r ON ds.role_table_id = r.role_id ORDER BY designation_title ASC";
     $result = mysqli_query($conn, $query);
     $departments = [];
     while ($row = $result->fetch_assoc()) {

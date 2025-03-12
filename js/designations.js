@@ -27,6 +27,16 @@ $(document).ready(function () {
                                 }</a></h6>
                             </td>
                             <td>
+                                <h6 class="fw-medium"><a href="#">${
+                                  row.department_name
+                                }</a></h6>
+                            </td>
+                            <td>
+                                <h6 class="fw-medium"><a href="#">${
+                                  row.role_name
+                                }</a></h6>
+                            </td>
+                            <td>
                                 <span class="badge ${statusClass} d-inline-flex align-items-center badge-xs">
                                     <i class="ti ti-point-filled me-1"></i>${statusValue}
                                 </span>
