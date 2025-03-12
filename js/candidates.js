@@ -140,7 +140,7 @@ $(document).ready(function () {
         if (res.status == "success") {
           $("#candidate_register_id").val(data.candidate_register_id);
           $("#contact_number").val(data.contact_number);
-          $("#created_by").val(data.created_by);
+          $("#created_by").val(data.full_name);
           $("#ticket_request_id").val(data.ticket_request_id);
           $("#address").val(data.address);
           $("#experience").val(data.experience);

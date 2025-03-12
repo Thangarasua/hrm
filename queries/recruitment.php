@@ -31,16 +31,16 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             $ticketRequestId = 'RTR' . $month . $year . '001';
         }
 
-        $jobTitle = $_POST['jobTitle'];
-        $jobDescription = $_POST['jobDescription'];
+        $jobTitle = $_POST['jobTitle']; 
+        $jobDescription = $conn->real_escape_string(trim(preg_replace('/\s+/', ' ', $_POST['jobDescription'])));
         $jobType = $_POST['jobType'];
         $jobLevel = $_POST['jobLevel'];
         $experience = $_POST['experience'];
-        $qualification = $_POST['qualification'];
+        $qualification = $conn->real_escape_string(trim(preg_replace('/\s+/', ' ', $_POST['qualification'])));
         $gender = $_POST['gender'];
-        $requiredSkills = $_POST['requiredSkills'];
+        $requiredSkills = $conn->real_escape_string(trim(preg_replace('/\s+/', ' ', $_POST['requiredSkills'])));
         $priority = $_POST['priority'];
-        $location = $_POST['location'];
+        $location = $conn->real_escape_string(trim(preg_replace('/\s+/', ' ', $_POST['location'])));
 
         $query = "INSERT INTO `recruitment`(`ticket_request_id`, `raised_by`, `job_position`, `job_descriptions`, `required_skills`, `job_type`, `job_level`, `job_experience`, `qualification`, `gender`, `priority`, `location`, `hr_contacted`, `status`, `created_at`) VALUES ('$ticketRequestId','$hrm_userid','$jobTitle','$jobDescription','$requiredSkills','$jobType','$jobLevel','$experience','$qualification','$gender','$priority','$location',0,1,'$currentDatetime')";
         $result = mysqli_query($conn, $query);

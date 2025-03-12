@@ -13,12 +13,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
     if ($flag === "interviewForm") {
 
-        $name = $_POST['name'];
+        $name = $conn->real_escape_string(trim(preg_replace('/\s+/', ' ', $_POST['name'])));
         $phone = $_POST['phone'];
-        $qualification = $_POST['qualification'];
+        $qualification = $conn->real_escape_string(trim(preg_replace('/\s+/', ' ', $_POST['qualification'])));
         $experience = $_POST['totalExpYear'] . '.' . $_POST['totalExpMonth'] .' year'; 
         $skills = json_encode($_POST['skills']);
-        $location = $_POST['location'];
+        $location = $conn->real_escape_string(trim(preg_replace('/\s+/', ' ', $_POST['location'])));
         $available_time1 = $_POST['availabilityDate1'] . ' ' . $_POST['availabilityTime1']; 
         $available_time2 = !empty($_POST['availabilityDate2']) ? $_POST['availabilityDate2'] . ' ' . $_POST['availabilityTime2'] : NULL;
         $available_time3 = !empty($_POST['availabilityDate3']) ? $_POST['availabilityDate3'] . ' ' . $_POST['availabilityTime3'] : NULL; 
