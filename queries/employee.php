@@ -56,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $workLocation = $_POST['workLocation'];
         $employeeType = $_POST['employeeType'];
         $about = $_POST['about'];
+        $employeeType = $_POST['employeeType'];
 
         $query = "INSERT INTO employees (employee_id, full_name, email, phone, doj, `password`, designation, department_id, role_id, manager_id, supervisor_id, work_location, employee_type_id, about, `status`) VALUES ('$employeeId', '$fullName', '$email', '$phone', '$doj', '$encryptedPassword', '$designation', $department, $role, '$manager', '$supervisor', '$workLocation', $employeeType, '$about', 1)";
 

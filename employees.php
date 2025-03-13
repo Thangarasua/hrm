@@ -298,8 +298,19 @@
 								</div> -->
 								<div class="col-md-6">
 									<div class="mb-3">
+										<label class="form-label">Joining Date <span class="text-danger"> *</span></label>
+										<div class="input-icon-end position-relative">
+											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="doj" id="doj" required>
+											<span class="input-icon-addon">
+												<i class="ti ti-calendar text-gray-7"></i>
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
 										<label class="form-label">Employee ID <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="employeeID" value="<?php echo getNewEmployeeId(); ?>" readonly>
+										<input type="text" class="form-control" name="employeeID" id="employeeID" value="" readonly>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -312,17 +323,6 @@
 									<div class="mb-3">
 										<label class="form-label">Email <span class="text-danger"> *</span></label>
 										<input type="email" class="form-control" onblur="return isEmail(this)" placeholder="@actetechnologies.com" name="email" required>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="mb-3">
-										<label class="form-label">Joining Date <span class="text-danger"> *</span></label>
-										<div class="input-icon-end position-relative">
-											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="doj" required>
-											<span class="input-icon-addon">
-												<i class="ti ti-calendar text-gray-7"></i>
-											</span>
-										</div>
 									</div>
 								</div>
 								<div class="col-md-6">
