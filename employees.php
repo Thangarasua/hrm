@@ -420,7 +420,7 @@
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">Cancel</button>
-								<button type="submit" class="btn btn-primary addEmployeeSaveBtn">Save</button>
+								<button type="submit" class="btn btn-primary addEmployeeSaveBtn">Save <i class='fa-solid fa-cloud-arrow-up'></i></button>
 							</div>
 						</div>
 				</div>
@@ -743,34 +743,7 @@
 		</div>
 	</div>
 </div>
-<!-- /Edit Employee -->
-
-<!-- Add Employee Success -->
-<div class="modal fade" id="success_modal" role="dialog">
-	<div class="modal-dialog modal-dialog-centered modal-sm">
-		<div class="modal-content">
-			<div class="modal-body">
-				<div class="text-center p-3">
-					<span class="avatar avatar-lg avatar-rounded bg-success mb-3"><i class="ti ti-check fs-24"></i></span>
-					<h5 class="mb-2">Employee Added Successfully</h5>
-					<p class="mb-3">Stephan Peralt has been added with Client ID : <span class="text-primary">#EMP - 0001</span>
-					</p>
-					<div>
-						<div class="row g-2">
-							<div class="col-6">
-								<a href="employees" class="btn btn-dark w-100">Back to List</a>
-							</div>
-							<div class="col-6">
-								<a href="employee-details" class="btn btn-primary w-100">Detail Page</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- /Add Client Success -->
+<!-- /Edit Employee --> 
 
 <!-- Delete Modal -->
 <div class="modal fade" id="delete_modal">

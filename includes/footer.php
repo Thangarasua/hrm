@@ -1,3 +1,28 @@
+<!-- Success common modal with dynamic content message set  -->
+<div class="modal fade" id="success_modal" role="dialog">
+	<div class="modal-dialog modal-dialog-centered modal-xm">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="text-center p-3">
+					<span class="avatar avatar-lg avatar-rounded bg-success mb-3">
+						<i class="fa-solid fa-check"></i>
+					</span>
+					<h5 class="mb-2" id="success_modal_content"></h5>
+					</p>
+					<div>
+						<div class="row g-2">
+							<div class="col-12">
+								<a href="#" class="btn btn-dark w-100" data-bs-dismiss="modal">Back to List</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- //Success common modal with dynamic content message set  -->
+
 </div>
 <!-- /Main Wrapper -->
 <!-- jQuery -->

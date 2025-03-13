@@ -74,8 +74,12 @@ $(document).ready(function () {
       processData: false,
       success: function (response) {
         if (response.status == "success") {
+          $("#addDepartment")[0].reset();
           $("#add_department").modal("hide");
-          toastr.success("Department added successfully");
+          $("#success_modal").modal("show");
+          $("#success_modal_content").html(
+            "Department added Successfully"
+          ); 
           fetchDepartments();
         } else {
           toastr.error(response.message, "Error");
@@ -123,10 +127,13 @@ $(document).ready(function () {
       cache: false,
       processData: false,
       success: function (response) {
-        if (response.status == "success") {
-          $("#update_modal").modal("show");
+        if (response.status == "success") { 
           $("#update")[0].reset();
           $("#editModal").modal("hide");
+          $("#success_modal").modal("show");
+          $("#success_modal_content").html(
+            "Department Updated Successfully"
+          ); 
           fetchDepartments();
         } else {
           toastr.error(response.message, "Error");

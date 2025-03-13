@@ -13,12 +13,7 @@ $(document).ready(function () {
       processData: false,
       success: function (response) {
         if (response.status == "success") {
-          $("#add_employee").modal("hide");
-          toastr.success("Employee added successfully");
-          $('#addEmployee')[0].reset();
-          setTimeout(function() {
-            location.reload();
-          }, 2000);
+          wellcomeMail(response.data);
         } else {
           toastr.error(response.message, "Error");
         }
@@ -28,7 +23,13 @@ $(document).ready(function () {
 
   fetchEmployee();
 
-  function fetchEmployee(fromDate = '', toDate = '', dateRange = '', companyType = '', flag = 'getAll') {
+  function fetchEmployee(
+    fromDate = "",
+    toDate = "",
+    dateRange = "",
+    companyType = "",
+    flag = "getAll"
+  ) {
     $.ajax({
       url: "queries/employee.php",
       type: "GET",
@@ -76,31 +77,75 @@ $(document).ready(function () {
     });
   }
 
-  $('#department').change(function() {
-      var departmentId = $(this).val();
-      if (departmentId) {
-        if (departmentId === '5') {
-          $('#manager-container').show();
-          $('#supervisors-container').show();
-        } else if (departmentId === '4') {
-          $('#manager-container').show();
-          $('#supervisors-container').hide();
-        } else {
-          $('#manager-container').hide();
-          $('#supervisors-container').hide();
-        }
-        $.ajax({
-          url: 'queries/employee.php', 
-          type: 'GET',
-          data: { departmentId: departmentId, flag: 'getRole' },
-          success: function(response) {
-              $('#role').html(response);
-          }
-        });
+  $("#department").change(function () {
+    var departmentId = $(this).val();
+    if (departmentId) {
+      if (departmentId === "5") {
+        $("#manager-container").show();
+        $("#supervisors-container").show();
+      } else if (departmentId === "4") {
+        $("#manager-container").show();
+        $("#supervisors-container").hide();
       } else {
-          $('#role').html('<option value="">Select</option>');
+        $("#manager-container").hide();
+        $("#supervisors-container").hide();
       }
+      $.ajax({
+        url: "queries/employee.php",
+        type: "GET",
+        data: { departmentId: departmentId, flag: "getRole" },
+        success: function (response) {
+          $("#role").html(response);
+        },
+      });
+    } else {
+      $("#role").html('<option value="">Select</option>');
+    }
   });
+
+
+  /** Function to Send Welcome Mail */
+  function wellcomeMail(data) {
+    console.log(data);
+    $.ajax({
+      type: "POST",
+      url: "mails/employees-mail.php",
+      data: data,
+      dataType: "json",
+      beforeSend: function () {
+        $("#addEmployeeSaveBtn")
+          .html("Loading <i class='fa-solid fa-spinner'></i>")
+          .prop("disabled", true);
+        Swal.fire({
+          title: "Employee welcome mail sending 💌...",
+          allowEscapeKey: false,
+          allowOutsideClick: false,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
+      },
+      success: function (response) {
+        if (response.status === "success") {
+          $("#addEmployee")[0].reset();
+          $("#add_employee").modal("hide");
+          $("#addEmployeeSaveBtn")
+            .html("Save <i class='fa-solid fa-cloud-arrow-up'></i>")
+            .prop("disabled", false);
+          $("#success_modal").modal("show");
+          $("#success_modal_content").html("Employee added successfully");
+          Swal.close();
+          fetchEmployee();
+        } else {
+          toastr.error(response.message, "Mail Error");
+        }
+      },
+      error: function (xhr, status, error) {
+        toastr.error("Failed to send mail: " + error, "Mail Error");
+      },
+    });
+  }
+ 
 
   function encryptEmployeeId(employeeId) {
     return btoa(employeeId);
@@ -112,6 +157,7 @@ $(document).ready(function () {
     var encryptedId = encryptEmployeeId(employeeId);
     window.location.href = `employee-details.php?empId=${encryptedId}`;
   });
+
 
   $(document).on('dp.change', '#doj', function(e) {
     const doj = $(this).val();
@@ -130,6 +176,7 @@ $(document).ready(function () {
           }
         });
     }
-}
+  }
 
 });
+
