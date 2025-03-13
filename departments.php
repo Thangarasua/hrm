@@ -174,7 +174,7 @@
 						<div class="col-md-12">
 							<div class="mb-3">
 								<label class="form-label">Department Name</label>
-								<input type="text" class="form-control" id="edit_department" name="department">
+								<input type="text" class="form-control" id="edit_department" name="department" oninput="capitalizeWords(this)">
 							</div>
 						</div>
 						<div class="col-md-12">

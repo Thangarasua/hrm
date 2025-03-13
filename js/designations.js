@@ -84,12 +84,13 @@ $(document).ready(function () {
       cache: false,
       processData: false,
       success: function (response) {
-        if (response.status == "success") {
+        if (response.status == "success") { 
           $("#addDesignation")[0].reset();
           $("#add_designation").modal("hide");
           $("#success_modal").modal("show");
           $("#success_modal_content").html("Designation added Successfully");
           fetchDesignation();
+          location.reload();
         } else {
           toastr.error(response.message, "Error");
         }

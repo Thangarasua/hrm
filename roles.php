@@ -173,7 +173,7 @@
 						<div class="col-md-12">
 							<div class="mb-3">
 								<label class="form-label">Roles Name</label>
-								<input type="text" class="form-control" id="edit_role" name="role">
+								<input type="text" class="form-control" id="edit_role" name="role" oninput="capitalizeWords(this)">
 							</div>
 						</div>
 						<div class="col-md-12">
