@@ -45,16 +45,18 @@ function getManagerUsers($user) {
 }
 
 if (isset($_POST['month']) && isset($_POST['year'])) {
+    $day = $_POST['day'];
     $month = $_POST['month'];
     $year = $_POST['year'];
-    echo getNewEmployeeId($month, $year);
+    echo getNewEmployeeId($day, $month, $year);
 }
 
-function getNewEmployeeId($month, $year) {
+function getNewEmployeeId($day, $month, $year) {
     global $conn;
     $year = date('y', strtotime($year . '-01-01')); 
     $month = date('m', strtotime($year . '-' . $month . '-01')); 
-    $baseId = "ACTE" . $year . $month;
+    $day = date('d', strtotime($year . '-' . $month . '-' . $day)); 
+    $baseId = "ACTE" . $year . $month . $day;
 
     $sql = "SELECT * FROM `employees` ORDER BY `employees`.`id` DESC LIMIT 1";
     $result = mysqli_query($conn, $sql);
@@ -73,7 +75,7 @@ function getNewEmployeeId($month, $year) {
     }
 
     $newEmployeeId = $baseId . str_pad($newSequence, 3, '0', STR_PAD_LEFT);
-    return $newEmployeeId;
+    return $baseId . '***';
 }
 
 function getBankInfo($employeeId) {

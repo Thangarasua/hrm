@@ -373,7 +373,7 @@
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Employee ID <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="employeeID" id="employeeID" placeholder="Auto Generate ID" readonly>
+										<input type="text" class="form-control" name="employeeID" id="employeeID" placeholder="Auto Generate ID" >
 									</div>
 								</div>
 								<div class="col-md-6">

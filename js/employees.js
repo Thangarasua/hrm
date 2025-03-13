@@ -189,7 +189,7 @@ $(document).ready(function () {
       $.ajax({
         url: "queries/commonFunctions.php",
         type: "POST",
-        data: { month: month, year: year, flag: "getEmpId" },
+        data: { day: day,month: month, year: year, flag: "getEmpId" },
         success: function (response) {
           $("#employeeID").val(response);
         },
