@@ -7,7 +7,7 @@ $(document).ready(function () {
       dataType: "json",
       success: function (data) {
         var tableBody = $("#tableRecords tbody");
- 
+
         if ($.fn.DataTable.isDataTable("#tableRecords")) {
           $("#tableRecords").DataTable().destroy();
         }
@@ -69,6 +69,10 @@ $(document).ready(function () {
 
   $("#addDesignation").on("submit", function (e) {
     e.preventDefault();
+    let form = formValidate();
+    if (form === 0) {
+      return false;
+    }
     let formData = new FormData(this);
     formData.append("flag", "insert");
     $.ajax({
@@ -84,10 +88,8 @@ $(document).ready(function () {
           $("#addDesignation")[0].reset();
           $("#add_designation").modal("hide");
           $("#success_modal").modal("show");
-          $("#success_modal_content").html(
-            "Designation added Successfully"
-          ); 
-          fetchDesignation(); 
+          $("#success_modal_content").html("Designation added Successfully");
+          fetchDesignation();
         } else {
           toastr.error(response.message, "Error");
         }
@@ -138,9 +140,7 @@ $(document).ready(function () {
           $("#update")[0].reset();
           $("#editModal").modal("hide");
           $("#success_modal").modal("show");
-          $("#success_modal_content").html(
-            "Designation Updated Successfully"
-          );  
+          $("#success_modal_content").html("Designation Updated Successfully");
           fetchDesignation();
         } else {
           toastr.error(response.message, "Error");
@@ -156,10 +156,9 @@ $(document).ready(function () {
     if (formfilling > 0) {
       $("#candidateCount").html(formfilling);
       $("#info_modal").modal("show");
- 
     } else {
       $("#delete_modal").modal("show");
-      $("#deleteId").val(id); 
+      $("#deleteId").val(id);
     }
   });
 
@@ -185,4 +184,25 @@ $(document).ready(function () {
       },
     });
   });
+
+  function formValidate() {
+    $(".error").remove(); // Remove previous error messages
+
+    let department = $("#department").val().trim();
+    if (department.length == 0) {
+      $("#department").focus();
+      $("#department").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+    let role = $("#role").val().trim();
+    if (role.length == 0) {
+      $("#role").focus();
+      $("#role").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+  }
 });

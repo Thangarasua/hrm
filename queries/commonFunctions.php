@@ -22,6 +22,16 @@ function getRoles() {
     }
     return $options;
 }
+function getJobTypes() {
+    global $conn;
+    $query = "SELECT * FROM job_types WHERE status = 1 ORDER BY job_type ASC";
+    $result = mysqli_query($conn, $query);
+    $options = '<option value="">Select</option>';
+    while ($row = $result->fetch_assoc()) {
+        $options .= '<option value="' . $row['id'] . '">' . htmlspecialchars($row['job_type']) . '</option>';
+    }
+    return $options;
+}
 
 function getManagerUsers($user) {
     global $conn;

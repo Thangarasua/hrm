@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function () { 
   $("#addEmployee").on("submit", function (e) {
     e.preventDefault();
     let formData = new FormData(this);
@@ -55,14 +55,16 @@ $(document).ready(function () {
             var newRow = `<tr>
                             <td>${index + 1}</td>
                             <td>${row.employee_id}</td>
-                            <td>${row.full_name}</td>
-                            <td>${row.email}</td>
+                            <td>${row.full_name}</td> 
+                            <td class='pointer' title='${row.email}'>${row.email.substr(0, 20)}</td>
                             <td>${row.phone}</td>
-                            <td>${row.designation}</td>
+                            <td class='pointer' title='${row.designation_title}'>${row.designation_title.substr(0, 20)}</td>
                             <td>${row.doj}</td>
                             <td>
                               <div class="action-icon d-inline-flex">
-                                <a href="employee-details" data-id="${row.employee_id}" class="view" id="employeeDetails">
+                                <a href="employee-details" data-id="${
+                                  row.employee_id
+                                }" class="view" id="employeeDetails">
                                   <i class="fa-solid fa-folder-open"></i>
                                 </a>
                               </div>
@@ -77,32 +79,51 @@ $(document).ready(function () {
     });
   }
 
-  $("#department").change(function () {
-    var departmentId = $(this).val();
-    if (departmentId) {
-      if (departmentId === "5") {
+  $("#role").change(function () {
+    var roleId = $(this).val();
+    if (roleId) {
+      if (roleId === "5") {
         $("#manager-container").show();
         $("#supervisors-container").show();
-      } else if (departmentId === "4") {
+      } else if (roleId === "4") {
         $("#manager-container").show();
         $("#supervisors-container").hide();
       } else {
         $("#manager-container").hide();
         $("#supervisors-container").hide();
       }
-      $.ajax({
-        url: "queries/employee.php",
-        type: "GET",
-        data: { departmentId: departmentId, flag: "getRole" },
-        success: function (response) {
-          $("#role").html(response);
-        },
-      });
     } else {
       $("#role").html('<option value="">Select</option>');
     }
   });
 
+  $("#role, #department").change(function () {
+    let roleId = $("#role").val().trim();
+    if (roleId.length == 0) {
+      $("#role").focus();
+      toastr["warning"]("First select Hierarchy");
+      return 0;
+    }
+    var departmentId = $("#department").val();
+    console.log(roleId);
+    console.log(departmentId);
+    if (departmentId) {
+      $.ajax({
+        url: "queries/employee.php",
+        type: "GET",
+        data: {
+          departmentId: departmentId,
+          roleId: roleId,
+          flag: "getDesignation",
+        },
+        success: function (response) {
+          $("#designation").html(response);
+        },
+      });
+    } else {
+      $("#designation").html('<option value="">Select</option>');
+    }
+  });
 
   /** Function to Send Welcome Mail */
   function wellcomeMail(data) {
@@ -145,38 +166,34 @@ $(document).ready(function () {
       },
     });
   }
- 
 
   function encryptEmployeeId(employeeId) {
     return btoa(employeeId);
   }
 
-  $(document).on('click', '#employeeDetails', function(e) {
+  $(document).on("click", "#employeeDetails", function (e) {
     e.preventDefault();
-    var employeeId = $(this).data('id');
+    var employeeId = $(this).data("id");
     var encryptedId = encryptEmployeeId(employeeId);
     window.location.href = `employee-details.php?empId=${encryptedId}`;
-  });
+  }); 
 
-
-  $(document).on('dp.change', '#doj', function(e) {
+  $(document).on("dp.change", "#doj", function (e) {
     const doj = $(this).val();
     updateEmployeeId(doj);
   });
 
   function updateEmployeeId(doj) {
     if (doj) {
-        const [day, month, year] = doj.split('-');
-        $.ajax({
-          url: 'queries/commonFunctions.php', 
-          type: 'POST',
-          data: { month: month, year: year, flag: 'getEmpId' },
-          success: function(response) {
-            $('#employeeID').val(response);
-          }
-        });
+      const [day, month, year] = doj.split("-");
+      $.ajax({
+        url: "queries/commonFunctions.php",
+        type: "POST",
+        data: { month: month, year: year, flag: "getEmpId" },
+        success: function (response) {
+          $("#employeeID").val(response);
+        },
+      });
     }
   }
-
 });
-

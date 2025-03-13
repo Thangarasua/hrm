@@ -28324,6 +28324,10 @@ margin: 2px;
   transition: color 0.2s ease;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .stars i.active {
   color: #ff9c1a;
 }

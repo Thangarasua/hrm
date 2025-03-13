@@ -144,7 +144,7 @@
 						<div class="col-md-6">
 							<div class="mb-3">
 								<label class="form-label">Department</label>
-								<select class="select" name="department" id="department">
+								<select class="select form-control" name="department" id="department">
 									<option value="">Select</option>
 									<?php echo getDepartments(); ?>
 								</select>
@@ -153,7 +153,7 @@
 						<div class="col-md-6">
 							<div class="mb-3">
 								<label class="form-label">Role</label>
-								<select class="select" name="role" id="role">
+								<select class="select form-control" name="role" id="role">
 									<option value="">Select</option>
 									<?php echo getRoles(); ?>
 								</select>
