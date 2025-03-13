@@ -5,7 +5,7 @@ $currentDatetime = date('Y-m-d H:i:s');
 $hrm_userid = $_SESSION['hrm_userid'];
 
 if (isset($_GET['flag']) && $_GET['flag'] === "fetch") {
-    $query = "SELECT * FROM designations AS ds INNER JOIN departments AS dp ON ds.department_table_id = dp.department_id INNER JOIN roles AS r ON ds.role_table_id = r.role_id ORDER BY designation_title ASC";
+    $query = "SELECT * FROM designations AS ds INNER JOIN departments AS dp ON ds.department_id = dp.department_id INNER JOIN roles AS r ON ds.role_id = r.role_id ORDER BY designation_title ASC";
     $result = mysqli_query($conn, $query);
     $departments = [];
     while ($row = $result->fetch_assoc()) {
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $status = 1;
 
         try {
-            $query = "INSERT INTO `designations` (`department_table_id`, `role_table_id`, `designation_title`, `status`) VALUES ('$department','$role','$designationName', $status)";
+            $query = "INSERT INTO `designations` (`department_id`, `role_id`, `designation_title`, `status`) VALUES ('$department','$role','$designationName', $status)";
             $result = mysqli_query($conn, $query);
             if ($result) {
                 echo json_encode(array('status' => 'success', 'message' => 'Designations Added Successfully'));
