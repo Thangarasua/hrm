@@ -24,4 +24,47 @@ $(document).ready(function () {
             }
         })
     });
+
+    function calculateSalary() {
+        let grossSalary = parseFloat($("#grossSalary").val()) || 0;
+        
+        let basicSalary = (grossSalary * 0.50).toFixed(2);
+        let hra = (basicSalary * 0.50).toFixed(2);
+        let conveyance = 1600;
+        let medicalAllowance = 1250;
+        let perDiem = 500;
+        let specialAllowance = (grossSalary - basicSalary - hra - conveyance - medicalAllowance - perDiem).toFixed(2);
+        
+        // Deductions
+        let pfEmployee = (basicSalary <= 15000) ? (basicSalary * 0.12).toFixed(2) : (15000 * 0.12).toFixed(2);
+        let pfEmployer = (basicSalary <= 15000) ? (basicSalary * 0.13).toFixed(2) : (15000 * 0.13).toFixed(2);
+        let esiEmployee = (grossSalary < 21000) ? (grossSalary * 0.0075).toFixed(2) : "0.00";
+        let esiEmployer = (grossSalary < 21000) ? (grossSalary * 0.0325).toFixed(2) : "0.00";
+        let professionalTax = 208.33;
+        
+        let totalDeductions = (parseFloat(pfEmployee) + parseFloat(esiEmployee) + professionalTax).toFixed(2);
+        let netSalary = (grossSalary - totalDeductions).toFixed(2);
+        let ctc = (parseFloat(grossSalary) + parseFloat(pfEmployer) + parseFloat(esiEmployer)).toFixed(2);
+        let yearCtc = ctc * 12;
+
+        // Fill the fields
+        $("#basicSalary").val(basicSalary);
+        $("#hra").val(hra);
+        $("#conveyance").val(conveyance);
+        $("#medicalAllowance").val(medicalAllowance);
+        $("#perDiem").val(perDiem);
+        $("#specialAllowance").val(specialAllowance);
+        $("#pfEmployee").val(pfEmployee);
+        $("#pfEmployer").val(pfEmployer);
+        $("#esiEmployee").val(esiEmployee);
+        $("#esiEmployer").val(esiEmployer);
+        $("#professionalTax").val(professionalTax);
+        $("#totalDeductions").val(totalDeductions);
+        $("#netSalary").val(netSalary);
+        $("#ctc").val(ctc);
+        $("#MonthCtc").val(ctc);
+        $("#yearCtc").val(yearCtc);
+    }
+
+    $("#grossSalary").on("input", calculateSalary);
 });

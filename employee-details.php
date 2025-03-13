@@ -1739,135 +1739,62 @@ $employeeInfo = getEmployeeInfo($employeeId);
 					<i class="ti ti-x"></i>
 				</button>
 			</div>
-			<form action="https://smarthr.dreamstechnologies.com/html/template/employee-details.html">
-				<div class="modal-body pb-0">
-					<div class="border-bottom mb-4">
-						<h5 class="mb-3">Basic Salary Information</h5>
-						<div class="row mb-2">
-							<div class="col-md-4">
-								<div class="mb-3">
-									<label class="form-label">Salary basis <span class="text-danger"> *</span></label>
-									<select class="select">
-										<option>Select</option>
-										<option>Weekly</option>
-										<option>Monthly</option>
-										<option>Annualy</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="mb-3">
-									<label class="form-label">Salary basis</label>
-									<input type="text" class="form-control" value="$">
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="mb-3">
-									<label class="form-label">Payment type</label>
-									<select class="select">
-										<option>Select</option>
-										<option>Cash</option>
-										<option>Debit Card</option>
-										<option>Mobile Payment</option>
-									</select>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="border-bottom mb-4">
-						<h5 class="mb-3">PF Information</h5>
-						<div class="row mb-2">
-							<div class="col-md-4">
-								<div class="mb-3">
-									<label class="form-label">PF contribution <span class="text-danger"> *</span></label>
-									<select class="select">
-										<option>Select</option>
-										<option>Employee Contribution</option>
-										<option>Employer Contribution</option>
-										<option>Provident Fund Interest</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="mb-3">
-									<label class="form-label">PF No</label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="mb-3">
-									<label class="form-label">Employee PF rate</label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="mb-3">
-									<label class="form-label">Additional rate</label>
-									<select class="select">
-										<option>Select</option>
-										<option>ESI</option>
-										<option>EPS</option>
-										<option>EPF</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="mb-3">
-									<label class="form-label">Total rate</label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-						</div>
-					</div>
-					<h5 class="mb-3">ESI Information</h5>
-					<div class="row">
-						<div class="col-md-4">
-							<div class="mb-3">
-								<label class="form-label">ESI contribution<span class="text-danger"> *</span></label>
-								<select class="select">
-									<option>Select</option>
-									<option>Employee Contribution</option>
-									<option>Employer Contribution</option>
-									<option>Maternity Benefit </option>
-								</select>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="mb-3">
-								<label class="form-label">ESI Number</label>
-								<input type="text" class="form-control">
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="mb-3">
-								<label class="form-label">Employee ESI rate<span class="text-danger"> *</span></label>
-								<input type="text" class="form-control">
-							</div>
-						</div>
+			<form>
+                <div class="modal-body pb-0">
+                    <h5 class="mb-3">Salary Details</h5>
+                    <div class="row mb-2">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Gross Salary<span class="text-danger"> *</span></label>
+                                <input type="number" id="grossSalary" class="form-control" placeholder="Enter Gross Salary">
+                            </div>
+                        </div>
 						<div class="col-md-6">
-							<div class="mb-3">
-								<label class="form-label">Additional rate</label>
-								<select class="select">
-									<option>Select</option>
-									<option>ESI</option>
-									<option>EPS</option>
-									<option>EPF</option>
-								</select>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="mb-3">
-								<label class="form-label">Total rate</label>
-								<input type="text" class="form-control">
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-white border me-2" data-bs-dismiss="modal">Cancel</button>
-					<button type="submit" class="btn btn-primary">Save</button>
-				</div>
-			</form>
+                            <div class="mb-3">
+                                <label class="form-label">CTC<span class="text-danger"> *</span></label>
+                                <input type="number" id="MonthCtc" class="form-control" placeholder="" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-4"><label class="form-label">Basic Salary (50%)</label><input type="text" id="basicSalary" class="form-control" readonly></div>
+                        <div class="col-md-4"><label class="form-label">HRA (50%)</label><input type="text" id="hra" class="form-control" readonly></div>
+                        <div class="col-md-4"><label class="form-label">Conveyance Allowance (Fixed)</label><input type="text" id="conveyance" class="form-control" readonly></div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-4"><label class="form-label">Medical Allowance (Fixed)</label><input type="text" id="medicalAllowance" class="form-control" readonly></div>
+                        <div class="col-md-4"><label class="form-label">Per Diem Allowance (Fixed)</label><input type="text" id="perDiem" class="form-control" readonly></div>
+                        <div class="col-md-4"><label class="form-label">Special Allowance</label><input type="text" id="specialAllowance" class="form-control" readonly></div>
+                    </div>
+                    
+                    <h5 class="mb-3">Deductions</h5>
+                    <div class="row mb-2">
+                        <div class="col-md-4"><label class="form-label">PF Employee (On Basic 12%)</label><input type="text" id="pfEmployee" class="form-control" readonly></div>
+                        <div class="col-md-4"><label class="form-label">ESI Employee (On Gross 0.75%)</label><input type="text" id="esiEmployee" class="form-control" readonly></div>
+                        <div class="col-md-4"><label class="form-label">Professional Tax</label><input type="text" id="professionalTax" class="form-control" readonly></div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-4"><label class="form-label">Total Deductions</label><input type="text" id="totalDeductions" class="form-control" readonly></div>
+                        <div class="col-md-4"><label class="form-label">Net Salary</label><input type="text" id="netSalary" class="form-control" readonly></div>
+                    </div>
+                    
+                    <h5 class="mb-3">Employer Contributions</h5>
+                    <div class="row mb-2">
+                        <div class="col-md-4"><label class="form-label">PF Employer (On Basic 13%)</label><input type="text" id="pfEmployer" class="form-control" readonly></div>
+                        <div class="col-md-4"><label class="form-label">ESI Employer (On Gross 3.25%)</label><input type="text" id="esiEmployer" class="form-control" readonly></div>
+                    </div>
+                    
+                    <h5 class="mb-3">CTC Calculation</h5>
+                    <div class="row mb-2">
+                        <div class="col-md-4"><label class="form-label">CTC Month</label><input type="text" id="ctc" class="form-control" readonly></div>
+						<div class="col-md-4"><label class="form-label">CTC Years</label><input type="text" id="yearCtc" class="form-control" readonly></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white border me-2" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
 		</div>
 	</div>
 </div>
