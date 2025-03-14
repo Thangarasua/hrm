@@ -75,7 +75,7 @@ function getNewEmployeeId($day, $month, $year) {
     }
 
     $newEmployeeId = $baseId . str_pad($newSequence, 3, '0', STR_PAD_LEFT);
-    return $baseId . '***';
+    return $newEmployeeId;
 }
 
 function getBankInfo($employeeId) {
