@@ -296,21 +296,49 @@
 										</div>
 									</div>
 								</div> -->
-								<div class="col-md-6">
+								
+								<div class="col-md-4">
 									<div class="mb-3">
-										<label class="form-label">Joining Date <span class="text-danger"> *</span></label>
-										<div class="input-icon-end position-relative">
-											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="doj" id="doj" required>
-											<span class="input-icon-addon">
-												<i class="ti ti-calendar text-gray-7"></i>
-											</span>
-										</div>
+										<label class="form-label">Role (or) Hierarchy <span class="text-danger"> *</span></label>
+										<select class="select" name="role" id="role" required>
+											<option value="">Select</option>
+											<?php echo getRoles(); ?>
+										</select>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="mb-3">
-										<label class="form-label">Employee ID <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="employeeID" id="employeeID" value="" readonly>
+										<label class="form-label">Department <span class="text-danger"> *</span></label>
+										<select class="select" name="department" id="department" required>
+											<option value="">Select</option>
+											<?php echo getDepartments(); ?>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="mb-3">
+										<label class="form-label">Designation <span class="text-danger"> *</span></label> 
+										<select class="select" name="designation" id="designation" required>
+											<option value="">Select</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6" id="manager-container">
+									<div class="mb-3">
+										<label class="form-label">Manager <span class="text-danger"> *</span></label>
+										<select class="select" name="manager" id="manager">
+											<option value="">Select</option>
+											<?php echo getManagerUsers(user: 3); ?>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6" id="supervisors-container">
+									<div class="mb-3">
+										<label class="form-label">Supervisors</label>
+										<select class="select" name="supervisors" id="supervisors">
+											<option value="">Select</option>
+											<?php echo getManagerUsers(4); ?>
+										</select>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -333,8 +361,19 @@
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
-										<label class="form-label">Designation</label>
-										<input type="text" class="form-control" name="designation" value="" required>
+										<label class="form-label">Joining Date <span class="text-danger"> *</span></label>
+										<div class="input-icon-end position-relative">
+											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="doj" id="doj" required>
+											<span class="input-icon-addon">
+												<i class="ti ti-calendar text-gray-7"></i>
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Employee ID <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" name="employeeID" id="employeeID" placeholder="Auto Generate ID" >
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -348,81 +387,41 @@
 										<label class="form-label">Confirm Password <span class="text-danger"> *</span></label>
 										<input type="text" class="form-control" name="confirmPassword" required>
 									</div>
+								</div> 
+							</div>
+						</div>  
+					</div>
+					<!-- Official Information Tab -->
+					<div class="tab-pane fade" id="office-info" role="tabpanel" aria-labelledby="office-tab" tabindex="0">
+						<div class="modal-body pb-0">
+							<div class="row"> 
+								<div class="col-md-6">
+									<div class="mb-3 position-relative">
+										<label class="form-label">Work Location <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" id="locationTypeSearch" name="workLocation" oninput="capitalizeWords(this)" placeholder="eg : Chennai" autocomplete="off"/>
+										<ul class="list-group addFields" id="locationTypeResult"></ul>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3 position-relative">
+										<label class="form-label">Employee Type <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" id="jobTypeSearch" name="employeeType" oninput="capitalizeWords(this)" placeholder="eg : Full Time" autocomplete="off"/>
+										<ul class="list-group addFields" id="jobTypeResult"></ul>
+									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="mb-3">
-										<label class="form-label">About <span class="text-danger"> *</span></label>
+										<label class="form-label">About</label>
 										<textarea class="form-control" rows="3" name="about"></textarea>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<!-- Official Information Tab -->
-					<div class="tab-pane fade" id="office-info" role="tabpanel" aria-labelledby="office-tab" tabindex="0">
-							<div class="modal-body pb-0">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Department</label>
-											<select class="select" name="department" id="department">
-												<option value="">Select</option>
-												<?php echo getDepartments(); ?>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Role</label>
-											<select class="select" name="role" id="role">
-												<option value="">Select</option>
-												<!-- <?php echo getRoles(); ?> -->
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6" id="manager-container">
-										<div class="mb-3">
-											<label class="form-label">Manager</label>
-											<select class="select" name="manager" id="manager">
-												<option value="">Select</option>
-												<?php echo getManagerUsers(user: 3); ?>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6" id="supervisors-container">
-										<div class="mb-3">
-											<label class="form-label">Supervisors</label>
-											<select class="select" name="supervisors" id="supervisors">
-												<option value="">Select</option>
-												<?php echo getManagerUsers(4); ?>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Work Location</label>
-											<input type="text" class="form-control" name="workLocation">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Employee Type</label>
-											<select class="select" name="employeeType">
-												<option value="">Select</option>
-												<option value="1">Full-Time</option>
-												<option value="2">Part-Time</option>
-												<option value="3">Contract</option>
-												<option value="4">Contract</option>
-											</select>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">Cancel</button>
-								<button type="submit" class="btn btn-primary addEmployeeSaveBtn">Save <i class='fa-solid fa-cloud-arrow-up'></i></button>
-							</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">Cancel</button>
+							<button type="submit" class="btn btn-primary addEmployeeSaveBtn">Save <i class='fa-solid fa-cloud-arrow-up'></i></button>
 						</div>
+					</div>
 				</div>
 			</form>
 		</div>
@@ -452,13 +451,13 @@
 							<button class="nav-link" id="edit-office-tab" data-bs-toggle="tab" data-bs-target="#edit-office-info" type="button" role="tab" aria-selected="true">Official Information</button>
 						</li>
 						<li class="nav-item" role="presentation"></li>
-							<button class="nav-link" id="edit-carrier-tab" data-bs-toggle="tab" data-bs-target="#edit-carrier-info" type="button" role="tab" aria-selected="true">Carrier Information</button>
+						<button class="nav-link" id="edit-carrier-tab" data-bs-toggle="tab" data-bs-target="#edit-carrier-info" type="button" role="tab" aria-selected="true">Carrier Information</button>
 						</li>
 						<li class="nav-item" role="presentation"></li>
-							<button class="nav-link" id="edit-personal-tab" data-bs-toggle="tab" data-bs-target="#edit-personal-info" type="button" role="tab" aria-selected="true">Personal Information</button>
+						<button class="nav-link" id="edit-personal-tab" data-bs-toggle="tab" data-bs-target="#edit-personal-info" type="button" role="tab" aria-selected="true">Personal Information</button>
 						</li>
 						<li class="nav-item" role="presentation"></li>
-							<button class="nav-link" id="edit-bank-tab" data-bs-toggle="tab" data-bs-target="#edit-bank-info" type="button" role="tab" aria-selected="true">Bank Information</button>
+						<button class="nav-link" id="edit-bank-tab" data-bs-toggle="tab" data-bs-target="#edit-bank-info" type="button" role="tab" aria-selected="true">Bank Information</button>
 						</li>
 					</ul>
 				</div>
@@ -575,175 +574,175 @@
 					</div>
 					<!-- Official Information Tab -->
 					<div class="tab-pane fade" id="edit-office-info" role="tabpanel" aria-labelledby="edit-office-tab" tabindex="0">
-							<div class="modal-body pb-0">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Work Location</label>
-											<input type="text" class="form-control" name="workLocation">
-										</div>
+						<div class="modal-body pb-0">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Work Location</label>
+										<input type="text" class="form-control" name="workLocation">
 									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Manager</label>
-											<input type="text" class="form-control" name="manager">
-										</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Manager</label>
+										<input type="text" class="form-control" name="manager">
 									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Supervisor</label>
-											<input type="text" class="form-control" name="supervisor">
-										</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Supervisor</label>
+										<input type="text" class="form-control" name="supervisor">
 									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Team</label>
-											<input type="text" class="form-control" name="team">
-										</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Team</label>
+										<input type="text" class="form-control" name="team">
 									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Employee Type</label>
-											<select class="select" name="employeeType">
-												<option value="">Select</option>
-												<option value="Full-Time">Full-Time</option>
-												<option value="Part-Time">Part-Time</option>
-												<option value="Contract">Contract</option>
-											</select>
-										</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Employee Type</label>
+										<select class="select" name="employeeType">
+											<option value="">Select</option>
+											<option value="Full-Time">Full-Time</option>
+											<option value="Part-Time">Part-Time</option>
+											<option value="Contract">Contract</option>
+										</select>
 									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Salary</label>
-											<input type="text" class="form-control" name="salary">
-										</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Salary</label>
+										<input type="text" class="form-control" name="salary">
 									</div>
 								</div>
 							</div>
 						</div>
+					</div>
 
-						<!-- Career Information Tab -->
-						<div class="tab-pane fade" id="edit-carrier-info" role="tabpanel" aria-labelledby="edit-carrier-tab" tabindex="0">
-							<div class="modal-body pb-0">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Previous Employer</label>
-											<input type="text" class="form-control" name="previousEmployer">
-										</div>
+					<!-- Career Information Tab -->
+					<div class="tab-pane fade" id="edit-carrier-info" role="tabpanel" aria-labelledby="edit-carrier-tab" tabindex="0">
+						<div class="modal-body pb-0">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Previous Employer</label>
+										<input type="text" class="form-control" name="previousEmployer">
 									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Work Experience (Years)</label>
-											<input type="text" class="form-control" name="workExperience">
-										</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Work Experience (Years)</label>
+										<input type="text" class="form-control" name="workExperience">
 									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Skills</label>
-											<input type="text" class="form-control" name="skills">
-										</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Skills</label>
+										<input type="text" class="form-control" name="skills">
 									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Certifications</label>
-											<input type="text" class="form-control" name="certifications">
-										</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Certifications</label>
+										<input type="text" class="form-control" name="certifications">
 									</div>
 								</div>
 							</div>
 						</div>
+					</div>
 
-						<!-- Personal Information Tab -->
-						<div class="tab-pane fade" id="edit-personal-info" role="tabpanel" aria-labelledby="edit-personal-tab" tabindex="0">
-							<div class="modal-body pb-0">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Date of Birth</label>
-											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="dob">
-										</div>
+					<!-- Personal Information Tab -->
+					<div class="tab-pane fade" id="edit-personal-info" role="tabpanel" aria-labelledby="edit-personal-tab" tabindex="0">
+						<div class="modal-body pb-0">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Date of Birth</label>
+										<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="dob">
 									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Gender</label>
-											<select class="select" name="gender">
-												<option value="">Select</option>
-												<option value="Male">Male</option>
-												<option value="Female">Female</option>
-												<option value="Other">Other</option>
-											</select>
-										</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Gender</label>
+										<select class="select" name="gender">
+											<option value="">Select</option>
+											<option value="Male">Male</option>
+											<option value="Female">Female</option>
+											<option value="Other">Other</option>
+										</select>
 									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Nationality</label>
-											<input type="text" class="form-control" name="nationality">
-										</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Nationality</label>
+										<input type="text" class="form-control" name="nationality">
 									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Marital Status</label>
-											<select class="select" name="maritalStatus">
-												<option value="">Select</option>
-												<option value="Single">Single</option>
-												<option value="Married">Married</option>
-												<option value="Divorced">Divorced</option>
-											</select>
-										</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Marital Status</label>
+										<select class="select" name="maritalStatus">
+											<option value="">Select</option>
+											<option value="Single">Single</option>
+											<option value="Married">Married</option>
+											<option value="Divorced">Divorced</option>
+										</select>
 									</div>
-									<div class="col-md-12">
+								</div>
+								<div class="col-md-12">
 									<div class="mb-3">
 										<label class="form-label">Address <span class="text-danger"> *</span></label>
 										<textarea class="form-control" rows="3" name="address"></textarea>
 									</div>
 								</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Bank Information Tab -->
-						<div class="tab-pane fade" id="edit-bank-info" role="tabpanel" aria-labelledby="edit-bank-tab" tabindex="0">
-							<div class="modal-body pb-0">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Bank Name</label>
-											<input type="text" class="form-control" name="bankName">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Bank Account Number</label>
-											<input type="text" class="form-control" name="bankAccountNumber">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">IFSC Code</label>
-											<input type="text" class="form-control" name="ifscCode">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label class="form-label">Branch Name</label>
-											<input type="text" class="form-control" name="branchName">
-										</div>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">Cancel</button>
-						<button type="submit" class="btn btn-primary addEmployeeSaveBtn">Save</button>
+
+					<!-- Bank Information Tab -->
+					<div class="tab-pane fade" id="edit-bank-info" role="tabpanel" aria-labelledby="edit-bank-tab" tabindex="0">
+						<div class="modal-body pb-0">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Bank Name</label>
+										<input type="text" class="form-control" name="bankName">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Bank Account Number</label>
+										<input type="text" class="form-control" name="bankAccountNumber">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">IFSC Code</label>
+										<input type="text" class="form-control" name="ifscCode">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Branch Name</label>
+										<input type="text" class="form-control" name="branchName">
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
-			</form>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">Cancel</button>
+					<button type="submit" class="btn btn-primary addEmployeeSaveBtn">Save</button>
+				</div>
 		</div>
+		</form>
 	</div>
 </div>
-<!-- /Edit Employee --> 
+</div>
+<!-- /Edit Employee -->
 
 <!-- Delete Modal -->
 <div class="modal fade" id="delete_modal">
@@ -767,3 +766,5 @@
 
 <?php require_once("./includes/footer.php"); ?>
 <script src="./js/employees.js"></script>
+<script src="./ajax/job-type.js"></script>
+<script src="./ajax/work-location.js"></script>

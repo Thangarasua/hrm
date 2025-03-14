@@ -11,7 +11,7 @@ $iv = substr(hash('sha256', $key), 0, 16);
 if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['flag'])) {
     $flag = $_GET['flag'];
     if ($flag === "getAll") {
-        $query = "SELECT * FROM `employees` ORDER BY `employees`.`employee_id` ASC";
+        $query = "SELECT * FROM `employees` AS e INNER JOIN roles AS r ON r.role_id = e.role_id INNER JOIN departments AS dp ON dp.department_id=e.department_id INNER JOIN designations AS dg ON dg.designation_id=e.designation_id ORDER BY `e`.`employee_id` ASC";
         $result = mysqli_query($conn, $query);
         $employess = [];
         while ($row = $result->fetch_assoc()) {
@@ -21,8 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['flag'])) {
         exit;
     }
 
-    if ($flag === "getRole") {
-        $flag = $_GET['flag'];
+    if ($flag === "getRole") { 
         $departmentId = $_GET['departmentId'];
         $query = "SELECT * FROM roles WHERE department_id = $departmentId AND status = 1 ORDER BY role_name ASC";
         $result = mysqli_query($conn, $query);
@@ -33,11 +32,24 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['flag'])) {
         echo json_encode($options);
         exit;
     }
+    if ($flag === "getDesignation") { 
+        $departmentId = $_GET['departmentId'];
+        $roleId = $_GET['roleId'];
+        $query = "SELECT * FROM designations WHERE department_id = $departmentId AND role_id = $roleId AND status = 1 ORDER BY designation_title ASC";
+        $result = mysqli_query($conn, $query);
+        $options = "<option value=''>Select</option>";
+        while ($row = $result->fetch_assoc()) {
+            $options .= '<option value="' . $row['designation_id'] . '">' . htmlspecialchars($row['designation_title']) . '</option>';
+        }
+        echo json_encode($options);
+        exit;
+    }
 }
 
 if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     $flag = $_POST['flag'];
     if ($flag === "insert") {
+
         $employeeId = $_POST['employeeID'];
         $fullName = $_POST['employeeName'];
         $email = $_POST['email'];
@@ -46,7 +58,13 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $doj = date('Y-m-d', strtotime(str_replace('-', '/', $doj)));
 
         $password = $_POST['password'];
-        $encryptedPassword = openssl_encrypt($password, $method, $key, 0, $iv);
+        $confirmPassword = $_POST['confirmPassword'];
+        if($password == $confirmPassword){
+            $encryptedPassword = openssl_encrypt($password, $method, $key, 0, $iv);
+        }else{
+            echo json_encode(array('status' => 'failure', 'message' => 'Mismatch confirm password.'));
+            exit;
+        }
 
         $designation = $_POST['designation'];
         $department = $_POST['department'];
@@ -55,11 +73,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $supervisor = isset($_POST['supervisors']) ? $_POST['supervisors'] : '';
         $workLocation = $_POST['workLocation'];
         $employeeType = $_POST['employeeType'];
-        $about = $_POST['about'];
-        $employeeType = $_POST['employeeType'];
+        $about = $_POST['about']; 
 
-        $query = "INSERT INTO employees (employee_id, full_name, email, phone, doj, `password`, designation, department_id, role_id, manager_id, supervisor_id, work_location, employee_type_id, about, `status`) VALUES ('$employeeId', '$fullName', '$email', '$phone', '$doj', '$encryptedPassword', '$designation', $department, $role, '$manager', '$supervisor', '$workLocation', $employeeType, '$about', 1)";
-
+        $query = "INSERT INTO employees (employee_id, full_name, email, phone, doj, `password`, designation_id, department_id, role_id, manager_id, supervisor_id, work_location, employee_type, about, `status`) VALUES ('$employeeId', '$fullName', '$email', '$phone', '$doj', '$encryptedPassword', $designation, $department, $role, '$manager', '$supervisor', '$workLocation', '$employeeType', '$about', 1)";
+        
         $data = array('flag'=>'welcomeMail','employeeId'=>$employeeId,'fullName'=>$fullName,'email'=>$email,'password'=>$password);
         
         if (mysqli_query($conn, $query)) {

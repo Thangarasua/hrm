@@ -144,7 +144,7 @@
 						<div class="col-md-6">
 							<div class="mb-3">
 								<label class="form-label">Department</label>
-								<select class="select" name="department" id="department">
+								<select class="select form-control" name="department" id="department">
 									<option value="">Select</option>
 									<?php echo getDepartments(); ?>
 								</select>
@@ -153,7 +153,7 @@
 						<div class="col-md-6">
 							<div class="mb-3">
 								<label class="form-label">Role</label>
-								<select class="select" name="role" id="role">
+								<select class="select form-control" name="role" id="role">
 									<option value="">Select</option>
 									<?php echo getRoles(); ?>
 								</select>
@@ -163,7 +163,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="mb-3">
-								<label class="form-label">designations Name</label>
+								<label class="form-label">designation Name</label>
 								<input type="text" class="form-control" name="designationName" oninput="capitalizeWords(this)" placeholder="eg : Os Associate">
 							</div>
 						</div>
@@ -196,7 +196,7 @@
 						<div class="col-md-12">
 							<div class="mb-3">
 								<label class="form-label">designation Name</label>
-								<input type="text" class="form-control" id="edit_designation" name="designationName">
+								<input type="text" class="form-control" id="edit_designation" name="designationName"  oninput="capitalizeWords(this)">
 							</div>
 						</div>
 						<div class="col-md-12">
