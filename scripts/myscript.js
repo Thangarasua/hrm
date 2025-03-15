@@ -1,3 +1,18 @@
+//active side menu
+  let currentPage = window.location.pathname.split("/").pop();
+  $("ul li a").each(function () {
+    if ($(this).hasClass(currentPage)) {
+      $(this).addClass("active");
+      $(this).closest("li").addClass("active");
+      $(this)
+        .closest("li")
+        .closest(".submenu")
+        .find(".sub-menu-title")
+        .addClass("active subdrop");
+      $(this).closest("ul").show();
+    }
+  }); 
+
 //check only numbers allowed condition
 function isNumber(input) {
   var charCode = input.which ? input.which : input.keyCode;
@@ -140,4 +155,4 @@ function dataTableDesigns() {
     var length = $(this).val();
     table.page.len(length).draw();
   });
-}
+} 
