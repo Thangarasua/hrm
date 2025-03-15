@@ -2,15 +2,15 @@
 <div class="sidebar" id="sidebar">
 	<!-- Logo -->
 	<div class="sidebar-logo">
-		<a href="https://smarthr.dreamstechnologies.com/html/template/index.php" class="logo logo-normal">
+		<a href="index" class="logo logo-normal">
 			<!-- <img src="assets/img/logo.svg" alt="Logo"> -->
 			<h2>ACTE HRM</h2>
 		</a>
-		<a href="index.php" class="logo-small">
+		<a href="index" class="logo-small">
 			<!-- <img src="assets/img/logo-small.svg" alt="Logo"> -->
 			<h4>HRM</h4>
 		</a>
-		<a href="index.php" class="dark-logo">
+		<a href="index" class="dark-logo">
 			<!-- <img src="assets/img/logo-white.svg" alt="Logo"> -->
 			<h2>ACTE HRM</h2>
 		</a>
@@ -83,16 +83,16 @@
 				<li>
 					<ul>
 						<li class="submenu">
-							<a href="javascript:void(0);">
+							<a href="javascript:void(0);" class="sub-menu-title">
 								<i class="ti ti-smart-home"></i>
 								<span>Dashboard</span>
 								<span class="badge badge-danger fs-10 fw-medium text-white p-1">Hot</span>
 								<span class="menu-arrow"></span>
 							</a>
-							<ul>
-								<li><a href="index.php">Admin Dashboard</a></li>
-								<li><a href="dashboard.php">Dashboard</a></li>
-								<li><a href="employee-dashboard.php">Employee Dashboard</a></li>
+							<ul class="list-menus">
+								<li><a href="index" class="index">Admin Dashboard</a></li>
+								<li><a href="dashboard" class="dashboard">Dashboard</a></li>
+								<li><a href="employee-dashboard" class="employee-dashboard">Employee Dashboard</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -101,18 +101,16 @@
 				<li>
 					<ul>
 						<li class="submenu">
-							<a href="javascript:void(0);" class="submenu">
+							<a href="javascript:void(0);" class="sub-menu-title">
 								<i class="ti ti-users"></i><span>Employees</span>
 								<span class="menu-arrow"></span>
 							</a>
-							<ul>
-								<li><a href="users">User Lists</a></li>
-								<li><a href="employees">Employee Lists</a></li>
-								<!-- <li><a href="employee-details">Employee Details</a></li> -->
-								<li><a href="departments">Departments</a></li>
-								<li><a href="designations">Designations</a></li>
-								<li><a href="roles">Roles</a></li>
-								<li><a href="policy">Policies</a></li>
+							<ul> 
+								<li><a href="employees" class="employees">Employee Lists</a></li>
+								<li><a href="departments" class="departments">Departments</a></li>
+								<li><a href="designations" class="designations">Designations</a></li>
+								<li><a href="roles" class="roles">Roles</a></li>
+								<li><a href="policy" class="policy">Policies</a></li>
 							</ul>
 						</li>
 						<!-- <li class="submenu">
@@ -195,23 +193,23 @@
 				<li class="menu-title"><span>RECRUITMENT</span></li>
 				<li>
 					<ul>
-						<li>
-							<a href="recruitment">
+						<li class="single-menu">
+							<a href="recruitment" class="recruitment">
 								<i class="ti ti-timeline"></i><span>Recruitment</span>
 							</a>
 						</li> 
-						<li>
-							<a href="candidates">
+						<li class="single-menu">
+							<a href="candidates" class="candidates">
 								<i class="ti ti-user-shield"></i><span>Candidates</span>
 							</a>
 						</li>
-						<li>
-							<a href="interview">
+						<li class="single-menu">
+							<a href="interview" class="interview">
 								<i class="ti ti-headset"></i><span>Interview</span>
 							</a>
 						</li>
-						<li>
-							<a href="refferals">
+						<li class="single-menu">
+							<a href="refferals" class="refferals">
 								<i class="ti ti-ux-circle"></i><span>Referrals</span>
 							</a>
 						</li>
@@ -406,9 +404,9 @@
 						<span class="menu-arrow"></span>
 					</a>
 					<ul>
-						<li><a href="index.php">Admin Dashboard</a></li>
-						<li><a href="dashboard.php">Dashboard</a></li>
-						<li><a href="employee-dashboard.php">Employee Dashboard</a></li>
+						<li><a href="index">Admin Dashboard</a></li>
+						<li><a href="dashboard">Dashboard</a></li>
+						<li><a href="employee-dashboard">Employee Dashboard</a></li>
 					</ul>
 				</li>
 				<li class="submenu">
@@ -417,7 +415,7 @@
 						<span class="menu-arrow"></span>
 					</a>
 					<ul>
-						<li><a href="dashboard.php">Dashboard</a></li>
+						<li><a href="dashboard">Dashboard</a></li>
 						<li><a href="companies.html">Companies</a></li>
 						<li><a href="subscription.html">Subscriptions</a></li>
 						<li><a href="packages.html">Packages</a></li>
@@ -569,10 +567,10 @@
 								<li><a href="users">User Lists</a></li>
 								<li><a href="employees.html">Employee Lists</a></li>
 								<li><a href="employees-grid.html">Employee Grid</a></li>
-								<!-- <li><a href="employee-details.php">Employee Details</a></li> -->
-								<li><a href="departments.php">Departments</a></li>
-								<li><a href="designations.php">Designations</a></li>
-								<li><a href="policy.php">Policies</a></li>
+								<!-- <li><a href="employee-details">Employee Details</a></li> -->
+								<li><a href="departments">Departments</a></li>
+								<li><a href="designations">Designations</a></li>
+								<li><a href="policy">Policies</a></li>
 							</ul>
 						</li>
 						<li class="submenu">
@@ -807,7 +805,7 @@
 						<li><a href="under-maintenance.html"><span>Under Maintenance</span></a></li>
 						<li><a href="under-construction.html"><span>Under Construction</span></a></li>
 						<li><a href="api-keys.html"><span>API Keys</span></a></li>
-						<li><a href="privacy-policy.php"><span>Privacy Policy</span></a></li>
+						<li><a href="privacy-policy"><span>Privacy Policy</span></a></li>
 						<li><a href="terms-condition.html"><span>Terms & Conditions</span></a></li>
 						<li class="submenu">
 							<a href="#"><span>Content</span> <span class="menu-arrow"></span></a>
