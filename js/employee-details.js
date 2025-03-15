@@ -1,8 +1,45 @@
 $(document).ready(function () {
+    getDesignation ($("#designationId").val());
+    let employeeID = $("#employeeID").val();
+    $("#grossSalary").on("input", calculateSalary);
+
+    $("#editEmployee").on("submit", function (e) {
+        e.preventDefault();
+        let formData = new FormData(this);
+        formData.append("flag", "update");
+        $.ajax({
+            type: "POST",
+            url: "queries/employee-details.php",
+            data: formData,
+            dataType: "json",
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (response) {
+            if (response.status == "success") {
+                $("#editEmployee")[0].reset();
+                $("#edit_employee").modal("hide");
+                $("#editEmployeeSaveBtn")
+                  .html("Save <i class='fa-solid fa-cloud-arrow-up'></i>")
+                  .prop("disabled", false);
+                $("#success_modal").modal("show");
+                $("#success_modal_content").html("Employee Updated successfully");
+                setTimeout(function() {
+                    location.reload();
+                }, 3000);
+                Swal.close();
+            } else {
+                toastr.error(response.message, "Error");
+            }
+            },
+        });
+    });
+    
     $("#addBankInfo").on("submit", function (e) {
         e.preventDefault();
         let formData = new FormData(this);
         formData.append("flag", "bankInfo");
+        formData.append("employeeID", employeeID);
         $.ajax({
             type: "POST",
             url: "queries/employee-details.php",
@@ -64,7 +101,38 @@ $(document).ready(function () {
         $("#ctc").val(ctc);
         $("#MonthCtc").val(ctc);
         $("#yearCtc").val(yearCtc);
-    }
+    };
 
-    $("#grossSalary").on("input", calculateSalary);
+    $("#role, #department").change(function () {
+        getDesignation ();
+    });
+
+    function getDesignation (currentID = null) {
+        let roleId = $("#role").val().trim();
+        if (roleId.length == 0) {
+            $("#role").focus();
+            toastr["warning"]("First select Hierarchy");
+            return 0;
+        }
+        var departmentId = $("#department").val();
+        if (departmentId) {
+            $.ajax({
+            url: "queries/employee.php",
+            type: "GET",
+            data: {
+                departmentId: departmentId,
+                roleId: roleId,
+                flag: "getDesignation",
+            },
+            success: function (response) {
+                $("#designation").html(response);
+                if (currentID) {
+                    $("#designation").val(currentID);
+                }
+            },
+            });
+        } else {
+            $("#designation").html('<option value="">Select</option>');
+        }
+    };
 });
