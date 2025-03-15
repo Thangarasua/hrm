@@ -18,23 +18,16 @@
 			</div>
 			<div class="d-flex my-xl-auto right-content align-items-center flex-wrap ">
 				<div class="me-2 mb-2">
-					<div class="d-flex align-items-center border bg-white rounded p-1 me-2 icon-list">
-						<a href="employees" class="btn btn-icon btn-sm active bg-primary text-white me-1"><i class="ti ti-list-tree"></i></a>
-						<a href="#" class="btn btn-icon btn-sm"><i class="ti ti-layout-grid"></i></a>
-					</div>
-				</div>
-				<div class="me-2 mb-2">
 					<div class="dropdown">
 						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
-							<i class="ti ti-file-export me-1"></i>Export
+							<i class="ti ti-file-export me-1"></i> Export
 						</a>
 						<ul class="dropdown-menu  dropdown-menu-end p-3">
-							<li>
-								<a href="javascript:void(0);" class="dropdown-item rounded-1"><i class="ti ti-file-type-pdf me-1"></i>Export as PDF</a>
-							</li>
-							<li>
-								<a href="javascript:void(0);" class="dropdown-item rounded-1"><i class="ti ti-file-type-xls me-1"></i>Export as Excel </a>
-							</li>
+							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="excel_button"><i class="ti ti-file-type-xls me-1"></i>Export as Excel </a></li>
+							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="pdf_button"><i class="ti ti-file-type-pdf me-1"></i>Export as PDF</a></li>
+							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="copy_button"><i class="ti ti-file-type-xls me-1"></i>Copy as Text </a></li>
+							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="csv_button"><i class="ti ti-file-type-xls me-1"></i>Export as CSV </a></li>
+							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="print_button"><i class="ti ti-file-type-xls me-1"></i>Export as Print </a></li>
 						</ul>
 					</div>
 				</div>
@@ -49,6 +42,8 @@
 			</div>
 		</div>
 		<!-- /Breadcrumb -->
+
+
 
 		<div class="row">
 
@@ -154,6 +149,11 @@
 			<div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
 				<h5>Employees List</h5>
 				<div class="d-flex my-xl-auto right-content align-items-center flex-wrap row-gap-3">
+				<div class="me-3">
+						<div class="form-group">
+							<input type="text" id="myInputTextField" class="form-control" placeholder="Search anything..." title="Search any thing in the table you want">
+						</div>
+					</div>
 					<div class="me-3">
 						<div class="input-icon-end position-relative">
 							<input type="text" class="form-control date-range bookingrange" placeholder="dd/mm/yyyy - dd/mm/yyyy">
@@ -296,7 +296,7 @@
 										</div>
 									</div>
 								</div> -->
-								
+
 								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">Role (or) Hierarchy <span class="text-danger"> *</span></label>
@@ -317,7 +317,7 @@
 								</div>
 								<div class="col-md-4">
 									<div class="mb-3">
-										<label class="form-label">Designation <span class="text-danger"> *</span></label> 
+										<label class="form-label">Designation <span class="text-danger"> *</span></label>
 										<select class="select" name="designation" id="designation" required>
 											<option value="">Select</option>
 										</select>
@@ -373,7 +373,7 @@
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Employee ID <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="employeeID" id="employeeID" placeholder="Auto Generate ID" >
+										<input type="text" class="form-control" name="employeeID" id="employeeID" placeholder="Auto Generate ID">
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -387,25 +387,25 @@
 										<label class="form-label">Confirm Password <span class="text-danger"> *</span></label>
 										<input type="text" class="form-control" name="confirmPassword" required>
 									</div>
-								</div> 
+								</div>
 							</div>
-						</div>  
+						</div>
 					</div>
 					<!-- Official Information Tab -->
 					<div class="tab-pane fade" id="office-info" role="tabpanel" aria-labelledby="office-tab" tabindex="0">
 						<div class="modal-body pb-0">
-							<div class="row"> 
+							<div class="row">
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Work Location <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" id="locationTypeSearch" name="workLocation" oninput="capitalizeWords(this)" placeholder="eg : Chennai" autocomplete="off"/>
+										<input type="text" class="form-control" id="locationTypeSearch" name="workLocation" oninput="capitalizeWords(this)" placeholder="eg : Chennai" autocomplete="off" />
 										<ul class="list-group addFields" id="locationTypeResult"></ul>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Employee Type <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" id="jobTypeSearch" name="employeeType" oninput="capitalizeWords(this)" placeholder="eg : Full Time" autocomplete="off"/>
+										<input type="text" class="form-control" id="jobTypeSearch" name="employeeType" oninput="capitalizeWords(this)" placeholder="eg : Full Time" autocomplete="off" />
 										<ul class="list-group addFields" id="jobTypeResult"></ul>
 									</div>
 								</div>

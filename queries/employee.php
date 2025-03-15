@@ -11,7 +11,7 @@ $iv = substr(hash('sha256', $key), 0, 16);
 if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['flag'])) {
     $flag = $_GET['flag'];
     if ($flag === "getAll") {
-        $query = "SELECT * FROM `employees` AS e INNER JOIN roles AS r ON r.role_id = e.role_id INNER JOIN departments AS dp ON dp.department_id=e.department_id INNER JOIN designations AS dg ON dg.designation_id=e.designation_id ORDER BY `e`.`employee_id` ASC";
+        $query = "SELECT * FROM `employees_bulk` AS e INNER JOIN roles AS r ON r.role_id = e.role_id INNER JOIN departments AS dp ON dp.department_id=e.department_id INNER JOIN designations AS dg ON dg.designation_id=e.designation_id ORDER BY `e`.`employee_id` ASC";
         $result = mysqli_query($conn, $query);
         $employess = [];
         while ($row = $result->fetch_assoc()) {
