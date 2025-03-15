@@ -83,7 +83,7 @@
 				<li>
 					<ul>
 						<li class="submenu">
-							<a href="javascript:void(0);">
+							<a href="javascript:void(0);" class="sub-menu-title">
 								<i class="ti ti-smart-home"></i>
 								<span>Dashboard</span>
 								<span class="badge badge-danger fs-10 fw-medium text-white p-1">Hot</span>
@@ -101,7 +101,7 @@
 				<li>
 					<ul>
 						<li class="submenu">
-							<a href="javascript:void(0);">
+							<a href="javascript:void(0);" class="sub-menu-title">
 								<i class="ti ti-users"></i><span>Employees</span>
 								<span class="menu-arrow"></span>
 							</a>
@@ -193,22 +193,22 @@
 				<li class="menu-title"><span>RECRUITMENT</span></li>
 				<li>
 					<ul>
-						<li>
+						<li class="single-menu">
 							<a href="recruitment" class="recruitment">
 								<i class="ti ti-timeline"></i><span>Recruitment</span>
 							</a>
 						</li> 
-						<li>
+						<li class="single-menu">
 							<a href="candidates" class="candidates">
 								<i class="ti ti-user-shield"></i><span>Candidates</span>
 							</a>
 						</li>
-						<li>
+						<li class="single-menu">
 							<a href="interview" class="interview">
 								<i class="ti ti-headset"></i><span>Interview</span>
 							</a>
 						</li>
-						<li>
+						<li class="single-menu">
 							<a href="refferals" class="refferals">
 								<i class="ti ti-ux-circle"></i><span>Referrals</span>
 							</a>

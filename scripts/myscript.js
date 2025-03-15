@@ -3,12 +3,12 @@
   $("ul li a").each(function () {
     if ($(this).hasClass(currentPage)) {
       $(this).addClass("active");
-      $(this).closest("li").addClass("active");
+      $(this).closest(".single-menu").addClass("active");
       $(this)
         .closest("li")
         .closest(".submenu")
         .find(".sub-menu-title")
-        .addClass("active subdrop");
+        .addClass("subdrop");
       $(this).closest("ul").show();
     }
   }); 
