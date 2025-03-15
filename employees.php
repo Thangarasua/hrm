@@ -337,7 +337,7 @@
 										<label class="form-label">Supervisors</label>
 										<select class="select" name="supervisors" id="supervisors">
 											<option value="">Select</option>
-											<?php echo getManagerUsers(4); ?>
+											<?php echo getManagerUsers(2); ?>
 										</select>
 									</div>
 								</div>
