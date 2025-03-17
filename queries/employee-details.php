@@ -31,6 +31,42 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         }
     }
 
+    if ($flag === "experienceInfo") {
+        $employeeId = $_POST['employeeID'];
+        $companyName = $_POST['companyName'];
+        $previousDesignation = $_POST['previousDesignation'];
+        $startDate = $_POST['startDate'];
+        $startDate = date('Y-m-d', strtotime(str_replace('-', '/', $startDate)));
+        $endDate = $_POST['endDate'];
+        $endDate = date('Y-m-d', strtotime(str_replace('-', '/', $endDate)));
+        $workExperience = $_POST['workExperience'];
+        $skils = $_POST['skils'];
+      
+        $experienceInfoQuery = "INSERT INTO experience_info (employee_id, previous_employer, designation, start_date, end_date, work_experience, skills) VALUES ('$employeeId', '$companyName', '$previousDesignation', '$startDate', '$endDate', '$workExperience', '$skils')";
+        if (mysqli_query($conn, $experienceInfoQuery)) {
+            echo json_encode(array('status' => 'success', 'message' => 'Experience Information Updated Successfully.'));
+        } else {
+            echo json_encode(array('status' => 'failure', 'message' => 'Error adding experience data.'));
+        }
+    }
+
+    if ($flag === "educationInfo") {
+        $employeeId = $_POST['employeeID'];
+        $institutionName = $_POST['institutionName'];
+        $course = $_POST['course'];
+        $educationStartDate = $_POST['educationStartDate'];
+        $educationStartDate = date('Y-m-d', strtotime(str_replace('-', '/', $educationStartDate)));
+        $educationeEndDate = $_POST['educationeEndDate'];
+        $educationeEndDate = date('Y-m-d', strtotime(str_replace('-', '/', $educationeEndDate)));
+      
+        $educationInfoQuery = "INSERT INTO education_info (employee_id, institution_name, course, start_date, end_date) VALUES ('$employeeId', '$institutionName', '$course', '$educationStartDate', '$educationeEndDate')";
+        if (mysqli_query($conn, $educationInfoQuery)) {
+            echo json_encode(array('status' => 'success', 'message' => 'Education Information Updated Successfully.'));
+        } else {
+            echo json_encode(array('status' => 'failure', 'message' => 'Error adding education data.'));
+        }
+    }
+
     if ($flag === "update") {
         $employeeId = $_POST['employeeID'];
         $fullName = $_POST['employeeName'];

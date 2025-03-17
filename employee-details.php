@@ -7,6 +7,8 @@ if (isset($_GET['empId'])) {
 }
 $bankInfo = getBankInfo($employeeId);
 $employeeInfo = getEmployeeInfo($employeeId);
+$experienceInfo = getExperienceInfo($employeeId);
+$educationInfo = getEducationInfo($employeeId);
 ?>
 <!-- Page Wrapper -->
 <div class="page-wrapper">
@@ -362,39 +364,7 @@ $employeeInfo = getEmployeeInfo($employeeId);
 												<div id="primaryBorderFour" class="accordion-collapse collapse border-top" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
 													<div class="accordion-body">
 														<div>
-															<div class="mb-3">
-																<div class="d-flex align-items-center justify-content-between">
-																	<div>
-																		<span class="d-inline-flex align-items-center fw-normal">
-																			Oxford University
-																		</span>
-																		<h6 class="d-flex align-items-center mt-1">Computer Science</h6>
-																	</div>
-																	<p class="text-dark">2020 - 2022</p>
-																</div>
-															</div>
-															<div class="mb-3">
-																<div class="d-flex align-items-center justify-content-between">
-																	<div>
-																		<span class="d-inline-flex align-items-center fw-normal">
-																			Cambridge University
-																		</span>
-																		<h6 class="d-flex align-items-center mt-1">Computer Network & Systems</h6>
-																	</div>
-																	<p class="text-dark">2016- 2019</p>
-																</div>
-															</div>
-															<div>
-																<div class="d-flex align-items-center justify-content-between">
-																	<div>
-																		<span class="d-inline-flex align-items-center fw-normal">
-																			Oxford School
-																		</span>
-																		<h6 class="d-flex align-items-center mt-1">Grade X</h6>
-																	</div>
-																	<p class="text-dark">2012 - 2016</p>
-																</div>
-															</div>
+														<?php echo $educationInfo ? $educationInfo : '';?>
 														</div>
 													</div>
 												</div>
@@ -420,39 +390,7 @@ $employeeInfo = getEmployeeInfo($employeeId);
 												<div id="primaryBorderFive" class="accordion-collapse collapse border-top" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
 													<div class="accordion-body">
 														<div>
-															<div class="mb-3">
-																<div class="d-flex align-items-center justify-content-between">
-																	<div>
-																		<h6 class="d-inline-flex align-items-center fw-medium">
-																			Google
-																		</h6>
-																		<span class="d-flex align-items-center badge bg-secondary-transparent mt-1"><i class="ti ti-point-filled me-1"></i>UI/UX Developer</span>
-																	</div>
-																	<p class="text-dark">Jan 2013 - Present</p>
-																</div>
-															</div>
-															<div class="mb-3">
-																<div class="d-flex align-items-center justify-content-between">
-																	<div>
-																		<h6 class="d-inline-flex align-items-center fw-medium">
-																			Salesforce
-																		</h6>
-																		<span class="d-flex align-items-center badge bg-secondary-transparent mt-1"><i class="ti ti-point-filled me-1"></i>Web Developer</span>
-																	</div>
-																	<p class="text-dark">Dec 2012- Jan 2015</p>
-																</div>
-															</div>
-															<div>
-																<div class="d-flex align-items-center justify-content-between">
-																	<div>
-																		<h6 class="d-inline-flex align-items-center fw-medium">
-																			HubSpot
-																		</h6>
-																		<span class="d-flex align-items-center badge bg-secondary-transparent mt-1"><i class="ti ti-point-filled me-1"></i>Software Developer</span>
-																	</div>
-																	<p class="text-dark">Dec 2011- Jan 2012</p>
-																</div>
-															</div>
+															<?php echo $experienceInfo ? $experienceInfo : '';?>
 														</div>
 													</div>
 												</div>
@@ -1087,26 +1025,26 @@ $employeeInfo = getEmployeeInfo($employeeId);
 					<i class="ti ti-x"></i>
 				</button>
 			</div>
-			<form action="https://smarthr.dreamstechnologies.com/html/template/employee-details.html">
+			<form action="#" id="AddEducationInfo">
 				<div class="modal-body pb-0">
 					<div class="row">
 						<div class="col-md-6">
 							<div class="mb-3">
-								<label class="form-label">Institution Name <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control">
+								<label class="form-label">Institution / School Name <span class="text-danger"> *</span></label>
+								<input type="text" class="form-control" name="institutionName" id="institutionName">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="mb-3">
 								<label class="form-label">Course <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" name="course" id="course">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="mb-3">
 								<label class="form-label">Start Date <span class="text-danger"> *</span></label>
 								<div class="input-icon-end position-relative">
-									<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy">
+									<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="educationStartDate" id="educationStartDate">
 									<span class="input-icon-addon">
 										<i class="ti ti-calendar text-gray-7"></i>
 									</span>
@@ -1117,7 +1055,7 @@ $employeeInfo = getEmployeeInfo($employeeId);
 							<div class="mb-3">
 								<label class="form-label">End Date <span class="text-danger"> *</span></label>
 								<div class="input-icon-end position-relative">
-									<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy">
+									<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="educationeEndDate" id="educationeEndDate">
 									<span class="input-icon-addon">
 										<i class="ti ti-calendar text-gray-7"></i>
 									</span>
@@ -1146,26 +1084,26 @@ $employeeInfo = getEmployeeInfo($employeeId);
 					<i class="ti ti-x"></i>
 				</button>
 			</div>
-			<form action="https://smarthr.dreamstechnologies.com/html/template/employee-details.html">
+			<form action="#" id="addExperienceInfo">
 				<div class="modal-body pb-0">
 					<div class="row">
 						<div class="col-md-6">
 							<div class="mb-3">
 								<label class="form-label">Previous Company Name <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" name="companyName" id="companyName" value="">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="mb-3">
 								<label class="form-label">Designation <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" name="previousDesignation" id="previousDesignation" value="">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="mb-3">
 								<label class="form-label">Start Date <span class="text-danger"> *</span></label>
 								<div class="input-icon-end position-relative">
-									<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy">
+									<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="startDate" id="startDate">
 									<span class="input-icon-addon">
 										<i class="ti ti-calendar text-gray-7"></i>
 									</span>
@@ -1176,19 +1114,23 @@ $employeeInfo = getEmployeeInfo($employeeId);
 							<div class="mb-3">
 								<label class="form-label">End Date <span class="text-danger"> *</span></label>
 								<div class="input-icon-end position-relative">
-									<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy">
+									<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="endDate" id="endDate">
 									<span class="input-icon-addon">
 										<i class="ti ti-calendar text-gray-7"></i>
 									</span>
 								</div>
 							</div>
 						</div>
-						<div class="col-md-12">
+						<div class="col-md-6">
 							<div class="mb-3">
-								<label class="form-check-label d-flex align-items-center mt-0">
-									<input class="form-check-input mt-0 me-2" type="checkbox" checked="">
-									<span class="text-dark">Check if you working present</span>
-								</label>
+								<label class="form-label">Total Work Experience <span class="text-danger"> *</span></label>
+								<input type="text" class="form-control" name="workExperience" id="workExperience" readonly>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="mb-3">
+								<label class="form-label">Skils (Optional) <span class="text-danger"> *</span></label>
+								<input type="text" class="form-control" name="skils" id="skils" >
 							</div>
 						</div>
 					</div>
