@@ -62,6 +62,60 @@ $(document).ready(function () {
         })
     });
 
+    $("#addExperienceInfo").on("submit", function (e) {
+        e.preventDefault();
+        let formData = new FormData(this);
+        formData.append("flag", "experienceInfo");
+        formData.append("employeeID", employeeID);
+        $.ajax({
+            type: "POST",
+            url: "queries/employee-details.php",
+            data: formData,
+            dataType: "json",
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (response) {
+                if (response.status == "success") {
+                    $("#edit_experience").modal("hide");
+                    toastr.success("Experience Information Updated Successfully");
+                    setTimeout(function() {
+                        location.reload();
+                      }, 2000);
+                } else {
+                    toastr.error(response.message, "Error");
+                }
+            }
+        })
+    });
+
+    $("#AddEducationInfo").on("submit", function (e) {
+        e.preventDefault();
+        let formData = new FormData(this);
+        formData.append("flag", "educationInfo");
+        formData.append("employeeID", employeeID);
+        $.ajax({
+            type: "POST",
+            url: "queries/employee-details.php",
+            data: formData,
+            dataType: "json",
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (response) {
+                if (response.status == "success") {
+                    $("#edit_education").modal("hide");
+                    toastr.success("Education Information Updated Successfully");
+                    setTimeout(function() {
+                        location.reload();
+                      }, 2000);
+                } else {
+                    toastr.error(response.message, "Error");
+                }
+            }
+        })
+    });
+
     function calculateSalary() {
         let grossSalary = parseFloat($("#grossSalary").val()) || 0;
         
@@ -135,4 +189,24 @@ $(document).ready(function () {
             $("#designation").html('<option value="">Select</option>');
         }
     };
+
+    $('#startDate, #endDate').on('dp.change', function (e) {
+        var startDate = $("#startDate").val().trim();
+        var endDate = $("#endDate").val().trim();
+
+        if (startDate && endDate) {
+            var startMoment = moment(startDate, 'DD/MM/YYYY');
+            var endMoment = moment(endDate, 'DD/MM/YYYY');
+
+            if (startMoment.isBefore(endMoment)) {
+                var years = endMoment.diff(startMoment, 'years');
+                startMoment.add(years, 'years');
+                var months = endMoment.diff(startMoment, 'months');
+                var totalExperience = years + (months / 12);
+                $('#workExperience').val(totalExperience.toFixed(1));
+            } else {
+                alert('Start Date should be before End Date');
+            }
+        }
+    });
 });

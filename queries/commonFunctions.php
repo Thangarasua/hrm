@@ -136,3 +136,70 @@ function getEmployeeInfo($employeeId) {
         return null;
     }
 };
+
+function getExperienceInfo($employeeId) {
+    global $conn;
+    $query = "SELECT * FROM `experience_info` WHERE `employee_id` = '$employeeId'";
+    $result = mysqli_query($conn, $query);
+    $output = '';
+    if ($result && mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $companyName = htmlspecialchars($row['previous_employer']);
+            $jobTitle = htmlspecialchars($row['designation']);
+            $startDate = htmlspecialchars($row['start_date']);
+            $endDate = htmlspecialchars($row['end_date']);
+            $output .= '
+            <div class="mb-3">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <h6 class="d-inline-flex align-items-center fw-medium">' . $companyName . '</h6>
+                        <span class="d-flex align-items-center badge bg-secondary-transparent mt-1">
+                            <i class="ti ti-point-filled me-1"></i>' . $jobTitle . '
+                        </span>
+                    </div>
+                    <p class="text-dark">' . formatDateRange($startDate, $endDate) . '</p>
+                </div>
+            </div>';
+        }
+    } else {
+        $output = "<p>No experience information found.</p>";
+    }
+    return $output;
+}
+
+function getEducationInfo($employeeId) {
+    global $conn;
+    $query = "SELECT * FROM `education_info` WHERE `employee_id` = '$employeeId'";
+    $result = mysqli_query($conn, $query);
+    $output = '';
+    if ($result && mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $institutionName = htmlspecialchars($row['institution_name']);
+            $course = htmlspecialchars($row['course']);
+            $startDate = htmlspecialchars($row['start_date']);
+            $endDate = htmlspecialchars($row['end_date']);
+            $output .= '
+            <div class="mb-3">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <span class="d-inline-flex align-items-center fw-normal">
+                            ' . $institutionName . '
+                        </span>
+                        <h6 class="d-flex align-items-center mt-1">' . $course . '</h6>
+                    </div>
+                    <p class="text-dark">' . formatDateRange($startDate, $endDate) . '</p>
+                </div>
+            </div>';
+        }
+    } else {
+        $output = "<p>No education information found.</p>";
+    }
+    return $output;
+}
+
+function formatDateRange($startDate, $endDate) {
+    $formattedStartDate = date("M Y", strtotime($startDate));
+    $formattedEndDate = ($endDate == "Present") ? "Present" : date("M Y", strtotime($endDate));
+    return $formattedStartDate . ' - ' . $formattedEndDate;
+}
+
