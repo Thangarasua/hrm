@@ -5,7 +5,7 @@ $(document).ready(function () {
     formData.append("flag", "insert");
     $.ajax({
       type: "POST",
-      url: "queries/employee.php",
+      url: "queries/employees.php",
       data: formData,
       dataType: "json",
       contentType: false,
@@ -31,7 +31,7 @@ $(document).ready(function () {
     flag = "getAll"
   ) {
     $.ajax({
-      url: "queries/employee.php",
+      url: "queries/employees.php",
       type: "GET",
       dataType: "json",
       data: {
@@ -109,7 +109,7 @@ $(document).ready(function () {
     console.log(departmentId);
     if (departmentId) {
       $.ajax({
-        url: "queries/employee.php",
+        url: "queries/employees.php",
         type: "GET",
         data: {
           departmentId: departmentId,
@@ -196,4 +196,5 @@ $(document).ready(function () {
       });
     }
   }
+  
 });

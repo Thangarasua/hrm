@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $doj = $_POST['doj'];
-        $doj = date('Y-m-d', strtotime(str_replace('-', '/', $doj)));
+        $doj = date('Y-m-d', strtotime($doj));
 
         $password = $_POST['password'];
         $confirmPassword = $_POST['confirmPassword'];
@@ -72,10 +72,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $manager = isset($_POST['manager']) ? $_POST['manager'] : '';
         $supervisor = isset($_POST['supervisors']) ? $_POST['supervisors'] : '';
         $workLocation = $_POST['workLocation'];
-        $employeeType = $_POST['employeeType'];
-        $about = $_POST['about']; 
+        $employeeType = $_POST['employeeType']; 
 
-        $query = "INSERT INTO employees (employee_id, full_name, email, phone, doj, `password`, designation_id, department_id, role_id, manager_id, supervisor_id, work_location, employee_type, about, `status`) VALUES ('$employeeId', '$fullName', '$email', '$phone', '$doj', '$encryptedPassword', $designation, $department, $role, '$manager', '$supervisor', '$workLocation', '$employeeType', '$about', 1)";
+        $query = "INSERT INTO employees (employee_id, full_name, email, phone, doj, `password`, designation_id, department_id, role_id, manager_id, supervisor_id, work_location, employee_type, `status`) VALUES ('$employeeId', '$fullName', '$email', '$phone', '$doj', '$encryptedPassword', $designation, $department, $role, '$manager', '$supervisor', '$workLocation', '$employeeType', 1)";
         
         $data = array('flag'=>'welcomeMail','employeeId'=>$employeeId,'fullName'=>$fullName,'email'=>$email,'password'=>$password);
         

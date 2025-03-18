@@ -344,7 +344,7 @@
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Full Name <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" onkeypress="return isAlphabets(event)" name="employeeName" required autocomplete="off">
+										<input type="text" class="form-control" onkeypress="return isAlphabets(event)" oninput="capitalizeWords(this)" name="employeeName" required autocomplete="off">
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -408,13 +408,7 @@
 										<input type="text" class="form-control" id="jobTypeSearch" name="employeeType" oninput="capitalizeWords(this)" placeholder="eg : Full Time" autocomplete="off" />
 										<ul class="list-group addFields" id="jobTypeResult"></ul>
 									</div>
-								</div>
-								<div class="col-md-12">
-									<div class="mb-3">
-										<label class="form-label">About</label>
-										<textarea class="form-control" rows="3" name="about"></textarea>
-									</div>
-								</div>
+								</div> 
 							</div>
 						</div>
 						<div class="modal-footer">
