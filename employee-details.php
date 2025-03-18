@@ -6,7 +6,7 @@ if (isset($_GET['empId'])) {
     $employeeId = base64_decode($encryptedId);
 }
 $bankInfo = getBankInfo($employeeId);
-$employeeInfo = getEmployeeInfo($employeeId);
+$employeeInfo = getEmployeeInfo($employeeId); 
 $experienceInfo = getExperienceInfo($employeeId);
 $educationInfo = getEducationInfo($employeeId);
 ?>
@@ -691,7 +691,7 @@ $educationInfo = getEducationInfo($employeeId);
 									<div class="mb-3">
 										<label class="form-label">Joining Date <span class="text-danger"> *</span></label>
 										<div class="input-icon-end position-relative">
-											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="doj" id="doj" value="<?php echo $employeeInfo ? $employeeInfo['doj'] : ''; ?>" required>
+											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="doj" id="doj" value="<?php echo $employeeInfo ? $employeeInfo['doj'] : ''; ?>" required> 
 											<span class="input-icon-addon">
 												<i class="ti ti-calendar text-gray-7"></i>
 											</span>

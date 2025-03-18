@@ -344,26 +344,26 @@
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Full Name <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" onkeypress="return isAlphabets(event)" name="employeeName" required>
+										<input type="text" class="form-control" onkeypress="return isAlphabets(event)" name="employeeName" required autocomplete="off">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Email <span class="text-danger"> *</span></label>
-										<input type="email" class="form-control" onblur="return isEmail(this)" placeholder="@actetechnologies.com" name="email" required>
+										<input type="email" class="form-control" onblur="return isEmail(this)" placeholder="@actetechnologies.com" name="email" required autocomplete="off">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Phone Number <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" onkeypress="return isNumber(event)" name="phone" required>
+										<input type="text" class="form-control" onkeypress="return isNumber(event)" name="phone" required autocomplete="off">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Joining Date <span class="text-danger"> *</span></label>
 										<div class="input-icon-end position-relative">
-											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="doj" id="doj" required>
+											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="doj" id="doj" required autocomplete="off">
 											<span class="input-icon-addon">
 												<i class="ti ti-calendar text-gray-7"></i>
 											</span>
@@ -379,13 +379,13 @@
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Password <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="password" required>
+										<input type="text" class="form-control" name="password" required autocomplete="off">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Confirm Password <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="confirmPassword" required>
+										<input type="text" class="form-control" name="confirmPassword" required autocomplete="off">
 									</div>
 								</div>
 							</div>

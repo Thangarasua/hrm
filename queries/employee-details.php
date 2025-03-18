@@ -36,12 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $companyName = $_POST['companyName'];
         $previousDesignation = $_POST['previousDesignation'];
         $startDate = $_POST['startDate'];
-        $startDate = date('Y-m-d', strtotime(str_replace('-', '/', $startDate)));
+        $startDate = date("Y-m-d", strtotime($startDate));
         $endDate = $_POST['endDate'];
-        $endDate = date('Y-m-d', strtotime(str_replace('-', '/', $endDate)));
+        $endDate = date("Y-m-d", strtotime($endDate));
         $workExperience = $_POST['workExperience'];
         $skils = $_POST['skils'];
-      
+
         $experienceInfoQuery = "INSERT INTO experience_info (employee_id, previous_employer, designation, start_date, end_date, work_experience, skills) VALUES ('$employeeId', '$companyName', '$previousDesignation', '$startDate', '$endDate', '$workExperience', '$skils')";
         if (mysqli_query($conn, $experienceInfoQuery)) {
             echo json_encode(array('status' => 'success', 'message' => 'Experience Information Updated Successfully.'));
@@ -55,10 +55,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $institutionName = $_POST['institutionName'];
         $course = $_POST['course'];
         $educationStartDate = $_POST['educationStartDate'];
-        $educationStartDate = date('Y-m-d', strtotime(str_replace('-', '/', $educationStartDate)));
+        $educationStartDate = date("Y-m-d", strtotime($educationStartDate));
         $educationeEndDate = $_POST['educationeEndDate'];
-        $educationeEndDate = date('Y-m-d', strtotime(str_replace('-', '/', $educationeEndDate)));
-      
+        $educationeEndDate = date("Y-m-d", strtotime($educationeEndDate));
         $educationInfoQuery = "INSERT INTO education_info (employee_id, institution_name, course, start_date, end_date) VALUES ('$employeeId', '$institutionName', '$course', '$educationStartDate', '$educationeEndDate')";
         if (mysqli_query($conn, $educationInfoQuery)) {
             echo json_encode(array('status' => 'success', 'message' => 'Education Information Updated Successfully.'));
@@ -73,12 +72,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $doj = $_POST['doj'];
-        $doj = date("Y-m-d", strtotime($doj)); 
+        $doj = date("Y-m-d", strtotime($doj));
         $password = $_POST['password'];
         $confirmPassword = $_POST['confirmPassword'];
-        if($password == $confirmPassword){
+        if ($password == $confirmPassword) {
             $encryptedPassword = openssl_encrypt($password, $method, $key, 0, $iv);
-        }else{
+        } else {
             echo json_encode(array('status' => 'failure', 'message' => 'Mismatch confirm password.'));
             exit;
         }
@@ -90,12 +89,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $supervisor = isset($_POST['supervisors']) ? $_POST['supervisors'] : '';
         $workLocation = $_POST['workLocation'];
         $employeeType = $_POST['employeeType'];
-        $about = $_POST['about']; 
+        $about = $_POST['about'];
 
         $updateQuery = "UPDATE employees SET full_name = '$fullName', email = '$email', phone = '$phone', doj = '$doj', `password` = '$encryptedPassword', designation_id = $designation, department_id = $department, role_id = $role, manager_id = '$manager', supervisor_id = '$supervisor', work_location = '$workLocation', employee_type = '$employeeType', about = '$about' WHERE employee_id = '$employeeId'";
-        
-        // $data = array('flag'=>'welcomeMail','employeeId'=>$employeeId,'fullName'=>$fullName,'email'=>$email,'password'=>$password);
-        
+
         if (mysqli_query($conn, $updateQuery)) {
             echo json_encode(array('status' => 'success', 'message' => 'Employee data updated successfully.'));
         } else {
