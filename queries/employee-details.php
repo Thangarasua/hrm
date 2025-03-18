@@ -36,9 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $companyName = $_POST['companyName'];
         $previousDesignation = $_POST['previousDesignation'];
         $startDate = $_POST['startDate'];
-        $startDate = date('Y-m-d', strtotime(str_replace('-', '/', $startDate)));
+        $startDate = DateTime::createFromFormat('d-m-Y', $startDate)->format('ymd');
         $endDate = $_POST['endDate'];
-        $endDate = date('Y-m-d', strtotime(str_replace('-', '/', $endDate)));
+        $endDate = DateTime::createFromFormat('d-m-Y', $endDate)->format('ymd');
         $workExperience = $_POST['workExperience'];
         $skils = $_POST['skils'];
       
@@ -55,9 +55,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $institutionName = $_POST['institutionName'];
         $course = $_POST['course'];
         $educationStartDate = $_POST['educationStartDate'];
-        $educationStartDate = date('Y-m-d', strtotime(str_replace('-', '/', $educationStartDate)));
+        $educationStartDate = DateTime::createFromFormat('d-m-Y', $educationStartDate)->format('ymd');
         $educationeEndDate = $_POST['educationeEndDate'];
-        $educationeEndDate = date('Y-m-d', strtotime(str_replace('-', '/', $educationeEndDate)));
+        $educationeEndDate = DateTime::createFromFormat('d-m-Y', $educationeEndDate)->format('ymd');
       
         $educationInfoQuery = "INSERT INTO education_info (employee_id, institution_name, course, start_date, end_date) VALUES ('$employeeId', '$institutionName', '$course', '$educationStartDate', '$educationeEndDate')";
         if (mysqli_query($conn, $educationInfoQuery)) {
@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $doj = $_POST['doj'];
-        $doj = date('Y-m-d', strtotime(str_replace('-', '/', $doj)));
+        $doj = DateTime::createFromFormat('d-m-Y', $doj)->format('ymd');
 
         $password = $_POST['password'];
         $confirmPassword = $_POST['confirmPassword'];
