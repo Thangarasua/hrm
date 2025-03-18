@@ -2,7 +2,7 @@
 
 header('Content-Type: application/json');
 $currentDatetime = date('Y-m-d H:i:s');
-$hrm_userid = $_SESSION['hrm_userid'];
+// $hrm_userid = $_SESSION['hrm_userid'];
 
 $key = "ACTEHRM2025";
 $method = "AES-256-CBC";
