@@ -149,7 +149,7 @@
 			<div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
 				<h5>Employees List</h5>
 				<div class="d-flex my-xl-auto right-content align-items-center flex-wrap row-gap-3">
-				<div class="me-3">
+					<div class="me-3">
 						<div class="form-group">
 							<input type="text" id="myInputTextField" class="form-control" placeholder="Search anything..." title="Search any thing in the table you want">
 						</div>
@@ -191,17 +191,12 @@
 						</ul>
 					</div>
 					<div class="dropdown me-3">
-						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
-							Select Status
-						</a>
-						<ul class="dropdown-menu  dropdown-menu-end p-3">
-							<li>
-								<a href="javascript:void(0);" class="dropdown-item rounded-1">Active</a>
-							</li>
-							<li>
-								<a href="javascript:void(0);" class="dropdown-item rounded-1">Inactive</a>
-							</li>
-						</ul>
+						<select class="form-control" id="employeeStatus">
+							<option value="">Select</option>
+							<option value="1" selected>Active</option>
+							<option value="2">Inactive</option>
+							<option value="3">All</option>
+						</select>
 					</div>
 					<div class="dropdown">
 						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
@@ -344,26 +339,26 @@
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Full Name <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" onkeypress="return isAlphabets(event)" name="employeeName" required>
+										<input type="text" class="form-control" onkeypress="return isAlphabets(event)" oninput="capitalizeWords(this)" name="employeeName" required autocomplete="off">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Email <span class="text-danger"> *</span></label>
-										<input type="email" class="form-control" onblur="return isEmail(this)" placeholder="@actetechnologies.com" name="email" required>
+										<input type="email" class="form-control" onblur="return isEmail(this)" placeholder="@actetechnologies.com" name="email" required autocomplete="off">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Phone Number <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" onkeypress="return isNumber(event)" name="phone" required>
+										<input type="text" class="form-control" onkeypress="return isNumber(event)" name="phone" required autocomplete="off">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Joining Date <span class="text-danger"> *</span></label>
 										<div class="input-icon-end position-relative">
-											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="doj" id="doj" required>
+											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="doj" id="doj" required autocomplete="off">
 											<span class="input-icon-addon">
 												<i class="ti ti-calendar text-gray-7"></i>
 											</span>
@@ -379,13 +374,13 @@
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Password <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="password" required>
+										<input type="text" class="form-control" name="password" required autocomplete="off">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Confirm Password <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="confirmPassword" required>
+										<input type="text" class="form-control" name="confirmPassword" required autocomplete="off">
 									</div>
 								</div>
 							</div>
@@ -407,12 +402,6 @@
 										<label class="form-label">Employee Type <span class="text-danger"> *</span></label>
 										<input type="text" class="form-control" id="jobTypeSearch" name="employeeType" oninput="capitalizeWords(this)" placeholder="eg : Full Time" autocomplete="off" />
 										<ul class="list-group addFields" id="jobTypeResult"></ul>
-									</div>
-								</div>
-								<div class="col-md-12">
-									<div class="mb-3">
-										<label class="form-label">About</label>
-										<textarea class="form-control" rows="3" name="about"></textarea>
 									</div>
 								</div>
 							</div>

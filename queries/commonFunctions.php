@@ -1,6 +1,6 @@
 <?php 
-// include(__DIR__ . "/../includes/config.php");
-$hrm_userid = $_SESSION['hrm_userid'];
+include(__DIR__ . "/../includes/config.php");
+// $hrm_userid = $_SESSION['hrm_userid'];
 
 function getDepartments($currentDepartmentId = null) {
     global $conn;
@@ -117,7 +117,7 @@ function getEmployeeInfo($employeeId) {
             'fullName' => $row['full_name'],
             'email' => $row['email'],
             'phone' => $row['phone'],
-            'doj' => $row['doj'],
+            'doj' => date("d-m-Y", strtotime($row['doj'])),
             'designation' => $row['designation_id'],
             'designationName' => $row['designation_title'],
             'department' => $row['department_id'],

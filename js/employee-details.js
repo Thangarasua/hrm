@@ -171,7 +171,7 @@ $(document).ready(function () {
         var departmentId = $("#department").val();
         if (departmentId) {
             $.ajax({
-            url: "queries/employee.php",
+            url: "queries/employees.php",
             type: "GET",
             data: {
                 departmentId: departmentId,
