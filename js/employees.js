@@ -82,10 +82,10 @@ $(document).ready(function () {
   $("#role").change(function () {
     var roleId = $(this).val();
     if (roleId) {
-      if (roleId === "5") {
+      if (roleId === "1") {
         $("#manager-container").show();
         $("#supervisors-container").show();
-      } else if (roleId === "4") {
+      } else if (roleId === "2") {
         $("#manager-container").show();
         $("#supervisors-container").hide();
       } else {
