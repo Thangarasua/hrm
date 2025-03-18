@@ -21,15 +21,14 @@ $(document).ready(function () {
     });
   });
 
-  fetchEmployee();
+  let fromDate = "";
+  let toDate = "";
+  let dateRange = "";
+  let active = $("#employeeStatus").val();
+  let flag = "getAll";
+  fetchEmployee(fromDate,toDate,dateRange,active,flag);
 
-  function fetchEmployee(
-    fromDate = "",
-    toDate = "",
-    dateRange = "",
-    companyType = "",
-    flag = "getAll"
-  ) {
+  function fetchEmployee(fromDate,toDate,dateRange,active,flag) {
     $.ajax({
       url: "queries/employees.php",
       type: "GET",
@@ -38,7 +37,7 @@ $(document).ready(function () {
         fromDate: fromDate,
         toDate: toDate,
         dateRange: dateRange,
-        companyType: companyType,
+        active: active,
         flag: flag,
       },
       success: function (data) {
@@ -79,6 +78,20 @@ $(document).ready(function () {
     });
   }
 
+  $("#employeeStatus").change(function () {
+    var val = $(this).val();
+    if (val) {
+      if (val === "1") {
+        fetchEmployee(fromDate = "",toDate = "",dateRange = "",active = "1",flag = "getAll");
+      } else if (val === "2") {
+        fetchEmployee(fromDate = "",toDate = "",dateRange = "",active = "2",flag = "getAll");
+      } else if (val === "3") {
+        fetchEmployee(fromDate = "",toDate = "",dateRange = "",active = "3",flag = "getAll");
+      } else { 
+      }
+    } else { 
+    }
+  });
   $("#role").change(function () {
     var roleId = $(this).val();
     if (roleId) {
@@ -198,3 +211,12 @@ $(document).ready(function () {
   }
   
 });
+ 
+$(document).ready(function () {
+  $(".date-range").on("change", function () {
+      let selectedDateRange = $(this).val().trim(); // Get selected date range
+      console.log("Selected Date Range:", selectedDateRange); // Display in console
+  });
+});
+
+

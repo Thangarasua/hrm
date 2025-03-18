@@ -149,7 +149,7 @@
 			<div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
 				<h5>Employees List</h5>
 				<div class="d-flex my-xl-auto right-content align-items-center flex-wrap row-gap-3">
-				<div class="me-3">
+					<div class="me-3">
 						<div class="form-group">
 							<input type="text" id="myInputTextField" class="form-control" placeholder="Search anything..." title="Search any thing in the table you want">
 						</div>
@@ -191,17 +191,12 @@
 						</ul>
 					</div>
 					<div class="dropdown me-3">
-						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
-							Select Status
-						</a>
-						<ul class="dropdown-menu  dropdown-menu-end p-3">
-							<li>
-								<a href="javascript:void(0);" class="dropdown-item rounded-1">Active</a>
-							</li>
-							<li>
-								<a href="javascript:void(0);" class="dropdown-item rounded-1">Inactive</a>
-							</li>
-						</ul>
+						<select class="form-control" id="employeeStatus">
+							<option value="">Select</option>
+							<option value="1" selected>Active</option>
+							<option value="2">Inactive</option>
+							<option value="3">All</option>
+						</select>
 					</div>
 					<div class="dropdown">
 						<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
@@ -408,7 +403,7 @@
 										<input type="text" class="form-control" id="jobTypeSearch" name="employeeType" oninput="capitalizeWords(this)" placeholder="eg : Full Time" autocomplete="off" />
 										<ul class="list-group addFields" id="jobTypeResult"></ul>
 									</div>
-								</div> 
+								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
