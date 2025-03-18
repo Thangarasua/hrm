@@ -58,7 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $educationStartDate = date("Y-m-d", strtotime($educationStartDate)); 
         $educationeEndDate = $_POST['educationeEndDate'];
         $educationeEndDate = date("Y-m-d", strtotime($educationeEndDate)); 
-      
         $educationInfoQuery = "INSERT INTO education_info (employee_id, institution_name, course, start_date, end_date) VALUES ('$employeeId', '$institutionName', '$course', '$educationStartDate', '$educationeEndDate')";
         if (mysqli_query($conn, $educationInfoQuery)) {
             echo json_encode(array('status' => 'success', 'message' => 'Education Information Updated Successfully.'));
@@ -74,7 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $phone = $_POST['phone'];
         $doj = $_POST['doj'];
         $doj = date("Y-m-d", strtotime($doj)); 
-
         $password = $_POST['password'];
         $confirmPassword = $_POST['confirmPassword'];
         if($password == $confirmPassword){
