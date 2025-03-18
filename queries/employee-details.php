@@ -36,9 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $companyName = $_POST['companyName'];
         $previousDesignation = $_POST['previousDesignation'];
         $startDate = $_POST['startDate'];
-        $startDate = date('Y-m-d', strtotime(str_replace('-', '/', $startDate)));
+        $startDate = date("Y-m-d", strtotime($startDate)); 
         $endDate = $_POST['endDate'];
-        $endDate = date('Y-m-d', strtotime(str_replace('-', '/', $endDate)));
+        $endDate = date("Y-m-d", strtotime($endDate)); 
         $workExperience = $_POST['workExperience'];
         $skils = $_POST['skils'];
       
@@ -55,10 +55,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $institutionName = $_POST['institutionName'];
         $course = $_POST['course'];
         $educationStartDate = $_POST['educationStartDate'];
-        $educationStartDate = date('Y-m-d', strtotime(str_replace('-', '/', $educationStartDate)));
+        $educationStartDate = date("Y-m-d", strtotime($educationStartDate)); 
         $educationeEndDate = $_POST['educationeEndDate'];
-        $educationeEndDate = date('Y-m-d', strtotime(str_replace('-', '/', $educationeEndDate)));
-      
+        $educationeEndDate = date("Y-m-d", strtotime($educationeEndDate)); 
         $educationInfoQuery = "INSERT INTO education_info (employee_id, institution_name, course, start_date, end_date) VALUES ('$employeeId', '$institutionName', '$course', '$educationStartDate', '$educationeEndDate')";
         if (mysqli_query($conn, $educationInfoQuery)) {
             echo json_encode(array('status' => 'success', 'message' => 'Education Information Updated Successfully.'));
