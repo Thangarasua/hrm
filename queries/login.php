@@ -14,22 +14,30 @@ $inputPassword = openssl_encrypt($password, $method, $key, 0, $iv);
 $query = "SELECT * FROM `employees` WHERE `employee_id` = '$username'";
 $result = mysqli_query($conn, $query);
 if (mysqli_num_rows($result) > 0) {
-    $row = mysqli_fetch_array($result); 
-    $userName = $row['full_name']; 
-    $userId = $row['employee_id']; 
+    $row = mysqli_fetch_array($result);
+    $userName = $row['full_name'];
+    $userId = $row['employee_id'];
     $dbPassword = $row['password'];
+    $designationId = $row['designation_id'];
+    $departmentId = $row['department_id'];
+    $roleId = $row['role_id'];
 
     if ($dbPassword == $inputPassword) {
 
         $_SESSION["hrm_loggedin"] = true;
-        $_SESSION["hrm_username"] = $userName; 
-        $_SESSION["hrm_userid"] = $userId; 
+        $_SESSION["hrm_username"] = $userName;
+        $_SESSION["hrm_userid"] = $userId;
+        $_SESSION["hrm_designationId"] = $designationId;
+        $_SESSION["hrm_departmentId"] = $departmentId;
+        $_SESSION["hrm_roleId"] = $roleId;
 
         echo json_encode(array('status' => 'success', 'message' => 'Login'));
         exit;
+ 
     }else{
-        echo json_encode(array('status' => 'failure', 'message' => 'mismatch password1'));
+        echo json_encode(array('status' => 'failure', 'message' => 'mismatch password'));
         exit; 
+ 
     }
 } else {
     echo json_encode(array('status' => 'failure', 'message' => 'username not found'));
