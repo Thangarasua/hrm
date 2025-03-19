@@ -1,6 +1,6 @@
 <?php require_once("./includes/header.php"); ?>
 <?php require_once("./includes/sidebar.php"); ?>
-<?php include("./queries/commonFunctions.php"); 
+<?php 
 if (isset($_GET['empId'])) {
 	$encryptedId = $_GET['empId'];
     $employeeId = base64_decode($encryptedId);
@@ -9,6 +9,8 @@ $bankInfo = getBankInfo($employeeId);
 $employeeInfo = getEmployeeInfo($employeeId); 
 $experienceInfo = getExperienceInfo($employeeId);
 $educationInfo = getEducationInfo($employeeId);
+
+$employeeRoleId = $employeeInfo ? $employeeInfo['role'] : '';
 ?>
 <!-- Page Wrapper -->
 <div class="page-wrapper">
@@ -93,7 +95,13 @@ $educationInfo = getEducationInfo($employeeId);
 								<div class="row gx-2 mt-3">
 									<div class="col-6">
 										<div>
-											<a href="#" class="btn btn-dark w-100" data-bs-toggle="modal" data-bs-target="#edit_employee"><i class="ti ti-edit me-1"></i>Edit Info</a>
+											<?php if ($employeeRoleId == 4 || $employeeRoleId == 5) { ?>
+												<a href="#" class="btn btn-dark w-100" data-bs-toggle="modal" data-bs-target="#edit_employee"><i class="ti ti-edit me-1"></i>Edit Info </a>
+											<?php } else {?>
+												<a href="#" class="btn btn-dark w-100" data-bs-toggle="tooltip" title="Contact Admin">
+													<i class="ti ti-edit me-1"></i>Edit Info
+												</a>
+											<?php }?>
 										</div>
 									</div>
 									<div class="col-6">

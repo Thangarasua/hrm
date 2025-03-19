@@ -1,6 +1,5 @@
 <?php require_once("./includes/header.php"); ?>
 <?php require_once("./includes/sidebar.php"); ?>
-<?php include("./queries/commonFunctions.php"); ?>
 <!-- Page Wrapper -->
 <div class="page-wrapper">
 	<div class="content">
