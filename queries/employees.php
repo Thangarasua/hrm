@@ -30,6 +30,21 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['flag'])) {
         exit;
     }
 
+    if ($flag === "getCardValues") {
+        $date1 = date('Y-m-d', strtotime('-3 months'));
+        $date2 = date('Y-m-d');
+        $query = "SELECT 
+        COUNT(id) AS total,
+        SUM(CASE WHEN employees.status = 1 THEN 1 ELSE 0 END) AS active,
+        SUM(CASE WHEN employees.status = 2 THEN 1 ELSE 0 END) AS inactive,
+        SUM(CASE WHEN employees.status = 1 AND doj BETWEEN '$date1' AND '$date2' THEN 1 ELSE 0 END) AS newly_active FROM `employees`";
+ 
+        $result = mysqli_query($conn, $query);
+        $row = $result->fetch_assoc();
+        echo json_encode(array('status' => 'success', 'data' => $row ));
+        exit;
+    }
+
     if ($flag === "getRole") {
         $departmentId = $_GET['departmentId'];
         $query = "SELECT * FROM roles WHERE department_id = $departmentId AND status = 1 ORDER BY role_name ASC";
@@ -40,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['flag'])) {
         }
         echo json_encode($options);
         exit;
-    }
+    } 
     if ($flag === "getDesignation") {
         $departmentId = $_GET['departmentId'];
         $roleId = $_GET['roleId'];
