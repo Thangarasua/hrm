@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['flag'])) {
         }
         echo json_encode($options);
         exit;
-    }
+    } 
     if ($flag === "getDesignation") {
         $departmentId = $_GET['departmentId'];
         $roleId = $_GET['roleId'];

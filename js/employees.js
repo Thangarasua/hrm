@@ -251,7 +251,7 @@ $(document).ready(function () {
         }
       },
     });
-  }
+  } 
   getCardDetails();
 });
 
