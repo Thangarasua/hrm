@@ -5,6 +5,13 @@ header('Content-Type: application/json');
 $hrm_userid = $_SESSION['hrm_userid'];
 $hrm_username = $_SESSION['hrm_username'];
 
+$query = "SELECT * FROM `employees` WHERE `employee_id` = '$hrm_userid'";
+$result = mysqli_query($conn, $query);
+$row = mysqli_fetch_assoc($result);
+$designation_id = $row['designation_id'];
+$department_id = $row['department_id'];
+$role_id = $row['role_id'];
+
 $month = date('m');
 $year = date('y');
 $date = date('d');
@@ -22,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         if ($rowCount > 0) {
             $data = mysqli_fetch_assoc($result);
             $lastInteger = substr($data['ticket_request_id'], 7, 3);
-            if($lastInteger > 999){
+            if ($lastInteger > 999) {
                 $lastInteger = 0;
             }
             $newInteger = sprintf("%03d", $lastInteger + 1);
@@ -31,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             $ticketRequestId = 'RTR' . $month . $year . '001';
         }
 
-        $jobTitle = $_POST['jobTitle']; 
+        $jobTitle = $_POST['jobTitle'];
         $jobDescription = $conn->real_escape_string(trim(preg_replace('/\s+/', ' ', $_POST['jobDescription'])));
         $jobType = $_POST['jobType'];
         $jobLevel = $_POST['jobLevel'];
@@ -52,7 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         exit;
     } elseif ($flag === 'getAll') {
 
-        // $sql = "SELECT * FROM `recruitment`";
         $sql = "SELECT r.*, SUM(CASE WHEN c.responce_status = 1 THEN 1 ELSE 0 END) AS candidate_count FROM recruitment AS r LEFT JOIN candidates AS c ON r.ticket_request_id = c.ticket_request_id GROUP BY r.ticket_request_id";
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
@@ -125,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         if ($rowCount > 0) {
             $data = mysqli_fetch_assoc($result);
             $lastInteger = (int) substr($data['candidate_register_id'], 7, 3);
-            if($lastInteger > 999){
+            if ($lastInteger > 999) {
                 $lastInteger = 0;
             }
             $newInteger = sprintf("%03d", $lastInteger + 1);

@@ -72,8 +72,8 @@ $(document).ready(function () {
                                   <a href="candidates?id=${
                                     row.encoded_id
                                   }"><span class="d-block mt-1">${
-              row.candidate_count
-            } Applicants</span></a>
+                                     row.candidate_count
+                                   } Applicants</span></a>
                                 </div>
                               </div>
                             </td>
@@ -91,8 +91,8 @@ $(document).ready(function () {
                                 <a href="#" data-id="${
                                   row.id
                                 }" data-formfilling="${
-              row.candidate_count
-            }" class="delete">
+                                   row.candidate_count
+                                 }" class="delete">
                                   <i class="fa-solid fa-trash-can"></i>
                                 </a>
                                 <a href="#" data-id="${row.id}" class="send">
