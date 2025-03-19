@@ -102,7 +102,7 @@ function getBankInfo($employeeId) {
 function getEmployeeInfo($employeeId) {
     global $conn;
     // $query = "SELECT * FROM `employees` WHERE `employee_id` = '$employeeId'";
-    $query = "SELECT * FROM `employees` AS e INNER JOIN roles AS r ON r.role_id = e.role_id INNER JOIN departments AS dp ON dp.department_id=e.department_id INNER JOIN designations AS dg ON dg.designation_id=e.designation_id WHERE `employee_id` = '$employeeId'";
+    $query = "SELECT *,e.status AS empStatus FROM `employees` AS e INNER JOIN roles AS r ON r.role_id = e.role_id INNER JOIN departments AS dp ON dp.department_id=e.department_id INNER JOIN designations AS dg ON dg.designation_id=e.designation_id WHERE `employee_id` = '$employeeId'";
     $result = mysqli_query($conn, $query);
     $key = "ACTEHRM2025";
     $method = "AES-256-CBC";
@@ -126,6 +126,7 @@ function getEmployeeInfo($employeeId) {
             'workLocation' => $row['work_location'],
             'employeeType' => $row['employee_type'],
             'about' => $row['about'],
+            'status' => $row['status'],
             'password' => $decryptPassword,
 
         ];

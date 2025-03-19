@@ -70,6 +70,11 @@ $(document).ready(function () {
                                 }" class="view" id="employeeDetails">
                                   <i class="fa-solid fa-folder-open"></i>
                                 </a>
+                                <a href="javascript:void(0)" data-id="${
+                                  row.employee_id
+                                }" class="edit">
+                                  <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
                               </div>
                             </td>
                           </tr>`;
@@ -114,6 +119,7 @@ $(document).ready(function () {
     } else {
     }
   });
+
   $("#role").change(function () {
     var roleId = $(this).val();
     if (roleId) {
@@ -211,6 +217,48 @@ $(document).ready(function () {
     var employeeId = $(this).data("id");
     var encryptedId = encryptEmployeeId(employeeId);
     window.location.href = `employee-details.php?empId=${encryptedId}`;
+  });
+
+  $(document).on("click", "#employeeStatusUpdate", function (e) {
+    e.preventDefault();
+    var employeeId = $(this).data("id"); 
+    window.location.href = `employee-details.php?empId=${encryptedId}`;
+  });
+
+  $(document).on("click", ".edit", function (e) {
+    e.preventDefault();
+    $("#editModal").modal("show");
+    var id = $(this).data("id");
+    $('#employeeId').val(id); 
+  });
+
+  $(document).on("submit", "#updateStatus", function (e) {
+    e.preventDefault();
+   
+    let formData = new FormData(this);
+    formData.append("flag", "statusUpdate");
+    $.ajax({
+      type: "POST",
+      url: "queries/employees.php",
+      data: formData,
+      dataType: "json",
+      contentType: false,
+      cache: false,
+      processData: false,
+      success: function (response) {
+        if (response.status == "success") {
+          $("#updateStatus")[0].reset();
+          $("#editModal").modal("hide");
+          $("#success_modal").modal("show");
+          $("#success_modal_content").html(
+            "Employee deactivate successfully"
+          );
+          fetchEmployee(fromDate, toDate, dateRange, active, flag);
+        } else {
+          toastr.error(response.message, "Error");
+        }
+      },
+    });
   });
 
   $(document).on("dp.change", "#doj", function (e) {

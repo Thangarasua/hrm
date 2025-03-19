@@ -10,7 +10,9 @@ $employeeInfo = getEmployeeInfo($employeeId);
 $experienceInfo = getExperienceInfo($employeeId);
 $educationInfo = getEducationInfo($employeeId);
 
-$employeeRoleId = $employeeInfo ? $employeeInfo['role'] : '';
+// $employeeRoleId = $employeeInfo ? $employeeInfo['role'] : '';  
+
+$employeeRoleId = $_SESSION['hrm_roleId'];
 ?>
 <!-- Page Wrapper -->
 <div class="page-wrapper">
@@ -19,7 +21,7 @@ $employeeRoleId = $employeeInfo ? $employeeInfo['role'] : '';
 		<!-- Breadcrumb -->
 		<div class="d-md-flex d-block align-items-center justify-content-between page-breadcrumb mb-3">
 			<div class="my-auto mb-2">
-				<h6 class="fw-medium d-inline-flex align-items-center mb-3 mb-sm-0"><a href="https://smarthr.dreamstechnologies.com/html/template/employees.html">
+				<h6 class="fw-medium d-inline-flex align-items-center mb-3 mb-sm-0"><a href="#">
 						<i class="ti ti-arrow-left me-2"></i>Employee Details - <?php echo $employeeId ? $employeeId : ''; ?></a>
 				</h6>
 			</div>
@@ -41,7 +43,7 @@ $employeeRoleId = $employeeInfo ? $employeeInfo['role'] : '';
 				<div class="card card-bg-1">
 					<div class="card-body p-0">
 						<span class="avatar avatar-xl avatar-rounded border border-2 border-white m-auto d-flex mb-2">
-							<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-13.jpg" class="w-auto h-auto" alt="Img">
+							<img src="./assets/img/users/user-13.jpg" class="w-auto h-auto" alt="Img">
 						</span>
 						<div class="text-center px-3 pb-3 border-bottom">
 							<div class="mb-3">
@@ -87,7 +89,7 @@ $employeeRoleId = $employeeInfo ? $employeeInfo['role'] : '';
 									</span>
 									<div class="d-flex align-items-center">
 										<span class="avatar avatar-sm avatar-rounded me-2">
-											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-12.jpg" alt="Img">
+											<img src="./assets/img/profiles/avatar-12.jpg" alt="Img"> 
 										</span>
 										<p class="text-gray-9 mb-0"><?php echo $employeeInfo ? $employeeInfo['workLocation'] : ''; ?></p>
 									</div>
@@ -95,7 +97,7 @@ $employeeRoleId = $employeeInfo ? $employeeInfo['role'] : '';
 								<div class="row gx-2 mt-3">
 									<div class="col-6">
 										<div>
-											<?php if ($employeeRoleId == 4 || $employeeRoleId == 5) { ?>
+											<?php if ($employeeRoleId == 4 || $employeeRoleId == 5 || $employeeRoleId == 3) { ?>
 												<a href="#" class="btn btn-dark w-100" data-bs-toggle="modal" data-bs-target="#edit_employee"><i class="ti ti-edit me-1"></i>Edit Info </a>
 											<?php } else {?>
 												<a href="#" class="btn btn-dark w-100" data-bs-toggle="tooltip" title="Contact Admin">
@@ -106,7 +108,7 @@ $employeeRoleId = $employeeInfo ? $employeeInfo['role'] : '';
 									</div>
 									<div class="col-6">
 										<div>
-											<a href="https://smarthr.dreamstechnologies.com/html/template/chat.html" class="btn btn-primary w-100"><i class="ti ti-message-heart me-1"></i>Message</a>
+											<a href="#" class="btn btn-primary w-100"><i class="ti ti-message-heart me-1"></i>Message</a>
 										</div>
 									</div>
 								</div>
@@ -447,7 +449,7 @@ $employeeRoleId = $employeeInfo ? $employeeInfo['role'] : '';
 																		<div>
 																			<span class="mb-1 d-block">Project Lead</span>
 																			<a href="#" class="fw-normal d-flex align-items-center">
-																				<img class="avatar avatar-sm rounded-circle me-2" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-01.jpg" alt="Img">
+																				<img class="avatar avatar-sm rounded-circle me-2" src="./assets/img/profiles/avatar-01.jpg" alt="Img">
 																				Leona
 																			</a>
 																		</div>
@@ -482,7 +484,7 @@ $employeeRoleId = $employeeInfo ? $employeeInfo['role'] : '';
 																		<div>
 																			<span class="mb-1 d-block">Project Lead</span>
 																			<a href="#" class="fw-normal d-flex align-items-center">
-																				<img class="avatar avatar-sm rounded-circle me-2" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-01.jpg" alt="Img">
+																				<img class="avatar avatar-sm rounded-circle me-2" src="./assets/img/profiles/avatar-01.jpg" alt="Img">
 																				Leona
 																			</a>
 																		</div>
@@ -505,7 +507,7 @@ $employeeRoleId = $employeeInfo ? $employeeInfo['role'] : '';
 																				<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/products/product-05.jpg" class="img-fluid rounded-circle" alt="img">
 																			</a>
 																			<div>
-																				<h6 class="mb-1"><a href="https://smarthr.dreamstechnologies.com/html/template/project-details.html">Dell Laptop - #343556656</a></h6>
+																				<h6 class="mb-1"><a href="#">Dell Laptop - #343556656</a></h6>
 																				<div class="d-flex align-items-center">
 																					<p><span class="text-primary">AST - 001<i class="ti ti-point-filled text-primary mx-1"></i></span>Assigned on 22 Nov, 2022 10:32AM </p>
 																				</div>
@@ -516,7 +518,7 @@ $employeeRoleId = $employeeInfo ? $employeeInfo['role'] : '';
 																		<div>
 																			<span class="mb-1 d-block">Assigned by</span>
 																			<a href="#" class="fw-normal d-flex align-items-center">
-																				<img class="avatar avatar-sm rounded-circle me-2" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-01.jpg" alt="Img">
+																				<img class="avatar avatar-sm rounded-circle me-2" src="./assets/img/profiles/avatar-01.jpg" alt="Img">
 																				Andrew Symon
 																			</a>
 																		</div>
@@ -550,7 +552,7 @@ $employeeRoleId = $employeeInfo ? $employeeInfo['role'] : '';
 																				<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/products/product-06.jpg" class="img-fluid rounded-circle" alt="img">
 																			</a>
 																			<div>
-																				<h6 class="mb-1"><a href="https://smarthr.dreamstechnologies.com/html/template/project-details.html">Bluetooth Mouse - #478878</a></h6>
+																				<h6 class="mb-1"><a href="#">Bluetooth Mouse - #478878</a></h6>
 																				<div class="d-flex align-items-center">
 																					<p><span class="text-primary">AST - 001<i class="ti ti-point-filled text-primary mx-1"></i></span>Assigned on 22 Nov, 2022 10:32AM </p>
 																				</div>
@@ -561,7 +563,7 @@ $employeeRoleId = $employeeInfo ? $employeeInfo['role'] : '';
 																		<div>
 																			<span class="mb-1 d-block">Assigned by</span>
 																			<a href="#" class="fw-normal d-flex align-items-center">
-																				<img class="avatar avatar-sm rounded-circle me-2" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-01.jpg" alt="Img">
+																				<img class="avatar avatar-sm rounded-circle me-2" src="./assets/img/profiles/avatar-01.jpg" alt="Img">
 																				Andrew Symon
 																			</a>
 																		</div>
@@ -744,13 +746,22 @@ $employeeRoleId = $employeeInfo ? $employeeInfo['role'] : '';
 										<input type="text" class="form-control" id="jobTypeSearch" name="employeeType" oninput="capitalizeWords(this)" placeholder="eg : Full Time" autocomplete="off" value="<?php echo $employeeInfo ? $employeeInfo['employeeType'] : ''; ?>"/>
 										<ul class="list-group addFields" id="jobTypeResult"></ul>
 									</div>
-								</div>
-								<div class="col-md-12">
-									<div class="mb-3">
-										<label class="form-label">About</label>
-										<textarea class="form-control" rows="3" name="about"><?php echo $employeeInfo ? $employeeInfo['about'] : ''; ?></textarea>
+								</div> 
+								<div class="col-md-6">
+									<div class="mb-3 position-relative">
+									<label class="form-label">Active Status <span class="text-danger"> *</span></label>
+										<select name="employeeStatus" id="employeeStatus" class="select">
+												<option value="1" <?php echo ($employeeInfo['status'] === '1') ? 'selected': ''; ?>>Active</option>
+												<option value="2" <?php echo ($employeeInfo['status'] === '2') ? 'selected': ''; ?>>Deactive</option>
+										</select>
 									</div>
-								</div>
+								</div> 
+								<div class="col-md-6" id="relieving-container" style="display: none;">
+									<div class="mb-3 position-relative">
+									<label class="form-label">Relieving Date <span class="text-danger"> *</span></label>
+									<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="relievingDate" id="relievingDate">
+									</div>
+								</div> 
 							</div>
 						</div>
 						<div class="modal-footer">
@@ -775,7 +786,7 @@ $employeeRoleId = $employeeInfo ? $employeeInfo['role'] : '';
 					<i class="ti ti-x"></i>
 				</button>
 			</div>
-			<form action="https://smarthr.dreamstechnologies.com/html/template/employee-details.html">
+			<form action="#">
 				<div class="modal-body pb-0">
 					<div class="row">
 						<div class="col-md-6">
@@ -851,7 +862,7 @@ $employeeRoleId = $employeeInfo ? $employeeInfo['role'] : '';
 					<i class="ti ti-x"></i>
 				</button>
 			</div>
-			<form action="https://smarthr.dreamstechnologies.com/html/template/employee-details.html">
+			<form action="#">
 				<div class="modal-body pb-0">
 					<div class="border-bottom mb-3 ">
 						<div class="row">
@@ -979,7 +990,7 @@ $employeeRoleId = $employeeInfo ? $employeeInfo['role'] : '';
 					<i class="ti ti-x"></i>
 				</button>
 			</div>
-			<form action="https://smarthr.dreamstechnologies.com/html/template/employee-details.html">
+			<form action="#">
 				<div class="modal-body pb-0">
 					<div class="row">
 						<div class="col-md-12">
@@ -1345,7 +1356,7 @@ $employeeRoleId = $employeeInfo ? $employeeInfo['role'] : '';
 					<i class="ti ti-x"></i>
 				</button>
 			</div>
-			<form action="https://smarthr.dreamstechnologies.com/html/template/employee-details.html">
+			<form action="#">
 				<div class="modal-body pb-0">
 					<div class="row">
 						<div class="col-md-12">
@@ -1378,7 +1389,7 @@ $employeeRoleId = $employeeInfo ? $employeeInfo['role'] : '';
 				<p class="mb-3">You want to delete all the marked items, this cant be undone once you delete.</p>
 				<div class="d-flex justify-content-center">
 					<a href="javascript:void(0);" class="btn btn-light me-3" data-bs-dismiss="modal">Cancel</a>
-					<a href="https://smarthr.dreamstechnologies.com/html/template/employee-details.html" class="btn btn-danger">Yes, Delete</a>
+					<a href="#" class="btn btn-danger">Yes, Delete</a>
 				</div>
 			</div>
 		</div>

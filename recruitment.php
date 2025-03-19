@@ -180,7 +180,7 @@
 								<div class="col-md-12">
 									<div class="mb-3">
 										<label class="form-label">Job Title <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="jobTitle" id="jobTitle">
+										<input type="text" class="form-control" name="jobTitle" id="jobTitle" oninput="capitalizeWords(this)" autocomplete="off">
 									</div>
 								</div>
 								<div class="col-md-12">
@@ -192,28 +192,28 @@
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Job Type <span class="text-danger"> *</span></label>
-										<input type="text" name="jobType" id="jobTypeSearch" placeholder="Work Job Type " class="form-control" />
+										<input type="text" name="jobType" id="jobTypeSearch" placeholder="Work Job Type " class="form-control" oninput="capitalizeWords(this)" autocomplete="off"/>
 										<ul class="list-group addFields" id="jobTypeResult"></ul>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Job Level <span class="text-danger"> *</span></label>
-										<input type="text" name="jobLevel" id="jobLevelSearch" placeholder="Work Job Level " class="form-control" />
+										<input type="text" name="jobLevel" id="jobLevelSearch" placeholder="Work Job Level " class="form-control" oninput="capitalizeWords(this)" autocomplete="off"/>
 										<ul class="list-group addFields" id="jobLevelResult"></ul>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Experience <span class="text-danger"> *</span></label>
-										<input type="text" name="experience" id="experienceSearch" placeholder="Work Experience level" class="form-control" />
+										<input type="text" name="experience" id="experienceSearch" placeholder="Work Experience level" class="form-control" oninput="capitalizeWords(this)" autocomplete="off"/>
 										<ul class="list-group addFields" id="experienceResult"></ul>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Qualification <span class="text-danger"> *</span></label>
-										<input type="text" name="qualification" id="qualificationSearch" placeholder="Education qualification" class="form-control" />
+										<input type="text" name="qualification" id="qualificationSearch" placeholder="Education qualification" class="form-control" oninput="capitalizeWords(this)" autocomplete="off"/>
 										<ul class="list-group addFields" id="qualificationResult"></ul>
 									</div>
 								</div>
@@ -251,7 +251,7 @@
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Location</label>
-										<input type="text" class="form-control" name="location" id="location">
+										<input type="text" class="form-control" oninput="capitalizeWords(this)" name="location" id="location">
 									</div>
 								</div>
 							</div>

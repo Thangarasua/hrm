@@ -84,18 +84,23 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             echo json_encode(array('status' => 'failure', 'message' => 'Mismatch confirm password.'));
             exit;
         }
-
+        
         $designation = $_POST['designation'];
         $department = $_POST['department'];
         $role = $_POST['role'];
         $manager = isset($_POST['manager']) ? $_POST['manager'] : '';
         $supervisor = isset($_POST['supervisors']) ? $_POST['supervisors'] : '';
         $workLocation = $_POST['workLocation'];
-        $employeeType = $_POST['employeeType'];
-        $about = $_POST['about'];
+        $employeeType = $_POST['employeeType']; 
+        $employeeStatus = $_POST['employeeStatus'];
+        if($employeeStatus == 2){
+            $relievingDate = date("Y-m-d", strtotime($_POST['relievingDate'])); 
+            $status = ",status = '2', relieving_date = '$relievingDate'";
+        }else{
+            $status = ",status = '1'";
+        }
 
-        $updateQuery = "UPDATE employees SET full_name = '$fullName', email = '$email', phone = '$phone', doj = '$doj', `password` = '$encryptedPassword', designation_id = $designation, department_id = $department, role_id = $role, manager_id = '$manager', supervisor_id = '$supervisor', work_location = '$workLocation', employee_type = '$employeeType', about = '$about' WHERE employee_id = '$employeeId'";
-
+        $updateQuery = "UPDATE employees SET full_name = '$fullName', email = '$email', phone = '$phone', doj = '$doj', `password` = '$encryptedPassword', designation_id = $designation, department_id = $department, role_id = $role, manager_id = '$manager', supervisor_id = '$supervisor', work_location = '$workLocation', employee_type = '$employeeType' $status WHERE employee_id = '$employeeId'"; 
         if (mysqli_query($conn, $updateQuery)) {
             echo json_encode(array('status' => 'success', 'message' => 'Employee data updated successfully.'));
         } else {

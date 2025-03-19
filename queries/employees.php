@@ -107,5 +107,19 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         } else {
             echo json_encode(array('status' => 'failure', 'message' => 'Error adding employee data.'));
         }
+    }else if($flag === "statusUpdate"){
+        $employeeId = $_POST['employeeId'];
+        $relievingDate = $_POST['relievingDate'];
+        $relievingDate = date('Y-m-d', strtotime($relievingDate));
+
+        $query = "UPDATE `employees` SET `status`='2',`relieving_date`='$relievingDate' WHERE `employee_id`='$employeeId'";
+        $result = mysqli_query($conn, $query);
+        if ($result) {
+            echo json_encode(array('status' => 'success', 'message' => 'Employee status update successfully'));
+        } else {
+            echo json_encode(array('status' => 'failure', 'message' => 'Employee status update failure'));
+        }
+        exit;
+
     }
 }
