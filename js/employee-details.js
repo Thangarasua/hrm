@@ -209,4 +209,17 @@ $(document).ready(function () {
             }
         }
     });
+
+    $("#employeeStatus").change(function () {
+        let status = $(this).val(); 
+          if (status === "1") {
+            $("#relieving-container").hide(); 
+          } else if (status === "2") {
+            $("#relieving-container").show(); 
+            $("#relievingDate").attr("required", true); 
+        } else {
+            $("#relieving-container").hide();  
+          }
+        
+      });
 });
