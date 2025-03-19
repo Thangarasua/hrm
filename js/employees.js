@@ -1,4 +1,4 @@
-$(document).ready(function () { 
+$(document).ready(function () {
   $("#addEmployee").on("submit", function (e) {
     e.preventDefault();
     let formData = new FormData(this);
@@ -26,9 +26,9 @@ $(document).ready(function () {
   let dateRange = "";
   let active = $("#employeeStatus").val();
   let flag = "getAll";
-  fetchEmployee(fromDate,toDate,dateRange,active,flag);
+  fetchEmployee(fromDate, toDate, dateRange, active, flag);
 
-  function fetchEmployee(fromDate,toDate,dateRange,active,flag) {
+  function fetchEmployee(fromDate, toDate, dateRange, active, flag) {
     $.ajax({
       url: "queries/employees.php",
       type: "GET",
@@ -55,9 +55,13 @@ $(document).ready(function () {
                             <td>${index + 1}</td>
                             <td>${row.employee_id}</td>
                             <td>${row.full_name}</td> 
-                            <td class='pointer' title='${row.email}'>${row.email.substr(0, 20)}</td>
+                            <td class='pointer' title='${
+                              row.email
+                            }'>${row.email.substr(0, 20)}</td>
                             <td>${row.phone}</td>
-                            <td class='pointer' title='${row.designation_title}'>${row.designation_title.substr(0, 20)}</td>
+                            <td class='pointer' title='${
+                              row.designation_title
+                            }'>${row.designation_title.substr(0, 20)}</td>
                             <td>${row.doj}</td>
                             <td>
                               <div class="action-icon d-inline-flex">
@@ -82,14 +86,32 @@ $(document).ready(function () {
     var val = $(this).val();
     if (val) {
       if (val === "1") {
-        fetchEmployee(fromDate = "",toDate = "",dateRange = "",active = "1",flag = "getAll");
+        fetchEmployee(
+          (fromDate = ""),
+          (toDate = ""),
+          (dateRange = ""),
+          (active = "1"),
+          (flag = "getAll")
+        );
       } else if (val === "2") {
-        fetchEmployee(fromDate = "",toDate = "",dateRange = "",active = "2",flag = "getAll");
+        fetchEmployee(
+          (fromDate = ""),
+          (toDate = ""),
+          (dateRange = ""),
+          (active = "2"),
+          (flag = "getAll")
+        );
       } else if (val === "3") {
-        fetchEmployee(fromDate = "",toDate = "",dateRange = "",active = "3",flag = "getAll");
-      } else { 
+        fetchEmployee(
+          (fromDate = ""),
+          (toDate = ""),
+          (dateRange = ""),
+          (active = "3"),
+          (flag = "getAll")
+        );
+      } else {
       }
-    } else { 
+    } else {
     }
   });
   $("#role").change(function () {
@@ -189,7 +211,7 @@ $(document).ready(function () {
     var employeeId = $(this).data("id");
     var encryptedId = encryptEmployeeId(employeeId);
     window.location.href = `employee-details.php?empId=${encryptedId}`;
-  }); 
+  });
 
   $(document).on("dp.change", "#doj", function (e) {
     const doj = $(this).val();
@@ -202,21 +224,40 @@ $(document).ready(function () {
       $.ajax({
         url: "queries/commonFunctions.php",
         type: "POST",
-        data: { day: day,month: month, year: year, flag: "getEmpId" },
+        data: { day: day, month: month, year: year, flag: "getEmpId" },
         success: function (response) {
           $("#employeeID").val(response);
         },
       });
     }
   }
-  
+
+  function getCardDetails() {
+    $.ajax({
+      url: "queries/employees.php",
+      type: "GET",
+      dataType: "json",
+      data: {
+        flag: "getCardValues",
+      },
+      success: function (res) {
+        if (res.status == "success") {
+          console.log(res.data.total);
+          $("#totalEmployees").html(res.data.total);
+          $("#activeEmployees").html(res.data.active);
+          $("#inActiveEmployees").html(res.data.inactive);
+          $("#newEmployees").html(res.data.newly_active);
+        } else {
+        }
+      },
+    });
+  }
+  getCardDetails();
 });
- 
+
 $(document).ready(function () {
   $(".date-range").on("change", function () {
-      let selectedDateRange = $(this).val().trim(); // Get selected date range
-      console.log("Selected Date Range:", selectedDateRange); // Display in console
+    let selectedDateRange = $(this).val().trim(); // Get selected date range
+    console.log("Selected Date Range:", selectedDateRange); // Display in console
   });
 });
-
-

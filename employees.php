@@ -1,10 +1,10 @@
 <?php require_once("./includes/header.php"); ?>
 <?php require_once("./includes/sidebar.php"); ?>
 <?php include("./queries/commonFunctions.php"); ?>
+
 <!-- Page Wrapper -->
 <div class="page-wrapper">
 	<div class="content">
-
 		<!-- Breadcrumb -->
 		<div class="d-md-flex d-block align-items-center justify-content-between page-breadcrumb mb-3">
 			<div class="my-auto mb-2">
@@ -43,10 +43,7 @@
 		</div>
 		<!-- /Breadcrumb -->
 
-
-
 		<div class="row">
-
 			<!-- Total Plans -->
 			<div class="col-lg-3 col-md-6 d-flex">
 				<div class="card flex-fill">
@@ -57,7 +54,7 @@
 							</div>
 							<div class="ms-2 overflow-hidden">
 								<p class="fs-12 fw-medium mb-1 text-truncate">Total Employee</p>
-								<h4>1007</h4>
+								<h4 id="totalEmployees"></h4>
 							</div>
 						</div>
 						<div>
@@ -70,7 +67,6 @@
 				</div>
 			</div>
 			<!-- /Total Plans -->
-
 			<!-- Total Plans -->
 			<div class="col-lg-3 col-md-6 d-flex">
 				<div class="card flex-fill">
@@ -81,7 +77,7 @@
 							</div>
 							<div class="ms-2 overflow-hidden">
 								<p class="fs-12 fw-medium mb-1 text-truncate">Active</p>
-								<h4>1007</h4>
+								<h4 id="activeEmployees"></h4>
 							</div>
 						</div>
 						<div>
@@ -94,7 +90,6 @@
 				</div>
 			</div>
 			<!-- /Total Plans -->
-
 			<!-- Inactive Plans -->
 			<div class="col-lg-3 col-md-6 d-flex">
 				<div class="card flex-fill">
@@ -105,7 +100,7 @@
 							</div>
 							<div class="ms-2 overflow-hidden">
 								<p class="fs-12 fw-medium mb-1 text-truncate">InActive</p>
-								<h4>1007</h4>
+								<h4 id="inActiveEmployees"></h4>
 							</div>
 						</div>
 						<div>
@@ -129,7 +124,7 @@
 							</div>
 							<div class="ms-2 overflow-hidden">
 								<p class="fs-12 fw-medium mb-1 text-truncate">New Joiners</p>
-								<h4>67</h4>
+								<h4 id="newEmployees"></h4>
 							</div>
 						</div>
 						<div>
