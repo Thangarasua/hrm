@@ -28,7 +28,7 @@ if (mysqli_num_rows($result) > 0) {
         echo json_encode(array('status' => 'success', 'message' => 'Login'));
         exit;
     }else{
-        echo json_encode(array('status' => 'failure', 'message' => 'mismatch password'));
+        echo json_encode(array('status' => 'failure', 'message' => 'mismatch password1'. $dbPassword .'-^^-'. $inputPassword));
         exit; 
     }
 } else {

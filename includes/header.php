@@ -3,6 +3,9 @@ if (!isset($_SESSION['hrm_username']) || empty($_SESSION['hrm_username'])) {
 	header('Location: login');
 	exit();
 }
+$hrmUserid = $_SESSION['hrm_userid'];
+include("./queries/commonFunctions.php"); 
+$MyProfileInfo = getMyProfileInfo($hrmUserid);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -1110,24 +1113,25 @@ if (!isset($_SESSION['hrm_username']) || empty($_SESSION['hrm_username'])) {
 												</span>
 												<div>
 													<h5 class="mb-0"><?php echo $_SESSION["hrm_username"]; ?></h5>
-													<p class="mb-0">test@gmail.com</p>
-
-
+													<p class="mb-0"><?php echo $MyProfileInfo ? $MyProfileInfo['email'] : ''; ?></p>
 												</div>
 											</div>
 										</div>
 										<div class="card-body">
-											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="profile.html">
+											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="employee-details.php?empId=<?php echo  $MyProfileInfo ? $MyProfileInfo['encrypyEmployeeId'] : '';  ?>">
 												<i class="ti ti-user-circle me-1"></i>My Profile
 											</a>
-											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="bussiness-settings.html">
+											<!-- <a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="bussiness-settings.html"> -->
+											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="employee-details.php?empId=<?php echo  $MyProfileInfo ? $MyProfileInfo['encrypyEmployeeId'] : '';  ?>">
 												<i class="ti ti-settings me-1"></i>Settings
 											</a>
 
-											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="profile-settings.html">
+											<!-- <a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="profile-settings.html"> -->
+											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="employee-details.php?empId=<?php echo  $MyProfileInfo ? $MyProfileInfo['encrypyEmployeeId'] : '';  ?>">
 												<i class="ti ti-circle-arrow-up me-1"></i>My Account
 											</a>
-											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="knowledgebase.html">
+											<!-- <a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="knowledgebase.html"> -->
+											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="employee-details.php?empId=<?php echo  $MyProfileInfo ? $MyProfileInfo['encrypyEmployeeId'] : '';  ?>">
 												<i class="ti ti-question-mark me-1"></i>Knowledge Base
 											</a>
 										</div>
