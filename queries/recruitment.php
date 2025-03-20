@@ -86,16 +86,16 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     } elseif ($flag === "update") {
 
         $rowId = $_POST['rowId'];
-        $jobTitle = $_POST['jobTitle'];
-        $jobDescription = $_POST['jobDescription'];
+        $jobTitle = $conn->real_escape_string(trim(preg_replace('/\s+/', ' ', $_POST['jobTitle'])));
+        $jobDescription = $conn->real_escape_string(trim(preg_replace('/\s+/', ' ', $_POST['jobDescription'])));
         $jobType = $_POST['jobType'];
         $jobLevel = $_POST['jobLevel'];
         $experience = $_POST['experience'];
-        $qualification = $_POST['qualification'];
+        $qualification = $conn->real_escape_string(trim(preg_replace('/\s+/', ' ', $_POST['qualification'])));
         $gender = $_POST['gender'];
-        $requiredSkills = $_POST['requiredSkills'];
+        $requiredSkills = $conn->real_escape_string(trim(preg_replace('/\s+/', ' ', $_POST['requiredSkills'])));
         $priority = $_POST['priority'];
-        $location = $_POST['location'];
+        $location = $conn->real_escape_string(trim(preg_replace('/\s+/', ' ', $_POST['location'])));
 
         $query = "UPDATE `recruitment` SET `job_position`='$jobTitle',`job_descriptions`='$jobDescription',`required_skills`='$requiredSkills',`job_type`='$jobType',`job_level`='$jobLevel',`job_experience`='$experience',`qualification`='$qualification',`gender`='$gender',`priority`='$priority',`location`='$location',`updated_at`='$currentDatetime' WHERE `id`='$rowId'";
         $result = mysqli_query($conn, $query);

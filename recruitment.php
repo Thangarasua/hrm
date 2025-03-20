@@ -1,6 +1,13 @@
-<?php require_once("./includes/header.php"); ?>
-<?php require_once("./includes/sidebar.php"); ?>
+<?php
+require_once("./includes/header.php");
+require_once("./includes/sidebar.php");
 
+$userName = $_SESSION["hrm_username"];
+$userId = $_SESSION["hrm_userid"];
+$designationId = $_SESSION["hrm_designationId"];
+$departmentId = $_SESSION["hrm_departmentId"];
+$roleId = $_SESSION["hrm_roleId"];
+?>
 <!-- Page Wrapper -->
 <div class="page-wrapper">
 	<div class="content">
@@ -178,42 +185,43 @@
 						<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
 							<div class="row">
 								<div class="col-md-12">
-									<div class="mb-3">
-										<label class="form-label">Job Title <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="jobTitle" id="jobTitle" oninput="capitalizeWords(this)" autocomplete="off">
+									<div class="mb-3 position-relative">
+										<label class="form-label">Job Title <span class="text-danger"> *</span></label> 
+										<input type="text" name="jobTitle" id="jobTitleSearch" placeholder="e.g: Sales Executies" class="form-control" oninput="capitalizeWords(this)" autocomplete="off" />
+										<ul class="list-group addFields" id="jobTitleResult"></ul>
 									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="mb-3">
 										<label class="form-label">Job Description <span class="text-danger"> *</span></label>
-										<textarea rows="3" class="form-control" name="jobDescription" id="jobDescription"></textarea>
+										<textarea rows="3" class="form-control" name="jobDescription" id="jobDescription" placeholder="Enter the job's specifics here..."></textarea>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Job Type <span class="text-danger"> *</span></label>
-										<input type="text" name="jobType" id="jobTypeSearch" placeholder="Work Job Type " class="form-control" oninput="capitalizeWords(this)" autocomplete="off"/>
+										<input type="text" name="jobType" id="jobTypeSearch" placeholder="e.g: Full TIme" class="form-control" oninput="capitalizeWords(this)" autocomplete="off" />
 										<ul class="list-group addFields" id="jobTypeResult"></ul>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Job Level <span class="text-danger"> *</span></label>
-										<input type="text" name="jobLevel" id="jobLevelSearch" placeholder="Work Job Level " class="form-control" oninput="capitalizeWords(this)" autocomplete="off"/>
+										<input type="text" name="jobLevel" id="jobLevelSearch" placeholder="e.g: Entry Level" class="form-control" oninput="capitalizeWords(this)" autocomplete="off" />
 										<ul class="list-group addFields" id="jobLevelResult"></ul>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Experience <span class="text-danger"> *</span></label>
-										<input type="text" name="experience" id="experienceSearch" placeholder="Work Experience level" class="form-control" oninput="capitalizeWords(this)" autocomplete="off"/>
+										<input type="text" name="experience" id="experienceSearch" placeholder="e.g: Fresher" class="form-control" oninput="capitalizeWords(this)" autocomplete="off" />
 										<ul class="list-group addFields" id="experienceResult"></ul>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Qualification <span class="text-danger"> *</span></label>
-										<input type="text" name="qualification" id="qualificationSearch" placeholder="Education qualification" class="form-control" oninput="capitalizeWords(this)" autocomplete="off"/>
+										<input type="text" name="qualification" id="qualificationSearch" placeholder="e.g: UG" class="form-control" oninput="capitalizeWords(this)" autocomplete="off" />
 										<ul class="list-group addFields" id="qualificationResult"></ul>
 									</div>
 								</div>
@@ -231,7 +239,7 @@
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Required Skills</label>
-										<input type="text" class="form-control" name="requiredSkills" id="requiredSkills">
+										<input type="text" class="form-control" name="requiredSkills" id="requiredSkills" placeholder="Enter the skill's specifics here.">
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -251,7 +259,7 @@
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Location</label>
-										<input type="text" class="form-control" oninput="capitalizeWords(this)" name="location" id="location">
+										<input type="text" class="form-control" oninput="capitalizeWords(this)" name="location" id="location" placeholder="Company branch location">
 									</div>
 								</div>
 							</div>
@@ -366,9 +374,9 @@
 		<div class="modal-content">
 			<div class="modal-body">
 				<div class="text-center p-3">
-					<span class="avatar avatar-lg avatar-rounded bg-success mb-3"> 
+					<span class="avatar avatar-lg avatar-rounded bg-success mb-3">
 						<i class="fa-solid fa-info"></i>
-					</span> 
+					</span>
 					<h5 class="mb-2"> <span class="text-danger">Cannot delete;</span> Already <span id="candidateCount"></span> candidates registered.</h5>
 					<div>
 						<div class="row g-2">
@@ -414,19 +422,19 @@
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Job Type <span class="text-danger"> *</span></label>
-										<input type="text" name="jobType" id="view_jobType" class="form-control" /> 
+										<input type="text" name="jobType" id="view_jobType" class="form-control" />
 									</div>
 								</div>
-								<div class="col-md-6"> 
+								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Job Level <span class="text-danger"> *</span></label>
-										<input type="text" name="jobLevel" id="view_jobLevel" class="form-control" /> 
+										<input type="text" name="jobLevel" id="view_jobLevel" class="form-control" />
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Experience <span class="text-danger"> *</span></label>
-										<input type="text" name="jobLevel" id="view_experience" class="form-control" /> 
+										<input type="text" name="jobLevel" id="view_experience" class="form-control" />
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -516,7 +524,7 @@
 										<ul class="list-group addFields" id="jobTypeResult"></ul>
 									</div>
 								</div>
-								<div class="col-md-6"> 
+								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Job Level <span class="text-danger"> *</span></label>
 										<input type="text" name="jobLevel" id="edit_jobLevel" placeholder="Work Job Level " class="form-control" />
@@ -618,6 +626,7 @@
 <!-- this page java scripts codes -->
 <script src="./js/recruitment.js"></script>
 
+<script src="./ajax/job-title.js"></script>
 <script src="./ajax/job-type.js"></script>
 <script src="./ajax/job-level.js"></script>
 <script src="./ajax/experience.js"></script>

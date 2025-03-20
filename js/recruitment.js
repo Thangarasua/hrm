@@ -366,10 +366,10 @@ $(document).ready(function () {
   function formValidate() {
     $(".error").remove(); // Remove previous error messages
 
-    let jobTitle = $("#jobTitle").val().trim();
-    if (jobTitle.length == 0) {
-      $("#jobTitle").focus();
-      $("#jobTitle").after(
+    let jobTitleSearch = $("#jobTitleSearch").val().trim();
+    if (jobTitleSearch.length == 0) {
+      $("#jobTitleSearch").focus();
+      $("#jobTitleSearch").after(
         "<small class='error text-danger'> mandatory field.</small>"
       );
       return 0;
