@@ -1,8 +1,7 @@
 <?php include "../includes/config.php";
 
 header('Content-Type: application/json');
-$currentDatetime = date('Y-m-d H:i:s');
-$hrm_userid = $_SESSION['hrm_userid'];
+$currentDatetime = date('Y-m-d H:i:s'); 
 
 $key = "ACTEHRM2025";
 $method = "AES-256-CBC";
@@ -23,7 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['flag'])) {
         $query = "SELECT * FROM `employees` AS e INNER JOIN roles AS r ON r.role_id = e.role_id INNER JOIN departments AS dp ON dp.department_id=e.department_id INNER JOIN designations AS dg ON dg.designation_id=e.designation_id WHERE $ststus  ORDER BY `e`.`employee_id` ASC";
         $result = mysqli_query($conn, $query);
         $employess = [];
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch_assoc()) { 
+            $row['doj'] = date("d M Y", strtotime($row['doj']));
             $employess[] = $row;
         }
         echo json_encode($employess);

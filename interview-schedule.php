@@ -146,7 +146,7 @@ if (mysqli_num_rows($result) > 0) {
 													</div>
 													<div class="form-group">
 														<label for="text">Job Description</label>
-														<textarea name="" id="" class="form-control"><?php echo $data['job_descriptions']; ?></textarea>
+														<textarea name="" id="" class="form-control" readonly><?php echo $data['job_descriptions']; ?></textarea>
 													</div>
 												</div>
 											</div>

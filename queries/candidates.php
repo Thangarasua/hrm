@@ -2,6 +2,12 @@
 
 header('Content-Type: application/json');
 
+$employeeId = $_SESSION['hrm_employeeId'];
+$employeeName = $_SESSION['hrm_employeeName'];
+$designationId = $_SESSION["hrm_designationId"];
+$departmentId = $_SESSION["hrm_departmentId"];
+$roleId = $_SESSION["hrm_roleId"];
+
 $month = date('m');
 $year = date('y');
 $date = date('d');
@@ -15,15 +21,22 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
         if ($flag === 'jobApplications') {
             $jobID = $_POST['jobID'];
-            $condition = "AND `c`.`ticket_request_id`= '$jobID'";
+            $jobWise = "AND `c`.`ticket_request_id`= '$jobID'";
         } elseif ($flag === 'getAll') {
-            $condition = '';
+            $jobWise = '';
         }
 
-        $sql = "SELECT c.*,r.job_position FROM `candidates` AS c INNER JOIN recruitment AS r ON c.ticket_request_id = r.ticket_request_id WHERE c.`responce_status` = 1 $condition";
+        if (in_array($departmentId, [1, 2, 3, 5])) {
+            $departmentWise = "AND 1";
+        } else {
+            $departmentWise = "AND e.department_id = $departmentId";
+        }
+
+        $sql = "SELECT c.*,r.job_position FROM `candidates` AS c INNER JOIN recruitment AS r ON c.ticket_request_id = r.ticket_request_id INNER JOIN employees AS e ON e.employee_id = r.raised_by WHERE c.`responce_status` = 1 $jobWise $departmentWise";
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
+                $row['created_at'] = date("d M Y", strtotime($row['created_at']));
                 $response[] = $row;
             }
         } else {

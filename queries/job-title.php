@@ -6,7 +6,7 @@ $currentDatetime = date('Y-m-d H:i:s');
 if (isset($_GET['flag']) && $_GET['flag'] === "fetch") {
     $data = $_GET['data'];
 
-    $query = "SELECT * FROM job_levels WHERE job_level LIKE '%$data%'  ORDER BY job_level ASC";
+    $query = "SELECT * FROM job_titles WHERE job_title LIKE '%$data%'  ORDER BY job_title ASC";
     $result = mysqli_query($conn, $query);
     $data = [];
     while ($row = $result->fetch_assoc()) {
@@ -24,19 +24,19 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $status = 1;
         $value = $_POST['value'];
 
-        $query = "SELECT * FROM job_levels WHERE job_level = '$value'";
+        $query = "SELECT * FROM job_titles WHERE job_title = '$value'";
         $result = mysqli_query($conn, $query);
         if (mysqli_num_rows($result) > 0) {
             echo json_encode(array('status' => 'failure', 'message' => 'Same value existing'));
             exit;
         } else {
-            $query = "INSERT INTO `job_levels` (`job_level`, `status`) VALUES ('$value', $status)";
+            $query = "INSERT INTO `job_titles` (`job_title`, `status`) VALUES ('$value', $status)";
             $result = mysqli_query($conn, $query);
             if ($result) {
-                echo json_encode(array('status' => 'success', 'message' => 'Job Level Added Successfully'));
+                echo json_encode(array('status' => 'success', 'message' => 'Job Title Added Successfully'));
                 exit;
             } else {
-                echo json_encode(array('status' => 'failure', 'message' => 'Job Level Added Requested Failure'));
+                echo json_encode(array('status' => 'failure', 'message' => 'Job Title Added Requested Failure'));
                 exit;
             }
         }
