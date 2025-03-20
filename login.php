@@ -1,7 +1,7 @@
 <?php
 include("./includes/config.php");
 
-if (isset($_SESSION['hrm_username'])) {
+if (isset($_SESSION['hrm_employeeId'])) {
 	header('Location: index');
 }
 ?>

@@ -1,11 +1,17 @@
 <?php include("config.php"); //connecting Database
-if (!isset($_SESSION['hrm_username']) || empty($_SESSION['hrm_username'])) {
+if (!isset($_SESSION['hrm_employeeId']) || empty($_SESSION['hrm_employeeId'])) {
 	header('Location: login');
 	exit();
 }
-$hrmUserid = $_SESSION['hrm_userid'];
-include("./queries/commonFunctions.php"); 
-$MyProfileInfo = getMyProfileInfo($hrmUserid);
+
+$employeeName = $_SESSION["hrm_employeeName"];
+$employeeId = $_SESSION["hrm_employeeId"];
+$designationId = $_SESSION["hrm_designationId"];
+$departmentId = $_SESSION["hrm_departmentId"];
+$roleId = $_SESSION["hrm_roleId"];
+
+include("./queries/commonFunctions.php");
+$MyProfileInfo = getMyProfileInfo($employeeId);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,7 +64,7 @@ $MyProfileInfo = getMyProfileInfo($hrmUserid);
 	<link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
 
 	<!-- Datatable CSS -->
-	<link rel="stylesheet" href="css/plugins/dataTables.bootstrap5.min.css"> 
+	<link rel="stylesheet" href="css/plugins/dataTables.bootstrap5.min.css">
 
 	<!-- Color Picker Css -->
 	<link rel="stylesheet" href="plugins/flatpickr/flatpickr.min.css">
@@ -79,6 +85,12 @@ $MyProfileInfo = getMyProfileInfo($hrmUserid);
 </head>
 
 <body>
+
+	<input type="hidden" id="employeeName" value="<?php echo $employeeName; ?>">
+	<input type="hidden" id="employeeId" value="<?php echo $employeeId; ?>">
+	<input type="hidden" id="designationId" value="<?php echo $designationId; ?>">
+	<input type="hidden" id="departmentId" value="<?php echo $departmentId; ?>">
+	<input type="hidden" id="roleId" value="<?php echo $roleId; ?>">
 
 	<div id="global-loader">
 		<div class="page-loader"></div>
@@ -1112,8 +1124,8 @@ $MyProfileInfo = getMyProfileInfo($hrmUserid);
 													<img src="assets/img/profiles/avatar-12.jpg" alt="img">
 												</span>
 												<div>
-													<h5 class="mb-0"><?php echo $_SESSION["hrm_username"]; ?></h5>
-													<p class="mb-0"><?php echo $MyProfileInfo ? $MyProfileInfo['email'] : ''; ?></p>
+													<h5 class="mb-0"><?php echo $_SESSION["hrm_employeeName"]; ?></h5>
+													<p class="mb-0"><?php echo $MyProfileInfo ? substr($MyProfileInfo['email'], 0, 14)  : ''; ?></p>
 												</div>
 											</div>
 										</div>

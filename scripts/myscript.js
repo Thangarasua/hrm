@@ -1,17 +1,17 @@
 //active side menu
-  let currentPage = window.location.pathname.split("/").pop();
-  $("ul li a").each(function () {
-    if ($(this).hasClass(currentPage)) {
-      $(this).addClass("active");
-      $(this).closest(".single-menu").addClass("active");
-      $(this)
-        .closest("li")
-        .closest(".submenu")
-        .find(".sub-menu-title")
-        .addClass("subdrop");
-      $(this).closest("ul").show();
-    }
-  }); 
+let currentPage = window.location.pathname.split("/").pop();
+$("ul li a").each(function () {
+  if ($(this).hasClass(currentPage)) {
+    $(this).addClass("active");
+    $(this).closest(".single-menu").addClass("active");
+    $(this)
+      .closest("li")
+      .closest(".submenu")
+      .find(".sub-menu-title")
+      .addClass("subdrop");
+    $(this).closest("ul").show();
+  }
+});
 
 //check only numbers allowed condition
 function isNumber(input) {
@@ -21,6 +21,21 @@ function isNumber(input) {
     return false;
   }
   return true;
+}
+
+function numberPasteValidate(event, input) {
+  event.preventDefault(); // Prevent default paste behavior
+
+  let pastedData = (event.clipboardData || window.clipboardData).getData(
+    "text"
+  );
+  let numbersOnly = pastedData.replace(/\D/g, ""); // Remove non-numeric characters
+
+  if (numbersOnly) {
+    input.value = numbersOnly; // Set only numeric values
+  } else {
+    toastr.warning("Only numbers are allowed!");
+  }
 }
 
 //check only name formate allowed condition
@@ -155,4 +170,4 @@ function dataTableDesigns() {
     var length = $(this).val();
     table.page.len(length).draw();
   });
-} 
+}

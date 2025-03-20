@@ -1,8 +1,7 @@
 <?php include "../includes/config.php";
 
 header('Content-Type: application/json');
-$currentDatetime = date('Y-m-d H:i:s');
-$hrm_userid = $_SESSION['hrm_userid'];
+$currentDatetime = date('Y-m-d H:i:s'); 
 
 if (isset($_GET['flag']) && $_GET['flag'] === "fetch") {
     $query = "SELECT * FROM roles ORDER BY role_id ASC";

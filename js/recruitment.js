@@ -30,7 +30,9 @@ $(document).ready(function () {
       },
     });
   });
-
+  
+  var departmentId = $("#departmentId").val();
+ console.log(departmentId);
   var fromDate = "";
   var toDate = "";
   var dateRange = "";
@@ -60,7 +62,13 @@ $(document).ready(function () {
         tableBody.empty();
         // Check if data is not empty
         if (data.length > 0) {
-          $.each(data, function (index, row) {
+          $.each(data, function (index, row) { 
+            if(departmentId == 5){ 
+              var send = `<a href="#" data-id="${row.id}" class="send"> <i class="fa-solid fa-paper-plane"></i></a>`;
+            }else if(departmentId == 7){
+             var send = ``;
+            }
+
             var newRow = `<tr>
                             <td>${index + 1}</td>
                             <td>${row.ticket_request_id}</td>
@@ -69,35 +77,25 @@ $(document).ready(function () {
                               <div class="d-flex align-items-center file-name-icon">
                                 <div class="ms-2">
                                   <h6 class="fw-medium">${row.job_position}</h6>
-                                  <a href="candidates?id=${
-                                    row.encoded_id
-                                  }"><span class="d-block mt-1">${
-                                     row.candidate_count
-                                   } Applicants</span></a>
+                                  <a href="candidates?id=${row.encoded_id}"><span class="d-block mt-1">${row.candidate_count} Applicants</span></a>
                                 </div>
                               </div>
                             </td>
                             <td>${row.job_level}</td>
                             <td>${row.priority}</td>
-                            <td>${row.created_at.split(" ")[0]}</td>
+                            <td>${row.created_at}</td>
                             <td>
                               <div class="action-icon d-inline-flex">
                                 <a href="#" data-id="${row.id}" class="view">
                                   <i class="fa-solid fa-folder-open"></i>
                                 </a>
-                                <a href="#" data-id="${row.id}" class="edit">
+                                <a href="#" data-id="${row.id}" data-formfilling="${row.candidate_count}" class="edit">
                                   <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
-                                <a href="#" data-id="${
-                                  row.id
-                                }" data-formfilling="${
-                                   row.candidate_count
-                                 }" class="delete">
+                                <a href="#" data-id="${row.id}" data-formfilling="${row.candidate_count}" class="delete">
                                   <i class="fa-solid fa-trash-can"></i>
                                 </a>
-                                <a href="#" data-id="${row.id}" class="send">
-                                  <i class="fa-solid fa-paper-plane"></i>
-                                </a>
+                                ${send}
                               </div>
                             </td>
                           </tr>`;
@@ -111,8 +109,14 @@ $(document).ready(function () {
   }
   $(document).on("click", ".edit", function (e) {
     e.preventDefault();
-    $("#editModal").modal("show");
     var id = $(this).data("id");
+    var formfilling = $(this).data("formfilling");
+    if (formfilling > 0) {
+      $("#candidateCount").html(formfilling);
+      $("#info_modal").modal("show");
+      return false;
+    }
+    $("#editModal").modal("show");
 
     $.ajax({
       type: "POST",
@@ -291,7 +295,7 @@ $(document).ready(function () {
           .html("Loading <i class='fa-solid fa-spinner'></i>")
           .prop("disabled", true);
         Swal.fire({
-          title: "Recruitment form sending...",
+          title: "Recruitment form sending 📩...",
           allowEscapeKey: false,
           allowOutsideClick: false,
           didOpen: () => {

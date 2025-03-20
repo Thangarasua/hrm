@@ -1,12 +1,6 @@
 <?php
 require_once("./includes/header.php");
 require_once("./includes/sidebar.php");
-
-$userName = $_SESSION["hrm_username"];
-$userId = $_SESSION["hrm_userid"];
-$designationId = $_SESSION["hrm_designationId"];
-$departmentId = $_SESSION["hrm_departmentId"];
-$roleId = $_SESSION["hrm_roleId"];
 ?>
 <!-- Page Wrapper -->
 <div class="page-wrapper">
@@ -56,7 +50,7 @@ $roleId = $_SESSION["hrm_roleId"];
 				<div class="d-flex my-xl-auto right-content align-items-center flex-wrap row-gap-3">
 					<div class="me-3">
 						<div class="form-group">
-							<input type="text" id="myInputTextField" class="form-control" placeholder="Search anything..." title="Search any thing in the table you want">
+							<input type="text" id="myInputTextField" class="form-control" placeholder="Search anything..." title="Search any thing in the table you want" >
 						</div>
 					</div>
 					<div class="me-3">
@@ -294,13 +288,13 @@ $roleId = $_SESSION["hrm_roleId"];
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Job ID <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="ticketRequestId" id="send_jobIt">
+										<input type="text" class="form-control" name="ticketRequestId" id="send_jobIt" readonly>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Job Title <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="jobTitle" id="send_jobTitle">
+										<input type="text" class="form-control" name="jobTitle" id="send_jobTitle" readonly>
 									</div>
 								</div>
 							</div>
@@ -313,19 +307,19 @@ $roleId = $_SESSION["hrm_roleId"];
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Candidate Name</label>
-										<input type="text" class="form-control" name="candidateName" id="candidateName" onkeypress="return isAlphabets(event)" placeholder="Candidate Name">
+										<input type="text" class="form-control" name="candidateName" id="candidateName" onkeypress="return isAlphabets(event)" oninput="capitalizeWords(this)" placeholder="Candidate Name" autocomplete="off">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Candidate Mail</label>
-										<input type="text" class="form-control" name="candidateMail" id="candidateMail" onblur="return isEmail(this)" placeholder="user@example.com">
+										<input type="text" class="form-control" name="candidateMail" id="candidateMail" onblur="return isEmail(this)" placeholder="user@example.com" autocomplete="off">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Candidate Contact</label>
-										<input type="text" class="form-control" name="candidateContact" id="candidateContact" onkeypress="return isNumber(event)" placeholder="9876543210">
+										<input type="text" class="form-control" name="candidateContact" id="candidateContact" onkeypress="return isNumber(event)" onpaste="numberPasteValidate(event, this)" placeholder="9876543210" autocomplete="off">
 									</div>
 								</div>
 							</div>
@@ -377,7 +371,9 @@ $roleId = $_SESSION["hrm_roleId"];
 					<span class="avatar avatar-lg avatar-rounded bg-success mb-3">
 						<i class="fa-solid fa-info"></i>
 					</span>
-					<h5 class="mb-2"> <span class="text-danger">Cannot delete;</span> Already <span id="candidateCount"></span> candidates registered.</h5>
+					<h4 class="mb-2"> <span class="text-danger">Cannot do anything ツ</span></h4>
+					<h6>Already <span id="candidateCount"></span> candidates registered.</h6>
+					<br>
 					<div>
 						<div class="row g-2">
 							<div class="col-12">
@@ -508,47 +504,47 @@ $roleId = $_SESSION["hrm_roleId"];
 								<div class="col-md-12">
 									<div class="mb-3">
 										<label class="form-label">Job Title <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="jobTitle" id="edit_jobTitle">
+										<input type="text" class="form-control" name="jobTitle" id="edit_jobTitle" readonly>
 									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="mb-3">
 										<label class="form-label">Job Description <span class="text-danger"> *</span></label>
-										<textarea rows="3" class="form-control" name="jobDescription" id="edit_jobDescription"></textarea>
+										<textarea rows="3" class="form-control input-highlight" name="jobDescription" id="edit_jobDescription"></textarea>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Job Type <span class="text-danger"> *</span></label>
-										<input type="text" name="jobType" id="edit_jobType" placeholder="Work Job Type " class="form-control" />
+										<input type="text" name="jobType" id="edit_jobType" placeholder="Work Job Type " class="form-control" readonly/>
 										<ul class="list-group addFields" id="jobTypeResult"></ul>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Job Level <span class="text-danger"> *</span></label>
-										<input type="text" name="jobLevel" id="edit_jobLevel" placeholder="Work Job Level " class="form-control" />
+										<input type="text" name="jobLevel" id="edit_jobLevel" placeholder="Work Job Level " class="form-control" readonly/>
 										<ul class="list-group addFields" id="jobLevelResult"></ul>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Experience <span class="text-danger"> *</span></label>
-										<input type="text" name="experience" id="edit_experience" placeholder="Work Experience level" class="form-control" />
+										<input type="text" name="experience" id="edit_experience" placeholder="Work Experience level" class="form-control" readonly/>
 										<ul class="list-group addFields" id="experienceResult"></ul>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Qualification <span class="text-danger"> *</span></label>
-										<input type="text" name="qualification" id="edit_qual" placeholder="Education qualification" class="form-control" />
+										<input type="text" name="qualification" id="edit_qual" placeholder="Education qualification" class="form-control" readonly/>
 										<ul class="list-group addFields" id="qualificationResult"></ul>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Gender <span class="text-danger"> *</span></label>
-										<select class="select" name="gender" id="edit_gender">
+										<select class="select input-highlight" name="gender" id="edit_gender">
 											<option value="">Select</option>
 											<option value="Male">Male</option>
 											<option value="Female">Female</option>
@@ -559,13 +555,13 @@ $roleId = $_SESSION["hrm_roleId"];
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Required Skills</label>
-										<input type="text" class="form-control" name="requiredSkills" id="edit_requiredSkills">
+										<input type="text" class="form-control input-highlight" name="requiredSkills" id="edit_requiredSkills" oninput="capitalizeWords(this)">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Notice period <span class="text-danger"> *</span></label>
-										<select class="select" name="priority" id="edit_priority">
+										<select class="select input-highlight" name="priority" id="edit_priority">
 											<option value="">Select</option>
 											<option value="Immediate">Immediate</option>
 											<option value="15 Days">15 Days</option>
@@ -579,7 +575,7 @@ $roleId = $_SESSION["hrm_roleId"];
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Location</label>
-										<input type="text" class="form-control" name="location" id="edit_location">
+										<input type="text" class="form-control input-highlight" name="location" id="edit_location" oninput="capitalizeWords(this)">
 									</div>
 								</div>
 							</div>
@@ -608,7 +604,7 @@ $roleId = $_SESSION["hrm_roleId"];
 						<i class="ti ti-trash-x fs-36"></i>
 					</span>
 					<h4 class="mb-1">Confirm Delete</h4>
-					<p class="mb-3">You want to delete all the marked items, this cant be undone once you delete.</p>
+					<p class="mb-3">You want to delete all this items, this cant be undone once you delete.</p>
 					<div class="d-flex justify-content-center">
 						<input type="hidden" name="deleteId" id="deleteId">
 						<a href="javascript:void(0);" class="btn btn-light me-3" data-bs-dismiss="modal">Cancel</a>

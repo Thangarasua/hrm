@@ -1,8 +1,7 @@
 <?php include "../includes/config.php";
 
 header('Content-Type: application/json');
-$currentDatetime = date('Y-m-d H:i:s');
-// $hrm_userid = $_SESSION['hrm_userid'];
+$currentDatetime = date('Y-m-d H:i:s'); 
 
 $key = "ACTEHRM2025";
 $method = "AES-256-CBC";
