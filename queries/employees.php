@@ -123,3 +123,34 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
     }
 }
+
+if (isset($_POST['month']) && isset($_POST['year']) && isset($_POST['flag'])) {
+    $day = $_POST['day'];
+    $month = $_POST['month'];
+    $year = $_POST['year'];
+    $year = date('y', strtotime($year . '-01-01'));
+    $month = date('m', strtotime($year . '-' . $month . '-01'));
+    $day = date('d', strtotime($year . '-' . $month . '-' . $day));
+    $baseId = "ACTE" . $year . $month . $day;
+
+    $sql = "SELECT * FROM `employees` ORDER BY `employees`.`id` DESC LIMIT 1";
+
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $lastEmployeeId = $row['employee_id'];
+        $lastSequence = (int)substr($lastEmployeeId, -3);
+        if ($lastSequence == 999) {
+            $newSequence = 1;
+        } else {
+            $newSequence = $lastSequence + 1;
+        }
+    } else {
+        $newSequence = 1;
+    }
+
+    $newEmployeeId = $baseId . str_pad($newSequence, 3, '0', STR_PAD_LEFT);
+    echo json_encode($newEmployeeId);
+    exit;
+};

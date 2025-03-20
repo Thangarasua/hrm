@@ -270,7 +270,7 @@ $(document).ready(function () {
     if (doj) {
       const [day, month, year] = doj.split("-");
       $.ajax({
-        url: "queries/commonFunctions.php",
+        url: "queries/employees.php",
         type: "POST",
         data: { day: day, month: month, year: year, flag: "getEmpId" },
         success: function (response) {
