@@ -97,7 +97,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								<div class="row gx-2 mt-3">
 									<div class="col-6">
 										<div>
-											<?php if ($employeeRoleId == 4 || $employeeRoleId == 5 || $employeeRoleId == 3) { ?>
+											<?php if ($employeeRoleId == 4 || $employeeRoleId == 5) { ?>
 												<a href="#" class="btn btn-dark w-100" data-bs-toggle="modal" data-bs-target="#edit_employee"><i class="ti ti-edit me-1"></i>Edit Info </a>
 											<?php } else {?>
 												<a href="#" class="btn btn-dark w-100" data-bs-toggle="tooltip" title="Contact Admin">
