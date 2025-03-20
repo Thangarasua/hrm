@@ -1,17 +1,13 @@
 <?php include "../includes/config.php";
 
 header('Content-Type: application/json');
-
-$hrm_userid = $_SESSION['hrm_userid'];
-$hrm_username = $_SESSION['hrm_username'];
-
-$query = "SELECT * FROM `employees` WHERE `employee_id` = '$hrm_userid'";
-$result = mysqli_query($conn, $query);
-$row = mysqli_fetch_assoc($result);
-$designation_id = $row['designation_id'];
-$department_id = $row['department_id'];
-$role_id = $row['role_id'];
-
+ 
+$employeeId = $_SESSION['hrm_employeeId'];
+$employeeName = $_SESSION['hrm_employeeName'];
+$designationId = $_SESSION["hrm_designationId"];
+$departmentId = $_SESSION["hrm_departmentId"];
+$roleId = $_SESSION["hrm_roleId"];
+ 
 $month = date('m');
 $year = date('y');
 $date = date('d');
@@ -49,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $priority = $_POST['priority'];
         $location = $conn->real_escape_string(trim(preg_replace('/\s+/', ' ', $_POST['location'])));
 
-        $query = "INSERT INTO `recruitment`(`ticket_request_id`, `raised_by`, `job_position`, `job_descriptions`, `required_skills`, `job_type`, `job_level`, `job_experience`, `qualification`, `gender`, `priority`, `location`, `hr_contacted`, `status`, `created_at`) VALUES ('$ticketRequestId','$hrm_userid','$jobTitle','$jobDescription','$requiredSkills','$jobType','$jobLevel','$experience','$qualification','$gender','$priority','$location',0,1,'$currentDatetime')";
+        $query = "INSERT INTO `recruitment`(`ticket_request_id`, `raised_by`, `job_position`, `job_descriptions`, `required_skills`, `job_type`, `job_level`, `job_experience`, `qualification`, `gender`, `priority`, `location`, `hr_contacted`, `status`, `created_at`) VALUES ('$ticketRequestId','$employeeId','$jobTitle','$jobDescription','$requiredSkills','$jobType','$jobLevel','$experience','$qualification','$gender','$priority','$location',0,1,'$currentDatetime')";
         $result = mysqli_query($conn, $query);
         if ($result) {
             echo json_encode(array('status' => 'success', 'message' => 'Resorce requested successfully'));
@@ -63,7 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
-                $row['encoded_id'] = base64_encode($row['ticket_request_id']);
+                $row['encoded_id'] = base64_encode($row['ticket_request_id']); 
+                $row['created_at'] = date("d M Y", strtotime($row['created_at']));
                 $response[] = $row;
             }
         } else {
@@ -157,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
                     'id' => $jobSno,
                     'email' => $candidateMail,
                     'candidateName' => $candidateName,
-                    'hrName' => $hrm_username
+                    'hrName' => $employeeName
                 ));
             }
         } catch (mysqli_sql_exception $e) {
