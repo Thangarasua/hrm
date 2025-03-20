@@ -31,8 +31,8 @@ $(document).ready(function () {
     });
   });
   
-  var departmentId = $("#departmentId").val();
- console.log(departmentId);
+  var departmentId = $("#loginedDepartmentId").val(); 
+  
   var fromDate = "";
   var toDate = "";
   var dateRange = "";

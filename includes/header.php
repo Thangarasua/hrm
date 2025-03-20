@@ -86,14 +86,14 @@ $MyProfileInfo = getMyProfileInfo($employeeId);
 
 <body>
 
-	<input type="hidden" id="employeeName" value="<?php echo $employeeName; ?>">
-	<input type="hidden" id="employeeId" value="<?php echo $employeeId; ?>">
-	<input type="hidden" id="designationId" value="<?php echo $designationId; ?>">
-	<input type="hidden" id="departmentId" value="<?php echo $departmentId; ?>">
-	<input type="hidden" id="roleId" value="<?php echo $roleId; ?>">
+	<input type="hidden" id="loginedEmployeeName" value="<?php echo $employeeName; ?>">
+	<input type="hidden" id="loginedEmployeeId" value="<?php echo $employeeId; ?>">
+	<input type="hidden" id="loginedDesignationId" value="<?php echo $designationId; ?>">
+	<input type="hidden" id="loginedDepartmentId" value="<?php echo $departmentId; ?>">
+	<input type="hidden" id="loginedRoleId" value="<?php echo $roleId; ?>">
 
 	<div id="global-loader">
-		<div class="page-loader"></div>
+		<div class="page-loader"></div> 
 	</div>
 
 	<!-- Main Wrapper -->
