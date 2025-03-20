@@ -93,7 +93,7 @@ $MyProfileInfo = getMyProfileInfo($employeeId);
 	<input type="hidden" id="loginedRoleId" value="<?php echo $roleId; ?>">
 
 	<div id="global-loader">
-		<div class="page-loader"></div>
+		<div class="page-loader"></div> 
 	</div>
 
 	<!-- Main Wrapper -->
