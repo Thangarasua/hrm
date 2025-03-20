@@ -116,6 +116,34 @@ $(document).ready(function () {
         })
     });
 
+    $("#addPersonalInfo").on("submit", function (e) {
+        alert('Okay');
+        e.preventDefault();
+        let formData = new FormData(this);
+        formData.append("flag", "PersonalInfo");
+        formData.append("employeeID", employeeID);
+        $.ajax({
+            type: "POST",
+            url: "queries/employee-details.php",
+            data: formData,
+            dataType: "json",
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (response) {
+                if (response.status == "success") {
+                    $("#edit_personal").modal("hide");
+                    toastr.success("Personal Information Updated Successfully");
+                    setTimeout(function() {
+                        location.reload();
+                      }, 2000);
+                } else {
+                    toastr.error(response.message, "Error");
+                }
+            }
+        })
+    });
+
     function calculateSalary() {
         let grossSalary = parseFloat($("#grossSalary").val()) || 0;
         

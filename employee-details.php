@@ -10,8 +10,6 @@ $employeeInfo = getEmployeeInfo($employeeId);
 $experienceInfo = getExperienceInfo($employeeId);
 $educationInfo = getEducationInfo($employeeId);
 
-// $employeeRoleId = $employeeInfo ? $employeeInfo['role'] : '';  
-
 $employeeRoleId = $_SESSION['hrm_roleId'];
 ?>
 <!-- Page Wrapper -->
@@ -117,7 +115,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 						<div class="p-3 border-bottom">
 							<div class="d-flex align-items-center justify-content-between mb-2">
 								<h6>Basic information</h6>
-								<a href="javascript:void(0);" class="btn btn-icon btn-sm" data-bs-toggle="modal" data-bs-target="#edit_employee"><i class="ti ti-edit"></i></a>
+								<a href="javascript:void(0);" class="btn btn-icon btn-sm" data-bs-toggle="modal" data-bs-target="#edit_personal"><i class="ti ti-edit"></i></a>
 							</div>
 							<div class="d-flex align-items-center justify-content-between mb-2">
 								<span class="d-inline-flex align-items-center">
@@ -214,7 +212,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 				</div>
 				<div class="d-flex align-items-center justify-content-between mb-2">
 					<h6>Emergency Contact Number</h6>
-					<a href="javascript:void(0);" class="btn btn-icon btn-sm" data-bs-toggle="modal" data-bs-target="#edit_emergency"><i class="ti ti-edit"></i></a>
+					<a href="javascript:void(0);" class="btn btn-icon btn-sm" data-bs-toggle="modal" data-bs-target="#edit_personal"><i class="ti ti-edit"></i></a>
 				</div>
 				<div class="card">
 					<div class="card-body p-0">
@@ -253,7 +251,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 										<div class="accordion-button">
 											<div class="d-flex align-items-center flex-fill">
 												<h5>About Employee</h5>
-												<a href="#" class="btn btn-sm btn-icon ms-auto" data-bs-toggle="modal" data-bs-target="#edit_employee"><i class="ti ti-edit"></i></a>
+												<a href="#" class="btn btn-sm btn-icon ms-auto" data-bs-toggle="modal" data-bs-target="#"><i class="ti ti-edit"></i></a>
 												<a href="#" class="d-flex align-items-center collapsed collapse-arrow" data-bs-toggle="collapse" data-bs-target="#primaryBorderOne" aria-expanded="false" aria-controls="primaryBorderOne">
 													<i class="ti ti-chevron-down fs-18"></i>
 												</a>
@@ -786,65 +784,170 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 					<i class="ti ti-x"></i>
 				</button>
 			</div>
-			<form action="#">
-				<div class="modal-body pb-0">
-					<div class="row">
-						<div class="col-md-6">
-							<div class="mb-3">
-								<label class="form-label">Passport No <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="mb-3">
-								<label class="form-label">Passport Expiry Date <span class="text-danger"> *</span></label>
-								<div class="input-icon-end position-relative">
-									<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy">
-									<span class="input-icon-addon">
-										<i class="ti ti-calendar text-gray-7"></i>
-									</span>
+			<form id="addPersonalInfo" action="#">
+				<div class="contact-grids-tab">
+					<ul class="nav nav-underline" id="myTab" role="tablist">
+						<li class="nav-item" role="presentation">
+							<button class="nav-link active" id="basic1-tab" data-bs-toggle="tab" data-bs-target="#basic1-info" type="button" role="tab" aria-selected="true">Basic Information</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link" id="personal-tab" data-bs-toggle="tab" data-bs-target="#personal-info" type="button" role="tab" aria-selected="true">Personal Information</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link" id="emergency-contact-tab" data-bs-toggle="tab" data-bs-target="#emergency-contact-info" type="button" role="tab" aria-selected="true">Emergency Contact Number</button>
+						</li>
+					</ul>
+				</div>
+				<div class="tab-content" id="personalInfoTabContent">
+					<div class="tab-pane fade show active" id="basic1-info" role="tabpanel" aria-labelledby="basic1-tab" tabindex="0">
+						<div class="modal-body pb-0">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Gender <span class="text-danger"> *</span></label>
+										<select class="select" name="gender" id="gender">
+											<option vale="">Select</option>
+											<option value="Male">Male</option>
+											<option value="Female">Female</option>
+											<option value="Transgender">Transgender</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Date Of Birth <span class="text-danger"> *</span></label>
+										<div class="input-icon-end position-relative">
+											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="dob" id="dob" value="" required> 
+											<span class="input-icon-addon">
+												<i class="ti ti-calendar text-gray-7"></i>
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Permanent Address <span class="text-danger"> *</span></label>
+										<textarea  class="form-control" rows="4" name="permanentAddress" id="permanentAddress"></textarea>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Present Address <span class="text-danger"> *</span></label>
+										<textarea  class="form-control" rows="4" name="presentAddress" id="presentAddress"></textarea>
+									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col-md-6">
-							<div class="mb-3">
-								<label class="form-label">Nationality <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="mb-3">
-								<label class="form-label">Religion</label>
-								<input type="text" class="form-control">
-							</div>
-						</div>
-						<div class="col-md-12">
-							<div class="mb-3">
-								<label class="form-label">Marital status <span class="text-danger"> *</span></label>
-								<select class="select">
-									<option>Select</option>
-									<option>Yes</option>
-									<option>Nos</option>
-								</select>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="mb-3">
-								<label class="form-label">Employment spouse</label>
-								<input type="text" class="form-control">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="mb-3">
-								<label class="form-label">No. of children</label>
-								<input type="text" class="form-control">
+					</div>
+					<div class="tab-pane fade" id="personal-info" role="tabpanel" aria-labelledby="personal-tab" tabindex="1">
+						<div class="modal-body pb-0">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Passport No <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" name="passportNo" id="passportNo">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Passport Expiry Date <span class="text-danger"> *</span></label>
+										<div class="input-icon-end position-relative">
+											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="passportExpiryDate" id="passportExpiryDate">
+											<span class="input-icon-addon">
+												<i class="ti ti-calendar text-gray-7"></i>
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Nationality <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" name="nationality" id="nationality">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Religion</label>
+										<input type="text" class="form-control" name="religion" id="religion">
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="mb-3">
+										<label class="form-label">Marital Status <span class="text-danger"> *</span></label>
+										<select class="select" name="maritalStatus" id="maritalStatus">
+											<option vale="">Select</option>
+											<option vale="Yes">Yes</option>
+											<option vale="No">No</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="mb-3">
+										<label class="form-label">Employment Spouse</label>
+										<input type="text" class="form-control" name="employmentSpouse" id="employmentSpouse">
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="mb-3">
+										<label class="form-label">No. of Children</label>
+										<input type="text" class="form-control" name="children" id="children">
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-white border me-2" data-bs-dismiss="modal">Cancel</button>
-					<button type="submit" class="btn btn-primary">Save</button>
+					<div class="tab-pane fade" id="emergency-contact-info" role="tabpanel" aria-labelledby="emergency-contact-tab" tabindex="2">
+						<div class="modal-body pb-0">
+							<div class="border-bottom mb-3 ">
+								<div class="row">
+									<h5 class="mb-3">Primary Contact Details</h5>
+									<div class="col-md-4">
+										<div class="mb-3">
+											<label class="form-label">Name <span class="text-danger"> *</span></label>
+											<input type="text" class="form-control" name="primaryContact" id="primaryContact">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="mb-3">
+											<label class="form-label">Relationship </label>
+											<input type="text" class="form-control" name="primaryRelationship" id="primaryRelationship">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="mb-3">
+											<label class="form-label">Phone No <span class="text-danger"> *</span></label>
+											<input type="text" class="form-control" name="primaryContactPhone" id="primaryContactPhone">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<h5 class="mb-3">Secondary Contact Details</h5>
+								<div class="col-md-4">
+									<div class="mb-3">
+										<label class="form-label">Name <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" name="secondaryContact" id="secondaryContact">
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="mb-3">
+										<label class="form-label">Relationship </label>
+										<input type="text" class="form-control" name="secondaryRelationship" id="secondaryRelationship">
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="mb-3">
+										<label class="form-label">Phone No <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" name="secondaryContactPhone" id="secondaryContactPhone">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-white border me-2" data-bs-dismiss="modal">Cancel</button>
+							<button type="submit" class="btn btn-primary">Save</button>
+						</div>
+					</div>
 				</div>
 			</form>
 		</div>
@@ -863,64 +966,6 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 				</button>
 			</div>
 			<form action="#">
-				<div class="modal-body pb-0">
-					<div class="border-bottom mb-3 ">
-						<div class="row">
-							<h5 class="mb-3">Secondary Contact Details</h5>
-							<div class="col-md-6">
-								<div class="mb-3">
-									<label class="form-label">Name <span class="text-danger"> *</span></label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="mb-3">
-									<label class="form-label">Relationship </label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="mb-3">
-									<label class="form-label">Phone No 1 <span class="text-danger"> *</span></label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="mb-3">
-									<label class="form-label">Phone No 2 </label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<h5 class="mb-3">Secondary Contact Details</h5>
-						<div class="col-md-6">
-							<div class="mb-3">
-								<label class="form-label">Name <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="mb-3">
-								<label class="form-label">Relationship </label>
-								<input type="text" class="form-control">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="mb-3">
-								<label class="form-label">Phone No 1 <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="mb-3">
-								<label class="form-label">Phone No 2 </label>
-								<input type="text" class="form-control">
-							</div>
-						</div>
-					</div>
-				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-white border me-2" data-bs-dismiss="modal">Cancel</button>
 					<button type="submit" class="btn btn-primary">Save</button>
