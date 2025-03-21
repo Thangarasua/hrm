@@ -18,15 +18,16 @@ $MyProfileInfo = getMyProfileInfo($employeeId);
 
 <head>
 
+	<title>Markerz | HRM Software</title>
+	
 	<!-- Meta Tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Dashboard | ACTE HRM</title>
-
-	<meta name="description" content="">
-	<meta name="keywords" content="">
-	<meta name="author" content="">
-	<meta name="robots" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<meta name="description" content="Markerz Global Solutions offers advanced Human Resource Management (HRM) software for efficient employee management, payroll, attendance tracking, and performance evaluation.">
+	<meta name="keywords" content="HRM software, human resource management, employee management, payroll system, attendance tracking, recruitment software, performance evaluation, admin panel, business automation, workforce management">
+	<meta name="author" content="Markerz Global Solutions - HRM Software Experts">
+	<meta name="robots" content="index, follow">
 
 	<!-- Apple Touch Icon -->
 	<link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">

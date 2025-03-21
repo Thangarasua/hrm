@@ -84,6 +84,7 @@ $(document).ready(function () {
                             <td>${row.job_level}</td>
                             <td>${row.priority}</td>
                             <td>${row.created_at}</td>
+                            <td>${row.hr_id}</td>
                             <td>
                               <div class="action-icon d-inline-flex">
                                 <a href="#" data-id="${row.id}" class="view">
