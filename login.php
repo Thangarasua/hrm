@@ -9,13 +9,17 @@ if (isset($_SESSION['hrm_employeeId'])) {
 <html lang="en">
 
 <head>
+	
+	<title>Markerz | HRM Software</title>
+
+	<!-- Meta Tags -->
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-	<meta name="description" content="fusionfeae - Bootstrap Admin Template">
-	<meta name="keywords" content="admin, estimates, bootstrap, business, html5, responsive, Projects">
-	<meta name="author" content="acte technologies - Bootstrap Admin Template">
-	<meta name="robots" content="noindex, nofollow">
-	<title>MARKERZ HRM</title>
+	<meta name="description" content="Markerz Global Solutions offers advanced Human Resource Management (HRM) software for efficient employee management, payroll, attendance tracking, and performance evaluation.">
+	<meta name="keywords" content="HRM software, human resource management, employee management, payroll system, attendance tracking, recruitment software, performance evaluation, admin panel, business automation, workforce management">
+	<meta name="author" content="Markerz Global Solutions - HRM Software Experts">
+	<meta name="robots" content="index, follow">
 
 	<!-- Favicon -->
 	<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
@@ -166,7 +170,7 @@ if (isset($_SESSION['hrm_employeeId'])) {
 				success: function(response) {
 					if (response.status == "success") {
 						location.reload();
-					}else{
+					} else {
 						toastr.error(response.message, "Error");
 					}
 				},
