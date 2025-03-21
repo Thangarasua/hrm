@@ -144,6 +144,7 @@ require_once("./includes/sidebar.php");
 								<th>Job Level</th>
 								<th>Notice period</th>
 								<th>Posted Date</th>
+								<th>Handled HR</th>
 								<th>Action</th>
 							</tr>
 						</thead>
