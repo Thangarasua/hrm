@@ -9,6 +9,7 @@ $bankInfo = getBankInfo($employeeId);
 $employeeInfo = getEmployeeInfo($employeeId); 
 $experienceInfo = getExperienceInfo($employeeId);
 $educationInfo = getEducationInfo($employeeId);
+$personalInfo = getPersonalInfo($employeeId);
 
 $employeeRoleId = $_SESSION['hrm_roleId'];
 ?>
@@ -136,21 +137,21 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									<i class="ti ti-gender-male me-2"></i>
 									Gender
 								</span>
-								<p class="text-dark text-end">Male</p>
+								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['gender'] : '';?></p>
 							</div>
 							<div class="d-flex align-items-center justify-content-between mb-2">
 								<span class="d-inline-flex align-items-center">
 									<i class="ti ti-cake me-2"></i>
 									Birdthday
 								</span>
-								<p class="text-dark text-end">24th July 2000</p>
+								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['dob'] : '';?></p>
 							</div>
 							<div class="d-flex align-items-center justify-content-between">
 								<span class="d-inline-flex align-items-center">
 									<i class="ti ti-map-pin-check me-2"></i>
 									Address
 								</span>
-								<p class="text-dark text-end">1861 Bayonne Ave, <br> Manchester, NJ, 08759</p>
+								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['permanentAddress'] : '';?></p>
 							</div>
 						</div>
 						<div class="p-3 border-bottom">
@@ -163,49 +164,49 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									<i class="ti ti-e-passport me-2"></i>
 									Passport No
 								</span>
-								<p class="text-dark">QRET4566FGRT</p>
+								<p class="text-dark"><?php echo $personalInfo ? $personalInfo['passportNo'] : '';?></p>
 							</div>
 							<div class="d-flex align-items-center justify-content-between mb-2">
 								<span class="d-inline-flex align-items-center">
 									<i class="ti ti-calendar-x me-2"></i>
 									Passport Exp Date
 								</span>
-								<p class="text-dark text-end">15 May 2029</p>
+								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['passportExpiryDate'] : '';?></p>
 							</div>
 							<div class="d-flex align-items-center justify-content-between mb-2">
 								<span class="d-inline-flex align-items-center">
 									<i class="ti ti-gender-male me-2"></i>
 									Nationality
 								</span>
-								<p class="text-dark text-end">Indian</p>
+								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['nationality'] : '';?></p>
 							</div>
 							<div class="d-flex align-items-center justify-content-between mb-2">
 								<span class="d-inline-flex align-items-center">
 									<i class="ti ti-bookmark-plus me-2"></i>
 									Religion
 								</span>
-								<p class="text-dark text-end">Christianity</p>
+								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['religion'] : '';?></p>
 							</div>
 							<div class="d-flex align-items-center justify-content-between mb-2">
 								<span class="d-inline-flex align-items-center">
 									<i class="ti ti-hotel-service me-2"></i>
 									Marital status
 								</span>
-								<p class="text-dark text-end">Yes</p>
+								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['maritalStatus'] : '';?></p>
 							</div>
 							<div class="d-flex align-items-center justify-content-between mb-2">
 								<span class="d-inline-flex align-items-center">
 									<i class="ti ti-briefcase-2 me-2"></i>
 									Employment of spouse
 								</span>
-								<p class="text-dark text-end">No</p>
+								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['employmentSpouse'] : '';?></p>
 							</div>
 							<div class="d-flex align-items-center justify-content-between">
 								<span class="d-inline-flex align-items-center">
 									<i class="ti ti-baby-bottle me-2"></i>
 									No. of children
 								</span>
-								<p class="text-dark text-end">2</p>
+								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['children'] : '';?></p>
 							</div>
 						</div>
 					</div>
@@ -222,9 +223,9 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									<span class="d-inline-flex align-items-center">
 										Primary
 									</span>
-									<h6 class="d-flex align-items-center fw-medium mt-1">Adrian Peralt <span class="d-inline-flex mx-1"><i class="ti ti-point-filled text-danger"></i></span>Father</h6>
+									<h6 class="d-flex align-items-center fw-medium mt-1"><?php echo $personalInfo ? $personalInfo['primaryContacts'] : '';?> <span class="d-inline-flex mx-1"><i class="ti ti-point-filled text-danger"></i></span><?php echo $personalInfo ? $personalInfo['primaryRelationship'] : '';?></h6>
 								</div>
-								<p class="text-dark">+1 127 2685 598</p>
+								<p class="text-dark"><?php echo $personalInfo ? $personalInfo['primaryContactPhone'] : '';?></p>
 							</div>
 						</div>
 						<div class="p-3 border-bottom">
@@ -233,9 +234,9 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									<span class="d-inline-flex align-items-center">
 										Secondry
 									</span>
-									<h6 class="d-flex align-items-center fw-medium mt-1">Karen Wills <span class="d-inline-flex mx-1"><i class="ti ti-point-filled text-danger"></i></span>Mother</h6>
+									<h6 class="d-flex align-items-center fw-medium mt-1"><?php echo $personalInfo ? $personalInfo['secondaryContact'] : '';?> <span class="d-inline-flex mx-1"><i class="ti ti-point-filled text-danger"></i></span><?php echo $personalInfo ? $personalInfo['secondaryRelationship'] : '';?></h6>
 								</div>
-								<p class="text-dark">+1 989 7774 787</p>
+								<p class="text-dark"><?php echo $personalInfo ? $personalInfo['secondaryContactPhone'] : '';?></p>
 							</div>
 						</div>
 					</div>
@@ -806,10 +807,10 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									<div class="mb-3">
 										<label class="form-label">Gender <span class="text-danger"> *</span></label>
 										<select class="select" name="gender" id="gender">
-											<option vale="">Select</option>
-											<option value="Male">Male</option>
-											<option value="Female">Female</option>
-											<option value="Transgender">Transgender</option>
+											<option value="" <?php echo !$personalInfo['gender'] ? 'selected' : ''; ?>>Select</option>
+											<option value="Male" <?php echo $personalInfo['gender'] == 'Male' ? 'selected' : ''; ?>>Male</option>
+											<option value="Female" <?php echo $personalInfo['gender'] == 'Female' ? 'selected' : ''; ?>>Female</option>
+											<option value="Transgender" <?php echo $personalInfo['gender'] == 'Transgender' ? 'selected' : ''; ?>>Transgender</option>
 										</select>
 									</div>
 								</div>
@@ -817,7 +818,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									<div class="mb-3">
 										<label class="form-label">Date Of Birth <span class="text-danger"> *</span></label>
 										<div class="input-icon-end position-relative">
-											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="dob" id="dob" value="" required> 
+											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="dob" id="dob" value="<?php echo $personalInfo ? $personalInfo['dob'] : '';?>" required> 
 											<span class="input-icon-addon">
 												<i class="ti ti-calendar text-gray-7"></i>
 											</span>
@@ -827,13 +828,13 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								<div class="col-md-12">
 									<div class="mb-3">
 										<label class="form-label">Permanent Address <span class="text-danger"> *</span></label>
-										<textarea  class="form-control" rows="4" name="permanentAddress" id="permanentAddress"></textarea>
+										<textarea  class="form-control" rows="4" name="permanentAddress" id="permanentAddress"><?php echo $personalInfo ? $personalInfo['permanentAddress'] : '';?></textarea>
 									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="mb-3">
 										<label class="form-label">Present Address <span class="text-danger"> *</span></label>
-										<textarea  class="form-control" rows="4" name="presentAddress" id="presentAddress"></textarea>
+										<textarea  class="form-control" rows="4" name="presentAddress" id="presentAddress"><?php echo $personalInfo ? $personalInfo['presentAddress'] : '';?></textarea>
 									</div>
 								</div>
 							</div>
@@ -845,14 +846,14 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Passport No <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="passportNo" id="passportNo">
+										<input type="text" class="form-control" name="passportNo" id="passportNo" value="<?php echo $personalInfo ? $personalInfo['passportNo'] : '';?>">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Passport Expiry Date <span class="text-danger"> *</span></label>
 										<div class="input-icon-end position-relative">
-											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="passportExpiryDate" id="passportExpiryDate">
+											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="passportExpiryDate" id="passportExpiryDate" value="<?php echo $personalInfo ? $personalInfo['passportExpiryDate'] : '';?>">
 											<span class="input-icon-addon">
 												<i class="ti ti-calendar text-gray-7"></i>
 											</span>
@@ -862,35 +863,35 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Nationality <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="nationality" id="nationality">
+										<input type="text" class="form-control" name="nationality" id="nationality" value="<?php echo $personalInfo ? $personalInfo['nationality'] : '';?>">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Religion</label>
-										<input type="text" class="form-control" name="religion" id="religion">
+										<input type="text" class="form-control" name="religion" id="religion" value="<?php echo $personalInfo ? $personalInfo['religion'] : '';?>">
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">Marital Status <span class="text-danger"> *</span></label>
 										<select class="select" name="maritalStatus" id="maritalStatus">
-											<option vale="">Select</option>
-											<option vale="Yes">Yes</option>
-											<option vale="No">No</option>
+											<option value="" <?php echo !$personalInfo['maritalStatus'] ? 'selected' : ''; ?>>Select</option>
+											<option value="Yes" <?php echo $personalInfo['maritalStatus'] == 'Yes' ? 'selected' : ''; ?>>Yes</option>
+											<option value="No" <?php echo $personalInfo['maritalStatus'] == 'No' ? 'selected' : ''; ?>>No</option>
 										</select>
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">Employment Spouse</label>
-										<input type="text" class="form-control" name="employmentSpouse" id="employmentSpouse">
+										<input type="text" class="form-control" name="employmentSpouse" id="employmentSpouse" value="<?php echo $personalInfo ? $personalInfo['employmentSpouse'] : '';?>">
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">No. of Children</label>
-										<input type="text" class="form-control" name="children" id="children">
+										<input type="text" class="form-control" name="children" id="children" value="<?php echo $personalInfo ? $personalInfo['children'] : '';?>">
 									</div>
 								</div>
 							</div>
@@ -904,19 +905,19 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									<div class="col-md-4">
 										<div class="mb-3">
 											<label class="form-label">Name <span class="text-danger"> *</span></label>
-											<input type="text" class="form-control" name="primaryContact" id="primaryContact">
+											<input type="text" class="form-control" name="primaryContact" id="primaryContact" value="<?php echo $personalInfo ? $personalInfo['primaryContacts'] : '';?>">
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="mb-3">
 											<label class="form-label">Relationship </label>
-											<input type="text" class="form-control" name="primaryRelationship" id="primaryRelationship">
+											<input type="text" class="form-control" name="primaryRelationship" id="primaryRelationship" value="<?php echo $personalInfo ? $personalInfo['primaryRelationship'] : '';?>">
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="mb-3">
 											<label class="form-label">Phone No <span class="text-danger"> *</span></label>
-											<input type="text" class="form-control" name="primaryContactPhone" id="primaryContactPhone">
+											<input type="text" class="form-control" name="primaryContactPhone" id="primaryContactPhone" value="<?php echo $personalInfo ? $personalInfo['primaryContactPhone'] : '';?>">
 										</div>
 									</div>
 								</div>
@@ -926,19 +927,19 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">Name <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="secondaryContact" id="secondaryContact">
+										<input type="text" class="form-control" name="secondaryContact" id="secondaryContact" value="<?php echo $personalInfo ? $personalInfo['secondaryContact'] : '';?>">
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">Relationship </label>
-										<input type="text" class="form-control" name="secondaryRelationship" id="secondaryRelationship">
+										<input type="text" class="form-control" name="secondaryRelationship" id="secondaryRelationship" value="<?php echo $personalInfo ? $personalInfo['secondaryRelationship'] : '';?>">
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">Phone No <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="secondaryContactPhone" id="secondaryContactPhone">
+										<input type="text" class="form-control" name="secondaryContactPhone" id="secondaryContactPhone" value="<?php echo $personalInfo ? $personalInfo['secondaryContactPhone'] : '';?>">
 									</div>
 								</div>
 							</div>
