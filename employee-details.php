@@ -807,10 +807,10 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									<div class="mb-3">
 										<label class="form-label">Gender <span class="text-danger"> *</span></label>
 										<select class="select" name="gender" id="gender">
-											<option value="" <?php echo !$personalInfo['gender'] ? 'selected' : ''; ?>>Select</option>
-											<option value="Male" <?php echo $personalInfo['gender'] == 'Male' ? 'selected' : ''; ?>>Male</option>
-											<option value="Female" <?php echo $personalInfo['gender'] == 'Female' ? 'selected' : ''; ?>>Female</option>
-											<option value="Transgender" <?php echo $personalInfo['gender'] == 'Transgender' ? 'selected' : ''; ?>>Transgender</option>
+											<option value="" <?php echo empty($personalInfo['gender']) ? 'selected' : ''; ?>>Select</option>
+											<option value="Male" <?php echo isset($personalInfo['gender']) && $personalInfo['gender'] == 'Male' ? 'selected' : ''; ?>>Male</option>
+											<option value="Female" <?php echo isset($personalInfo['gender']) && $personalInfo['gender'] == 'Female' ? 'selected' : ''; ?>>Female</option>
+											<option value="Transgender" <?php echo isset($personalInfo['gender']) && $personalInfo['gender'] == 'Transgender' ? 'selected' : ''; ?>>Transgender</option>
 										</select>
 									</div>
 								</div>
@@ -876,9 +876,9 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									<div class="mb-3">
 										<label class="form-label">Marital Status <span class="text-danger"> *</span></label>
 										<select class="select" name="maritalStatus" id="maritalStatus">
-											<option value="" <?php echo !$personalInfo['maritalStatus'] ? 'selected' : ''; ?>>Select</option>
-											<option value="Yes" <?php echo $personalInfo['maritalStatus'] == 'Yes' ? 'selected' : ''; ?>>Yes</option>
-											<option value="No" <?php echo $personalInfo['maritalStatus'] == 'No' ? 'selected' : ''; ?>>No</option>
+											<option value="" <?php echo empty($personalInfo['maritalStatus']) ? 'selected' : ''; ?>>Select</option>
+											<option value="Yes" <?php echo isset($personalInfo['maritalStatus']) && $personalInfo['maritalStatus'] == 'Yes' ? 'selected' : ''; ?>>Yes</option>
+											<option value="No" <?php echo isset($personalInfo['maritalStatus']) && $personalInfo['maritalStatus'] == 'No' ? 'selected' : ''; ?>>No</option>
 										</select>
 									</div>
 								</div>
