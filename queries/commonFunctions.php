@@ -190,3 +190,32 @@ function formatDateRange($startDate, $endDate) {
     return $formattedStartDate . ' - ' . $formattedEndDate;
 }
 
+function getPersonalInfo($employeeId) {
+    global $conn;
+    $query = "SELECT * FROM personal_info WHERE employee_id = '$employeeId'";
+    $result = mysqli_query($conn, $query);
+    if ($result && $row = $result->fetch_assoc()) {
+        return [
+            'gender' => $row['gender'],
+            'dob' => $row['dob'],
+            'permanentAddress' => $row['permanent_address'],
+            'presentAddress' => $row['present_address'],
+            'passportNo' => $row['passpor_no'],
+            'passportExpiryDate' => $row['passport_expiry_date'],
+            'nationality' => $row['nationality'],
+            'religion' => $row['religion'],
+            'maritalStatus' => $row['marital_status'],
+            'employmentSpouse' => $row['employment_spouse'],
+            'children' => $row['children'],
+            'primaryContacts' => $row['primary_contact'],
+            'primaryRelationship' => $row['primary_relationship'],
+            'primaryContactPhone' => $row['primary_phone'],
+            'secondaryContact' => $row['secondary_contact'],
+            'secondaryRelationship' => $row['secondary_relationship'],
+            'secondaryContactPhone' => $row['secondary_phone'],
+        ];
+    } else {
+        return null;
+    }
+};
+

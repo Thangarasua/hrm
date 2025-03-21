@@ -117,7 +117,6 @@ $(document).ready(function () {
     });
 
     $("#addPersonalInfo").on("submit", function (e) {
-        alert('Okay');
         e.preventDefault();
         let formData = new FormData(this);
         formData.append("flag", "PersonalInfo");
