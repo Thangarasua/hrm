@@ -75,7 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     if ($flag === "insert") {
 
         $employeeId = $_POST['employeeID'];
-        $fullName = $_POST['employeeName'];
+        $officialName = $_POST['employeeOfficialName'];
+        $personalName = $_POST['employeePersonalName'];
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $doj = $_POST['doj'];
@@ -98,9 +99,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $workLocation = $_POST['workLocation'];
         $employeeType = $_POST['employeeType'];
 
-        $query = "INSERT INTO employees (employee_id, full_name, email, phone, doj, `password`, designation_id, department_id, role_id, manager_id, supervisor_id, work_location, employee_type, `status`) VALUES ('$employeeId', '$fullName', '$email', '$phone', '$doj', '$encryptedPassword', $designation, $department, $role, '$manager', '$supervisor', '$workLocation', '$employeeType', 1)";
+        $query = "INSERT INTO employees (employee_id, official_name, personal_name, email, phone, doj, `password`, designation_id, department_id, role_id, manager_id, supervisor_id, work_location, employee_type, `status`) VALUES ('$employeeId', '$officialName', '$personalName', '$email', '$phone', '$doj', '$encryptedPassword', $designation, $department, $role, '$manager', '$supervisor', '$workLocation', '$employeeType', 1)";
 
-        $data = array('flag' => 'welcomeMail', 'employeeId' => $employeeId, 'fullName' => $fullName, 'email' => $email, 'password' => $password);
+        $data = array('flag' => 'welcomeMail', 'employeeId' => $employeeId, 'OfficialName' => $officialName, 'email' => $email, 'password' => $password);
 
         if (mysqli_query($conn, $query)) {
             echo json_encode(array('status' => 'success', 'message' => 'Employee data added successfully.', 'data' => $data));

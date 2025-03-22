@@ -42,7 +42,7 @@ function getManagerUsers($user, $currentUserId = null) {
 
     while ($row = $result->fetch_assoc()) {
         $selected = ($row['employee_id'] == $currentUserId) ? 'selected' : '';
-        $options .= '<option value="' . $row['employee_id'] . '" ' . $selected . '>' . htmlspecialchars($row['full_name']) . '</option>';
+        $options .= '<option value="' . $row['employee_id'] . '" ' . $selected . '>' . htmlspecialchars($row['official_name']) . '</option>';
     }
 
     return $options;
@@ -76,7 +76,8 @@ function getEmployeeInfo($employeeId) {
         $decryptPassword = openssl_decrypt($row['password'], $method, $key, 0, $iv);
         return [
             'employeeId' => $row['employee_id'],
-            'fullName' => $row['full_name'],
+            'OfficialName' => $row['official_name'],
+            'personalName' => $row['personal_name'],
             'email' => $row['email'],
             'phone' => $row['phone'],
             'doj' => date("d-m-Y", strtotime($row['doj'])),
@@ -112,7 +113,7 @@ function getMyProfileInfo($employeeId) {
         $decryptPassword = openssl_decrypt($row['password'], $method, $key, 0, $iv);
         return [
             'employeeId' => $row['employee_id'],
-            'fullName' => $row['full_name'],
+            'officialName' => $row['official_name'],
             'email' => $row['email'],
             'phone' => $row['phone'],
             'password' => $decryptPassword,

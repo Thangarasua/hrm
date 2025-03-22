@@ -54,7 +54,7 @@ $(document).ready(function () {
             var newRow = `<tr>
                             <td>${index + 1}</td>
                             <td>${row.employee_id}</td>
-                            <td>${row.full_name}</td> 
+                            <td>${row.official_name}</td> 
                             <td class='pointer' title='${
                               row.email
                             }'>${row.email.substr(0, 20)}</td>

@@ -15,7 +15,7 @@ $query = "SELECT * FROM `employees` WHERE `employee_id` = '$username'";
 $result = mysqli_query($conn, $query);
 if (mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_array($result);
-    $employeeName = $row['full_name'];
+    $employeeName = $row['official_name'];
     $employeeId = $row['employee_id'];
     $dbPassword = $row['password'];
     $designationId = $row['designation_id'];

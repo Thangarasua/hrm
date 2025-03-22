@@ -29,16 +29,16 @@ try {
 
         if ($flag === "welcomeMail") {
             $employeeId = $_POST['employeeId'];
-            $fullName = $_POST['fullName'];
+            $OfficialName = $_POST['OfficialName'];
             $email = $_POST['email'];
             $password = $_POST['password'];
             //Recipients
-            $mail->addAddress($_POST['email'], $_POST['fullName']);
+            $mail->addAddress($_POST['email'], $_POST['OfficialName']);
 
             $mail->Subject = mb_encode_mimeheader("🎉Welcome to Markerz! 💌🎊", 'UTF-8');
             //Content
             $htmlContent = file_get_contents('./templates/employee-welcome-mail.html');
-            $htmlContent = str_replace('{{Name}}', $fullName, $htmlContent);
+            $htmlContent = str_replace('{{Name}}', $OfficialName, $htmlContent);
             $htmlContent = str_replace('{{Employee ID}}', $employeeId, $htmlContent);
             $htmlContent = str_replace('{{Password}}', $password, $htmlContent);
 

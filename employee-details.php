@@ -46,7 +46,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 						</span>
 						<div class="text-center px-3 pb-3 border-bottom">
 							<div class="mb-3">
-								<h5 class="d-flex align-items-center justify-content-center mb-1"><?php echo $employeeInfo ? $employeeInfo['fullName'] : ''; ?><i class="ti ti-discount-check-filled text-success ms-1"></i></h5>
+								<h5 class="d-flex align-items-center justify-content-center mb-1"><?php echo $employeeInfo ? $employeeInfo['OfficialName'] : ''; ?><i class="ti ti-discount-check-filled text-success ms-1"></i></h5>
 								<span class="badge badge-soft-dark fw-medium me-2">
 									<i class="ti ti-point-filled me-1"></i><?php echo $employeeInfo ? $employeeInfo['designationName'] : ''; ?>
 								</span>
@@ -680,8 +680,14 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
-										<label class="form-label">Full Name <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" onkeypress="return isAlphabets(event)" name="employeeName" value="<?php echo $employeeInfo ? $employeeInfo['fullName'] : ''; ?>" required>
+										<label class="form-label">Official Name <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" onkeypress="return isAlphabets(event)" name="employeeOfficalName" value="<?php echo $employeeInfo ? $employeeInfo['OfficialName'] : ''; ?>" required>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Personal Name <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" onkeypress="return isAlphabets(event)" name="employeePersonalName" value="<?php echo $employeeInfo ? $employeeInfo['personalName'] : ''; ?>" required>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -1218,7 +1224,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 				<div class="text-center p-3">
 					<span class="avatar avatar-lg avatar-rounded bg-success mb-3"><i class="ti ti-check fs-24"></i></span>
 					<h5 class="mb-2">Employee Update Successfully</h5>
-					<p class="mb-3"><?php echo $employeeInfo ? $employeeInfo['fullName'] : ''; ?> : <span class="text-primary">#<?php echo $employeeInfo ? $employeeInfo['employeeId'] : ''; ?></span>
+					<p class="mb-3"><?php echo $employeeInfo ? $employeeInfo['OfficialName'] : ''; ?> : <span class="text-primary">#<?php echo $employeeInfo ? $employeeInfo['employeeId'] : ''; ?></span>
 					</p>
 					<div>
 						<div class="row g-2">

@@ -332,8 +332,14 @@
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
-										<label class="form-label">Full Name <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" onkeypress="return isAlphabets(event)" oninput="capitalizeWords(this)" name="employeeName" required autocomplete="off">
+										<label class="form-label">Official Name <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" onkeypress="return isAlphabets(event)" oninput="capitalizeWords(this)" name="employeeOfficialName" required autocomplete="off">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Personal Name <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" onkeypress="return isAlphabets(event)" oninput="capitalizeWords(this)" name="employeePersonalName" required autocomplete="off">
 									</div>
 								</div>
 								<div class="col-md-6">
