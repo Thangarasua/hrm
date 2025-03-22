@@ -100,11 +100,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
             echo json_encode(array('status' => 'success', 'data' => $salaryRange));
         } else {
-            echo json_encode(array('status' => 'failure', 'message' => 'something went wrong'));
-        }
-        if ($result) {
-        } else {
-        }
+            echo json_encode(array('status' => 'failure', 'message' => 'STILL NOT SET SALARY RANGE.'));
+        } 
         exit;
     }
 }

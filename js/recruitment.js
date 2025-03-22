@@ -133,8 +133,19 @@ $(document).on("change", "#jobPosition, #salaryType", function(e){
     success: function (res) {
       if (res.status == "success") {
         $("#salaryRange").val(res.data);
-      } else {
-        Swal.fire(res.data.message);
+      } else { 
+        $("#salaryRange").val(''); 
+
+        Swal.fire({
+          icon: "info",
+          title: res.message, 
+          showCancelButton: true,
+          confirmButtonText: "Set Salary Range👈", 
+        }).then((result) => { 
+          if (result.isConfirmed) {
+            window.open("salary-structure", "_blank");
+          }  
+        });
       }
     },
   });
