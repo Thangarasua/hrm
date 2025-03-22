@@ -70,7 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
     if ($flag === "update") {
         $employeeId = $_POST['employeeID'];
-        $fullName = $_POST['employeeName'];
+        $officialName = $_POST['employeeOfficalName'];
+        $personalName = $_POST['employeePersonalName'];
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $doj = $_POST['doj'];
@@ -99,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             $status = ",status = '1'";
         }
 
-        $updateQuery = "UPDATE employees SET full_name = '$fullName', email = '$email', phone = '$phone', doj = '$doj', `password` = '$encryptedPassword', designation_id = $designation, department_id = $department, role_id = $role, manager_id = '$manager', supervisor_id = '$supervisor', work_location = '$workLocation', employee_type = '$employeeType' $status WHERE employee_id = '$employeeId'"; 
+        $updateQuery = "UPDATE employees SET official_name = '$officialName', personal_name = '$personalName', email = '$email', phone = '$phone', doj = '$doj', `password` = '$encryptedPassword', designation_id = $designation, department_id = $department, role_id = $role, manager_id = '$manager', supervisor_id = '$supervisor', work_location = '$workLocation', employee_type = '$employeeType' $status WHERE employee_id = '$employeeId'"; 
         if (mysqli_query($conn, $updateQuery)) {
             echo json_encode(array('status' => 'success', 'message' => 'Employee data updated successfully.'));
         } else {
