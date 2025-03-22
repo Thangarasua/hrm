@@ -73,7 +73,7 @@ $(document).ready(function () {
           $.each(data, function (index, row) { 
             if(departmentId == 5){ 
               var send = `<a href="#" data-id="${row.id}" class="send"> <i class="fa-solid fa-paper-plane"></i></a>`;
-            }else if(departmentId == 7){
+            }else{
              var send = ``;
             }
 
