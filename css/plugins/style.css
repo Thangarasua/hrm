@@ -13427,6 +13427,15 @@ svg.collapse-open, svg.collapse-close {
   margin-top: 5px;
 }
 
+.swal2-icon { 
+  width: 3em!important;
+  height: 3em!important; 
+}
+
+.swal2-icon .swal2-icon-content { 
+  font-size: 1.75em!important;
+}
+
 .swal2-actions .swal2-confirm.btn:active {
   background-color: var(--bg-primary);
   border-color: var(--bg-primary);
