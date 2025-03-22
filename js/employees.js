@@ -222,6 +222,7 @@ $(document).ready(function () {
   $(document).on("click", "#employeeStatusUpdate", function (e) {
     e.preventDefault();
     var employeeId = $(this).data("id"); 
+    var encryptedId = encryptEmployeeId(employeeId);
     window.location.href = `employee-details.php?empId=${encryptedId}`;
   });
 

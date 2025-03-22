@@ -50,7 +50,7 @@ require_once("./includes/sidebar.php");
 				<div class="d-flex my-xl-auto right-content align-items-center flex-wrap row-gap-3">
 					<div class="me-3">
 						<div class="form-group">
-							<input type="text" id="myInputTextField" class="form-control" placeholder="Search anything..." title="Search any thing in the table you want" >
+							<input type="text" id="myInputTextField" class="form-control" placeholder="Search anything..." title="Search any thing in the table you want">
 						</div>
 					</div>
 					<div class="me-3">
@@ -179,11 +179,30 @@ require_once("./includes/sidebar.php");
 					<div class="tab-content" id="">
 						<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
 							<div class="row">
-								<div class="col-md-12">
+								<div class="col-md-6">
 									<div class="mb-3 position-relative">
-										<label class="form-label">Job Title <span class="text-danger"> *</span></label> 
+										<label class="form-label">Job Title <span class="text-danger"> *</span></label>
 										<input type="text" name="jobTitle" id="jobTitleSearch" placeholder="e.g: Sales Executies" class="form-control" oninput="capitalizeWords(this)" autocomplete="off" />
 										<ul class="list-group addFields" id="jobTitleResult"></ul>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Salary Range <span class="text-danger"> *</span></label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<select class="select" name="" id="jobPosition">
+													<?php echo getJobLevels(); ?>
+												</select>
+											</div>
+											<div class="input-group-prepend">
+												<select class="select" name="" id="salaryType">
+													<option value="Annum">Annum</option>
+													<option value="Month">Month</option>
+												</select>
+											</div>
+											<input type="text" class="form-control" name="salaryRange" id="salaryRange" placeholder="Select the Position Level" readonly>
+										</div>
 									</div>
 								</div>
 								<div class="col-md-12">
@@ -192,35 +211,51 @@ require_once("./includes/sidebar.php");
 										<textarea rows="3" class="form-control" name="jobDescription" id="jobDescription" placeholder="Enter the job's specifics here..."></textarea>
 									</div>
 								</div>
-								<div class="col-md-6">
-									<div class="mb-3 position-relative">
-										<label class="form-label">Job Type <span class="text-danger"> *</span></label>
-										<input type="text" name="jobType" id="jobTypeSearch" placeholder="e.g: Full TIme" class="form-control" oninput="capitalizeWords(this)" autocomplete="off" />
-										<ul class="list-group addFields" id="jobTypeResult"></ul>
+
+								<div class="col-md-4">
+									<div class="mb-3">
+										<label class="form-label">Work Mode <span class="text-danger"> *</span></label>
+										<select class="select" name="workMode" id="workMode">
+											<option value="">Select</option>
+											<option value="On Premises">On Premises</option>
+											<option value="Work From Home">Work From Home</option>
+											<option value="Hybrid">Hybrid</option>
+										</select>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
+									<div class="mb-3">
+										<label class="form-label">Job Type <span class="text-danger"> *</span></label>
+										<select class="select" name="jobType" id="jobType">
+											<option value="">Select</option>
+											<option value="Full Time">Full Time</option>
+											<option value="Part Time">Part Time</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="col-md-4">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Job Level <span class="text-danger"> *</span></label>
 										<input type="text" name="jobLevel" id="jobLevelSearch" placeholder="e.g: Entry Level" class="form-control" oninput="capitalizeWords(this)" autocomplete="off" />
 										<ul class="list-group addFields" id="jobLevelResult"></ul>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Experience <span class="text-danger"> *</span></label>
 										<input type="text" name="experience" id="experienceSearch" placeholder="e.g: Fresher" class="form-control" oninput="capitalizeWords(this)" autocomplete="off" />
 										<ul class="list-group addFields" id="experienceResult"></ul>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Qualification <span class="text-danger"> *</span></label>
 										<input type="text" name="qualification" id="qualificationSearch" placeholder="e.g: UG" class="form-control" oninput="capitalizeWords(this)" autocomplete="off" />
 										<ul class="list-group addFields" id="qualificationResult"></ul>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">Gender <span class="text-danger"> *</span></label>
 										<select class="select" name="gender" id="gender">
@@ -231,36 +266,42 @@ require_once("./includes/sidebar.php");
 										</select>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-12">
 									<div class="mb-3">
-										<label class="form-label">Required Skills</label>
-										<input type="text" class="form-control" name="requiredSkills" id="requiredSkills" placeholder="Enter the skill's specifics here.">
+										<label class="form-label">Required Skills <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" name="requiredSkills" id="requiredSkills" placeholder="Enter the skill's specifics here." autocomplete="off">
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="mb-3">
-										<label class="form-label">Notice period<span class="text-danger"> *</span></label>
+										<label class="form-label">Notice period <span class="text-danger"> *</span></label>
 										<select class="select" name="priority" id="priority">
 											<option value="">Select</option>
 											<option value="Immediate">Immediate</option>
 											<option value="15 Days">15 Days</option>
-											<option value="01 Month">01 Month</option>
+											<option value="30 Days">30 Days</option>
 											<option value="45 Days">45 Days</option>
-											<option value="02 Month">02 Month</option>
-											<option value="No Limite">No Limite</option>
+											<option value="60 Days">60 Days</option>
+											<option value="90 Days">90 Days</option>
 										</select>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="mb-3">
-										<label class="form-label">Location</label>
-										<input type="text" class="form-control" oninput="capitalizeWords(this)" name="location" id="location" placeholder="Company branch location">
+										<label class="form-label">No Of Opening <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" onkeypress="return isNumber(event)" name="openings" id="openings" placeholder="Number of openings" autocomplete="off">
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="mb-3">
+										<label class="form-label">Location <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" oninput="capitalizeWords(this)" name="location" id="location" placeholder="Company branch location" autocomplete="off">
 									</div>
 								</div>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</button>
-								<button type="submit" class="btn btn-primary">Save & Next</button>
+								<button type="submit" class="btn btn-primary" id="updateButton">Upload <i class='fa-solid fa-cloud-arrow-up'></i></button>
 							</div>
 						</div>
 					</div>
@@ -517,28 +558,28 @@ require_once("./includes/sidebar.php");
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Job Type <span class="text-danger"> *</span></label>
-										<input type="text" name="jobType" id="edit_jobType" placeholder="Work Job Type " class="form-control" readonly/>
+										<input type="text" name="jobType" id="edit_jobType" placeholder="Work Job Type " class="form-control" readonly />
 										<ul class="list-group addFields" id="jobTypeResult"></ul>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Job Level <span class="text-danger"> *</span></label>
-										<input type="text" name="jobLevel" id="edit_jobLevel" placeholder="Work Job Level " class="form-control" readonly/>
+										<input type="text" name="jobLevel" id="edit_jobLevel" placeholder="Work Job Level " class="form-control" readonly />
 										<ul class="list-group addFields" id="jobLevelResult"></ul>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Experience <span class="text-danger"> *</span></label>
-										<input type="text" name="experience" id="edit_experience" placeholder="Work Experience level" class="form-control" readonly/>
+										<input type="text" name="experience" id="edit_experience" placeholder="Work Experience level" class="form-control" readonly />
 										<ul class="list-group addFields" id="experienceResult"></ul>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Qualification <span class="text-danger"> *</span></label>
-										<input type="text" name="qualification" id="edit_qual" placeholder="Education qualification" class="form-control" readonly/>
+										<input type="text" name="qualification" id="edit_qual" placeholder="Education qualification" class="form-control" readonly />
 										<ul class="list-group addFields" id="qualificationResult"></ul>
 									</div>
 								</div>

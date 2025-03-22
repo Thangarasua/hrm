@@ -17,11 +17,19 @@ $(document).ready(function () {
       contentType: false,
       cache: false,
       processData: false,
+      beforeSend: function(){
+        $("#updateButton")
+        .html("Loading <i class='fa-solid fa-spinner'></i>")
+        .prop("disabled", true);
+      },
       success: function (response) {
         if (response.status == "success") {
           $("#success_modal").modal("show");
           $("#success_modal_content").html("Request add Successfully");
           $("#create")[0].reset();
+          $("#updateButton")
+              .html("Upload <i class='fa-solid fa-cloud-arrow-up'></i>")
+              .prop("disabled", false);
           $("#add_post").modal("hide");
           loadData("", "", "", "", "getAll");
         } else {
@@ -108,6 +116,30 @@ $(document).ready(function () {
       },
     });
   }
+
+$(document).on("change", "#jobPosition, #salaryType", function(e){
+  e.preventDefault();
+  var id = $('#jobPosition').val();
+  var type = $('#salaryType').val();
+  $.ajax({
+    type: "POST",
+    url: "queries/salary-structure.php",
+    data: {
+      id: id,
+      type: type,
+      flag: "salaryRange",
+    },
+    cache: false,
+    success: function (res) {
+      if (res.status == "success") {
+        $("#salaryRange").val(res.data);
+      } else {
+        Swal.fire(res.data.message);
+      }
+    },
+  });
+})
+
   $(document).on("click", ".edit", function (e) {
     e.preventDefault();
     var id = $(this).data("id");
@@ -374,7 +406,15 @@ $(document).ready(function () {
     let jobTitleSearch = $("#jobTitleSearch").val().trim();
     if (jobTitleSearch.length == 0) {
       $("#jobTitleSearch").focus();
-      $("#jobTitleSearch").after(
+      $("#jobTitleSearch").closest(".mb-3").find(".form-label").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+    let salaryRange = $("#salaryRange").val().trim();
+    if (salaryRange.length == 0) {
+      $("#salaryRange").focus();
+      $("#salaryRange").closest(".mb-3").find(".form-label").after(
         "<small class='error text-danger'> mandatory field.</small>"
       );
       return 0;
@@ -382,15 +422,23 @@ $(document).ready(function () {
     let jobDescription = $("#jobDescription").val().trim();
     if (jobDescription.length == 0) {
       $("#jobDescription").focus();
-      $("#jobDescription").after(
+      $("#jobDescription").closest(".mb-3").find(".form-label").after(
         "<small class='error text-danger'> mandatory field.</small>"
       );
       return 0;
     }
-    let jobType = $("#jobTypeSearch").val().trim();
+    let workMode = $("#workMode").val().trim();
+    if (workMode.length == 0) {
+      $("#workMode").focus();
+      $("#workMode").closest(".mb-3").find(".form-label").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+    let jobType = $("#jobType").val().trim();
     if (jobType.length == 0) {
       $("#jobType").focus();
-      $("#jobType").after(
+      $("#jobType").closest(".mb-3").find(".form-label").after(
         "<small class='error text-danger'> mandatory field.</small>"
       );
       return 0;
@@ -398,7 +446,7 @@ $(document).ready(function () {
     let jobLevelSearch = $("#jobLevelSearch").val().trim();
     if (jobLevelSearch.length == 0) {
       $("#jobLevelSearch").focus();
-      $("#jobLevelSearch").after(
+      $("#jobLevelSearch").closest(".mb-3").find(".form-label").after(
         "<small class='error text-danger'> mandatory field.</small>"
       );
       return 0;
@@ -406,7 +454,7 @@ $(document).ready(function () {
     let experienceSearch = $("#experienceSearch").val().trim();
     if (experienceSearch.length == 0) {
       $("#experienceSearch").focus();
-      $("#experienceSearch").after(
+      $("#experienceSearch").closest(".mb-3").find(".form-label").after(
         "<small class='error text-danger'> mandatory field.</small>"
       );
       return 0;
@@ -414,7 +462,7 @@ $(document).ready(function () {
     let qualificationSearch = $("#qualificationSearch").val().trim();
     if (qualificationSearch.length == 0) {
       $("#qualificationSearch").focus();
-      $("#qualificationSearch").after(
+      $("#qualificationSearch").closest(".mb-3").find(".form-label").after(
         "<small class='error text-danger'> mandatory field.</small>"
       );
       return 0;
@@ -422,7 +470,7 @@ $(document).ready(function () {
     let gender = $("#gender").val().trim();
     if (gender.length == 0) {
       $("#gender").focus();
-      $("#gender").after(
+      $("#gender").closest(".mb-3").find(".form-label").after(
         "<small class='error text-danger'> mandatory field.</small>"
       );
       return 0;
@@ -430,7 +478,7 @@ $(document).ready(function () {
     let requiredSkills = $("#requiredSkills").val().trim();
     if (requiredSkills.length == 0) {
       $("#requiredSkills").focus();
-      $("#requiredSkills").after(
+      $("#requiredSkills").closest(".mb-3").find(".form-label").after(
         "<small class='error text-danger'> mandatory field.</small>"
       );
       return 0;
@@ -438,7 +486,15 @@ $(document).ready(function () {
     let priority = $("#priority").val().trim();
     if (priority.length == 0) {
       $("#priority").focus();
-      $("#priority").after(
+      $("#priority").closest(".mb-3").find(".form-label").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+    let openings = $("#openings").val().trim();
+    if (openings.length == 0) {
+      $("#openings").focus();
+      $("#openings").closest(".mb-3").find(".form-label").after(
         "<small class='error text-danger'> mandatory field.</small>"
       );
       return 0;
@@ -446,7 +502,7 @@ $(document).ready(function () {
     let location = $("#location").val().trim();
     if (location.length == 0) {
       $("#location").focus();
-      $("#location").after(
+      $("#location").closest(".mb-3").find(".form-label").after(
         "<small class='error text-danger'> mandatory field.</small>"
       );
       return 0;
