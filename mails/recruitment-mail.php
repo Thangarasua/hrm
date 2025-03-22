@@ -56,14 +56,16 @@ try {
         }
     } else if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['interview_status'])) {
         $interviewStatus = $_POST['interview_status'];
-        //3->shortlist mail content
-        if ($interviewStatus == 3) {
+        //2->shortlist mail content
+ 
+        if ($interviewStatus == 2) {
             $encryptID = base64_encode($_POST['candidate_id']);
             $candidate_name = $_POST['candidate_name'];
             $email = $_POST['email'];
             $interview_date = $_POST['interview_date'];
             $job_position = $_POST['job_position'];
-            $user_name = $_POST['user_name'];
+            $HRname = $_POST['HRname'];
+            $HRphone = $_POST['HRphone'];
             //Recipients
             $mail->addAddress($_POST['email'], $_POST['candidate_name']);
 
@@ -74,7 +76,9 @@ try {
             $htmlContent = str_replace('{{Name}}', $candidate_name, $htmlContent);
             $htmlContent = str_replace('{{Job Position}}', $job_position, $htmlContent);
             $htmlContent = str_replace('{{Date}}', $interview_date, $htmlContent);
-            $htmlContent = str_replace('{{HR Name}}', $user_name, $htmlContent);
+            $htmlContent = str_replace('{{HR Name}}', $HRname, $htmlContent);
+            $htmlContent = str_replace('{{HR Name}}', $HRname, $htmlContent);
+            $htmlContent = str_replace('{{HR Number}}', $HRphone, $htmlContent);
 
             $mail->Body = $htmlContent;
             $mail->send();
