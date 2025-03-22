@@ -134,8 +134,8 @@ $(document).on("change", "#jobPosition, #salaryType", function(e){
       if (res.status == "success") {
         $("#salaryRange").val(res.data);
       } else { 
+        $("#jobPosition").val(''); 
         $("#salaryRange").val(''); 
-
         Swal.fire({
           icon: "info",
           title: res.message, 

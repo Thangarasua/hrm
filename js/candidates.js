@@ -306,7 +306,7 @@ $(document).ready(function () {
       beforeSend: function () {
         $("#updateBtn").text("Loading...").prop("disabled", true);
         Swal.fire({
-          title: "Interview status update mail sending...",
+          title: "Interview status update mail sending 📩...",
           allowEscapeKey: false,
           allowOutsideClick: false,
           didOpen: () => {
