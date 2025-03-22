@@ -23,6 +23,21 @@ function isNumber(input) {
   return true;
 }
 
+//check only numbers and single Dot(.) allowed condition for salary LPA mention
+function isAmount(event) {
+  var charCode = event.which ? event.which : event.keyCode;
+  var inputValue = event.target.value;
+
+  // Allow numbers (0-9) and only one dot (.)
+  if ((charCode >= 48 && charCode <= 57) || (charCode === 46 && !inputValue.includes("."))) {
+      return true;
+  } else {
+      toastr.warning("Only numbers and a single dot are allowed!");
+      return false;
+  }
+}
+
+
 function numberPasteValidate(event, input) {
   event.preventDefault(); // Prevent default paste behavior
 

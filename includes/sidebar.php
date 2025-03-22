@@ -110,6 +110,7 @@
 								<li><a href="departments" class="departments">Departments</a></li>
 								<li><a href="designations" class="designations">Designations</a></li>
 								<li><a href="roles" class="roles">Roles</a></li>
+								<li><a href="salary-structure" class="salary-structure">Salary Structure</a></li>
 								<li><a href="policy" class="policy">Policies</a></li>
 							</ul>
 						</li>
