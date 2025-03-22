@@ -36,6 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
         $jobTitle = $_POST['jobTitle'];
         $jobDescription = $conn->real_escape_string(trim(preg_replace('/\s+/', ' ', $_POST['jobDescription'])));
+        $salaryRange = $_POST['salaryRange'];
+        $workMode = $_POST['workMode'];
         $jobType = $_POST['jobType'];
         $jobLevel = $_POST['jobLevel'];
         $experience = $_POST['experience'];
@@ -45,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $priority = $_POST['priority'];
         $location = $conn->real_escape_string(trim(preg_replace('/\s+/', ' ', $_POST['location'])));
 
-        $query = "INSERT INTO `recruitment`(`ticket_request_id`, `raised_by`, `job_position`, `job_descriptions`, `required_skills`, `job_type`, `job_level`, `job_experience`, `qualification`, `gender`, `priority`, `location`, `status`, `created_at`) VALUES ('$ticketRequestId','$employeeId','$jobTitle','$jobDescription','$requiredSkills','$jobType','$jobLevel','$experience','$qualification','$gender','$priority','$location',1,'$currentDatetime')";
+        $query = "INSERT INTO `recruitment`(`ticket_request_id`, `raised_by`, `job_position`, `job_descriptions`, `required_skills`,`salary_range`,`work_mode`, `job_type`, `job_level`, `job_experience`, `qualification`, `gender`, `priority`, `location`, `status`, `created_at`) VALUES ('$ticketRequestId','$employeeId','$jobTitle','$jobDescription','$requiredSkills','$salaryRange','$workMode','$jobType','$jobLevel','$experience','$qualification','$gender','$priority','$location',1,'$currentDatetime')";
         $result = mysqli_query($conn, $query);
         if ($result) {
             echo json_encode(array('status' => 'success', 'message' => 'Resorce requested successfully'));

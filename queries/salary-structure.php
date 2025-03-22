@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $maxLPA = $_POST['maxLPA'];
         $minKPM = $_POST['minKPM'];
         $maxKPM = $_POST['maxKPM'];
-        $rowId = $_POST['rowId']; 
+        $rowId = $_POST['rowId'];
 
         $query = "SELECT * FROM `salary_structure` WHERE `role_id`='$rowId'";
         $result = mysqli_query($conn, $query);
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         } else {
             $query = "INSERT INTO `salary_structure`(`role_id`, `min_LPA`, `max_LPA`, `min_KPM`, `max_KPM`, `created`) VALUES ('$rowId','$minLPA','$maxLPA','$minKPM','$maxKPM','$currentDatetime')";
         }
-        
+
         $result = mysqli_query($conn, $query);
         if ($result) {
             echo json_encode(array('status' => 'success', 'message' => 'update successfully'));
@@ -85,14 +85,25 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             echo json_encode(array('status' => 'failure', 'message' => 'update failure'));
         }
         exit;
-    } elseif ($flag === "delete") {
+    } elseif ($flag === "salaryRange") {
         $id = $_POST['id'];
-        $query = "DELETE FROM `roles` WHERE `role_id` = '$id'";
+        $type = $_POST['type'];
+        $query = "SELECT * FROM `salary_structure` WHERE `role_id`='$id'";
         $result = mysqli_query($conn, $query);
-        if ($result) {
-            echo json_encode(array('status' => 'success', 'message' => 'Deleted successfull'));
+        if (mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+            if ($type == 'Annum') {
+                $salaryRange = $row['min_LPA'] . ' - ' . $row['max_LPA'] .' LPA';
+            } else {
+                $salaryRange = $row['min_KPM'] . ' - ' . $row['max_KPM'] .' Per Month';
+            } 
+
+            echo json_encode(array('status' => 'success', 'data' => $salaryRange));
         } else {
             echo json_encode(array('status' => 'failure', 'message' => 'something went wrong'));
+        }
+        if ($result) {
+        } else {
         }
         exit;
     }

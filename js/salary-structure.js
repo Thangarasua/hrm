@@ -31,11 +31,6 @@ $(document).ready(function () {
                                       row.roleId
                                     }" class="edit">
                                       <i class="fa-solid fa-pen-to-square"></i>
-                                    </a>
-                                    <a href="#" data-id="${
-                                      row.roleId
-                                    }" class="delete">
-                                      <i class="fa-solid fa-trash-can"></i>
                                     </a> 
                                   </div>
                                 </td>

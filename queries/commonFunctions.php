@@ -23,6 +23,7 @@ function getRoles($currentRoleId = null) {
     }
     return $options;
 };
+
 function getJobTypes() {
     global $conn;
     $query = "SELECT * FROM job_types WHERE status = 1 ORDER BY job_type ASC";
@@ -30,6 +31,17 @@ function getJobTypes() {
     $options = '<option value="">Select</option>';
     while ($row = $result->fetch_assoc()) {
         $options .= '<option value="' . $row['id'] . '">' . htmlspecialchars($row['job_type']) . '</option>';
+    }
+    return $options;
+};
+
+function getJobLevels() {
+    global $conn;
+    $query = "SELECT r.* FROM roles AS r LEFT JOIN salary_structure AS s ON s.role_id=r.role_id ORDER BY role_name ASC";
+    $result = mysqli_query($conn, $query); 
+    $options = '<option value="">Select</option>';
+    while ($row = $result->fetch_assoc()) {
+        $options .= '<option value="' . $row['role_id'] . '">' . htmlspecialchars($row['role_name']) . '</option>';
     }
     return $options;
 };
