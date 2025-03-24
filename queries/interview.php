@@ -55,8 +55,15 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             $ratingsJson = json_encode($ratingsArray, JSON_UNESCAPED_UNICODE);
 
             $query = "UPDATE `interview_process` SET `interview_status`='$interviewStatus',`ratings`='$ratingsJson',`rating_date`='$currentDatetime' WHERE `candidate_id`='$rowId'";
+
+            $getDataQuery = "SELECT c.*, r.job_position, e.official_name AS HRname, e.phone AS HRphone FROM `candidates`AS c INNER JOIN `recruitment`AS r ON `c`.`ticket_request_id`=`r`.`ticket_request_id`INNER JOIN `employees`AS `e` ON `r`.`hr_id`=`e`.`employee_id`WHERE c.`candidate_id`= '$rowId'";
+            
         } else if ($interviewStatus == 5) {
-            $query = "UPDATE `interview_process` SET `interview_status`='$interviewStatus' WHERE `candidate_id`='$rowId'";
+            $joiningDate = $_POST['joining_date'].' '.$_POST['joining_time'];
+            
+            $query = "UPDATE `interview_process` SET `interview_status`='$interviewStatus',`training_offer_send`='$joiningDate',`training_offer_status`= 0 WHERE `candidate_id`='$rowId'";
+            
+            $getDataQuery = "SELECT i.interview_status,i.`training_offer_send`, i.`training_offer_responced`, i.`training_offer_status`, c.candidate_id, c.candidate_name, c.email, r.job_position, e.official_name AS HRname, e.phone AS HRphone FROM `interview_process` AS i INNER JOIN `candidates`AS c ON `i`.`candidate_id`=`c`.`candidate_id` INNER JOIN `recruitment`AS r ON `c`.`ticket_request_id`=`r`.`ticket_request_id`INNER JOIN `employees`AS `e` ON `r`.`hr_id`=`e`.`employee_id`WHERE c.`candidate_id`= '$rowId'";
         } else if ($interviewStatus == 6) {
             $query = "UPDATE `interview_process` SET `interview_status`='$interviewStatus' WHERE `candidate_id`='$rowId'";
         } else if ($interviewStatus == 8) {
@@ -70,8 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             $updateQuery = "UPDATE `candidates` SET `interview_status`= $interviewStatus WHERE `candidate_id`='$rowId'";
             mysqli_query($conn, $updateQuery);
 
-            $query = "SELECT c.*, r.job_position, e.official_name AS HRname, e.phone AS HRphone FROM `candidates`AS c INNER JOIN `recruitment`AS r ON `c`.`ticket_request_id`=`r`.`ticket_request_id`INNER JOIN `employees`AS `e` ON `r`.`hr_id`=`e`.`employee_id`WHERE c.`candidate_id`= '$rowId'";
-            $result = mysqli_query($conn, $query);
+           
+            $result = mysqli_query($conn, $getDataQuery);
             $row = mysqli_fetch_assoc($result);
 
             echo json_encode(array('status' => 'success', 'message' => 'Candidate status update successfully', 'data' => $row));
