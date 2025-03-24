@@ -45,9 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $gender = $_POST['gender'];
         $requiredSkills = $conn->real_escape_string(trim(preg_replace('/\s+/', ' ', $_POST['requiredSkills'])));
         $priority = $_POST['priority'];
+        $openings = $_POST['openings'];
         $location = $conn->real_escape_string(trim(preg_replace('/\s+/', ' ', $_POST['location'])));
 
-        $query = "INSERT INTO `recruitment`(`ticket_request_id`, `raised_by`, `job_position`, `job_descriptions`, `required_skills`,`salary_range`,`work_mode`, `job_type`, `job_level`, `job_experience`, `qualification`, `gender`, `priority`, `location`, `status`, `created_at`) VALUES ('$ticketRequestId','$employeeId','$jobTitle','$jobDescription','$requiredSkills','$salaryRange','$workMode','$jobType','$jobLevel','$experience','$qualification','$gender','$priority','$location',1,'$currentDatetime')";
+        $query = "INSERT INTO `recruitment`(`ticket_request_id`, `raised_by`, `job_position`, `job_descriptions`, `required_skills`,`salary_range`,`work_mode`, `job_type`, `job_level`, `job_experience`, `qualification`, `gender`, `priority`, `openings`, `location`, `status`, `created_at`) VALUES ('$ticketRequestId','$employeeId','$jobTitle','$jobDescription','$requiredSkills','$salaryRange','$workMode','$jobType','$jobLevel','$experience','$qualification','$gender','$priority','$openings','$location',1,'$currentDatetime')";
         $result = mysqli_query($conn, $query);
         if ($result) {
             echo json_encode(array('status' => 'success', 'message' => 'Resorce requested successfully'));
@@ -101,9 +102,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $gender = $_POST['gender'];
         $requiredSkills = $conn->real_escape_string(trim(preg_replace('/\s+/', ' ', $_POST['requiredSkills'])));
         $priority = $_POST['priority'];
+        $openings = $_POST['openings'];
         $location = $conn->real_escape_string(trim(preg_replace('/\s+/', ' ', $_POST['location'])));
 
-        $query = "UPDATE `recruitment` SET `job_position`='$jobTitle',`job_descriptions`='$jobDescription',`required_skills`='$requiredSkills',`job_type`='$jobType',`job_level`='$jobLevel',`job_experience`='$experience',`qualification`='$qualification',`gender`='$gender',`priority`='$priority',`location`='$location',`updated_at`='$currentDatetime' WHERE `id`='$rowId'";
+        $query = "UPDATE `recruitment` SET `job_position`='$jobTitle',`job_descriptions`='$jobDescription',`required_skills`='$requiredSkills',`job_type`='$jobType',`job_level`='$jobLevel',`job_experience`='$experience',`qualification`='$qualification',`gender`='$gender',`priority`='$priority',`openings`='$openings',`location`='$location',`updated_at`='$currentDatetime' WHERE `id`='$rowId'";
         $result = mysqli_query($conn, $query);
         if ($result) {
             echo json_encode(array('status' => 'success', 'message' => 'Recruitment update successfully'));

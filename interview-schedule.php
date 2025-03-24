@@ -182,7 +182,7 @@ if (mysqli_num_rows($result) > 0) {
 														<div class="responsive">
 															<div class="form-group">
 																<label for="text">Name <em class="mandatory">*</em><small>(if change)</small></label>
-																<input type="text" class="form-control" id="name" name="name" placeholder="Candidate full name" value="<?php echo $data['candidate_name']; ?>">
+																<input type="text" class="form-control" id="name" name="name" placeholder="Candidate full name" value="<?php echo $data['candidate_name']; ?>" oninput="capitalizeWords(this)">
 																<small id="name_error" class="error d-none"> "Please enter letters only".</small>
 															</div>
 															<div class="form-group">
@@ -199,7 +199,7 @@ if (mysqli_num_rows($result) > 0) {
 														<div class="responsive">
 															<div class="form-group">
 																<label for="text">Qualification <em class="mandatory">*</em></label>
-																<input type="text" class="form-control" id="qualification" name="qualification" placeholder="Enter your Highest Qualification">
+																<input type="text" class="form-control" id="qualification" name="qualification" placeholder="Enter your Highest Qualification" oninput="capitalizeWords(this)">
 																<small id="qualification_error" class="error d-none"></small>
 															</div>
 															<div class="form-group">
@@ -221,12 +221,12 @@ if (mysqli_num_rows($result) > 0) {
 												<div class="responsive">
 													<div class="form-group">
 														<label for="text">Skills <em class="mandatory">*</em></label>
-														<textarea class="form-control" rows="1" id="skills" name="skills" placeholder="eg: Data Analysis, Python"></textarea>
+														<textarea class="form-control" rows="1" id="skills" name="skills" placeholder="eg: Data Analysis, Python" oninput="capitalizeWords(this)"></textarea>
 														<span id='' class='error'></span>
 													</div>
 													<div class="form-group">
 														<label for="text">Current Location <em class="mandatory">*</em></label>
-														<input type="text" name="location" id="location" class="form-control" placeholder="eg:Area,district,state">
+														<input type="text" name="location" id="location" class="form-control" placeholder="eg:Area,district,state" oninput="capitalizeWords(this)">
 													</div>
 												</div>
 												<div class="responsive">
@@ -269,31 +269,31 @@ if (mysqli_num_rows($result) > 0) {
 												<h6>1.Eligibility Criteria</h6>
 												<p>Applicants must provide accurate and complete information.</p>
 												<p>Any false information may lead to disqualification.</p>
-												
+
 												<h6>2.Document Submission</h6>
 												<p>Candidates must upload all required documents (resume, ID proof, certificates, etc.).</p>
 												<p>Incomplete applications will not be considered.</p>
-												
+
 												<h6>3.Selection Process</h6>
 												<p>Shortlisted candidates will be contacted for further rounds.</p>
 												<p>Selection is based on qualifications, experience, and interview performance.</p>
-												
+
 												<h6>4.Background Verification</h6>
 												<p>The company reserves the right to verify the provided information.</p>
 												<p>Any discrepancies may result in application rejection.</p>
-												
+
 												<h6>5.Confidentiality</h6>
 												<p>Candidate details will be used solely for recruitment purposes.</p>
 												<p>The company will not share personal information with third parties without consent.</p>
-												
+
 												<h6>6.Job Offer & Joining</h6>
 												<p>An offer letter will be issued to selected candidates.</p>
 												<p>The company reserves the right to withdraw the offer under special circumstances.</p>
-												
+
 												<h6>7.Company Policies</h6>
 												<p>Selected candidates must adhere to company rules and regulations.</p>
 												<p>Any misconduct may lead to termination of employment.</p>
-												
+
 												<h6>8.Equal Opportunity Employment</h6>
 												<p>The company follows a fair recruitment policy without discrimination.</p>
 												<p>Updates & Changes</p>
@@ -302,7 +302,7 @@ if (mysqli_num_rows($result) > 0) {
 											</div>
 										</div>
 									</div>
-								</div> 
+								</div>
 								<br>
 								<input type="hidden" name="id" id="id" value="<?php echo $data['candidate_id']; ?>">
 								<button type="submit" id="formSubmit" class="btn btn-primary">Submit </button>
@@ -344,6 +344,8 @@ if (mysqli_num_rows($result) > 0) {
 	<script src="js/plugins/croppie.js"></script>
 	<!-- toastr alert added -->
 	<script src="js/plugins/toastr.min.js" type="text/javascript"></script>
+	<!-- own scripts added -->
+	<script src="scripts/myscript.js" type="text/javascript"></script>
 
 	<script>
 		$(document).ready(function() {
@@ -618,14 +620,14 @@ if (mysqli_num_rows($result) > 0) {
 				if (totalExpYear.length == 0) {
 					$("#totalExpYear").focus();
 					$("#experienceError").html('mandatory field.');
-					toastr.warning("Kindly fill your experience year.");
+					toastr.warning("Kindly fill your experience year; if not, enter 0.");
 					return 0;
 				}
 				let totalExpMonth = $("#totalExpMonth").val().trim();
 				if (totalExpMonth.length == 0) {
 					$("#totalExpMonth").focus();
 					$("#experienceError").html('mandatory field.');
-					toastr.warning("Kindly fill your experience month.");
+					toastr.warning("Kindly fill your experience month; if not, enter 0.");
 					return 0;
 				}
 				let resume = $("#resume").val().trim();

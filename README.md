@@ -9,3 +9,5 @@ git add .
 git commit -m "Initial commit"
 git push origin HEAD
 Create PR and merge - (Example: https://github.com/Thangarasua/hrm/pull/1)
+
+success model popup code commomnly moved in footer, use common success model popup based on ID (id="success_modal")
