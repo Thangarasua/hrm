@@ -274,17 +274,27 @@
 									</div>
 								</div>
 							</div>
-						</div> 
+						</div>
 					</div>
 
 					<div class="row offered" style="display: none;">
-						<div class="mb-3">
-							<h4 class="text-center">offered details</h4>
-						</div>
 						<div class="col-md-12">
-							<div class="mb-3">
-								<label class="form-label">Offer comments <span class="text-danger"> *</span></label>
-								<textarea class="form-control" name="offer_comments" id="" rows="3"></textarea>
+							<div class="row sheduleDate">
+								<div class="mb-3">
+									<h4 class="text-center">Joing Date for Training</h4>
+								</div>
+								<div class="col-md-4">
+									<div class="mb-3">
+										<label class="form-label">Date<span class="text-danger"> *</span></label>
+										<input type="date" class="form-control" id="joining_date" name="joining_date" min=<?php echo date('Y-m-d'); ?>>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="mb-3">
+										<label class="form-label">Time<span class="text-danger"> *</span></label>
+										<input type="time" class="form-control" id="joining_time" name="joining_time">
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -392,8 +402,8 @@
 		</div>
 	</div>
 </div>
-<!-- /View candidate details --> 
- 
+<!-- /View candidate details -->
+
 <!-- Delete Modal -->
 <div class="modal fade" id="delete_modal">
 	<div class="modal-dialog modal-dialog-centered">
@@ -417,4 +427,3 @@
 <?php require_once("./includes/footer.php"); ?>
 <!-- this page java scripts codes -->
 <script src="./js/interview.js"></script>
- 

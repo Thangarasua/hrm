@@ -116,6 +116,39 @@ try {
                 'status' => 'success',
                 'message' => 'Email sent successfully.'
             );
+        } elseif ($interviewStatus == 5) {
+            $encryptID = base64_encode($_POST['candidate_id']);
+            $candidate_name = $_POST['candidate_name'];
+            $email = $_POST['email'];
+            $job_position = $_POST['job_position']; 
+            $joingDate = date("F jS \of, Y, h:i A", strtotime($_POST['training_offer_send'])); 
+            $HRname = $_POST['HRname'];
+            $HRphone = $_POST['HRphone'];
+            $companyName = 'Markerz Global Solution';
+            $companyAddress = 'Velachery, Chennai, Tamil Nadu 600042';
+
+            //Recipients
+            $mail->addAddress($_POST['email'], $_POST['candidate_name']); 
+
+            $mail->Subject = mb_encode_mimeheader("🎉Congratulations $candidate_name!🎊 Job Offer for $job_position at $companyName", 'UTF-8');
+            //Content
+            $htmlContent = file_get_contents('./templates/interview-offer.html');
+            $htmlContent = str_replace('{{id}}', $encryptID, $htmlContent);
+            $htmlContent = str_replace('{{Name}}', $candidate_name, $htmlContent);
+            $htmlContent = str_replace('{{Job Position}}', $job_position, $htmlContent);
+            $htmlContent = str_replace('{{Date}}', $joingDate, $htmlContent);
+            $htmlContent = str_replace('{{HR Name}}', $HRname, $htmlContent);
+            $htmlContent = str_replace('{{HR Number}}', $HRphone, $htmlContent);
+            $htmlContent = str_replace('{{Company Name}}', $companyName, $htmlContent);
+            $htmlContent = str_replace('{{Company Address}}', $companyAddress, $htmlContent);
+
+            $mail->Body = $htmlContent;
+            $mail->send();
+
+            $response = array(
+                'status' => 'success',
+                'message' => 'Email sent successfully.'
+            );
         }
     } else {
         $response = array(

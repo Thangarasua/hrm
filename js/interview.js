@@ -434,6 +434,12 @@ $(document).ready(function () {
         return false;
       }
     }
+    if (interview_status == 5) {
+      let form = joingDate();
+      if (form === 0) {
+        return false;
+      }
+    }
 
     let formData = new FormData(this);
     formData.append("flag", "update");
@@ -462,7 +468,9 @@ $(document).ready(function () {
       success: function (res) { 
         if (res.status === "success") {
           if (res.data.interview_status == 4) {
-            feedbackMail(res.data)
+            interviewUpdateMail(res.data);
+          } else if (res.data.interview_status == 5) {
+            interviewUpdateMail(res.data);
           } else {
             $("#update")[0].reset();
             $("#updateButton")
@@ -487,7 +495,7 @@ $(document).ready(function () {
   });
 
   /** Function to Send Recruitment Mail */
-  function feedbackMail(data) { 
+  function interviewUpdateMail(data) { 
     $.ajax({
       type: "POST",
       url: "mails/recruitment-mail.php",
@@ -498,7 +506,7 @@ $(document).ready(function () {
           .html("Loading <i class='fa-solid fa-spinner'></i>")
           .prop("disabled", true);
         Swal.fire({
-          title: "Interview feed back mail 📨 sending...",
+          title: "Interview Status Update Mail 📨 Sending...",
           allowEscapeKey: false,
           allowOutsideClick: false,
           didOpen: () => {
@@ -561,6 +569,21 @@ $(document).ready(function () {
     if ($("#overallRate").val().length == 0) {
       $("#overall").focus();
       toastr.error("Kindly rating the overall");
+      return 0;
+    }
+  }
+  function joingDate() {
+    $('.error').remove();
+    if ($("#joining_date").val().length == 0) {
+      $("#joining_date").closest(".mb-3").find(".form-label").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+    if ($("#joining_time").val().length == 0) {
+      $("#joining_time").closest(".mb-3").find(".form-label").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      ); 
       return 0;
     }
   }
