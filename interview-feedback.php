@@ -2,12 +2,12 @@
 <?php
 $id = base64_decode($_GET['id']); 
 
-$query = "SELECT i.interview_id,i.interview_feedback,c.candidate_name,r.job_position FROM `interview_process` AS i INNER JOIN candidates AS c ON i.candidate_table_id=c.candidate_id INNER JOIN recruitment AS r ON r.ticket_request_id=c.ticket_request_id  WHERE `candidate_table_id` = $id";
+$query = "SELECT i.interview_id,i.interview_feedback,c.candidate_name,r.job_position FROM `interview_process` AS i INNER JOIN candidates AS c ON i.candidate_id=c.candidate_id INNER JOIN recruitment AS r ON r.ticket_request_id=c.ticket_request_id  WHERE i.`candidate_id` = $id";
 $result = mysqli_query($conn, $query);
 $row = mysqli_fetch_assoc($result);  
 $feedbackStatus = $row['interview_feedback'];
 
-if ($feedbackStatus == '') {
+if (is_null($feedbackStatus)) {
     $content = 'updateReview';
 } else {
     $content = 'submited';
@@ -50,7 +50,7 @@ if ($feedbackStatus == '') {
             <div class="content">
                 <h4 style="text-align: center;">Thank you for responce</h4>
 
-                <p>Looking forward to speaking with you!</p>
+                <p style="text-align: center;">We appreciate your feedback and will review it. We’ll update you soon.</p>
             </div>
         <?php } ?>
         <div class="footer">
