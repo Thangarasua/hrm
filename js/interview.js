@@ -459,8 +459,7 @@ $(document).ready(function () {
           },
         });
       },
-      success: function (res) {
-        console.log(res);
+      success: function (res) { 
         if (res.status === "success") {
           if (res.data.interview_status == 4) {
             feedbackMail(res.data)
@@ -499,7 +498,7 @@ $(document).ready(function () {
           .html("Loading <i class='fa-solid fa-spinner'></i>")
           .prop("disabled", true);
         Swal.fire({
-          title: "Interview feed back mail sending...",
+          title: "Interview feed back mail 📨 sending...",
           allowEscapeKey: false,
           allowOutsideClick: false,
           didOpen: () => {

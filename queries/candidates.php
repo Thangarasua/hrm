@@ -146,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $query = "UPDATE `candidates` SET `interview_status`= $sheduled, `date_confirm_status`= 2 , `interview_re_date`= '$interview_date'  WHERE `candidate_id`='$rowId'";
         mysqli_query($conn, $query);
 
-        $insertQuery = "INSERT INTO `interview_process`(`candidate_table_id`, `interview_process_status`, `scheduled_date`) VALUES ('$rowId','$sheduled','$currentDatetime')";
+        $insertQuery = "INSERT INTO `interview_process`(`candidate_id`, `interview_status`, `scheduled_date`) VALUES ('$rowId','$sheduled','$currentDatetime')";
         $result = mysqli_query($conn, $insertQuery);
 
         if ($result) {

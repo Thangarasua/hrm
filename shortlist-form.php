@@ -20,7 +20,7 @@ if ($status == 0) {
         $query = "UPDATE `candidates` SET `interview_status`= $interview_status, `date_confirm_status`= 1 WHERE `candidate_id`='$id'";
         $result = mysqli_query($conn, $query);
         
-        $insertQuery = "INSERT INTO `interview_process`(`candidate_table_id`, `interview_process_status`, `scheduled_date`) VALUES ('$id', $interview_status, '$currentDatetime')";
+        $insertQuery = "INSERT INTO `interview_process`(`candidate_id`, `interview_status`, `scheduled_date`) VALUES ('$id', $interview_status, '$currentDatetime')";
         $result = mysqli_query($conn, $insertQuery);
 
         $content = 'scheduledDate';
