@@ -361,7 +361,7 @@ require_once("./includes/sidebar.php");
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Candidate Contact</label>
-										<input type="text" class="form-control" name="candidateContact" id="candidateContact" onkeypress="return isNumber(event)" onpaste="numberPasteValidate(event, this)" placeholder="9876543210" autocomplete="off">
+										<input type="text" class="form-control" name="candidateContact" id="candidateContact" onkeypress="return phoneNumber(event)" onkeypress="return tenDigits(event)" onpaste="numberPasteValidate(event, this)" placeholder="9876543210" autocomplete="off">
 									</div>
 								</div>
 							</div>
@@ -445,47 +445,64 @@ require_once("./includes/sidebar.php");
 					<div class="tab-content" id="">
 						<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
 							<div class="row">
-								<div class="col-md-12">
+								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Job Title <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" id="view_jobTitle">
+										<input type="text" class="form-control" id="view_jobTitle" readonly>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Salary Range <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" id="view_salaryRange" readonly>
 									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="mb-3">
 										<label class="form-label">Job Description <span class="text-danger"> *</span></label>
-										<textarea rows="3" class="form-control" id="view_jobDescription"></textarea>
+										<textarea rows="3" class="form-control" id="view_jobDescription" readonly></textarea>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
+									<div class="mb-3">
+										<label class="form-label">Work Mode <span class="text-danger"> *</span></label>
+										<select class="select" id="view_workMode" readonly>
+											<option value="">Select</option>
+											<option value="On Premises">On Premises</option>
+											<option value="Work From Home">Work From Home</option>
+											<option value="Hybrid">Hybrid</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-4">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Job Type <span class="text-danger"> *</span></label>
-										<input type="text" name="jobType" id="view_jobType" class="form-control" />
+										<input type="text" id="view_jobType" class="form-control" readonly>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Job Level <span class="text-danger"> *</span></label>
-										<input type="text" name="jobLevel" id="view_jobLevel" class="form-control" />
+										<input type="text" id="view_jobLevel" class="form-control" readonly>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">Experience <span class="text-danger"> *</span></label>
-										<input type="text" name="jobLevel" id="view_experience" class="form-control" />
+										<input type="text" id="view_experience" class="form-control" readonly>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Qualification <span class="text-danger"> *</span></label>
-										<input type="text" name="qualification" id="view_qual" class="form-control" />
+										<input type="text" id="view_qual" class="form-control" readonly>
 										<ul class="list-group addFields" id="qualificationResult"></ul>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">Gender <span class="text-danger"> *</span></label>
-										<select class="select" id="view_gender">
+										<select class="select" id="view_gender" readonly>
 											<option value="">Select</option>
 											<option value="Male">Male</option>
 											<option value="Female">Female</option>
@@ -493,16 +510,16 @@ require_once("./includes/sidebar.php");
 										</select>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-12">
 									<div class="mb-3">
 										<label class="form-label">Required Skills</label>
-										<input type="text" class="form-control" id="view_requiredSkills">
+										<input type="text" class="form-control" id="view_requiredSkills" readonly>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">Notice period <span class="text-danger"> *</span></label>
-										<select class="select" name="priority" id="view_priority">
+										<select class="select" id="view_priority" readonly>
 											<option value="">Select</option>
 											<option value="Immediate">Immediate</option>
 											<option value="15 Days">15 Days</option>
@@ -513,10 +530,16 @@ require_once("./includes/sidebar.php");
 										</select>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
+									<div class="mb-3">
+										<label class="form-label">No Of Opening <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" id="view_openings" placeholder="Number of openings" autocomplete="off" readonly>
+									</div>
+								</div>
+								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">Location</label>
-										<input type="text" class="form-control" name="location" id="view_location">
+										<input type="text" class="form-control" id="view_location" readonly>
 									</div>
 								</div>
 							</div>
@@ -543,10 +566,16 @@ require_once("./includes/sidebar.php");
 					<div class="tab-content" id="">
 						<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
 							<div class="row">
-								<div class="col-md-12">
+								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Job Title <span class="text-danger"> *</span></label>
 										<input type="text" class="form-control" name="jobTitle" id="edit_jobTitle" readonly>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Salary Range <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" id="edit_salaryRange" readonly>
 									</div>
 								</div>
 								<div class="col-md-12">
@@ -555,35 +584,46 @@ require_once("./includes/sidebar.php");
 										<textarea rows="3" class="form-control input-highlight" name="jobDescription" id="edit_jobDescription"></textarea>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
+									<div class="mb-3">
+										<label class="form-label">Work Mode <span class="text-danger"> *</span></label>
+										<select class="select" id="edit_workMode" readonly>
+											<option value="">Select</option>
+											<option value="On Premises">On Premises</option>
+											<option value="Work From Home">Work From Home</option>
+											<option value="Hybrid">Hybrid</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-4">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Job Type <span class="text-danger"> *</span></label>
 										<input type="text" name="jobType" id="edit_jobType" placeholder="Work Job Type " class="form-control" readonly />
 										<ul class="list-group addFields" id="jobTypeResult"></ul>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Job Level <span class="text-danger"> *</span></label>
 										<input type="text" name="jobLevel" id="edit_jobLevel" placeholder="Work Job Level " class="form-control" readonly />
 										<ul class="list-group addFields" id="jobLevelResult"></ul>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Experience <span class="text-danger"> *</span></label>
 										<input type="text" name="experience" id="edit_experience" placeholder="Work Experience level" class="form-control" readonly />
 										<ul class="list-group addFields" id="experienceResult"></ul>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Qualification <span class="text-danger"> *</span></label>
 										<input type="text" name="qualification" id="edit_qual" placeholder="Education qualification" class="form-control" readonly />
 										<ul class="list-group addFields" id="qualificationResult"></ul>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">Gender <span class="text-danger"> *</span></label>
 										<select class="select input-highlight" name="gender" id="edit_gender">
@@ -594,13 +634,13 @@ require_once("./includes/sidebar.php");
 										</select>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-12">
 									<div class="mb-3">
 										<label class="form-label">Required Skills</label>
 										<input type="text" class="form-control input-highlight" name="requiredSkills" id="edit_requiredSkills" oninput="capitalizeWords(this)">
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">Notice period <span class="text-danger"> *</span></label>
 										<select class="select input-highlight" name="priority" id="edit_priority">
@@ -614,7 +654,13 @@ require_once("./includes/sidebar.php");
 										</select>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
+									<div class="mb-3">
+										<label class="form-label">No Of Opening <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control input-highlight " name="openings" id="edit_openings" onkeypress="return isNumber(event)">
+									</div>
+								</div>
+								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">Location</label>
 										<input type="text" class="form-control input-highlight" name="location" id="edit_location" oninput="capitalizeWords(this)">

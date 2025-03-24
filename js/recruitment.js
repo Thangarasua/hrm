@@ -174,14 +174,17 @@ $(document).on("change", "#jobPosition, #salaryType", function(e){
         if (res.status == "success") {
           $("#rowId").val(res.data.id);
           $("#edit_jobTitle").val(res.data.job_position);
+          $("#edit_salaryRange").val(res.data.salary_range);
           $("#edit_jobDescription").val(res.data.job_descriptions);
+          $("#edit_workMode").val(res.data.work_mode).trigger("change");
           $("#edit_jobType").val(res.data.job_type).trigger("change");
           $("#edit_jobLevel").val(res.data.job_level).trigger("change");
           $("#edit_experience").val(res.data.job_experience).trigger("change");
           $("#edit_qual").val(res.data.qualification).trigger("change");
           $("#edit_gender").val(res.data.gender).trigger("change");
-          $("#edit_priority").val(res.data.priority).trigger("change");
           $("#edit_requiredSkills").val(res.data.required_skills);
+          $("#edit_priority").val(res.data.priority).trigger("change");
+          $("#edit_openings").val(res.data.openings);
           $("#edit_location").val(res.data.location);
         } else {
           Swal.fire(res.data.message);
@@ -205,16 +208,20 @@ $(document).on("change", "#jobPosition, #salaryType", function(e){
       cache: false,
       success: function (res) {
         if (res.status == "success") {
+          console.log(res.data);
           $("#rowId").val(res.data.id);
           $("#view_jobTitle").val(res.data.job_position);
+          $("#view_salaryRange").val(res.data.salary_range);
           $("#view_jobDescription").val(res.data.job_descriptions);
+          $("#view_workMode").val(res.data.work_mode).trigger("change");
           $("#view_jobType").val(res.data.job_type).trigger("change");
           $("#view_jobLevel").val(res.data.job_level).trigger("change");
           $("#view_experience").val(res.data.job_experience).trigger("change");
           $("#view_qual").val(res.data.qualification).trigger("change");
           $("#view_gender").val(res.data.gender).trigger("change");
-          $("#view_priority").val(res.data.priority).trigger("change");
           $("#view_requiredSkills").val(res.data.required_skills);
+          $("#view_priority").val(res.data.priority).trigger("change");
+          $("#view_openings").val(res.data.openings);
           $("#view_location").val(res.data.location);
         } else {
           Swal.fire(res.data.location);
@@ -503,7 +510,7 @@ $(document).on("change", "#jobPosition, #salaryType", function(e){
       return 0;
     }
     let openings = $("#openings").val().trim();
-    if (openings.length == 0) {
+    if (openings.length == 0 || openings === '0') {
       $("#openings").focus();
       $("#openings").closest(".mb-3").find(".form-label").after(
         "<small class='error text-danger'> mandatory field.</small>"
@@ -593,6 +600,14 @@ $(document).on("change", "#jobPosition, #salaryType", function(e){
     if (priority.length == 0) {
       $("#edit_priority").focus();
       $("#edit_priority").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
+    let openings = $("#edit_openings").val().trim();
+    if (openings.length == 0 || openings === '0') {
+      $("#edit_openings").focus();
+      $("#edit_openings").closest(".mb-3").find(".form-label").after(
         "<small class='error text-danger'> mandatory field.</small>"
       );
       return 0;

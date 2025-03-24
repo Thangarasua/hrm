@@ -22,6 +22,21 @@ function isNumber(input) {
   }
   return true;
 }
+//check only numbers allowed condition
+function phoneNumber(input) {
+  var charCode = input.which ? input.which : input.keyCode;
+  if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+    toastr["warning"]("Please Enter Number Only!");
+    return false;
+  }
+  // Restrict input to 10 digits
+  let currentValue = $(input.target).val();
+  if (currentValue.length >= 10) {
+    toastr.warning("Only 10 digits are allowed!");
+    return false;
+  }
+  return true;
+}
 
 //check only numbers and single Dot(.) allowed condition for salary LPA mention
 function isAmount(event) {
@@ -29,14 +44,16 @@ function isAmount(event) {
   var inputValue = event.target.value;
 
   // Allow numbers (0-9) and only one dot (.)
-  if ((charCode >= 48 && charCode <= 57) || (charCode === 46 && !inputValue.includes("."))) {
-      return true;
+  if (
+    (charCode >= 48 && charCode <= 57) ||
+    (charCode === 46 && !inputValue.includes("."))
+  ) {
+    return true;
   } else {
-      toastr.warning("Only numbers and a single dot are allowed!");
-      return false;
+    toastr.warning("Only numbers and a single dot are allowed!");
+    return false;
   }
 }
-
 
 function numberPasteValidate(event, input) {
   event.preventDefault(); // Prevent default paste behavior
