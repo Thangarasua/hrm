@@ -52,15 +52,21 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
     if ($flag === "educationInfo") {
         $employeeId = $_POST['employeeID'];
+        $courseCategory = $_POST['courseCategory'];
         $institutionName = $_POST['institutionName'];
         $course = $_POST['course'];
         $educationStartDate = $_POST['educationStartDate'];
- 
         $educationStartDate = date("Y-m-d", strtotime($educationStartDate)); 
         $educationeEndDate = $_POST['educationeEndDate'];
         $educationeEndDate = date("Y-m-d", strtotime($educationeEndDate)); 
- 
-        $educationInfoQuery = "INSERT INTO education_info (employee_id, institution_name, course, start_date, end_date) VALUES ('$employeeId', '$institutionName', '$course', '$educationStartDate', '$educationeEndDate')";
+
+        $CheckQuery = " SELECT * FROM `education_info` WHERE `employee_id` = '$employeeId' AND `category` = '$courseCategory'";
+        $result = mysqli_query($conn, $CheckQuery);
+        if (mysqli_num_rows($result) > 0) {
+            $educationInfoQuery = "UPDATE `education_info` SET `institution_name` = '$institutionName', `course` = ' $course', `start_date` = '$educationStartDate', `end_date` = '$educationeEndDate' WHERE `employee_id` = '$employeeId' AND `category` = '$courseCategory'";
+        } else {
+            $educationInfoQuery = "INSERT INTO education_info (employee_id, category, institution_name, course, start_date, end_date) VALUES ('$employeeId', '$courseCategory', '$institutionName', '$course', '$educationStartDate', '$educationeEndDate')";
+        }
         if (mysqli_query($conn, $educationInfoQuery)) {
             echo json_encode(array('status' => 'success', 'message' => 'Education Information Updated Successfully.'));
         } else {
