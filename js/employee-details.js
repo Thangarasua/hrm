@@ -248,5 +248,20 @@ $(document).ready(function () {
             $("#relieving-container").hide();  
           }
         
-      });
+    });
+
+    document.querySelectorAll('.edit-education-btn').forEach(button => {
+        button.addEventListener('click', ({ currentTarget }) => {
+            const { category, institution, course, startdate, enddate } = currentTarget.dataset;
+    
+            Object.entries({
+                courseCategory: category,
+                institutionName: institution,
+                course,
+                educationStartDate: startdate,
+                educationeEndDate: enddate
+            }).forEach(([id, value]) => document.getElementById(id).value = value);
+        });
+    });
+      
 });

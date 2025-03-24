@@ -362,7 +362,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 														<div class="d-flex align-items-center justify-content-between flex-fill">
 															<h5>Education Details</h5>
 															<div class="d-flex">
-																<a href="#" class="btn btn-icon btn-sm" data-bs-toggle="modal" data-bs-target="#edit_education"><i class="ti ti-edit"></i></a>
+																<a href="#" class="btn btn-icon btn-sm" data-bs-toggle="modal" data-bs-target="#edit_education"><i class="fas fa-plus"></i></a>
 																<a href="#" class="d-flex align-items-center collapsed collapse-arrow" data-bs-toggle="collapse" data-bs-target="#primaryBorderFour" aria-expanded="false" aria-controls="primaryBorderFour">
 																	<i class="ti ti-chevron-down fs-18"></i>
 																</a>
@@ -1099,13 +1099,19 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 			<form action="#" id="AddEducationInfo">
 				<div class="modal-body pb-0">
 					<div class="row">
-						<div class="col-md-6">
+					<div class="col-md-4">
+							<div class="mb-3">
+								<label class="form-label">Category <span class="text-danger"> *</span></label>
+								<input type="text" class="form-control" name="courseCategory" id="courseCategory">
+							</div>
+						</div>
+						<div class="col-md-4">
 							<div class="mb-3">
 								<label class="form-label">Institution / School Name <span class="text-danger"> *</span></label>
 								<input type="text" class="form-control" name="institutionName" id="institutionName">
 							</div>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<div class="mb-3">
 								<label class="form-label">Course <span class="text-danger"> *</span></label>
 								<input type="text" class="form-control" name="course" id="course">

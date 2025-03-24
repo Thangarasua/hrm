@@ -169,33 +169,63 @@ function getExperienceInfo($employeeId) {
 
 function getEducationInfo($employeeId) {
     global $conn;
-    $query = "SELECT * FROM `education_info` WHERE `employee_id` = '$employeeId'";
+    $existingData = [];
+    $defaultCategories = ['SSLC', 'HSC', 'UG', 'PG'];
+
+    $query = "SELECT DISTINCT `category` FROM `education_info` WHERE `employee_id` = '$employeeId'";
     $result = mysqli_query($conn, $query);
-    $output = '';
+    $categories = $defaultCategories;
+
     if ($result && mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
-            $institutionName = htmlspecialchars($row['institution_name']);
-            $course = htmlspecialchars($row['course']);
-            $startDate = htmlspecialchars($row['start_date']);
-            $endDate = htmlspecialchars($row['end_date']);
-            $output .= '
-            <div class="mb-3">
-                <div class="d-flex align-items-center justify-content-between">
-                    <div>
-                        <span class="d-inline-flex align-items-center fw-normal">
-                            ' . $institutionName . '
-                        </span>
-                        <h6 class="d-flex align-items-center mt-1">' . $course . '</h6>
-                    </div>
+            $category = htmlspecialchars($row['category']);
+            if (!in_array($category, $categories)) {
+                $categories[] = $category;
+            }
+        }
+    }
+
+    $query = "SELECT * FROM `education_info` WHERE `employee_id` = '$employeeId'";
+    $result = mysqli_query($conn, $query);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $category = htmlspecialchars($row['category']);
+            $existingData[$category] = $row;
+        }
+    }
+    $output = '';
+    foreach ($categories as $category) {
+        $institutionName = isset($existingData[$category]) ? htmlspecialchars($existingData[$category]['institution_name']) : 'NA';
+        $course = isset($existingData[$category]) ? htmlspecialchars($existingData[$category]['course']) : 'NA';
+        $startDate = isset($existingData[$category]) ? htmlspecialchars($existingData[$category]['start_date']) : '';
+        $endDate = isset($existingData[$category]) ? htmlspecialchars($existingData[$category]['end_date']) : '';
+
+        $output .= '
+        <div class="mb-3">
+            <div class="d-flex align-items-center justify-content-between">
+                <div>
+                    <h6 class="d-flex align-items-center mt-1"><b>' . $category . '</b></h6>
+                    <a href="#" class="btn btn-icon btn-sm edit-education-btn" data-bs-toggle="modal" data-bs-target="#edit_education" 
+                       data-category="' . $category . '" 
+                       data-institution="' . $institutionName . '" 
+                       data-course="' . $course . '" 
+                       data-startdate="' . $startDate . '" 
+                       data-enddate="' . $endDate . '">
+                        <i class="ti ti-edit"></i>
+                    </a>
+                    <span class="d-inline-flex align-items-center fw-normal">' . $institutionName . '</span>
+                </div>
+                <div>
+                    <span class="d-inline-flex align-items-center fw-normal">' . $course . '</span>
                     <p class="text-dark">' . formatDateRange($startDate, $endDate) . '</p>
                 </div>
-            </div>';
-        }
-    } else {
-        $output = "<p>No education information found.</p>";
+            </div>
+        </div>';
     }
     return $output;
 }
+
 
 function formatDateRange($startDate, $endDate) {
     $formattedStartDate = date("M Y", strtotime($startDate));
