@@ -6,23 +6,21 @@ $value = base64_decode($_GET['val']);
 $query = "SELECT i.*,c.candidate_name,r.job_position FROM `interview_process` AS i INNER JOIN candidates AS c ON i.candidate_id=c.candidate_id INNER JOIN recruitment AS r ON r.ticket_request_id=c.ticket_request_id  WHERE i.`candidate_id` = $id";
 $result = mysqli_query($conn, $query);
 $row = mysqli_fetch_assoc($result);  
-$status = $row['training_offer_status'];
+$status = $row['training_offer_status']; 
 
 if ($status == 0) {
     if ($value == 1) {
         $currentDatetime = date('Y-m-d H:i:s'); 
-
         $query = "UPDATE `interview_process` SET `training_offer_responced`= $currentDatetime, `training_offer_status`= 1 WHERE `candidate_id`='$id'";
         $result = mysqli_query($conn, $query);
-
-        $content = 'submited';
+        $content = 'accepted';
     } elseif ($value == 2) {
         $content = 'updateStatus';
     }
 } elseif ($status == 1) {
-    $content = 'submited';
+    $content = 'accepted';
 } elseif ($status == 2) {
-    $content = 'submited';
+    $content = 'rejected';
 }
 ?>
 <!DOCTYPE html>
@@ -44,10 +42,10 @@ if ($status == 0) {
             <div class="content">
                 <p>Dear <b> <?php echo $row['candidate_name']; ?></b>,</p>
 
-                <p>Thank you for taking the time to interview for the <b><?php echo $row['job_position']; ?></b> role. We appreciate your interest in joining our team.
+                <p>I would like to offering you to attend a mandatory training session for the position of <b><?php echo $row['job_position']; ?></b> role.
                 </p>
                 <p>
-                    After careful consideration, we would like to provide you with feedback on your interview:
+                  Kindly tell me about offer rejection comment, we would like to provide you with responce:
                 </p>
 
                 <form id="update">
@@ -58,11 +56,18 @@ if ($status == 0) {
                     </div>
                 </form>
             </div>
-        <?php } elseif ($content == 'submited') { ?>
+        <?php } elseif ($content == 'accepted') { ?>
+            <div class="content">
+                <h4 style="text-align: center;">Thank you for responce</h4>
+                <p>Dear <b> <?php echo $row['candidate_name']; ?></b>,</p>
+                <p>Welcome to join with our team  .</p>
+                </p>Please confirm your attendance by <b><?php echo $row['training_offer_send']; ?>,</b> so that I can reserve your spot for the training.</p>
+            </div>
+        <?php } elseif ($content == 'rejected') { ?>
             <div class="content">
                 <h4 style="text-align: center;">Thank you for responce</h4>
 
-                <p style="text-align: center;">We appreciate your feedback and will review it. We’ll update you soon.</p>
+                <p style="text-align: center;">We appreciate your responce.</p>
             </div>
         <?php } ?>
         <div class="footer">
@@ -75,12 +80,12 @@ if ($status == 0) {
 
             $(document).on("submit", "#update", function(e) {
                 e.preventDefault();
-                let form = feedbackForm();
+                let form = formValidation();
                 if (form === 0) {
                     return false;
                 }
                 let formData = new FormData(this);
-                formData.append("flag", "interviewFeedback");
+                formData.append("flag", "offerRejection");
                 $.ajax({
                     type: "POST",
                     url: "queries/candidates.php",
@@ -99,7 +104,7 @@ if ($status == 0) {
                 });
             });
 
-            function feedbackForm() {
+            function formValidation() {
                 let comments = $("#comments").val().trim();
                 if (comments.length == 0) {
                     $("#comments").focus();

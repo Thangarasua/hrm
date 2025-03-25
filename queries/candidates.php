@@ -169,5 +169,19 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             echo json_encode(array('status' => 'failure', 'message' => 'Feed back update failure'));
         }
         exit;
+    } elseif ($flag === "offerRejection") {
+
+        $rowId = $_POST['rowId'];
+        $comments = $_POST['comments']; 
+ 
+        $query = "UPDATE `interview_process` SET `training_offer_responced`='$currentDatetime', `training_offer_status`=2, `training_offer_rejection`= '$comments' WHERE `interview_id`='$rowId'"; 
+        $result = mysqli_query($conn, $query);
+
+        if ($result) {
+            echo json_encode(array('status' => 'success', 'message' => 'Rejection comment update successfully'));
+        } else {
+            echo json_encode(array('status' => 'failure', 'message' => 'Rejection comment update failure'));
+        }
+        exit;
     }
 }
