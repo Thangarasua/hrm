@@ -42,7 +42,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 				<div class="card card-bg-1">
 					<div class="card-body p-0">
 						<span class="avatar avatar-xl avatar-rounded border border-2 border-white m-auto d-flex mb-2">
-							<img src="./assets/img/users/user-13.jpg" class="w-auto h-auto" alt="Img">
+							<img src="./assets/img/users/sample-user.jpg" class="w-auto h-auto" alt="Img">
 						</span>
 						<div class="text-center px-3 pb-3 border-bottom">
 							<div class="mb-3">
@@ -407,7 +407,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 										</div>
 									</div>
 								</div>
-								<div class="card">
+								<!-- <div class="card">
 									<div class="card-body">
 										<div class="contact-grids-tab p-0 mb-3">
 											<ul class="nav nav-underline" id="myTab" role="tablist">
@@ -426,11 +426,11 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 														<div class="card flex-fill mb-4 mb-md-0">
 															<div class="card-body">
 																<div class="d-flex align-items-center pb-3 mb-3 border-bottom">
-																	<a href="https://smarthr.dreamstechnologies.com/html/template/project-details.html" class="flex-shrink-0 me-2">
+																	<a href="#" class="flex-shrink-0 me-2">
 																		<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/social/project-03.svg" alt="Img">
 																	</a>
 																	<div>
-																		<h6 class="mb-1"><a href="https://smarthr.dreamstechnologies.com/html/template/project-details.html">World Health</a></h6>
+																		<h6 class="mb-1"><a href="#">World Health</a></h6>
 																		<div class="d-flex align-items-center">
 																			<p class="mb-0 fs-13">8 tasks</p>
 																			<p class="fs-13"><span class="mx-1"><i class="ti ti-point-filled text-primary"></i></span>15 Completed</p>
@@ -461,11 +461,11 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 														<div class="card flex-fill mb-0">
 															<div class="card-body">
 																<div class="d-flex align-items-center pb-3 mb-3 border-bottom">
-																	<a href="https://smarthr.dreamstechnologies.com/html/template/project-details.html" class="flex-shrink-0 me-2">
+																	<a href="#" class="flex-shrink-0 me-2">
 																		<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/social/project-01.svg" alt="Img">
 																	</a>
 																	<div>
-																		<h6 class="mb-1 text-truncate"><a href="https://smarthr.dreamstechnologies.com/html/template/project-details.html">Hospital Administration</a></h6>
+																		<h6 class="mb-1 text-truncate"><a href="#">Hospital Administration</a></h6>
 																		<div class="d-flex align-items-center">
 																			<p class="mb-0 fs-13">8 tasks</p>
 																			<p class="fs-13"><span class="mx-1"><i class="ti ti-point-filled text-primary"></i></span>15 Completed</p>
@@ -502,7 +502,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 																<div class="row align-items-center">
 																	<div class="col-md-8">
 																		<div class="d-flex align-items-center">
-																			<a href="https://smarthr.dreamstechnologies.com/html/template/project-details.html" class="flex-shrink-0 me-2">
+																			<a href="#" class="flex-shrink-0 me-2">
 																				<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/products/product-05.jpg" class="img-fluid rounded-circle" alt="img">
 																			</a>
 																			<div>
@@ -547,7 +547,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 																<div class="row align-items-center">
 																	<div class="col-md-8">
 																		<div class="d-flex align-items-center">
-																			<a href="https://smarthr.dreamstechnologies.com/html/template/project-details.html" class="flex-shrink-0 me-2">
+																			<a href="#" class="flex-shrink-0 me-2">
 																				<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/products/product-06.jpg" class="img-fluid rounded-circle" alt="img">
 																			</a>
 																			<div>
@@ -590,7 +590,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 											</div>
 										</div>
 									</div>
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</div>
