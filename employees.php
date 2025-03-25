@@ -358,7 +358,7 @@
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Phone Number <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" onkeypress="return isNumber(event)" name="phone" placeholder="Enter 10 digits only" required autocomplete="off">
+										<input type="text" class="form-control" onkeypress="return phoneNumber(event)" name="phone" placeholder="Enter 10 digits only" required autocomplete="off">
 									</div>
 								</div>
 								<div class="col-md-6">
