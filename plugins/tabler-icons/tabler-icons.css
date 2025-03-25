@@ -9786,7 +9786,7 @@
 }
 
 .ti-eye:before {
-  content: "\ea9a";
+  content: "\ea9a"!important;
 }
 
 .ti-eye-bitcoin:before {

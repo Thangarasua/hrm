@@ -79,6 +79,7 @@
 	<div class="sidebar-inner slimscroll">
 		<div id="sidebar-menu" class="sidebar-menu">
 			<ul>
+			<?php if ( in_array($roleId,[3,4,5]) ){ ?>
 				<li class="menu-title"><span>MAIN MENU</span></li>
 				<li>
 					<ul>
@@ -97,6 +98,7 @@
 						</li>
 					</ul>
 				</li>
+				
 				<li class="menu-title"><span>HRM</span></li>
 				<li>
 					<ul>
@@ -191,6 +193,8 @@
 								</li> -->
 					</ul>
 				</li>
+				<?php } ?>
+
 				<li class="menu-title"><span>RECRUITMENT</span></li>
 				<li>
 					<ul>

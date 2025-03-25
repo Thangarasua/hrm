@@ -28344,6 +28344,10 @@ margin: 2px;
 .input-highlight {
 border: 1px solid var(--bg-primary);
 }
+
+.breadcrumb li{
+  font-size: 12px;
+}
 /* End:: own style added */
 
 /*# sourceMappingURL=style.css.map */

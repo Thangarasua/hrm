@@ -19,7 +19,7 @@ $MyProfileInfo = getMyProfileInfo($employeeId);
 <head>
 
 	<title>Markerz | HRM Software</title>
-	
+
 	<!-- Meta Tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -95,7 +95,7 @@ $MyProfileInfo = getMyProfileInfo($employeeId);
 	<input type="hidden" id="loginedRoleId" value="<?php echo $roleId; ?>">
 
 	<div id="global-loader">
-		<div class="page-loader"></div> 
+		<div class="page-loader"></div>
 	</div>
 
 	<!-- Main Wrapper -->
@@ -1137,7 +1137,7 @@ $MyProfileInfo = getMyProfileInfo($employeeId);
 											</a>
 											<!-- <a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="bussiness-settings.html"> -->
 											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="employee-details.php?empId=<?php echo  $MyProfileInfo ? $MyProfileInfo['encrypyEmployeeId'] : '';  ?>">
-											<i class="fas fa-cogs me-1"></i> Settings
+												<i class="fas fa-cogs me-1"></i> Settings
 											</a>
 
 											<!-- <a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="profile-settings.html"> -->
@@ -1175,48 +1175,51 @@ $MyProfileInfo = getMyProfileInfo($employeeId);
 		</div>
 		<!-- /Header -->
 
-<!-- Chnage Password -->
-<div class="modal fade" id="change_password">
-	<div class="modal-dialog modal-dialog-centered modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">Change Password</h4>
-				<button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
-					<i class="ti ti-x"></i>
-				</button>
-			</div>
-			<form action="#" id="changePassword">
-				<div class="modal-body pb-0">
-					<div class="row">
-						<div class="col-md-8">
-							<div class="mb-3">
-								<label class="form-label">Current Password <span class="text-danger"> *</span></label>
-								<input type="password" class="form-control" name="currentPassword" id="currentPassword">
-								<span class="currentPasswordCheck error"></span>
+		<!-- Chnage Password -->
+		<div class="modal fade" id="change_password">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Change Password</h4>
+						<button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
+							<i class="ti ti-x"></i>
+						</button>
+					</div>
+					<form action="#" id="changePassword">
+						<div class="modal-body pb-0">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Current Password <span class="text-danger"> *</span></label>
+										<input type="password" class="form-control" name="currentPassword" id="currentPassword">
+										<small class="currentPasswordCheck error"></small>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">New Password <span class="text-danger"> *</span></label>
+										<div class="pass-group">
+											<input type="password" class="pass-input form-control" name="newPassword" id="newPassword">
+											<span class="ti toggle-password ti-eye-off"></span>
+										</div>
+										<small class="passwordCheck error"></small>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Confirm Password <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" name="confirmNewPassword" id="confirmNewPassword">
+										<small class="passwordCheck error"></small>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-white border me-2" data-bs-dismiss="modal">Cancel</button>
+								<button type="submit" class="btn btn-primary">Save</button>
 							</div>
 						</div>
-						<div class="col-md-8">
-							<div class="mb-3">
-								<label class="form-label">New Password <span class="text-danger"> *</span></label>
-								<input type="password" class="form-control" name="newPassword" id="newPassword">
-								<span class="passwordCheck error"></span>
-							</div>
-						</div>
-						<div class="col-md-8">
-							<div class="mb-3">
-								<label class="form-label">Confirm Password <span class="text-danger"> *</span></label>
-								<input type="password" class="form-control" name="confirmNewPassword" id="confirmNewPassword">
-								<span class="passwordCheck error"></span>
-							</div>
-						</div>										
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-white border me-2" data-bs-dismiss="modal">Cancel</button>
-						<button type="submit" class="btn btn-primary">Save</button>
-					</div>
+					</form>
 				</div>
-			</form>
+			</div>
 		</div>
-	</div>
-</div>
-<!-- Chnage Password -->
+		<!-- Chnage Password -->
