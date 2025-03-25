@@ -36,7 +36,7 @@
             <div class=" d-flex align-items-center justify-content-between flex-wrap">
                 <div class="mb-3">
                     <h2 class="mb-1 text-white">Welcome Back, <?php echo $employeeName; ?></h2>
-                    <p class="text-light">14 New Companies Subscribed Today !!!</p>
+                    <p class="text-light">Stay motivated, keep growing !!!</p>
                 </div>
                 <div class="d-flex align-items-center flex-wrap mb-1">
                     <a href="https://smarthr.dreamstechnologies.com/html/template/companies.html" class="btn btn-dark btn-md me-2 mb-2">Companies</a>
