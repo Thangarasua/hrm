@@ -166,6 +166,29 @@ $(document).ready(function () {
     }
   });
 
+  $("#same-personalName").on("click", function () {
+    var employeePersonalName = $("#employeePersonalName").val();
+    if (employeePersonalName != "") {
+      if (officialNameCheckbox.checked) {
+        $("#employeeOfficialName").val(employeePersonalName);
+      } else {
+        $("#employeeOfficialName").val("");
+      }
+    } else {
+      toastr.error('Kindly enter the personal name', "Error");
+      $("#employeeOfficialName").val("");
+      $("#officialNameCheckbox").prop("checked", false);
+    } 
+  });
+ 
+    $("#nextButton").click(function () {
+        $("#office-tab").tab("show"); // Open the "Official Information" tab
+    }); 
+    $("#previousButton").click(function () {
+        $("#basic-tab").tab("show"); // Open the "Official Information" tab
+    }); 
+
+
   /** Function to Send Welcome Mail */
   function wellcomeMail(data) {
     console.log(data);

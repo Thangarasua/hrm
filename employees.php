@@ -323,7 +323,7 @@
 								</div>
 								<div class="col-md-6" id="supervisors-container">
 									<div class="mb-3">
-										<label class="form-label">Supervisors</label>
+										<label class="form-label">Supervisors <small>(if available)</small> </label>
 										<select class="select" name="supervisors" id="supervisors">
 											<option value="">Select</option>
 											<?php echo getManagerUsers(2); ?>
@@ -332,14 +332,21 @@
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
-										<label class="form-label">Official Name <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" onkeypress="return isAlphabets(event)" oninput="capitalizeWords(this)" name="employeeOfficialName" required autocomplete="off">
+										<label class="form-label">Personal Name <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" onkeypress="return isAlphabets(event)" oninput="capitalizeWords(this)" id="employeePersonalName" name="employeePersonalName" placeholder="Personal Name (Birth Name)" required autocomplete="off">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
-										<label class="form-label">Personal Name <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" onkeypress="return isAlphabets(event)" oninput="capitalizeWords(this)" name="employeePersonalName" required autocomplete="off">
+										<label class="form-label">Official Name <span class="text-danger"> *</span></label>
+										<div class="input-group">
+											<div class="input-group-append">
+												<span class="input-group-text" id="same-personalName">
+													<input type="checkbox" id="officialNameCheckbox" />
+												</span>
+											</div>
+											<input type="text" class="form-control" onkeypress="return isAlphabets(event)" oninput="capitalizeWords(this)" id="employeeOfficialName" name="employeeOfficialName" placeholder="Official Name (Office purpose)" required autocomplete="off">
+										</div>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -351,7 +358,7 @@
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Phone Number <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" onkeypress="return isNumber(event)" name="phone" required autocomplete="off">
+										<input type="text" class="form-control" onkeypress="return isNumber(event)" name="phone" placeholder="Enter 10 digits only" required autocomplete="off">
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -385,6 +392,9 @@
 								</div>
 							</div>
 						</div>
+						<div class="modal-footer"> 
+							<button type="button" class="btn btn-primary" id="nextButton">Next <i class="fa-solid fa-circle-chevron-right"></i></button>
+						</div>
 					</div>
 					<!-- Official Information Tab -->
 					<div class="tab-pane fade" id="office-info" role="tabpanel" aria-labelledby="office-tab" tabindex="0">
@@ -407,6 +417,7 @@
 							</div>
 						</div>
 						<div class="modal-footer">
+							<button type="button" class="btn btn-primary border me-2" id="previousButton"><i class="fa-solid fa-circle-chevron-left"></i> Back</button>
 							<button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">Cancel</button>
 							<button type="submit" class="btn btn-primary addEmployeeSaveBtn">Save <i class='fa-solid fa-cloud-arrow-up'></i></button>
 						</div>
@@ -744,29 +755,29 @@
 					<i class="ti ti-x"></i>
 				</button>
 			</div>
-			<form id="updateStatus"> 
-					<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="basic-tab" tabindex="0">
-						<div class="modal-body pb-0 ">
-							<div class="row">
-								<div class="col-md-12">
-									<div class="mb-3">
-										<label class="form-label">Relieving Date <span class="text-danger"> *</span></label>
-										<div class="input-icon-end position-relative">
-											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="relievingDate" id="relievingDate" required autocomplete="off">
-											<span class="input-icon-addon">
-												<i class="ti ti-calendar text-gray-7"></i>
-											</span>
-										</div>
+			<form id="updateStatus">
+				<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="basic-tab" tabindex="0">
+					<div class="modal-body pb-0 ">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="mb-3">
+									<label class="form-label">Relieving Date <span class="text-danger"> *</span></label>
+									<div class="input-icon-end position-relative">
+										<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="relievingDate" id="relievingDate" required autocomplete="off">
+										<span class="input-icon-addon">
+											<i class="ti ti-calendar text-gray-7"></i>
+										</span>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="modal-footer">
-							<input type="hidden" id="employeeId" name="employeeId">
-							<button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">Cancel</button>
-							<button type="submit" class="btn btn-primary">Deactivate</button>
-						</div>
-					</div> 
+					</div>
+					<div class="modal-footer">
+						<input type="hidden" id="employeeId" name="employeeId">
+						<button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">Cancel</button>
+						<button type="submit" class="btn btn-primary">Deactivate</button>
+					</div>
+				</div>
 			</form>
 		</div>
 	</div>
