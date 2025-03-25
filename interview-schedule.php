@@ -135,6 +135,10 @@ if (mysqli_num_rows($result) > 0) {
 														<input type="text" class="form-control" value="<?php echo $data['gender']; ?>" readonly>
 													</div>
 													<div class="form-group">
+														<label for="text">Salary Range</label>
+														<input type="text" class="form-control" value="<?php echo $data['salary_range']; ?>" readonly>
+													</div>
+													<div class="form-group">
 														<label for="text">Location</label>
 														<input type="text" class="form-control" value="<?php echo $data['location']; ?>" readonly>
 													</div>
