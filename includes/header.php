@@ -1115,7 +1115,7 @@ $MyProfileInfo = getMyProfileInfo($employeeId);
 								<a href="javascript:void(0);" class="dropdown-toggle d-flex align-items-center"
 									data-bs-toggle="dropdown">
 									<span class="avatar avatar-sm online">
-										<img src="assets/img/profiles/avatar-12.jpg" alt="Img" class="img-fluid rounded-circle">
+										<img src="assets/img/profiles/sample-user.jpg" alt="Img" class="img-fluid rounded-circle">
 									</span>
 								</a>
 								<div class="dropdown-menu shadow-none">
@@ -1123,7 +1123,7 @@ $MyProfileInfo = getMyProfileInfo($employeeId);
 										<div class="card-header">
 											<div class="d-flex align-items-center">
 												<span class="avatar avatar-lg me-2 avatar-rounded">
-													<img src="assets/img/profiles/avatar-12.jpg" alt="img">
+													<img src="assets/img/profiles/sample-user.jpg" alt="img">
 												</span>
 												<div>
 													<h5 class="mb-0"><?php echo $_SESSION["hrm_employeeName"]; ?></h5>
