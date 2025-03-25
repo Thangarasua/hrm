@@ -2,6 +2,8 @@
 
 header('Content-Type: application/json');
 
+$departmentId = $_SESSION["hrm_departmentId"];
+
 $month = date('m');
 $year = date('y');
 $date = date('d');
@@ -40,6 +42,15 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
         $rowId = $_POST['rowId'];
         $interviewStatus = $_POST['interview_status'];
+
+        $query = "SELECT department_id FROM `candidates` AS c INNER JOIN `employees`AS `e` ON `c`.`created_by`=`e`.`employee_id` WHERE c.candidate_id = $rowId";
+        $result = mysqli_query($conn, $query);
+        $row = mysqli_fetch_assoc($result);
+        $department_id = $row['department_id'];
+        if($departmentId != $department_id){
+            echo json_encode(array('status' => 'failure', 'message' => 'Star rating must given the particular department only'));
+            exit;
+        }
 
         if ($interviewStatus == 4) {
             // Create an associative array for the ratings
