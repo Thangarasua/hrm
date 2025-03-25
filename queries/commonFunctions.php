@@ -1,4 +1,5 @@
 <?php 
+include(__DIR__ . '/../includes/config.php');
 function getDepartments($currentDepartmentId = null) {
     global $conn;
     $query = "SELECT * FROM departments WHERE status = 1 ORDER BY department_name ASC";
@@ -261,4 +262,39 @@ function getPersonalInfo($employeeId) {
         return null;
     }
 };
+
+if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
+    global $conn;
+    $flag = $_POST['flag'];
+    $key = "ACTEHRM2025";
+    $method = "AES-256-CBC";
+    $iv = substr(hash('sha256', $key), 0, 16);
+    if ($flag === "updatePassword") {
+        $employeeId = $_POST['employeeID'];
+        $currentPassword = $_POST['currentPassword'];
+        $newPassword = $_POST['newPassword'];
+        $confirmNewPassword = $_POST['confirmNewPassword'];
+
+        $query = "SELECT * FROM employees WHERE employee_id = '$employeeId'";
+        $result = mysqli_query($conn, $query);
+        $row = mysqli_fetch_assoc($result);
+        $encryptedPassword = $row['password'];
+        $decryptedPassword = openssl_decrypt($encryptedPassword, $method, $key, 0, $iv);
+
+        if ($currentPassword !== $decryptedPassword) {
+            echo json_encode(array('status' => 'failure', 'message' => 'Current password does not match.'));
+            exit;
+        } else {
+            $encryptedNewPassword = openssl_encrypt($newPassword, $method, $key, 0, $iv);
+
+            $updateQuery = "UPDATE employees SET `password` = '$encryptedNewPassword' WHERE employee_id = '$employeeId'"; 
+            if (mysqli_query($conn, $updateQuery)) {
+                echo json_encode(array('status' => 'success', 'message' => 'Password updated successfully.'));
+            } else {
+                echo json_encode(array('status' => 'failure', 'message' => 'Error updating password.'));
+            }
+        }
+    
+    }
+}
 

@@ -95,4 +95,5 @@
 
 <!-- own scripts added -->
 <script src="scripts/myscript.js" type="text/javascript"></script>
+<script src="js/commonFunctions.js"></script>
 

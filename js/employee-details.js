@@ -162,8 +162,8 @@ $(document).ready(function () {
         
         let totalDeductions = (parseFloat(pfEmployee) + parseFloat(esiEmployee) + professionalTax).toFixed(2);
         let netSalary = (grossSalary - totalDeductions).toFixed(2);
-        let ctc = (parseFloat(grossSalary) + parseFloat(pfEmployer) + parseFloat(esiEmployer)).toFixed(2);
-        let yearCtc = ctc * 12;
+        let ctc = (parseFloat(grossSalary) + parseFloat(pfEmployer) + parseFloat(esiEmployer)).toFixed(0);
+        let yearCtc = (ctc * 12).toFixed(0);
 
         // Fill the fields
         $("#basicSalary").val(basicSalary);
