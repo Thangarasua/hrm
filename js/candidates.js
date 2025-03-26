@@ -83,7 +83,7 @@ $(document).ready(function () {
                             </div>
                         </div>
                     </td>
-                    <td>${row.job_position}</td>
+                    <td class='pointer' title='${row.job_position}'>${row.job_position.substr(0, 23)}</td>
                     <td>${row.contact_number}</td>
                     <td>${row.created_at}</td>
                     <td>
