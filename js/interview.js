@@ -466,10 +466,13 @@ $(document).ready(function () {
         });
       },
       success: function (res) { 
+        console.log(res.data);
         if (res.status === "success") {
           if (res.data.interview_status == 4) {
             interviewUpdateMail(res.data);
           } else if (res.data.interview_status == 5) {
+            interviewUpdateMail(res.data);
+          } else if (res.data.interview_status == 7) {
             interviewUpdateMail(res.data);
           } else {
             $("#update")[0].reset();

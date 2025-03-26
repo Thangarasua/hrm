@@ -278,6 +278,8 @@ $(document).ready(function () {
           if (interview_status == 2) {
             // 2->shortlisted candidate send mail
             sendRecruitmentMail(response.data);
+          }else if(interview_status == 7){
+            sendRecruitmentMail(response.data);
           } else {
             $("#update")[0].reset();
             $("#interviewModal").modal("hide");
