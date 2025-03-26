@@ -54,16 +54,17 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $rowId = $_POST['rowId'];
         $interviewStatus = $_POST['interview_status'];
 
-        $query = "SELECT department_id FROM `candidates` AS c INNER JOIN `employees`AS `e` ON `c`.`created_by`=`e`.`employee_id` WHERE c.candidate_id = $rowId";
+        $query = "SELECT e.department_id,department_name FROM `candidates` AS c INNER JOIN `employees`AS `e` ON `c`.`created_by`=`e`.`employee_id` INNER JOIN `departments`AS `d` ON `d`.`department_id`=`e`.`department_id` WHERE c.candidate_id = $rowId";
         $result = mysqli_query($conn, $query);
         $row = mysqli_fetch_assoc($result);
         $department_id = $row['department_id'];
+        $department_name = $row['department_name'];
       
 
         if ($interviewStatus == 4) {
 
-            if($departmentId != $department_id){
-                echo json_encode(array('status' => 'failure', 'message' => 'Star rating must given the particular department only'));
+            if($departmentId != $department_id){ 
+                echo json_encode(array('status' => 'failure', 'message' => "Star ratings must be given only to the ''$department_name'' department."));
                 exit;
             }
             // Create an associative array for the ratings

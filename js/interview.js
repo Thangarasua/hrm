@@ -465,8 +465,7 @@ $(document).ready(function () {
           },
         });
       },
-      success: function (res) { 
-        console.log(res.data);
+      success: function (res) {  
         if (res.status === "success") {
           if (res.data.interview_status == 4) {
             interviewUpdateMail(res.data);
@@ -488,6 +487,9 @@ $(document).ready(function () {
             loadData("", "", "", "", "getAll");
           }
         } else {
+          $("#updateButton")
+              .html("Update <i class='fa-solid fa-cloud-arrow-up'></i>")
+              .prop("disabled", false);
           handleError(res.message);
         }
       },
@@ -531,6 +533,9 @@ $(document).ready(function () {
           Swal.close();
           loadData("", "", "", "", "getAll");
         } else {
+          $("#updateButton")
+              .html("Update <i class='fa-solid fa-cloud-arrow-up'></i>")
+              .prop("disabled", false);
           toastr.error(response.message, "Mail Error");
         }
       },
