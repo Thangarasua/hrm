@@ -298,3 +298,58 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     }
 }
 
+function getFamilyInfo($employeeId) {
+    global $conn;
+    $query = "SELECT * FROM `family_info` WHERE `employee_id` = '$employeeId'";
+    $result = mysqli_query($conn, $query);
+    $output = '';
+    
+    // Check if data exists
+    if ($result && mysqli_num_rows($result) > 0) {
+        // Start the row for labels
+        $output .= '
+        <div class="row">
+            <div class="col-md-3">
+                <span class="d-inline-flex align-items-center">Name</span>
+            </div>
+            <div class="col-md-3">
+                <span class="d-inline-flex align-items-center">Relationship</span>
+            </div>
+            <div class="col-md-3">
+                <span class="d-inline-flex align-items-center">Date of birth</span>
+            </div>
+            <div class="col-md-3">
+                <span class="d-inline-flex align-items-center">Phone</span>
+            </div>
+        </div>';
+
+        // Now loop through family members and display their details
+        while ($row = mysqli_fetch_assoc($result)) {
+            $relationName = htmlspecialchars($row['relation_name']);
+            $relationship = htmlspecialchars($row['relationship']);
+            $relationDob = htmlspecialchars($row['relation_dob']);
+            $relationPhone = htmlspecialchars($row['relation_phone']);
+
+            // Display the family member's information
+            $output .= '
+            <div class="row">
+                <div class="col-md-3">
+                    <h6 class="d-flex align-items-center fw-medium mt-1">' . $relationName . '</h6>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="d-flex align-items-center fw-medium mt-1">' . $relationship . '</h6>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="d-flex align-items-center fw-medium mt-1">' . $relationDob . '</h6>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="d-flex align-items-center fw-medium mt-1">' . $relationPhone . '</h6>
+                </div>
+            </div>';
+        }
+    } else {
+        $output = "<p>No family information found.</p>";
+    }
+    return $output;
+}
+

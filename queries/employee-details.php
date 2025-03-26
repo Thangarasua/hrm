@@ -149,7 +149,23 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         if (mysqli_query($conn, $query)) {
             echo json_encode(array('status' => 'success', 'message' => 'Personal Information Updated Successfully.'));
         } else {
-            echo json_encode(array('status' => 'failure', 'message' => 'Error adding personal data.', $query));
+            echo json_encode(array('status' => 'failure', 'message' => 'Error adding personal data.'));
+        }
+    }
+
+    if ($flag === "familyInfo") {
+        $employeeId = $_POST['employeeID'];
+        $relationName = $_POST['relationName'];
+        $relationPhone = $_POST['relationPhone'];
+        $relationship = $_POST['relationship'];
+        $relationDob = $_POST['relationDob'];
+        $relationDob = date('Y-m-d', strtotime($relationDob));
+
+        $query = "INSERT INTO `family_info` (`employee_id`, `relation_name`, `relationship`, `relation_phone`, `relation_dob`) VALUES ('$employeeId', '$relationName', '$relationship', '$relationPhone', '$relationDob')";
+        if (mysqli_query($conn, $query)) {
+            echo json_encode(array('status' => 'success', 'message' => 'Family Information Updated Successfully.'));
+        } else {
+            echo json_encode(array('status' => 'failure', 'message' => 'Error adding family data.'));
         }
     }
 }

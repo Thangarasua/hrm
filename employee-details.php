@@ -10,6 +10,7 @@ $employeeInfo = getEmployeeInfo($employeeId);
 $experienceInfo = getExperienceInfo($employeeId);
 $educationInfo = getEducationInfo($employeeId);
 $personalInfo = getPersonalInfo($employeeId);
+$familyInfo = getFamilyInfo($employeeId);
 
 $employeeRoleId = $_SESSION['hrm_roleId'];
 ?>
@@ -324,32 +325,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									</div>
 									<div id="primaryBorderThree" class="accordion-collapse collapse border-top" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
 										<div class="accordion-body">
-											<div class="row">
-												<div class="col-md-3">
-													<span class="d-inline-flex align-items-center">
-														Name
-													</span>
-													<h6 class="d-flex align-items-center fw-medium mt-1">Hendry Peralt</h6>
-												</div>
-												<div class="col-md-3">
-													<span class="d-inline-flex align-items-center">
-														Relationship
-													</span>
-													<h6 class="d-flex align-items-center fw-medium mt-1">Brother</h6>
-												</div>
-												<div class="col-md-3">
-													<span class="d-inline-flex align-items-center">
-														Date of birth
-													</span>
-													<h6 class="d-flex align-items-center fw-medium mt-1">25 May 2014</h6>
-												</div>
-												<div class="col-md-3">
-													<span class="d-inline-flex align-items-center">
-														Phone
-													</span>
-													<h6 class="d-flex align-items-center fw-medium mt-1">+1 265 6956 961</h6>
-												</div>
-											</div>
+										<?php echo $familyInfo ? $familyInfo : '';?>
 										</div>
 									</div>
 								</div>
@@ -1042,32 +1018,32 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 					<i class="ti ti-x"></i>
 				</button>
 			</div>
-			<form action="#">
+			<form action="#" id="addFamilyinformation">
 				<div class="modal-body pb-0">
 					<div class="row">
 						<div class="col-md-12">
 							<div class="mb-3">
 								<label class="form-label">Name <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" name="relationName" id="relationName">
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="mb-3">
 								<label class="form-label">Relationship </label>
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" name="relationship" id="relationship">
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="mb-3">
 								<label class="form-label">Phone </label>
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" name="relationPhone" id="relationPhone">
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="mb-3">
-								<label class="form-label">Passport Expiry Date <span class="text-danger"> *</span></label>
+								<label class="form-label">Date of Birth <span class="text-danger"> *</span></label>
 								<div class="input-icon-end position-relative">
-									<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy">
+									<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="relationDob" id="relationDob">
 									<span class="input-icon-addon">
 										<i class="ti ti-calendar text-gray-7"></i>
 									</span>
