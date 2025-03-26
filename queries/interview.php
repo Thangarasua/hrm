@@ -2,7 +2,11 @@
 
 header('Content-Type: application/json');
 
+$employeeId = $_SESSION['hrm_employeeId'];
+$employeeName = $_SESSION['hrm_employeeName'];
+$designationId = $_SESSION["hrm_designationId"];
 $departmentId = $_SESSION["hrm_departmentId"];
+$roleId = $_SESSION["hrm_roleId"]; 
 
 $month = date('m');
 $year = date('y');
@@ -15,7 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
     if ($flag === 'getAll') {
 
-        $sql = "SELECT c.*,r.job_position FROM `candidates` AS c INNER JOIN recruitment AS r ON c.ticket_request_id = r.ticket_request_id WHERE c.`responce_status` = 1 AND `interview_status` IN (3,4,5,6,7,8)";
+        if (in_array($departmentId, [1, 2, 3, 5])) {
+            $departmentWise = "AND 1";
+        } else {
+            $departmentWise = "AND e.department_id = $departmentId";
+        }
+
+        $sql = "SELECT c.*,r.job_position FROM `candidates` AS c INNER JOIN recruitment AS r ON c.ticket_request_id = r.ticket_request_id INNER JOIN employees AS e ON e.employee_id = r.raised_by WHERE c.`responce_status` = 1 AND `interview_status` IN (3,4,5,6,7,8) $departmentWise"; 
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
@@ -47,12 +57,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $result = mysqli_query($conn, $query);
         $row = mysqli_fetch_assoc($result);
         $department_id = $row['department_id'];
-        if($departmentId != $department_id){
-            echo json_encode(array('status' => 'failure', 'message' => 'Star rating must given the particular department only'));
-            exit;
-        }
+      
 
         if ($interviewStatus == 4) {
+
+            if($departmentId != $department_id){
+                echo json_encode(array('status' => 'failure', 'message' => 'Star rating must given the particular department only'));
+                exit;
+            }
             // Create an associative array for the ratings
             $ratingsArray = array(
                 "dressCodeRate" => $_POST['dressCodeRate'],
@@ -77,6 +89,11 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             $getDataQuery = "SELECT i.interview_status,i.`training_offer_send`, i.`training_offer_responced`, i.`training_offer_status`, c.candidate_id, c.candidate_name, c.email, r.job_position, e.official_name AS HRname, e.phone AS HRphone FROM `interview_process` AS i INNER JOIN `candidates`AS c ON `i`.`candidate_id`=`c`.`candidate_id` INNER JOIN `recruitment`AS r ON `c`.`ticket_request_id`=`r`.`ticket_request_id`INNER JOIN `employees`AS `e` ON `r`.`hr_id`=`e`.`employee_id`WHERE c.`candidate_id`= '$rowId'";
         } else if ($interviewStatus == 6) {
             $query = "UPDATE `interview_process` SET `interview_status`='$interviewStatus' WHERE `candidate_id`='$rowId'";
+        } else if ($interviewStatus == 7) {
+            $query = "UPDATE `interview_process` SET `interview_status`='$interviewStatus' WHERE `candidate_id`='$rowId'";
+
+            $getDataQuery = "SELECT c.*, r.job_position, e.official_name AS HRname, e.phone AS HRphone FROM `candidates`AS c INNER JOIN `recruitment`AS r ON `c`.`ticket_request_id`=`r`.`ticket_request_id`INNER JOIN `employees`AS `e` ON `r`.`hr_id`=`e`.`employee_id`WHERE c.`candidate_id`= '$rowId'";
+
         } else if ($interviewStatus == 8) {
             $query = "UPDATE `interview_process` SET `interview_status`='$interviewStatus' WHERE `candidate_id`='$rowId'";
         } else {
