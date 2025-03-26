@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             $departmentWise = "AND e.department_id = $departmentId";
         }
 
-        $sql = "SELECT c.*,r.job_position FROM `candidates` AS c INNER JOIN recruitment AS r ON c.ticket_request_id = r.ticket_request_id INNER JOIN employees AS e ON e.employee_id = r.raised_by WHERE c.`responce_status` = 1 $jobWise $departmentWise";
+        $sql = "SELECT c.*,r.job_position FROM `candidates` AS c INNER JOIN recruitment AS r ON c.ticket_request_id = r.ticket_request_id INNER JOIN employees AS e ON e.employee_id = r.raised_by WHERE c.`responce_status` = 1 $jobWise $departmentWise ORDER BY c.`candidate_id` DESC";
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
@@ -66,6 +66,11 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             $query = "UPDATE `candidates` SET `interview_status`= $interview_status,interview_date = '$interview_date' WHERE `candidate_id`='$rowId'";
         } elseif ($interview_status == 3) {
             $query = "UPDATE `candidates` SET `interview_status`= $interview_status WHERE `candidate_id`='$rowId'";
+        } elseif ($interview_status == 7) {
+            // $query = "UPDATE `candidates` SET `interview_status`= $interview_status WHERE `candidate_id`='$rowId'";
+
+            $query = "UPDATE `candidates` AS c LEFT JOIN `interview_process` AS i ON c.candidate_id=i.candidate_id SET c.`interview_status`= $interview_status, i.`interview_status`= $interview_status WHERE c.`candidate_id`='$rowId'";
+
         } else {
             $query = "UPDATE `candidates` SET `interview_status`= $interview_status WHERE `candidate_id`='$rowId'";
         }

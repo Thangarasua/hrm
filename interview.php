@@ -49,14 +49,17 @@
 							<input type="text" id="myInputTextField" class="form-control" placeholder="Search anything..." title="Search any thing in the table you want">
 						</div>
 					</div>
-					<div class="me-3">
-						<div class="input-icon-end position-relative">
-							<input type="text" class="form-control date-range bookingrange"
-								placeholder="dd/mm/yyyy - dd/mm/yyyy">
-							<span class="input-icon-addon">
-								<i class="ti ti-chevron-down"></i>
-							</span>
-						</div>
+					<div class="dropdown me-3">
+						<select id="customLengthMenu" name="tableRecords_length" aria-controls="tableRecords" class="dropdown-toggle btn btn-white">
+							<option value="5">5</option>
+							<option value="10" selected>10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
+							<option value="50">50</option>
+							<option value="72">72</option>
+							<option value="100">100</option>
+							<option value="-1">All</option>
+						</select>
 					</div>
 					<div class="dropdown me-3">
 						<a href="javascript:void(0);"

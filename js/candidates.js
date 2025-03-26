@@ -83,7 +83,7 @@ $(document).ready(function () {
                             </div>
                         </div>
                     </td>
-                    <td>${row.job_position}</td>
+                    <td class='pointer' title='${row.job_position}'>${row.job_position.substr(0, 23)}</td>
                     <td>${row.contact_number}</td>
                     <td>${row.created_at}</td>
                     <td>
@@ -277,6 +277,8 @@ $(document).ready(function () {
           interview_status = response.data.interview_status;
           if (interview_status == 2) {
             // 2->shortlisted candidate send mail
+            sendRecruitmentMail(response.data);
+          }else if(interview_status == 7){
             sendRecruitmentMail(response.data);
           } else {
             $("#update")[0].reset();

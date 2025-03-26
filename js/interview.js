@@ -80,8 +80,8 @@ $(document).ready(function () {
                                 <span class="d-block mt-1">${row.email}</span>
                             </div>
                         </div>
-                    </td>
-                    <td>${row.job_position}</td>
+                    </td> 
+                    <td class='pointer' title='${row.job_position}'>${row.job_position.substr(0, 23)}</td>
                     <td>${row.contact_number}</td>
                     <td>${row.created_at}</td>
                     <td>
@@ -466,10 +466,13 @@ $(document).ready(function () {
         });
       },
       success: function (res) { 
+        console.log(res.data);
         if (res.status === "success") {
           if (res.data.interview_status == 4) {
             interviewUpdateMail(res.data);
           } else if (res.data.interview_status == 5) {
+            interviewUpdateMail(res.data);
+          } else if (res.data.interview_status == 7) {
             interviewUpdateMail(res.data);
           } else {
             $("#update")[0].reset();
