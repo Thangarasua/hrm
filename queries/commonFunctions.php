@@ -240,6 +240,8 @@ function getPersonalInfo($employeeId) {
     $result = mysqli_query($conn, $query);
     if ($result && $row = $result->fetch_assoc()) {
         return [
+            'phone' => $row['phone'],
+            'email' => $row['email'],
             'gender' => $row['gender'],
             'dob' => $row['dob'],
             'permanentAddress' => $row['permanent_address'],
