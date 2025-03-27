@@ -340,25 +340,25 @@ $(document).ready(function () {
         flag: "getDetails",
       },
       cache: false,
-      success: function (res) {
-        console.log(res);
+      success: function (res) { 
         if (res.status == "success") {
           $("#rowId").val(res.data.candidate_id);
           $("#candidate_name").val(res.data.candidate_name);
           $("input[name='interview_status']").prop("checked", false); // Uncheck all first
-          $(
-            `input[name='interview_status'][value='${res.data.interview_status}']`
-          ).prop("checked", true);
+          $(`input[name='interview_status'][value='${res.data.interview_status}']`).prop("checked", true);
           $("#existingStatus").val(res.data.interview_status);
           $("#schedule_time1").val(res.data.available_time1);
           $("#schedule_time2").val(res.data.available_time2);
           $("#schedule_time3").val(res.data.available_time3);
-          if (!res.data.ratings || res.data.ratings.trim() === "") {
-            console.log("No ratings available.");
+          if (!res.data.ratings || res.data.ratings.trim() === "") { 
             unSetStars();
+            $(".feedback-content").hide();
           } else {
-            setStars(res.data.ratings);
+            setStars(res.data.ratings); 
+            $(".feedback-content").show();
+            $("#interview_feedback").html(res.data.interview_feedback??'Candidate still not given the feedback'); 
           }
+          $("#schedule_time3").val(res.data.available_time3);
           dynamicInputs(res.data.interview_status, res.data.interview_status);
         } else {
           Swal.fire(res.data.message);
@@ -385,9 +385,9 @@ $(document).ready(function () {
     }
     if (selectedValue == 4) {
       $(".rating-content").show();
-      if (existingStatus == 4) {
+      if (existingStatus == 4) { 
         $("#updateButton").hide();
-      } else {
+      } else { 
         $("#updateButton").show();
       }
     }

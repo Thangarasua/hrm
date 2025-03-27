@@ -278,6 +278,9 @@
 								</div>
 							</div>
 						</div>
+						<div class="col-12 feedback-content" style="display: none;">
+							<p> <b>Candidate Interview feedback:</b> <span id="interview_feedback"></span></p> 
+						</div>
 					</div>
 
 					<div class="row offered" style="display: none;">
