@@ -278,8 +278,10 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-12 feedback-content" style="display: none;">
-							<p> <b>Candidate Interview feedback:</b> <span id="interview_feedback"></span></p>
+						<div class="col-6 m-auto feedback-content" style="display: none;">
+							<br>
+							<h6>Interviewed By: <span id="rating_by" class="text-primary"></span></h6>
+							<p> <h6>Candidate Interview feedback:</h6> <span id="interview_feedback" class="text-secondary"></span></p>
 						</div>
 					</div>
 					<div class="offer-content">

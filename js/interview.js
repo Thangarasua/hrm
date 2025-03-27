@@ -360,6 +360,7 @@ $(document).ready(function () {
           } else {
             setStars(res.data.ratings);
             $(".feedback-content").show();
+            $("#rating_by").html(res.data.official_name);
             $("#interview_feedback").html(
               res.data.interview_feedback ??
                 "Candidate still not given the feedback"

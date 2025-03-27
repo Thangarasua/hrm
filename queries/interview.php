@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     } elseif ($flag === "getDetails") {
 
         $id = $_POST['id'];
-        $query = "SELECT * FROM `candidates` AS `c` LEFT JOIN `interview_process` AS `ip` ON `c`.`candidate_id`=`ip`.`candidate_id` WHERE `c`.`candidate_id` = '$id'";
+        $query = "SELECT c.*,ip.*,e.official_name FROM `candidates` AS `c` LEFT JOIN `interview_process` AS `ip` ON `c`.`candidate_id`=`ip`.`candidate_id` LEFT JOIN `employees` AS `e` ON `e`.`employee_id`=`ip`.`rating_by`  WHERE `c`.`candidate_id` = '$id'";
         $result = mysqli_query($conn, $query);
         if ($result) {
             $row = mysqli_fetch_assoc($result);
@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             // Convert the array to JSON format
             $ratingsJson = json_encode($ratingsArray, JSON_UNESCAPED_UNICODE);
 
-            $query = "UPDATE `interview_process` SET `interview_status`='$interviewStatus',`ratings`='$ratingsJson',`rating_date`='$currentDatetime' WHERE `candidate_id`='$rowId'";
+            $query = "UPDATE `interview_process` SET `interview_status`='$interviewStatus',`ratings`='$ratingsJson',`rating_date`='$currentDatetime',`rating_by`='$employeeId' WHERE `candidate_id`='$rowId'";
 
             $getDataQuery = "SELECT c.*, r.job_position, e.official_name AS HRname, e.phone AS HRphone FROM `candidates`AS c INNER JOIN `recruitment`AS r ON `c`.`ticket_request_id`=`r`.`ticket_request_id`INNER JOIN `employees`AS `e` ON `r`.`hr_id`=`e`.`employee_id`WHERE c.`candidate_id`= '$rowId'";
             
