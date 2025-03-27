@@ -82,6 +82,20 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									</span>
 									<p class="text-dark"><?php echo $employeeInfo ? $employeeInfo['doj'] : ''; ?></p>
 								</div>
+								<div class="d-flex align-items-center justify-content-between mb-2">
+								<span class="d-inline-flex align-items-center">
+									<i class="ti ti-phone me-2"></i>
+									Phone
+								</span>
+								<p class="text-dark"><?php echo $employeeInfo ? $employeeInfo['phone'] : ''; ?></p>
+							</div>
+							<div class="d-flex align-items-center justify-content-between mb-2">
+								<span class="d-inline-flex align-items-center">
+									<i class="ti ti-mail-check me-2"></i>
+									Email
+								</span>
+								<a href="javascript:void(0);" class="text-info d-inline-flex align-items-center"><span class="__cf_email__" data-cfemail=""><?php echo $employeeInfo ? $employeeInfo['email'] : ''; ?></span><i class="ti ti-copy text-dark ms-2"></i></a>
+							</div>
 								<div class="d-flex align-items-center justify-content-between">
 									<span class="d-inline-flex align-items-center">
 										<i class="ti ti-calendar-check me-2"></i>
@@ -124,14 +138,14 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									<i class="ti ti-phone me-2"></i>
 									Phone
 								</span>
-								<p class="text-dark"><?php echo $employeeInfo ? $employeeInfo['phone'] : ''; ?></p>
+								<p class="text-dark"><?php echo $personalInfo ? $personalInfo['phone'] : ''; ?></p>
 							</div>
 							<div class="d-flex align-items-center justify-content-between mb-2">
 								<span class="d-inline-flex align-items-center">
 									<i class="ti ti-mail-check me-2"></i>
 									Email
 								</span>
-								<a href="javascript:void(0);" class="text-info d-inline-flex align-items-center"><span class="__cf_email__" data-cfemail=""><?php echo $employeeInfo ? $employeeInfo['email'] : ''; ?></span><i class="ti ti-copy text-dark ms-2"></i></a>
+								<a href="javascript:void(0);" class="text-info d-inline-flex align-items-center"><span class="__cf_email__" data-cfemail=""><?php echo $personalInfo ? $personalInfo['email'] : ''; ?></span><i class="ti ti-copy text-dark ms-2"></i></a>
 							</div>
 							<div class="d-flex align-items-center justify-content-between mb-2">
 								<span class="d-inline-flex align-items-center">
@@ -785,6 +799,18 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 					<div class="tab-pane fade show active" id="basic1-info" role="tabpanel" aria-labelledby="basic1-tab" tabindex="0">
 						<div class="modal-body pb-0">
 							<div class="row">
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Phone Number <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" onkeypress="return isNumber(event)" name="personalPhone" value="<?php echo $personalInfo ? $personalInfo['phone'] : ''; ?>" required>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Email <span class="text-danger"> *</span></label>
+										<input type="email" class="form-control" onblur="return isEmail(this)" placeholder="@gmail.com" name="personalEmail" value="<?php echo $personalInfo ? $personalInfo['email'] : ''; ?>" required>
+									</div>
+								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Gender <span class="text-danger"> *</span></label>
