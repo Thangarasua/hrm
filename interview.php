@@ -199,7 +199,10 @@
 					</div>
 				</div>
 				<br>
-				<div class="modal-body pb-0">
+				<div class="modal-body">
+				<div class="col-8 m-auto scheduled-date" style="display: none;">
+							<h5 class="text-center">Shortlisted, Interview Date: <span id="interviewDate" class="text-primary"></span></h5>
+						</div>
 					<div class="rating-content">
 						<div class="col-6 m-auto">
 							<div class="d-flex p-1">
@@ -279,9 +282,10 @@
 							</div>
 						</div>
 						<div class="col-6 m-auto feedback-content" style="display: none;">
-							<br>
+							 
 							<h6>Interviewed By: <span id="rating_by" class="text-primary"></span></h6>
-							<p> <h6>Candidate Interview feedback:</h6> <span id="interview_feedback" class="text-secondary"></span></p>
+							 
+							<h6>Candidate Interview feedback: <span id="interview_feedback" class="text-secondary"></span></h6>
 						</div>
 					</div>
 					<div class="offer-content">
@@ -306,11 +310,20 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-6 m-auto offerDate" style="display: none;">
-							<h4>Offer sended, Joing Date <span id="joingDate"></span></h4>
+						<div class="col-8 m-auto offerDate" style="display: none;">
+							<h5 class="text-center">Offer sent. Joing Date: <span id="joingDate" class="text-primary"></span></h5>
 						</div>
 					</div>
-
+					<div class="rejection-content" style="display: none;">
+						<div class="col-md-12">
+							<div class="col-md-8 m-auto">
+								<div class="mb-3">
+									<label class="form-label">Rejection Comments<span class="text-danger"> *</span></label>
+									<textarea class="form-control" name="rejection" id="rejection" rows="3"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 				<input type="hidden" name="rowId" id="rowId">
 				<div class="modal-footer">
