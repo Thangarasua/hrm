@@ -203,3 +203,68 @@ function dataTableDesigns() {
     table.page.len(length).draw();
   });
 }
+
+  /*-----------SESSION AUTO LOGOUT-----------*/
+  let logoutTime = 20 * 60 * 1000; // 20 minutes (1,200,000 ms)
+  let warningTime = logoutTime - (2 * 60 * 1000); // 18 minutes (120,000 ms before logout)
+  let timeout, warningTimeout;
+
+  function resetTimer() {
+      clearTimeout(timeout);
+      clearTimeout(warningTimeout);
+
+      // Show warning popup 2 minutes before logout
+      warningTimeout = setTimeout(function () {
+          let timeLeft = 120; // Countdown starts from 120 seconds (2 minutes)
+
+          Swal.fire({
+              title: "⚠ Session Expiring Soon!",
+              html: `<p>You will be logged out in <b id="countdown">${timeLeft}</b> seconds.</p>
+                     <p>Are you still working?</p>`,
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonText: "Yes, I'm Working!",
+              cancelButtonText: "No, Logout!",
+              reverseButtons: true,
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+              buttonsStyling: false,
+              customClass: {
+                  confirmButton: "btn btn-success px-4 py-2 mx-2",
+                  cancelButton: "btn btn-danger px-4 py-2 mx-2",
+                  popup: "bg-light text-dark",
+              },
+              didOpen: () => {
+                  let countdownInterval = setInterval(() => {
+                      timeLeft--;
+                      document.getElementById("countdown").innerText = timeLeft;
+
+                      if (timeLeft <= 0) {
+                          clearInterval(countdownInterval);
+                          Swal.close();
+                          window.location.href = "queries/logout"; // Auto logout
+                      }
+                  }, 1000);
+              }
+          }).then((result) => {
+              if (result.isConfirmed) {
+                  resetTimer(); // Stay logged in
+              } else {
+                  window.location.href = "queries/logout"; // Logout immediately
+              }
+          });
+      }, warningTime);
+
+      // Auto logout after 20 minutes
+      timeout = setTimeout(function () {
+          window.location.href = "queries/logout"; // Redirect to logout
+      }, logoutTime);
+  }
+
+  // Reset timer on user activity (mouse, keyboard, click)
+  $(document).on("mousemove keydown click", resetTimer);
+
+  // Start the timer initially
+  resetTimer();
+  /*-----------SESSION AUTO LOGOUT-----------*/
+ 

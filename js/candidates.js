@@ -321,7 +321,11 @@ $(document).ready(function () {
           $("#update")[0].reset();
           $("#interviewModal").modal("hide");
           $("#updateBtn").text("Update").prop("disabled", false);
-          Swal.fire("Mail send successfully!", "", "success");
+          $("#success_modal").modal("show");
+            $("#success_modal_content").html(
+              "Shortlist mail send successfully! 📨"
+            );
+            Swal.close(); 
           loadData("", "", "", "", "getAll");
         } else {
           toastr.error(response.message, "Mail Error");

@@ -199,7 +199,10 @@
 					</div>
 				</div>
 				<br>
-				<div class="modal-body pb-0">
+				<div class="modal-body">
+				<div class="col-8 m-auto scheduled-date" style="display: none;">
+							<h5 class="text-center">Shortlisted, Interview Date: <span id="interviewDate" class="text-primary"></span></h5>
+						</div>
 					<div class="rating-content">
 						<div class="col-6 m-auto">
 							<div class="d-flex p-1">
@@ -278,25 +281,45 @@
 								</div>
 							</div>
 						</div>
+						<div class="col-6 m-auto feedback-content" style="display: none;">
+							 
+							<h6>Interviewed By: <span id="rating_by" class="text-primary"></span></h6>
+							 
+							<h6>Candidate Interview feedback: <span id="interview_feedback" class="text-secondary"></span></h6>
+						</div>
 					</div>
-
-					<div class="row offered" style="display: none;">
+					<div class="offer-content">
+						<div class="row send-offer" style="display: none;">
+							<div class="col-md-12">
+								<div class="row sheduleDate">
+									<div class="mb-3">
+										<h4 class="text-center">Joing Date for Training</h4>
+									</div>
+									<div class="col-md-4">
+										<div class="mb-3">
+											<label class="form-label">Date<span class="text-danger"> *</span></label>
+											<input type="date" class="form-control" id="joining_date" name="joining_date" min=<?php echo date('Y-m-d'); ?>>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="mb-3">
+											<label class="form-label">Time<span class="text-danger"> *</span></label>
+											<input type="time" class="form-control" id="joining_time" name="joining_time">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-8 m-auto offerDate" style="display: none;">
+							<h5 class="text-center">Offer sent. Joing Date: <span id="joingDate" class="text-primary"></span></h5>
+						</div>
+					</div>
+					<div class="rejection-content" style="display: none;">
 						<div class="col-md-12">
-							<div class="row sheduleDate">
+							<div class="col-md-8 m-auto">
 								<div class="mb-3">
-									<h4 class="text-center">Joing Date for Training</h4>
-								</div>
-								<div class="col-md-4">
-									<div class="mb-3">
-										<label class="form-label">Date<span class="text-danger"> *</span></label>
-										<input type="date" class="form-control" id="joining_date" name="joining_date" min=<?php echo date('Y-m-d'); ?>>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="mb-3">
-										<label class="form-label">Time<span class="text-danger"> *</span></label>
-										<input type="time" class="form-control" id="joining_time" name="joining_time">
-									</div>
+									<label class="form-label">Rejection Comments<span class="text-danger"> *</span></label>
+									<textarea class="form-control" name="rejection" id="rejection" rows="3"></textarea>
 								</div>
 							</div>
 						</div>

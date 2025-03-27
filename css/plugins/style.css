@@ -28348,6 +28348,11 @@ border: 1px solid var(--bg-primary);
 .breadcrumb li{
   font-size: 12px;
 }
+
+.scheduled-date, .offerDate, .feedback-content h6 {
+  padding: 10px;
+  border: 1px solid;
+}
 /* End:: own style added */
 
 /*# sourceMappingURL=style.css.map */

@@ -81,7 +81,9 @@ $(document).ready(function () {
                             </div>
                         </div>
                     </td> 
-                    <td class='pointer' title='${row.job_position}'>${row.job_position.substr(0, 23)}</td>
+                    <td class='pointer' title='${
+                      row.job_position
+                    }'>${row.job_position.substr(0, 23)}</td>
                     <td>${row.contact_number}</td>
                     <td>${row.created_at}</td>
                     <td>
@@ -341,7 +343,6 @@ $(document).ready(function () {
       },
       cache: false,
       success: function (res) {
-        console.log(res);
         if (res.status == "success") {
           $("#rowId").val(res.data.candidate_id);
           $("#candidate_name").val(res.data.candidate_name);
@@ -353,12 +354,26 @@ $(document).ready(function () {
           $("#schedule_time1").val(res.data.available_time1);
           $("#schedule_time2").val(res.data.available_time2);
           $("#schedule_time3").val(res.data.available_time3);
+          $("#interviewDate").html(res.data.interview_re_date??res.data.interview_date);
           if (!res.data.ratings || res.data.ratings.trim() === "") {
-            console.log("No ratings available.");
             unSetStars();
+            $(".feedback-content").hide();
           } else {
             setStars(res.data.ratings);
+            $(".feedback-content").show();
+            $("#rating_by").html(res.data.official_name);
+            $("#interview_feedback").html(
+              res.data.interview_feedback ??
+                "Candidate still not given the feedback"
+            );
           }
+          if (res.data.training_offer_send) {
+            $(".offerDate").show(); 
+            $("#joingDate").html(moment(res.data.training_offer_send).format("MMMM D, YYYY [at] h:mm A"));
+          } 
+          if (res.data.candidate_rejection_comment) { 
+            $("#rejection").html(res.data.candidate_rejection_comment);
+          } 
           dynamicInputs(res.data.interview_status, res.data.interview_status);
         } else {
           Swal.fire(res.data.message);
@@ -374,18 +389,24 @@ $(document).ready(function () {
   });
 
   function dynamicInputs(val1, val2) {
-    selectedValue = val1;
-    existingStatus = val2;
+   var selectedValue = val1;
+   var existingStatus = val2;
 
+    
     $("#updateButton").hide();
+    $(".scheduled-date").hide();
     $(".rating-content").hide();
-    $(".offered").hide();
+    $(".send-offer").hide();
+    $(".rejection-content").hide();
+    $(".offerDate").hide();
+    
     if (selectedValue == 3) {
+      $(".scheduled-date").show();
       $("#updateButton").hide();
     }
     if (selectedValue == 4) {
       $(".rating-content").show();
-      if (existingStatus == 4) {
+      if (existingStatus >= 4) {
         $("#updateButton").hide();
       } else {
         $("#updateButton").show();
@@ -393,10 +414,11 @@ $(document).ready(function () {
     }
     if (selectedValue == 5) {
       if (existingStatus == 5) {
-        $(".offered").hide();
+        $(".send-offer").hide();
+        $(".offerDate").show();
         $("#updateButton").hide();
       } else {
-        $(".offered").show();
+        $(".send-offer").show();
         $("#updateButton").show();
       }
     }
@@ -409,8 +431,10 @@ $(document).ready(function () {
     }
     if (selectedValue == 7) {
       if (existingStatus == 7) {
+        $(".rejection-content").show();
         $("#updateButton").hide();
       } else {
+        $(".rejection-content").show();
         $("#updateButton").show();
       }
     }
@@ -421,7 +445,11 @@ $(document).ready(function () {
         $("#updateButton").show();
       }
     }
-   
+
+    if(existingStatus == 7){
+      $("#updateButton").hide();
+    }
+
   }
 
   $(document).on("submit", "#update", function (e) {
@@ -436,6 +464,12 @@ $(document).ready(function () {
     }
     if (interview_status == 5) {
       let form = joingDate();
+      if (form === 0) {
+        return false;
+      }
+    }
+    if (interview_status == 7) {
+      let form = rejection();
       if (form === 0) {
         return false;
       }
@@ -465,8 +499,7 @@ $(document).ready(function () {
           },
         });
       },
-      success: function (res) { 
-        console.log(res.data);
+      success: function (res) {
         if (res.status === "success") {
           if (res.data.interview_status == 4) {
             interviewUpdateMail(res.data);
@@ -488,6 +521,9 @@ $(document).ready(function () {
             loadData("", "", "", "", "getAll");
           }
         } else {
+          $("#updateButton")
+            .html("Update <i class='fa-solid fa-cloud-arrow-up'></i>")
+            .prop("disabled", false);
           handleError(res.message);
         }
       },
@@ -498,7 +534,7 @@ $(document).ready(function () {
   });
 
   /** Function to Send Recruitment Mail */
-  function interviewUpdateMail(data) { 
+  function interviewUpdateMail(data) {
     $.ajax({
       type: "POST",
       url: "mails/recruitment-mail.php",
@@ -531,6 +567,9 @@ $(document).ready(function () {
           Swal.close();
           loadData("", "", "", "", "getAll");
         } else {
+          $("#updateButton")
+            .html("Update <i class='fa-solid fa-cloud-arrow-up'></i>")
+            .prop("disabled", false);
           toastr.error(response.message, "Mail Error");
         }
       },
@@ -576,17 +615,29 @@ $(document).ready(function () {
     }
   }
   function joingDate() {
-    $('.error').remove();
+    $(".error").remove();
     if ($("#joining_date").val().length == 0) {
-      $("#joining_date").closest(".mb-3").find(".form-label").after(
-        "<small class='error text-danger'> mandatory field.</small>"
-      );
+      $("#joining_date")
+        .closest(".mb-3")
+        .find(".form-label")
+        .after("<small class='error text-danger'> mandatory field.</small>");
       return 0;
     }
     if ($("#joining_time").val().length == 0) {
-      $("#joining_time").closest(".mb-3").find(".form-label").after(
-        "<small class='error text-danger'> mandatory field.</small>"
-      ); 
+      $("#joining_time")
+        .closest(".mb-3")
+        .find(".form-label")
+        .after("<small class='error text-danger'> mandatory field.</small>");
+      return 0;
+    }
+  }
+  function rejection() {
+    $(".error").remove(); 
+    if ($("#rejection").val().length == 0) {
+      $("#rejection")
+        .closest(".mb-3")
+        .find(".form-label")
+        .after("<small class='error text-danger'> mandatory field.</small>");
       return 0;
     }
   }
