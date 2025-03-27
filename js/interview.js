@@ -81,7 +81,9 @@ $(document).ready(function () {
                             </div>
                         </div>
                     </td> 
-                    <td class='pointer' title='${row.job_position}'>${row.job_position.substr(0, 23)}</td>
+                    <td class='pointer' title='${
+                      row.job_position
+                    }'>${row.job_position.substr(0, 23)}</td>
                     <td>${row.contact_number}</td>
                     <td>${row.created_at}</td>
                     <td>
@@ -340,25 +342,35 @@ $(document).ready(function () {
         flag: "getDetails",
       },
       cache: false,
-      success: function (res) { 
+      success: function (res) {
         if (res.status == "success") {
           $("#rowId").val(res.data.candidate_id);
           $("#candidate_name").val(res.data.candidate_name);
           $("input[name='interview_status']").prop("checked", false); // Uncheck all first
-          $(`input[name='interview_status'][value='${res.data.interview_status}']`).prop("checked", true);
+          $(
+            `input[name='interview_status'][value='${res.data.interview_status}']`
+          ).prop("checked", true);
           $("#existingStatus").val(res.data.interview_status);
           $("#schedule_time1").val(res.data.available_time1);
           $("#schedule_time2").val(res.data.available_time2);
           $("#schedule_time3").val(res.data.available_time3);
-          if (!res.data.ratings || res.data.ratings.trim() === "") { 
+          if (!res.data.ratings || res.data.ratings.trim() === "") {
             unSetStars();
             $(".feedback-content").hide();
           } else {
-            setStars(res.data.ratings); 
+            setStars(res.data.ratings);
             $(".feedback-content").show();
-            $("#interview_feedback").html(res.data.interview_feedback??'Candidate still not given the feedback'); 
+            $("#interview_feedback").html(
+              res.data.interview_feedback ??
+                "Candidate still not given the feedback"
+            );
+          }
+          if (res.data.training_offer_send) {
+            $(".offerDate").show();
+            $("#joingDate").html(res.data.training_offer_send);
           }
           $("#schedule_time3").val(res.data.available_time3);
+
           dynamicInputs(res.data.interview_status, res.data.interview_status);
         } else {
           Swal.fire(res.data.message);
@@ -379,24 +391,24 @@ $(document).ready(function () {
 
     $("#updateButton").hide();
     $(".rating-content").hide();
-    $(".offered").hide();
+    $(".send-offer").hide();
     if (selectedValue == 3) {
       $("#updateButton").hide();
     }
     if (selectedValue == 4) {
       $(".rating-content").show();
-      if (existingStatus == 4) { 
+      if (existingStatus == 4) {
         $("#updateButton").hide();
-      } else { 
+      } else {
         $("#updateButton").show();
       }
     }
     if (selectedValue == 5) {
       if (existingStatus == 5) {
-        $(".offered").hide();
+        $(".send-offer").hide();
         $("#updateButton").hide();
       } else {
-        $(".offered").show();
+        $(".send-offer").show();
         $("#updateButton").show();
       }
     }
@@ -421,7 +433,6 @@ $(document).ready(function () {
         $("#updateButton").show();
       }
     }
-   
   }
 
   $(document).on("submit", "#update", function (e) {
@@ -465,7 +476,7 @@ $(document).ready(function () {
           },
         });
       },
-      success: function (res) {  
+      success: function (res) {
         if (res.status === "success") {
           if (res.data.interview_status == 4) {
             interviewUpdateMail(res.data);
@@ -488,8 +499,8 @@ $(document).ready(function () {
           }
         } else {
           $("#updateButton")
-              .html("Update <i class='fa-solid fa-cloud-arrow-up'></i>")
-              .prop("disabled", false);
+            .html("Update <i class='fa-solid fa-cloud-arrow-up'></i>")
+            .prop("disabled", false);
           handleError(res.message);
         }
       },
@@ -500,7 +511,7 @@ $(document).ready(function () {
   });
 
   /** Function to Send Recruitment Mail */
-  function interviewUpdateMail(data) { 
+  function interviewUpdateMail(data) {
     $.ajax({
       type: "POST",
       url: "mails/recruitment-mail.php",
@@ -534,8 +545,8 @@ $(document).ready(function () {
           loadData("", "", "", "", "getAll");
         } else {
           $("#updateButton")
-              .html("Update <i class='fa-solid fa-cloud-arrow-up'></i>")
-              .prop("disabled", false);
+            .html("Update <i class='fa-solid fa-cloud-arrow-up'></i>")
+            .prop("disabled", false);
           toastr.error(response.message, "Mail Error");
         }
       },
@@ -581,17 +592,19 @@ $(document).ready(function () {
     }
   }
   function joingDate() {
-    $('.error').remove();
+    $(".error").remove();
     if ($("#joining_date").val().length == 0) {
-      $("#joining_date").closest(".mb-3").find(".form-label").after(
-        "<small class='error text-danger'> mandatory field.</small>"
-      );
+      $("#joining_date")
+        .closest(".mb-3")
+        .find(".form-label")
+        .after("<small class='error text-danger'> mandatory field.</small>");
       return 0;
     }
     if ($("#joining_time").val().length == 0) {
-      $("#joining_time").closest(".mb-3").find(".form-label").after(
-        "<small class='error text-danger'> mandatory field.</small>"
-      ); 
+      $("#joining_time")
+        .closest(".mb-3")
+        .find(".form-label")
+        .after("<small class='error text-danger'> mandatory field.</small>");
       return 0;
     }
   }

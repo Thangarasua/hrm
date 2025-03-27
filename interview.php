@@ -279,31 +279,36 @@
 							</div>
 						</div>
 						<div class="col-12 feedback-content" style="display: none;">
-							<p> <b>Candidate Interview feedback:</b> <span id="interview_feedback"></span></p> 
+							<p> <b>Candidate Interview feedback:</b> <span id="interview_feedback"></span></p>
 						</div>
 					</div>
-
-					<div class="row offered" style="display: none;">
-						<div class="col-md-12">
-							<div class="row sheduleDate">
-								<div class="mb-3">
-									<h4 class="text-center">Joing Date for Training</h4>
-								</div>
-								<div class="col-md-4">
+					<div class="offer-content">
+						<div class="row send-offer" style="display: none;">
+							<div class="col-md-12">
+								<div class="row sheduleDate">
 									<div class="mb-3">
-										<label class="form-label">Date<span class="text-danger"> *</span></label>
-										<input type="date" class="form-control" id="joining_date" name="joining_date" min=<?php echo date('Y-m-d'); ?>>
+										<h4 class="text-center">Joing Date for Training</h4>
 									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="mb-3">
-										<label class="form-label">Time<span class="text-danger"> *</span></label>
-										<input type="time" class="form-control" id="joining_time" name="joining_time">
+									<div class="col-md-4">
+										<div class="mb-3">
+											<label class="form-label">Date<span class="text-danger"> *</span></label>
+											<input type="date" class="form-control" id="joining_date" name="joining_date" min=<?php echo date('Y-m-d'); ?>>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="mb-3">
+											<label class="form-label">Time<span class="text-danger"> *</span></label>
+											<input type="time" class="form-control" id="joining_time" name="joining_time">
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+						<div class="col-6 m-auto offerDate" style="display: none;">
+							<h4>Offer sended, Joing Date <span id="joingDate"></span></h4>
+						</div>
 					</div>
+
 				</div>
 				<input type="hidden" name="rowId" id="rowId">
 				<div class="modal-footer">
