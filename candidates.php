@@ -144,7 +144,7 @@ if (isset($_GET['id'])) {
 								<th>Candidate</th>
 								<th>Applied Role</th>
 								<th>Phone</th>
-								<th>Applied Date</th>
+								<th>Applied Date</th> 
 								<th>Resume</th>
 								<th>Status</th>
 								<th>Action</th>
@@ -197,6 +197,9 @@ if (isset($_GET['id'])) {
 				</div>
 				<br>
 				<div class="modal-body pb-0">
+					<div class="col-8 m-auto scheduled-date" style="display: none;">
+						<h5 class="text-center">Shortlisted, Interview Date: <span id="interviewDate" class="text-primary"></span></h5>
+					</div>
 					<div class="shortlisted" style="display: none;">
 						<div class="row">
 							<div class="mb-3">
@@ -236,10 +239,10 @@ if (isset($_GET['id'])) {
 									<label class="form-label">Interview Time</label>
 									<input type="time" class="form-control" id="interview_time" name="interview_time">
 								</div>
-							</div> 
+							</div>
 						</div>
 						<div class="row sheduledDate" style="display: none;">
-						<div class="mb-3">
+							<div class="mb-3">
 								<h4 class="text-center">Scheduled Date</h4>
 							</div>
 							<div class="col-md-4">
@@ -255,7 +258,7 @@ if (isset($_GET['id'])) {
 								</div>
 							</div>
 						</div>
-					</div> 
+					</div>
 				</div>
 				<input type="hidden" name="rowId" id="rowId">
 				<div class="modal-footer">
@@ -296,7 +299,7 @@ if (isset($_GET['id'])) {
 							<div class="col-md-4">
 								<div class="mb-3">
 									<label class="form-label">addres</label>
-									<input type="text" id="address" class="form-control" /> 
+									<input type="text" id="address" class="form-control" />
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -361,7 +364,7 @@ if (isset($_GET['id'])) {
 	</div>
 </div>
 <!-- /View candidate details -->
- 
+
 <!-- Delete Modal -->
 <div class="modal fade" id="delete_modal">
 	<div class="modal-dialog modal-dialog-centered">

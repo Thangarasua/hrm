@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['flag'])) {
             $ststus = "1";
         }
 
-        $query = "SELECT * FROM `employees` AS e INNER JOIN roles AS r ON r.role_id = e.role_id INNER JOIN departments AS dp ON dp.department_id=e.department_id INNER JOIN designations AS dg ON dg.designation_id=e.designation_id WHERE $ststus  ORDER BY `e`.`employee_id` ASC";
+        $query = "SELECT * FROM `temporary_employees` AS e INNER JOIN roles AS r ON r.role_id = e.role_id INNER JOIN departments AS dp ON dp.department_id=e.department_id INNER JOIN designations AS dg ON dg.designation_id=e.designation_id WHERE $ststus  ORDER BY `e`.`employee_id` ASC";
         $result = mysqli_query($conn, $query);
         $employess = [];
         while ($row = $result->fetch_assoc()) {
@@ -35,9 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['flag'])) {
         $date2 = date('Y-m-d');
         $query = "SELECT 
         COUNT(id) AS total,
-        SUM(CASE WHEN employees.status = 1 THEN 1 ELSE 0 END) AS active,
-        SUM(CASE WHEN employees.status = 2 THEN 1 ELSE 0 END) AS inactive,
-        SUM(CASE WHEN employees.status = 1 AND doj BETWEEN '$date1' AND '$date2' THEN 1 ELSE 0 END) AS newly_active FROM `employees`";
+        SUM(CASE WHEN temporary_employees.status = 1 THEN 1 ELSE 0 END) AS active,
+        SUM(CASE WHEN temporary_employees.status = 2 THEN 1 ELSE 0 END) AS inactive,
+        SUM(CASE WHEN temporary_employees.status = 1 AND doj BETWEEN '$date1' AND '$date2' THEN 1 ELSE 0 END) AS newly_active FROM `temporary_employees`";
 
         $result = mysqli_query($conn, $query);
         $row = $result->fetch_assoc();
@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $workLocation = $_POST['workLocation'];
         $employeeType = $_POST['employeeType'];
 
-        $query = "INSERT INTO employees (employee_id, official_name, personal_name, email, phone, doj, `password`, designation_id, department_id, role_id, manager_id, supervisor_id, work_location, employee_type, `status`) VALUES ('$employeeId', '$officialName', '$personalName', '$email', '$phone', '$doj', '$encryptedPassword', $designation, $department, $role, '$manager', '$supervisor', '$workLocation', '$employeeType', 1)";
+        $query = "INSERT INTO temporary_employees (employee_id, official_name, personal_name, email, phone, doj, `password`, designation_id, department_id, role_id, manager_id, supervisor_id, work_location, employee_type, `status`) VALUES ('$employeeId', '$officialName', '$personalName', '$email', '$phone', '$doj', '$encryptedPassword', $designation, $department, $role, '$manager', '$supervisor', '$workLocation', '$employeeType', 1)";
 
         $data = array('flag' => 'welcomeMail', 'employeeId' => $employeeId, 'OfficialName' => $officialName, 'email' => $email, 'password' => $password);
 
@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $relievingDate = $_POST['relievingDate'];
         $relievingDate = date('Y-m-d', strtotime($relievingDate));
 
-        $query = "UPDATE `employees` SET `status`='2',`relieving_date`='$relievingDate' WHERE `employee_id`='$employeeId'";
+        $query = "UPDATE `temporary_employees` SET `status`='2',`relieving_date`='$relievingDate' WHERE `employee_id`='$employeeId'";
         $result = mysqli_query($conn, $query);
         if ($result) {
             echo json_encode(array('status' => 'success', 'message' => 'Employee status update successfully'));
@@ -131,13 +131,14 @@ if (isset($_POST['month']) && isset($_POST['year']) && isset($_POST['flag'])) {
     $year = date('y', strtotime($year . '-01-01'));
     $month = date('m', strtotime($year . '-' . $month . '-01'));
     $day = date('d', strtotime($year . '-' . $month . '-' . $day));
-    $baseId = "ACTE" . $year . $month . $day;
+    $baseId = "TEMP" . $year . $month . $day;
 
-    $sql = "SELECT * FROM `employees`";
+    $sql = "SELECT * FROM `temporary_employees`";
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) > 0) {
-        $sql = "SELECT * FROM `employees` ORDER BY `employees`.`id` DESC LIMIT 1";
+        $sql = "SELECT * FROM `temporary_employees` ORDER BY `temporary_employees`.`id` DESC LIMIT 1";
         $result = mysqli_query($conn, $sql);
+
         if (mysqli_num_rows($result) > 0) {
             $row = mysqli_fetch_assoc($result);
             $lastEmployeeId = $row['employee_id'];
@@ -150,7 +151,7 @@ if (isset($_POST['month']) && isset($_POST['year']) && isset($_POST['flag'])) {
         } else {
             $newSequence = 1;
         }
-    } else {
+    }else{
         $newSequence = 1;
     }
 

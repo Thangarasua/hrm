@@ -136,7 +136,7 @@
 								<th>Candidate</th>
 								<th>Applied Role</th>
 								<th>Phone</th>
-								<th>Applied Date</th>
+								<th>Scheduled</th>
 								<th>Resume</th>
 								<th>Status</th>
 								<th>Action</th>
@@ -200,9 +200,9 @@
 				</div>
 				<br>
 				<div class="modal-body">
-				<div class="col-8 m-auto scheduled-date" style="display: none;">
-							<h5 class="text-center">Shortlisted, Interview Date: <span id="interviewDate" class="text-primary"></span></h5>
-						</div>
+					<div class="col-8 m-auto scheduled-date" style="display: none;">
+						<h5 class="text-center">Shortlisted, Interview Date: <span id="interviewDate" class="text-primary"></span></h5>
+					</div>
 					<div class="rating-content">
 						<div class="col-6 m-auto">
 							<div class="d-flex p-1">
@@ -282,9 +282,9 @@
 							</div>
 						</div>
 						<div class="col-6 m-auto feedback-content" style="display: none;">
-							 
+
 							<h6>Interviewed By: <span id="rating_by" class="text-primary"></span></h6>
-							 
+
 							<h6>Candidate Interview feedback: <span id="interview_feedback" class="text-secondary"></span></h6>
 						</div>
 					</div>

@@ -85,7 +85,7 @@ $(document).ready(function () {
                     </td>
                     <td class='pointer' title='${row.job_position}'>${row.job_position.substr(0, 23)}</td>
                     <td>${row.contact_number}</td>
-                    <td>${row.created_at}</td>
+                    <td>${row.created_at}</td> 
                     <td>
                         <div class="d-inline-flex">
                             <a href="${resumeLink}" class="text-gray me-2 fs-16" target="_blank"><i class="fa-solid fa-file-lines"></i></a>
@@ -196,6 +196,7 @@ $(document).ready(function () {
           $("#interview_re_date_edit").val(
             res.data.interview_re_date || "---Not Define---"
           );
+          $("#interviewDate").html(res.data.interview_re_date??res.data.interview_date);
           let val = res.data.interview_status;
           dynamicInputs(val, val);
         } else {
@@ -216,11 +217,14 @@ $(document).ready(function () {
     existingStatus = val2;
 
     $("#updateBtn").hide();
+    $(".scheduled-date").hide();
     $(".shortlisted").hide();
 
-    if (selectedValue == 1) {
-      $("#updateBtn").hide();
+    if (selectedValue == 1) { 
+      $(".scheduled-date").show();
+      $("#updateButton").hide();
     } 
+    
     if (selectedValue == 2) {
       $(".shortlisted").show();
       if (existingStatus > 1) {
