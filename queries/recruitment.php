@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             $departmentWise = "e.department_id = $departmentId";
         }
 
-        $sql = "SELECT r.*, SUM(CASE WHEN c.responce_status = 1 THEN 1 ELSE 0 END) AS candidate_count FROM recruitment AS r LEFT JOIN candidates AS c ON r.ticket_request_id = c.ticket_request_id INNER JOIN employees AS e ON e.employee_id = r.raised_by WHERE $departmentWise GROUP BY r.ticket_request_id";
+        $sql = "SELECT r.*,e.official_name, SUM(CASE WHEN c.responce_status = 1 THEN 1 ELSE 0 END) AS candidate_count FROM recruitment AS r LEFT JOIN candidates AS c ON r.ticket_request_id = c.ticket_request_id INNER JOIN employees AS e ON e.employee_id = r.raised_by WHERE $departmentWise GROUP BY r.ticket_request_id,e.official_name ORDER BY r.id DESC"; 
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {

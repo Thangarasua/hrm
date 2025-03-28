@@ -80,7 +80,7 @@ $(document).ready(function () {
             var newRow = `<tr>
                             <td>${index + 1}</td>
                             <td>${row.ticket_request_id}</td>
-                            <td>${row.raised_by}</td>
+                            <td class="pointer" title="${row.official_name}">${row.raised_by}</td>
                             <td>
                               <div class="d-flex align-items-center file-name-icon">
                                 <div class="ms-2">
