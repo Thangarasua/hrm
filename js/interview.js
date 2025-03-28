@@ -85,7 +85,7 @@ $(document).ready(function () {
                       row.job_position
                     }'>${row.job_position.substr(0, 23)}</td>
                     <td>${row.contact_number}</td>
-                    <td>${row.created_at}</td>
+                    <td>${row.interview_date}</td>
                     <td>
                         <div class="d-inline-flex">
                             <a href="${resumeLink}" class="text-gray me-2 fs-16" target="_blank"><i class="fa-solid fa-file-lines"></i></a>

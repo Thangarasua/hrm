@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
-                $row['created_at'] = date("d M Y", strtotime($row['created_at']));
+                $row['interview_date'] = date("d M Y", strtotime($row['interview_re_date']??$row['interview_date']));
                 $response[] = $row;
             }
         } else {
