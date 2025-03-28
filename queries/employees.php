@@ -1,7 +1,7 @@
 <?php include "../includes/config.php";
 
 header('Content-Type: application/json');
-$currentDatetime = date('Y-m-d H:i:s'); 
+$currentDatetime = date('Y-m-d H:i:s');
 
 $key = "ACTEHRM2025";
 $method = "AES-256-CBC";
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['flag'])) {
         $query = "SELECT * FROM `employees` AS e INNER JOIN roles AS r ON r.role_id = e.role_id INNER JOIN departments AS dp ON dp.department_id=e.department_id INNER JOIN designations AS dg ON dg.designation_id=e.designation_id WHERE $ststus  ORDER BY `e`.`employee_id` ASC";
         $result = mysqli_query($conn, $query);
         $employess = [];
-        while ($row = $result->fetch_assoc()) { 
+        while ($row = $result->fetch_assoc()) {
             $row['doj'] = date("d M Y", strtotime($row['doj']));
             $employess[] = $row;
         }
@@ -38,10 +38,10 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['flag'])) {
         SUM(CASE WHEN employees.status = 1 THEN 1 ELSE 0 END) AS active,
         SUM(CASE WHEN employees.status = 2 THEN 1 ELSE 0 END) AS inactive,
         SUM(CASE WHEN employees.status = 1 AND doj BETWEEN '$date1' AND '$date2' THEN 1 ELSE 0 END) AS newly_active FROM `employees`";
- 
+
         $result = mysqli_query($conn, $query);
         $row = $result->fetch_assoc();
-        echo json_encode(array('status' => 'success', 'data' => $row ));
+        echo json_encode(array('status' => 'success', 'data' => $row));
         exit;
     }
 
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['flag'])) {
         }
         echo json_encode($options);
         exit;
-    } 
+    }
     if ($flag === "getDesignation") {
         $departmentId = $_GET['departmentId'];
         $roleId = $_GET['roleId'];
@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         } else {
             echo json_encode(array('status' => 'failure', 'message' => 'Error adding employee data.'));
         }
-    }else if($flag === "statusUpdate"){
+    } else if ($flag === "statusUpdate") {
         $employeeId = $_POST['employeeId'];
         $relievingDate = $_POST['relievingDate'];
         $relievingDate = date('Y-m-d', strtotime($relievingDate));
@@ -121,7 +121,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             echo json_encode(array('status' => 'failure', 'message' => 'Employee status update failure'));
         }
         exit;
-
     }
 }
 
@@ -134,18 +133,22 @@ if (isset($_POST['month']) && isset($_POST['year']) && isset($_POST['flag'])) {
     $day = date('d', strtotime($year . '-' . $month . '-' . $day));
     $baseId = "ACTE" . $year . $month . $day;
 
-    $sql = "SELECT * FROM `employees` ORDER BY `employees`.`id` DESC LIMIT 1";
-
+    $sql = "SELECT * FROM `employees`";
     $result = mysqli_query($conn, $sql);
-
     if (mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $lastEmployeeId = $row['employee_id'];
-        $lastSequence = (int)substr($lastEmployeeId, -3);
-        if ($lastSequence == 999) {
-            $newSequence = 1;
+        $sql = "SELECT * FROM `employees` ORDER BY `employees`.`id` DESC LIMIT 1";
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+            $lastEmployeeId = $row['employee_id'];
+            $lastSequence = (int)substr($lastEmployeeId, -3);
+            if ($lastSequence == 999) {
+                $newSequence = 1;
+            } else {
+                $newSequence = $lastSequence + 1;
+            }
         } else {
-            $newSequence = $lastSequence + 1;
+            $newSequence = 1;
         }
     } else {
         $newSequence = 1;
