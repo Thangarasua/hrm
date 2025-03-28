@@ -11,7 +11,14 @@ $method = "AES-256-CBC";
 $iv = substr(hash('sha256', $key), 0, 16);
 $inputPassword = openssl_encrypt($password, $method, $key, 0, $iv);
 
-$query = "SELECT * FROM `employees` WHERE `employee_id` = '$username'";
+$employeeType = substr($username, 0, 4);
+
+if($employeeType === 'TEMP'){
+    $query = "SELECT * FROM `temporary_employees` WHERE `employee_id` = '$username'";
+}else{
+    $query = "SELECT * FROM `employees` WHERE `employee_id` = '$username'";
+}
+
 $result = mysqli_query($conn, $query);
 if (mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_array($result);
