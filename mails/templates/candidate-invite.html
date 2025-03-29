@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Invite mail</title>
+    <title>Job Invite Mail</title>
     <style>
         body {
           font-family: "Arial", "Helvetica", "sans-serif";
@@ -106,15 +106,25 @@
 </head>
 <body>
     <div class="container">
-        <div class="header">Welcome to Markerz Global Solution</div>
-        <div class="content">
-            <p>Dear {{Name}},</p>
-            <p> Thank you for your interest in the opportunity with us. Please complete the recruitment form by clicking the link below:</p>
-            <a href="{{Link}}" target="_blank" class="button">Form Link</a>
-            <p>Kindly fill in the required details at your earliest convenience. If you have any questions, feel free to reach out.</p>
-            <p><b>Best regards</b>, <br> {{HR Name}} <br> Markerz Global solution </p> 
+        <div class="header"> 
+             <img src="https://actecrm.com/hrm/mails/mail-images/form-header.png" alt="">
         </div>
-        <div class="footer">&copy; 2025 Markerz Global Solution. All rights reserved.</div>
+        <div class="content">
+            <p>Dear <b>{{Name}}</b>,</p>
+            <p> Thank you for your interest in the opportunity with us. Please complete the recruitment form by clicking the link below:</p>
+            <a href="{{Link}}" target="_blank" class="form-control button yes"><span>Form Link</span></a>
+            <p>Kindly fill in the required details at your earliest convenience. If you have any questions, feel free to reach out.</p>
+            <p>
+              <b>Best regards</b>, <br />
+              {{HR Name}}, <br />
+              {{HR Number}}, <br /> 
+              {{Company Name}}, <br />
+              {{Company Address}}.
+            </p>
+        </div>
+        <div class="footer"> 
+            <img src="https://actecrm.com/hrm/mails/mail-images/form-footer.png" alt="">
+        </div>
     </div>
 </body>
 </html>

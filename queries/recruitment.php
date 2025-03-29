@@ -7,6 +7,13 @@ $employeeName = $_SESSION['hrm_employeeName'];
 $designationId = $_SESSION["hrm_designationId"];
 $departmentId = $_SESSION["hrm_departmentId"];
 $roleId = $_SESSION["hrm_roleId"];
+
+$employeeType = substr($employeeId, 0, 4);
+if ($employeeType === 'TEMP') {
+    $employeeTable = "temporary_employees";
+} else {
+    $employeeTable = "employees";
+}
  
 $month = date('m');
 $year = date('y');
@@ -156,17 +163,22 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             mysqli_query($conn, $update);
 
             $query = "INSERT INTO `candidates` (`candidate_register_id`,`candidate_name`, `email`, `contact_number`, `created_by`, `ticket_request_id`, `created_at`) VALUES ('$candidateRequestId','$candidateName', '$candidateMail', '$candidateContact', '$raisedBy', '$ticketRequestId', '$currentDatetime')";
-            $result = mysqli_query($conn, $query);
+            mysqli_query($conn, $query);
+
+            $getHRdetails = "SELECT `official_name` AS hrName,`phone` AS HRphone FROM `$employeeTable` WHERE `employee_id` = '$employeeId'"; 
+            $result = mysqli_query($conn, $getHRdetails);
+            $row = mysqli_fetch_assoc($result);
+            $row['id'] = $jobSno;
+            $row['flag'] = 'recruitmentForm';
+            $row['candidateName'] = $candidateName; 
+            $row['email'] = $candidateMail; 
 
             if ($result) {
                 echo json_encode(array(
                     'status' => 'success',
                     'message' => 'Recruitment form sent successfully',
                     'flag' => 'recruitmentForm',
-                    'id' => $jobSno,
-                    'email' => $candidateMail,
-                    'candidateName' => $candidateName,
-                    'hrName' => $employeeName
+                    'data' => $row
                 ));
             }
         } catch (mysqli_sql_exception $e) {

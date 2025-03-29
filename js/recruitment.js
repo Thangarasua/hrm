@@ -356,13 +356,7 @@ $(document).on("change", "#jobPosition, #salaryType", function(e){
       },
       success: function (response) {
         if (response.status === "success") {
-          sendRecruitmentMail(
-            response.flag,
-            response.id,
-            response.email,
-            response.candidateName,
-            response.hrName
-          );
+          sendRecruitmentMail(response.data);
         } else {
           handleError(response.message);
         }
@@ -374,17 +368,12 @@ $(document).on("change", "#jobPosition, #salaryType", function(e){
   });
 
   /** Function to Send Recruitment Mail */
-  function sendRecruitmentMail(flag, id, email, candidateName, hrName) {
+  function sendRecruitmentMail(data) {
+    console.log(data);
     $.ajax({
       type: "POST",
       url: "mails/recruitment-mail.php",
-      data: {
-        flag: flag,
-        id: id,
-        email: email,
-        candidateName: candidateName,
-        hrName: hrName,
-      },
+      data: data,
       dataType: "json",
       success: function (response) {
         if (response.status === "success") {

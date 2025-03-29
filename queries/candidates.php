@@ -8,6 +8,13 @@ $designationId = $_SESSION["hrm_designationId"];
 $departmentId = $_SESSION["hrm_departmentId"];
 $roleId = $_SESSION["hrm_roleId"];
 
+$employeeType = substr($employeeId, 0, 4);
+if ($employeeType === 'TEMP') {
+    $employeeTable = "temporary_employees";
+} else {
+    $employeeTable = "employees";
+}
+
 $month = date('m');
 $year = date('y');
 $date = date('d');
@@ -74,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
         $result = mysqli_query($conn, $query);
         if ($result) {
-            $query = "SELECT c.*, r.job_position, e.official_name AS HRname, e.phone AS HRphone FROM `candidates`AS c INNER JOIN `recruitment`AS r ON `c`.`ticket_request_id`=`r`.`ticket_request_id`INNER JOIN `employees`AS `e` ON `r`.`hr_id`=`e`.`employee_id`WHERE c.`candidate_id`= '$rowId'";
+            $query = "SELECT c.*, r.job_position, e.official_name AS HRname, e.phone AS HRphone FROM `candidates`AS c INNER JOIN `recruitment`AS r ON `c`.`ticket_request_id`=`r`.`ticket_request_id`INNER JOIN `$employeeTable`AS `e` ON `r`.`hr_id`=`e`.`employee_id`WHERE c.`candidate_id`= '$rowId'";
             $result = mysqli_query($conn, $query);
             $row = mysqli_fetch_assoc($result); 
             echo json_encode(array('status' => 'success', 'data' => $row));
@@ -91,53 +98,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         } else {
             echo json_encode(array('status' => 'failure', 'message' => 'something went wrong'));
         }
-        exit;
-    } elseif ($flag === "send") {
-
-        $ticketRequestId = $_POST['ticketRequestId'];
-        $jobTitle = $_POST['jobTitle'];
-        $candidateName = $_POST['candidateName'];
-        $candidateMail = $_POST['candidateMail'];
-        $candidateContact = $_POST['candidateContact'];
-        $raisedBy = $_POST['raisedBy'];
-        $jobSno = $_POST['jobSno'];
-
-        // Enable MySQLi Exception Mode
-        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-
-        try {
-            $query = "INSERT INTO `candidates` (`candidate_name`, `email`, `contact_number`, `created_by`, `ticket_request_id`, `created_at`) 
-              VALUES ('$candidateName', '$candidateMail', '$candidateContact', '$raisedBy', '$ticketRequestId', '$currentDatetime')";
-
-            $result = mysqli_query($conn, $query);
-
-            if ($result) {
-                echo json_encode(array(
-                    'status' => 'success',
-                    'message' => 'Recruitment form sent successfully',
-                    'flag' => 'recruitmentForm',
-                    'id' => $jobSno,
-                    'email' => $candidateMail
-                ));
-            }
-        } catch (mysqli_sql_exception $e) {
-            // Check if the error is a duplicate entry (MySQL error code 1062)
-            if ($e->getCode() == 1062) {
-                echo json_encode(array(
-                    'status' => 'failure',
-                    'message' => 'Duplicate entry detected. Email or Contact Number already exists!',
-                    'error' => $e->getMessage()
-                ));
-            } else {
-                // Handle other MySQL errors
-                echo json_encode(array(
-                    'status' => 'failure',
-                    'message' => 'Something went wrong',
-                    'error' => $e->getMessage()
-                ));
-            }
-        }
-        // Exit to prevent further execution
         exit;
     } elseif ($flag === "interviewDateUpdate") {
 
