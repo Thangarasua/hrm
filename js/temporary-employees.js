@@ -68,12 +68,12 @@ $(document).ready(function () {
                                 <a href="employee-details" data-id="${
                                   row.employee_id
                                 }" class="view" id="employeeDetails">
-                                  <i class="fa-solid fa-folder-open"></i>
+                                  <i class="fa-solid fa-eye" title="view details"></i>
                                 </a>
                                 <a href="javascript:void(0)" data-id="${
                                   row.employee_id
                                 }" class="edit">
-                                  <i class="fa-solid fa-pen-to-square"></i>
+                                  <i class="fa-solid fa-pen-to-square" title="edit details"></i>
                                 </a>
                               </div>
                             </td>

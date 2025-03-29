@@ -64,6 +64,9 @@ $(document).ready(function () {
             } else if (row.interview_status == 8) {
               inertview_status =
                 '<span class="badge border border-success text-success"><i class="ti ti-point-filled"></i>Hired</span>';
+            } else if (row.interview_status == 9) {
+              inertview_status =
+                '<span class="badge border border-danger text-danger"><i class="ti ti-point-filled"></i>Not Attend</span>';
             }
 
             var newRow = `
@@ -98,12 +101,12 @@ $(document).ready(function () {
                           <a href="#" data-id="${
                             row.candidate_id
                           }" class="view">
-                            <i class="fa-solid fa-folder-open"></i>
+                            <i class="fa-solid fa-eye" title="view details"></i>
                           </a>
                           <a href="#" data-id="${
                             row.candidate_id
                           }" class="edit">
-                            <i class="fa-solid fa-pen-to-square"></i>
+                            <i class="fa-solid fa-pen-to-square" title="edit details"></i>
                           </a>
                         </div>
                     </td>

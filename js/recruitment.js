@@ -96,10 +96,10 @@ $(document).ready(function () {
                             <td>
                               <div class="action-icon d-inline-flex">
                                 <a href="#" data-id="${row.id}" class="view">
-                                  <i class="fa-solid fa-folder-open"></i>
+                                  <i class="fa-solid fa-eye" title="view details"></i>
                                 </a>
                                 <a href="#" data-id="${row.id}" data-formfilling="${row.candidate_count}" class="edit">
-                                  <i class="fa-solid fa-pen-to-square"></i>
+                                  <i class="fa-solid fa-pen-to-square" title="edit details"></i>
                                 </a>
                                 <a href="#" data-id="${row.id}" data-formfilling="${row.candidate_count}" class="delete">
                                   <i class="fa-solid fa-trash-can"></i>

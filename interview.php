@@ -181,6 +181,9 @@
 
 									<input type="radio" class="btn-check" name="interview_status" id="interviewed" value="4" autocomplete="off">
 									<label class="btn border" for="interviewed">Interviewed</label>
+									
+									<input type="radio" class="btn-check" name="interview_status" id="Not attend" value="9" autocomplete="off">
+									<label class="btn border" for="Not attend">Not attend</label>
 
 									<input type="radio" class="btn-check" name="interview_status" id="offered" value="5" autocomplete="off">
 									<label class="btn border" for="offered">Offered</label>
@@ -287,6 +290,9 @@
 
 							<h6>Candidate Interview feedback: <span id="interview_feedback" class="text-secondary"></span></h6>
 						</div>
+					</div>
+					<div class="col-8 m-auto not-attend" style="display: none;">
+						<h5 class="text-center">This candidate not attend the interview.</h5>
 					</div>
 					<div class="offer-content">
 						<div class="row send-offer" style="display: none;">
