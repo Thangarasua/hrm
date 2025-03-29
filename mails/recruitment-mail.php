@@ -36,16 +36,23 @@ try {
             $name = $_POST['candidateName'];
             $link = "https://actecrm.com/hrm/interview-schedule?id=$encryptedID&mail=$encryptedMail";
             $hrName = $_POST['hrName'];
+            $HRphone = $_POST['HRphone'];
+            $companyName = 'Markerz Global Solution';
+            $companyAddress = 'Velachery, Chennai, Tamil Nadu 600042';
+
             //Recipients
             $mail->addAddress($_POST['email'], $_POST['candidateName']);
 
-            $mail->Subject = mb_encode_mimeheader("🔔 Job Application form! 📧📝", 'UTF-8');
+            $mail->Subject = mb_encode_mimeheader("🔔 Job Application form by $companyName! 📧📝", 'UTF-8');
             //Content
-            $htmlContent = file_get_contents('./templates/candidate-invite1.html');
+            $htmlContent = file_get_contents('./templates/candidate-invite.html');
             $htmlContent = str_replace('{{Name}}', $name, $htmlContent);
             $htmlContent = str_replace('{{Link}}', $link, $htmlContent);
             $htmlContent = str_replace('{{HR Name}}', $hrName, $htmlContent);
-
+            $htmlContent = str_replace('{{HR Number}}', $HRphone, $htmlContent);
+            $htmlContent = str_replace('{{Company Name}}', $companyName, $htmlContent);
+            $htmlContent = str_replace('{{Company Address}}', $companyAddress, $htmlContent);
+            
             $mail->Body = $htmlContent;
             $mail->send();
 
@@ -75,8 +82,7 @@ try {
             $htmlContent = str_replace('{{Name}}', $candidate_name, $htmlContent);
             $htmlContent = str_replace('{{Job Position}}', $job_position, $htmlContent);
             $htmlContent = str_replace('{{Date}}', $interview_date, $htmlContent);
-            $htmlContent = str_replace('{{HR Name}}', $HRname, $htmlContent);
-            $htmlContent = str_replace('{{HR Name}}', $HRname, $htmlContent);
+            $htmlContent = str_replace('{{HR Name}}', $HRname, $htmlContent); 
             $htmlContent = str_replace('{{HR Number}}', $HRphone, $htmlContent);
 
             $mail->Body = $htmlContent;
