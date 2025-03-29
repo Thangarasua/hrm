@@ -62,6 +62,9 @@ $(document).ready(function () {
             } else if (row.interview_status == 8) {
               inertview_status =
                 '<span class="badge border border-success text-success"><i class="ti ti-point-filled"></i>Hired</span>';
+            } else if (row.interview_status == 9) {
+              inertview_status =
+                '<span class="badge border border-danger text-danger"><i class="ti ti-point-filled"></i>Not Attend</span>';
             }
 
             var newRow = `
@@ -396,6 +399,7 @@ $(document).ready(function () {
     $("#updateButton").hide();
     $(".scheduled-date").hide();
     $(".rating-content").hide();
+    $(".not-attend").hide();
     $(".send-offer").hide();
     $(".rejection-content").hide();
     $(".offerDate").hide();
@@ -407,6 +411,14 @@ $(document).ready(function () {
     if (selectedValue == 4) {
       $(".rating-content").show();
       if (existingStatus >= 4) {
+        $("#updateButton").hide();
+      } else {
+        $("#updateButton").show();
+      }
+    }
+    if (selectedValue == 9) {
+      $(".not-attend").show();
+      if (existingStatus >= 9) {
         $("#updateButton").hide();
       } else {
         $("#updateButton").show();
