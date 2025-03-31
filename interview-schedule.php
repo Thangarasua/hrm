@@ -347,11 +347,16 @@ if (mysqli_num_rows($result) > 0) {
 	<!-- crop script added -->
 	<script src="js/plugins/croppie.js"></script>
 	<!-- toastr alert added -->
-	<script src="js/plugins/toastr.min.js" type="text/javascript"></script>
-	<!-- own scripts added -->
-	<script src="scripts/myscript.js" type="text/javascript"></script>
+	<script src="js/plugins/toastr.min.js" type="text/javascript"></script> 
 
 	<script>
+		/*-----Fist letter auto caps function----*/
+		function capitalizeWords(input) {
+			input.value = input.value.replace(/\b\w/g, function(char) {
+				return char.toUpperCase();
+			});
+		}
+
 		$(document).ready(function() {
 
 			/*----------------- Start upload preview image with crop -----------------*/
@@ -423,7 +428,6 @@ if (mysqli_num_rows($result) > 0) {
 					$("#name_error").addClass('d-none');
 				}
 			});
-
 			$("#phone").on("input", function() {
 				const value = $(this).val();
 				if (!/^\d*$/.test(value)) {
@@ -441,7 +445,6 @@ if (mysqli_num_rows($result) > 0) {
 					$("#number_error").addClass('d-none');
 				}
 			});
-
 			$("#qualification").on("input", function() {
 				const value = $(this).val();
 
@@ -455,8 +458,6 @@ if (mysqli_num_rows($result) > 0) {
 					$("#qualification_error").addClass('d-none');
 				}
 			});
-
-
 			$(".totalEpx").on("input", function() {
 				const value = $(this).val();
 				if (!/^\d*$/.test(value)) {
@@ -515,11 +516,9 @@ if (mysqli_num_rows($result) > 0) {
 					this.value = ""; // Clear invalid time
 				}
 			})
-
 			$("#interviewForm").click(function() {
 				$(".error").addClass('d-none');
 			});
-
 			$("#interviewForm").on("submit", function(e) {
 				e.preventDefault();
 				var response = validateForm();
