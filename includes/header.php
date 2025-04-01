@@ -1132,25 +1132,21 @@ $MyProfileInfo = getMyProfileInfo($employeeId);
 											</div>
 										</div>
 										<div class="card-body">
-											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="employee-details.php?empId=<?php echo  $MyProfileInfo ? $MyProfileInfo['encrypyEmployeeId'] : '';  ?>">
+											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="employee-details">
 												<i class="ti ti-user-circle me-1"></i>My Profile
-											</a>
-											<!-- <a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="bussiness-settings.html"> -->
-											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="employee-details.php?empId=<?php echo  $MyProfileInfo ? $MyProfileInfo['encrypyEmployeeId'] : '';  ?>">
+											</a> 
+											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="employee-details">
 												<i class="fas fa-cogs me-1"></i> Settings
 											</a>
-
-											<!-- <a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="profile-settings.html"> -->
 											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="" data-bs-toggle="modal" data-bs-target="#change_password">
 												<i class="ti ti-circle-arrow-up me-1"></i>Change Password
-											</a>
-											<!-- <a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="knowledgebase.html"> -->
-											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="employee-details.php?empId=<?php echo  $MyProfileInfo ? $MyProfileInfo['encrypyEmployeeId'] : '';  ?>">
+											</a> 
+											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="employee-details">
 												<i class="ti ti-question-mark me-1"></i>Knowledge Base
 											</a>
 										</div>
 										<div class="card-footer">
-											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="queries/logout.php">
+											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="queries/logout">
 												<i class="ti ti-login me-2"></i>Logout
 											</a>
 										</div>

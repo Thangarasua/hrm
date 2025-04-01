@@ -1,5 +1,11 @@
 <?php 
 include(__DIR__ . '/../includes/config.php');
+
+$employeeId = $_SESSION['hrm_employeeId'];
+$employeeType = substr($employeeId, 0, 4);
+global $employeeTable; // Declare global variable
+$employeeTable = ($employeeType === 'TEMP') ? 'temporary_employees' : 'employees';
+
 function getDepartments($currentDepartmentId = null) {
     global $conn;
     $query = "SELECT * FROM departments WHERE status = 1 ORDER BY department_name ASC";
@@ -49,7 +55,8 @@ function getJobLevels() {
 
 function getManagerUsers($user, $currentUserId = null) {
     global $conn;
-    $query = "SELECT * FROM `employees` WHERE `role_id` = $user AND status = 1 ORDER BY `employee_id` ASC";
+    global $employeeTable;
+    $query = "SELECT * FROM $employeeTable WHERE `role_id` = $user AND status = 1 ORDER BY `employee_id` ASC";
     $result = mysqli_query($conn, $query);
     $options = '';
 
@@ -78,9 +85,9 @@ function getBankInfo($employeeId) {
 };
 
 function getEmployeeInfo($employeeId) {
-    global $conn;
-    // $query = "SELECT * FROM `employees` WHERE `employee_id` = '$employeeId'";
-    $query = "SELECT *,e.status AS empStatus FROM `employees` AS e INNER JOIN roles AS r ON r.role_id = e.role_id INNER JOIN departments AS dp ON dp.department_id=e.department_id INNER JOIN designations AS dg ON dg.designation_id=e.designation_id WHERE `employee_id` = '$employeeId'";
+    global $conn; 
+    global $employeeTable;
+    $query = "SELECT *,e.status AS empStatus FROM $employeeTable AS e INNER JOIN roles AS r ON r.role_id = e.role_id INNER JOIN departments AS dp ON dp.department_id=e.department_id INNER JOIN designations AS dg ON dg.designation_id=e.designation_id WHERE `employee_id` = '$employeeId'";
     $result = mysqli_query($conn, $query);
     $key = "ACTEHRM2025";
     $method = "AES-256-CBC";
@@ -107,7 +114,6 @@ function getEmployeeInfo($employeeId) {
             'about' => $row['about'],
             'status' => $row['status'],
             'password' => $decryptPassword,
-
         ];
     } else {
         return null;
@@ -116,8 +122,8 @@ function getEmployeeInfo($employeeId) {
 
 function getMyProfileInfo($employeeId) {
     global $conn;
-    // $query = "SELECT * FROM `employees` WHERE `employee_id` = '$employeeId'";
-    $query = "SELECT * FROM `employees` AS e INNER JOIN roles AS r ON r.role_id = e.role_id INNER JOIN departments AS dp ON dp.department_id=e.department_id INNER JOIN designations AS dg ON dg.designation_id=e.designation_id WHERE `employee_id` = '$employeeId'";
+    global $employeeTable;
+    $query = "SELECT * FROM $employeeTable AS e INNER JOIN roles AS r ON r.role_id = e.role_id INNER JOIN departments AS dp ON dp.department_id=e.department_id INNER JOIN designations AS dg ON dg.designation_id=e.designation_id WHERE `employee_id` = '$employeeId'";
     $result = mysqli_query($conn, $query);
     $key = "ACTEHRM2025";
     $method = "AES-256-CBC";
@@ -267,6 +273,7 @@ function getPersonalInfo($employeeId) {
 
 if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     global $conn;
+    global $employeeTable;
     $flag = $_POST['flag'];
     $key = "ACTEHRM2025";
     $method = "AES-256-CBC";
@@ -277,7 +284,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $newPassword = $_POST['newPassword'];
         $confirmNewPassword = $_POST['confirmNewPassword'];
 
-        $query = "SELECT * FROM employees WHERE employee_id = '$employeeId'";
+        $query = "SELECT * FROM $employeeTable WHERE employee_id = '$employeeId'";
         $result = mysqli_query($conn, $query);
         $row = mysqli_fetch_assoc($result);
         $encryptedPassword = $row['password'];
@@ -289,7 +296,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         } else {
             $encryptedNewPassword = openssl_encrypt($newPassword, $method, $key, 0, $iv);
 
-            $updateQuery = "UPDATE employees SET `password` = '$encryptedNewPassword' WHERE employee_id = '$employeeId'"; 
+            $updateQuery = "UPDATE $employeeTable SET `password` = '$encryptedNewPassword' WHERE employee_id = '$employeeId'"; 
             if (mysqli_query($conn, $updateQuery)) {
                 echo json_encode(array('status' => 'success', 'message' => 'Password updated successfully.'));
             } else {
@@ -329,7 +336,7 @@ function getFamilyInfo($employeeId) {
         while ($row = mysqli_fetch_assoc($result)) {
             $relationName = htmlspecialchars($row['relation_name']);
             $relationship = htmlspecialchars($row['relationship']);
-            $relationDob = htmlspecialchars($row['relation_dob']);
+            $relationAddress = htmlspecialchars($row['relation_address']);
             $relationPhone = htmlspecialchars($row['relation_phone']);
 
             // Display the family member's information
@@ -342,7 +349,7 @@ function getFamilyInfo($employeeId) {
                     <h6 class="d-flex align-items-center fw-medium mt-1">' . $relationship . '</h6>
                 </div>
                 <div class="col-md-3">
-                    <h6 class="d-flex align-items-center fw-medium mt-1">' . $relationDob . '</h6>
+                    <h6 class="d-flex align-items-center fw-medium mt-1">' . $relationAddress . '</h6>
                 </div>
                 <div class="col-md-3">
                     <h6 class="d-flex align-items-center fw-medium mt-1">' . $relationPhone . '</h6>

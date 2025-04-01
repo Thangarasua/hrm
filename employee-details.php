@@ -1,12 +1,15 @@
 <?php require_once("./includes/header.php"); ?>
 <?php require_once("./includes/sidebar.php"); ?>
-<?php 
+<?php
 if (isset($_GET['empId'])) {
 	$encryptedId = $_GET['empId'];
-    $employeeId = base64_decode($encryptedId);
+	$employeeId = base64_decode($encryptedId);
+} else {
+	$employeeId = $_SESSION['hrm_employeeId'];
 }
+
 $bankInfo = getBankInfo($employeeId);
-$employeeInfo = getEmployeeInfo($employeeId); 
+$employeeInfo = getEmployeeInfo($employeeId);
 $experienceInfo = getExperienceInfo($employeeId);
 $educationInfo = getEducationInfo($employeeId);
 $personalInfo = getPersonalInfo($employeeId);
@@ -83,19 +86,19 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									<p class="text-dark"><?php echo $employeeInfo ? $employeeInfo['doj'] : ''; ?></p>
 								</div>
 								<div class="d-flex align-items-center justify-content-between mb-2">
-								<span class="d-inline-flex align-items-center">
-									<i class="ti ti-phone me-2"></i>
-									Phone
-								</span>
-								<p class="text-dark"><?php echo $employeeInfo ? $employeeInfo['phone'] : ''; ?></p>
-							</div>
-							<div class="d-flex align-items-center justify-content-between mb-2">
-								<span class="d-inline-flex align-items-center">
-									<i class="ti ti-mail-check me-2"></i>
-									Email
-								</span>
-								<a href="javascript:void(0);" class="text-info d-inline-flex align-items-center"><span class="__cf_email__" data-cfemail=""><?php echo $employeeInfo ? $employeeInfo['email'] : ''; ?></span><i class="ti ti-copy text-dark ms-2"></i></a>
-							</div>
+									<span class="d-inline-flex align-items-center">
+										<i class="ti ti-phone me-2"></i>
+										Phone
+									</span>
+									<p class="text-dark"><?php echo $employeeInfo ? $employeeInfo['phone'] : ''; ?></p>
+								</div>
+								<div class="d-flex align-items-center justify-content-between mb-2">
+									<span class="d-inline-flex align-items-center">
+										<i class="ti ti-mail-check me-2"></i>
+										Email
+									</span>
+									<a href="javascript:void(0);" class="text-info d-inline-flex align-items-center"><span class="__cf_email__" data-cfemail=""><?php echo $employeeInfo ? $employeeInfo['email'] : ''; ?></span><i data-bs-toggle="tooltip" title="Copy to clipboard" class="ti ti-copy text-dark ms-2"></i></a>
+								</div>
 								<div class="d-flex align-items-center justify-content-between">
 									<span class="d-inline-flex align-items-center">
 										<i class="ti ti-calendar-check me-2"></i>
@@ -103,7 +106,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									</span>
 									<div class="d-flex align-items-center">
 										<span class="avatar avatar-sm avatar-rounded me-2">
-											<img src="./assets/img/profiles/avatar-12.jpg" alt="Img"> 
+											<img src="./assets/img/profiles/avatar-12.jpg" alt="Img">
 										</span>
 										<p class="text-gray-9 mb-0"><?php echo $employeeInfo ? $employeeInfo['workLocation'] : ''; ?></p>
 									</div>
@@ -113,11 +116,11 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 										<div>
 											<?php if ($employeeRoleId == 4 || $employeeRoleId == 5) { ?>
 												<a href="#" class="btn btn-dark w-100" data-bs-toggle="modal" data-bs-target="#edit_employee"><i class="ti ti-edit me-1"></i>Edit Info </a>
-											<?php } else {?>
+											<?php } else { ?>
 												<a href="#" class="btn btn-dark w-100" data-bs-toggle="tooltip" title="Contact Admin">
 													<i class="ti ti-edit me-1"></i>Edit Info
 												</a>
-											<?php }?>
+											<?php } ?>
 										</div>
 									</div>
 									<div class="col-6">
@@ -131,7 +134,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 						<div class="p-3 border-bottom">
 							<div class="d-flex align-items-center justify-content-between mb-2">
 								<h6>Basic information</h6>
-								<a href="javascript:void(0);" class="btn btn-icon btn-sm" data-bs-toggle="modal" data-bs-target="#edit_personal"><i class="ti ti-edit"></i></a>
+								<a href="javascript:void(0);" class="btn btn-icon btn-sm" data-bs-toggle="modal" data-bs-target="#edit_personal" data-bs-toggle="tooltip" title="edit & update details"><i class="ti ti-edit"></i></a>
 							</div>
 							<div class="d-flex align-items-center justify-content-between mb-2">
 								<span class="d-inline-flex align-items-center">
@@ -145,28 +148,28 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									<i class="ti ti-mail-check me-2"></i>
 									Email
 								</span>
-								<a href="javascript:void(0);" class="text-info d-inline-flex align-items-center"><span class="__cf_email__" data-cfemail=""><?php echo $personalInfo ? $personalInfo['email'] : ''; ?></span><i class="ti ti-copy text-dark ms-2"></i></a>
+								<a href="javascript:void(0);" class="text-info d-inline-flex align-items-center"><span class="__cf_email__" data-cfemail=""><?php echo $personalInfo ? $personalInfo['email'] : ''; ?></span><i data-bs-toggle="tooltip" title="Copy to clipboard" class="ti ti-copy text-dark ms-2"></i></a>
 							</div>
 							<div class="d-flex align-items-center justify-content-between mb-2">
 								<span class="d-inline-flex align-items-center">
 									<i class="ti ti-gender-male me-2"></i>
 									Gender
 								</span>
-								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['gender'] : '';?></p>
+								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['gender'] : ''; ?></p>
 							</div>
 							<div class="d-flex align-items-center justify-content-between mb-2">
 								<span class="d-inline-flex align-items-center">
 									<i class="ti ti-cake me-2"></i>
 									Birdthday
 								</span>
-								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['dob'] : '';?></p>
+								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['dob'] : ''; ?></p>
 							</div>
 							<div class="d-flex align-items-center justify-content-between">
 								<span class="d-inline-flex align-items-center">
 									<i class="ti ti-map-pin-check me-2"></i>
 									Address
 								</span>
-								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['permanentAddress'] : '';?></p>
+								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['permanentAddress'] : ''; ?></p>
 							</div>
 						</div>
 						<div class="p-3 border-bottom">
@@ -179,49 +182,49 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									<i class="ti ti-e-passport me-2"></i>
 									Passport No
 								</span>
-								<p class="text-dark"><?php echo $personalInfo ? $personalInfo['passportNo'] : '';?></p>
+								<p class="text-dark"><?php echo $personalInfo ? $personalInfo['passportNo'] : ''; ?></p>
 							</div>
 							<div class="d-flex align-items-center justify-content-between mb-2">
 								<span class="d-inline-flex align-items-center">
 									<i class="ti ti-calendar-x me-2"></i>
 									Passport Exp Date
 								</span>
-								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['passportExpiryDate'] : '';?></p>
+								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['passportExpiryDate'] : ''; ?></p>
 							</div>
 							<div class="d-flex align-items-center justify-content-between mb-2">
 								<span class="d-inline-flex align-items-center">
 									<i class="ti ti-gender-male me-2"></i>
 									Nationality
 								</span>
-								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['nationality'] : '';?></p>
+								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['nationality'] : ''; ?></p>
 							</div>
 							<div class="d-flex align-items-center justify-content-between mb-2">
 								<span class="d-inline-flex align-items-center">
 									<i class="ti ti-bookmark-plus me-2"></i>
 									Religion
 								</span>
-								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['religion'] : '';?></p>
+								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['religion'] : ''; ?></p>
 							</div>
 							<div class="d-flex align-items-center justify-content-between mb-2">
 								<span class="d-inline-flex align-items-center">
 									<i class="ti ti-hotel-service me-2"></i>
 									Marital status
 								</span>
-								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['maritalStatus'] : '';?></p>
+								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['maritalStatus'] : ''; ?></p>
 							</div>
 							<div class="d-flex align-items-center justify-content-between mb-2">
 								<span class="d-inline-flex align-items-center">
 									<i class="ti ti-briefcase-2 me-2"></i>
 									Employment of spouse
 								</span>
-								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['employmentSpouse'] : '';?></p>
+								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['employmentSpouse'] : ''; ?></p>
 							</div>
 							<div class="d-flex align-items-center justify-content-between">
 								<span class="d-inline-flex align-items-center">
 									<i class="ti ti-baby-bottle me-2"></i>
 									No. of children
 								</span>
-								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['children'] : '';?></p>
+								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['children'] : ''; ?></p>
 							</div>
 						</div>
 					</div>
@@ -238,9 +241,9 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									<span class="d-inline-flex align-items-center">
 										Primary
 									</span>
-									<h6 class="d-flex align-items-center fw-medium mt-1"><?php echo $personalInfo ? $personalInfo['primaryContacts'] : '';?> <span class="d-inline-flex mx-1"><i class="ti ti-point-filled text-danger"></i></span><?php echo $personalInfo ? $personalInfo['primaryRelationship'] : '';?></h6>
+									<h6 class="d-flex align-items-center fw-medium mt-1"><?php echo $personalInfo ? $personalInfo['primaryContacts'] : ''; ?> <span class="d-inline-flex mx-1"><i class="ti ti-point-filled text-danger"></i></span><?php echo $personalInfo ? $personalInfo['primaryRelationship'] : ''; ?></h6>
 								</div>
-								<p class="text-dark"><?php echo $personalInfo ? $personalInfo['primaryContactPhone'] : '';?></p>
+								<p class="text-dark"><?php echo $personalInfo ? $personalInfo['primaryContactPhone'] : ''; ?></p>
 							</div>
 						</div>
 						<div class="p-3 border-bottom">
@@ -249,9 +252,9 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									<span class="d-inline-flex align-items-center">
 										Secondry
 									</span>
-									<h6 class="d-flex align-items-center fw-medium mt-1"><?php echo $personalInfo ? $personalInfo['secondaryContact'] : '';?> <span class="d-inline-flex mx-1"><i class="ti ti-point-filled text-danger"></i></span><?php echo $personalInfo ? $personalInfo['secondaryRelationship'] : '';?></h6>
+									<h6 class="d-flex align-items-center fw-medium mt-1"><?php echo $personalInfo ? $personalInfo['secondaryContact'] : ''; ?> <span class="d-inline-flex mx-1"><i class="ti ti-point-filled text-danger"></i></span><?php echo $personalInfo ? $personalInfo['secondaryRelationship'] : ''; ?></h6>
 								</div>
-								<p class="text-dark"><?php echo $personalInfo ? $personalInfo['secondaryContactPhone'] : '';?></p>
+								<p class="text-dark"><?php echo $personalInfo ? $personalInfo['secondaryContactPhone'] : ''; ?></p>
 							</div>
 						</div>
 					</div>
@@ -267,7 +270,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 										<div class="accordion-button">
 											<div class="d-flex align-items-center flex-fill">
 												<h5>About Employee</h5>
-												<a href="#" class="btn btn-sm btn-icon ms-auto" data-bs-toggle="modal" data-bs-target="#"><i class="ti ti-edit"></i></a>
+												<a href="#" class="btn btn-sm btn-icon ms-auto" data-bs-toggle="modal" data-bs-target="accordionExample"><i class="ti ti-edit"></i></a>
 												<a href="#" class="d-flex align-items-center collapsed collapse-arrow" data-bs-toggle="collapse" data-bs-target="#primaryBorderOne" aria-expanded="false" aria-controls="primaryBorderOne">
 													<i class="ti ti-chevron-down fs-18"></i>
 												</a>
@@ -276,7 +279,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									</div>
 									<div id="primaryBorderOne" class="accordion-collapse collapse show border-top" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
 										<div class="accordion-body mt-2">
-											<?php echo $employeeInfo ? $employeeInfo['about'] : ''; ?> 
+											<?php echo $employeeInfo ? $employeeInfo['about'] : ''; ?>
 										</div>
 									</div>
 								</div>
@@ -339,7 +342,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									</div>
 									<div id="primaryBorderThree" class="accordion-collapse collapse border-top" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
 										<div class="accordion-body">
-										<?php echo $familyInfo ? $familyInfo : '';?>
+											<?php echo $familyInfo ? $familyInfo : ''; ?>
 										</div>
 									</div>
 								</div>
@@ -363,7 +366,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 												<div id="primaryBorderFour" class="accordion-collapse collapse border-top" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
 													<div class="accordion-body">
 														<div>
-														<?php echo $educationInfo ? $educationInfo : '';?>
+															<?php echo $educationInfo ? $educationInfo : ''; ?>
 														</div>
 													</div>
 												</div>
@@ -389,7 +392,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 												<div id="primaryBorderFive" class="accordion-collapse collapse border-top" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
 													<div class="accordion-body">
 														<div>
-															<?php echo $experienceInfo ? $experienceInfo : '';?>
+															<?php echo $experienceInfo ? $experienceInfo : ''; ?>
 														</div>
 													</div>
 												</div>
@@ -597,7 +600,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 
 <!-- Edit Employee -->
 <div class="modal fade" id="edit_employee">
-<div class="modal-dialog modal-dialog-centered modal-lg">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
 				<div class="d-flex align-items-center">
@@ -644,7 +647,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">Designation <span class="text-danger"> *</span></label>
-										<input type="hidden" class="form-control" name="designationId" id="designationId" value="<?php echo $employeeInfo ? $employeeInfo['designation'] : ''; ?>" >
+										<input type="hidden" class="form-control" name="designationId" id="designationId" value="<?php echo $employeeInfo ? $employeeInfo['designation'] : ''; ?>">
 										<select class="select" name="designation" id="designation" required>
 											<option value="">Select</option>
 										</select>
@@ -655,7 +658,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 										<label class="form-label">Manager <span class="text-danger"> *</span></label>
 										<select class="select" name="manager" id="manager">
 											<option value="">Select</option>
-											<?php echo getManagerUsers(3, $employeeInfo ? $employeeInfo['manager'] : '') ; ?>
+											<?php echo getManagerUsers(3, $employeeInfo ? $employeeInfo['manager'] : ''); ?>
 										</select>
 									</div>
 								</div>
@@ -664,7 +667,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 										<label class="form-label">Supervisors</label>
 										<select class="select" name="supervisors" id="supervisors">
 											<option value="">Select</option>
-											<?php echo getManagerUsers(2, $employeeInfo ? $employeeInfo['supervisor'] : '') ; ?>
+											<?php echo getManagerUsers(2, $employeeInfo ? $employeeInfo['supervisor'] : ''); ?>
 										</select>
 									</div>
 								</div>
@@ -696,7 +699,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									<div class="mb-3">
 										<label class="form-label">Joining Date <span class="text-danger"> *</span></label>
 										<div class="input-icon-end position-relative">
-											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="doj" id="doj" value="<?php echo $employeeInfo ? $employeeInfo['doj'] : ''; ?>" required> 
+											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="doj" id="doj" value="<?php echo $employeeInfo ? $employeeInfo['doj'] : ''; ?>" required>
 											<span class="input-icon-addon">
 												<i class="ti ti-calendar text-gray-7"></i>
 											</span>
@@ -706,7 +709,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Employee ID <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="employeeID"  id="employeeID" value="<?php echo $employeeInfo ? $employeeInfo['employeeId'] : ''; ?>" readonly>
+										<input type="text" class="form-control" name="employeeID" id="employeeID" value="<?php echo $employeeInfo ? $employeeInfo['employeeId'] : ''; ?>" readonly>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -720,14 +723,14 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 										<label class="form-label">Confirm Password <span class="text-danger"> *</span></label>
 										<input type="text" class="form-control" name="confirmPassword" value="<?php echo $employeeInfo ? $employeeInfo['password'] : ''; ?>" required>
 									</div>
-								</div> 
+								</div>
 							</div>
-						</div>  
+						</div>
 					</div>
 					<!-- Official Information Tab -->
 					<div class="tab-pane fade" id="office-info" role="tabpanel" aria-labelledby="office-tab" tabindex="0">
 						<div class="modal-body pb-0">
-							<div class="row"> 
+							<div class="row">
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Work Location <span class="text-danger"> *</span></label>
@@ -738,25 +741,25 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Employee Type <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" id="jobTypeSearch" name="employeeType" oninput="capitalizeWords(this)" placeholder="eg : Full Time" autocomplete="off" value="<?php echo $employeeInfo ? $employeeInfo['employeeType'] : ''; ?>"/>
+										<input type="text" class="form-control" id="jobTypeSearch" name="employeeType" oninput="capitalizeWords(this)" placeholder="eg : Full Time" autocomplete="off" value="<?php echo $employeeInfo ? $employeeInfo['employeeType'] : ''; ?>" />
 										<ul class="list-group addFields" id="jobTypeResult"></ul>
 									</div>
-								</div> 
+								</div>
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
-									<label class="form-label">Active Status <span class="text-danger"> *</span></label>
+										<label class="form-label">Active Status <span class="text-danger"> *</span></label>
 										<select name="employeeStatus" id="employeeStatus" class="select">
-												<option value="1" <?php echo ($employeeInfo['status'] === '1') ? 'selected': ''; ?>>Active</option>
-												<option value="2" <?php echo ($employeeInfo['status'] === '2') ? 'selected': ''; ?>>Deactive</option>
+											<option value="1" <?php echo ($employeeInfo['status'] === '1') ? 'selected' : ''; ?>>Active</option>
+											<option value="2" <?php echo ($employeeInfo['status'] === '2') ? 'selected' : ''; ?>>Deactive</option>
 										</select>
 									</div>
-								</div> 
+								</div>
 								<div class="col-md-6" id="relieving-container" style="display: none;">
 									<div class="mb-3 position-relative">
-									<label class="form-label">Relieving Date <span class="text-danger"> *</span></label>
-									<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="relievingDate" id="relievingDate">
+										<label class="form-label">Relieving Date <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="relievingDate" id="relievingDate">
 									</div>
-								</div> 
+								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
@@ -802,7 +805,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Phone Number <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" onkeypress="return isNumber(event)" name="personalPhone" value="<?php echo $personalInfo ? $personalInfo['phone'] : ''; ?>" required>
+										<input type="text" class="form-control" name="personalPhone" value="<?php echo $personalInfo ? $personalInfo['phone'] : ''; ?>" onkeypress="return phoneNumber(event)" onkeypress="return tenDigits(event)" onpaste="numberPasteValidate(event, this)" required>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -826,7 +829,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									<div class="mb-3">
 										<label class="form-label">Date Of Birth <span class="text-danger"> *</span></label>
 										<div class="input-icon-end position-relative">
-											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="dob" id="dob" value="<?php echo $personalInfo ? $personalInfo['dob'] : '';?>" required> 
+											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="dob" id="dob" value="<?php echo $personalInfo ? $personalInfo['dob'] : ''; ?>" required>
 											<span class="input-icon-addon">
 												<i class="ti ti-calendar text-gray-7"></i>
 											</span>
@@ -836,13 +839,13 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								<div class="col-md-12">
 									<div class="mb-3">
 										<label class="form-label">Permanent Address <span class="text-danger"> *</span></label>
-										<textarea  class="form-control" rows="4" name="permanentAddress" id="permanentAddress"><?php echo $personalInfo ? $personalInfo['permanentAddress'] : '';?></textarea>
+										<textarea class="form-control" rows="2" name="permanentAddress" id="permanentAddress"><?php echo $personalInfo ? $personalInfo['permanentAddress'] : ''; ?></textarea>
 									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="mb-3">
 										<label class="form-label">Present Address <span class="text-danger"> *</span></label>
-										<textarea  class="form-control" rows="4" name="presentAddress" id="presentAddress"><?php echo $personalInfo ? $personalInfo['presentAddress'] : '';?></textarea>
+										<textarea class="form-control" rows="2" name="presentAddress" id="presentAddress"><?php echo $personalInfo ? $personalInfo['presentAddress'] : ''; ?></textarea>
 									</div>
 								</div>
 							</div>
@@ -853,15 +856,15 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 							<div class="row">
 								<div class="col-md-6">
 									<div class="mb-3">
-										<label class="form-label">Passport No <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="passportNo" id="passportNo" value="<?php echo $personalInfo ? $personalInfo['passportNo'] : '';?>">
+										<label class="form-label">Passport No</label>
+										<input type="text" class="form-control" name="passportNo" id="passportNo" value="<?php echo $personalInfo ? $personalInfo['passportNo'] : ''; ?>">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
-										<label class="form-label">Passport Expiry Date <span class="text-danger"> *</span></label>
+										<label class="form-label">Passport Expiry Date</label>
 										<div class="input-icon-end position-relative">
-											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="passportExpiryDate" id="passportExpiryDate" value="<?php echo $personalInfo ? $personalInfo['passportExpiryDate'] : '';?>">
+											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="passportExpiryDate" id="passportExpiryDate" value="<?php echo $personalInfo ? $personalInfo['passportExpiryDate'] : ''; ?>">
 											<span class="input-icon-addon">
 												<i class="ti ti-calendar text-gray-7"></i>
 											</span>
@@ -870,14 +873,14 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
-										<label class="form-label">Nationality <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="nationality" id="nationality" value="<?php echo $personalInfo ? $personalInfo['nationality'] : '';?>">
+										<label class="form-label">Nationality</label>
+										<input type="text" class="form-control" name="nationality" id="nationality" value="<?php echo $personalInfo ? $personalInfo['nationality'] : ''; ?>">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Religion</label>
-										<input type="text" class="form-control" name="religion" id="religion" value="<?php echo $personalInfo ? $personalInfo['religion'] : '';?>">
+										<input type="text" class="form-control" name="religion" id="religion" value="<?php echo $personalInfo ? $personalInfo['religion'] : ''; ?>">
 									</div>
 								</div>
 								<div class="col-md-4">
@@ -893,13 +896,13 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">Employment Spouse</label>
-										<input type="text" class="form-control" name="employmentSpouse" id="employmentSpouse" value="<?php echo $personalInfo ? $personalInfo['employmentSpouse'] : '';?>">
+										<input type="text" class="form-control" name="employmentSpouse" id="employmentSpouse" value="<?php echo $personalInfo ? $personalInfo['employmentSpouse'] : ''; ?>">
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">No. of Children</label>
-										<input type="text" class="form-control" name="children" id="children" value="<?php echo $personalInfo ? $personalInfo['children'] : '';?>">
+										<input type="text" class="form-control" name="children" id="children" value="<?php echo $personalInfo ? $personalInfo['children'] : ''; ?>">
 									</div>
 								</div>
 							</div>
@@ -913,19 +916,19 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									<div class="col-md-4">
 										<div class="mb-3">
 											<label class="form-label">Name <span class="text-danger"> *</span></label>
-											<input type="text" class="form-control" name="primaryContact" id="primaryContact" value="<?php echo $personalInfo ? $personalInfo['primaryContacts'] : '';?>">
+											<input type="text" class="form-control" name="primaryContact" id="primaryContact" value="<?php echo $personalInfo ? $personalInfo['primaryContacts'] : ''; ?>">
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="mb-3">
 											<label class="form-label">Relationship </label>
-											<input type="text" class="form-control" name="primaryRelationship" id="primaryRelationship" value="<?php echo $personalInfo ? $personalInfo['primaryRelationship'] : '';?>">
+											<input type="text" class="form-control" name="primaryRelationship" id="primaryRelationship" value="<?php echo $personalInfo ? $personalInfo['primaryRelationship'] : ''; ?>">
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="mb-3">
 											<label class="form-label">Phone No <span class="text-danger"> *</span></label>
-											<input type="text" class="form-control" name="primaryContactPhone" id="primaryContactPhone" value="<?php echo $personalInfo ? $personalInfo['primaryContactPhone'] : '';?>">
+											<input type="text" class="form-control" name="primaryContactPhone" id="primaryContactPhone" value="<?php echo $personalInfo ? $personalInfo['primaryContactPhone'] : ''; ?>">
 										</div>
 									</div>
 								</div>
@@ -935,19 +938,19 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">Name <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="secondaryContact" id="secondaryContact" value="<?php echo $personalInfo ? $personalInfo['secondaryContact'] : '';?>">
+										<input type="text" class="form-control" name="secondaryContact" id="secondaryContact" value="<?php echo $personalInfo ? $personalInfo['secondaryContact'] : ''; ?>">
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">Relationship </label>
-										<input type="text" class="form-control" name="secondaryRelationship" id="secondaryRelationship" value="<?php echo $personalInfo ? $personalInfo['secondaryRelationship'] : '';?>">
+										<input type="text" class="form-control" name="secondaryRelationship" id="secondaryRelationship" value="<?php echo $personalInfo ? $personalInfo['secondaryRelationship'] : ''; ?>">
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">Phone No <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="secondaryContactPhone" id="secondaryContactPhone" value="<?php echo $personalInfo ? $personalInfo['secondaryContactPhone'] : '';?>">
+										<input type="text" class="form-control" name="secondaryContactPhone" id="secondaryContactPhone" value="<?php echo $personalInfo ? $personalInfo['secondaryContactPhone'] : ''; ?>">
 									</div>
 								</div>
 							</div>
@@ -1000,25 +1003,25 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 					<div class="row">
 						<div class="col-md-12">
 							<div class="mb-3">
-								<label class="form-label">Bank Details <span class="text-danger"> *</span></label>
+								<label class="form-label">Bank Name <span class="text-danger"> *</span></label>
 								<input type="text" class="form-control" name="bankName" value="<?php echo $bankInfo ? $bankInfo['bankName'] : ''; ?>" required>
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="mb-3">
-								<label class="form-label">Bank account No </label>
+								<label class="form-label">Bank account No <span class="text-danger"> *</span></label>
 								<input type="text" class="form-control" name="bankAccountNumber" value="<?php echo $bankInfo ? $bankInfo['bankAccountNumber'] : ''; ?>" required>
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="mb-3">
-								<label class="form-label">IFSC Code</label>
+								<label class="form-label">IFSC Code <span class="text-danger"> *</span></label>
 								<input type="text" class="form-control" name="ifscCode" value="<?php echo $bankInfo ? $bankInfo['ifscCode'] : ''; ?>" required>
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="mb-3">
-								<label class="form-label">Branch Address</label>
+								<label class="form-label">Branch Address <span class="text-danger"> *</span></label>
 								<input type="text" class="form-control" name="branchName" value="<?php echo $bankInfo ? $bankInfo['branchName'] : ''; ?>" required>
 							</div>
 						</div>
@@ -1050,30 +1053,25 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 						<div class="col-md-12">
 							<div class="mb-3">
 								<label class="form-label">Name <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control" name="relationName" id="relationName">
+								<input type="text" class="form-control" name="relationName" id="relationName" oninput="capitalizeWords(this)">
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="mb-3">
-								<label class="form-label">Relationship </label>
-								<input type="text" class="form-control" name="relationship" id="relationship">
+								<label class="form-label">Relationship <span class="text-danger"> *</span></label>
+								<input type="text" class="form-control" name="relationship" id="relationship" oninput="capitalizeWords(this)">
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="mb-3">
-								<label class="form-label">Phone </label>
-								<input type="text" class="form-control" name="relationPhone" id="relationPhone">
+								<label class="form-label">Phone <span class="text-danger"> *</span></label>
+								<input type="text" class="form-control" name="relationPhone" id="relationPhone" onkeypress="return phoneNumber(event)" onkeypress="return tenDigits(event)" onpaste="numberPasteValidate(event, this)">
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="mb-3">
-								<label class="form-label">Date of Birth <span class="text-danger"> *</span></label>
-								<div class="input-icon-end position-relative">
-									<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="relationDob" id="relationDob">
-									<span class="input-icon-addon">
-										<i class="ti ti-calendar text-gray-7"></i>
-									</span>
-								</div>
+								<label class="form-label">Address <span class="text-danger"> *</span></label>
+								<input type="text" class="form-control" name="relationAddress" id="relationAddress" oninput="capitalizeWords(this)">
 							</div>
 						</div>
 					</div>
@@ -1101,7 +1099,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 			<form action="#" id="AddEducationInfo">
 				<div class="modal-body pb-0">
 					<div class="row">
-					<div class="col-md-4">
+						<div class="col-md-4">
 							<div class="mb-3">
 								<label class="form-label">Category <span class="text-danger"> *</span></label>
 								<input type="text" class="form-control" name="courseCategory" id="courseCategory">
@@ -1209,7 +1207,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 						<div class="col-md-6">
 							<div class="mb-3">
 								<label class="form-label">Skils (Optional) <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control" name="skils" id="skils" >
+								<input type="text" class="form-control" name="skils" id="skils">
 							</div>
 						</div>
 					</div>
@@ -1262,61 +1260,61 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 				</button>
 			</div>
 			<form>
-                <div class="modal-body pb-0">
-                    <h5 class="mb-3">Salary Details</h5>
-                    <div class="row mb-2">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label">Gross Salary<span class="text-danger"> *</span></label>
-                                <input type="number" id="grossSalary" class="form-control" placeholder="Enter Gross Salary">
-                            </div>
-                        </div>
+				<div class="modal-body pb-0">
+					<h5 class="mb-3">Salary Details</h5>
+					<div class="row mb-2">
 						<div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label">CTC<span class="text-danger"> *</span></label>
-                                <input type="number" id="MonthCtc" class="form-control" placeholder="" readonly>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-md-4"><label class="form-label">Basic Salary (50%)</label><input type="text" id="basicSalary" class="form-control" readonly></div>
-                        <div class="col-md-4"><label class="form-label">HRA (50%)</label><input type="text" id="hra" class="form-control" readonly></div>
-                        <div class="col-md-4"><label class="form-label">Conveyance Allowance (Fixed)</label><input type="text" id="conveyance" class="form-control" readonly></div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-md-4"><label class="form-label">Medical Allowance (Fixed)</label><input type="text" id="medicalAllowance" class="form-control" readonly></div>
-                        <div class="col-md-4"><label class="form-label">Per Diem Allowance (Fixed)</label><input type="text" id="perDiem" class="form-control" readonly></div>
-                        <div class="col-md-4"><label class="form-label">Special Allowance</label><input type="text" id="specialAllowance" class="form-control" readonly></div>
-                    </div>
-                    
-                    <h5 class="mb-3">Deductions</h5>
-                    <div class="row mb-2">
-                        <div class="col-md-4"><label class="form-label">PF Employee (On Basic 12%)</label><input type="text" id="pfEmployee" class="form-control" readonly></div>
-                        <div class="col-md-4"><label class="form-label">ESI Employee (On Gross 0.75%)</label><input type="text" id="esiEmployee" class="form-control" readonly></div>
-                        <div class="col-md-4"><label class="form-label">Professional Tax</label><input type="text" id="professionalTax" class="form-control" readonly></div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-md-4"><label class="form-label">Total Deductions</label><input type="text" id="totalDeductions" class="form-control" readonly></div>
-                        <div class="col-md-4"><label class="form-label">Net Salary</label><input type="text" id="netSalary" class="form-control" readonly></div>
-                    </div>
-                    
-                    <h5 class="mb-3">Employer Contributions</h5>
-                    <div class="row mb-2">
-                        <div class="col-md-4"><label class="form-label">PF Employer (On Basic 13%)</label><input type="text" id="pfEmployer" class="form-control" readonly></div>
-                        <div class="col-md-4"><label class="form-label">ESI Employer (On Gross 3.25%)</label><input type="text" id="esiEmployer" class="form-control" readonly></div>
-                    </div>
-                    
-                    <h5 class="mb-3">CTC Calculation</h5>
-                    <div class="row mb-2">
-                        <div class="col-md-4"><label class="form-label">CTC Month</label><input type="text" id="ctc" class="form-control" readonly></div>
+							<div class="mb-3">
+								<label class="form-label">Gross Salary<span class="text-danger"> *</span></label>
+								<input type="number" id="grossSalary" class="form-control" placeholder="Enter Gross Salary">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="mb-3">
+								<label class="form-label">CTC<span class="text-danger"> *</span></label>
+								<input type="number" id="MonthCtc" class="form-control" placeholder="" readonly>
+							</div>
+						</div>
+					</div>
+					<div class="row mb-2">
+						<div class="col-md-4"><label class="form-label">Basic Salary (50%)</label><input type="text" id="basicSalary" class="form-control" readonly></div>
+						<div class="col-md-4"><label class="form-label">HRA (50%)</label><input type="text" id="hra" class="form-control" readonly></div>
+						<div class="col-md-4"><label class="form-label">Conveyance Allowance (Fixed)</label><input type="text" id="conveyance" class="form-control" readonly></div>
+					</div>
+					<div class="row mb-2">
+						<div class="col-md-4"><label class="form-label">Medical Allowance (Fixed)</label><input type="text" id="medicalAllowance" class="form-control" readonly></div>
+						<div class="col-md-4"><label class="form-label">Per Diem Allowance (Fixed)</label><input type="text" id="perDiem" class="form-control" readonly></div>
+						<div class="col-md-4"><label class="form-label">Special Allowance</label><input type="text" id="specialAllowance" class="form-control" readonly></div>
+					</div>
+
+					<h5 class="mb-3">Deductions</h5>
+					<div class="row mb-2">
+						<div class="col-md-4"><label class="form-label">PF Employee (On Basic 12%)</label><input type="text" id="pfEmployee" class="form-control" readonly></div>
+						<div class="col-md-4"><label class="form-label">ESI Employee (On Gross 0.75%)</label><input type="text" id="esiEmployee" class="form-control" readonly></div>
+						<div class="col-md-4"><label class="form-label">Professional Tax</label><input type="text" id="professionalTax" class="form-control" readonly></div>
+					</div>
+					<div class="row mb-2">
+						<div class="col-md-4"><label class="form-label">Total Deductions</label><input type="text" id="totalDeductions" class="form-control" readonly></div>
+						<div class="col-md-4"><label class="form-label">Net Salary</label><input type="text" id="netSalary" class="form-control" readonly></div>
+					</div>
+
+					<h5 class="mb-3">Employer Contributions</h5>
+					<div class="row mb-2">
+						<div class="col-md-4"><label class="form-label">PF Employer (On Basic 13%)</label><input type="text" id="pfEmployer" class="form-control" readonly></div>
+						<div class="col-md-4"><label class="form-label">ESI Employer (On Gross 3.25%)</label><input type="text" id="esiEmployer" class="form-control" readonly></div>
+					</div>
+
+					<h5 class="mb-3">CTC Calculation</h5>
+					<div class="row mb-2">
+						<div class="col-md-4"><label class="form-label">CTC Month</label><input type="text" id="ctc" class="form-control" readonly></div>
 						<div class="col-md-4"><label class="form-label">CTC Years</label><input type="text" id="yearCtc" class="form-control" readonly></div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-white border me-2" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
-            </form>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-white border me-2" data-bs-dismiss="modal">Cancel</button>
+					<button type="submit" class="btn btn-primary">Save</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>
@@ -1458,4 +1456,4 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 <!-- /Delete Modal -->
 
 <?php require_once("./includes/footer.php"); ?>
-<script src="./js/employee-details.js"></script>
+<script src="./js/employee-details.js"></script> 
