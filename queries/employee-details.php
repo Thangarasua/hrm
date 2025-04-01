@@ -160,10 +160,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $relationName = $_POST['relationName'];
         $relationPhone = $_POST['relationPhone'];
         $relationship = $_POST['relationship'];
-        $relationDob = $_POST['relationDob'];
-        $relationDob = date('Y-m-d', strtotime($relationDob));
+        $relationAddress = $_POST['relationAddress']; 
 
-        $query = "INSERT INTO `family_info` (`employee_id`, `relation_name`, `relationship`, `relation_phone`, `relation_dob`) VALUES ('$employeeId', '$relationName', '$relationship', '$relationPhone', '$relationDob')";
+        $query = "INSERT INTO `family_info` (`employee_id`, `relation_name`, `relationship`, `relation_phone`, `relation_address`) VALUES ('$employeeId', '$relationName', '$relationship', '$relationPhone', '$relationAddress')";
         if (mysqli_query($conn, $query)) {
             echo json_encode(array('status' => 'success', 'message' => 'Family Information Updated Successfully.'));
         } else {
