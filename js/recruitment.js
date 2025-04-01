@@ -72,7 +72,7 @@ $(document).ready(function () {
         if (data.length > 0) {
           $.each(data, function (index, row) { 
             if(departmentId == 5){ 
-              var send = `<a href="#" data-id="${row.id}" class="send"> <i class="fa-solid fa-paper-plane"></i></a>`;
+              var send = `<a href="#" data-id="${row.id}" class="send" title="Send application form by HR only"> <i class="fa-solid fa-paper-plane"></i></a>`;
             }else{
              var send = ``;
             }
@@ -96,12 +96,12 @@ $(document).ready(function () {
                             <td>
                               <div class="action-icon d-inline-flex">
                                 <a href="#" data-id="${row.id}" class="view">
-                                  <i class="fa-solid fa-eye" title="view details"></i>
+                                  <i class="fa-solid fa-eye" title="View all details"></i>
                                 </a>
-                                <a href="#" data-id="${row.id}" data-formfilling="${row.candidate_count}" class="edit">
+                                <a href="#" data-id="${row.id}" data-formfilling="${row.candidate_count}" class="edit" title="Edit the existing details">
                                   <i class="fa-solid fa-pen-to-square" title="edit details"></i>
                                 </a>
-                                <a href="#" data-id="${row.id}" data-formfilling="${row.candidate_count}" class="delete">
+                                <a href="#" data-id="${row.id}" data-formfilling="${row.candidate_count}" class="delete" title="Confirm Before Delete">
                                   <i class="fa-solid fa-trash-can"></i>
                                 </a>
                                 ${send}
