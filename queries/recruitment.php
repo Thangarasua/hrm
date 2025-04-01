@@ -172,6 +172,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             $row['flag'] = 'recruitmentForm';
             $row['candidateName'] = $candidateName; 
             $row['email'] = $candidateMail; 
+            $row['jobTitle'] = $jobTitle; 
 
             if ($result) {
                 echo json_encode(array(

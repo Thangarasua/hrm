@@ -20,7 +20,7 @@ try {
     $mail->Password = 'kaizxqhrltqzsxgr';
     $mail->SMTPSecure = 'ssl';
     $mail->Port = 465;
-    $mail->setFrom('info@acte.in', 'MARKERZ GLOBAL SOLUTION');
+    $mail->setFrom('info@acte.in', 'Markerz Global Solution');
     $mail->isHTML(true);
 
     if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
@@ -34,6 +34,7 @@ try {
         if ($flag === "recruitmentForm") {
 
             $name = $_POST['candidateName'];
+            $jobTitle = $_POST['jobTitle'];
             $link = "https://actecrm.com/hrm/interview-schedule?id=$encryptedID&mail=$encryptedMail";
             $hrName = $_POST['hrName'];
             $HRphone = $_POST['HRphone'];
@@ -47,6 +48,7 @@ try {
             //Content
             $htmlContent = file_get_contents('./templates/candidate-invite.html');
             $htmlContent = str_replace('{{Name}}', $name, $htmlContent);
+            $htmlContent = str_replace('{{jobTitle}}', $jobTitle, $htmlContent);
             $htmlContent = str_replace('{{Link}}', $link, $htmlContent);
             $htmlContent = str_replace('{{HR Name}}', $hrName, $htmlContent);
             $htmlContent = str_replace('{{HR Number}}', $HRphone, $htmlContent);
