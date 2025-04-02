@@ -850,6 +850,9 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								</div>
 							</div>
 						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" data-bs-target="#personal-info" data-bs-toggle="tab" id="nextBasicTab">Next</button>
+						</div>
 					</div>
 					<div class="tab-pane fade" id="personal-info" role="tabpanel" aria-labelledby="personal-tab" tabindex="1">
 						<div class="modal-body pb-0">
@@ -907,6 +910,10 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								</div>
 							</div>
 						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary border me-2" data-bs-target="#basic1-info" data-bs-toggle="tab" id="prevBasicTab">Back</button>
+							<button type="button" class="btn btn-primary" data-bs-target="#emergency-contact-info" data-bs-toggle="tab" id="nextPersonalTab">Next</button>
+						</div>
 					</div>
 					<div class="tab-pane fade" id="emergency-contact-info" role="tabpanel" aria-labelledby="emergency-contact-tab" tabindex="2">
 						<div class="modal-body pb-0">
@@ -956,6 +963,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 							</div>
 						</div>
 						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary border me-2" data-bs-target="#personal-info" data-bs-toggle="tab" id="prevPersonalTab">Back</button>
 							<button type="button" class="btn btn-white border me-2" data-bs-dismiss="modal">Cancel</button>
 							<button type="submit" class="btn btn-primary">Save</button>
 						</div>

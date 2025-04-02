@@ -3,6 +3,27 @@ $(document).ready(function () {
     let employeeID = $("#employeeID").val();
     $("#grossSalary").on("input", calculateSalary);
 
+    const basicTab = new bootstrap.Tab(document.getElementById('basic1-tab'));
+    const personalTab = new bootstrap.Tab(document.getElementById('personal-tab'));
+    const emergencyContactTab = new bootstrap.Tab(document.getElementById('emergency-contact-tab'));
+
+    // Add event listeners to the buttons
+    document.getElementById('nextBasicTab').addEventListener('click', () => {
+        personalTab.show();
+    });
+
+    document.getElementById('prevBasicTab').addEventListener('click', () => {
+        basicTab.show();
+    });
+
+    document.getElementById('nextPersonalTab').addEventListener('click', () => {
+        emergencyContactTab.show();
+    });
+
+    document.getElementById('prevPersonalTab').addEventListener('click', () => {
+        personalTab.show();
+    });
+
     $("#editEmployee").on("submit", function (e) {
         e.preventDefault();
         let formData = new FormData(this);
@@ -261,6 +282,12 @@ $(document).ready(function () {
                 educationStartDate: startdate,
                 educationeEndDate: enddate
             }).forEach(([id, value]) => document.getElementById(id).value = value);
+
+            if (category === 'SSLC' || category === 'HSC') {
+                document.getElementById('course').readOnly = true;
+            } else {
+                document.getElementById('course').readOnly = false;
+            }
         });
     });
 
