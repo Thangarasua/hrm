@@ -204,7 +204,11 @@ function getEducationInfo($employeeId) {
     $output = '';
     foreach ($categories as $category) {
         $institutionName = isset($existingData[$category]) ? htmlspecialchars($existingData[$category]['institution_name']) : 'NA';
-        $course = isset($existingData[$category]) ? htmlspecialchars($existingData[$category]['course']) : 'NA';
+        if ($category == 'SSLC' || $category == 'HSC') {
+            $course = isset($existingData[$category]) ? htmlspecialchars($existingData[$category]['course']) : $category;
+        } else {
+            $course = isset($existingData[$category]) ? htmlspecialchars($existingData[$category]['course']) : 'NA';
+        }
         $startDate = isset($existingData[$category]) ? htmlspecialchars($existingData[$category]['start_date']) : '';
         $endDate = isset($existingData[$category]) ? htmlspecialchars($existingData[$category]['end_date']) : '';
 
