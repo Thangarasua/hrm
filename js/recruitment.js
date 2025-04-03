@@ -215,13 +215,13 @@ $(document).ready(function () {
         // Check if data is not empty
         if (data.length > 0) {
           $.each(data, function (index, row) {
-            var status = (row.responce_status == 0) ? '<span class="badge badge-danger">Not Submited</i></span>' : '<span class="badge badge-success">Submited</i></span>';
+            var status = (row.responce_status == 0) ? '<span class="badge badge-danger">Not Submit</i></span>' : '<span class="badge badge-success">Submited</i></span>';
             var newRow = `<tr> 
 								<td>${index + 1}</td>
 								<td>${row.candidate_register_id}</td>
 								<td>${row.candidate_name}</td> 
                 <td class='pointer'>${row.email}</td>
-								<td>${row.contact_number}</td>
+								<td>${row.HandledHR}</td>
 								<td>${row.created_at}</td> 
 								<td>${status}</td>
 							</tr>`;

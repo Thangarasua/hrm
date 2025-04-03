@@ -709,32 +709,7 @@ require_once("./includes/sidebar.php");
 				</div>
 
 			</div>
-			<div class="card-body p-0">
-				<!-- <div class="sorting row p-1">
-					<div class="col-md-9">
-					</div>
-					<div class="col-md-2">
-						<div class="me-3">
-							<div class="form-group">
-								<input type="text" id="myInputTextField" class="form-control" placeholder="Search anything..." title="Search any thing in the table you want">
-							</div>
-						</div>
-					</div>
-					<div class="col-md-1">
-						<div class="dropdown me-3">
-							<select id="customLengthMenu" name="tableRecords_length" aria-controls="tableRecords" class="dropdown-toggle btn btn-white">
-								<option value="5">5</option>
-								<option value="10" selected>10</option>
-								<option value="15">15</option>
-								<option value="20">20</option>
-								<option value="50">50</option>
-								<option value="72">72</option>
-								<option value="100">100</option>
-								<option value="-1">All</option>
-							</select>
-						</div>
-					</div>
-				</div> -->
+			<div class="card-body p-0"> 
 				<div class="custom-datatable-filter table-responsive">
 					<table class="table datatable" id="modalTableRecords">
 						<thead class="thead-light">
@@ -743,7 +718,7 @@ require_once("./includes/sidebar.php");
 								<th>Candidate ID</th>
 								<th>Name</th>
 								<th>Email</th>
-								<th>Phone</th>
+								<th>Handled By</th>
 								<th>Sent at</th>
 								<th>Application</th>
 							</tr>
