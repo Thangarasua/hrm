@@ -223,11 +223,12 @@ function getEducationInfo($employeeId) {
             </div>';
 
             if (!empty($existingDocuments)) {
-                $output .= '<div class="mt-2"><strong>Documents (Click & Preview):</strong><ul>';
+                $output .= '<div class="mt-2"><strong>Documents:</strong><ul>';
                 $counter = 1;
                 foreach ($existingDocuments as $doc) {
                     $filePath = './uploads/employee_documents/education_documents/' . $doc;  
-                    $output .= '<li><a href="' . $filePath . '" target="_blank">' . $counter . '. ' . $doc . '</a></li>';
+                    $output .= '<li><a href="' . $filePath . '" target="_blank">' . $counter . '.<i class="fas fa-file-pdf" style="color:red; margin-right:8px;"></i></a></li>';
+
                     $counter++; 
                 }
                 $output .= '</ul></div>';
