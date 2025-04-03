@@ -52,25 +52,51 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
     if ($flag === "educationInfo") {
         $employeeId = $_POST['employeeID'];
-        $courseCategory = $_POST['courseCategory'];
-        $institutionName = $_POST['institutionName'];
-        $course = $_POST['course'];
-        $educationStartDate = $_POST['educationStartDate'];
-        $educationStartDate = date("Y-m-d", strtotime($educationStartDate)); 
-        $educationeEndDate = $_POST['educationeEndDate'];
-        $educationeEndDate = date("Y-m-d", strtotime($educationeEndDate)); 
+        $courseCategory = $_POST['category'];
+        $educationDocuments = $_FILES['education_documents'];
+    
+        if (!empty($educationDocuments['name'][0])) {
+            $uploadedFiles = [];
+            foreach ($educationDocuments['name'] as $key => $docName) {
+                $fileTmpName = $educationDocuments['tmp_name'][$key];
+                $fileType = $educationDocuments['type'][$key];
+ 
+                if ($fileType !== 'application/pdf') {
+                    echo json_encode(array('status' => 'failure', 'message' => 'Only PDF files are allowed.'));
+                    exit;
+                }
+                $randomDigits = rand(100, 999);
+                $fileExtension = pathinfo($docName, PATHINFO_EXTENSION);
+                $newFileName = $courseCategory .'_'. $employeeId . '_'. $randomDigits . '.' . $fileExtension;
+                $filePath = '../uploads/employee_documents/education_documents/' . $newFileName;
+    
+                if (move_uploaded_file($fileTmpName, $filePath)) {
+                    $uploadedFiles[] = $newFileName;
+                } else {
+                    echo json_encode(array('status' => 'failure', 'message' => 'Error uploading document.'));
+                    exit;
+                }
+            }
+    
+            $uploadedFilesJson = json_encode($uploadedFiles);
+    
+            $CheckQuery = "SELECT * FROM `education_info` WHERE `employee_id` = '$employeeId' AND `category` = '$courseCategory'";
+            $result = mysqli_query($conn, $CheckQuery);
+    
+            if (mysqli_num_rows($result) > 0) {
+                $educationInfoQuery = "UPDATE `education_info` SET `documents` = '$uploadedFilesJson' WHERE `employee_id` = '$employeeId' AND `category` = '$courseCategory'";
+            } else {
+                $educationInfoQuery = "INSERT INTO `education_info` (employee_id, category, documents) 
+                                        VALUES ('$employeeId', '$courseCategory', '$uploadedFilesJson')";
+            }
 
-        $CheckQuery = " SELECT * FROM `education_info` WHERE `employee_id` = '$employeeId' AND `category` = '$courseCategory'";
-        $result = mysqli_query($conn, $CheckQuery);
-        if (mysqli_num_rows($result) > 0) {
-            $educationInfoQuery = "UPDATE `education_info` SET `institution_name` = '$institutionName', `course` = ' $course', `start_date` = '$educationStartDate', `end_date` = '$educationeEndDate' WHERE `employee_id` = '$employeeId' AND `category` = '$courseCategory'";
+            if (mysqli_query($conn, $educationInfoQuery)) {
+                echo json_encode(array('status' => 'success', 'message' => 'Education Information Updated Successfully.'));
+            } else {
+                echo json_encode(array('status' => 'failure', 'message' => 'Error updating education data.'));
+            }
         } else {
-            $educationInfoQuery = "INSERT INTO education_info (employee_id, category, institution_name, course, start_date, end_date) VALUES ('$employeeId', '$courseCategory', '$institutionName', '$course', '$educationStartDate', '$educationeEndDate')";
-        }
-        if (mysqli_query($conn, $educationInfoQuery)) {
-            echo json_encode(array('status' => 'success', 'message' => 'Education Information Updated Successfully.'));
-        } else {
-            echo json_encode(array('status' => 'failure', 'message' => 'Error adding education data.'));
+            echo json_encode(array('status' => 'failure', 'message' => 'No documents uploaded.'));
         }
     }
 
