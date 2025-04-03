@@ -207,7 +207,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
                 $row['created_at'] = date("d M Y", strtotime($row['created_at'])); 
-                $row['HandledHR'] = $row['emp_name']??$row['temp_emp_name']; 
+                $row['HandledHR'] = $row['emp_name']??$row['temp_emp_name'];  
+                $row['batch'] = is_null($row['emp_name']) ? '<i title="temporary employee" class="ti ti-discount-check-filled text-warning pointer"></i>' : '<i title="permanent employee" class="ti ti-discount-check-filled text-success pointer"></i>';
+
                 $response[] = $row;
             }
         } else {
