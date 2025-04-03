@@ -17,10 +17,10 @@ $(document).ready(function () {
       contentType: false,
       cache: false,
       processData: false,
-      beforeSend: function(){
+      beforeSend: function () {
         $("#updateButton")
-        .html("Loading <i class='fa-solid fa-spinner'></i>")
-        .prop("disabled", true);
+          .html("Loading <i class='fa-solid fa-spinner'></i>")
+          .prop("disabled", true);
       },
       success: function (response) {
         if (response.status == "success") {
@@ -28,8 +28,8 @@ $(document).ready(function () {
           $("#success_modal_content").html("Request add Successfully");
           $("#create")[0].reset();
           $("#updateButton")
-              .html("Upload <i class='fa-solid fa-cloud-arrow-up'></i>")
-              .prop("disabled", false);
+            .html("Upload <i class='fa-solid fa-cloud-arrow-up'></i>")
+            .prop("disabled", false);
           $("#add_post").modal("hide");
           loadData("", "", "", "", "getAll");
         } else {
@@ -38,9 +38,9 @@ $(document).ready(function () {
       },
     });
   });
-  
-  var departmentId = $("#loginedDepartmentId").val(); 
-  
+
+  var departmentId = $("#loginedDepartmentId").val();
+
   var fromDate = "";
   var toDate = "";
   var dateRange = "";
@@ -70,11 +70,11 @@ $(document).ready(function () {
         tableBody.empty();
         // Check if data is not empty
         if (data.length > 0) {
-          $.each(data, function (index, row) { 
-            if(departmentId == 5){ 
+          $.each(data, function (index, row) {
+            if (departmentId == 5) {
               var send = `<a href="#" data-id="${row.id}" class="send" title="Send application form by HR only"> <i class="fa-solid fa-paper-plane"></i></a>`;
-            }else{
-             var send = ``;
+            } else {
+              var send = ``;
             }
 
             var newRow = `<tr>
@@ -85,23 +85,22 @@ $(document).ready(function () {
                               <div class="d-flex align-items-center file-name-icon">
                                 <div class="ms-2">
                                   <h6 class="fw-medium">${row.job_position}</h6>
-                                  <a href="candidates?id=${row.encoded_id}"><span class="d-block mt-1">${row.candidate_count} Applicants</span></a>
+                                  <a href="candidates?id=${row.encoded_id}"><span class="d-block mt-1">${row.apllications} Applicants</span></a>
                                 </div>
                               </div>
                             </td>
                             <td>${row.job_level}</td>
-                            <td>${row.priority}</td>
-                            <td>${row.created_at}</td>
-                            <td>${row.hr_id}</td>
+                            <td title="click to view all no.of application send" data-id="${row.ticket_request_id}" class="listOfSendings"><span class="badge badge-success d-inline-flex align-items-center pointer">${row.application_sends} candidate <i class="fa-solid fa-users"></i></span></td>
+                            <td>${row.created_at}</td> 
                             <td>
                               <div class="action-icon d-inline-flex">
                                 <a href="#" data-id="${row.id}" class="view">
                                   <i class="fa-solid fa-eye" title="View all details"></i>
                                 </a>
-                                <a href="#" data-id="${row.id}" data-formfilling="${row.candidate_count}" class="edit" title="Edit the existing details">
+                                <a href="#" data-id="${row.id}" data-formfilling="${row.apllications}" class="edit" title="Edit the existing details">
                                   <i class="fa-solid fa-pen-to-square" title="edit details"></i>
                                 </a>
-                                <a href="#" data-id="${row.id}" data-formfilling="${row.candidate_count}" class="delete" title="Confirm Before Delete">
+                                <a href="#" data-id="${row.id}" data-formfilling="${row.apllications}" class="delete" title="Confirm Before Delete">
                                   <i class="fa-solid fa-trash-can"></i>
                                 </a>
                                 ${send}
@@ -117,39 +116,39 @@ $(document).ready(function () {
     });
   }
 
-$(document).on("change", "#jobPosition, #salaryType", function(e){
-  e.preventDefault();
-  var id = $('#jobPosition').val();
-  var type = $('#salaryType').val();
-  $.ajax({
-    type: "POST",
-    url: "queries/salary-structure.php",
-    data: {
-      id: id,
-      type: type,
-      flag: "salaryRange",
-    },
-    cache: false,
-    success: function (res) {
-      if (res.status == "success") {
-        $("#salaryRange").val(res.data);
-      } else { 
-        $("#jobPosition").val(''); 
-        $("#salaryRange").val(''); 
-        Swal.fire({
-          icon: "info",
-          title: res.message, 
-          showCancelButton: true,
-          confirmButtonText: "Set Salary Range👈", 
-        }).then((result) => { 
-          if (result.isConfirmed) {
-            window.open("salary-structure", "_blank");
-          }  
-        });
-      }
-    },
-  });
-})
+  $(document).on("change", "#jobPosition, #salaryType", function (e) {
+    e.preventDefault();
+    var id = $('#jobPosition').val();
+    var type = $('#salaryType').val();
+    $.ajax({
+      type: "POST",
+      url: "queries/salary-structure.php",
+      data: {
+        id: id,
+        type: type,
+        flag: "salaryRange",
+      },
+      cache: false,
+      success: function (res) {
+        if (res.status == "success") {
+          $("#salaryRange").val(res.data);
+        } else {
+          $("#jobPosition").val('');
+          $("#salaryRange").val('');
+          Swal.fire({
+            icon: "info",
+            title: res.message,
+            showCancelButton: true,
+            confirmButtonText: "Set Salary Range👈",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.open("salary-structure", "_blank");
+            }
+          });
+        }
+      },
+    });
+  })
 
   $(document).on("click", ".edit", function (e) {
     e.preventDefault();
@@ -189,6 +188,66 @@ $(document).on("change", "#jobPosition, #salaryType", function(e){
         } else {
           Swal.fire(res.data.message);
         }
+      },
+    });
+  });
+
+  $(document).on("click", ".listOfSendings", function (e) {
+    e.preventDefault();
+    var id = $(this).data("id");
+    $("#applicationsModal").modal("show");
+    $.ajax({
+      type: "POST",
+      url: "queries/recruitment.php",
+      data: {
+        id: id,
+        flag: "getCandidates",
+      },
+      cache: false,
+      success: function (data) {
+        var tableBody = $("#modalTableRecords tbody");
+
+        if ($.fn.DataTable.isDataTable("#modalTableRecords")) {
+          $("#modalTableRecords").DataTable().destroy();
+        }
+
+        tableBody.empty();
+        // Check if data is not empty
+        if (data.length > 0) {
+          $.each(data, function (index, row) {
+            var status = (row.responce_status == 0) ? '<span class="badge badge-danger">Not Submited</i></span>' : '<span class="badge badge-success">Submited</i></span>';
+            var newRow = `<tr> 
+								<td>${index + 1}</td>
+								<td>${row.candidate_register_id}</td>
+								<td>${row.candidate_name}</td> 
+                <td class='pointer'>${row.email}</td>
+								<td>${row.contact_number}</td>
+								<td>${row.created_at}</td> 
+								<td>${status}</td>
+							</tr>`;
+            tableBody.append(newRow);
+          });
+        }
+        /*-----data table common comments includes-----*/
+        // new DataTable('#modalTableRecords'); 
+        modalTable = $("#modalTableRecords").DataTable({
+          pageLength: 10,
+          lengthChange: false,
+          language: {
+            search: "",
+          }
+        })
+        //customise the dataTable search modalTable column value
+        modalTable = $("#modalTableRecords").DataTable();
+        $("#modalSearch").keyup(function () {
+          modalTable.search($(this).val()).draw();
+        });
+        //customise the dataTable no of records show
+        $("#modalLengthMenu").on("change", function () {
+          var length = $(this).val();
+          modalTable.page.len(length).draw();
+        });
+
       },
     });
   });
