@@ -150,6 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $dob = date('Y-m-d', strtotime($dob));
         $permanentAddress = $_POST['permanentAddress'];
         $presentAddress = $_POST['presentAddress'];
+        $addressProof = $_FILES['addressProof'];
 
         $passportNo = $_POST['passportNo'];
         $passportExpiryDate = $_POST['passportExpiryDate'];
@@ -167,12 +168,39 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $secondaryRelationship = $_POST['secondaryRelationship'];
         $secondaryContactPhone = $_POST['secondaryContactPhone'];
 
+        $addressProofFileName = '';
+
+        if (!empty($addressProof['name'])) {
+            $docName = $addressProof['name'];
+            $fileTmpName = $addressProof['tmp_name'];
+            $fileType = $addressProof['type'];
+                    if ($fileType !== 'application/pdf') {
+                echo json_encode(array('status' => 'failure', 'message' => 'Only PDF files are allowed.'.$docName));
+                exit;
+            }
+        
+            $randomDigits = rand(100, 999);
+            $fileExtension = pathinfo($docName, PATHINFO_EXTENSION);
+            $newFileName = $employeeId . '_'. $randomDigits . '.' . $fileExtension;
+            $filePath = '../uploads/employee_documents/address_documents/' . $newFileName;
+
+            if (move_uploaded_file($fileTmpName, $filePath)) {
+                $addressProofFileName = $newFileName;
+            } else {
+                echo json_encode(array('status' => 'failure', 'message' => 'Error uploading document.'));
+                exit;
+            }
+        }
+        
+
         $CheckQuery = "SELECT * FROM personal_info WHERE employee_id = '$employeeId'";
         $result = mysqli_query($conn, $CheckQuery);
         if (mysqli_num_rows($result) > 0) {
-            $query = "UPDATE `personal_info` SET phone = '$personalPhone', email = '$personalEmail', `dob` = '$dob', `gender` = '$gender', `permanent_address` = '$permanentAddress', `present_address` = '$presentAddress', `nationality` = '$nationality', `marital_status` = '$maritalStatus', `religion` = '$religion', `passpor_no` = '$passportNo', `passport_expiry_date` = '$passportExpiryDate', `employment_spouse` = '$employmentSpouse', `children` = '$children', `primary_contact` = '$primaryContacts', `primary_relationship` = '$primaryRelationship', `primary_phone` = '$primaryContactPhone', `secondary_contact` = '$secondaryContact', `secondary_relationship` = '$secondaryRelationship', `secondary_phone` = '$secondaryContactPhone' WHERE `employee_id` = '$employeeId';";
+            $row = mysqli_fetch_assoc($result);
+            $addressProofFileName = empty($addressProofFileName) ? $row['address_proof'] : $addressProofFileName;
+            $query = "UPDATE `personal_info` SET phone = '$personalPhone', email = '$personalEmail', `dob` = '$dob', `gender` = '$gender', `permanent_address` = '$permanentAddress', `present_address` = '$presentAddress', `nationality` = '$nationality', `marital_status` = '$maritalStatus', `religion` = '$religion', `passpor_no` = '$passportNo', `passport_expiry_date` = '$passportExpiryDate', `employment_spouse` = '$employmentSpouse', `children` = '$children', `primary_contact` = '$primaryContacts', `primary_relationship` = '$primaryRelationship', `primary_phone` = '$primaryContactPhone', `secondary_contact` = '$secondaryContact', `secondary_relationship` = '$secondaryRelationship', `secondary_phone` = '$secondaryContactPhone', `address_proof` = '$addressProofFileName' WHERE `employee_id` = '$employeeId';";
         } else {
-            $query = "INSERT INTO `personal_info` (`employee_id`,`phone`,`email`, `dob`, `gender`, `permanent_address`, `present_address`, `nationality`, `marital_status`, `religion`, `passpor_no`, `passport_expiry_date`, `employment_spouse`, `children`, `primary_contact`, `primary_relationship`, `primary_phone`, `secondary_contact`, `secondary_relationship`, `secondary_phone`) VALUES ('$employeeId', '$personalPhone', '$personalEmail', '$dob', '$gender', '$permanentAddress', '$presentAddress', '$nationality', '$maritalStatus', '$religion', '$passportNo', '$passportExpiryDate', '$employmentSpouse', '$children', '$primaryContacts', '$primaryRelationship ', '$primaryContactPhone', '$secondaryContact', '$secondaryRelationship', '$secondaryContactPhone')";
+            $query = "INSERT INTO `personal_info` (`employee_id`,`phone`,`email`, `dob`, `gender`, `permanent_address`, `present_address`, `nationality`, `marital_status`, `religion`, `passpor_no`, `passport_expiry_date`, `employment_spouse`, `children`, `primary_contact`, `primary_relationship`, `primary_phone`, `secondary_contact`, `secondary_relationship`, `secondary_phone`, `address_proof`) VALUES ('$employeeId', '$personalPhone', '$personalEmail', '$dob', '$gender', '$permanentAddress', '$presentAddress', '$nationality', '$maritalStatus', '$religion', '$passportNo', '$passportExpiryDate', '$employmentSpouse', '$children', '$primaryContacts', '$primaryRelationship ', '$primaryContactPhone', '$secondaryContact', '$secondaryRelationship', '$secondaryContactPhone', '$addressProofFileName')";
         }
         if (mysqli_query($conn, $query)) {
             echo json_encode(array('status' => 'success', 'message' => 'Personal Information Updated Successfully.'));

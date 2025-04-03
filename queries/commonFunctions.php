@@ -270,6 +270,8 @@ function getPersonalInfo($employeeId) {
             'secondaryContact' => $row['secondary_contact'],
             'secondaryRelationship' => $row['secondary_relationship'],
             'secondaryContactPhone' => $row['secondary_phone'],
+            'addressPoof' => $row['address_proof'],
+            'addressPoofFile' => './uploads/employee_documents/address_documents/'.$row['address_proof'],
         ];
     } else {
         return null;

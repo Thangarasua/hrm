@@ -171,6 +171,15 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								</span>
 								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['permanentAddress'] : ''; ?></p>
 							</div>
+							<div class="d-flex align-items-center justify-content-between">
+								<span class="d-inline-flex align-items-center">
+									<i class="ti ti-map-pin-check me-2"></i>
+									Address Proof
+								</span>
+								<p class="text-dark text-end">
+								<a href="<?php echo !empty($personalInfo['addressPoof']) ? $personalInfo['addressPoofFile'] : ''; ?>"   class="text-info d-inline-flex align-items-center" target="_blank"><?php echo !empty($personalInfo['addressPoof']) ? 'Click' : 'No File'; ?></a>
+								</p>
+							</div>
 						</div>
 						<div class="p-3 border-bottom">
 							<div class="d-flex align-items-center justify-content-between mb-2">
@@ -789,7 +798,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 					<i class="ti ti-x"></i>
 				</button>
 			</div>
-			<form id="addPersonalInfo" action="#">
+			<form id="addPersonalInfo" action="#" enctype="multipart/form-data">
 				<div class="contact-grids-tab">
 					<ul class="nav nav-underline" id="myTab" role="tablist">
 						<li class="nav-item" role="presentation">
@@ -856,8 +865,8 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								<!-- Document Upload Field -->
 								<div class="col-md-12">
 									<div class="mb-3">
-										<label class="form-label">Upload Address Proof <span class="text-danger"> *</span></label>
-										<input type="file" name="addressProof" class="form-control" id="addressProof" accept=".pdf" required>
+										<label class="form-label">Upload Address Proof <span class="text-danger"> (Only support PDF)*</span></label>
+										<input type="file" name="addressProof" class="form-control" id="addressProof" accept=".pdf" value="<?php echo $personalInfo ? $personalInfo['addressPoof'] : ''; ?>">
 									</div>
 								</div>
 							</div>
@@ -903,8 +912,8 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 										<label class="form-label">Marital Status <span class="text-danger"> *</span></label>
 										<select class="select" name="maritalStatus" id="maritalStatus">
 											<option value="" <?php echo empty($personalInfo['maritalStatus']) ? 'selected' : ''; ?>>Select</option>
-											<option value="Yes" <?php echo isset($personalInfo['maritalStatus']) && $personalInfo['maritalStatus'] == 'Yes' ? 'selected' : ''; ?>>Yes</option>
-											<option value="No" <?php echo isset($personalInfo['maritalStatus']) && $personalInfo['maritalStatus'] == 'No' ? 'selected' : ''; ?>>No</option>
+											<option value="Yes" <?php echo isset($personalInfo['maritalStatus']) && $personalInfo['maritalStatus'] == 'Yes' ? 'selected' : ''; ?>>Married</option>
+											<option value="No" <?php echo isset($personalInfo['maritalStatus']) && $personalInfo['maritalStatus'] == 'No' ? 'selected' : ''; ?>>Single</option>
 										</select>
 									</div>
 								</div>
@@ -1117,7 +1126,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
                     <i class="ti ti-x"></i>
                 </button>
             </div>
-            <form action="#" id="AddEducationInfo">
+            <form action="#" id="AddEducationInfo" enctype="multipart/form-data">
                 <div class="modal-body pb-0">
                     <div class="row">
                         <div class="col-md-12">
