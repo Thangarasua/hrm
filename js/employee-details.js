@@ -273,23 +273,33 @@ $(document).ready(function () {
 
     document.querySelectorAll('.edit-education-btn').forEach(button => {
         button.addEventListener('click', ({ currentTarget }) => {
-            const { category, institution, course, startdate, enddate } = currentTarget.dataset;
+            const category = currentTarget.dataset.category;
+            document.getElementById('category').value = category;
+            
+            const uploadFieldsContainer = document.getElementById('uploadFieldsContainer');
+            uploadFieldsContainer.innerHTML = '';
     
-            Object.entries({
-                courseCategory: category,
-                institutionName: institution,
-                course,
-                educationStartDate: startdate,
-                educationeEndDate: enddate
-            }).forEach(([id, value]) => document.getElementById(id).value = value);
-
-            if (category === 'SSLC' || category === 'HSC') {
-                document.getElementById('course').readOnly = true;
-            } else {
-                document.getElementById('course').readOnly = false;
-            }
+            addUploadField(category);
         });
     });
+    
+    document.getElementById('addMoreUploadFields').addEventListener('click', function() {
+        const category = document.getElementById('category').value;
+        addUploadField(category);
+    });
+    
+    function addUploadField(category) {
+        const uploadFieldsContainer = document.getElementById('uploadFieldsContainer');
+    
+        const newFieldHTML = `
+            <div class="mb-3">
+                <label for="uploadDocument_${category}">Upload Document for ${category}:</label>
+                <input type="file" name="education_documents[]" class="form-control" id="uploadDocument_${category}" accept=".pdf" />
+            </div>
+        `;
+    
+        uploadFieldsContainer.insertAdjacentHTML('beforeend', newFieldHTML);
+    }    
 
     $("#addFamilyinformation").on("submit", function (e) {
         e.preventDefault();

@@ -192,51 +192,53 @@ function getEducationInfo($employeeId) {
         }
     }
 
-    $query = "SELECT * FROM `education_info` WHERE `employee_id` = '$employeeId'";
-    $result = mysqli_query($conn, $query);
-
-    if ($result && mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $category = htmlspecialchars($row['category']);
-            $existingData[$category] = $row;
-        }
-    }
     $output = '';
     foreach ($categories as $category) {
-        $institutionName = isset($existingData[$category]) ? htmlspecialchars($existingData[$category]['institution_name']) : 'NA';
-        if ($category == 'SSLC' || $category == 'HSC') {
-            $course = isset($existingData[$category]) ? htmlspecialchars($existingData[$category]['course']) : $category;
-        } else {
-            $course = isset($existingData[$category]) ? htmlspecialchars($existingData[$category]['course']) : 'NA';
+        $existingDocuments = [];
+        $docQuery = "SELECT `documents` FROM `education_info` WHERE `employee_id` = '$employeeId' AND `category` = '$category'";
+        $docResult = mysqli_query($conn, $docQuery);
+
+        if ($docResult && mysqli_num_rows($docResult) > 0) {
+            while ($docRow = mysqli_fetch_assoc($docResult)) {
+                $documents = json_decode($docRow['documents'], true);  
+                if (is_array($documents)) {
+                    $existingDocuments = array_merge($existingDocuments, $documents); 
+                }
+            }
         }
-        $startDate = isset($existingData[$category]) ? htmlspecialchars($existingData[$category]['start_date']) : '';
-        $endDate = isset($existingData[$category]) ? htmlspecialchars($existingData[$category]['end_date']) : '';
 
         $output .= '
         <div class="mb-3">
             <div class="d-flex align-items-center justify-content-between">
                 <div>
                     <h6 class="d-flex align-items-center mt-1"><b>' . $category . '</b></h6>
-                    <a href="#" class="btn btn-icon btn-sm edit-education-btn" data-bs-toggle="modal" data-bs-target="#edit_education" 
-                       data-category="' . $category . '" 
-                       data-institution="' . $institutionName . '" 
-                       data-course="' . $course . '" 
-                       data-startdate="' . $startDate . '" 
-                       data-enddate="' . $endDate . '">
-                        <i class="ti ti-edit"></i>
-                    </a>
-                    <span class="d-inline-flex align-items-center fw-normal">' . $institutionName . '</span>
                 </div>
                 <div>
-                    <span class="d-inline-flex align-items-center fw-normal">' . $course . '</span>
-                    <p class="text-dark">' . formatDateRange($startDate, $endDate) . '</p>
+                    <!-- Edit button for each category -->
+                    <a href="#" class="btn btn-sm btn-icon btn-primary edit-education-btn" data-bs-toggle="modal" data-bs-target="#edit_education" 
+                       data-category="' . $category . '">
+                        <i class="ti ti-edit"></i> Edit
+                    </a>
                 </div>
-            </div>
-        </div>';
+            </div>';
+
+            if (!empty($existingDocuments)) {
+                $output .= '<div class="mt-2"><strong>Documents:</strong><ul>';
+                $counter = 1;
+                foreach ($existingDocuments as $doc) {
+                    $filePath = './uploads/employee_documents/education_documents/' . $doc;  
+                    $output .= '<li><a href="' . $filePath . '" target="_blank">' . $counter . '.<i class="fas fa-file-pdf" style="color:red; margin-right:8px;"></i></a></li>';
+
+                    $counter++; 
+                }
+                $output .= '</ul></div>';
+            } else {
+                $output .= '<div class="mt-2"><i>No documents uploaded for this category.</i></div>';
+            }
+        $output .= '</div>';
     }
     return $output;
 }
-
 
 function formatDateRange($startDate, $endDate) {
     $formattedStartDate = date("M Y", strtotime($startDate));
@@ -269,6 +271,8 @@ function getPersonalInfo($employeeId) {
             'secondaryContact' => $row['secondary_contact'],
             'secondaryRelationship' => $row['secondary_relationship'],
             'secondaryContactPhone' => $row['secondary_phone'],
+            'addressPoof' => $row['address_proof'],
+            'addressPoofFile' => './uploads/employee_documents/address_documents/'.$row['address_proof'],
         ];
     } else {
         return null;

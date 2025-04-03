@@ -171,6 +171,15 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								</span>
 								<p class="text-dark text-end"><?php echo $personalInfo ? $personalInfo['permanentAddress'] : ''; ?></p>
 							</div>
+							<div class="d-flex align-items-center justify-content-between">
+								<span class="d-inline-flex align-items-center">
+									<i class="ti ti-map-pin-check me-2"></i>
+									Address Proof
+								</span>
+								<p class="text-dark text-end">
+								<a href="<?php echo !empty($personalInfo['addressPoof']) ? $personalInfo['addressPoofFile'] : ''; ?>"   class="text-info d-inline-flex align-items-center" target="_blank"><?php echo !empty($personalInfo['addressPoof']) ? 'Click' : 'No File'; ?></a>
+								</p>
+							</div>
 						</div>
 						<div class="p-3 border-bottom">
 							<div class="d-flex align-items-center justify-content-between mb-2">
@@ -355,7 +364,6 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 														<div class="d-flex align-items-center justify-content-between flex-fill">
 															<h5>Education Details</h5>
 															<div class="d-flex">
-																<a href="#" class="btn btn-icon btn-sm" data-bs-toggle="modal" data-bs-target="#edit_education"><i class="fas fa-plus"></i></a>
 																<a href="#" class="d-flex align-items-center collapsed collapse-arrow" data-bs-toggle="collapse" data-bs-target="#primaryBorderFour" aria-expanded="false" aria-controls="primaryBorderFour">
 																	<i class="ti ti-chevron-down fs-18"></i>
 																</a>
@@ -367,6 +375,12 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 													<div class="accordion-body">
 														<div>
 															<?php echo $educationInfo ? $educationInfo : ''; ?>
+														</div>
+														<div>
+															<button type="submit" class="btn btn-primary" data-bs-target="#edit_education" data-bs-toggle="modal" >
+																
+																Add More
+															</button>
 														</div>
 													</div>
 												</div>
@@ -784,7 +798,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 					<i class="ti ti-x"></i>
 				</button>
 			</div>
-			<form id="addPersonalInfo" action="#">
+			<form id="addPersonalInfo" action="#" enctype="multipart/form-data">
 				<div class="contact-grids-tab">
 					<ul class="nav nav-underline" id="myTab" role="tablist">
 						<li class="nav-item" role="presentation">
@@ -836,16 +850,23 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 										</div>
 									</div>
 								</div>
-								<div class="col-md-12">
+								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Permanent Address <span class="text-danger"> *</span></label>
 										<textarea class="form-control" rows="2" name="permanentAddress" id="permanentAddress"><?php echo $personalInfo ? $personalInfo['permanentAddress'] : ''; ?></textarea>
 									</div>
 								</div>
-								<div class="col-md-12">
+								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Present Address <span class="text-danger"> *</span></label>
 										<textarea class="form-control" rows="2" name="presentAddress" id="presentAddress"><?php echo $personalInfo ? $personalInfo['presentAddress'] : ''; ?></textarea>
+									</div>
+								</div>
+								<!-- Document Upload Field -->
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Upload Address Proof <span class="text-danger"> (Only support PDF)*</span></label>
+										<input type="file" name="addressProof" class="form-control" id="addressProof" accept=".pdf" value="<?php echo $personalInfo ? $personalInfo['addressPoof'] : ''; ?>">
 									</div>
 								</div>
 							</div>
@@ -891,8 +912,8 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 										<label class="form-label">Marital Status <span class="text-danger"> *</span></label>
 										<select class="select" name="maritalStatus" id="maritalStatus">
 											<option value="" <?php echo empty($personalInfo['maritalStatus']) ? 'selected' : ''; ?>>Select</option>
-											<option value="Yes" <?php echo isset($personalInfo['maritalStatus']) && $personalInfo['maritalStatus'] == 'Yes' ? 'selected' : ''; ?>>Yes</option>
-											<option value="No" <?php echo isset($personalInfo['maritalStatus']) && $personalInfo['maritalStatus'] == 'No' ? 'selected' : ''; ?>>No</option>
+											<option value="Yes" <?php echo isset($personalInfo['maritalStatus']) && $personalInfo['maritalStatus'] == 'Yes' ? 'selected' : ''; ?>>Married</option>
+											<option value="No" <?php echo isset($personalInfo['maritalStatus']) && $personalInfo['maritalStatus'] == 'No' ? 'selected' : ''; ?>>Single</option>
 										</select>
 									</div>
 								</div>
@@ -1095,67 +1116,42 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 <!-- /Add Family -->
 
 <!-- Add Education -->
+<!-- Modal for editing and uploading documents -->
 <div class="modal fade" id="edit_education">
-	<div class="modal-dialog modal-dialog-centered modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">Education Information</h4>
-				<button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
-					<i class="ti ti-x"></i>
-				</button>
-			</div>
-			<form action="#" id="AddEducationInfo">
-				<div class="modal-body pb-0">
-					<div class="row">
-						<div class="col-md-4">
-							<div class="mb-3">
-								<label class="form-label">Category <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control" name="courseCategory" id="courseCategory">
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="mb-3">
-								<label class="form-label">Institution / School Name <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control" name="institutionName" id="institutionName">
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="mb-3">
-								<label class="form-label">Course <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control" name="course" id="course">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="mb-3">
-								<label class="form-label">Start Date <span class="text-danger"> *</span></label>
-								<div class="input-icon-end position-relative">
-									<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="educationStartDate" id="educationStartDate">
-									<span class="input-icon-addon">
-										<i class="ti ti-calendar text-gray-7"></i>
-									</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="mb-3">
-								<label class="form-label">End Date <span class="text-danger"> *</span></label>
-								<div class="input-icon-end position-relative">
-									<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="educationeEndDate" id="educationeEndDate">
-									<span class="input-icon-addon">
-										<i class="ti ti-calendar text-gray-7"></i>
-									</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-white border me-2" data-bs-dismiss="modal">Cancel</button>
-					<button type="submit" class="btn btn-primary">Save</button>
-				</div>
-			</form>
-		</div>
-	</div>
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Education Information</h4>
+                <button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="ti ti-x"></i>
+                </button>
+            </div>
+            <form action="#" id="AddEducationInfo" enctype="multipart/form-data">
+                <div class="modal-body pb-0">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label class="form-label">Category</label>
+                                <input type="text" class="form-control" id="category" name="category">
+                            </div>
+                        </div>
+
+                        <!-- Upload Document Fields -->
+                        <div id="uploadFieldsContainer"></div>
+
+                        <!-- Add More Upload Button -->
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-link" id="addMoreUploadFields">Add More Uploads</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white border me-2" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 <!-- /Add Education -->
 
