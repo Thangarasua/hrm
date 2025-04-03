@@ -202,7 +202,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     } elseif ($flag === "getCandidates") {
 
         $id = $_POST['id'];
-        $query = "SELECT `candidate_register_id`, `candidate_name`, c.`email`, e.`official_name` AS emp_name,te.`official_name` AS temp_emp_name, `created_at`,`responce_status` FROM `candidates` AS c LEFT JOIN `employees` AS e ON c.handled_hr = e.employee_id LEFT JOIN `temporary_employees` AS te ON c.handled_hr = te.employee_id WHERE `ticket_request_id` = '$id'";
+        $query = "SELECT `candidate_register_id`, `candidate_name`, c.`email`, e.`official_name` AS emp_name,te.`official_name` AS temp_emp_name, `created_at`,`responce_status` FROM `candidates` AS c LEFT JOIN `employees` AS e ON c.handled_hr = e.employee_id LEFT JOIN `temporary_employees` AS te ON c.handled_hr = te.employee_id WHERE `ticket_request_id` = '$id' ORDER BY `candidate_id` DESC";   
         $result = mysqli_query($conn, $query);
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
