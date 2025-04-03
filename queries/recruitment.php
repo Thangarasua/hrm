@@ -159,7 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
         try { 
 
-            $query = "INSERT INTO `candidates` (`candidate_register_id`,`candidate_name`, `email`, `contact_number`, `created_by`, `ticket_request_id`, `handled_hr`, `created_at`) VALUES ('$candidateRequestId','$candidateName', '$candidateMail', '$candidateContact', '$raisedBy', '$employeeId', '$ticketRequestId', '$currentDatetime')";
+            $query = "INSERT INTO `candidates` (`candidate_register_id`,`candidate_name`, `email`, `contact_number`, `created_by`, `ticket_request_id`, `handled_hr`, `created_at`) VALUES ('$candidateRequestId','$candidateName', '$candidateMail', '$candidateContact', '$raisedBy', '$ticketRequestId', '$employeeId', '$currentDatetime')"; 
             mysqli_query($conn, $query);
 
             $getHRdetails = "SELECT `official_name` AS hrName,`phone` AS HRphone FROM `$employeeTable` WHERE `employee_id` = '$employeeId'";
