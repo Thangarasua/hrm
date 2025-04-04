@@ -48,7 +48,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 						<span class="avatar avatar-xl avatar-rounded border border-2 border-white m-auto d-flex mb-2">
 							<img src="<?php echo $personalInfo && !empty($personalInfo['profilePhoto']) ? './uploads/employee_documents/profile_photo/' . $personalInfo['profilePhoto'] : './assets/img/users/sample-user.jpg'; ?>" class="w-auto h-auto" alt="Img" id="avatar-img">
 						</span>
-						<input type="file" id="profilePhoto"  name="profilePhoto" style="display: none;" accept="image/*" >
+						<input type="file" id="profilePhoto" name="profilePhoto" style="display: none;" accept="image/*">
 						<div class="text-center px-3 pb-3 border-bottom">
 							<div class="mb-3">
 								<h5 class="d-flex align-items-center justify-content-center mb-1"><?php echo $employeeInfo ? $employeeInfo['OfficialName'] : ''; ?><i class="ti ti-discount-check-filled text-success ms-1"></i></h5>
@@ -178,7 +178,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									Address Proof
 								</span>
 								<p class="text-dark text-end">
-								<a href="<?php echo !empty($personalInfo['addressPoof']) ? $personalInfo['addressPoofFile'] : ''; ?>"   class="text-info d-inline-flex align-items-center" target="_blank"><?php echo !empty($personalInfo['addressPoof']) ? 'Click' : 'No File'; ?></a>
+									<a href="<?php echo !empty($personalInfo['addressPoof']) ? $personalInfo['addressPoofFile'] : ''; ?>" class="text-info d-inline-flex align-items-center" target="_blank"><?php echo !empty($personalInfo['addressPoof']) ? 'Click' : 'No File'; ?></a>
 								</p>
 							</div>
 						</div>
@@ -378,8 +378,8 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 															<?php echo $educationInfo ? $educationInfo : ''; ?>
 														</div>
 														<div>
-															<button type="submit" class="btn btn-primary" data-bs-target="#edit_education" data-bs-toggle="modal" >
-																
+															<button type="submit" class="btn btn-primary" data-bs-target="#edit_education" data-bs-toggle="modal">
+
 																Add More
 															</button>
 														</div>
@@ -739,6 +739,9 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 										<input type="text" class="form-control" name="confirmPassword" value="<?php echo $employeeInfo ? $employeeInfo['password'] : ''; ?>" required>
 									</div>
 								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary" id="nextButton">Next <i class="fa-solid fa-circle-chevron-right"></i></button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -748,16 +751,30 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 							<div class="row">
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
-										<label class="form-label">Work Location <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" id="locationTypeSearch" name="workLocation" oninput="capitalizeWords(this)" placeholder="eg : Chennai" autocomplete="off" value="<?php echo $employeeInfo ? $employeeInfo['workLocation'] : ''; ?>" />
-										<ul class="list-group addFields" id="locationTypeResult"></ul>
+										<label class="form-label">Work Mode <span class="text-danger"> *</span></label>
+										<select class="form-control select" name="workMode" id="workMode">
+											<option value="">Select</option>
+											<option value="On-Site" <?php echo ($employeeInfo['workMode'] == 'On-Site') ? 'selected' : ''; ?>>On-Site</option>
+											<option value="Remote" <?php echo ($employeeInfo['workMode'] == 'Remote') ? 'selected' : ''; ?>>Remote</option>
+											<option value="Hybrid" <?php echo ($employeeInfo['workMode'] == 'Hybrid') ? 'selected' : ''; ?>>Hybrid</option>
+										</select>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
-										<label class="form-label">Employee Type <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" id="jobTypeSearch" name="employeeType" oninput="capitalizeWords(this)" placeholder="eg : Full Time" autocomplete="off" value="<?php echo $employeeInfo ? $employeeInfo['employeeType'] : ''; ?>" />
-										<ul class="list-group addFields" id="jobTypeResult"></ul>
+										<label class="form-label">Work Type <span class="text-danger"> *</span></label>
+										<select class="form-control select" name="workType" id="workType">
+											<option value="">Select</option>
+											<option value="Full-Time" <?php echo ($employeeInfo['workType'] == 'Full-Time') ? 'selected' : ''; ?>>Full-Time</option>
+											<option value="Part-Time" <?php echo ($employeeInfo['workType'] == 'Part-Time') ? 'selected' : ''; ?>>Part-Time</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3 position-relative">
+										<label class="form-label">Work Location <span class="text-danger"> *</span></label>
+										<input type="text" class="form-control" id="locationTypeSearch" name="workLocation" oninput="capitalizeWords(this)" value="<?php echo $employeeInfo ? $employeeInfo['workLocation'] : ''; ?>" autocomplete="off" />
+										<ul class="list-group addFields" id="locationTypeResult"></ul>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -765,7 +782,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 										<label class="form-label">Active Status <span class="text-danger"> *</span></label>
 										<select name="employeeStatus" id="employeeStatus" class="select">
 											<option value="1" <?php echo ($employeeInfo['status'] === '1') ? 'selected' : ''; ?>>Active</option>
-											<option value="2" <?php echo ($employeeInfo['status'] === '2') ? 'selected' : ''; ?>>Deactive</option>
+											<option value="0" <?php echo ($employeeInfo['status'] === '0') ? 'selected' : ''; ?>>Deactive</option>
 										</select>
 									</div>
 								</div>
@@ -778,6 +795,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 							</div>
 						</div>
 						<div class="modal-footer">
+							<button type="button" class="btn btn-outline-light border me-2" id="previousButton"><i class="fa-solid fa-circle-chevron-left"></i> Back</button>
 							<button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">Cancel</button>
 							<button type="submit" class="btn btn-primary editEmployeeSaveBtn">Save <i class='fa-solid fa-cloud-arrow-up'></i></button>
 						</div>
@@ -1119,40 +1137,40 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 <!-- Add Education -->
 <!-- Modal for editing and uploading documents -->
 <div class="modal fade" id="edit_education">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Edit Education Information</h4>
-                <button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    <i class="ti ti-x"></i>
-                </button>
-            </div>
-            <form action="#" id="AddEducationInfo" enctype="multipart/form-data">
-                <div class="modal-body pb-0">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="mb-3">
-                                <label class="form-label">Category</label>
-                                <input type="text" class="form-control" id="category" name="category">
-                            </div>
-                        </div>
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Edit Education Information</h4>
+				<button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
+					<i class="ti ti-x"></i>
+				</button>
+			</div>
+			<form action="#" id="AddEducationInfo" enctype="multipart/form-data">
+				<div class="modal-body pb-0">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="mb-3">
+								<label class="form-label">Category</label>
+								<input type="text" class="form-control" id="category" name="category">
+							</div>
+						</div>
 
-                        <!-- Upload Document Fields -->
-                        <div id="uploadFieldsContainer"></div>
+						<!-- Upload Document Fields -->
+						<div id="uploadFieldsContainer"></div>
 
-                        <!-- Add More Upload Button -->
-                        <div class="col-md-12">
-                            <button type="button" class="btn btn-link" id="addMoreUploadFields">Add More Uploads</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-white border me-2" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
+						<!-- Add More Upload Button -->
+						<div class="col-md-12">
+							<button type="button" class="btn btn-link" id="addMoreUploadFields">Add More Uploads</button>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-white border me-2" data-bs-dismiss="modal">Cancel</button>
+					<button type="submit" class="btn btn-primary">Save Changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
 <!-- /Add Education -->
 
@@ -1461,4 +1479,4 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 <!-- /Delete Modal -->
 
 <?php require_once("./includes/footer.php"); ?>
-<script src="./js/employee-details.js"></script> 
+<script src="./js/employee-details.js"></script>

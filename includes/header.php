@@ -147,6 +147,9 @@ $personalInfo = getPersonalInfo($employeeId);
 								<i class="ti ti-settings-cog"></i>
 							</a>
 						</div>
+						<div class="name">
+							<p><?php echo $employeeName;?></p>
+						</div>
 
 						<!-- Horizontal Single -->
 						<div class="sidebar sidebar-horizontal" id="horizontal-single">

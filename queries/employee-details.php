@@ -122,8 +122,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $role = $_POST['role'];
         $manager = isset($_POST['manager']) ? $_POST['manager'] : '';
         $supervisor = isset($_POST['supervisors']) ? $_POST['supervisors'] : '';
+        $workMode = $_POST['workMode']; 
+        $workType = $_POST['workType']; 
         $workLocation = $_POST['workLocation'];
-        $employeeType = $_POST['employeeType']; 
         $employeeStatus = $_POST['employeeStatus'];
         if($employeeStatus == 2){
             $relievingDate = date("Y-m-d", strtotime($_POST['relievingDate'])); 
@@ -132,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             $status = ",status = '1'";
         }
 
-        $updateQuery = "UPDATE employees SET official_name = '$officialName', personal_name = '$personalName', email = '$email', phone = '$phone', doj = '$doj', `password` = '$encryptedPassword', designation_id = $designation, department_id = $department, role_id = $role, manager_id = '$manager', supervisor_id = '$supervisor', work_location = '$workLocation', employee_type = '$employeeType' $status WHERE employee_id = '$employeeId'"; 
+        $updateQuery = "UPDATE employees SET official_name = '$officialName', personal_name = '$personalName', email = '$email', phone = '$phone', doj = '$doj', `password` = '$encryptedPassword', designation_id = $designation, department_id = $department, role_id = $role, manager_id = '$manager', supervisor_id = '$supervisor', `work_mode`='$workMode',`work_type`='$workType', work_location = '$workLocation' $status WHERE employee_id = '$employeeId'"; 
         if (mysqli_query($conn, $updateQuery)) {
             echo json_encode(array('status' => 'success', 'message' => 'Employee data updated successfully.'));
         } else {

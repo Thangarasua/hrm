@@ -13,10 +13,14 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['flag'])) {
         $active = $_GET['active'];
         if ($active == 1) {
             $ststus = "`e`.`status` = 1";
+        } elseif ($active == 0) {
+            $ststus = "`e`.`status` = 0";
         } elseif ($active == 2) {
-            $ststus = "`e`.`status` = 2";
-        } elseif ($active == 3) {
             $ststus = "1";
+        } elseif ($active == 3) {
+            $date1 = date('Y-m-d', strtotime('-3 months'));
+            $date2 = date('Y-m-d');
+            $ststus = "1 AND doj BETWEEN '$date1' AND '$date2'";
         }
 
         $query = "SELECT * FROM `employees` AS e INNER JOIN roles AS r ON r.role_id = e.role_id INNER JOIN departments AS dp ON dp.department_id=e.department_id INNER JOIN designations AS dg ON dg.designation_id=e.designation_id WHERE $ststus  ORDER BY `e`.`employee_id` ASC";
@@ -36,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['flag'])) {
         $query = "SELECT 
         COUNT(id) AS total,
         SUM(CASE WHEN employees.status = 1 THEN 1 ELSE 0 END) AS active,
-        SUM(CASE WHEN employees.status = 2 THEN 1 ELSE 0 END) AS inactive,
+        SUM(CASE WHEN employees.status = 0 THEN 1 ELSE 0 END) AS inactive,
         SUM(CASE WHEN employees.status = 1 AND doj BETWEEN '$date1' AND '$date2' THEN 1 ELSE 0 END) AS newly_active FROM `employees`";
 
         $result = mysqli_query($conn, $query);
@@ -47,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['flag'])) {
 
     if ($flag === "getRole") {
         $departmentId = $_GET['departmentId'];
-        $query = "SELECT * FROM roles WHERE department_id = $departmentId AND status = 1 ORDER BY role_name ASC";
+        $query = "SELECT * FROM roles WHERE department_id = $departmentId AND `status` = 1 ORDER BY `role_name` ASC";
         $result = mysqli_query($conn, $query);
         $options = "<option value=''>Select</option>";
         while ($row = $result->fetch_assoc()) {
@@ -97,9 +101,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $manager = isset($_POST['manager']) ? $_POST['manager'] : '';
         $supervisor = isset($_POST['supervisors']) ? $_POST['supervisors'] : '';
         $workLocation = $_POST['workLocation'];
-        $employeeType = $_POST['employeeType'];
+        $workMode = $_POST['workMode'];
+        $workType = $_POST['workType'];
 
-        $query = "INSERT INTO employees (employee_id, official_name, personal_name, email, phone, doj, `password`, designation_id, department_id, role_id, manager_id, supervisor_id, work_location, employee_type, `status`) VALUES ('$employeeId', '$officialName', '$personalName', '$email', '$phone', '$doj', '$encryptedPassword', $designation, $department, $role, '$manager', '$supervisor', '$workLocation', '$employeeType', 1)";
+        $query = "INSERT INTO employees (employee_id, official_name, personal_name, email, phone, doj, `password`, designation_id, department_id, role_id, manager_id, supervisor_id, `work_mode`, `work_type`, `work_location`, `status`, `confirmation_status`) VALUES ('$employeeId', '$officialName', '$personalName', '$email', '$phone', '$doj', '$encryptedPassword', $designation, $department, $role, '$manager', '$supervisor', '$workMode', '$workType', '$workLocation', 1, 1)";
 
         $data = array('flag' => 'welcomeMail', 'employeeId' => $employeeId, 'OfficialName' => $officialName, 'email' => $email, 'password' => $password);
 
