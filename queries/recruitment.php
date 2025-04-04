@@ -8,13 +8,6 @@ $designationId = $_SESSION["hrm_designationId"];
 $departmentId = $_SESSION["hrm_departmentId"];
 $roleId = $_SESSION["hrm_roleId"];
 
-$employeeType = substr($employeeId, 0, 4);
-if ($employeeType === 'TEMP') {
-    $employeeTable = "temporary_employees";
-} else {
-    $employeeTable = "employees";
-}
-
 $month = date('m');
 $year = date('y');
 $date = date('d');
@@ -162,7 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             $query = "INSERT INTO `candidates` (`candidate_register_id`,`candidate_name`, `email`, `contact_number`, `created_by`, `ticket_request_id`, `handled_hr`, `created_at`) VALUES ('$candidateRequestId','$candidateName', '$candidateMail', '$candidateContact', '$raisedBy', '$ticketRequestId', '$employeeId', '$currentDatetime')"; 
             mysqli_query($conn, $query);
 
-            $getHRdetails = "SELECT `official_name` AS hrName,`phone` AS HRphone FROM `$employeeTable` WHERE `employee_id` = '$employeeId'";
+            $getHRdetails = "SELECT `official_name` AS hrName,`phone` AS HRphone FROM `employees` WHERE `employee_id` = '$employeeId'";
             $result = mysqli_query($conn, $getHRdetails);
             $row = mysqli_fetch_assoc($result);
             $row['id'] = $jobSno;
@@ -202,14 +195,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     } elseif ($flag === "getCandidates") {
 
         $id = $_POST['id'];
-        $query = "SELECT `candidate_register_id`, `candidate_name`, c.`email`, e.`official_name` AS emp_name,te.`official_name` AS temp_emp_name, `created_at`,`responce_status` FROM `candidates` AS c LEFT JOIN `employees` AS e ON c.handled_hr = e.employee_id LEFT JOIN `temporary_employees` AS te ON c.handled_hr = te.employee_id WHERE `ticket_request_id` = '$id' ORDER BY `candidate_id` DESC";   
+        $query = "SELECT c.`candidate_register_id`, c.`candidate_name`, c.`email`, c.`created_at`,c.`responce_status`,e.`official_name`,e.confirmation_status FROM `candidates` AS c LEFT JOIN `employees` AS e ON c.handled_hr = e.employee_id WHERE `ticket_request_id` = '$id' ORDER BY `candidate_id` DESC";   
         $result = mysqli_query($conn, $query);
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
-                $row['created_at'] = date("d M Y", strtotime($row['created_at'])); 
-                $row['HandledHR'] = $row['emp_name']??$row['temp_emp_name'];  
-                $row['batch'] = is_null($row['emp_name']) ? '<i title="temporary employee" class="ti ti-discount-check-filled text-warning pointer"></i>' : '<i title="permanent employee" class="ti ti-discount-check-filled text-success pointer"></i>';
-
+                $row['created_at'] = date("d M Y", strtotime($row['created_at']));  
+                $row['batch'] = ($row['confirmation_status'] == 1) ? '<i title="Propagation employee" class="ti ti-discount-check-filled text-warning pointer"></i>' : '<i title="Confirmed employee" class="ti ti-discount-check-filled text-success pointer"></i>';
                 $response[] = $row;
             }
         } else {
