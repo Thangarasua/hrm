@@ -46,8 +46,9 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 				<div class="card card-bg-1">
 					<div class="card-body p-0">
 						<span class="avatar avatar-xl avatar-rounded border border-2 border-white m-auto d-flex mb-2">
-							<img src="./assets/img/users/sample-user.jpg" class="w-auto h-auto" alt="Img">
+							<img src="<?php echo $personalInfo && !empty($personalInfo['profilePhoto']) ? './uploads/employee_documents/profile_photo/' . $personalInfo['profilePhoto'] : './assets/img/users/sample-user.jpg'; ?>" class="w-auto h-auto" alt="Img" id="avatar-img">
 						</span>
+						<input type="file" id="profilePhoto"  name="profilePhoto" style="display: none;" accept="image/*" >
 						<div class="text-center px-3 pb-3 border-bottom">
 							<div class="mb-3">
 								<h5 class="d-flex align-items-center justify-content-center mb-1"><?php echo $employeeInfo ? $employeeInfo['OfficialName'] : ''; ?><i class="ti ti-discount-check-filled text-success ms-1"></i></h5>

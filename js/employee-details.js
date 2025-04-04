@@ -344,5 +344,42 @@ $(document).ready(function () {
     $('#maritalStatus').change(function() {
         toggleFields();
     });
-      
+
+    $('#avatar-img').click(function() {
+        $('#profilePhoto').click();
+    });
+
+    $('#profilePhoto').change(function() {
+        uploadPhoneImage(); 
+    });
+    function uploadPhoneImage() {
+        const fileInput = document.getElementById('profilePhoto');
+        const file = fileInput.files[0];
+        if (file) {
+            let formData = new FormData();
+            formData.append("profilePhoto", file);
+            formData.append("flag", "profilePhoto");
+            formData.append("employeeID", employeeID);
+            $.ajax({
+                type: "POST",
+                url: "queries/employee-details.php",
+                data: formData,
+                dataType: "json",
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (response) {
+                    if (response.status == "success") {
+                        $("#edit_personal").modal("hide");
+                        toastr.success("Profile Photo Updated Successfully");
+                        setTimeout(function() {
+                            location.reload();
+                          }, 2000);
+                    } else {
+                        toastr.error(response.message, "Error");
+                    }
+                }
+            })
+        }
+    }
 });

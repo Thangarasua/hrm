@@ -272,7 +272,9 @@ function getPersonalInfo($employeeId) {
             'secondaryRelationship' => $row['secondary_relationship'],
             'secondaryContactPhone' => $row['secondary_phone'],
             'addressPoof' => $row['address_proof'],
+            'profilePhoto' => $row['profile_photo'],
             'addressPoofFile' => './uploads/employee_documents/address_documents/'.$row['address_proof'],
+            'profilePhotoFile' => './uploads/employee_documents/profile_photo/'.$row['profile_photo'],
         ];
     } else {
         return null;
