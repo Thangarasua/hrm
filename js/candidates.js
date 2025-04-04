@@ -188,6 +188,7 @@ $(document).ready(function () {
             `input[name='interview_status'][value='${res.data.interview_status}']`
           ).prop("checked", true);
           $("#existingStatus").val(res.data.interview_status);
+          $("#appliedDate").html(res.data.created_at);
           $("#schedule_time1").val(res.data.available_time1);
           $("#schedule_time2").val(
             res.data.available_time2 || "---Not Define---"
@@ -220,23 +221,22 @@ $(document).ready(function () {
     existingStatus = val2;
 
     $("#updateBtn").hide();
-    $(".scheduled-date").hide();
+    $(".applied-date").hide(); 
     $(".shortlisted").hide();
 
     if (selectedValue == 1) { 
-      $(".scheduled-date").show();
-      $("#updateButton").hide();
-    } 
+      $(".applied-date").show();
+    }
     
     if (selectedValue == 2) {
-      $(".shortlisted").show();
-      if (existingStatus > 1) {
+      if (existingStatus >= 2) {
         $(".sheduleDate").hide();
         $(".sheduledDate").show();
         $("#updateBtn").hide();
       } else {
+        $(".shortlisted").show();
         $(".sheduleDate").show();
-        $(".sheduledDate").hide();
+        $(".sheduledDate").hide(); 
         $("#updateBtn").show();
       }
     }  

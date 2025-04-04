@@ -200,10 +200,9 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<br>
+				</div> 
 				<div class="modal-body">
-					<div class="col-8 m-auto scheduled-date" style="display: none;">
+					<div class="col-8 m-auto scheduled-date content-border" style="display: none;">
 						<h5 class="text-center">Shortlisted, Interview Date: <span id="interviewDate" class="text-primary"></span></h5>
 					</div>
 					<div class="rating-content">
@@ -284,7 +283,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-6 m-auto feedback-content" style="display: none;">
+						<div class="col-6 m-auto feedback-content content-border" style="display: none;">
 
 							<h6>Interviewed By: <span id="rating_by" class="text-primary"></span></h6>
 
@@ -292,7 +291,7 @@
 						</div>
 					</div>
 					<div class="col-8 m-auto not-attend" style="display: none;">
-						<h5 class="text-center">This candidate not attend the interview.</h5>
+						<p class="text-center content-border"> <b>Message</b>: This candidate not attend the interview.</p>
 					</div>
 					<div class="offer-content">
 						<div class="row send-offer" style="display: none;">
@@ -316,7 +315,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-8 m-auto offerDate" style="display: none;">
+						<div class="col-8 m-auto offerDate content-border" style="display: none;">
 							<h5 class="text-center">Offer sent. Joing Date: <span id="joingDate" class="text-primary"></span></h5>
 						</div>
 					</div>

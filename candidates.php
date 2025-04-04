@@ -194,12 +194,11 @@ if (isset($_GET['id'])) {
 							</div>
 						</div>
 					</div>
-				</div>
-				<br>
-				<div class="modal-body pb-0">
-					<div class="col-8 m-auto scheduled-date" style="display: none;">
-						<h5 class="text-center">Shortlisted, Interview Date: <span id="interviewDate" class="text-primary"></span></h5>
-					</div>
+				</div> 
+				<div class="modal-body">
+					<div class="col-8 m-auto applied-date" style="display: none;">
+						<h5 class="text-center">Applied Date: <span id="appliedDate" class="text-primary"></span></h5>
+					</div> 
 					<div class="shortlisted" style="display: none;">
 						<div class="row">
 							<div class="mb-3">
