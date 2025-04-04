@@ -195,11 +195,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     } elseif ($flag === "getCandidates") {
 
         $id = $_POST['id'];
-        $query = "SELECT c.`candidate_register_id`, c.`candidate_name`, c.`email`, c.`created_at`,c.`responce_status`,e.`official_name`,e.confirmation_status FROM `candidates` AS c LEFT JOIN `employees` AS e ON c.handled_hr = e.employee_id WHERE `ticket_request_id` = '$id' ORDER BY `candidate_id` DESC";   
+        $query = "SELECT c.`candidate_register_id`, c.`candidate_name`, c.`email`, c.`created_at`,c.`responce_status`,e.`official_name`,e.employee_id,e.confirmation_status FROM `candidates` AS c LEFT JOIN `employees` AS e ON c.handled_hr = e.employee_id WHERE `ticket_request_id` = '$id' ORDER BY `candidate_id` DESC";   
         $result = mysqli_query($conn, $query);
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
                 $row['created_at'] = date("d M Y", strtotime($row['created_at']));  
+                $row['idNumber']  = substr($row['employee_id'], -3);
                 $row['batch'] = ($row['confirmation_status'] == 1) ? '<i title="Propagation employee" class="ti ti-discount-check-filled text-warning pointer"></i>' : '<i title="Confirmed employee" class="ti ti-discount-check-filled text-success pointer"></i>';
                 $response[] = $row;
             }
