@@ -97,9 +97,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $manager = isset($_POST['manager']) ? $_POST['manager'] : '';
         $supervisor = isset($_POST['supervisors']) ? $_POST['supervisors'] : '';
         $workLocation = $_POST['workLocation'];
-        $employeeType = $_POST['employeeType'];
+        $workMode = $_POST['workMode'];
+        $workType = $_POST['workType'];
 
-        $query = "INSERT INTO employees (employee_id, official_name, personal_name, email, phone, doj, `password`, designation_id, department_id, role_id, manager_id, supervisor_id, work_location, employee_type, `status`) VALUES ('$employeeId', '$officialName', '$personalName', '$email', '$phone', '$doj', '$encryptedPassword', $designation, $department, $role, '$manager', '$supervisor', '$workLocation', '$employeeType', 1)";
+        $query = "INSERT INTO employees (employee_id, official_name, personal_name, email, phone, doj, `password`, designation_id, department_id, role_id, manager_id, supervisor_id, `work_mode`, `work_type`, `work_location`, `status`, `confirmation_status`) VALUES ('$employeeId', '$officialName', '$personalName', '$email', '$phone', '$doj', '$encryptedPassword', $designation, $department, $role, '$manager', '$supervisor', '$workMode', '$workType', '$workLocation', 1, 1)";
 
         $data = array('flag' => 'welcomeMail', 'employeeId' => $employeeId, 'OfficialName' => $officialName, 'email' => $email, 'password' => $password);
 

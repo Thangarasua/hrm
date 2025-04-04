@@ -264,28 +264,6 @@
 					<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="basic-tab" tabindex="0">
 						<div class="modal-body pb-0 ">
 							<div class="row">
-								<!-- <div class="col-md-12">
-									<div class="d-flex align-items-center flex-wrap row-gap-3 bg-light w-100 rounded p-3 mb-4">
-										<div class="d-flex align-items-center justify-content-center avatar avatar-xxl rounded-circle border border-dashed me-2 flex-shrink-0 text-dark frames">
-											<i class="ti ti-photo text-gray-2 fs-16"></i>
-										</div>
-										<div class="profile-upload">
-											<div class="mb-2">
-												<h6 class="mb-1">Upload Profile Image</h6>
-												<p class="fs-12">Image should be below 4 mb</p>
-											</div>
-											<div class="profile-uploader d-flex align-items-center">
-												<div class="drag-upload-btn btn btn-sm btn-primary me-2">
-													Upload
-													<input type="file" class="form-control image-sign" multiple="" name="profile">
-												</div>
-												<a href="javascript:void(0);" class="btn btn-light btn-sm">Cancel</a>
-											</div>
-
-										</div>
-									</div>
-								</div> -->
-
 								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">Role (or) Hierarchy <span class="text-danger"> *</span></label>
@@ -314,7 +292,7 @@
 								</div>
 								<div class="col-md-6" id="manager-container">
 									<div class="mb-3">
-										<label class="form-label">Manager <span class="text-danger"> *</span></label>
+										<label class="form-label">Manager <small>(if available)</small></label>
 										<select class="select" name="manager" id="manager">
 											<option value="">Select</option>
 											<?php echo getManagerUsers(user: 3); ?>
@@ -349,19 +327,19 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">Email <span class="text-danger"> *</span></label>
 										<input type="email" class="form-control" onblur="return isEmail(this)" placeholder="@actetechnologies.com" name="email" required autocomplete="off">
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">Phone Number <span class="text-danger"> *</span></label>
 										<input type="text" class="form-control" onkeypress="return phoneNumber(event)" onkeypress="return tenDigits(event)" onpaste="numberPasteValidate(event, this)" name="phone" placeholder="Enter 10 digits only" required autocomplete="off">
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">Joining Date <span class="text-danger"> *</span></label>
 										<div class="input-icon-end position-relative">
@@ -372,19 +350,19 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">Employee ID <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="employeeID" id="employeeID" placeholder="Auto Generate ID">
+										<input type="text" class="form-control" name="employeeID" id="employeeID" placeholder="Auto Generate ID" readonly>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">Password <span class="text-danger"> *</span></label>
 										<input type="text" class="form-control" name="password" required autocomplete="off">
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="mb-3">
 										<label class="form-label">Confirm Password <span class="text-danger"> *</span></label>
 										<input type="text" class="form-control" name="confirmPassword" required autocomplete="off">
@@ -400,6 +378,28 @@
 					<div class="tab-pane fade" id="office-info" role="tabpanel" aria-labelledby="office-tab" tabindex="0">
 						<div class="modal-body pb-0">
 							<div class="row">
+								
+								<div class="col-md-6">
+									<div class="mb-3 position-relative">
+										<label class="form-label">Work Mode <span class="text-danger"> *</span></label>
+										 <select class="form-control select" name="workMode" id="workMode">
+											<option value="">Select</option>
+											<option value="On-Site">On-Site</option>
+											<option value="Remote">Remote</option>
+											<option value="Hybrid">Hybrid</option>
+										 </select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3 position-relative">
+										<label class="form-label">Work Type <span class="text-danger"> *</span></label>
+										<select class="form-control select" name="workType" id="workType">
+											<option value="">Select</option>
+											<option value="Full-Time">Full-Time</option>
+											<option value="Part-Time">Part-Time</option> 
+										 </select>
+									</div>
+								</div>
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Work Location <span class="text-danger"> *</span></label>
@@ -407,17 +407,10 @@
 										<ul class="list-group addFields" id="locationTypeResult"></ul>
 									</div>
 								</div>
-								<div class="col-md-6">
-									<div class="mb-3 position-relative">
-										<label class="form-label">Employee Type <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" id="jobTypeSearch" name="employeeType" oninput="capitalizeWords(this)" placeholder="eg : Full Time" autocomplete="off" />
-										<ul class="list-group addFields" id="jobTypeResult"></ul>
-									</div>
-								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-primary border me-2" id="previousButton"><i class="fa-solid fa-circle-chevron-left"></i> Back</button>
+							<button type="button" class="btn btn-secondary border me-2" id="previousButton"><i class="fa-solid fa-circle-chevron-left"></i> Back</button>
 							<button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">Cancel</button>
 							<button type="submit" class="btn btn-primary addEmployeeSaveBtn">Save <i class='fa-solid fa-cloud-arrow-up'></i></button>
 						</div>
