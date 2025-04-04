@@ -1,7 +1,7 @@
 <?php include "../includes/config.php";
 
 header('Content-Type: application/json');
- 
+
 $employeeId = $_SESSION['hrm_employeeId'];
 $employeeName = $_SESSION['hrm_employeeName'];
 $designationId = $_SESSION["hrm_designationId"];
@@ -14,7 +14,7 @@ if ($employeeType === 'TEMP') {
 } else {
     $employeeTable = "employees";
 }
- 
+
 $month = date('m');
 $year = date('y');
 $date = date('d');
@@ -71,12 +71,11 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             $departmentWise = "e.department_id = $departmentId";
         }
 
-        $sql = "SELECT r.*,e.official_name,d.designation_title, SUM(CASE WHEN c.responce_status = 1 THEN 1 ELSE 0 END) AS candidate_count FROM recruitment AS r LEFT JOIN candidates AS c ON r.ticket_request_id = c.ticket_request_id INNER JOIN employees AS e ON e.employee_id = r.raised_by INNER JOIN designations AS d ON e.designation_id=d.designation_id WHERE $departmentWise GROUP BY r.ticket_request_id,e.official_name, d.designation_title ORDER BY r.id DESC"; 
+        $sql = "SELECT r.*,e.official_name,d.designation_title, SUM(CASE WHEN c.responce_status = 1 THEN 1 ELSE 0 END) AS apllications,COUNT(c.candidate_id) AS application_sends FROM recruitment AS r LEFT JOIN candidates AS c ON r.ticket_request_id = c.ticket_request_id INNER JOIN employees AS e ON e.employee_id = r.raised_by INNER JOIN designations AS d ON e.designation_id=d.designation_id WHERE $departmentWise GROUP BY r.ticket_request_id,e.official_name, d.designation_title ORDER BY r.id DESC";
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
-                $row['hr_id'] = (isset($row['hr_id'])?$row['hr_id']:"HR Still Not work"); 
-                $row['encoded_id'] = base64_encode($row['ticket_request_id']); 
+            while ($row = mysqli_fetch_assoc($result)) { 
+                $row['encoded_id'] = base64_encode($row['ticket_request_id']);
                 $row['created_at'] = date("d M Y", strtotime($row['created_at']));
                 $response[] = $row;
             }
@@ -139,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $candidateContact = $_POST['candidateContact'];
         $raisedBy = $_POST['raisedBy'];
         $jobSno = $_POST['jobSno'];
-        
+
         $lastTicketId = "SELECT `candidate_register_id` FROM `candidates` ORDER BY `candidate_id` DESC";
         $result = mysqli_query($conn, $lastTicketId);
         $rowCount = mysqli_num_rows($result);
@@ -158,21 +157,19 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         // Enable MySQLi Exception Mode
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-        try {
-            $update = "UPDATE `recruitment` SET `hr_id`='$employeeId' WHERE `id`= $jobSno";
-            mysqli_query($conn, $update);
+        try { 
 
-            $query = "INSERT INTO `candidates` (`candidate_register_id`,`candidate_name`, `email`, `contact_number`, `created_by`, `ticket_request_id`, `created_at`) VALUES ('$candidateRequestId','$candidateName', '$candidateMail', '$candidateContact', '$raisedBy', '$ticketRequestId', '$currentDatetime')";
+            $query = "INSERT INTO `candidates` (`candidate_register_id`,`candidate_name`, `email`, `contact_number`, `created_by`, `ticket_request_id`, `handled_hr`, `created_at`) VALUES ('$candidateRequestId','$candidateName', '$candidateMail', '$candidateContact', '$raisedBy', '$ticketRequestId', '$employeeId', '$currentDatetime')"; 
             mysqli_query($conn, $query);
 
-            $getHRdetails = "SELECT `official_name` AS hrName,`phone` AS HRphone FROM `$employeeTable` WHERE `employee_id` = '$employeeId'"; 
+            $getHRdetails = "SELECT `official_name` AS hrName,`phone` AS HRphone FROM `$employeeTable` WHERE `employee_id` = '$employeeId'";
             $result = mysqli_query($conn, $getHRdetails);
             $row = mysqli_fetch_assoc($result);
             $row['id'] = $jobSno;
             $row['flag'] = 'recruitmentForm';
-            $row['candidateName'] = $candidateName; 
-            $row['email'] = $candidateMail; 
-            $row['jobTitle'] = $jobTitle; 
+            $row['candidateName'] = $candidateName;
+            $row['email'] = $candidateMail;
+            $row['jobTitle'] = $jobTitle;
 
             if ($result) {
                 echo json_encode(array(
@@ -201,6 +198,24 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         }
 
         // Exit to prevent further execution
+        exit;
+    } elseif ($flag === "getCandidates") {
+
+        $id = $_POST['id'];
+        $query = "SELECT `candidate_register_id`, `candidate_name`, c.`email`, e.`official_name` AS emp_name,te.`official_name` AS temp_emp_name, `created_at`,`responce_status` FROM `candidates` AS c LEFT JOIN `employees` AS e ON c.handled_hr = e.employee_id LEFT JOIN `temporary_employees` AS te ON c.handled_hr = te.employee_id WHERE `ticket_request_id` = '$id' ORDER BY `candidate_id` DESC";   
+        $result = mysqli_query($conn, $query);
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $row['created_at'] = date("d M Y", strtotime($row['created_at'])); 
+                $row['HandledHR'] = $row['emp_name']??$row['temp_emp_name'];  
+                $row['batch'] = is_null($row['emp_name']) ? '<i title="temporary employee" class="ti ti-discount-check-filled text-warning pointer"></i>' : '<i title="permanent employee" class="ti ti-discount-check-filled text-success pointer"></i>';
+
+                $response[] = $row;
+            }
+        } else {
+            $response = array();
+        }
+        echo json_encode($response);
         exit;
     }
 }

@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
         $result = mysqli_query($conn, $query);
         if ($result) {
-            $query = "SELECT c.*, r.job_position, e.official_name AS HRname, e.phone AS HRphone FROM `candidates`AS c INNER JOIN `recruitment`AS r ON `c`.`ticket_request_id`=`r`.`ticket_request_id`INNER JOIN `$employeeTable`AS `e` ON `r`.`hr_id`=`e`.`employee_id`WHERE c.`candidate_id`= '$rowId'";
+            $query = "SELECT c.*, r.job_position, e.official_name AS HRname, e.phone AS HRphone FROM `candidates`AS c INNER JOIN `recruitment`AS r ON `c`.`ticket_request_id`=`r`.`ticket_request_id`INNER JOIN `$employeeTable`AS `e` ON `c`.`handled_hr`=`e`.`employee_id`WHERE c.`candidate_id`= '$rowId'";
             $result = mysqli_query($conn, $query);
             $row = mysqli_fetch_assoc($result); 
             echo json_encode(array('status' => 'success', 'data' => $row));

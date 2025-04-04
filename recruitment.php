@@ -142,9 +142,8 @@ require_once("./includes/sidebar.php");
 								<th>Raised By</th>
 								<th>Job Title</th>
 								<th>Job Level</th>
-								<th>Notice period</th>
-								<th>Posted Date</th>
-								<th>Handled HR</th>
+								<th>Send To</th>
+								<th>Posted Date</th> 
 								<th>Action</th>
 							</tr>
 						</thead>
@@ -440,7 +439,7 @@ require_once("./includes/sidebar.php");
 					<i class="ti ti-x"></i>
 				</button>
 			</div>
-			<form id="update">
+			<form>
 				<div class="modal-body pb-0">
 					<div class="tab-content" id="">
 						<div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
@@ -680,6 +679,60 @@ require_once("./includes/sidebar.php");
 	</div>
 </div>
 <!-- /Edit Post -->
+<!-- List of application sendgs... -->
+<div class="modal fade" id="applicationsModal">
+	<div class="modal-dialog modal-dialog-centered modal-xl">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">List of applications sendings</h4>
+				<div class="sorting d-flex">
+
+					<div class="form-group">
+						<input type="text" id="modalSearch" class="form-control" placeholder="Search anything..." title="Search any thing in the table you want">
+					</div>
+					<div class="dropdown me-3">
+						<select id="modalLengthMenu" name="tableRecords_length" aria-controls="tableRecords" class="dropdown-toggle btn btn-white">
+							<option value="5">5</option>
+							<option value="10" selected>10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
+							<option value="50">50</option>
+							<option value="72">72</option>
+							<option value="100">100</option>
+							<option value="-1">All</option>
+						</select>
+					</div>
+
+					<button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
+						<i class="ti ti-x"></i>
+					</button>
+				</div>
+
+			</div>
+			<div class="card-body p-0"> 
+				<div class="custom-datatable-filter table-responsive">
+					<table class="table datatable" id="modalTableRecords">
+						<thead class="thead-light">
+							<tr>
+								<th>S.No</th>
+								<th>Candidate ID</th>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Handled By</th>
+								<th>Sent at</th>
+								<th>Application</th>
+							</tr>
+						</thead>
+						<tbody>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /List of application sendgs... -->
 
 
 <!-- Delete Modal -->
