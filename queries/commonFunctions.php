@@ -217,7 +217,7 @@ function getEducationInfo($employeeId) {
                     <!-- Edit button for each category -->
                     <a href="#" class="btn btn-sm btn-icon btn-primary edit-education-btn" data-bs-toggle="modal" data-bs-target="#edit_education" 
                        data-category="' . $category . '">
-                        <i class="ti ti-edit"></i> Edit
+                        <i class="ti ti-edit"></i>
                     </a>
                 </div>
             </div>';
@@ -272,7 +272,9 @@ function getPersonalInfo($employeeId) {
             'secondaryRelationship' => $row['secondary_relationship'],
             'secondaryContactPhone' => $row['secondary_phone'],
             'addressPoof' => $row['address_proof'],
+            'profilePhoto' => $row['profile_photo'],
             'addressPoofFile' => './uploads/employee_documents/address_documents/'.$row['address_proof'],
+            'profilePhotoFile' => './uploads/employee_documents/profile_photo/'.$row['profile_photo'],
         ];
     } else {
         return null;
