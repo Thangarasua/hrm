@@ -108,8 +108,7 @@
 								<span class="menu-arrow"></span>
 							</a>
 							<ul> 
-								<li><a href="employees" class="employees">Employee Lists</a></li>
-								<li><a href="temporary-employees" class="temporary-employees">Temporary Employees</a></li>
+								<li><a href="employees" class="employees">Employee Lists</a></li> 
 								<li><a href="departments" class="departments">Departments</a></li>
 								<li><a href="designations" class="designations">Designations</a></li>
 								<li><a href="roles" class="roles">Roles</a></li>

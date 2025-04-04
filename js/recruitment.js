@@ -221,7 +221,7 @@ $(document).ready(function () {
 								<td>${row.candidate_register_id}</td>
 								<td>${row.candidate_name}</td> 
                 <td class='pointer'>${row.email}</td>
-								<td>${row.official_name}${row.batch}</td>
+								<td title="${row.employee_id}" class="pointer">${row.official_name}${row.batch}(${row.idNumber})</td>
 								<td>${row.created_at}</td> 
 								<td>${status}</td>
 							</tr>`;
