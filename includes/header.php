@@ -12,6 +12,7 @@ $roleId = $_SESSION["hrm_roleId"];
 
 include("./queries/commonFunctions.php");
 $MyProfileInfo = getMyProfileInfo($employeeId);
+$personalInfo = getPersonalInfo($employeeId);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -1115,7 +1116,7 @@ $MyProfileInfo = getMyProfileInfo($employeeId);
 								<a href="javascript:void(0);" class="dropdown-toggle d-flex align-items-center"
 									data-bs-toggle="dropdown">
 									<span class="avatar avatar-sm online">
-										<img src="assets/img/profiles/sample-user.jpg" alt="Img" class="img-fluid rounded-circle">
+										<img src="<?php echo $personalInfo && !empty($personalInfo['profilePhoto']) ? './uploads/employee_documents/profile_photo/' . $personalInfo['profilePhoto'] : './assets/img/users/sample-user.jpg'; ?>" alt="Img" class="img-fluid rounded-circle">
 									</span>
 								</a>
 								<div class="dropdown-menu shadow-none">
