@@ -13,9 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['flag'])) {
         $active = $_GET['active'];
         if ($active == 1) {
             $ststus = "`e`.`status` = 1";
+        } elseif ($active == 0) {
+            $ststus = "`e`.`status` = 0";
         } elseif ($active == 2) {
-            $ststus = "`e`.`status` = 2";
-        } elseif ($active == 3) {
             $ststus = "1";
         }
 
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['flag'])) {
 
     if ($flag === "getRole") {
         $departmentId = $_GET['departmentId'];
-        $query = "SELECT * FROM roles WHERE department_id = $departmentId AND status = 1 ORDER BY role_name ASC";
+        $query = "SELECT * FROM roles WHERE department_id = $departmentId AND `status` = 1 ORDER BY `role_name` ASC";
         $result = mysqli_query($conn, $query);
         $options = "<option value=''>Select</option>";
         while ($row = $result->fetch_assoc()) {

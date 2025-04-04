@@ -188,8 +188,8 @@
 						<select class="form-control" id="employeeStatus">
 							<option value="">Select</option>
 							<option value="1" selected>Active</option>
-							<option value="2">Inactive</option>
-							<option value="3">All</option>
+							<option value="0">Inactive</option>
+							<option value="2">All</option>
 						</select>
 					</div>
 					<div class="dropdown">

@@ -98,20 +98,20 @@ $(document).ready(function () {
           (active = "1"),
           (flag = "getAll")
         );
+      } else if (val === "0") {
+        fetchEmployee(
+          (fromDate = ""),
+          (toDate = ""),
+          (dateRange = ""),
+          (active = "0"),
+          (flag = "getAll")
+        );
       } else if (val === "2") {
         fetchEmployee(
           (fromDate = ""),
           (toDate = ""),
           (dateRange = ""),
           (active = "2"),
-          (flag = "getAll")
-        );
-      } else if (val === "3") {
-        fetchEmployee(
-          (fromDate = ""),
-          (toDate = ""),
-          (dateRange = ""),
-          (active = "3"),
           (flag = "getAll")
         );
       } else {
