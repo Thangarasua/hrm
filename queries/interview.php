@@ -7,7 +7,7 @@ $employeeName = $_SESSION['hrm_employeeName'];
 $designationId = $_SESSION["hrm_designationId"];
 $departmentId = $_SESSION["hrm_departmentId"];
 $roleId = $_SESSION["hrm_roleId"];
-
+ 
 $month = date('m');
 $year = date('y');
 $date = date('d');
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             $departmentWise = "AND e.department_id = $departmentId";
         }
 
-        $sql = "SELECT c.*,r.job_position FROM `candidates` AS c INNER JOIN recruitment AS r ON c.ticket_request_id = r.ticket_request_id INNER JOIN $employeeTable AS e ON e.employee_id = r.raised_by WHERE c.`responce_status` = 1 AND `interview_status` IN (3,4,5,6,7,8,9) $departmentWise ORDER BY c.`candidate_id` DESC";
+        $sql = "SELECT c.*,r.job_position FROM `candidates` AS c INNER JOIN recruitment AS r ON c.ticket_request_id = r.ticket_request_id INNER JOIN employees AS e ON e.employee_id = r.raised_by WHERE c.`responce_status` = 1 AND `interview_status` IN (3,4,5,6,7,8,9) $departmentWise ORDER BY c.`candidate_id` DESC"; 
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     } elseif ($flag === "getDetails") {
 
         $id = $_POST['id'];
-        $query = "SELECT c.*,ip.*,e.official_name FROM `candidates` AS `c` LEFT JOIN `interview_process` AS `ip` ON `c`.`candidate_id`=`ip`.`candidate_id` LEFT JOIN `$employeeTable` AS `e` ON `e`.`employee_id`=`ip`.`rating_by`  WHERE `c`.`candidate_id` = '$id'";
+        $query = "SELECT c.*,ip.*,e.official_name FROM `candidates` AS `c` LEFT JOIN `interview_process` AS `ip` ON `c`.`candidate_id`=`ip`.`candidate_id` LEFT JOIN `employees` AS `e` ON `e`.`employee_id`=`ip`.`rating_by`  WHERE `c`.`candidate_id` = '$id'";
         $result = mysqli_query($conn, $query);
         if ($result) {
             $row = mysqli_fetch_assoc($result);
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $rowId = $_POST['rowId'];
         $interviewStatus = $_POST['interview_status'];
 
-        $query = "SELECT e.department_id,department_name,handled_hr FROM `candidates` AS c LEFT JOIN `$employeeTable`AS `e` ON `c`.`created_by`=`e`.`employee_id` INNER JOIN `departments`AS `d` ON `d`.`department_id`=`e`.`department_id` WHERE c.candidate_id = $rowId";
+        $query = "SELECT e.department_id,department_name,handled_hr FROM `candidates` AS c LEFT JOIN `employees`AS `e` ON `c`.`created_by`=`e`.`employee_id` INNER JOIN `departments`AS `d` ON `d`.`department_id`=`e`.`department_id` WHERE c.candidate_id = $rowId";
         $result = mysqli_query($conn, $query);
         $row = mysqli_fetch_assoc($result);
         $department_id = $row['department_id'];

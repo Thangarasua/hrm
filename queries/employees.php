@@ -17,6 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['flag'])) {
             $ststus = "`e`.`status` = 0";
         } elseif ($active == 2) {
             $ststus = "1";
+        } elseif ($active == 3) {
+            $date1 = date('Y-m-d', strtotime('-3 months'));
+            $date2 = date('Y-m-d');
+            $ststus = "1 AND doj BETWEEN '$date1' AND '$date2'";
         }
 
         $query = "SELECT * FROM `employees` AS e INNER JOIN roles AS r ON r.role_id = e.role_id INNER JOIN departments AS dp ON dp.department_id=e.department_id INNER JOIN designations AS dg ON dg.designation_id=e.designation_id WHERE $ststus  ORDER BY `e`.`employee_id` ASC";
@@ -36,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['flag'])) {
         $query = "SELECT 
         COUNT(id) AS total,
         SUM(CASE WHEN employees.status = 1 THEN 1 ELSE 0 END) AS active,
-        SUM(CASE WHEN employees.status = 2 THEN 1 ELSE 0 END) AS inactive,
+        SUM(CASE WHEN employees.status = 0 THEN 1 ELSE 0 END) AS inactive,
         SUM(CASE WHEN employees.status = 1 AND doj BETWEEN '$date1' AND '$date2' THEN 1 ELSE 0 END) AS newly_active FROM `employees`";
 
         $result = mysqli_query($conn, $query);

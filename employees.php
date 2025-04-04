@@ -187,9 +187,10 @@
 					<div class="dropdown me-3">
 						<select class="form-control" id="employeeStatus">
 							<option value="">Select</option>
+							<option value="2">All</option>
 							<option value="1" selected>Active</option>
 							<option value="0">Inactive</option>
-							<option value="2">All</option>
+							<option value="3">New</option>
 						</select>
 					</div>
 					<div class="dropdown">
@@ -378,7 +379,6 @@
 					<div class="tab-pane fade" id="office-info" role="tabpanel" aria-labelledby="office-tab" tabindex="0">
 						<div class="modal-body pb-0">
 							<div class="row">
-								
 								<div class="col-md-6">
 									<div class="mb-3 position-relative">
 										<label class="form-label">Work Mode <span class="text-danger"> *</span></label>
@@ -410,7 +410,7 @@
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary border me-2" id="previousButton"><i class="fa-solid fa-circle-chevron-left"></i> Back</button>
+							<button type="button" class="btn btn-outline-light border me-2" id="previousButton"><i class="fa-solid fa-circle-chevron-left"></i> Back</button>
 							<button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">Cancel</button>
 							<button type="submit" class="btn btn-primary addEmployeeSaveBtn">Save <i class='fa-solid fa-cloud-arrow-up'></i></button>
 						</div>

@@ -24,6 +24,13 @@ $(document).ready(function () {
         personalTab.show();
     });
 
+    $("#nextButton").click(function () {
+        $("#office-tab").tab("show"); // Open the "Official Information" tab
+    }); 
+    $("#previousButton").click(function () {
+        $("#basic-tab").tab("show"); // Open the "Official Information" tab
+    }); 
+
     $("#editEmployee").on("submit", function (e) {
         e.preventDefault();
         let formData = new FormData(this);
@@ -259,10 +266,10 @@ $(document).ready(function () {
     });
 
     $("#employeeStatus").change(function () {
-        let status = $(this).val(); 
+        let status = $(this).val();  
           if (status === "1") {
             $("#relieving-container").hide(); 
-          } else if (status === "2") {
+          } else if (status === "0") {
             $("#relieving-container").show(); 
             $("#relievingDate").attr("required", true); 
         } else {

@@ -89,35 +89,45 @@ $(document).ready(function () {
 
   $("#employeeStatus").change(function () {
     var val = $(this).val();
-    if (val) {
-      if (val === "1") {
-        fetchEmployee(
-          (fromDate = ""),
-          (toDate = ""),
-          (dateRange = ""),
-          (active = "1"),
-          (flag = "getAll")
-        );
-      } else if (val === "0") {
-        fetchEmployee(
-          (fromDate = ""),
-          (toDate = ""),
-          (dateRange = ""),
-          (active = "0"),
-          (flag = "getAll")
-        );
-      } else if (val === "2") {
-        fetchEmployee(
-          (fromDate = ""),
-          (toDate = ""),
-          (dateRange = ""),
-          (active = "2"),
-          (flag = "getAll")
-        );
-      } else {
-      }
-    } else {
-    }
+    let fromDate = "";
+    let toDate = "";
+    let dateRange = "";
+    let active = val;
+    let flag = "getAll";
+    fetchEmployee(fromDate, toDate, dateRange, active, flag);
+
+//     if (val) {
+//       if (val === "1") {
+// fetchEmployee((fromDate = ""),(toDate = ""),(dateRange = ""),(active = "1"),(flag = "getAll")
+// );
+//       } else if (val === "0") {
+//         fetchEmployee(
+//           (fromDate = ""),
+//           (toDate = ""),
+//           (dateRange = ""),
+//           (active = "0"),
+//           (flag = "getAll")
+//         );
+//       } else if (val === "2") {
+//         fetchEmployee(
+//           (fromDate = ""),
+//           (toDate = ""),
+//           (dateRange = ""),
+//           (active = "2"),
+//           (flag = "getAll")
+//         );
+//       } else if (val === "3") {
+//         fetchEmployee(
+//           (fromDate = ""),
+//           (toDate = ""),
+//           (dateRange = ""),
+//           (active = "3"),
+//           (flag = "getAll")
+//         );
+//       } else {
+//       }
+//     } else {
+//     }
   });
 
   $("#role").change(function () {
@@ -145,9 +155,7 @@ $(document).ready(function () {
       toastr["warning"]("First select Hierarchy");
       return 0;
     }
-    var departmentId = $("#department").val();
-    console.log(roleId);
-    console.log(departmentId);
+    var departmentId = $("#department").val(); 
     if (departmentId) {
       $.ajax({
         url: "queries/employees.php",
@@ -190,8 +198,7 @@ $(document).ready(function () {
 
 
   /** Function to Send Welcome Mail */
-  function wellcomeMail(data) {
-    console.log(data);
+  function wellcomeMail(data) { 
     $.ajax({
       type: "POST",
       url: "mails/employees-mail.php",
@@ -313,8 +320,7 @@ $(document).ready(function () {
         flag: "getCardValues",
       },
       success: function (res) {
-        if (res.status == "success") {
-          console.log(res.data.total);
+        if (res.status == "success") { 
           $("#totalEmployees").html(res.data.total);
           $("#activeEmployees").html(res.data.active);
           $("#inActiveEmployees").html(res.data.inactive);
