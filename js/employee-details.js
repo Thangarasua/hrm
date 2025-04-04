@@ -327,5 +327,22 @@ $(document).ready(function () {
             }
         })
     });
+
+    function toggleFields() {
+        var maritalStatus = $('#maritalStatus').val();
+        if (maritalStatus === 'Yes') {
+            $('#employmentSpouseContainer').show();
+            $('#childrenContainer').show();
+        } else {
+            $('#employmentSpouseContainer').hide();
+            $('#childrenContainer').hide();
+        }
+    }
+
+    toggleFields();
+
+    $('#maritalStatus').change(function() {
+        toggleFields();
+    });
       
 });

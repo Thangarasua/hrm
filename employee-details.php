@@ -29,9 +29,9 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 				</h6>
 			</div>
 			<div class="d-flex my-xl-auto right-content align-items-center flex-wrap ">
-				<div class="mb-2">
+				<!-- <div class="mb-2">
 					<a href="#" data-bs-toggle="modal" data-bs-target="#add_bank_satutory" class="btn btn-primary d-flex align-items-center"><i class="ti ti-circle-plus me-2"></i>Bank & Statutory</a>
-				</div>
+				</div> -->
 				<div class="head-icons ms-2">
 					<a href="javascript:void(0);" class="" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Collapse" id="collapse-header">
 						<i class="ti ti-chevrons-up"></i>
@@ -274,7 +274,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 					<div class="tab-content custom-accordion-items">
 						<div class="tab-pane active show" id="bottom-justified-tab1" role="tabpanel">
 							<div class="accordion accordions-items-seperate" id="accordionExample">
-								<div class="accordion-item">
+								<div class="accordion-item" style="display: none;">
 									<div class="accordion-header" id="headingOne">
 										<div class="accordion-button">
 											<div class="d-flex align-items-center flex-fill">
@@ -335,7 +335,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 										</div>
 									</div>
 								</div>
-								<div class="accordion-item">
+								<div class="accordion-item" style="display: none;">
 									<div class="accordion-header" id="headingThree">
 										<div class="accordion-button">
 											<div class="d-flex align-items-center justify-content-between flex-fill">
@@ -917,13 +917,13 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 										</select>
 									</div>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-4" id="employmentSpouseContainer">
 									<div class="mb-3">
 										<label class="form-label">Employment Spouse</label>
 										<input type="text" class="form-control" name="employmentSpouse" id="employmentSpouse" value="<?php echo $personalInfo ? $personalInfo['employmentSpouse'] : ''; ?>">
 									</div>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-4" id="childrenContainer">
 									<div class="mb-3">
 										<label class="form-label">No. of Children</label>
 										<input type="text" class="form-control" name="children" id="children" value="<?php echo $personalInfo ? $personalInfo['children'] : ''; ?>">

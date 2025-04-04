@@ -217,7 +217,7 @@ function getEducationInfo($employeeId) {
                     <!-- Edit button for each category -->
                     <a href="#" class="btn btn-sm btn-icon btn-primary edit-education-btn" data-bs-toggle="modal" data-bs-target="#edit_education" 
                        data-category="' . $category . '">
-                        <i class="ti ti-edit"></i> Edit
+                        <i class="ti ti-edit"></i>
                     </a>
                 </div>
             </div>';
