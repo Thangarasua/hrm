@@ -820,13 +820,13 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Phone Number <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="personalPhone" value="<?php echo $personalInfo ? $personalInfo['phone'] : ''; ?>" onkeypress="return phoneNumber(event)" onkeypress="return tenDigits(event)" onpaste="numberPasteValidate(event, this)" required>
+										<input type="text" class="form-control" name="personalPhone" value="<?php echo $personalInfo ? $personalInfo['phone'] : ''; ?>" onkeypress="return phoneNumber(event)" onkeypress="return tenDigits(event)" onpaste="numberPasteValidate(event, this)">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Email <span class="text-danger"> *</span></label>
-										<input type="email" class="form-control" onblur="return isEmail(this)" placeholder="@gmail.com" name="personalEmail" value="<?php echo $personalInfo ? $personalInfo['email'] : ''; ?>" required>
+										<input type="email" class="form-control" onblur="return isEmail(this)" placeholder="@gmail.com" name="personalEmail" value="<?php echo $personalInfo ? $personalInfo['email'] : ''; ?>">
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -844,7 +844,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									<div class="mb-3">
 										<label class="form-label">Date Of Birth <span class="text-danger"> *</span></label>
 										<div class="input-icon-end position-relative">
-											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="dob" id="dob" value="<?php echo $personalInfo ? $personalInfo['dob'] : ''; ?>" required>
+											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="dob" id="dob" value="<?php echo $personalInfo ? $personalInfo['dob'] : ''; ?>">
 											<span class="input-icon-addon">
 												<i class="ti ti-calendar text-gray-7"></i>
 											</span>
@@ -927,7 +927,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								<div class="col-md-4" id="childrenContainer">
 									<div class="mb-3">
 										<label class="form-label">No. of Children</label>
-										<input type="text" class="form-control" name="children" id="children" value="<?php echo $personalInfo ? $personalInfo['children'] : ''; ?>">
+										<input type="text" class="form-control" name="children" id="children" value="<?php echo $personalInfo ? $personalInfo['children'] : '0'; ?>">
 									</div>
 								</div>
 							</div>
