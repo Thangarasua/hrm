@@ -1127,7 +1127,7 @@ $personalInfo = getPersonalInfo($employeeId);
 										<div class="card-header">
 											<div class="d-flex align-items-center">
 												<span class="avatar avatar-lg me-2 avatar-rounded">
-													<img src="assets/img/profiles/sample-user.jpg" alt="img">
+													<img src="<?php echo $personalInfo && !empty($personalInfo['profilePhoto']) ? './uploads/employee_documents/profile_photo/' . $personalInfo['profilePhoto'] : './assets/img/users/sample-user.jpg'; ?>" alt="Img" class="img-fluid rounded-circle">
 												</span>
 												<div>
 													<h5 class="mb-0"><?php echo $_SESSION["hrm_employeeName"]; ?></h5>
