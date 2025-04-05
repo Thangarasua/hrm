@@ -18,6 +18,8 @@ $progressPercent = getProfileProgress($employeeId);
 
 $employeeRoleId = $_SESSION['hrm_roleId'];
 ?>
+<!-- Image crop-->
+<link rel="stylesheet" href="css/plugins/croppie.css">
 <!-- Page Wrapper -->
 <div class="page-wrapper">
 	<div class="content">
@@ -48,13 +50,28 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 					<div class="card-body p-0">
 						<div class="profile-progress">
 							<div class="progress-ring" style="--progress: <?= $progressPercent; ?>;">
-								<img src="<?php echo $personalInfo && !empty($personalInfo['profilePhoto']) ? './uploads/employee_documents/profile_photo/' . $personalInfo['profilePhoto'] : './assets/img/users/sample-user.jpg'; ?>" 
-								alt="Img" class="profile-img">
+								<div class="test position-relative pointer" data-bs-toggle="dropdown">
+									<img src="<?= $personalInfo && !empty($personalInfo['profilePhoto']) ? './uploads/employee_documents/profile_photo/' . $personalInfo['profilePhoto'] : './assets/img/users/sample-user.jpg'; ?>" alt="Img" class="profile-img" id="cropedImage">
+									<i class="fas fa-camera position-absolute" style="right: -2px; bottom: 6px; color: black; font-size: 15px; padding: 5px; background: #fff; border-radius: 14px; z-index: 1;"></i>
+								</div>
+
+								<!-- Dropdown Menu -->
+								<div class="dropdown-menu" id="profileDropdown">
+									<div class="dropdown-item pointer">
+										<button id="viewProfile" class="border-0 bg-transparent">👁️ View Image</button>
+									</div>
+									<div class="dropdown-item pointer">
+										<button id="openFile" class="border-0 bg-transparent">📤 Upload Image</button>
+										<input type="file" id="fileInput" class="item-img d-none" accept="image/*">
+									</div>
+								</div>
+
 								<div class="progress-label"><?= $progressPercent; ?>%</div>
 							</div>
 						</div>
 
-						<input type="file" id="profilePhoto" name="profilePhoto" style="display: none;" accept="image/*">
+						<!-- <input type="file" id="profilePhoto" name="profilePhoto" style="display: none;" accept="image/*"> -->
+
 						<div class="text-center px-3 pb-3 border-bottom">
 							<div class="mb-3">
 								<h5 class="d-flex align-items-center justify-content-center mb-1"><?php echo $employeeInfo ? $employeeInfo['OfficialName'] : ''; ?><i class="ti ti-discount-check-filled text-success ms-1"></i></h5>
@@ -1483,6 +1500,51 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 	</div>
 </div>
 <!-- /Delete Modal -->
+<!-- image crop model start -->
+<div class="modal fade" id="cropImagePop" tabindex="-1" role="dialog" aria-labelledby="cropImageModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="cropImageModalLabel">Edit Photo</h4>
+			</div>
+			<div class="modal-body">
+				<div id="upload-demo"></div>
+			</div>
+			<form id="profileForm">
+				<input type="hidden" id="employeeProfile" name="employeeProfile">
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="submit" id="cropImageBtn" class="btn btn-primary">Crop</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- image crop model end -->
+
+<!-- profile image preview modal start -->
+<div class="modal fade" id="profilePopup">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			</div>
+			<div class="modal-body">
+				<img src="" alt="Img" id="profilePopupImage">
+			</div> 
+			<div class="modal-footer">
+				 <button type="button" class="btn btn-white border me-2" data-bs-dismiss="modal">Close</button>
+				 <button type="button" id="openFile2" class="btn btn-success" data-bs-dismiss="modal">Change Profile</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- profile image preview modal end -->
+
+
 
 <?php require_once("./includes/footer.php"); ?>
 <script src="./js/employee-details.js"></script>
+<!-- crop script added -->
+<script src="js/plugins/croppie.js"></script>
