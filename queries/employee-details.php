@@ -1,7 +1,7 @@
 <?php include "../includes/config.php";
 
 header('Content-Type: application/json');
-$currentDatetime = date('Y-m-d H:i:s'); 
+$currentDatetime = date('Y-m-d H:i:s');
 
 $key = "ACTEHRM2025";
 $method = "AES-256-CBC";
@@ -34,11 +34,11 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $employeeId = $_POST['employeeID'];
         $companyName = $_POST['companyName'];
         $previousDesignation = $_POST['previousDesignation'];
-        $startDate = $_POST['startDate']; 
-        $startDate = date("Y-m-d", strtotime($startDate)); 
+        $startDate = $_POST['startDate'];
+        $startDate = date("Y-m-d", strtotime($startDate));
         $endDate = $_POST['endDate'];
-        $endDate = date("Y-m-d", strtotime($endDate)); 
- 
+        $endDate = date("Y-m-d", strtotime($endDate));
+
         $workExperience = $_POST['workExperience'];
         $skils = $_POST['skils'];
 
@@ -54,22 +54,22 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $employeeId = $_POST['employeeID'];
         $courseCategory = $_POST['category'];
         $educationDocuments = $_FILES['education_documents'];
-    
+
         if (!empty($educationDocuments['name'][0])) {
             $uploadedFiles = [];
             foreach ($educationDocuments['name'] as $key => $docName) {
                 $fileTmpName = $educationDocuments['tmp_name'][$key];
                 $fileType = $educationDocuments['type'][$key];
- 
+
                 if ($fileType !== 'application/pdf') {
                     echo json_encode(array('status' => 'failure', 'message' => 'Only PDF files are allowed.'));
                     exit;
                 }
                 $randomDigits = rand(100, 999);
                 $fileExtension = pathinfo($docName, PATHINFO_EXTENSION);
-                $newFileName = $courseCategory .'_'. $employeeId . '_'. $randomDigits . '.' . $fileExtension;
+                $newFileName = $courseCategory . '_' . $employeeId . '_' . $randomDigits . '.' . $fileExtension;
                 $filePath = '../uploads/employee_documents/education_documents/' . $newFileName;
-    
+
                 if (move_uploaded_file($fileTmpName, $filePath)) {
                     $uploadedFiles[] = $newFileName;
                 } else {
@@ -77,12 +77,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
                     exit;
                 }
             }
-    
+
             $uploadedFilesJson = json_encode($uploadedFiles);
-    
+
             $CheckQuery = "SELECT * FROM `education_info` WHERE `employee_id` = '$employeeId' AND `category` = '$courseCategory'";
             $result = mysqli_query($conn, $CheckQuery);
-    
+
             if (mysqli_num_rows($result) > 0) {
                 $educationInfoQuery = "UPDATE `education_info` SET `documents` = '$uploadedFilesJson' WHERE `employee_id` = '$employeeId' AND `category` = '$courseCategory'";
             } else {
@@ -116,24 +116,24 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             echo json_encode(array('status' => 'failure', 'message' => 'Mismatch confirm password.'));
             exit;
         }
-        
+
         $designation = $_POST['designation'];
         $department = $_POST['department'];
         $role = $_POST['role'];
         $manager = isset($_POST['manager']) ? $_POST['manager'] : '';
         $supervisor = isset($_POST['supervisors']) ? $_POST['supervisors'] : '';
-        $workMode = $_POST['workMode']; 
-        $workType = $_POST['workType']; 
+        $workMode = $_POST['workMode'];
+        $workType = $_POST['workType'];
         $workLocation = $_POST['workLocation'];
         $employeeStatus = $_POST['employeeStatus'];
-        if($employeeStatus == 2){
-            $relievingDate = date("Y-m-d", strtotime($_POST['relievingDate'])); 
+        if ($employeeStatus == 2) {
+            $relievingDate = date("Y-m-d", strtotime($_POST['relievingDate']));
             $status = ",status = '2', relieving_date = '$relievingDate'";
-        }else{
+        } else {
             $status = ",status = '1'";
         }
 
-        $updateQuery = "UPDATE employees SET official_name = '$officialName', personal_name = '$personalName', email = '$email', phone = '$phone', doj = '$doj', `password` = '$encryptedPassword', designation_id = $designation, department_id = $department, role_id = $role, manager_id = '$manager', supervisor_id = '$supervisor', `work_mode`='$workMode',`work_type`='$workType', work_location = '$workLocation' $status WHERE employee_id = '$employeeId'"; 
+        $updateQuery = "UPDATE employees SET official_name = '$officialName', personal_name = '$personalName', email = '$email', phone = '$phone', doj = '$doj', `password` = '$encryptedPassword', designation_id = $designation, department_id = $department, role_id = $role, manager_id = '$manager', supervisor_id = '$supervisor', `work_mode`='$workMode',`work_type`='$workType', work_location = '$workLocation' $status WHERE employee_id = '$employeeId'";
         if (mysqli_query($conn, $updateQuery)) {
             echo json_encode(array('status' => 'success', 'message' => 'Employee data updated successfully.'));
         } else {
@@ -175,14 +175,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             $docName = $addressProof['name'];
             $fileTmpName = $addressProof['tmp_name'];
             $fileType = $addressProof['type'];
-                    if ($fileType !== 'application/pdf') {
-                echo json_encode(array('status' => 'failure', 'message' => 'Only PDF files are allowed.'.$docName));
+            if ($fileType !== 'application/pdf') {
+                echo json_encode(array('status' => 'failure', 'message' => 'Only PDF files are allowed.' . $docName));
                 exit;
             }
-        
+
             $randomDigits = rand(100, 999);
             $fileExtension = pathinfo($docName, PATHINFO_EXTENSION);
-            $newFileName = $employeeId . '_'. $randomDigits . '.' . $fileExtension;
+            $newFileName = $employeeId . '_' . $randomDigits . '.' . $fileExtension;
             $filePath = '../uploads/employee_documents/address_documents/' . $newFileName;
 
             if (move_uploaded_file($fileTmpName, $filePath)) {
@@ -192,7 +192,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
                 exit;
             }
         }
-        
+
 
         $CheckQuery = "SELECT * FROM personal_info WHERE employee_id = '$employeeId'";
         $result = mysqli_query($conn, $CheckQuery);
@@ -215,7 +215,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $relationName = $_POST['relationName'];
         $relationPhone = $_POST['relationPhone'];
         $relationship = $_POST['relationship'];
-        $relationAddress = $_POST['relationAddress']; 
+        $relationAddress = $_POST['relationAddress'];
 
         $query = "INSERT INTO `family_info` (`employee_id`, `relation_name`, `relationship`, `relation_phone`, `relation_address`) VALUES ('$employeeId', '$relationName', '$relationship', '$relationPhone', '$relationAddress')";
         if (mysqli_query($conn, $query)) {
@@ -227,43 +227,37 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
     if ($flag === "profilePhoto") {
         $employeeId = $_POST['employeeID'];
-        $profilePhoto = $_FILES['profilePhoto'];
-        $profilePhotoFileName = '';
 
-        if (!empty($profilePhoto['name'])) {
-            $docName = $profilePhoto['name'];
-            $fileTmpName = $profilePhoto['tmp_name'];
-            $fileType = strtolower(pathinfo($profilePhoto['name'], PATHINFO_EXTENSION));
-            $allowedTypes = ['jpg', 'jpeg', 'png'];
-            if (!in_array($fileType, $allowedTypes)) {
-                echo json_encode(array('status' => 'failure', 'message' => 'Only PDF files are allowed.'.$fileType));
-                exit;
-            }
-        
-            $randomDigits = rand(100, 999);
-            $fileExtension = pathinfo($docName, PATHINFO_EXTENSION);
-            $newFileName = $employeeId . '_'. $randomDigits . '.' . $fileExtension;
-            $filePath = '../uploads/employee_documents/profile_photo/' . $newFileName;
-
-            if (move_uploaded_file($fileTmpName, $filePath)) {
-                $profilePhotoFileName = $newFileName;
-                // echo json_encode(array('status' => 'success', 'message' => 'Profile photo upload sucess.'));
-            } else {
-                echo json_encode(array('status' => 'failure', 'message' => 'Error uploading document.'));
-                exit;
-            }
+        if (isset($_POST['employeeProfile']) && !empty($_POST['employeeProfile'])) {
+            $base64_image = $_POST['employeeProfile'];
+            $image_parts = explode(";base64,", $base64_image);
+            $image_type_aux = explode("image/", $image_parts[0]);
+            $image_type = $image_type_aux[1];
+            $image_base64 = base64_decode($image_parts[1]);
+            // Create a unique file name  
+            $profile =  "{$employeeId}.{$image_type}";
+            $file_path = '../uploads/employee_documents/profile_photo/' . $profile;
+            // Save the image to the server
+            file_put_contents($file_path, $image_base64);
+        } else {
+            $profile =  '';
+            echo json_encode(array('status' => 'failure', 'message' => 'Error uploading document.'));
+            exit;
         }
+
         $CheckQuery = "SELECT * FROM personal_info WHERE employee_id = '$employeeId'";
         $result = mysqli_query($conn, $CheckQuery);
         if (mysqli_num_rows($result) > 0) {
-            $query = "UPDATE `personal_info` SET `profile_photo` = '$profilePhotoFileName' WHERE `employee_id` = '$employeeId';";
-            if (mysqli_query($conn, $query)) {
-                echo json_encode(array('status' => 'success', 'message' => 'Profile photo Updated Successfully.'));
-            } else {
-                echo json_encode(array('status' => 'failure', 'message' => 'Error adding photo.'));
-            }
+            $query = "UPDATE `personal_info` SET `profile_photo` = '$profile' WHERE `employee_id` = '$employeeId'";
         } else {
-            echo json_encode(array('status' => 'failure', 'message' => 'First upload basic data.'));
+            $query = "INSERT INTO `personal_info`(`employee_id`,`profile_photo`) VALUES ('$employeeId', '$profile')";
         }
+        $result = mysqli_query($conn, $query);
+        if ($result) {
+            echo json_encode(array('status' => 'success', 'message' => 'Successfully updated profile picture.'));
+        } else {
+            echo json_encode(array('status' => 'failure', 'message' => 'Something went wrong uploading.'));
+        }
+        exit;
     }
 }

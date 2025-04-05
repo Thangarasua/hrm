@@ -28353,6 +28353,12 @@ border: 1px solid var(--bg-primary);
   padding: 10px;
   border: 1px solid;
 }
+
+#upload-demo {
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+}
 /* End:: own style added */
 
 /*# sourceMappingURL=style.css.map */

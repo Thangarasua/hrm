@@ -371,6 +371,7 @@ if (mysqli_num_rows($result) > 0) {
 					reader.onload = function(e) {
 						$('.upload-demo').addClass('ready');
 						$('#cropImagePop').modal('show');
+						$('.item-img').val('');
 						rawImg = e.target.result;
 					}
 					reader.readAsDataURL(input.files[0]);
