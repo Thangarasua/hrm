@@ -14,6 +14,7 @@ $experienceInfo = getExperienceInfo($employeeId);
 $educationInfo = getEducationInfo($employeeId);
 $personalInfo = getPersonalInfo($employeeId);
 $familyInfo = getFamilyInfo($employeeId);
+$progressPercent = getProfileProgress($employeeId);
 
 $employeeRoleId = $_SESSION['hrm_roleId'];
 ?>
@@ -45,9 +46,14 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 			<div class="col-xl-4 theiaStickySidebar">
 				<div class="card card-bg-1">
 					<div class="card-body p-0">
-						<span class="avatar avatar-xl avatar-rounded border border-2 border-white m-auto d-flex mb-2">
-							<img src="<?php echo $personalInfo && !empty($personalInfo['profilePhoto']) ? './uploads/employee_documents/profile_photo/' . $personalInfo['profilePhoto'] : './assets/img/users/sample-user.jpg'; ?>" class="w-auto h-auto" alt="Img" id="avatar-img">
-						</span>
+						<div class="profile-progress">
+							<div class="progress-ring" style="--progress: <?= $progressPercent; ?>;">
+								<img src="<?php echo $personalInfo && !empty($personalInfo['profilePhoto']) ? './uploads/employee_documents/profile_photo/' . $personalInfo['profilePhoto'] : './assets/img/users/sample-user.jpg'; ?>" 
+								alt="Img" class="profile-img">
+								<div class="progress-label"><?= $progressPercent; ?>%</div>
+							</div>
+						</div>
+
 						<input type="file" id="profilePhoto" name="profilePhoto" style="display: none;" accept="image/*">
 						<div class="text-center px-3 pb-3 border-bottom">
 							<div class="mb-3">
@@ -392,7 +398,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 										<div class="accordion-item">
 											<div class="row">
 												<div class="accordion-header" id="headingFive">
-													<div class="accordion-button collapsed">
+													<div class="accordion-button collapsed experienceTab">
 														<div class="d-flex align-items-center justify-content-between flex-fill">
 															<h5>Experience</h5>
 															<div class="d-flex">

@@ -368,3 +368,29 @@ function getFamilyInfo($employeeId) {
     return $output;
 }
 
+function getProfileProgress($employeeId) {
+    global $conn;
+    $completedChecks = 0;
+
+    $tables = ['employees', 'experience_info', 'education_info', 'personal_info'];
+
+    foreach ($tables as $table) {
+        $query = "SELECT * FROM `$table` WHERE `employee_id` = '$employeeId'";
+        $result = mysqli_query($conn, $query);
+
+        if ($result && mysqli_num_rows($result) > 0) {
+            $completedChecks++;
+        }
+    }
+
+    $queryPhoto = "SELECT `profile_photo` FROM `personal_info` WHERE `employee_id` = '$employeeId' AND `profile_photo` != ''";
+    $resultPhoto = mysqli_query($conn, $queryPhoto);
+
+    if ($resultPhoto && mysqli_num_rows($resultPhoto) > 0) {
+        $completedChecks++;
+    }
+
+    $progressPercent = $completedChecks * 20;
+    return $progressPercent;
+}
+
