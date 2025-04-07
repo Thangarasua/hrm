@@ -58,7 +58,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								<!-- Dropdown Menu -->
 								<div class="dropdown-menu" id="profileDropdown">
 									<div class="dropdown-item pointer">
-										<button id="viewProfile" class="border-0 bg-transparent"><i class="fa-regular fa-user"></i> View profile picture</button>
+										<button id="viewProfile" class="border-0 bg-transparent"><i class="fa-regular fa-circle-user"></i> View profile picture</button>
 									</div>
 									<div class="dropdown-item pointer">
 										<button id="openFile" class="border-0 bg-transparent"><i class="fa-solid fa-images"></i> Choose profile picture</a></button>
