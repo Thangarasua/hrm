@@ -201,7 +201,9 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									Address Proof
 								</span>
 								<p class="text-dark text-end">
-									<a href="<?php echo !empty($personalInfo['addressPoof']) ? $personalInfo['addressPoofFile'] : ''; ?>" class="text-info d-inline-flex align-items-center" target="_blank"><?php echo !empty($personalInfo['addressPoof']) ? 'Click' : 'No File'; ?></a>
+									<a href="#" class="previewDocument" data-file-url="<?php echo $personalInfo ? $personalInfo['addressPoofFile'] : ''; ?>" class="d-flex align-items-center">
+										<i class="fa fa-file-alt iconStyle"></i>
+									</a>
 								</p>
 							</div>
 						</div>
@@ -331,7 +333,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									<div id="primaryBorderTwo" class="accordion-collapse collapse border-top" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
 										<div class="accordion-body">
 											<div class="row">
-												<div class="col-md-3">
+												<div class="col-md-2">
 													<span class="d-inline-flex align-items-center">
 														Bank Name
 													</span>
@@ -349,11 +351,21 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 													</span>
 													<h6 class="d-flex align-items-center fw-medium mt-1"><?php echo $bankInfo ? $bankInfo['ifscCode'] : ''; ?></h6>
 												</div>
-												<div class="col-md-3">
+												<div class="col-md-2">
 													<span class="d-inline-flex align-items-center">
 														Branch
 													</span>
 													<h6 class="d-flex align-items-center fw-medium mt-1"><?php echo $bankInfo ? $bankInfo['branchName'] : ''; ?></h6>
+												</div>
+												<div class="col-md-2">
+													<span class="d-inline-flex align-items-center">
+														Proof
+													</span>
+													<h6>
+														<a href="#" class="previewDocument" data-file-url="<?php echo $bankInfo ? $bankInfo['bankProofFile'] : ''; ?>" class="d-flex align-items-center">
+															<i class="fa fa-file-alt iconStyle"></i>
+														</a>
+													</h6>
 												</div>
 											</div>
 										</div>
@@ -1096,6 +1108,10 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								<input type="text" class="form-control" name="branchName" value="<?php echo $bankInfo ? $bankInfo['branchName'] : ''; ?>" required>
 							</div>
 						</div>
+						<div class="col-md-12">
+							<label for="">Upload Proof Bank Passbok / Statement:</label>
+							<input type="file" name="bankdocument" class="form-control" id="bankdocument" accept=".pdf,image/*" />
+						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -1542,9 +1558,23 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 </div>
 <!-- profile image preview modal end -->
 
+<!-- Modal for Preview -->
+<div class="modal" tabindex="-1" id="documentPreviewModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Document Preview</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="previewContent"></div> <!-- Document preview will appear here -->
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 <?php require_once("./includes/footer.php"); ?>
 <script src="./js/employee-details.js"></script>
-<!-- crop script added -->
 <script src="js/plugins/croppie.js"></script>

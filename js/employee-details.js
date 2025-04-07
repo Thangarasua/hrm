@@ -456,45 +456,24 @@ $(document).ready(function () {
         // Show the modal
         $('#profilePopup').modal('show');
     });
-    
 
+    // Documet preview
+    $('.previewDocument').on('click', function(e) {
+        e.preventDefault();
+        const fileUrl = $(this).data('file-url');
+        const fileExtension = fileUrl.split('.').pop().toLowerCase();
+        $('#previewContent').empty();
 
-
-    // $('#avatar-img').click(function () {
-    //     $('#profilePhoto').click();
-    // });
-
-    // $('#profilePhoto').change(function () {
-    //     uploadPhoneImage();
-    // });
-    // function uploadPhoneImage() {
-    //     const fileInput = document.getElementById('profilePhoto');
-    //     const file = fileInput.files[0];
-    //     if (file) {
-    //         let formData = new FormData();
-    //         formData.append("profilePhoto", file);
-    //         formData.append("flag", "profilePhoto");
-    //         formData.append("employeeID", employeeID);
-    //         $.ajax({
-    //             type: "POST",
-    //             url: "queries/employee-details.php",
-    //             data: formData,
-    //             dataType: "json",
-    //             contentType: false,
-    //             cache: false,
-    //             processData: false,
-    //             success: function (response) {
-    //                 if (response.status == "success") {
-    //                     $("#edit_personal").modal("hide");
-    //                     toastr.success("Profile Photo Updated Successfully");
-    //                     setTimeout(function () {
-    //                         location.reload();
-    //                     }, 2000);
-    //                 } else {
-    //                     toastr.error(response.message, "Error");
-    //                 }
-    //             }
-    //         })
-    //     }
-    // }
+        if (fileExtension === 'pdf') {
+            $('#previewContent').html('<embed src="' + fileUrl + '" width="100%" height="500px" type="application/pdf" />');
+        }
+        else if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension)) {
+            $('#previewContent').html('<img src="' + fileUrl + '" alt="Document Preview" width="100%" height="500px" />');
+        }
+        else {
+            $('#previewContent').html('<p>Unsupported file format</p>');
+        }
+        var modal = new bootstrap.Modal(document.getElementById('documentPreviewModal'));
+        modal.show();
+    });
 });

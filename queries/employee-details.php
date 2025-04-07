@@ -15,13 +15,41 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $bankAccountNumber = $_POST['bankAccountNumber'];
         $ifscCode = $_POST['ifscCode'];
         $branchName = $_POST['branchName'];
+        $bankdocument = $_FILES['bankdocument'];
+        $bankdocumentFileName = '';
+
+        if (!empty($bankdocument['name'])) {
+            $docName = $bankdocument['name'];
+            $fileTmpName = $bankdocument['tmp_name'];
+            $fileType = $bankdocument['type'];
+            $allowedMimeTypes = ['application/pdf', 'image/jpeg', 'image/png', 'image/webp'];
+
+            if (!in_array($fileType, $allowedMimeTypes)) {
+                echo json_encode(array('status' => 'failure', 'message' => 'Only PDF and image files are allowed. ' . $docName));
+                exit;
+            }
+
+            $randomDigits = rand(100, 999);
+            $fileExtension = pathinfo($docName, PATHINFO_EXTENSION);
+            $newFileName = $employeeId . '_' . $randomDigits . '.' . $fileExtension;
+            $filePath = '../uploads/employee_documents/bank_proof/' . $newFileName;
+
+            if (move_uploaded_file($fileTmpName, $filePath)) {
+                $bankdocumentFileName = $newFileName;
+            } else {
+                echo json_encode(array('status' => 'failure', 'message' => 'Error uploading document.'));
+                exit;
+            }
+        }
 
         $CheckQuery = "SELECT * FROM bank_info WHERE employee_id = '$employeeId'";
         $result = mysqli_query($conn, $CheckQuery);
         if (mysqli_num_rows($result) > 0) {
-            $bankInfoQuery = "UPDATE bank_info SET bank_name = '$bankName', bank_account_number = $bankAccountNumber, ifsc_code = '$ifscCode', branch_name = '$branchName' WHERE employee_id = '$employeeId'";
+            $row = mysqli_fetch_assoc($result);
+            $bankdocumentFileName = empty($bankdocumentFileName) ? $row['bank_proof'] : $bankdocumentFileName;
+            $bankInfoQuery = "UPDATE bank_info SET bank_name = '$bankName', bank_account_number = $bankAccountNumber, ifsc_code = '$ifscCode', branch_name = '$branchName', bank_proof = '$bankdocumentFileName' WHERE employee_id = '$employeeId'";
         } else {
-            $bankInfoQuery = "INSERT INTO bank_info (employee_id, bank_name, bank_account_number, ifsc_code, branch_name) VALUES ('$employeeId', '$bankName', $bankAccountNumber, '$ifscCode', '$branchName')";
+            $bankInfoQuery = "INSERT INTO bank_info (employee_id, bank_name, bank_account_number, ifsc_code, branch_name, bank_proof) VALUES ('$employeeId', '$bankName', $bankAccountNumber, '$ifscCode', '$branchName', '$bankdocumentFileName')";
         }
         if (mysqli_query($conn, $bankInfoQuery)) {
             echo json_encode(array('status' => 'success', 'message' => 'Bank Information Updated Successfully.'));
