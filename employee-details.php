@@ -58,10 +58,10 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								<!-- Dropdown Menu -->
 								<div class="dropdown-menu" id="profileDropdown">
 									<div class="dropdown-item pointer">
-										<button id="viewProfile" class="border-0 bg-transparent">👁️ View Image</button>
+										<button id="viewProfile" class="border-0 bg-transparent"><i class="fa-solid fa-image"></i> See profile picture</button>
 									</div>
 									<div class="dropdown-item pointer">
-										<button id="openFile" class="border-0 bg-transparent">📤 Upload Image</button>
+										<button id="openFile" class="border-0 bg-transparent"><i class="fa-solid fa-arrow-up-from-bracket"></i> Choose profile picture</a></button>
 										<input type="file" id="fileInput" class="item-img d-none" accept="image/*">
 									</div>
 								</div>
