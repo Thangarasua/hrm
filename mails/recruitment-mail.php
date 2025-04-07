@@ -66,11 +66,12 @@ try {
     } else if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['interview_status'])) {
         $interviewStatus = $_POST['interview_status'];
         //2->shortlist mail content 
-        if ($interviewStatus == 2) {
+        if ($interviewStatus == 3) {
             $encryptID = base64_encode($_POST['candidate_id']);
             $candidate_name = $_POST['candidate_name'];
-            $email = $_POST['email'];
-            $interview_date = $_POST['interview_date'];
+            $email = $_POST['email']; 
+            $interview_date = date("Y-M-d", strtotime($_POST['interview_date']));
+            $interview_time = date(" h:i a", strtotime($_POST['interview_date']));
             $job_position = $_POST['job_position'];
             $HRname = $_POST['HRname'];
             $HRphone = $_POST['HRphone'];
@@ -83,7 +84,8 @@ try {
             $htmlContent = str_replace('{{id}}', $encryptID, $htmlContent);
             $htmlContent = str_replace('{{Name}}', $candidate_name, $htmlContent);
             $htmlContent = str_replace('{{Job Position}}', $job_position, $htmlContent);
-            $htmlContent = str_replace('{{Date}}', $interview_date, $htmlContent);
+            $htmlContent = str_replace('{{interviewDate}}', $interview_date, $htmlContent);
+            $htmlContent = str_replace('{{interviewTime}}', $interview_time, $htmlContent);
             $htmlContent = str_replace('{{HR Name}}', $HRname, $htmlContent); 
             $htmlContent = str_replace('{{HR Number}}', $HRphone, $htmlContent);
 

@@ -63,9 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
         if ($interview_status == 2) {
             $interview_date = $_POST['interview_date'] . ' ' . $_POST['interview_time'];
-            $query = "UPDATE `candidates` SET `interview_status`= $interview_status,interview_date = '$interview_date' WHERE `candidate_id`='$rowId'";
-        } elseif ($interview_status == 3) {
-            $query = "UPDATE `candidates` SET `interview_status`= $interview_status WHERE `candidate_id`='$rowId'";
+            $query = "UPDATE `candidates` SET `interview_status`= 3,interview_date = '$interview_date' WHERE `candidate_id`='$rowId'";
         } elseif ($interview_status == 7) { 
             $query = "UPDATE `candidates` AS c LEFT JOIN `interview_process` AS i ON c.candidate_id=i.candidate_id SET c.`interview_status`= $interview_status, i.`interview_status`= $interview_status WHERE c.`candidate_id`='$rowId'";
         } else {
