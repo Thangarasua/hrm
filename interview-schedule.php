@@ -249,15 +249,7 @@ if (mysqli_num_rows($result) > 0) {
 															<input type="time" class="form-control" id="availabilityTime2" name="availabilityTime2" placeholder="Time">
 														</div>
 														<span id='availabilityDate' class='error'></span>
-													</div>
-													<div class="form-group">
-														<label for="text">Availability time 3 <small>(opional)</small></label>
-														<div class="availability">
-															<input type="date" class="form-control" id="availabilityDate3" name="availabilityDate3" min=<?php echo date('Y-m-d'); ?>>
-															<input type="time" class="form-control" id="availabilityTime3" name="availabilityTime3">
-														</div>
-														<span id='availabilityDate' class='error'></span>
-													</div>
+													</div> 
 												</div>
 											</div>
 										</div>
@@ -326,14 +318,13 @@ if (mysqli_num_rows($result) > 0) {
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="cropImageModalLabel">Edit Photo</h4>
+					<span> <small> <i class="fa-solid fa-circle-exclamation"></i> Use the mouse scroll (or) adjust with finger (or) adjust the range slider below.</small></span>
 				</div>
 				<div class="modal-body">
 					<div id="upload-demo"></div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
 					<button type="button" id="cropImageBtn" class="btn btn-primary">Crop</button>
 				</div>
 			</div>
@@ -347,7 +338,7 @@ if (mysqli_num_rows($result) > 0) {
 	<!-- crop script added -->
 	<script src="js/plugins/croppie.js"></script>
 	<!-- toastr alert added -->
-	<script src="js/plugins/toastr.min.js" type="text/javascript"></script> 
+	<script src="js/plugins/toastr.min.js" type="text/javascript"></script>
 
 	<script>
 		/*-----Fist letter auto caps function----*/

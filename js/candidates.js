@@ -149,8 +149,7 @@ $(document).ready(function () {
           $("#experience").val(data.experience);
           $("#skills").val(data.skills);
           $("#available_time1").val(data.available_time1);
-          $("#available_time2").val(data.available_time2 || "Not define");
-          $("#available_time3").val(data.available_time3 || "Not define");
+          $("#available_time2").val(data.available_time2 || "Not define"); 
           $("#created_at").val(data.created_at);
           $("#interview_status").val(data.interview_status);
           $("#interview_date_view").val(
@@ -192,10 +191,7 @@ $(document).ready(function () {
           $("#schedule_time1").val(res.data.available_time1);
           $("#schedule_time2").val(
             res.data.available_time2 || "---Not Define---"
-          );
-          $("#schedule_time3").val(
-            res.data.available_time3 || "---Not Define---"
-          );
+          ); 
           $("#interview_date_edit").val(res.data.interview_date);
           $("#interview_re_date_edit").val(
             res.data.interview_re_date || "---Not Define---"
@@ -282,7 +278,7 @@ $(document).ready(function () {
       success: function (response) {
         if (response.status === "success") {
           interview_status = response.data.interview_status;
-          if (interview_status == 2) {
+          if (interview_status == 3) {
             // 2->shortlisted candidate send mail
             sendRecruitmentMail(response.data);
           }else if(interview_status == 7){

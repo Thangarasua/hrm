@@ -204,28 +204,22 @@ if (isset($_GET['id'])) {
 							<div class="mb-3">
 								<h4 class="text-center">Candidate Available Date's</h4>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<div class="mb-3">
-									<label class="form-label">Date 1</label>
+									<label class="form-label">Primary Available Date</label>
 									<input type="text" class="form-control" id="schedule_time1" disabled>
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<div class="mb-3">
-									<label class="form-label">Date 2</label>
+									<label class="form-label">Secondary Available Date</label>
 									<input type="text" class="form-control" id="schedule_time2" disabled>
 								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="mb-3">
-									<label class="form-label">Date 3</label>
-									<input type="text" class="form-control" id="schedule_time3" disabled>
-								</div>
-							</div>
+							</div> 
 						</div>
 						<div class="row sheduleDate" style="display: none;">
 							<div class="mb-3">
-								<h4 class="text-center">Select scheduled Date</h4>
+								<h4 class="text-center">Select interview scheduled Date (By HR only)</h4>
 							</div>
 							<div class="col-md-4">
 								<div class="mb-3">
@@ -286,73 +280,67 @@ if (isset($_GET['id'])) {
 							<div class="col-md-4">
 								<div class="mb-3">
 									<label class="form-label">Candidate Register ID</label>
-									<input type="text" class="form-control" id="candidate_register_id">
+									<input type="text" class="form-control" id="candidate_register_id" readonly/>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="mb-3">
 									<label class="form-label">Ticket Request ID</label>
-									<input type="text" class="form-control" id="ticket_request_id">
+									<input type="text" class="form-control" id="ticket_request_id" readonly/>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="mb-3">
-									<label class="form-label">addres</label>
-									<input type="text" id="address" class="form-control" />
+									<label class="form-label">Address</label>
+									<input type="text" id="address" class="form-control" readonly/>
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<div class="mb-3 position-relative">
-									<label class="form-label">experience</label>
-									<input type="text" id="experience" class="form-control" />
+									<label class="form-label">Experience</label>
+									<input type="text" id="experience" class="form-control" readonly/>
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-4">
+								<div class="mb-3">
+									<label class="form-label">Available Time</label>
+									<input type="text" id="available_time1" class="form-control" readonly/>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="mb-3">
+									<label class="form-label">Available Time</label>
+									<input type="text" id="available_time2" class="form-control" readonly/>
+								</div>
+							</div> 
+							<div class="col-md-8">
 								<div class="mb-3 position-relative">
-									<label class="form-label">skills</label>
-									<input type="text" id="skills" class="form-control" />
+									<label class="form-label">Skills</label>
+									<input type="text" id="skills" class="form-control" readonly/>
 								</div>
 							</div>
 							<div class="col-md-4">
-								<div class="mb-3">
-									<label class="form-label">available_time1</label>
-									<input type="text" id="available_time1" class="form-control" />
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="mb-3">
-									<label class="form-label">available_time2</label>
-									<input type="text" id="available_time2" class="form-control" />
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="mb-3">
-									<label class="form-label">available_time3</label>
-									<input type="text" id="available_time3" class="form-control" />
-								</div>
-							</div>
-							<div class="col-md-6">
 								<div class="mb-3 position-relative">
 									<label class="form-label">Created By</label>
-									<input type="text" id="created_by" class="form-control" />
+									<input type="text" id="created_by" class="form-control" readonly/>
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<div class="mb-3 position-relative">
-									<label class="form-label">job created date</label>
-									<input type="text" id="created_at" class="form-control" />
+									<label class="form-label">Recruitment created date</label>
+									<input type="text" id="created_at" class="form-control" readonly/>
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<div class="mb-3 position-relative">
 									<label class="form-label">Interview Scheduled Date</label>
-									<input type="text" id="interview_date_view" class="form-control" />
+									<input type="text" id="interview_date_view" class="form-control" readonly/>
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<div class="mb-3 position-relative">
 									<label class="form-label">Interview Re-scheduled Date</label>
-									<input type="text" id="interview_re_date_view" class="form-control" />
+									<input type="text" id="interview_re_date_view" class="form-control" readonly/>
 								</div>
 							</div>
 						</div>
