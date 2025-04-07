@@ -154,10 +154,7 @@ $(document).ready(function () {
           $("#interview_status").val(data.interview_status);
           $("#interview_date_view").val(
             data.interview_date || "---Still not update---"
-          );
-          $("#interview_re_date_view").val(
-            data.interview_re_date || "---Not Define---"
-          );
+          ); 
         } else {
           Swal.fire(data.message);
         }
@@ -179,7 +176,7 @@ $(document).ready(function () {
       },
       cache: false,
       success: function (res) {
-        if (res.status == "success") {
+        if (res.status == "success") { 
           $("#rowId").val(res.data.candidate_id);
           $("#candidate_name").val(res.data.candidate_name);
           $("input[name='interview_status']").prop("checked", false); // Uncheck all first
@@ -192,11 +189,9 @@ $(document).ready(function () {
           $("#schedule_time2").val(
             res.data.available_time2 || "---Not Define---"
           ); 
-          $("#interview_date_edit").val(res.data.interview_date);
-          $("#interview_re_date_edit").val(
-            res.data.interview_re_date || "---Not Define---"
-          );
-          $("#interviewDate").html(res.data.interview_re_date??res.data.interview_date);
+          $("#interview_date_edit").val(res.data.interview_date); 
+          $("#interviewDate").html(res.data.interview_date);
+          $("#rejection").html(res.data.candidate_rejection_comment);
           let val = res.data.interview_status;
           dynamicInputs(val, val);
         } else {
@@ -214,19 +209,21 @@ $(document).ready(function () {
 
   function dynamicInputs(val1, val2) {
     selectedValue = val1;
-    existingStatus = val2;
+    existingStatus = val2; 
 
     $("#updateBtn").hide();
     $(".applied-date").hide(); 
     $(".shortlisted").hide();
+    $(".rejection-content").hide();
 
     if (selectedValue == 1) { 
       $(".applied-date").show();
     }
     
-    if (selectedValue == 2) {
-      if (existingStatus >= 2) {
+    if (selectedValue == 2) { 
+      if (existingStatus > 2) {
         $(".sheduleDate").hide();
+        $(".shortlisted").show();
         $(".sheduledDate").show();
         $("#updateBtn").hide();
       } else {
@@ -235,9 +232,15 @@ $(document).ready(function () {
         $(".sheduledDate").hide(); 
         $("#updateBtn").show();
       }
-    }  
+    }   
     if (selectedValue == 7) {
-      $("#updateBtn").show();
+      $(".rejection-content").show();
+      if (existingStatus == 7) {
+        $("#updateBtn").hide();
+      }else{
+        $("#updateBtn").show();
+
+      }
     } 
   }
 
@@ -301,8 +304,7 @@ $(document).ready(function () {
   });
 
   /** Function to Send Recruitment Mail */
-  function sendRecruitmentMail(data) {
-    console.log(data);
+  function sendRecruitmentMail(data) { 
     $.ajax({
       type: "POST",
       url: "mails/recruitment-mail.php",

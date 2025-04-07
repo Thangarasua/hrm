@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
             $rejection = $_POST['rejection'];
 
-            $query = "UPDATE `interview_process` SET `interview_status`='$interviewStatus',`candidate_rejection_comment`='$rejection' WHERE `candidate_id`='$rowId'";
+            $query = "UPDATE `interview_process` AS i INNER JOIN `candidates` AS c ON i.candidate_id = c.candidate_id SET i.`interview_status`='$interviewStatus',c.`interview_status`='$interviewStatus',c.`candidate_rejection_comment`='$rejection' WHERE i.`candidate_id`='$rowId'";
 
             $getDataQuery = "SELECT c.*, r.job_position, e.official_name AS HRname, e.phone AS HRphone FROM `candidates`AS c INNER JOIN `recruitment`AS r ON `c`.`ticket_request_id`=`r`.`ticket_request_id`LEFT JOIN `employees`AS `e` ON `c`.`handled_hr`=`e`.`employee_id`WHERE c.`candidate_id`= '$rowId'";
         } else if ($interviewStatus == 8) {
