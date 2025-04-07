@@ -66,15 +66,47 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $startDate = date("Y-m-d", strtotime($startDate));
         $endDate = $_POST['endDate'];
         $endDate = date("Y-m-d", strtotime($endDate));
-
         $workExperience = $_POST['workExperience'];
         $skils = $_POST['skils'];
+        $experienceDocument = $_FILES['experienceDocument'];
 
-        $experienceInfoQuery = "INSERT INTO experience_info (employee_id, previous_employer, designation, start_date, end_date, work_experience, skills) VALUES ('$employeeId', '$companyName', '$previousDesignation', '$startDate', '$endDate', '$workExperience', '$skils')";
-        if (mysqli_query($conn, $experienceInfoQuery)) {
-            echo json_encode(array('status' => 'success', 'message' => 'Experience Information Updated Successfully.'));
+        $words = explode(' ', $companyName);
+        $firstWord = $words[0];
+
+        if (!empty($experienceDocument['name'][0])) {
+
+            $uploadedFiles = [];
+            foreach ($experienceDocument['name'] as $key => $docName) {
+                $fileTmpName = $experienceDocument['tmp_name'][$key];
+                $fileType = $experienceDocument['type'][$key];
+                $allowedMimeTypes = ['application/pdf', 'image/jpeg', 'image/png', 'image/webp'];
+                if (!in_array($fileType, $allowedMimeTypes)) {
+                    echo json_encode(array('status' => 'failure', 'message' => 'Only PDF and image files are allowed. ' . $docName));
+                    exit;
+                }
+                $randomDigits = rand(100, 999);
+                $fileExtension = pathinfo($docName, PATHINFO_EXTENSION);
+                $newFileName = $employeeId . '_' . $firstWord . '_' . $randomDigits . '.' . $fileExtension;
+                $filePath = '../uploads/employee_documents/experience_documents/' . $newFileName;
+
+                if (move_uploaded_file($fileTmpName, $filePath)) {
+                    $uploadedFiles[] = $newFileName;
+                } else {
+                    echo json_encode(array('status' => 'failure', 'message' => 'Error uploading document.'));
+                    exit;
+                }
+            }
+
+            $uploadedFilesJson = json_encode($uploadedFiles);
+
+            $experienceInfoQuery = "INSERT INTO experience_info (employee_id, previous_employer, designation, start_date, end_date, work_experience, skills, documents) VALUES ('$employeeId', '$companyName', '$previousDesignation', '$startDate', '$endDate', '$workExperience', '$skils', '$uploadedFilesJson')";
+            if (mysqli_query($conn, $experienceInfoQuery)) {
+                echo json_encode(array('status' => 'success', 'message' => 'Experience Information Updated Successfully.'));
+            } else {
+                echo json_encode(array('status' => 'failure', 'message' => 'Error adding experience data.'));
+            }
         } else {
-            echo json_encode(array('status' => 'failure', 'message' => 'Error adding experience data.'));
+            echo json_encode(array('status' => 'failure', 'message' => 'No documents uploaded.'));
         }
     }
 

@@ -153,6 +153,8 @@ function getExperienceInfo($employeeId) {
             $jobTitle = htmlspecialchars($row['designation']);
             $startDate = htmlspecialchars($row['start_date']);
             $endDate = htmlspecialchars($row['end_date']);
+            $existingDocuments = json_decode($row['documents']);
+            
             $output .= '
             <div class="mb-3">
                 <div class="d-flex align-items-center justify-content-between">
@@ -163,8 +165,25 @@ function getExperienceInfo($employeeId) {
                         </span>
                     </div>
                     <p class="text-dark">' . formatDateRange($startDate, $endDate) . '</p>
-                </div>
-            </div>';
+                </div>';
+
+            // Document section
+            if (!empty($existingDocuments)) {
+                $output .= '<div class="mt-2">Documents:<ul class="list-unstyled d-flex flex-wrap">';
+                $counter = 1;
+                foreach ($existingDocuments as $doc) {
+                    $filePath = './uploads/employee_documents/experience_documents/' . $doc;
+                    $output .= '<li class="d-flex align-items-center mr-3">'; 
+                    $output .= '<a href="#" class="previewDocument" data-file-url="' . ($filePath ? $filePath : '') . '">';
+                    $output .= '<i class="fa fa-file-alt iconStyle educationIcon"></i>';
+                    $output .= '</a>';
+                    $output .= '</li>';
+                    $counter++; 
+                }
+                $output .= '</ul></div>';
+            }
+
+            $output .= '</div>';
         }
     } else {
         $output = "<p>No experience information found.</p>";

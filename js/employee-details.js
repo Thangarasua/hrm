@@ -301,7 +301,7 @@ $(document).ready(function () {
         const newFieldHTML = `
             <div class="mb-3">
                 <label for="uploadDocument_${category}">Upload Document for ${category}:</label>
-                <input type="file" name="education_documents[]" class="form-control" id="uploadDocument_${category}" accept=".pdf" />
+                <input type="file" name="education_documents[]" class="form-control" id="uploadDocument_${category}" accept=".pdf,image/*" />
             </div>
         `;
 
@@ -485,5 +485,16 @@ $(document).ready(function () {
         }
         var modal = new bootstrap.Modal(document.getElementById('documentPreviewModal'));
         modal.show();
+    });
+
+    // Experience info file upload
+    $('.addMoreUploadFields').on('click', function() {
+        var newField = `
+            <div class="col-md-12">
+                <label for="">Upload Proof Document</label>
+                <input type="file" name="experienceDocument[]" class="form-control experienceDocument" accept=".pdf,image/*" />
+            </div>
+        `;
+        $('#uploadFields').append(newField);
     });
 });
