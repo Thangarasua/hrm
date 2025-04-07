@@ -196,7 +196,8 @@ function getEducationInfo($employeeId) {
 
         if ($docResult && mysqli_num_rows($docResult) > 0) {
             while ($docRow = mysqli_fetch_assoc($docResult)) {
-                $documents = json_decode($docRow['documents'], true);  
+                // $documents = json_decode($docRow['documents'], true);
+                $documents = !empty($docRow['documents']) ? json_decode($docRow['documents'], true) : [];
                 if (is_array($documents)) {
                     $existingDocuments = array_merge($existingDocuments, $documents); 
                 }
