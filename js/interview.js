@@ -419,7 +419,7 @@ $(document).ready(function () {
     }
     if (selectedValue == 9) {
       $(".not-attend").show();
-      if (existingStatus >= 9) {
+      if (existingStatus == 9) {
         $("#updateButton").hide();
       } else {
         $("#updateButton").show();

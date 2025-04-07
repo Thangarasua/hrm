@@ -56,15 +56,17 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             echo json_encode(array('status' => 'failure', 'message' => 'something went wrong'));
         }
         exit;
-    } elseif ($flag === "update") {
-
-        $rowId = $_POST['rowId']; 
+    } elseif ($flag === "update") { 
+        $rowId = $_POST['rowId'];
         $interview_status = $_POST['interview_status'];
-        
+
         if ($interview_status == 2) {
             $interview_date = $_POST['interview_date'] . ' ' . $_POST['interview_time'];
+            $insertQuery = "INSERT INTO `interview_process`(`candidate_id`, `interview_status`, `scheduled_date`) VALUES ('$rowId', 3, '$currentDatetime')";
+            mysqli_query($conn, $insertQuery);
+
             $query = "UPDATE `candidates` SET `interview_status`= 3,interview_date = '$interview_date' WHERE `candidate_id`='$rowId'";
-        } elseif ($interview_status == 7) { 
+        } elseif ($interview_status == 7) {
             $rejection = $_POST['rejection'];
             $query = "UPDATE `candidates` AS c LEFT JOIN `interview_process` AS i ON c.candidate_id=i.candidate_id SET c.`interview_status`= $interview_status, i.`interview_status`= $interview_status,c.candidate_rejection_comment = '$rejection'  WHERE c.`candidate_id`='$rowId'";
         } else {
@@ -75,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         if ($result) {
             $query = "SELECT c.*, r.job_position, e.official_name AS HRname, e.phone AS HRphone FROM `candidates`AS c INNER JOIN `recruitment`AS r ON `c`.`ticket_request_id`=`r`.`ticket_request_id`INNER JOIN `employees`AS `e` ON `c`.`handled_hr`=`e`.`employee_id`WHERE c.`candidate_id`= '$rowId'";
             $result = mysqli_query($conn, $query);
-            $row = mysqli_fetch_assoc($result); 
+            $row = mysqli_fetch_assoc($result);
             echo json_encode(array('status' => 'success', 'data' => $row));
         } else {
             echo json_encode(array('status' => 'failure', 'message' => 'Candidate status update failure'));
@@ -112,9 +114,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     } elseif ($flag === "interviewFeedback") {
 
         $rowId = $_POST['rowId'];
-        $comments = $_POST['comments']; 
- 
-        $query = "UPDATE `interview_process` SET `interview_feedback`= '$comments' WHERE `interview_id`='$rowId'"; 
+        $comments = $_POST['comments'];
+
+        $query = "UPDATE `interview_process` SET `interview_feedback`= '$comments' WHERE `interview_id`='$rowId'";
         $result = mysqli_query($conn, $query);
 
         if ($result) {
@@ -126,9 +128,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     } elseif ($flag === "offerRejection") {
 
         $rowId = $_POST['rowId'];
-        $comments = $_POST['comments']; 
- 
-        $query = "UPDATE `interview_process` SET `training_offer_responced`='$currentDatetime', `training_offer_status`=2, `training_offer_rejection`= '$comments' WHERE `interview_id`='$rowId'"; 
+        $comments = $_POST['comments'];
+
+        $query = "UPDATE `interview_process` SET `training_offer_responced`='$currentDatetime', `training_offer_status`=2, `training_offer_rejection`= '$comments' WHERE `interview_id`='$rowId'";
         $result = mysqli_query($conn, $query);
 
         if ($result) {
