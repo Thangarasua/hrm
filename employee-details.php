@@ -1506,7 +1506,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
-				<span> <b><i class="fa-solid fa-circle-exclamation"></i> Use the mouse scroll or adjust the range slider below.</b></span>
+				<span> <b><i class="fa-solid fa-circle-exclamation"></i> Use the mouse scroll (or) adjust the range slider below.</b></span>
 				<span></span>
 			</div>
 			<div class="modal-body">
