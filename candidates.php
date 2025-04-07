@@ -196,10 +196,10 @@ if (isset($_GET['id'])) {
 					</div>
 				</div> 
 				<div class="modal-body">
-					<div class="col-8 m-auto applied-date" style="display: none;">
+					<div class="col-8 m-auto applied-date content-border" style="display: none;">
 						<h5 class="text-center">Applied Date: <span id="appliedDate" class="text-primary"></span></h5>
 					</div> 
-					<div class="shortlisted" style="display: none;">
+					<div class="shortlisted" style="display: block;">
 						<div class="row">
 							<div class="mb-3">
 								<h4 class="text-center">Candidate Available Date's</h4>
@@ -238,16 +238,20 @@ if (isset($_GET['id'])) {
 							<div class="mb-3">
 								<h4 class="text-center">Scheduled Date</h4>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-8">
 								<div class="mb-3">
 									<label class="form-label">Scheduled Date</label>
 									<input type="text" class="form-control" id="interview_date_edit">
 								</div>
-							</div>
-							<div class="col-md-4">
+							</div> 
+						</div>
+					</div>
+					<div class="rejection-content" style="display: none;">
+						<div class="col-md-12">
+							<div class="col-md-8 m-auto">
 								<div class="mb-3">
-									<label class="form-label">Scheduled Re-Date</label>
-									<input type="text" class="form-control" id="interview_re_date_edit">
+									<label class="form-label">Rejection Comments<span class="text-danger"> *</span></label>
+									<textarea class="form-control" name="rejection" id="rejection" rows="3"></textarea>
 								</div>
 							</div>
 						</div>
