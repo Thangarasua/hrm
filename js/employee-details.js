@@ -449,52 +449,21 @@ $(document).ready(function () {
         });
     });
 
-    $('#viewProfile').on('click', function () { 
-        var profileSrc = $('#cropedImage').attr('src');  
+    $('#viewProfile').on('click', function () {
+        var profileSrc = $('#cropedImage').attr('src');
         $('#profilePopupImage').attr('src', profileSrc);
-    
         // Show the modal
         $('#profilePopup').modal('show');
+    }); 
+
+    $('#officialMail').on('click', function () {
+        var officialMail = $('.officialMail').html().trim(); 
+        navigator.clipboard.writeText(officialMail);
+        toastr.success("Mail ID copy to Clipboard.");
     });
-    
-
-
-
-    // $('#avatar-img').click(function () {
-    //     $('#profilePhoto').click();
-    // });
-
-    // $('#profilePhoto').change(function () {
-    //     uploadPhoneImage();
-    // });
-    // function uploadPhoneImage() {
-    //     const fileInput = document.getElementById('profilePhoto');
-    //     const file = fileInput.files[0];
-    //     if (file) {
-    //         let formData = new FormData();
-    //         formData.append("profilePhoto", file);
-    //         formData.append("flag", "profilePhoto");
-    //         formData.append("employeeID", employeeID);
-    //         $.ajax({
-    //             type: "POST",
-    //             url: "queries/employee-details.php",
-    //             data: formData,
-    //             dataType: "json",
-    //             contentType: false,
-    //             cache: false,
-    //             processData: false,
-    //             success: function (response) {
-    //                 if (response.status == "success") {
-    //                     $("#edit_personal").modal("hide");
-    //                     toastr.success("Profile Photo Updated Successfully");
-    //                     setTimeout(function () {
-    //                         location.reload();
-    //                     }, 2000);
-    //                 } else {
-    //                     toastr.error(response.message, "Error");
-    //                 }
-    //             }
-    //         })
-    //     }
-    // }
+    $('#personalMail').on('click', function () {
+        var personalMail = $('.personalMail').html().trim(); 
+        navigator.clipboard.writeText(personalMail);
+        toastr.success("Mail ID copy to Clipboard.");
+    });
 });

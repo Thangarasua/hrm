@@ -121,7 +121,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 										<i class="ti ti-mail-check me-2"></i>
 										Email
 									</span>
-									<a href="javascript:void(0);" class="text-info d-inline-flex align-items-center"><span class="__cf_email__" data-cfemail=""><?php echo $employeeInfo ? $employeeInfo['email'] : ''; ?></span><i data-bs-toggle="tooltip" title="Copy to clipboard" class="ti ti-copy text-dark ms-2"></i></a>
+									<a href="javascript:void(0);" class="text-info d-inline-flex align-items-center"><span class="__cf_email__ officialMail" data-cfemail=""><?php echo $employeeInfo ? $employeeInfo['email'] : ''; ?></span><i data-bs-toggle="tooltip" title="Copy to clipboard" class="ti ti-copy text-dark ms-2" id="officialMail"></i></a>
 								</div>
 								<div class="d-flex align-items-center justify-content-between">
 									<span class="d-inline-flex align-items-center">
@@ -172,7 +172,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									<i class="ti ti-mail-check me-2"></i>
 									Email
 								</span>
-								<a href="javascript:void(0);" class="text-info d-inline-flex align-items-center"><span class="__cf_email__" data-cfemail=""><?php echo $personalInfo ? $personalInfo['email'] : ''; ?></span><i data-bs-toggle="tooltip" title="Copy to clipboard" class="ti ti-copy text-dark ms-2"></i></a>
+								<a href="javascript:void(0);" class="text-info d-inline-flex align-items-center"><span class="__cf_email__ personalMail" data-cfemail=""><?php echo $personalInfo ? $personalInfo['email'] : ''; ?></span><i data-bs-toggle="tooltip" title="Copy to clipboard" class="ti ti-copy text-dark ms-2" id="personalMail"></i></a>
 							</div>
 							<div class="d-flex align-items-center justify-content-between mb-2">
 								<span class="d-inline-flex align-items-center">
@@ -1505,8 +1505,9 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="cropImageModalLabel">Edit Photo</h4>
+				<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
+				<span> <b><i class="fa-solid fa-circle-exclamation"></i> Use the mouse scroll (or) adjust the range slider below.</b></span>
+				<span></span>
 			</div>
 			<div class="modal-body">
 				<div id="upload-demo"></div>
