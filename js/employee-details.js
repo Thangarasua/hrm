@@ -466,4 +466,24 @@ $(document).ready(function () {
         navigator.clipboard.writeText(personalMail);
         toastr.success("Mail ID copy to Clipboard.");
     });
+
+    // Documet preview
+    $('.previewDocument').on('click', function(e) {
+        e.preventDefault();
+        const fileUrl = $(this).data('file-url');
+        const fileExtension = fileUrl.split('.').pop().toLowerCase();
+        $('#previewContent').empty();
+
+        if (fileExtension === 'pdf') {
+            $('#previewContent').html('<embed src="' + fileUrl + '" width="100%" height="500px" type="application/pdf" />');
+        }
+        else if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension)) {
+            $('#previewContent').html('<img src="' + fileUrl + '" alt="Document Preview" width="100%" height="500px" />');
+        }
+        else {
+            $('#previewContent').html('<p>Unsupported file format</p>');
+        }
+        var modal = new bootstrap.Modal(document.getElementById('documentPreviewModal'));
+        modal.show();
+    });
 });

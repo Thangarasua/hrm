@@ -74,7 +74,9 @@ function getBankInfo($employeeId) {
             'bankName' => $row['bank_name'],
             'bankAccountNumber' => $row['bank_account_number'],
             'ifscCode' => $row['ifsc_code'],
-            'branchName' => $row['branch_name']
+            'branchName' => $row['branch_name'],
+            'bankProof' => $row['bank_proof'],
+            'bankProofFile' => './uploads/employee_documents/bank_proof/'.$row['bank_proof'],
         ];
     } else {
         return null;
@@ -220,16 +222,20 @@ function getEducationInfo($employeeId) {
             </div>';
 
             if (!empty($existingDocuments)) {
-                $output .= '<div class="mt-2"><strong>Documents:</strong><ul>';
+                $output .= '<div class="mt-2"><strong>Documents:</strong><ul class="list-unstyled d-flex flex-wrap">';
                 $counter = 1;
                 foreach ($existingDocuments as $doc) {
-                    $filePath = './uploads/employee_documents/education_documents/' . $doc;  
-                    $output .= '<li><a href="' . $filePath . '" target="_blank">' . $counter . '.<i class="fas fa-file-pdf" style="color:red; margin-right:8px;"></i></a></li>';
-
+                    $filePath = './uploads/employee_documents/education_documents/' . $doc;
+                    $output .= '<li class="d-flex align-items-center mr-3">'; 
+                    $output .= '<a href="#" class="previewDocument" data-file-url="' . ($filePath ? $filePath : '') . '">';
+                    $output .= '<i class="fa fa-file-alt iconStyle educationIcon"></i>';
+                    $output .= '</a>';
+                    $output .= '</li>';
                     $counter++; 
                 }
                 $output .= '</ul></div>';
-            } else {
+            }
+             else {
                 $output .= '<div class="mt-2"><i>No documents uploaded for this category.</i></div>';
             }
         $output .= '</div>';
