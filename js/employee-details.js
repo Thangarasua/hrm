@@ -449,12 +449,22 @@ $(document).ready(function () {
         });
     });
 
-    $('#viewProfile').on('click', function () { 
-        var profileSrc = $('#cropedImage').attr('src');  
+    $('#viewProfile').on('click', function () {
+        var profileSrc = $('#cropedImage').attr('src');
         $('#profilePopupImage').attr('src', profileSrc);
-    
         // Show the modal
         $('#profilePopup').modal('show');
+    }); 
+
+    $('#officialMail').on('click', function () {
+        var officialMail = $('.officialMail').html().trim(); 
+        navigator.clipboard.writeText(officialMail);
+        toastr.success("Mail ID copy to Clipboard.");
+    });
+    $('#personalMail').on('click', function () {
+        var personalMail = $('.personalMail').html().trim(); 
+        navigator.clipboard.writeText(personalMail);
+        toastr.success("Mail ID copy to Clipboard.");
     });
 
     // Documet preview
