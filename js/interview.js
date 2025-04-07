@@ -20,6 +20,7 @@ $(document).ready(function () {
         flag: flag,
       },
       success: function (data) {
+        console.log(data);
         var tableBody = $("#tableRecords tbody");
 
         if ($.fn.DataTable.isDataTable("#tableRecords")) {
@@ -357,7 +358,7 @@ $(document).ready(function () {
           $("#schedule_time1").val(res.data.available_time1);
           $("#schedule_time2").val(res.data.available_time2);
           $("#schedule_time3").val(res.data.available_time3);
-          $("#interviewDate").html(res.data.interview_re_date??res.data.interview_date);
+          $("#interviewDate").html(res.data.interview_date);
           if (!res.data.ratings || res.data.ratings.trim() === "") {
             unSetStars();
             $(".feedback-content").hide();
