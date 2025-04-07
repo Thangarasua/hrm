@@ -1272,6 +1272,14 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								<input type="text" class="form-control" name="skils" id="skils">
 							</div>
 						</div>
+						<div class="col-md-12">
+							<label for="">Upload Proof Document:</label>
+							<input type="file" name="experienceDocument[]" class="form-control experienceDocument" accept=".pdf,image/*" />
+						</div>
+						<div class="col-md-12" id="uploadFields"></div>
+						<div class="col-md-12">
+							<button type="button" class="btn btn-link addMoreUploadFields">Add More Uploads</button>
+						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
