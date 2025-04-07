@@ -121,7 +121,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 										<i class="ti ti-mail-check me-2"></i>
 										Email
 									</span>
-									<a href="javascript:void(0);" class="text-info d-inline-flex align-items-center"><span class="__cf_email__" data-cfemail=""><?php echo $employeeInfo ? $employeeInfo['email'] : ''; ?></span><i data-bs-toggle="tooltip" title="Copy to clipboard" class="ti ti-copy text-dark ms-2"></i></a>
+									<a href="javascript:void(0);" class="text-info d-inline-flex align-items-center"><span class="__cf_email__ officialMail" data-cfemail=""><?php echo $employeeInfo ? $employeeInfo['email'] : ''; ?></span><i data-bs-toggle="tooltip" title="Copy to clipboard" class="ti ti-copy text-dark ms-2" id="officialMail"></i></a>
 								</div>
 								<div class="d-flex align-items-center justify-content-between">
 									<span class="d-inline-flex align-items-center">
@@ -172,7 +172,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 									<i class="ti ti-mail-check me-2"></i>
 									Email
 								</span>
-								<a href="javascript:void(0);" class="text-info d-inline-flex align-items-center"><span class="__cf_email__" data-cfemail=""><?php echo $personalInfo ? $personalInfo['email'] : ''; ?></span><i data-bs-toggle="tooltip" title="Copy to clipboard" class="ti ti-copy text-dark ms-2"></i></a>
+								<a href="javascript:void(0);" class="text-info d-inline-flex align-items-center"><span class="__cf_email__ personalMail" data-cfemail=""><?php echo $personalInfo ? $personalInfo['email'] : ''; ?></span><i data-bs-toggle="tooltip" title="Copy to clipboard" class="ti ti-copy text-dark ms-2" id="personalMail"></i></a>
 							</div>
 							<div class="d-flex align-items-center justify-content-between mb-2">
 								<span class="d-inline-flex align-items-center">
