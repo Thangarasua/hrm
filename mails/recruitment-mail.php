@@ -131,6 +131,7 @@ try {
             $candidate_name = $_POST['candidate_name'];
             $email = $_POST['email'];
             $job_position = $_POST['job_position'];
+            $offer_salary = $_POST['training_offer_salary'];
             $joingDate = date("F jS \of, Y, h:i A", strtotime($_POST['training_offer_send']));
             $HRname = $_POST['HRname'];
             $HRphone = $_POST['HRphone'];
@@ -146,6 +147,7 @@ try {
             $htmlContent = str_replace('{{id}}', $encryptID, $htmlContent);
             $htmlContent = str_replace('{{Name}}', $candidate_name, $htmlContent);
             $htmlContent = str_replace('{{Job Position}}', $job_position, $htmlContent);
+            $htmlContent = str_replace('{{Salary}}', $offer_salary, $htmlContent);
             $htmlContent = str_replace('{{Date}}', $joingDate, $htmlContent);
             $htmlContent = str_replace('{{HR Name}}', $HRname, $htmlContent);
             $htmlContent = str_replace('{{HR Number}}', $HRphone, $htmlContent);

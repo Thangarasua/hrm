@@ -312,6 +312,18 @@
 											<input type="time" class="form-control" id="joining_time" name="joining_time">
 										</div>
 									</div>
+									<div class="col-md-4"> 
+										<label class="form-label">Salary<span class="text-danger"> *</span></label>
+										<div class="input-group"> 
+											<div class="input-group-prepend">
+												<select class="select" name="salaryType" id="salaryType">
+													<option value="Annum">Annum</option>
+													<option value="Month">Month</option>
+												</select>
+											</div>
+											<input type="text" class="form-control" name="offer_salary" id="offer_salary" onkeypress="return isAmount(event)" placeholder="Select the Position Level">
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>

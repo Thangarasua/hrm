@@ -85,9 +85,8 @@ $(document).ready(function () {
                             </div>
                         </div>
                     </td> 
-                    <td class='pointer' title='${
-                      row.job_position
-                    }'>${row.job_position.substr(0, 23)}</td>
+                    <td class='pointer' title='${row.job_position
+              }'>${row.job_position.substr(0, 23)}</td>
                     <td>${row.contact_number}</td>
                     <td>${row.interview_date}</td>
                     <td>
@@ -99,14 +98,12 @@ $(document).ready(function () {
                     <td>${inertview_status}</td>
                     <td>
                         <div class="action-icon d-inline-flex"> 
-                          <a href="#" data-id="${
-                            row.candidate_id
-                          }" class="view">
+                          <a href="#" data-id="${row.candidate_id
+              }" class="view">
                             <i class="fa-solid fa-eye" title="view details"></i>
                           </a>
-                          <a href="#" data-id="${
-                            row.candidate_id
-                          }" class="edit">
+                          <a href="#" data-id="${row.candidate_id
+              }" class="edit">
                             <i class="fa-solid fa-pen-to-square" title="edit details"></i>
                           </a>
                         </div>
@@ -368,16 +365,16 @@ $(document).ready(function () {
             $("#rating_by").html(res.data.official_name);
             $("#interview_feedback").html(
               res.data.interview_feedback ??
-                "Candidate still not given the feedback"
+              "Candidate still not given the feedback"
             );
           }
           if (res.data.training_offer_send) {
-            $(".offerDate").show(); 
+            $(".offerDate").show();
             $("#joingDate").html(moment(res.data.training_offer_send).format("MMMM D, YYYY [at] h:mm A"));
-          } 
-          if (res.data.candidate_rejection_comment) { 
+          }
+          if (res.data.candidate_rejection_comment) {
             $("#rejection").html(res.data.candidate_rejection_comment);
-          } 
+          }
           dynamicInputs(res.data.interview_status, res.data.interview_status);
         } else {
           Swal.fire(res.data.message);
@@ -393,10 +390,10 @@ $(document).ready(function () {
   });
 
   function dynamicInputs(val1, val2) {
-   var selectedValue = val1;
-   var existingStatus = val2;
+    var selectedValue = val1;
+    var existingStatus = val2;
 
-    
+
     $("#updateButton").hide();
     $(".scheduled-date").hide();
     $(".rating-content").hide();
@@ -404,7 +401,7 @@ $(document).ready(function () {
     $(".send-offer").hide();
     $(".rejection-content").hide();
     $(".offerDate").hide();
-    
+
     if (selectedValue == 3) {
       $(".scheduled-date").show();
       $("#updateButton").hide();
@@ -459,7 +456,7 @@ $(document).ready(function () {
       }
     }
 
-    if(existingStatus == 7){
+    if (existingStatus == 7) {
       $("#updateButton").hide();
     }
 
@@ -476,7 +473,7 @@ $(document).ready(function () {
       }
     }
     if (interview_status == 5) {
-      let form = joingDate();
+      let form = offerFormValidate();
       if (form === 0) {
         return false;
       }
@@ -627,7 +624,7 @@ $(document).ready(function () {
       return 0;
     }
   }
-  function joingDate() {
+  function offerFormValidate() {
     $(".error").remove();
     if ($("#joining_date").val().length == 0) {
       $("#joining_date")
@@ -643,9 +640,18 @@ $(document).ready(function () {
         .after("<small class='error text-danger'> mandatory field.</small>");
       return 0;
     }
+    if ($("#offer_salary").val().length == 0) {
+      $("#offer_salary")
+        .closest(".input-group")
+        .closest(".col-md-4")
+        .find("label.form-label")
+        .after("<small class='error text-danger'>Mandatory field.</small>");
+
+      return 0;
+    }
   }
   function rejection() {
-    $(".error").remove(); 
+    $(".error").remove();
     if ($("#rejection").val().length == 0) {
       $("#rejection")
         .closest(".mb-3")
