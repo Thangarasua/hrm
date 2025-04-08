@@ -1228,6 +1228,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 					<div class="row">
 						<div class="col-md-6">
 							<div class="mb-3">
+							<input type="hidden" class="form-control" name="experienceId" id="experienceId" value="">
 								<label class="form-label">Previous Company Name <span class="text-danger"> *</span></label>
 								<input type="text" class="form-control" name="companyName" id="companyName" value="">
 							</div>
@@ -1269,9 +1270,10 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 						<div class="col-md-6">
 							<div class="mb-3">
 								<label class="form-label">Skils (Optional) <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control" name="skils" id="skils">
+								<input type="text" class="form-control" name="skills" id="skills">
 							</div>
 						</div>
+						<div class="col-md-12" id="editUploadFields"></div>
 						<div class="col-md-12">
 							<label for="">Upload Proof Document:</label>
 							<input type="file" name="experienceDocument[]" class="form-control experienceDocument" accept=".pdf,image/*" />

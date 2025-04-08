@@ -149,6 +149,7 @@ function getExperienceInfo($employeeId) {
     $output = '';
     if ($result && mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
+            $id = htmlspecialchars($row['id']);
             $companyName = htmlspecialchars($row['previous_employer']);
             $jobTitle = htmlspecialchars($row['designation']);
             $startDate = htmlspecialchars($row['start_date']);
@@ -164,7 +165,13 @@ function getExperienceInfo($employeeId) {
                             <i class="ti ti-point-filled me-1"></i>' . $jobTitle . '
                         </span>
                     </div>
-                    <p class="text-dark">' . formatDateRange($startDate, $endDate) . '</p>
+                    <div>
+                        <a href="#" class="btn btn-sm btn-icon btn-primary edit-experience-btn" data-bs-toggle="modal" data-bs-target="#edit_experience" 
+                        data-category="' . $id . '">
+                            <i class="ti ti-edit"></i>
+                        </a>
+                        <p class="text-dark">' . formatDateRange($startDate, $endDate) . '</p>
+                    </div>
                 </div>';
 
             // Document section

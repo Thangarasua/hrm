@@ -60,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
     if ($flag === "experienceInfo") {
         $employeeId = $_POST['employeeID'];
+        $experienceId = $_POST['experienceId'];
         $companyName = $_POST['companyName'];
         $previousDesignation = $_POST['previousDesignation'];
         $startDate = $_POST['startDate'];
@@ -67,15 +68,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $endDate = $_POST['endDate'];
         $endDate = date("Y-m-d", strtotime($endDate));
         $workExperience = $_POST['workExperience'];
-        $skils = $_POST['skils'];
+        $skills = $_POST['skills'];
         $experienceDocument = $_FILES['experienceDocument'];
 
         $words = explode(' ', $companyName);
         $firstWord = $words[0];
-
+        $uploadedFiles = [];
+        $uploadedFilesJson = [];
         if (!empty($experienceDocument['name'][0])) {
-
-            $uploadedFiles = [];
             foreach ($experienceDocument['name'] as $key => $docName) {
                 $fileTmpName = $experienceDocument['tmp_name'][$key];
                 $fileType = $experienceDocument['type'][$key];
@@ -96,17 +96,24 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
                     exit;
                 }
             }
+        }
 
-            $uploadedFilesJson = json_encode($uploadedFiles);
-
-            $experienceInfoQuery = "INSERT INTO experience_info (employee_id, previous_employer, designation, start_date, end_date, work_experience, skills, documents) VALUES ('$employeeId', '$companyName', '$previousDesignation', '$startDate', '$endDate', '$workExperience', '$skils', '$uploadedFilesJson')";
-            if (mysqli_query($conn, $experienceInfoQuery)) {
-                echo json_encode(array('status' => 'success', 'message' => 'Experience Information Updated Successfully.'));
-            } else {
-                echo json_encode(array('status' => 'failure', 'message' => 'Error adding experience data.'));
+        if( !empty($experienceId)){
+            $CheckQuery = "SELECT * FROM experience_info WHERE id = '$experienceId'";
+            $result = mysqli_query($conn, $CheckQuery);
+            if (mysqli_num_rows($result) > 0) {
+                $row = mysqli_fetch_assoc($result);
+                $uploadedFilesJson = empty($uploadedFiles) ? $row['documents'] : json_encode($uploadedFiles);
             }
+            $experienceInfoQuery = "UPDATE experience_info SET previous_employer = '$companyName', designation = '$previousDesignation', start_date = '$startDate', end_date = '$endDate', work_experience = '$workExperience', skills = '$skills', documents ='$uploadedFilesJson' WHERE id = $experienceId AND employee_id = '$employeeId'";
         } else {
-            echo json_encode(array('status' => 'failure', 'message' => 'No documents uploaded.'));
+            $uploadedFilesJson = json_encode($uploadedFiles);
+            $experienceInfoQuery = "INSERT INTO experience_info (employee_id, previous_employer, designation, start_date, end_date, work_experience, skills, documents) VALUES ('$employeeId', '$companyName', '$previousDesignation', '$startDate', '$endDate', '$workExperience', '$skills', '$uploadedFilesJson')";
+        }
+        if (mysqli_query($conn, $experienceInfoQuery)) {
+            echo json_encode(array('status' => 'success', 'message' => 'Experience Information Updated Successfully.'));
+        } else {
+            echo json_encode(array('status' => 'failure', 'message' => 'Error adding experience data.'));
         }
     }
 
@@ -319,5 +326,33 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             echo json_encode(array('status' => 'failure', 'message' => 'Something went wrong uploading.'));
         }
         exit;
+    }
+
+    if ($flag === "getExperienceData") {
+        $id = $_POST['id'];
+        $query = "SELECT * FROM `experience_info` WHERE `id` = $id";
+        $result = mysqli_query($conn, $query);
+        if ($result && $row = $result->fetch_assoc()) {
+            $id = htmlspecialchars($row['id']);
+            $companyName = htmlspecialchars($row['previous_employer']);
+            $jobTitle = htmlspecialchars($row['designation']);
+            $startDate = htmlspecialchars($row['start_date']);
+            $endDate = htmlspecialchars($row['end_date']);
+            $workExperience = htmlspecialchars($row['work_experience']);
+            $skills = htmlspecialchars($row['skills']);
+            $existingDocuments = json_decode($row['documents'], true);
+
+            $response = array(
+                'id' => $id,
+                'companyName' => $companyName,
+                'jobTitle' => $jobTitle,
+                'startDate' => $startDate,
+                'endDate' => $endDate,
+                'existingDocuments' => $existingDocuments,
+                'workExperience' => $workExperience,
+                'skills' => $skills
+            );
+            echo json_encode($response);
+        }
     }
 }
