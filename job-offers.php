@@ -136,7 +136,7 @@
 								<th>Candidate</th>
 								<th>Applied Role</th>
 								<th>Phone</th>
-								<th>Scheduled</th>
+								<th>Joining On</th>
 								<th>Resume</th>
 								<th>Status</th>
 								<th>Action</th>
