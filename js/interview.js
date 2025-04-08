@@ -369,8 +369,15 @@ $(document).ready(function () {
             );
           }
           if (res.data.training_offer_send) {
-            $(".offerDate").show();
+            $(".offerContent").show();
             $("#joingDate").html(moment(res.data.training_offer_send).format("MMMM D, YYYY [at] h:mm A"));
+            if(res.data.training_offer_status == 0){
+              $("#offerResponce").html('Still Not response');
+            }else if(res.data.training_offer_status == 1){
+              $("#offerResponce").html('Accept the offer');
+            }else{
+              $("#offerResponce").html('Reject the offer');
+            }
           }
           if (res.data.candidate_rejection_comment) {
             $("#rejection").html(res.data.candidate_rejection_comment);

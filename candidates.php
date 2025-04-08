@@ -256,6 +256,9 @@ if (isset($_GET['id'])) {
 							</div>
 						</div>
 					</div>
+					<div class="col-8 m-auto interviewPage content-border" style="display: none;">
+						<h5 class="text-center">Kindly visit the <a href="interview" class="text-primary">interview</a> page.</h5>
+					</div> 
 				</div>
 				<input type="hidden" name="rowId" id="rowId">
 				<div class="modal-footer">
