@@ -11,7 +11,7 @@ $status = $row['training_offer_status'];
 if ($status == 0) {
     if ($value == 1) {
         $currentDatetime = date('Y-m-d H:i:s'); 
-        $query = "UPDATE `interview_process` SET `training_offer_responced`= $currentDatetime, `training_offer_status`= 1 WHERE `candidate_id`='$id'";
+        $query = "UPDATE `interview_process` SET `training_offer_responced`= '$currentDatetime', `training_offer_status`= 1 WHERE `candidate_id`='$id'"; 
         $result = mysqli_query($conn, $query);
         $content = 'accepted';
     } elseif ($value == 2) {

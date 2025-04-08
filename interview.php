@@ -327,8 +327,9 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-8 m-auto offerDate content-border" style="display: none;">
+						<div class="col-8 m-auto offerContent content-border" style="display: none;">
 							<h5 class="text-center">Offer sent. Joing Date: <span id="joingDate" class="text-primary"></span></h5>
+							<h5 class="text-center">Responce Status: <span id="offerResponce" class="text-primary"></span></h5>
 						</div>
 					</div>
 					<div class="rejection-content" style="display: none;">

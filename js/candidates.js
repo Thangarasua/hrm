@@ -98,14 +98,12 @@ $(document).ready(function () {
                     <td>${inertview_status}</td>
                     <td>
                         <div class="action-icon d-inline-flex"> 
-                          <a href="#" data-id="${
-                            row.candidate_id
-                          }" class="view">
+                          <a href="#" data-id="${row.candidate_id
+              }" class="view">
                             <i class="fa-solid fa-eye" title="view details"></i>
                           </a>
-                          <a href="#" data-id="${
-                            row.candidate_id
-                          }" class="edit">
+                          <a href="#" data-id="${row.candidate_id
+              }" class="edit">
                             <i class="fa-solid fa-pen-to-square" title="edit details"></i>
                           </a>
                         </div>
@@ -149,12 +147,12 @@ $(document).ready(function () {
           $("#experience").val(data.experience);
           $("#skills").val(data.skills);
           $("#available_time1").val(data.available_time1);
-          $("#available_time2").val(data.available_time2 || "Not define"); 
+          $("#available_time2").val(data.available_time2 || "Not define");
           $("#created_at").val(data.created_at);
           $("#interview_status").val(data.interview_status);
           $("#interview_date_view").val(
             data.interview_date || "---Still not update---"
-          ); 
+          );
         } else {
           Swal.fire(data.message);
         }
@@ -176,7 +174,7 @@ $(document).ready(function () {
       },
       cache: false,
       success: function (res) {
-        if (res.status == "success") { 
+        if (res.status == "success") {
           $("#rowId").val(res.data.candidate_id);
           $("#candidate_name").val(res.data.candidate_name);
           $("input[name='interview_status']").prop("checked", false); // Uncheck all first
@@ -188,8 +186,8 @@ $(document).ready(function () {
           $("#schedule_time1").val(res.data.available_time1);
           $("#schedule_time2").val(
             res.data.available_time2 || "---Not Define---"
-          ); 
-          $("#interview_date_edit").val(res.data.interview_date); 
+          );
+          $("#interview_date_edit").val(res.data.interview_date);
           $("#interviewDate").html(res.data.interview_date);
           $("#rejection").html(res.data.candidate_rejection_comment);
           let val = res.data.interview_status;
@@ -209,18 +207,19 @@ $(document).ready(function () {
 
   function dynamicInputs(val1, val2) {
     selectedValue = val1;
-    existingStatus = val2; 
+    existingStatus = val2;
 
     $("#updateBtn").hide();
-    $(".applied-date").hide(); 
+    $(".applied-date").hide();
     $(".shortlisted").hide();
     $(".rejection-content").hide();
+    $(".interviewPage").hide();
 
-    if (selectedValue == 1) { 
+    if (selectedValue == 1) {
       $(".applied-date").show();
     }
-    
-    if (selectedValue == 2) { 
+
+    if (selectedValue == 2) {
       if (existingStatus > 2) {
         $(".sheduleDate").hide();
         $(".shortlisted").show();
@@ -229,19 +228,22 @@ $(document).ready(function () {
       } else {
         $(".shortlisted").show();
         $(".sheduleDate").show();
-        $(".sheduledDate").hide(); 
+        $(".sheduledDate").hide();
         $("#updateBtn").show();
       }
-    }   
+    }
+    if (selectedValue > 2) {
+      $(".interviewPage").show();
+    }
     if (selectedValue == 7) {
       $(".rejection-content").show();
       if (existingStatus == 7) {
         $("#updateBtn").hide();
-      }else{
+      } else {
         $("#updateBtn").show();
 
       }
-    } 
+    }
   }
 
   $(document).on("submit", "#update", function (e) {
@@ -284,7 +286,7 @@ $(document).ready(function () {
           if (interview_status == 3) {
             // 2->shortlisted candidate send mail
             sendRecruitmentMail(response.data);
-          }else if(interview_status == 7){
+          } else if (interview_status == 7) {
             sendRecruitmentMail(response.data);
           } else {
             $("#update")[0].reset();
@@ -304,7 +306,7 @@ $(document).ready(function () {
   });
 
   /** Function to Send Recruitment Mail */
-  function sendRecruitmentMail(data) { 
+  function sendRecruitmentMail(data) {
     $.ajax({
       type: "POST",
       url: "mails/recruitment-mail.php",
@@ -327,10 +329,10 @@ $(document).ready(function () {
           $("#interviewModal").modal("hide");
           $("#updateBtn").text("Update").prop("disabled", false);
           $("#success_modal").modal("show");
-            $("#success_modal_content").html(
-              "Shortlist mail send successfully! 📨"
-            );
-            Swal.close(); 
+          $("#success_modal_content").html(
+            "Shortlist mail send successfully! 📨"
+          );
+          Swal.close();
           loadData("", "", "", "", "getAll");
         } else {
           toastr.error(response.message, "Mail Error");
