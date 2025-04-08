@@ -497,4 +497,35 @@ $(document).ready(function () {
         `;
         $('#uploadFields').append(newField);
     });
+
+    $('.edit-experience-btn').click(function () {
+        var id = $(this).data('category');
+        $.ajax({
+            url: 'queries/employee-details.php',
+            type: 'POST',
+            data: { 'id': id, 'flag': 'getExperienceData' },
+            success: function (response) {
+                $('#experienceId').val(response.id);
+                $('#companyName').val(response.companyName);
+                $('#previousDesignation').val(response.jobTitle);
+                $('#startDate').val(response.startDate);
+                $('#endDate').val(response.endDate);
+                $('#workExperience').val(response.workExperience);
+                $('#skills').val(response.skills);
+                var documents = response.existingDocuments;
+                $('#editUploadFields').empty();
+                $.each(documents, function (index, doc) {
+                    var filePath = './uploads/employee_documents/experience_documents/';
+                    var fileUrl = `${filePath}${doc}`;
+                    var documentField = `
+                        <div class="mb-3">
+                            <label for="experienceDocument_${index}">Existing Document ${index + 1}</label>
+                            <a href="${fileUrl}" class="previewDocument" data-file-url="${fileUrl}" target="_blank"><i class="fa fa-file-alt iconStyle educationIcon"></i></a>
+                        </div>
+                    `;
+                    $('#editUploadFields').append(documentField);
+                });
+            }
+        });
+    });
 });
