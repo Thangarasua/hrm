@@ -25,11 +25,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             $departmentWise = "AND e.department_id = $departmentId";
         }
 
-        $sql = "SELECT c.*,r.job_position FROM `interview_process` AS i INNER JOIN `candidates` AS c ON i.candidate_id = c.candidate_id INNER JOIN recruitment AS r ON c.ticket_request_id = r.ticket_request_id INNER JOIN employees AS e ON e.employee_id = r.raised_by WHERE c.`responce_status` = 1 AND i.`interview_status` IN (3,4,5,6,7,8,9) $departmentWise ORDER BY i.`candidate_id` DESC";
+        $sql = "SELECT i.*,c.*,r.job_position FROM `interview_process` AS i INNER JOIN `candidates` AS c ON i.candidate_id = c.candidate_id INNER JOIN recruitment AS r ON c.ticket_request_id = r.ticket_request_id INNER JOIN employees AS e ON e.employee_id = r.raised_by WHERE i.`training_offer_status` = 1 AND i.`interview_status` = 5 $departmentWise ORDER BY i.`candidate_id` DESC";  
+        
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
-                $row['interview_date'] = date("d M Y", strtotime($row['interview_date']));
+                $row['training_offer_send'] = date("d M Y", strtotime($row['training_offer_send']));
                 $response[] = $row;
             }
         } else {
