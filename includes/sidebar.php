@@ -120,6 +120,24 @@
 				</li>
 				<?php } ?>
 
+				<li class="menu-title"><span>MY PAGE</span></li>
+				<li>
+					<ul>
+						<li class="submenu">
+							<a href="javascript:void(0);" class="sub-menu-title">
+								<i class="ti ti-user-shield"></i><span>My Page</span>
+								<span class="menu-arrow"></span>
+							</a>
+							<ul> 
+							<li><a href="employee-details" class="job-offers">My Info</a></li> 
+								<li><a href="attendance" class="recruitment">Attendance</a></li> 
+								<li><a href="leave-managment" class="candidates">Leave Management</a></li>
+								<li><a href="payroll" class="interview">Payroll</a></li>
+							</ul>
+						</li>
+					</ul>
+				</li> 
+
 				<li class="menu-title"><span>RECRUITMENT</span></li>
 				<li>
 					<ul>
