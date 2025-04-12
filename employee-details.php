@@ -912,7 +912,12 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								</div>
 								<div class="col-md-6">
 									<div class="mb-3">
-										<label class="form-label">Present Address <span class="text-danger"> *</span></label>
+										<label class="form-label">Present Address <span class="text-danger"> * &nbsp;&nbsp;&nbsp;</span>
+												<input class="form-check-input" type="checkbox" id="sameAddressCheck">
+												<label class="form-check-label" for="sameAddressCheck">
+													Same as Permanent Address
+												</label>
+										</label>
 										<textarea class="form-control" rows="2" name="presentAddress" id="presentAddress"><?php echo $personalInfo ? $personalInfo['presentAddress'] : ''; ?></textarea>
 									</div>
 								</div>

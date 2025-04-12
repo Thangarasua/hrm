@@ -528,4 +528,22 @@ $(document).ready(function () {
             }
         });
     });
+
+
+    $('#sameAddressCheck').on('change', function () {
+        if ($(this).is(':checked')) {
+            $('#presentAddress').val($('#permanentAddress').val());
+            $('#presentAddress').prop('readonly', true);
+        } else {
+            $('#presentAddress').val('');
+            $('#presentAddress').prop('readonly', false);
+        }
+    });
+
+    // Optional: If permanent address changes after checkbox is checked
+    $('#permanentAddress').on('input', function () {
+        if ($('#sameAddressCheck').is(':checked')) {
+            $('#presentAddress').val($(this).val());
+        }
+    });
 });
