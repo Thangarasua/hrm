@@ -329,7 +329,7 @@ require_once("./includes/sidebar.php");
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Job ID <span class="text-danger"> *</span></label>
-										<input type="text" class="form-control" name="ticketRequestId" id="send_jobIt" readonly>
+										<input type="text" class="form-control" name="ticketRequestId" id="send_jobID" readonly>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -360,7 +360,7 @@ require_once("./includes/sidebar.php");
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Candidate Contact</label>
-										<input type="text" class="form-control" name="candidateContact" id="candidateContact" onkeypress="return phoneNumber(event)" onkeypress="return tenDigits(event)" onpaste="numberPasteValidate(event, this)" placeholder="9876543210" autocomplete="off">
+										<input type="text" class="form-control" name="candidateContact" id="candidateContact" onkeypress="return phoneNumber(event)" onpaste="numberPasteValidate(event, this)" placeholder="9876543210" autocomplete="off">
 									</div>
 								</div>
 							</div>

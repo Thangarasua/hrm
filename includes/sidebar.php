@@ -79,45 +79,45 @@
 	<div class="sidebar-inner slimscroll">
 		<div id="sidebar-menu" class="sidebar-menu">
 			<ul>
-			<?php if ( in_array($roleId,[3,4,5]) ){ ?>
-				<li class="menu-title"><span>MAIN MENU</span></li>
-				<li>
-					<ul>
-						<li class="submenu">
-							<a href="javascript:void(0);" class="sub-menu-title">
-								<i class="ti ti-smart-home"></i>
-								<span>Dashboard</span>
-								<span class="badge badge-danger fs-10 fw-medium text-white p-1">Hot</span>
-								<span class="menu-arrow"></span>
-							</a>
-							<ul class="list-menus">
-								<li><a href="index" class="index">Admin Dashboard</a></li>
-								<li><a href="dashboard" class="dashboard">Dashboard</a></li>
-								<li><a href="employee-dashboard" class="employee-dashboard">Employee Dashboard</a></li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-				
-				<li class="menu-title"><span>HRM</span></li>
-				<li>
-					<ul>
-						<li class="submenu">
-							<a href="javascript:void(0);" class="sub-menu-title">
-								<i class="ti ti-users"></i><span>Employees</span>
-								<span class="menu-arrow"></span>
-							</a>
-							<ul> 
-								<li><a href="employees" class="employees">Employee Lists</a></li> 
-								<li><a href="departments" class="departments">Departments</a></li>
-								<li><a href="designations" class="designations">Designations</a></li>
-								<li><a href="roles" class="roles">Roles</a></li>
-								<li><a href="salary-structure" class="salary-structure">Salary Structure</a></li>
-								<li><a href="policy" class="policy">Policies</a></li>
-							</ul>
-						</li>
-					</ul>
-				</li>
+				<?php if (in_array($roleId, [3, 4, 5])) { ?>
+					<li class="menu-title"><span>MAIN MENU</span></li>
+					<li>
+						<ul>
+							<li class="submenu">
+								<a href="javascript:void(0);" class="sub-menu-title">
+									<i class="ti ti-smart-home"></i>
+									<span>Dashboard</span>
+									<span class="badge badge-danger fs-10 fw-medium text-white p-1">Hot</span>
+									<span class="menu-arrow"></span>
+								</a>
+								<ul class="list-menus">
+									<li><a href="index" class="index">Admin Dashboard</a></li>
+									<li><a href="dashboard" class="dashboard">Dashboard</a></li>
+									<li><a href="employee-dashboard" class="employee-dashboard">Employee Dashboard</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+
+					<li class="menu-title"><span>HRM</span></li>
+					<li>
+						<ul>
+							<li class="submenu">
+								<a href="javascript:void(0);" class="sub-menu-title">
+									<i class="ti ti-users"></i><span>Employees</span>
+									<span class="menu-arrow"></span>
+								</a>
+								<ul>
+									<li><a href="employees" class="employees">Employee Lists</a></li>
+									<li><a href="departments" class="departments">Departments</a></li>
+									<li><a href="designations" class="designations">Designations</a></li>
+									<li><a href="roles" class="roles">Roles</a></li>
+									<li><a href="salary-structure" class="salary-structure">Salary Structure</a></li>
+									<li><a href="policy" class="policy">Policies</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
 				<?php } ?>
 
 				<li class="menu-title"><span>MY PAGE</span></li>
@@ -128,15 +128,15 @@
 								<i class="ti ti-user-shield"></i><span>My Page</span>
 								<span class="menu-arrow"></span>
 							</a>
-							<ul> 
-							<li><a href="employee-details" class="job-offers">My Info</a></li> 
-								<li><a href="employee-attendance" class="recruitment">Attendance</a></li> 
-								<li><a href="leave-managment" class="candidates">Leave Management</a></li>
-								<li><a href="payroll" class="interview">Payroll</a></li>
+							<ul>
+								<li><a href="employee-details" class="employee-details">My Info</a></li>
+								<li><a href="attendance" class="attendance">Attendance</a></li>
+								<li><a href="leave-managment" class="leave-managment">Leave Management</a></li>
+								<li><a href="payroll" class="payroll">Payroll</a></li> 
 							</ul>
 						</li>
 					</ul>
-				</li> 
+				</li>
 
 				<li class="menu-title"><span>RECRUITMENT</span></li>
 				<li>
@@ -146,15 +146,18 @@
 								<i class="ti ti-user-shield"></i><span>Recruitment</span>
 								<span class="menu-arrow"></span>
 							</a>
-							<ul> 
-								<li><a href="recruitment" class="recruitment">Recruitment</a></li> 
+							<ul>
+								<li><a href="recruitment" class="recruitment">Recruitment</a></li>
 								<li><a href="candidates" class="candidates">Candidates</a></li>
 								<li><a href="interview" class="interview">Interview</a></li>
-								<li><a href="job-offers" class="job-offers">Job Offers</a></li> 
+								<li><a href="job-offers" class="job-offers">Job Offers</a></li>
+								<li><a href="referrals" class="referrals">Job Referrals</a></li>
 							</ul>
 						</li>
+						<li><a href="job-openings" class="job-openings"><i class="ti ti-timeline"></i><span>Job Openings</span></a></li>
 					</ul>
-				</li> 
+				</li>
+
 			</ul>
 		</div>
 	</div>
