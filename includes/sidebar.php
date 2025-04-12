@@ -130,7 +130,7 @@
 							</a>
 							<ul> 
 							<li><a href="employee-details" class="job-offers">My Info</a></li> 
-								<li><a href="attendance" class="recruitment">Attendance</a></li> 
+								<li><a href="employee-attendance" class="recruitment">Attendance</a></li> 
 								<li><a href="leave-managment" class="candidates">Leave Management</a></li>
 								<li><a href="payroll" class="interview">Payroll</a></li>
 							</ul>
