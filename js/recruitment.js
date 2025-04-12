@@ -371,7 +371,7 @@ $(document).ready(function () {
         if (res.status == "success") {
           $("#jobSno").val(res.data.id);
           $("#send_raised_by").val(res.data.raised_by);
-          $("#send_jobIt").val(res.data.ticket_request_id);
+          $("#send_jobID").val(res.data.ticket_request_id);
           $("#send_jobTitle").val(res.data.job_position);
           $("#send_jobDescription").val(res.data.job_descriptions);
         } else {
@@ -678,7 +678,7 @@ $(document).ready(function () {
     let candidateName = $("#candidateName").val().trim();
     if (candidateName.length == 0) {
       $("#candidateName").focus();
-      $("#candidateName").after(
+      $("#candidateName").closest(".mb-3").find(".form-label").after(
         "<small class='error text-danger'> mandatory field.</small>"
       );
       return 0;
@@ -686,7 +686,7 @@ $(document).ready(function () {
     let candidateMail = $("#candidateMail").val().trim();
     if (candidateMail.length == 0) {
       $("#candidateMail").focus();
-      $("#candidateMail").after(
+      $("#candidateMail").closest(".mb-3").find(".form-label").after(
         "<small class='error text-danger'> mandatory field.</small>"
       );
       return 0;
@@ -705,7 +705,7 @@ $(document).ready(function () {
     let candidateContact = $("#candidateContact").val().trim();
     if (candidateContact.length == 0) {
       $("#candidateContact").focus();
-      $("#candidateContact").after(
+      $("#candidateContact").closest(".mb-3").find(".form-label").after(
         "<small class='error text-danger'> mandatory field.</small>"
       );
       return 0;
