@@ -14,9 +14,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             $row = mysqli_fetch_assoc($result);
             $response = [
                 'exists' => true,
-                'check_in' => $row['check_in'],
-                'check_out' => $row['check_out'],
-                'production_hours' => $row['production_hours']
+                'checkIn' => $row['check_in'],
+                'checkOut' => $row['check_out'],
+                'productionHours' => $row['production_hours']
             ];
         } else {
             $response = [
@@ -27,26 +27,61 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     }
 
     if ($flag === "CheckIn") {
-        $employee_id = $_POST['employee_id'];
-        $record_date = $_POST['record_date'];
-        $check_in_time = $_POST['check_in_time'];
+        $employeeId = $_POST['employeeId'];
+        $recordDate = $_POST['recordDate'];
+        $checkInTime = $_POST['checkInTime'];
 
-        $default_check_in = "10:00:00";
-        $late_time = "00:00";
-        $check_in = new DateTime($check_in_time);
-        $default_time = new DateTime($default_check_in);
-        if ($check_in > $default_time) {
-            $diff = $check_in->diff($default_time);
-            $late_hours = $diff->h;
-            $late_minutes = $diff->i;
-            $late_time = $late_hours . " Hrs " . $late_minutes . " Min";
+        $defaultCheckIn = "10:00:00";
+        $lateTime = "00:00";
+        $checkIn = new DateTime($checkInTime);
+        $defaultTime = new DateTime($defaultCheckIn);
+        if ($checkIn > $defaultTime) {
+            $diff = $checkIn->diff($defaultTime);
+            $lateHours = $diff->h;
+            $lateMinutes = $diff->i;
+            $lateTime = $lateHours . " Hrs " . $lateMinutes . " Min";
         }
 
-        $insertQuery = "INSERT INTO attendance (employee_id, record_date, check_in, check_out, status, late_time) VALUES ('$employee_id', '$record_date', '$check_in_time', '00:00', 'Present', '$late_time')";
+        $insertQuery = "INSERT INTO attendance (employee_id, record_date, check_in, check_out, status, late_time) VALUES ('$employeeId', '$recordDate', '$checkInTime', '00:00', 'Present', '$lateTime')";
         if (mysqli_query($conn, $insertQuery)) {
             echo json_encode(array('status' => 'success', 'message' => 'Check In Successfully.'));
         } else {
             echo json_encode(array('status' => 'failure', 'message' => 'Error Check In.'));
+        }
+    }
+
+    if ($flag === "CheckOut") {
+        $employeeId = $_POST['employeeId'];
+        $recordDate = $_POST['recordDate'];
+        $checkInTime = $_POST['checkInTime'];
+        $checkOutTime = $_POST['checkOutTime'];
+
+        $overTime = "00:00";
+        $today = date('Y-m-d');
+        $checkInDateTime = new DateTime("$today $checkInTime");
+        $checkOutDateTime = new DateTime("$today $checkOutTime");
+        $interval = $checkInDateTime->diff($checkOutDateTime);
+
+        $totalMinutes = ($interval->h * 60) + $interval->i;
+        $overMinutes = $totalMinutes - (9 * 60);
+
+        if ($overMinutes > 0) {
+            $hours = floor($overMinutes / 60);
+            $minutes = $overMinutes % 60;
+            $overTime = sprintf('%02d:%02d', $hours, $minutes);
+        } else {
+            $overTime = "00:00";
+        }
+
+        $hours = $interval->h;
+        $minutes = $interval->i;
+        $productionHours = $hours . ':' . str_pad($minutes, 2, '0', STR_PAD_LEFT);
+
+        $updateQuery = "UPDATE attendance SET check_out = '$checkOutTime', overtime = '$overTime', production_hours = '$productionHours' WHERE `employee_id` = '$employeeId ' AND `record_date` = '$recordDate'";
+        if (mysqli_query($conn, $updateQuery)) {
+            echo json_encode(array('status' => 'success', 'message' => 'Check Out Successfully.', 'productionHours' => $productionHours));
+        } else {
+            echo json_encode(array('status' => 'failure', 'message' => 'Error Check Out.'));
         }
     }
 }
