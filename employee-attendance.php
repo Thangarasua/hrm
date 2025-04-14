@@ -54,7 +54,7 @@ $personalInfo = getPersonalInfo($employeeId);
 							<div class="card-body">
 								<div class="mb-3 text-center">
 									<h6 class="fw-medium text-gray-5 mb-2">Good Morning, <?php echo $employeeInfo ? $employeeInfo['OfficialName'] : ''; ?></h6>
-									<h4>08:35 AM, 11 Mar 2025</h4>
+									<h4 id="logiInTime">00:00 AM, 11 Mar 2025</h4>
 									<input type="hidden" class="form-control" name="employeeID" id="employeeID" value="<?php echo $employeeInfo ? $employeeInfo['employeeId'] : ''; ?>" readonly>
 								</div>
 								<div class="attendance-circle-progress mx-auto mb-3"  data-value='65'>
@@ -71,11 +71,11 @@ $personalInfo = getPersonalInfo($employeeId);
 								<div class="text-center">
 									<div class="badge badge-md badge-primary mb-3" id="production-hours">Production: 0.00 hrs</div>
 									<h6 class="fw-medium d-flex align-items-center justify-content-center mb-3">
-										<i class="ti ti-fingerprint text-primary me-1">
+										<i class="text-primary me-1">
 											<span id="check-in-status">Check In at 10.00 AM</span>
 										</i>
 									</h6>
-									<a href="javascript:void(0);" id="punch-action" class="btn btn-dark w-100">Check In</a>
+									<a id="punch-action" class="btn btn-dark w-100 disabled">Check In</a>
 								</div>
 							</div>
 						</div>
