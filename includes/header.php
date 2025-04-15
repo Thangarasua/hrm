@@ -1010,8 +1010,8 @@ $personalInfo = getPersonalInfo($employeeId);
 							</div>
 							<div class="me-1 notification_item">
 								<a href="#" class="btn btn-menubar position-relative me-1" id="notification_popup"
-									data-bs-toggle="dropdown">
-									<i class="ti ti-bell"></i>
+									data-bs-toggle="dropdown"> 
+									<i class="fa-solid fa-bell"></i>   
 									<span class="notification-status-dot"></span>
 								</a>
 								<div class="dropdown-menu dropdown-menu-end notification-dropdown p-4">

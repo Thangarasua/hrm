@@ -22,10 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $sql = "SELECT jr.id,jr.referral_id,jr.referral_id,jr.candidate_name,jr.created_at,jr.handled_hr, jr.referrer_id,jr.interview_status,r.job_position,e.official_name,pi.profile_photo FROM `job_referrals` AS jr INNER JOIN recruitment AS r ON jr.job_id = r.ticket_request_id INNER JOIN employees AS e ON e.employee_id = jr.referrer_id INNER JOIN personal_info AS pi ON e.employee_id=pi.employee_id WHERE 1 ORDER BY jr.`id` DESC"; 
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
+            while ($row = mysqli_fetch_assoc($result)) { 
                 $row['created_at'] = date("d M Y", strtotime($row['created_at'])); 
-                $row['handled_hr'] = is_null($row['handled_hr'])?'Still Not Work':$row['handled_hr']; 
-                $row['interview_status'] = is_null($row['interview_status'])?0:$row['interview_status']; 
+                $row['handled_hr'] = is_null($row['handled_hr'])?'Still Not Work':$row['handled_hr'];  
                 $response[] = $row;
             }
         } else {
@@ -88,12 +87,11 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
         try { 
 
-            $query = "INSERT INTO `candidates` 
-            (`candidate_register_id`,`candidate_name`, `email`, `contact_number`, `created_by`, `ticket_request_id`, `handled_hr`, `referral_id`, `created_at`) VALUES ('$candidateRegistertId','$candidateName', '$candidateMail', '$candidateContact', '$raisedBy', '$ticketRequestId', '$employeeId', '$referralID', '$currentDatetime')"; 
-            mysqli_query($conn, $query);
+            $query = "INSERT INTO `candidates` (`candidate_register_id`,`candidate_name`, `email`, `contact_number`, `created_by`, `ticket_request_id`, `handled_hr`, `referral_id`, `created_at`) VALUES ('$candidateRegistertId','$candidateName', '$candidateMail', '$candidateContact', '$raisedBy', '$ticketRequestId', '$employeeId', '$referralID', '$currentDatetime')"; 
+            mysqli_query($conn, $query); 
 
-            $updateQuery = "UPDATE `job_referrals` SET `handled_hr`='$employeeId',`updated_at`='$currentDatetime',`responce_status`=0 WHERE `referral_id` = $referralID";
-            mysqli_query($conn, $updateQuery);
+            $updateQuery = "UPDATE `job_referrals` SET `handled_hr`='$employeeId',`updated_at`='$currentDatetime',`interview_status`= 0 WHERE `referral_id` = '$referralID'";
+            mysqli_query($conn, $updateQuery); 
 
             $getHRdetails = "SELECT `official_name` AS hrName,`phone` AS HRphone FROM `employees` WHERE `employee_id` = '$employeeId'";
             $result = mysqli_query($conn, $getHRdetails);
