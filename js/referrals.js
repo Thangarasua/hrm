@@ -32,8 +32,10 @@ $(document).ready(function () {
 
         // Check if data is not empty
         if (data.length > 0) {
-          $.each(data, function (index, row) {
-            if (row.interview_status == 1) {
+          $.each(data, function (index, row) { 
+            if (row.interview_status == 0) {
+              inertview_status = '<span class="badge border border-purple text-purple"><i class="ti ti-point-filled"></i>Form Sending</span>';
+            } else if (row.interview_status == 1) {
               inertview_status = '<span class="badge border border-purple text-purple"><i class="ti ti-point-filled"></i>Applied</span>';
             } else if (row.interview_status == 2) {
               inertview_status = '<span class="badge border border-pink text-pink"><i class="ti ti-point-filled"></i>Shortlisted</span>';
@@ -50,7 +52,7 @@ $(document).ready(function () {
             } else if (row.interview_status == 8) {
               inertview_status = '<span class="badge border border-success text-success"><i class="ti ti-point-filled"></i>Hired</span>';
             } else if (row.interview_status == 9) {
-              inertview_status = '<span class="badge border border-danger text-danger"><i class="ti ti-point-filled"></i>Not Attend</span>';
+              inertview_status = '<span class="badge border border-danger text-danger"><i class="ti ti-point-filled"></i>Not Attend</span>';  
             } else {
               inertview_status = '<span class="badge border border-danger text-danger"><i class="ti ti-point-filled"></i>Not Workout</span>';
             }

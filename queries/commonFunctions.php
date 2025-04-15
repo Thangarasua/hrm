@@ -262,7 +262,7 @@ function getEducationInfo($employeeId) {
                 $output .= '</ul></div>';
             }
              else {
-                $output .= '<div class="mt-2"><i>No documents uploaded for this category.</i></div>';
+                $output .= '<div class="mt-2"><i>Kindly upload your certificate.</i></div>';
             }
         $output .= '</div>';
     }
