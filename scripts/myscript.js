@@ -268,3 +268,21 @@ function dataTableDesigns() {
   resetTimer();
   /*-----------SESSION AUTO LOGOUT-----------*/
  
+  // Like corn job every min update attendance hours
+  function callPHPscript() {
+    let baseUrl = window.location.origin;
+
+    let dynamicUrl = baseUrl.includes("localhost")
+        ? baseUrl + "/actecrm/hrm/queries/cron-update.php?updateProduction=1"
+        : baseUrl + "/hrm/queries/cron-update.php?updateProduction=1";
+    
+    $.get(dynamicUrl, function(data) {
+        console.log("Script executed:", new Date().toLocaleTimeString());
+    });
+}
+
+// Call once when page loads
+callPHPscript();
+
+// Then every 60 seconds
+setInterval(callPHPscript, 60000);
