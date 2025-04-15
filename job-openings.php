@@ -214,7 +214,7 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Job ID</label>
-                                            <input type="text" class="form-control" name="ticketRequestId" id="send_jobIt" readonly>
+                                            <input type="text" class="form-control" name="ticketRequestId" id="send_jobID" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
