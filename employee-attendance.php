@@ -72,10 +72,10 @@ $personalInfo = getPersonalInfo($employeeId);
 									<div class="badge badge-md badge-primary mb-3" id="production-hours">Production: 0.00 hrs</div>
 									<h6 class="fw-medium d-flex align-items-center justify-content-center mb-3">
 										<i class="text-primary me-1">
-											<span id="check-in-status">Check In at 10.00 AM</span>
+											<span id="check-in-status">Log In at 10.00 AM</span>
 										</i>
 									</h6>
-									<a id="punch-action" class="btn btn-dark w-100 disabled">Check In</a>
+									<a id="punch-action" class="btn btn-dark w-100 disabled">Log In</a>
 								</div>
 							</div>
 						</div>
@@ -288,9 +288,9 @@ $personalInfo = getPersonalInfo($employeeId);
 								<thead class="thead-light">
 									<tr>
 										<th>Date</th>
-										<th>Check In</th>
+										<th>Log In</th>
 										<th>Status</th>
-										<th>Check Out</th>
+										<th>Log Out</th>
 										<th>Break</th>
 										<th>Late</th>
 										<th>Overtime</th>
