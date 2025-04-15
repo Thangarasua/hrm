@@ -14,15 +14,15 @@ $(document).ready(function () {
 
      // Update the UI for check-out option
      function updateUIForCheckOut(productionHours = 0) {
-        $('#check-in-status').text('Check Out after 9 hours');
-        $('#punch-action').text('Check Out');
+        $('#check-in-status').text('Log Out after 9 hours');
+        $('#punch-action').text('Log Out');
         $('#punch-action').attr('href', $('#punch-action').data('href')).removeClass('disabled');
         $('#production-hours').text('Production: ' + productionHours + ' hrs');
     }
 
     // Update the UI after checkout
     function updateUIForCheckedOut(productionHours) {
-        $('#check-in-status').text('Checked Out');
+        $('#check-in-status').text('Logged Out');
         $('#punch-action').text('No further action today');
         $('#punch-action').data('href', href).removeAttr('href').addClass('disabled');
         $('#production-hours').text('Production: ' + productionHours + ' hrs');
@@ -72,7 +72,7 @@ $(document).ready(function () {
 
     }
 
-    // On "Check In" or "Check Out" button click
+    // On "Log In" or "Log Out" button click
     $('#punch-action').on('click', function() {
         if (!isCheckedIn) {
             $.ajax({
@@ -82,12 +82,11 @@ $(document).ready(function () {
                 success: function(response) {
                     if (response.status == "success") {
                         isCheckedIn = true;
-                        toastr.success("Check In Successfully");
+                        toastr.success("Log In Successfully");
                         setTimeout(function () {
-                            location.reload();
+                            updateUIForCheckOut(); 
                         }, 3000);
                         Swal.close();
-                        updateUIForCheckOut(); 
                     } else {
                         toastr.error(response.message, "Error");
                     }
@@ -100,12 +99,11 @@ $(document).ready(function () {
                 data: { employeeId: employeeId, recordDate: currentDate, checkInTime: checkInTime, checkOutTime: systemTime, flag: 'CheckOut' },
                 success: function(response) {
                     if (response.status == "success") {
-                        toastr.success("Check Out Successfully");
+                        toastr.success("Log Out Successfully");
                         setTimeout(function () {
-                            location.reload();
+                            updateUIForCheckedOut(response.productionHours);
                         }, 3000);
                         Swal.close();
-                        updateUIForCheckedOut(response.productionHours);
                     }
                 }
             });
