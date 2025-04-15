@@ -1,29 +1,54 @@
-<?php include "../includes/config.php";
-header('Content-Type: application/json');
-$employeeId = $_SESSION['hrm_employeeId'];
-$currentDate = date("Y-m-d");
-$currentTime = date("H:i:s");
+<?php
+include(__DIR__ . '/../includes/config.php');
 
-$query = "SELECT * FROM `attendance` WHERE `employee_id` = '$employeeId ' AND `record_date` = '$currentDate' ORDER BY id DESC LIMIT 1";
-$result = mysqli_query($conn, $query);
-if (mysqli_num_rows($result) > 0) {
-    $row = mysqli_fetch_assoc($result);
-    $employeeId = $row['employee_id'];
-    $checkInTime = strtotime($row['check_in']);
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['updateProduction'])) {
+    $currentDate = date("Y-m-d");
     $now = time();
-    $productionHours;
+    $updated = 0;
+    $errors = [];
 
-    if ($currentTime >= "23:59:00") {
-        $productionHours = floor((strtotime("23:59:59") - $checkInTime) / 60);
-       
-    } else {
-        $productionHours = floor(($now - $checkInTime) / 60);
-    }
+    // Get all attendance records for today with a check-in time
+    $query = "SELECT * FROM attendance WHERE record_date = '$currentDate' AND check_in IS NOT NULL";
+    global $conn;
+    $result = mysqli_query($conn, $query);
 
-    $updateQuery = "UPDATE attendance SET production_hours = '$productionHours' WHERE `employee_id` = '$employeeId ' AND `record_date` = '$recordDate'";
-    if (mysqli_query($conn, $updateQuery)) {
-        echo json_encode(array('status' => 'success', 'message' => 'Check Out Successfully.', 'productionHours' => $productionHours));
+    if ($result && mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $employeeId = $row['employee_id'];
+            $checkInTime = strtotime($row['check_in']);
+
+            // Set end time — either now or 23:59:59
+            $endTime = ($now >= strtotime("23:59:00")) ? strtotime("23:59:59") : $now;
+
+            $diffSeconds = $endTime - $checkInTime;
+
+            // Format difference into HH:MM:SS
+            $hours = floor($diffSeconds / 3600);
+            $minutes = floor(($diffSeconds % 3600) / 60);
+            $seconds = $diffSeconds % 60;
+            $productionTime = sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
+
+            $updateQuery = "UPDATE attendance 
+                            SET production_hours = '$productionTime' 
+                            WHERE employee_id = '$employeeId' 
+                              AND record_date = '$currentDate'";
+
+            if (mysqli_query($conn, $updateQuery)) {
+                $updated++;
+            } else {
+                $errors[] = "Failed to update $employeeId: " . mysqli_error($conn);
+            }
+        }
+
+        echo json_encode([
+            'status' => 'success',
+            'updated' => $updated,
+            'errors' => $errors
+        ]);
     } else {
-        echo json_encode(array('status' => 'failure', 'message' => 'Error Check Out.'));
+        echo json_encode([
+            'status' => 'info',
+            'message' => 'No attendance check-ins found for today.'
+        ]);
     }
 }
