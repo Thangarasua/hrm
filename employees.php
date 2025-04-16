@@ -213,7 +213,7 @@
 								<th>S.No</th>
 								<th>Emp ID</th>
 								<th>Name</th>
-								<th>Email</th>
+								<th>Profile Filling</th>
 								<th>Phone</th>
 								<th>Designation</th>
 								<th>Joining Date</th>
