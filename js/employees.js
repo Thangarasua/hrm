@@ -53,15 +53,27 @@ $(document).ready(function () {
           $.each(data, function (index, row) {
             var newRow = `<tr>
                             <td>${index + 1}</td>
-                            <td>${row.employee_id}</td>
-                            <td>${row.official_name}</td> 
-                            <td class='pointer' title='${
-                              row.email
-                            }'>${row.email.substr(0, 20)}</td>
+                            <td>${row.employee_id}</td> 
+                            <td>
+                              <div class="d-flex align-items-center file-name-icon">
+                                <a href="${row.profile}" target="_blank" class="avatar avatar-md">
+                                <img src="${row.profile}" class="img-fluid rounded-circle" alt="Profile">
+                                </a>
+                                <div class="ms-2">
+                                  <h6 class="fw-medium"><a href="#">
+                                  ${row.official_name}
+                                  </a></h6>
+                                  <span class="d-block mt-1">${row.email}</span>
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              <div class="progress pointer" data-bs-toggle="tooltip" title="${row.profileCompletion}%">
+                                  <div class="progress-bar" role="progressbar" style="width: ${row.profileCompletion}%;" aria-valuenow="${row.profileCompletion}" aria-valuemin="0" aria-valuemax="100">${row.profileCompletion}%</div>
+                              </div>
+                            </td>
                             <td>${row.phone}</td>
-                            <td class='pointer' title='${
-                              row.designation_title
-                            }'>${row.designation_title.substr(0, 20)}</td>
+                            <td class='pointer'> <span data-bs-toggle="tooltip" title="${row.designation_title}">${row.designation_title.substr(0, 12)}</span></td>
                             <td>${row.doj}</td>
                             <td>
                               <div class="action-icon d-inline-flex">
@@ -79,6 +91,8 @@ $(document).ready(function () {
                             </td>
                           </tr>`;
             tableBody.append(newRow);
+             // Reinitialize Bootstrap tooltips
+              $('[data-bs-toggle="tooltip"]').tooltip();
           });
         }
         /*-----data table common comments includes-----*/

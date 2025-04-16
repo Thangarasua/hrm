@@ -12,21 +12,25 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['flag'])) {
     if ($flag === "getAll") {
         $active = $_GET['active'];
         if ($active == 1) {
-            $ststus = "`e`.`status` = 1";
+            $status = "`e`.`status` = 1";
         } elseif ($active == 0) {
-            $ststus = "`e`.`status` = 0";
+            $status = "`e`.`status` = 0";
         } elseif ($active == 2) {
-            $ststus = "1";
+            $status = "1";
         } elseif ($active == 3) {
             $date1 = date('Y-m-d', strtotime('-3 months'));
             $date2 = date('Y-m-d');
-            $ststus = "1 AND doj BETWEEN '$date1' AND '$date2'";
-        }
+            $status = "1 AND doj BETWEEN '$date1' AND '$date2'";
+        } 
 
-        $query = "SELECT * FROM `employees` AS e INNER JOIN roles AS r ON r.role_id = e.role_id INNER JOIN departments AS dp ON dp.department_id=e.department_id INNER JOIN designations AS dg ON dg.designation_id=e.designation_id WHERE $ststus  ORDER BY `e`.`employee_id` ASC";
+        $query = "SELECT e.`employee_id`, e.`official_name`, e.`email`, e.`phone`, e.`doj`, dg.designation_title, pi.profile_photo AS profileImage, IF(ei.employee_id IS NOT NULL, 1, 0) AS exp, IF(ed.employee_id IS NOT NULL, 1, 0) AS edu, IF(pi.employee_id IS NOT NULL, 1, 0) AS personal, IF(pi.profile_photo IS NOT NULL, 1, 0) AS pic FROM `employees` AS e  INNER JOIN `roles` AS r ON r.role_id = e.role_id  INNER JOIN `departments` AS dp ON dp.department_id = e.department_id  INNER JOIN `designations` AS dg ON dg.designation_id = e.designation_id  LEFT JOIN `experience_info` AS ei ON ei.employee_id = e.employee_id  LEFT JOIN `education_info` AS ed ON ed.employee_id = e.employee_id  LEFT JOIN `personal_info` AS pi ON pi.employee_id = e.employee_id  WHERE $status GROUP BY e.employee_id, e.official_name, e.email, e.phone, e.doj, dg.designation_title, pi.profile_photo, ei.employee_id, ed.employee_id, pi.employee_id ORDER BY e.`employee_id` ASC";
+        
         $result = mysqli_query($conn, $query);
         $employess = [];
         while ($row = $result->fetch_assoc()) {
+            $row['profile'] = is_null($row['profileImage']) ? "assets/img/users/sample-user.jpg" : "uploads/employee_documents/profile_photo/".$row['profileImage'];
+            $row['profileCompletion'] = ($row['exp'] + $row['edu'] + $row['personal'] + $row['pic'] + 1) * 20;
+            $row['string'] = (string)$row['profileCompletion'];
             $row['doj'] = date("d M Y", strtotime($row['doj']));
             $employess[] = $row;
         }
