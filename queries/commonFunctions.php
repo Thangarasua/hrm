@@ -1,10 +1,11 @@
-<?php 
+<?php
 include(__DIR__ . '/../includes/config.php');
 
 $employeeId = $_SESSION['hrm_employeeId'];
-$employeeType = substr($employeeId, 0, 4); 
+$employeeType = substr($employeeId, 0, 4);
 
-function getDepartments($currentDepartmentId = null) {
+function getDepartments($currentDepartmentId = null)
+{
     global $conn;
     $query = "SELECT * FROM departments WHERE status = 1 ORDER BY department_name ASC";
     $result = mysqli_query($conn, $query);
@@ -16,7 +17,8 @@ function getDepartments($currentDepartmentId = null) {
     return $options;
 };
 
-function getRoles($currentRoleId = null) {
+function getRoles($currentRoleId = null)
+{
     global $conn;
     $query = "SELECT * FROM roles WHERE status = 1 ORDER BY role_name ASC";
     $result = mysqli_query($conn, $query);
@@ -29,7 +31,8 @@ function getRoles($currentRoleId = null) {
     return $options;
 };
 
-function getJobTypes() {
+function getJobTypes()
+{
     global $conn;
     $query = "SELECT * FROM job_types WHERE status = 1 ORDER BY job_type ASC";
     $result = mysqli_query($conn, $query);
@@ -40,10 +43,11 @@ function getJobTypes() {
     return $options;
 };
 
-function getJobLevels() {
+function getJobLevels()
+{
     global $conn;
     $query = "SELECT r.* FROM roles AS r LEFT JOIN salary_structure AS s ON s.role_id=r.role_id ORDER BY role_name ASC";
-    $result = mysqli_query($conn, $query); 
+    $result = mysqli_query($conn, $query);
     $options = '<option value="">Select</option>';
     while ($row = $result->fetch_assoc()) {
         $options .= '<option value="' . $row['role_id'] . '">' . htmlspecialchars($row['role_name']) . '</option>';
@@ -51,7 +55,8 @@ function getJobLevels() {
     return $options;
 };
 
-function getManagerUsers($user, $currentUserId = null) {
+function getManagerUsers($user, $currentUserId = null)
+{
     global $conn;
     $query = "SELECT * FROM employees WHERE `role_id` = $user AND status = 1 ORDER BY `employee_id` ASC";
     $result = mysqli_query($conn, $query);
@@ -65,7 +70,8 @@ function getManagerUsers($user, $currentUserId = null) {
     return $options;
 };
 
-function getBankInfo($employeeId) {
+function getBankInfo($employeeId)
+{
     global $conn;
     $sql = "SELECT * FROM bank_info WHERE employee_id = '$employeeId'";
     $result = mysqli_query($conn, $sql);
@@ -76,15 +82,16 @@ function getBankInfo($employeeId) {
             'ifscCode' => $row['ifsc_code'],
             'branchName' => $row['branch_name'],
             'bankProof' => $row['bank_proof'],
-            'bankProofFile' => './uploads/employee_documents/bank_proof/'.$row['bank_proof'],
+            'bankProofFile' => './uploads/employee_documents/bank_proof/' . $row['bank_proof'],
         ];
     } else {
         return null;
     }
 };
 
-function getEmployeeInfo($employeeId) {
-    global $conn; 
+function getEmployeeInfo($employeeId)
+{
+    global $conn;
     $query = "SELECT *,e.status AS empStatus FROM employees AS e INNER JOIN roles AS r ON r.role_id = e.role_id INNER JOIN departments AS dp ON dp.department_id=e.department_id INNER JOIN designations AS dg ON dg.designation_id=e.designation_id WHERE `employee_id` = '$employeeId'";
     $result = mysqli_query($conn, $query);
     $key = "ACTEHRM2025";
@@ -119,7 +126,8 @@ function getEmployeeInfo($employeeId) {
     }
 };
 
-function getMyProfileInfo($employeeId) {
+function getMyProfileInfo($employeeId)
+{
     global $conn;
     $query = "SELECT * FROM employees AS e INNER JOIN roles AS r ON r.role_id = e.role_id INNER JOIN departments AS dp ON dp.department_id=e.department_id INNER JOIN designations AS dg ON dg.designation_id=e.designation_id WHERE `employee_id` = '$employeeId'";
     $result = mysqli_query($conn, $query);
@@ -142,7 +150,8 @@ function getMyProfileInfo($employeeId) {
     }
 };
 
-function getExperienceInfo($employeeId) {
+function getExperienceInfo($employeeId)
+{
     global $conn;
     $query = "SELECT * FROM `experience_info` WHERE `employee_id` = '$employeeId'";
     $result = mysqli_query($conn, $query);
@@ -155,8 +164,12 @@ function getExperienceInfo($employeeId) {
             $startDate = htmlspecialchars($row['start_date']);
             $endDate = htmlspecialchars($row['end_date']);
             $existingDocuments = json_decode($row['documents']);
-            
-            $output .= '
+            $experienceLevel = htmlspecialchars($row['experience_level']);
+
+            if ($experienceLevel === 'Fresher') {
+                $output = "<p>I am a Fresher.</p>";
+            } else {
+                $output .= '
             <div class="mb-3">
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
@@ -174,23 +187,23 @@ function getExperienceInfo($employeeId) {
                     </div>
                 </div>';
 
-            // Document section
-            if (!empty($existingDocuments)) {
-                $output .= '<div class="mt-2">Documents:<ul class="list-unstyled d-flex flex-wrap">';
-                $counter = 1;
-                foreach ($existingDocuments as $doc) {
-                    $filePath = './uploads/employee_documents/experience_documents/' . $doc;
-                    $output .= '<li class="d-flex align-items-center mr-3">'; 
-                    $output .= '<a href="#" class="previewDocument" data-file-url="' . ($filePath ? $filePath : '') . '">';
-                    $output .= '<i class="fa fa-file-alt iconStyle educationIcon"></i>';
-                    $output .= '</a>';
-                    $output .= '</li>';
-                    $counter++; 
+                // Document section
+                if (!empty($existingDocuments)) {
+                    $output .= '<div class="mt-2">Documents:<ul class="list-unstyled d-flex flex-wrap">';
+                    $counter = 1;
+                    foreach ($existingDocuments as $doc) {
+                        $filePath = './uploads/employee_documents/experience_documents/' . $doc;
+                        $output .= '<li class="d-flex align-items-center mr-3">';
+                        $output .= '<a href="#" class="previewDocument" data-file-url="' . ($filePath ? $filePath : '') . '">';
+                        $output .= '<i class="fa fa-file-alt iconStyle educationIcon"></i>';
+                        $output .= '</a>';
+                        $output .= '</li>';
+                        $counter++;
+                    }
+                    $output .= '</ul></div>';
                 }
-                $output .= '</ul></div>';
+                $output .= '</div>';
             }
-
-            $output .= '</div>';
         }
     } else {
         $output = "<p>No experience information found.</p>";
@@ -198,7 +211,8 @@ function getExperienceInfo($employeeId) {
     return $output;
 }
 
-function getEducationInfo($employeeId) {
+function getEducationInfo($employeeId)
+{
     global $conn;
     $existingData = [];
     $defaultCategories = ['SSLC', 'HSC', 'UG', 'PG'];
@@ -227,7 +241,7 @@ function getEducationInfo($employeeId) {
                 // $documents = json_decode($docRow['documents'], true);
                 $documents = !empty($docRow['documents']) ? json_decode($docRow['documents'], true) : [];
                 if (is_array($documents)) {
-                    $existingDocuments = array_merge($existingDocuments, $documents); 
+                    $existingDocuments = array_merge($existingDocuments, $documents);
                 }
             }
         }
@@ -247,35 +261,36 @@ function getEducationInfo($employeeId) {
                 </div>
             </div>';
 
-            if (!empty($existingDocuments)) {
-                $output .= '<div class="mt-2"><strong>Documents:</strong><ul class="list-unstyled d-flex flex-wrap">';
-                $counter = 1;
-                foreach ($existingDocuments as $doc) {
-                    $filePath = './uploads/employee_documents/education_documents/' . $doc;
-                    $output .= '<li class="d-flex align-items-center mr-3">'; 
-                    $output .= '<a href="#" class="previewDocument" data-file-url="' . ($filePath ? $filePath : '') . '">';
-                    $output .= '<i class="fa fa-file-alt iconStyle educationIcon"></i>';
-                    $output .= '</a>';
-                    $output .= '</li>';
-                    $counter++; 
-                }
-                $output .= '</ul></div>';
+        if (!empty($existingDocuments)) {
+            $output .= '<div class="mt-2"><strong>Documents:</strong><ul class="list-unstyled d-flex flex-wrap">';
+            $counter = 1;
+            foreach ($existingDocuments as $doc) {
+                $filePath = './uploads/employee_documents/education_documents/' . $doc;
+                $output .= '<li class="d-flex align-items-center mr-3">';
+                $output .= '<a href="#" class="previewDocument" data-file-url="' . ($filePath ? $filePath : '') . '">';
+                $output .= '<i class="fa fa-file-alt iconStyle educationIcon"></i>';
+                $output .= '</a>';
+                $output .= '</li>';
+                $counter++;
             }
-             else {
-                $output .= '<div class="mt-2"><i>Kindly upload your certificate.</i></div>';
-            }
+            $output .= '</ul></div>';
+        } else {
+            $output .= '<div class="mt-2"><i>Kindly upload your certificate.</i></div>';
+        }
         $output .= '</div>';
     }
     return $output;
 }
 
-function formatDateRange($startDate, $endDate) {
+function formatDateRange($startDate, $endDate)
+{
     $formattedStartDate = date("M Y", strtotime($startDate));
     $formattedEndDate = ($endDate == "Present") ? "Present" : date("M Y", strtotime($endDate));
     return $formattedStartDate . ' - ' . $formattedEndDate;
 }
 
-function getPersonalInfo($employeeId) {
+function getPersonalInfo($employeeId)
+{
     global $conn;
     $query = "SELECT * FROM personal_info WHERE employee_id = '$employeeId'";
     $result = mysqli_query($conn, $query);
@@ -302,8 +317,8 @@ function getPersonalInfo($employeeId) {
             'secondaryContactPhone' => $row['secondary_phone'],
             'addressPoof' => $row['address_proof'],
             'profilePhoto' => $row['profile_photo'],
-            'addressPoofFile' => './uploads/employee_documents/address_documents/'.$row['address_proof'],
-            'profilePhotoFile' => './uploads/employee_documents/profile_photo/'.$row['profile_photo'],
+            'addressPoofFile' => './uploads/employee_documents/address_documents/' . $row['address_proof'],
+            'profilePhotoFile' => './uploads/employee_documents/profile_photo/' . $row['profile_photo'],
         ];
     } else {
         return null;
@@ -312,7 +327,7 @@ function getPersonalInfo($employeeId) {
 
 if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     global $conn;
-    
+
     $flag = $_POST['flag'];
     $key = "ACTEHRM2025";
     $method = "AES-256-CBC";
@@ -335,23 +350,23 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         } else {
             $encryptedNewPassword = openssl_encrypt($newPassword, $method, $key, 0, $iv);
 
-            $updateQuery = "UPDATE employees SET `password` = '$encryptedNewPassword' WHERE employee_id = '$employeeId'"; 
+            $updateQuery = "UPDATE employees SET `password` = '$encryptedNewPassword' WHERE employee_id = '$employeeId'";
             if (mysqli_query($conn, $updateQuery)) {
                 echo json_encode(array('status' => 'success', 'message' => 'Password updated successfully.'));
             } else {
                 echo json_encode(array('status' => 'failure', 'message' => 'Error updating password.'));
             }
         }
-    
     }
 }
 
-function getFamilyInfo($employeeId) {
+function getFamilyInfo($employeeId)
+{
     global $conn;
     $query = "SELECT * FROM `family_info` WHERE `employee_id` = '$employeeId'";
     $result = mysqli_query($conn, $query);
     $output = '';
-    
+
     // Check if data exists
     if ($result && mysqli_num_rows($result) > 0) {
         // Start the row for labels
@@ -401,7 +416,8 @@ function getFamilyInfo($employeeId) {
     return $output;
 }
 
-function getProfileProgress($employeeId) {
+function getProfileProgress($employeeId)
+{
     global $conn;
     $completedChecks = 0;
 
@@ -426,4 +442,3 @@ function getProfileProgress($employeeId) {
     $progressPercent = $completedChecks * 20;
     return $progressPercent;
 }
-

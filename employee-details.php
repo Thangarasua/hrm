@@ -450,190 +450,6 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 										</div>
 									</div>
 								</div>
-								<!-- <div class="card">
-									<div class="card-body">
-										<div class="contact-grids-tab p-0 mb-3">
-											<ul class="nav nav-underline" id="myTab" role="tablist">
-												<li class="nav-item" role="presentation">
-													<button class="nav-link active" id="info-tab2" data-bs-toggle="tab" data-bs-target="#basic-info2" type="button" role="tab" aria-selected="true">Projects</button>
-												</li>
-												<li class="nav-item" role="presentation">
-													<button class="nav-link" id="address-tab2" data-bs-toggle="tab" data-bs-target="#address2" type="button" role="tab" aria-selected="false">Assets</button>
-												</li>
-											</ul>
-										</div>
-										<div class="tab-content" id="myTabContent3">
-											<div class="tab-pane fade show active" id="basic-info2" role="tabpanel" aria-labelledby="info-tab2" tabindex="0">
-												<div class="row">
-													<div class="col-md-6 d-flex">
-														<div class="card flex-fill mb-4 mb-md-0">
-															<div class="card-body">
-																<div class="d-flex align-items-center pb-3 mb-3 border-bottom">
-																	<a href="#" class="flex-shrink-0 me-2">
-																		<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/social/project-03.svg" alt="Img">
-																	</a>
-																	<div>
-																		<h6 class="mb-1"><a href="#">World Health</a></h6>
-																		<div class="d-flex align-items-center">
-																			<p class="mb-0 fs-13">8 tasks</p>
-																			<p class="fs-13"><span class="mx-1"><i class="ti ti-point-filled text-primary"></i></span>15 Completed</p>
-																		</div>
-																	</div>
-																</div>
-																<div class="row">
-																	<div class="col-md-6">
-																		<div>
-																			<span class="mb-1 d-block">Deadline</span>
-																			<p class="text-dark">31 July 2025</p>
-																		</div>
-																	</div>
-																	<div class="col-md-6">
-																		<div>
-																			<span class="mb-1 d-block">Project Lead</span>
-																			<a href="#" class="fw-normal d-flex align-items-center">
-																				<img class="avatar avatar-sm rounded-circle me-2" src="./assets/img/profiles/avatar-01.jpg" alt="Img">
-																				Leona
-																			</a>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-													<div class="col-md-6 d-flex">
-														<div class="card flex-fill mb-0">
-															<div class="card-body">
-																<div class="d-flex align-items-center pb-3 mb-3 border-bottom">
-																	<a href="#" class="flex-shrink-0 me-2">
-																		<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/social/project-01.svg" alt="Img">
-																	</a>
-																	<div>
-																		<h6 class="mb-1 text-truncate"><a href="#">Hospital Administration</a></h6>
-																		<div class="d-flex align-items-center">
-																			<p class="mb-0 fs-13">8 tasks</p>
-																			<p class="fs-13"><span class="mx-1"><i class="ti ti-point-filled text-primary"></i></span>15 Completed</p>
-																		</div>
-																	</div>
-																</div>
-																<div class="row">
-																	<div class="col-md-6">
-																		<div>
-																			<span class="mb-1 d-block">Deadline</span>
-																			<p class="text-dark">31 July 2025</p>
-																		</div>
-																	</div>
-																	<div class="col-md-6">
-																		<div>
-																			<span class="mb-1 d-block">Project Lead</span>
-																			<a href="#" class="fw-normal d-flex align-items-center">
-																				<img class="avatar avatar-sm rounded-circle me-2" src="./assets/img/profiles/avatar-01.jpg" alt="Img">
-																				Leona
-																			</a>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="tab-pane fade" id="address2" role="tabpanel" aria-labelledby="address-tab2" tabindex="0">
-												<div class="row">
-													<div class="col-md-12 d-flex">
-														<div class="card flex-fill">
-															<div class="card-body">
-																<div class="row align-items-center">
-																	<div class="col-md-8">
-																		<div class="d-flex align-items-center">
-																			<a href="#" class="flex-shrink-0 me-2">
-																				<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/products/product-05.jpg" class="img-fluid rounded-circle" alt="img">
-																			</a>
-																			<div>
-																				<h6 class="mb-1"><a href="#">Dell Laptop - #343556656</a></h6>
-																				<div class="d-flex align-items-center">
-																					<p><span class="text-primary">AST - 001<i class="ti ti-point-filled text-primary mx-1"></i></span>Assigned on 22 Nov, 2022 10:32AM </p>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																	<div class="col-md-3">
-																		<div>
-																			<span class="mb-1 d-block">Assigned by</span>
-																			<a href="#" class="fw-normal d-flex align-items-center">
-																				<img class="avatar avatar-sm rounded-circle me-2" src="./assets/img/profiles/avatar-01.jpg" alt="Img">
-																				Andrew Symon
-																			</a>
-																		</div>
-																	</div>
-																	<div class="col-md-1">
-																		<div class="dropdown ms-2">
-																			<a href="javascript:void(0);" class="d-inline-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
-																				<i class="ti ti-dots-vertical"></i>
-																			</a>
-																			<ul class="dropdown-menu dropdown-menu-end p-3">
-																				<li>
-																					<a href="javascript:void(0);" class="dropdown-item rounded-1" data-bs-toggle="modal" data-bs-target="#asset_info">View Info</a>
-																				</li>
-																				<li>
-																					<a href="javascript:void(0);" class="dropdown-item rounded-1" data-bs-toggle="modal" data-bs-target="#refuse_msg">Raise Issue </a>
-																				</li>
-																			</ul>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-													<div class="col-md-12 d-flex">
-														<div class="card flex-fill mb-0">
-															<div class="card-body">
-																<div class="row align-items-center">
-																	<div class="col-md-8">
-																		<div class="d-flex align-items-center">
-																			<a href="#" class="flex-shrink-0 me-2">
-																				<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/products/product-06.jpg" class="img-fluid rounded-circle" alt="img">
-																			</a>
-																			<div>
-																				<h6 class="mb-1"><a href="#">Bluetooth Mouse - #478878</a></h6>
-																				<div class="d-flex align-items-center">
-																					<p><span class="text-primary">AST - 001<i class="ti ti-point-filled text-primary mx-1"></i></span>Assigned on 22 Nov, 2022 10:32AM </p>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																	<div class="col-md-3">
-																		<div>
-																			<span class="mb-1 d-block">Assigned by</span>
-																			<a href="#" class="fw-normal d-flex align-items-center">
-																				<img class="avatar avatar-sm rounded-circle me-2" src="./assets/img/profiles/avatar-01.jpg" alt="Img">
-																				Andrew Symon
-																			</a>
-																		</div>
-																	</div>
-																	<div class="col-md-1">
-																		<div class="dropdown ms-2">
-																			<a href="javascript:void(0);" class="d-inline-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
-																				<i class="ti ti-dots-vertical"></i>
-																			</a>
-																			<ul class="dropdown-menu dropdown-menu-end p-3">
-																				<li>
-																					<a href="javascript:void(0);" class="dropdown-item rounded-1" data-bs-toggle="modal" data-bs-target="#asset_info">View Info</a>
-																				</li>
-																				<li>
-																					<a href="javascript:void(0);" class="dropdown-item rounded-1" data-bs-toggle="modal" data-bs-target="#refuse_msg">Raise Issue </a>
-																				</li>
-																			</ul>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div> -->
 							</div>
 						</div>
 					</div>
@@ -913,10 +729,10 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								<div class="col-md-6">
 									<div class="mb-3">
 										<label class="form-label">Present Address <span class="text-danger"> * &nbsp;&nbsp;&nbsp;</span>
-												<input class="form-check-input" type="checkbox" id="sameAddressCheck">
-												<label class="form-check-label" for="sameAddressCheck">
-													Same as Permanent Address
-												</label>
+											<input class="form-check-input" type="checkbox" id="sameAddressCheck">
+											<label class="form-check-label" for="sameAddressCheck">
+												Same as Permanent Address
+											</label>
 										</label>
 										<textarea class="form-control" rows="2" name="presentAddress" id="presentAddress"><?php echo $personalInfo ? $personalInfo['presentAddress'] : ''; ?></textarea>
 									</div>
@@ -1223,28 +1039,40 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 	<div class="modal-dialog modal-dialog-centered modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title">Company Information</h4>
+				<h4 class="modal-title">Experence Details</h4>
 				<button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
 					<i class="ti ti-x"></i>
 				</button>
 			</div>
-			<form action="#" id="addExperienceInfo">
+			<form id="addExperienceInfo">
 				<div class="modal-body pb-0">
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<div class="mb-3">
-							<input type="hidden" class="form-control" name="experienceId" id="experienceId" value="">
+								<label class="form-label">Experence Level<span class="text-danger"> *</span></label>
+								<select class="select" name="experienceLevel" id="experienceLevel">
+									<option value="">Select</option>
+									<option value="Fresher">Fresher</option>
+									<option value="Experience">Experience</option>
+								</select>
+							</div>
+						</div> 
+					</div>
+					<div class="row expDetails" style="display: none;">
+						<div class="col-md-4">
+							<div class="mb-3">
+								<input type="hidden" class="form-control" name="experienceId" id="experienceId" value="">
 								<label class="form-label">Previous Company Name <span class="text-danger"> *</span></label>
 								<input type="text" class="form-control" name="companyName" id="companyName" value="">
 							</div>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<div class="mb-3">
 								<label class="form-label">Designation <span class="text-danger"> *</span></label>
 								<input type="text" class="form-control" name="previousDesignation" id="previousDesignation" value="">
 							</div>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<div class="mb-3">
 								<label class="form-label">Start Date <span class="text-danger"> *</span></label>
 								<div class="input-icon-end position-relative">
@@ -1255,7 +1083,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								</div>
 							</div>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<div class="mb-3">
 								<label class="form-label">End Date <span class="text-danger"> *</span></label>
 								<div class="input-icon-end position-relative">
@@ -1266,15 +1094,15 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 								</div>
 							</div>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<div class="mb-3">
 								<label class="form-label">Total Work Experience <span class="text-danger"> *</span></label>
 								<input type="text" class="form-control" name="workExperience" id="workExperience" readonly>
 							</div>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<div class="mb-3">
-								<label class="form-label">Skils (Optional) <span class="text-danger"> *</span></label>
+								<label class="form-label">Skills <small>(Optional)</small></label>
 								<input type="text" class="form-control" name="skills" id="skills">
 							</div>
 						</div>
@@ -1291,7 +1119,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-white border me-2" data-bs-dismiss="modal">Cancel</button>
-					<button type="submit" class="btn btn-primary">Save</button>
+					<button type="submit" class="btn btn-primary">Submit</button>
 				</div>
 			</form>
 		</div>
@@ -1536,7 +1364,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
+				<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<span> <b><i class="fa-solid fa-circle-exclamation"></i> Use the mouse scroll (or) adjust the range slider below.</b></span>
 				<span></span>
 			</div>
@@ -1564,10 +1392,10 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 			</div>
 			<div class="modal-body">
 				<img src="" alt="Img" id="profilePopupImage">
-			</div> 
+			</div>
 			<div class="modal-footer">
-				 <button type="button" class="btn btn-white border me-2" data-bs-dismiss="modal">Close</button>
-				 <button type="button" id="openFile2" class="btn btn-success" data-bs-dismiss="modal">Change Profile</button>
+				<button type="button" class="btn btn-white border me-2" data-bs-dismiss="modal">Close</button>
+				<button type="button" id="openFile2" class="btn btn-success" data-bs-dismiss="modal">Change Profile</button>
 			</div>
 		</div>
 	</div>
@@ -1576,17 +1404,17 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 
 <!-- Modal for Preview -->
 <div class="modal" tabindex="-1" id="documentPreviewModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Document Preview</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div id="previewContent"></div> <!-- Document preview will appear here -->
-            </div>
-        </div>
-    </div>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Document Preview</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div id="previewContent"></div> <!-- Document preview will appear here -->
+			</div>
+		</div>
+	</div>
 </div>
 
 
