@@ -90,8 +90,40 @@ $(document).ready(function () {
         })
     });
 
+    $("#experienceLevel").change(function () {
+        let experienceLevel = $(this).val();
+        if (experienceLevel === "Fresher") {
+            $(".expDetails").hide();
+        } else if (experienceLevel === "Experience") {
+            $(".expDetails").show();
+        } else {
+            $(".expDetails").hide();
+        }
+
+    });
+
     $("#addExperienceInfo").on("submit", function (e) {
         e.preventDefault();
+
+        let experienceLevel = $("#experienceLevel").val().trim();
+        if (experienceLevel == '') {
+            $("#experienceLevel").focus();
+            $(".error").remove();
+            $("#experienceLevel").closest(".mb-3").find(".form-label").after(
+                "<small class='error text-danger'> mandatory field.</small>"
+            );
+            return false;
+        }else if(experienceLevel == 'Fresher'){
+             
+        } else {
+            let form = formValidate();
+            if (form == 0) {
+                return false;
+            }
+        }
+
+
+
         let formData = new FormData(this);
         formData.append("flag", "experienceInfo");
         formData.append("employeeID", employeeID);
@@ -454,21 +486,21 @@ $(document).ready(function () {
         $('#profilePopupImage').attr('src', profileSrc);
         // Show the modal
         $('#profilePopup').modal('show');
-    }); 
+    });
 
     $('#officialMail').on('click', function () {
-        var officialMail = $('.officialMail').html().trim(); 
+        var officialMail = $('.officialMail').html().trim();
         navigator.clipboard.writeText(officialMail);
         toastr.success("Mail ID copy to Clipboard.");
     });
     $('#personalMail').on('click', function () {
-        var personalMail = $('.personalMail').html().trim(); 
+        var personalMail = $('.personalMail').html().trim();
         navigator.clipboard.writeText(personalMail);
         toastr.success("Mail ID copy to Clipboard.");
     });
 
     // Documet preview
-    $('.previewDocument').on('click', function(e) {
+    $('.previewDocument').on('click', function (e) {
         e.preventDefault();
         const fileUrl = $(this).data('file-url');
         const fileExtension = fileUrl.split('.').pop().toLowerCase();
@@ -488,7 +520,7 @@ $(document).ready(function () {
     });
 
     // Experience info file upload
-    $('.addMoreUploadFields').on('click', function() {
+    $('.addMoreUploadFields').on('click', function () {
         var newField = `
             <div class="col-md-12">
                 <label for="">Upload Proof Document</label>
@@ -546,4 +578,45 @@ $(document).ready(function () {
             $('#presentAddress').val($(this).val());
         }
     });
+
+    function formValidate() {
+        $(".error").remove(); // Remove previous error messages
+
+        let companyName = $("#companyName").val().trim();
+        if (companyName.length == 0) {
+            $("#companyName").focus();
+            $("#companyName").closest(".mb-3").find(".form-label").after(
+                "<small class='error text-danger'> mandatory field.</small>"
+            );
+            return 0;
+        }
+        let previousDesignation = $("#previousDesignation").val().trim();
+        if (previousDesignation.length == 0) {
+            $("#previousDesignation").focus();
+            $("#previousDesignation").closest(".mb-3").find(".form-label").after(
+                "<small class='error text-danger'> mandatory field.</small>"
+            );
+            return 0;
+        }
+        let startDate = $("#startDate").val().trim();
+        if (startDate.length == 0) {
+            $("#startDate").focus();
+            $("#startDate").closest(".mb-3").find(".form-label").after(
+                "<small class='error text-danger'> mandatory field.</small>"
+            );
+            return 0;
+        }
+        let endDate = $("#endDate").val().trim();
+        if (endDate.length == 0) {
+            $("#endDate").focus();
+            $("#endDate").closest(".mb-3").find(".form-label").after(
+                "<small class='error text-danger'> mandatory field.</small>"
+            );
+            return 0;
+        }
+
+        return 1;
+    }
+
+
 });

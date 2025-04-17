@@ -60,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
     if ($flag === "experienceInfo") {
         $employeeId = $_POST['employeeID'];
+        $experienceLevel = $_POST['experienceLevel'];
         $experienceId = $_POST['experienceId'];
         $companyName = $_POST['companyName'];
         $previousDesignation = $_POST['previousDesignation'];
@@ -108,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             $experienceInfoQuery = "UPDATE experience_info SET previous_employer = '$companyName', designation = '$previousDesignation', start_date = '$startDate', end_date = '$endDate', work_experience = '$workExperience', skills = '$skills', documents ='$uploadedFilesJson' WHERE id = $experienceId AND employee_id = '$employeeId'";
         } else {
             $uploadedFilesJson = json_encode($uploadedFiles);
-            $experienceInfoQuery = "INSERT INTO experience_info (employee_id, previous_employer, designation, start_date, end_date, work_experience, skills, documents) VALUES ('$employeeId', '$companyName', '$previousDesignation', '$startDate', '$endDate', '$workExperience', '$skills', '$uploadedFilesJson')";
+            $experienceInfoQuery = "INSERT INTO experience_info (employee_id, experience_level, previous_employer, designation, start_date, end_date, work_experience, skills, documents) VALUES ('$employeeId', '$experienceLevel', '$companyName', '$previousDesignation', '$startDate', '$endDate', '$workExperience', '$skills', '$uploadedFilesJson')";
         }
         if (mysqli_query($conn, $experienceInfoQuery)) {
             echo json_encode(array('status' => 'success', 'message' => 'Experience Information Updated Successfully.'));
@@ -153,8 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             if (mysqli_num_rows($result) > 0) {
                 $educationInfoQuery = "UPDATE `education_info` SET `documents` = '$uploadedFilesJson' WHERE `employee_id` = '$employeeId' AND `category` = '$courseCategory'";
             } else {
-                $educationInfoQuery = "INSERT INTO `education_info` (employee_id, category, documents) 
-                                        VALUES ('$employeeId', '$courseCategory', '$uploadedFilesJson')";
+                $educationInfoQuery = "INSERT INTO `education_info` (employee_id, category, documents) VALUES ('$employeeId', '$courseCategory', '$uploadedFilesJson')";
             }
 
             if (mysqli_query($conn, $educationInfoQuery)) {
@@ -216,8 +216,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $gender = $_POST['gender'];
         $dob = $_POST['dob'];
         $dob = date('Y-m-d', strtotime($dob));
-        $permanentAddress = $_POST['permanentAddress'];
-        $presentAddress = $_POST['presentAddress'];
+        $permanentAddress = $conn->real_escape_string(trim(preg_replace('/\s+/', ' ', $_POST['permanentAddress'])));
+        $presentAddress = $conn->real_escape_string(trim(preg_replace('/\s+/', ' ', $_POST['presentAddress']))); 
         $addressProof = $_FILES['addressProof'];
 
         $passportNo = $_POST['passportNo'];
