@@ -109,6 +109,7 @@
 								</a>
 								<ul>
 									<li><a href="employees" class="employees">Employee Lists</a></li>
+									<li><a href="admin-attendance" class="admin-attendance">Employee Attendance</a></li>
 									<li><a href="departments" class="departments">Departments</a></li>
 									<li><a href="designations" class="designations">Designations</a></li>
 									<li><a href="roles" class="roles">Roles</a></li>
