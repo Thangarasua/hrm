@@ -53,7 +53,7 @@ $(document).ready(function () {
           $.each(data, function (index, row) {
             var newRow = `<tr>
                             <td>${index + 1}</td>
-                            <td>${row.employee_id}</td> 
+                            <td> <span class="pointer" data-bs-toggle="tooltip" title="${row.password}">${row.employee_id}</span> </td> 
                             <td>
                               <div class="d-flex align-items-center file-name-icon">
                                 <a href="${row.profile}" target="_blank" class="avatar avatar-md">
