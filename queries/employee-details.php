@@ -339,7 +339,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             $startDate = htmlspecialchars($row['start_date']);
             $endDate = htmlspecialchars($row['end_date']);
             $workExperience = htmlspecialchars($row['work_experience']);
-            $skills = htmlspecialchars($row['skills']);
+            $skills = htmlspecialchars($conn->real_escape_string(trim(preg_replace('/\s+/', ' ', $_POST['skills']))));
             $existingDocuments = json_decode($row['documents'], true);
 
             $response = array(
