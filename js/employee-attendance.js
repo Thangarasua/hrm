@@ -120,11 +120,11 @@ $(document).ready(function () {
         return `${hours}:${minutes}`;
     }
 
-    function fetchAttendance() {
+    function fetchAttendance(fromDate, toDate) {
         $.ajax({
             url: "queries/employee-attendance.php",
             type: "POST",
-            data: { employeeId: employeeId, flag: "fetch" },
+            data: { employeeId: employeeId, fromDate:fromDate, toDate:toDate, flag: "fetch" },
             dataType: "json",
             success: function (data) {
               var tableBody = $("#tableRecords tbody");
@@ -185,5 +185,27 @@ $(document).ready(function () {
         });
     }
 
-    fetchAttendance();
+    let today = new Date();
+    let fromDate = new Date(today.getFullYear(), today.getMonth(), 1);
+    let toDate = today;
+    function formatDate(date) {
+        if (typeof date === 'string') {
+            date = new Date(date);
+        }
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let dd = String(date.getDate()).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return yyyy + '-' + mm + '-' + dd;
+    }
+    let formattedFromDate = formatDate(fromDate);
+    let formattedToDate = formatDate(toDate);
+    fetchAttendance(formattedFromDate, formattedToDate);
+
+    $('#attendanceRange').on('change', function() {
+        let attendanceRange = $("#attendanceRange").val();
+        let [fromDate, toDate] = attendanceRange.split(" - ");
+        let formattedFromDate = formatDate(fromDate);
+    let formattedToDate = formatDate(toDate);
+        fetchAttendance(formattedFromDate, formattedToDate);
+    });
 });
