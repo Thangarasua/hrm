@@ -8,8 +8,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
     if($flag === "fetch"){
         $employeeId = $_POST['employeeId'];
-        $startDate = date("Y") . "-04-01";
-        $endDate = date("Y-m-d");
+        $startDate = $_POST['fromDate'];
+        $endDate = $_POST['toDate'];
 
         $query = "SELECT * FROM `attendance` WHERE `employee_id` = '$employeeId' AND `record_date` BETWEEN '$startDate' AND '$endDate' ORDER BY `id` DESC";
         $result = mysqli_query($conn, $query);

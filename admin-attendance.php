@@ -163,7 +163,7 @@ $personalInfo = getPersonalInfo($employeeId);
                 
                         <div class="me-3">
                             <div class="input-icon-end position-relative">
-                                <input type="text" class="form-control date-range bookingrange" placeholder="dd/mm/yyyy - dd/mm/yyyy">
+                                <input type="text" class="form-control date-range bookingrange" id="attendanceRange" placeholder="dd/mm/yyyy - dd/mm/yyyy">
                                 <span class="input-icon-addon">
                                     <i class="ti ti-chevron-down"></i>
                                 </span>
