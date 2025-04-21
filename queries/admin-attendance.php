@@ -16,4 +16,18 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         echo json_encode($attendance);
         exit;
     }
+
+    if($flag === "fetchRequest"){
+        $startDate = $_POST['fromDate'];
+        $endDate = $_POST['toDate'];
+
+        $query = "SELECT * FROM `attendance_requests` WHERE `record_date` BETWEEN '$startDate' AND '$endDate' ORDER BY `id` DESC";
+        $result = mysqli_query($conn, $query);
+        $attendance = [];
+        while ($row = $result->fetch_assoc()) {
+            $attendance[] = $row;
+        }
+        echo json_encode($attendance);
+        exit;
+    }
 }

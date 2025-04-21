@@ -138,6 +138,7 @@ $(document).ready(function () {
                 $.each(data, function (index, row) {
                     let statusClass = row.status === "Present" ? "badge-success-transparent" : row.status === "Off" ? "badge-info-transparent" : "badge-danger-transparent";
                     let hoursStatusClass ='';
+                    let editOption = '';
                     const timeStr = row.production_hours;
                     const totalHours = timeToFloat(timeStr); // → 4.92
                     const displayTime = formatHHMM(timeStr); // → "04:55"
@@ -148,6 +149,22 @@ $(document).ready(function () {
                     } else {
                         hoursStatusClass = "badge-success";
                     }
+                    if (row.record_edit === 'Yes') {
+                        editOption = '<span class="badge bg-warning text-dark"><i class="ti ti-clock"></i></span>';
+                    } else {
+                        editOption = `<div class="action-icon d-inline-flex">
+                    <a href="#" class="me-2 request-modify-attendance"
+                        data-bs-toggle="modal"
+                        data-bs-target="#edit_attendance"
+                        data-attendance-id="${row.id}"
+                        data-date="${row.record_date}"
+                        data-checkin="${row.check_in}"
+                        data-checkout="${row.check_out}">
+                        <i class="ti ti-edit"></i>
+                    </a>
+                </div>`;
+                    }
+                
                   var newRow = `<tr>
                                   <td>${index + 1}</td>
                                   <td>
@@ -175,6 +192,7 @@ $(document).ready(function () {
                                         <i class="ti ti-clock-hour-11 me-1"></i>${ displayTime } Hrs
                                     </span>
                                   </td>
+                                  <td> ${editOption} </td>
                               </tr>`;
                   tableBody.append(newRow);
                 });
@@ -208,4 +226,45 @@ $(document).ready(function () {
     let formattedToDate = formatDate(toDate);
         fetchAttendance(formattedFromDate, formattedToDate);
     });
+
+    $(document).on("click", ".request-modify-attendance", function () {
+        const id = $(this).data("attendance-id");
+        const date = $(this).data("date");
+        var checkin = $(this).data("checkin");
+        checkin = formatHHMM(checkin)
+        var checkout = $(this).data("checkout");
+        checkout = formatHHMM(checkout)
+        $("#edit_attendance input[name='attendance_id']").val(id);
+        $("#edit_attendance input[name='check_in']").val(checkin);
+        $("#edit_attendance input[name='check_out']").val(checkout);
+        $("#edit_attendance input[name='record_date']").val(date);
+    });
+
+    $("#attendanceModifyForm").on("submit", function (e) {
+        e.preventDefault();
+        let formData = new FormData(this);
+        formData.append("flag", "attendanceRequest");
+        formData.append("employeeId", employeeId);
+        $.ajax({
+            type: "POST",
+            url: "queries/employee-attendance.php",
+            data: formData,
+            dataType: "json",
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (response) {
+                if (response.status == "success") {
+                    $("#edit_attendance").modal("hide");
+                    toastr.success("Your attendance Request Updated Successfully");
+                    setTimeout(function () {
+                        fetchAttendance(formattedFromDate, formattedToDate);
+                    }, 2000);
+                } else {
+                    toastr.error(response.message, "Error");
+                }
+            }
+        })
+    });
+    
 });

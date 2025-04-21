@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    const path = window.location.pathname;
     function timeToFloat(timeStr) {
         const [hours, minutes, seconds] = timeStr.split(':').map(Number);
         return hours + (minutes / 60) + (seconds / 3600);
@@ -67,12 +68,71 @@ $(document).ready(function () {
                                         <i class="ti ti-clock-hour-11 me-1"></i>${ displayTime } Hrs
                                     </span>
                                   </td>
+                              </tr>`;
+                  tableBody.append(newRow);
+                });
+              }
+              /*-----data table common comments includes-----*/
+              dataTableDesigns();
+            },
+        });
+    }
+
+    function fetchAttendanceRequest(fromDate, toDate) {
+        $.ajax({
+            url: "queries/admin-attendance.php",
+            type: "POST",
+            data: { fromDate:fromDate, toDate:toDate, flag: "fetchRequest" },
+            dataType: "json",
+            success: function (data) {
+              var tableBody = $("#tableRecords tbody");
+      
+              if ($.fn.DataTable.isDataTable("#tableRecords")) {
+                $("#tableRecords").DataTable().destroy();
+              }
+      
+              tableBody.empty();
+              if (data.length > 0) {
+                $.each(data, function (index, row) {
+                    let statusClass = row.status === "Pending" ? "badge-danger-transparent" : "badge-success-transparent";
+                    let hoursStatusClass ='';
+                    const timeStr = row.production_hours;
+                    const totalHours = timeToFloat(timeStr); // → 4.92
+                    const displayTime = formatHHMM(timeStr); // → "04:55"
+                    if (totalHours <= 8) {
+                        hoursStatusClass = "badge-danger";
+                    } else if (totalHours > 9 ) {
+                        hoursStatusClass = "badge-info"
+                    } else {
+                        hoursStatusClass = "badge-success";
+                    }
+                  var newRow = `<tr>
+                                  <td>${index + 1}</td>
                                   <td>
-											<div class="action-icon d-inline-flex">
-												<a href="#" class="me-2" data-bs-toggle="modal"
-													data-bs-target="#edit_attendance"><i class="ti ti-edit"></i></a>
-											</div>
-										</td>
+                                      <h6 class="fw-medium"><a href="#">${ row.employee_id }</a></h6>
+                                  </td>
+                                  <td>
+                                      <h6 class="fw-medium"><a href="#">${ row.record_date }</a></h6>
+                                  </td>
+                                  <td>
+                                      <h6 class="fw-medium"><a href="#">${ row.check_in }</a></h6>
+                                  </td>
+                                  <td>
+                                      <h6 class="fw-medium"><a href="#">${ row.check_out }</a></h6>
+                                  </td>
+                                  <td>
+                                    <span class="badge ${hoursStatusClass} d-inline-flex align-items-center">
+                                        <i class="ti ti-clock-hour-11 me-1"></i>${ displayTime } Hrs
+                                    </span>
+                                  </td>
+                                  <td>
+                                      <h6 class="fw-medium"><a href="#">${ row.reason }</a></h6>
+                                  </td>
+                                  <td>
+                                    <span class="badge  ${statusClass} d-inline-flex align-items-center">
+                                        <i class="ti ti-point-filled me-1"></i>${ row.status }
+                                    </span>
+                                  </td>
                               </tr>`;
                   tableBody.append(newRow);
                 });
@@ -97,13 +157,21 @@ $(document).ready(function () {
     }
     let formattedFromDate = formatDate(fromDate);
     let formattedToDate = formatDate(toDate);
-    fetchAttendance(formattedFromDate, formattedToDate);
+    if (path.includes("admin-attendance-request")) {
+        fetchAttendanceRequest(formattedFromDate, formattedToDate);
+    } else if (path.includes("admin-attendance")) {
+        fetchAttendance(formattedFromDate, formattedToDate);
+    }
 
     $('#attendanceRange').on('change', function() {
         let attendanceRange = $("#attendanceRange").val();
         let [fromDate, toDate] = attendanceRange.split(" - ");
         let formattedFromDate = formatDate(fromDate);
-    let formattedToDate = formatDate(toDate);
-        fetchAttendance(formattedFromDate, formattedToDate);
+        let formattedToDate = formatDate(toDate);
+        if (path.includes("admin-attendance-request")) {
+            fetchAttendanceRequest(formattedFromDate, formattedToDate);
+        } else if (path.includes("admin-attendance")) {
+            fetchAttendance(formattedFromDate, formattedToDate);
+        }
     });
 });
