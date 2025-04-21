@@ -15,10 +15,24 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $result = mysqli_query($conn, $query);
 
         $records = [];
+        $editRequests = [];
 
+        // Fetch attendance records
         while ($row = $result->fetch_assoc()) {
             $records[$row['record_date']] = $row;
         }
+
+        // Fetch pending edit requests for this employee and date range
+        $requestQuery = "SELECT `record_date` FROM `attendance_requests` 
+                        WHERE `employee_id` = '$employeeId' 
+                        AND `record_date` BETWEEN '$startDate' AND '$endDate' 
+                        AND `status` = 'Pending'";
+        $requestResult = mysqli_query($conn, $requestQuery);
+
+        while ($reqRow = $requestResult->fetch_assoc()) {
+            $editRequests[$reqRow['record_date']] = true;
+        }
+
         $attendance = [];
         $period = new DatePeriod(
             new DateTime($startDate),
@@ -32,7 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         foreach ($dates as $date) {
             $currentDate = $date->format('Y-m-d');
             $dayOfWeek = date('w', strtotime($currentDate)); // 0 = Sunday
-        
+
+            $recordEdit = isset($editRequests[$currentDate]) ? 'Yes' : 'No';
+
             if ($dayOfWeek == 0) {
                 $attendance[] = [
                     'record_date' => $currentDate,
@@ -44,9 +60,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
                     'overtime' => '00:00',
                     'production_hours' => '00:00:00',
                     'id' => '',
+                    'record_edit' => $recordEdit,
                 ];
             } elseif (isset($records[$currentDate])) {
-                $attendance[] = $records[$currentDate];
+                $row = $records[$currentDate];
+                $row['record_edit'] = $recordEdit;
+                $attendance[] = $row;
             } else {
                 $attendance[] = [
                     'record_date' => $currentDate,
@@ -58,6 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
                     'overtime' => '00:00',
                     'production_hours' => '00:00:00',
                     'id' => '',
+                    'record_edit' => $recordEdit,
                 ];
             }
         }
@@ -143,6 +163,54 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             echo json_encode(array('status' => 'success', 'message' => 'Check Out Successfully.', 'productionHours' => $productionHours));
         } else {
             echo json_encode(array('status' => 'failure', 'message' => 'Error Check Out.'));
+        }
+    }
+
+    if ($flag === "attendanceRequest") {
+        $employeeId = $_POST['employeeId'];
+        $attendanceId = $_POST['attendance_id'];
+        $recordDate = $_POST['record_date'];
+        $checkInTime = $_POST['check_in'];
+        $checkOutTime = $_POST['check_out'];
+        $reason = $_POST['reason'];
+
+        $defaultCheckIn = "10:00:00";
+        $lateTime = "00:00";
+        $checkIn = new DateTime($checkInTime);
+        $defaultTime = new DateTime($defaultCheckIn);
+        if ($checkIn > $defaultTime) {
+            $diff = $checkIn->diff($defaultTime);
+            $lateHours = $diff->h;
+            $lateMinutes = $diff->i;
+            $lateTime = $lateHours . " Hrs " . $lateMinutes . " Min";
+        }
+
+        $overTime = "00:00";
+        $today = $recordDate;
+        $checkInDateTime = new DateTime("$today $checkInTime");
+        $checkOutDateTime = new DateTime("$today $checkOutTime");
+        $interval = $checkInDateTime->diff($checkOutDateTime);
+
+        $totalMinutes = ($interval->h * 60) + $interval->i;
+        $overMinutes = $totalMinutes - (9 * 60);
+
+        if ($overMinutes > 0) {
+            $hours = floor($overMinutes / 60);
+            $minutes = $overMinutes % 60;
+            $overTime = sprintf('%02d:%02d', $hours, $minutes);
+        } else {
+            $overTime = "00:00";
+        }
+
+        $hours = $interval->h;
+        $minutes = $interval->i;
+        $productionHours = $hours . ':' . str_pad($minutes, 2, '0', STR_PAD_LEFT);
+
+        $insertQuery = "INSERT INTO attendance_requests (employee_id, attendance_id, record_date, check_in, check_out, late_time, overtime, production_hours, reason) VALUES ('$employeeId', '$attendanceId', '$recordDate', '$checkInTime', ' $checkOutTime', '$lateTime', '$overTime', '$productionHours', '$reason')";
+        if (mysqli_query($conn, $insertQuery)) {
+            echo json_encode(array('status' => 'success', 'message' => 'Request Added Successfully.'));
+        } else {
+            echo json_encode(array('status' => 'failure', 'message' => 'Error In Request.'));
         }
     }
 }

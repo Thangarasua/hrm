@@ -12,7 +12,7 @@ $personalInfo = getPersonalInfo($employeeId);
         <!-- Breadcrumb -->
         <div class="d-md-flex d-block align-items-center justify-content-between page-breadcrumb mb-3">
             <div class="my-auto mb-2">
-                <h2 class="mb-1">Employee Attendance</h2>
+                <h2 class="mb-1">Employee Attendance Requests</h2>
             </div>
             <div class="d-flex my-xl-auto right-content align-items-center flex-wrap ">
                 <div class="me-2 mb-2">
@@ -47,118 +47,10 @@ $personalInfo = getPersonalInfo($employeeId);
             </div>
         </div>
         <!-- /Breadcrumb -->
-
-        <div class="card border-0">
-            <div class="card-body">
-                <div class="row align-items-center mb-4">
-                    <div class="col-md-5">
-                        <div class="mb-3 mb-md-0">
-                            <h4 class="mb-1">Attendance Details Today</h4>
-                            <p>Data from the 800+ total no of employees</p>
-                        </div>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="d-flex align-items-center justify-content-md-end">
-                            <h6>Total Absenties today</h6>
-                            <div class="avatar-list-stacked avatar-group-sm ms-4">
-                                <span class="avatar avatar-rounded">
-                                    <img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-02.jpg"
-                                        alt="img">
-                                </span>
-                                <span class="avatar avatar-rounded">
-                                    <img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-03.jpg"
-                                        alt="img">
-                                </span>
-                                <span class="avatar avatar-rounded">
-                                    <img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-05.jpg"
-                                        alt="img">
-                                </span>
-                                <span class="avatar avatar-rounded">
-                                    <img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-06.jpg"
-                                        alt="img">
-                                </span>
-                                <span class="avatar avatar-rounded">
-                                    <img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-07.jpg"
-                                        alt="img">
-                                </span>
-                                <a class="avatar bg-primary avatar-rounded text-fixed-white fs-12"
-                                    href="javascript:void(0);">
-                                    +1
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="border rounded">
-                    <div class="row gx-0">
-                        <div class="col-md col-sm-4 border-end">
-                            <div class="p-3">
-                                <span class="fw-medium mb-1 d-block">Present</span>
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <h5>250</h5>
-                                    <span class="badge badge-success d-inline-flex align-items-center">
-                                        <i class="ti ti-arrow-wave-right-down me-1"></i>
-                                        +1%
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md col-sm-4 border-end">
-                            <div class="p-3">
-                                <span class="fw-medium mb-1 d-block">Late Login</span>
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <h5>45</h5>
-                                    <span class="badge badge-danger d-inline-flex align-items-center">
-                                        <i class="ti ti-arrow-wave-right-down me-1"></i>
-                                        -1%
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md col-sm-4 border-end">
-                            <div class="p-3">
-                                <span class="fw-medium mb-1 d-block">Uninformed</span>
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <h5>15</h5>
-                                    <span class="badge badge-danger d-inline-flex align-items-center">
-                                        <i class="ti ti-arrow-wave-right-down me-1"></i>
-                                        -12%
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md col-sm-4 border-end">
-                            <div class="p-3">
-                                <span class="fw-medium mb-1 d-block">Permisson</span>
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <h5>03</h5>
-                                    <span class="badge badge-success d-inline-flex align-items-center">
-                                        <i class="ti ti-arrow-wave-right-down me-1"></i>
-                                        +1%
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md col-sm-4">
-                            <div class="p-3">
-                                <span class="fw-medium mb-1 d-block">Absent</span>
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <h5>12</h5>
-                                    <span class="badge badge-danger d-inline-flex align-items-center">
-                                        <i class="ti ti-arrow-wave-right-down me-1"></i>
-                                        -19%
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
                 
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-                <h5>Admin Attendance</h5>
+                <h5>Attendance Requests</h5>
                 <div class="d-flex my-xl-auto right-content align-items-center flex-wrap row-gap-3">
                 
                         <div class="me-3">
@@ -237,13 +129,11 @@ $personalInfo = getPersonalInfo($employeeId);
                                 <th>S.No</th>
                                 <th>Emp ID</th>
                                 <th>Date</th>
-                                <th>Status</th>
                                 <th>Check In</th>
                                 <th>Check Out</th>
-                                <th>Late</th>
-                                <th>Overtime</th>
                                 <th>Production Hours</th>
-                                
+                                <th>Reason</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>

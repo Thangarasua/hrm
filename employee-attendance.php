@@ -295,6 +295,7 @@ $personalInfo = getPersonalInfo($employeeId);
 										<th>Late</th>
 										<th>Overtime</th>
 										<th>Production Hours</th>
+										<th>Action</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -427,6 +428,44 @@ $personalInfo = getPersonalInfo($employeeId);
 			</div>
 		</div>
 		<!-- /Attendance Report -->
+	
+		<div class="modal fade" id="edit_attendance" tabindex="-1" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+				<form id="attendanceModifyForm">
+					<div class="modal-header">
+					<h5 class="modal-title">Modify Attendance</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<input type="hidden" name="attendance_id">
+						<input type="hidden" name="record_date">
+						<div class="mb-3">
+							<label>Attendance Date</label>
+							<input type="hidden" class="form-control" name="attendance_id" required>
+							<input type="text" class="form-control" name="record_date" readonly>
+						</div>
+						<div class="mb-3">
+							<label>New Check-in</label>
+							<input type="time" class="form-control" name="check_in" required>
+						</div>
+						<div class="mb-3">
+							<label>New Check-out</label>
+							<input type="time" class="form-control" name="check_out" required>
+						</div>
+						<div class="mb-3">
+							<label>Reason for Request</label>
+							<textarea class="form-control" name="reason" required></textarea>
+						</div>
+					</div>
+					<div class="modal-footer">
+					<button type="submit" class="btn btn-primary">Submit Request</button>
+					</div>
+				</form>
+				</div>
+			</div>
+		</div>
+
 	</div>
 	<!-- /Page Wrapper -->
 <?php require_once("./includes/footer.php"); ?>
