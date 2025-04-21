@@ -19,6 +19,211 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 ?>
 <!-- Image crop-->
 <link rel="stylesheet" href="css/plugins/croppie.css">
+<style>
+	.notifications {
+		position: fixed;
+		bottom: 20px;
+		right: 20px;
+		max-width: 360px;
+		text-align: right;
+		z-index: 100;
+	}
+
+	.notifications .n {
+		position: relative;
+		margin-top: 15px;
+		transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+		opacity: 0;
+		transform: translateY(100%);
+	}
+
+	.notifications .n::before {
+		content: attr(data-msg);
+		display: inline-block;
+		background-color: #fd6801;
+		border-radius: 5px;
+		font-family: Verdana;
+		color: #fff;
+		padding: 15px;
+		box-shadow: -7px 8px 2px rgba(0, 0, 0, 0.2);
+	}
+
+	.notifications .n:after {
+		left: 100%;
+		top: 50%;
+		border: solid transparent;
+		content: "";
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+		border-color: rgba(253, 104, 1, 0);
+		border-left-color: #fd6801;
+		border-width: 10px;
+		margin-top: -10px;
+	}
+
+	.notifications .n.in {
+		opacity: 1;
+		transform: translateY(0%);
+	}
+
+	.notifications .n.out {
+		opacity: 0;
+		transform: translateY(100%);
+	}
+</style>
+<style>
+	.container {
+		background: url(https://raw.githubusercontent.com/hosseinghafouri/brightness-range-slider/main/images/city.jpg) no-repeat center;
+		background-size: cover;
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.brightness-box {
+		width: 400px;
+		height: 60px;
+		font-size: 23px;
+		background: #f9f9f9;
+		border-radius: 8px;
+		padding: 0 20px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.brightness-box i {
+		margin: 0 10px;
+	}
+
+	#range {
+		width: 100%;
+		height: 3px;
+
+		/*tira a barra do input range*/
+		-webkit-appearance: none;
+		background: #003eff;
+		outline: none;
+	}
+
+	#range::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		background: #003eff;
+		width: 18px;
+		height: 18px;
+		border-radius: 50%;
+		cursor: pointer;
+	}
+</style>
+
+<style>
+ 
+
+[role="progressbar"] {
+  --percentage: var(--value);
+  --primary: #369;
+  --secondary: #adf;
+  --size: 300px;
+  animation: progress 2s 0.5s forwards;
+  width: var(--size);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+[role="progressbar"]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: conic-gradient(var(--primary) calc(var(--percentage) * 1%), var(--secondary) 0);
+  mask: radial-gradient(white 55%, transparent 0);
+  mask-mode: alpha;
+  -webkit-mask: radial-gradient(#0000 55%, #000 0);
+  -webkit-mask-mode: alpha;
+}
+
+[role="progressbar"]::after {
+  counter-reset: percentage var(--value);
+  content: counter(percentage) '%';
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: calc(var(--size) / 5);
+  color: var(--primary);
+}
+
+/* demo */
+body {
+  margin: 0;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  background: #f0f8ff;
+}
+
+
+/***/
+
+#youtube {
+  z-index: 2;
+  display: block;
+  width: 100px;
+  height: 70px;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: red;
+  border-radius: 50% / 11%;
+  transition: transform 0.5s;
+}
+
+#youtube:hover,
+#youtube:focus {
+  transform: scale(1.1);
+}
+
+#youtube::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 7.5%;
+  left: -6%;
+  width: 112%;
+  height: 85%;
+  background: red;
+  border-radius: 9% / 50%;
+}
+
+#youtube::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 20px;
+  left: 40px;
+  width: 45px;
+  height: 30px;
+  border: 15px solid transparent;
+  box-sizing: border-box;
+  border-left: 30px solid white;
+}
+
+#youtube span {
+  font-size: 0;
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+
+</style>
 <!-- Page Wrapper -->
 <div class="page-wrapper">
 	<div class="content">
@@ -429,191 +634,26 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 											</div>
 										</div>
 									</div>
-								</div>
-								<!-- <div class="card">
-									<div class="card-body">
-										<div class="contact-grids-tab p-0 mb-3">
-											<ul class="nav nav-underline" id="myTab" role="tablist">
-												<li class="nav-item" role="presentation">
-													<button class="nav-link active" id="info-tab2" data-bs-toggle="tab" data-bs-target="#basic-info2" type="button" role="tab" aria-selected="true">Projects</button>
-												</li>
-												<li class="nav-item" role="presentation">
-													<button class="nav-link" id="address-tab2" data-bs-toggle="tab" data-bs-target="#address2" type="button" role="tab" aria-selected="false">Assets</button>
-												</li>
-											</ul>
-										</div>
-										<div class="tab-content" id="myTabContent3">
-											<div class="tab-pane fade show active" id="basic-info2" role="tabpanel" aria-labelledby="info-tab2" tabindex="0">
-												<div class="row">
-													<div class="col-md-6 d-flex">
-														<div class="card flex-fill mb-4 mb-md-0">
-															<div class="card-body">
-																<div class="d-flex align-items-center pb-3 mb-3 border-bottom">
-																	<a href="#" class="flex-shrink-0 me-2">
-																		<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/social/project-03.svg" alt="Img">
-																	</a>
-																	<div>
-																		<h6 class="mb-1"><a href="#">World Health</a></h6>
-																		<div class="d-flex align-items-center">
-																			<p class="mb-0 fs-13">8 tasks</p>
-																			<p class="fs-13"><span class="mx-1"><i class="ti ti-point-filled text-primary"></i></span>15 Completed</p>
-																		</div>
-																	</div>
-																</div>
-																<div class="row">
-																	<div class="col-md-6">
-																		<div>
-																			<span class="mb-1 d-block">Deadline</span>
-																			<p class="text-dark">31 July 2025</p>
-																		</div>
-																	</div>
-																	<div class="col-md-6">
-																		<div>
-																			<span class="mb-1 d-block">Project Lead</span>
-																			<a href="#" class="fw-normal d-flex align-items-center">
-																				<img class="avatar avatar-sm rounded-circle me-2" src="./assets/img/profiles/avatar-01.jpg" alt="Img">
-																				Leona
-																			</a>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-													<div class="col-md-6 d-flex">
-														<div class="card flex-fill mb-0">
-															<div class="card-body">
-																<div class="d-flex align-items-center pb-3 mb-3 border-bottom">
-																	<a href="#" class="flex-shrink-0 me-2">
-																		<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/social/project-01.svg" alt="Img">
-																	</a>
-																	<div>
-																		<h6 class="mb-1 text-truncate"><a href="#">Hospital Administration</a></h6>
-																		<div class="d-flex align-items-center">
-																			<p class="mb-0 fs-13">8 tasks</p>
-																			<p class="fs-13"><span class="mx-1"><i class="ti ti-point-filled text-primary"></i></span>15 Completed</p>
-																		</div>
-																	</div>
-																</div>
-																<div class="row">
-																	<div class="col-md-6">
-																		<div>
-																			<span class="mb-1 d-block">Deadline</span>
-																			<p class="text-dark">31 July 2025</p>
-																		</div>
-																	</div>
-																	<div class="col-md-6">
-																		<div>
-																			<span class="mb-1 d-block">Project Lead</span>
-																			<a href="#" class="fw-normal d-flex align-items-center">
-																				<img class="avatar avatar-sm rounded-circle me-2" src="./assets/img/profiles/avatar-01.jpg" alt="Img">
-																				Leona
-																			</a>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="tab-pane fade" id="address2" role="tabpanel" aria-labelledby="address-tab2" tabindex="0">
-												<div class="row">
-													<div class="col-md-12 d-flex">
-														<div class="card flex-fill">
-															<div class="card-body">
-																<div class="row align-items-center">
-																	<div class="col-md-8">
-																		<div class="d-flex align-items-center">
-																			<a href="#" class="flex-shrink-0 me-2">
-																				<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/products/product-05.jpg" class="img-fluid rounded-circle" alt="img">
-																			</a>
-																			<div>
-																				<h6 class="mb-1"><a href="#">Dell Laptop - #343556656</a></h6>
-																				<div class="d-flex align-items-center">
-																					<p><span class="text-primary">AST - 001<i class="ti ti-point-filled text-primary mx-1"></i></span>Assigned on 22 Nov, 2022 10:32AM </p>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																	<div class="col-md-3">
-																		<div>
-																			<span class="mb-1 d-block">Assigned by</span>
-																			<a href="#" class="fw-normal d-flex align-items-center">
-																				<img class="avatar avatar-sm rounded-circle me-2" src="./assets/img/profiles/avatar-01.jpg" alt="Img">
-																				Andrew Symon
-																			</a>
-																		</div>
-																	</div>
-																	<div class="col-md-1">
-																		<div class="dropdown ms-2">
-																			<a href="javascript:void(0);" class="d-inline-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
-																				<i class="ti ti-dots-vertical"></i>
-																			</a>
-																			<ul class="dropdown-menu dropdown-menu-end p-3">
-																				<li>
-																					<a href="javascript:void(0);" class="dropdown-item rounded-1" data-bs-toggle="modal" data-bs-target="#asset_info">View Info</a>
-																				</li>
-																				<li>
-																					<a href="javascript:void(0);" class="dropdown-item rounded-1" data-bs-toggle="modal" data-bs-target="#refuse_msg">Raise Issue </a>
-																				</li>
-																			</ul>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-													<div class="col-md-12 d-flex">
-														<div class="card flex-fill mb-0">
-															<div class="card-body">
-																<div class="row align-items-center">
-																	<div class="col-md-8">
-																		<div class="d-flex align-items-center">
-																			<a href="#" class="flex-shrink-0 me-2">
-																				<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/products/product-06.jpg" class="img-fluid rounded-circle" alt="img">
-																			</a>
-																			<div>
-																				<h6 class="mb-1"><a href="#">Bluetooth Mouse - #478878</a></h6>
-																				<div class="d-flex align-items-center">
-																					<p><span class="text-primary">AST - 001<i class="ti ti-point-filled text-primary mx-1"></i></span>Assigned on 22 Nov, 2022 10:32AM </p>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																	<div class="col-md-3">
-																		<div>
-																			<span class="mb-1 d-block">Assigned by</span>
-																			<a href="#" class="fw-normal d-flex align-items-center">
-																				<img class="avatar avatar-sm rounded-circle me-2" src="./assets/img/profiles/avatar-01.jpg" alt="Img">
-																				Andrew Symon
-																			</a>
-																		</div>
-																	</div>
-																	<div class="col-md-1">
-																		<div class="dropdown ms-2">
-																			<a href="javascript:void(0);" class="d-inline-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
-																				<i class="ti ti-dots-vertical"></i>
-																			</a>
-																			<ul class="dropdown-menu dropdown-menu-end p-3">
-																				<li>
-																					<a href="javascript:void(0);" class="dropdown-item rounded-1" data-bs-toggle="modal" data-bs-target="#asset_info">View Info</a>
-																				</li>
-																				<li>
-																					<a href="javascript:void(0);" class="dropdown-item rounded-1" data-bs-toggle="modal" data-bs-target="#refuse_msg">Raise Issue </a>
-																				</li>
-																			</ul>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
+
+
+									<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" />
+
+									<div class="container">
+										<div class="brightness-box">
+											<i class="far fa-sun"></i>
+											<input type="range" id="range" min="10" max="100" value="100">
+											<i class="fas fa-sun"></i>
 										</div>
 									</div>
-								</div> -->
+
+									<div role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="--value: 67"></div>
+
+<a id="youtube" href="https://www.youtube.com/watch?v=aXmNG2wie7I" target="_blank">
+  <span>See how this demo was coded</span>
+</a>
+
+
+								</div>
 							</div>
 						</div>
 					</div>
@@ -1511,13 +1551,64 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 	</div>
 </div>
 <!-- image crop model end -->
-
+<div class="notifications" id="notifications"></div>
 
 
 <?php require_once("./includes/footer.php"); ?>
 <script src="./js/employee-details.js"></script>
 <!-- crop script added -->
 <script src="js/plugins/croppie.js"></script>
+<script>
+	function PushMessage(message) {
+		const notificationContainer = document.getElementById("notifications");
+
+		const notification = document.createElement("p");
+		notification.classList.add("n");
+		notification.setAttribute("data-msg", message);
+		notificationContainer.appendChild(notification);
+
+		setTimeout(function() {
+			notification.classList.add("in");
+		}, 100);
+
+		// setTimeout(function() {
+		// 	hideNotification(notification);
+		// }, 15000);
+
+		notification.addEventListener("transitionend", function() {
+			if (!notification.classList.contains("in")) {
+				notification.remove();
+			}
+		});
+	}
+
+	function hideNotification(notification) {
+		notification.classList.remove("in");
+		notification.classList.add("out");
+	}
+
+	PushMessage("Hi!");
+
+	setTimeout(function() {
+		PushMessage("This is a Push notification!");
+	}, 2000);
+
+	setTimeout(function() {
+		PushMessage(
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris condimentum, nisi quis accumsan hendrerit, velit nulla tristique enim, vehicula posuere sapien velit porta dolor."
+		);
+	}, 4000);
+
+	setTimeout(function() {
+		PushMessage(
+			"Donec ut arcu congue, viverra neque non, molestie elit. Vivamus pulvinar felis eget rutrum scelerisque. Aenean congue, arcu eget posuere consequat, libero purus pulvinar ante, eget aliquet mauris est sagittis odio."
+		);
+	}, 10000);
+
+	setTimeout(function() {
+		PushMessage("Bye.");
+	}, 20000);
+</script>
 <script>
 	/*----------------- Start upload preview image with crop -----------------*/
 	// 	$("#openFile").on("click", function () {
@@ -1588,14 +1679,22 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 	});
 	/*----------------- End upload preview image -----------------*/
 
-	document.getElementById("cropedImage").addEventListener("click", function () {
-    if (this.requestFullscreen) {
-        this.requestFullscreen();
-    } else if (this.webkitRequestFullscreen) { // Safari
-        this.webkitRequestFullscreen();
-    } else if (this.msRequestFullscreen) { // IE11
-        this.msRequestFullscreen();
-    }
-});
+	document.getElementById("cropedImage").addEventListener("click", function() {
+		if (this.requestFullscreen) {
+			this.requestFullscreen();
+		} else if (this.webkitRequestFullscreen) { // Safari
+			this.webkitRequestFullscreen();
+		} else if (this.msRequestFullscreen) { // IE11
+			this.msRequestFullscreen();
+		}
+	});
+</script>
 
+<script>
+	$(document).ready(function() {
+		$('#range').on('input change', function() {
+			let inputRangeValue = $(this).val();
+			$('.container').css('filter', 'brightness(' + inputRangeValue + '%)');
+		});
+	});
 </script>

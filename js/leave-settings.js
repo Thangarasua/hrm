@@ -83,7 +83,7 @@ $(document).ready(function () {
                                     <input type="checkbox" role="switch" class="form-check-input" id="leavePolicyStatus" value="${row.id}" ${checked}>
                                 </label>
                             </div>
-                            <h6 class="d-flex align-items-center">${row.leave_type}</h6>
+                            <h6 class="d-flex align-items-center">${row.policy_name}</h6>
                         </div>
                         <div class="d-flex align-items-center">
                             <i class="fa-solid fa-gear edit" data-id="${row.id}"></i>
@@ -141,8 +141,9 @@ $(document).ready(function () {
       success: function (response) {
         if (response.status == "success") {
           $("#rowId").val(response.data.id);
-          $("#updateLeaveType").val(response.data.leave_type);
-          $("#updateDays").val(response.data.days); 
+          $("#updatePolicyName").val(response.data.policy_name);
+          $("#updateDays").val(response.data.days);  
+          $("#updateLeaveType").val(response.data.leave_type).trigger('change');
           $("#updateDescription").val(response.data.description); 
         } else {
           Swal.fire(response.data.message);
@@ -183,6 +184,14 @@ $(document).ready(function () {
   function formValidate() {
     $(".error").remove(); // Remove previous error messages
 
+    let policyName = $("#policyName").val().trim();
+    if (policyName.length == 0) {
+      $("#policyName").focus();
+      $("#policyName").closest(".mb-3").find(".form-label").after(
+        "<small class='error text-danger'> mandatory field.</small>"
+      );
+      return 0;
+    }
     let leaveType = $("#leaveType").val().trim();
     if (leaveType.length == 0) {
       $("#leaveType").focus();
@@ -204,10 +213,10 @@ $(document).ready(function () {
   function updateFormValidate() {
     $(".error").remove(); // Remove previous error messages
 
-    let updateLeaveType = $("#updateLeaveType").val().trim();
-    if (updateLeaveType.length == 0) {
-      $("#updateLeaveType").focus();
-      $("#updateLeaveType").closest(".mb-3").find(".form-label").after(
+    let updatePolicyName = $("#updatePolicyName").val().trim();
+    if (updatePolicyName.length == 0) {
+      $("#updatePolicyName").focus();
+      $("#updatePolicyName").closest(".mb-3").find(".form-label").after(
         "<small class='error text-danger'> mandatory field.</small>"
       );
       return 0;

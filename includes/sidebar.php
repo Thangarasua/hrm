@@ -132,7 +132,7 @@
 							<ul>
 								<li><a href="employee-details" class="employee-details">My Info</a></li>
 								<li><a href="employee-attendance" class="employee-attendance">Attendance</a></li>
-								<li><a href="leave-managment" class="leave-managment">Leave Management</a></li>
+								<li><a href="leaves-employee" class="leaves-employee">Leave Request</a></li>
 								<li><a href="payroll" class="payroll">Payroll</a></li> 
 							</ul>
 						</li>
@@ -159,6 +159,23 @@
 					</ul>
 				</li>
 				
+				<?php if (in_array($roleId, [3, 4, 5])) { ?>
+				<li class="menu-title"><span>LEAVE MANAGEMENT</span></li>
+				<li>
+					<ul>
+						<li class="submenu">
+							<a href="javascript:void(0);" class="sub-menu-title">
+								<i class="ti ti-user-shield"></i><span>Leave Management</span>
+								<span class="menu-arrow"></span>
+							</a>
+							<ul>
+								<li><a href="leave-settings" class="leave-settings">Leave Settings</a></li>
+								<li><a href="leaves" class="leaves">leaves</a></li> 
+							</ul>
+						</li> 
+					</ul>
+				</li>
+				<?php } ?>
 
 			</ul>
 		</div>
