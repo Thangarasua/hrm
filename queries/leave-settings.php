@@ -19,11 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
     if ($flag === "insert") { 
 
-        $leaveType = $_POST['leaveType'];
+        $policyName = $_POST['policyName'];
         $days = $_POST['days']; 
+        $leaveType = $_POST['leaveType']; 
         $description = $conn->real_escape_string(trim(preg_replace('/\s+/', ' ', $_POST['description'])));
 
-        $query = "INSERT INTO `leave_types`(`leave_type`, `days`, `description`, `status`, `updated_at`) VALUES ('$leaveType','$days','$description',1,'$currentDatetime')";
+        $query = "INSERT INTO `leave_settings`(`policy_name`, `allowed_days`, `leave_type`, `description`, `status`, `updated_at`) VALUES ('$policyName','$days','$leaveType','$description',1,'$currentDatetime')"; 
         $result = mysqli_query($conn, $query);
         if ($result) {
             echo json_encode(array('status' => 'success', 'message' => 'Leave Policy created successfully'));
@@ -32,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         }
         exit;
     } elseif ($flag === 'getAll') { 
-        $sql = "SELECT * FROM `leave_types`";
+        $sql = "SELECT * FROM `leave_settings`";
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {  
@@ -47,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
     } elseif ($flag === "getDetails") {
 
         $id = $_POST['id'];
-        $query = "SELECT * FROM `leave_types` WHERE `id` = '$id'";
+        $query = "SELECT * FROM `leave_settings` WHERE `id` = '$id'";
         $result = mysqli_query($conn, $query);
         if ($result) {
             $row = mysqli_fetch_assoc($result);
@@ -61,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $id = $_POST['id'];  
         $activeStatus = $_POST['activeStatus']; 
         
-        $query = "UPDATE `leave_types` SET `status`=$activeStatus,`updated_at`='$currentDatetime' WHERE `id`='$id'";
+        $query = "UPDATE `leave_settings` SET `status`=$activeStatus,`updated_at`='$currentDatetime' WHERE `id`='$id'";
         $result = mysqli_query($conn, $query);
         if ($result) {
             echo json_encode(array('status' => 'success', 'message' => 'Leave policy update successfully'));
@@ -71,27 +72,18 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         exit;
     } elseif ($flag === "update") {
 
-        $leaveType = $_POST['leaveType'];
+        $policyName = $_POST['policyName'];
         $days = $_POST['days']; 
+        $leaveType = $_POST['leaveType']; 
         $description = $conn->real_escape_string(trim(preg_replace('/\s+/', ' ', $_POST['description'])));
         $rowId = $_POST['rowId'];
 
-        $query = "UPDATE `leave_types` SET `leave_type`='$leaveType',`days`='$days',`description`='$description',`updated_at`='$currentDatetime' WHERE `id`='$rowId'";
+        $query = "UPDATE `leave_settings` SET `policy_name`='$policyName',`allowed_days`='$days',`leave_type`='$leaveType',`description`='$description',`updated_at`='$currentDatetime' WHERE `id`='$rowId'";
         $result = mysqli_query($conn, $query);
         if ($result) {
             echo json_encode(array('status' => 'success', 'message' => 'Leave policy update successfully'));
         } else {
             echo json_encode(array('status' => 'failure', 'message' => 'Leave policy update failure'));
-        }
-        exit;
-    } elseif ($flag === "delete") {
-        $id = $_POST['id'];
-        $query = "DELETE FROM `recruitment` WHERE `id` = '$id'";
-        $result = mysqli_query($conn, $query);
-        if ($result) {
-            echo json_encode(array('status' => 'success', 'message' => 'Deleted successfull'));
-        } else {
-            echo json_encode(array('status' => 'failure', 'message' => 'something went wrong'));
         }
         exit; 
     }

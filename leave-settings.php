@@ -59,13 +59,23 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">Policy Name<span class="text-danger">*</span></label>
-                                <input type="text" name="leaveType" id="leaveType" class="form-control" oninput="capitalizeWords(this)">
+                                <input type="text" name="policyName" id="policyName" class="form-control" oninput="capitalizeWords(this)">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">No of Days</label>
                                 <input type="text" name="days" id="days" class="form-control" onkeypress="return isNumber(event)">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Leave Type<span class="text-danger">*</span></label> 
+                                <select class="select" name="leaveType" id="leaveType">
+									<option value="">Select</option>
+									<option value="Paid">Paid</option>
+									<option value="Unpaid">Unpaid</option>
+								</select>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -102,13 +112,22 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">Policy Name<span class="text-danger">*</span></label>
-                                <input type="text" name="leaveType" id="updateLeaveType" class="form-control" oninput="capitalizeWords(this)">
+                                <input type="text" name="policyName" id="updatePolicyName" class="form-control" oninput="capitalizeWords(this)">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">No of Days</label>
                                 <input type="text" name="days" id="updateDays" class="form-control" onkeypress="return isNumber(event)">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Leave Type<span class="text-danger">*</span></label> 
+                                <select class="select" name="leaveType" id="updateLeaveType"> 
+									<option value="Paid">Paid</option>
+									<option value="Unpaid">Unpaid</option>
+								</select>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -122,7 +141,7 @@
                 <div class="modal-footer">
                     <input type="hidden" name="rowId" id="rowId">
                     <button type="button" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary" id="updateButton">Update Leave Policy</button>
+                    <button type="submit" class="btn btn-primary">Update Leave Policy</button>
                 </div>
             </form>
         </div>

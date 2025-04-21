@@ -442,3 +442,15 @@ function getProfileProgress($employeeId)
     $progressPercent = $completedChecks * 20;
     return $progressPercent;
 }
+
+function getLeaveTypes()
+{
+    global $conn;
+    $query = "SELECT * FROM `leave_settings` WHERE `status` = 1 ORDER BY policy_name ASC";
+    $result = mysqli_query($conn, $query);
+    $options = '';
+    while ($row = $result->fetch_assoc()) { 
+        $options .= '<option value="' . $row['id'] . '">' . htmlspecialchars($row['policy_name']) . '</option>';
+    }
+    return $options;
+};
