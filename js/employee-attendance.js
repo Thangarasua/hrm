@@ -84,7 +84,8 @@ $(document).ready(function () {
                         isCheckedIn = true;
                         toastr.success("Log In Successfully");
                         setTimeout(function () {
-                            updateUIForCheckOut(); 
+                            updateUIForCheckOut();
+                            fetchAttendance(formattedFromDate, formattedToDate);
                         }, 3000);
                         Swal.close();
                     } else {
@@ -102,6 +103,7 @@ $(document).ready(function () {
                         toastr.success("Log Out Successfully");
                         setTimeout(function () {
                             updateUIForCheckedOut(response.productionHours);
+                            fetchAttendance(formattedFromDate, formattedToDate);
                         }, 3000);
                         Swal.close();
                     }

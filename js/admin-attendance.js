@@ -129,10 +129,13 @@ $(document).ready(function () {
                                       <h6 class="fw-medium"><a href="#">${ row.reason }</a></h6>
                                   </td>
                                   <td>
-                                    <span class="badge  ${statusClass} d-inline-flex align-items-center">
-                                        <i class="ti ti-point-filled me-1"></i>${ row.status }
-                                    </span>
-                                  </td>
+                                    <a class="btn btn-success btn-sm me-1 approve-btn" data-id="${row.id}" title="Approve">
+                                        <i class="ti ti-circle-check"></i>
+                                    </a>
+                                    <a class="btn btn-danger btn-sm reject-btn" data-id="${row.id}" title="Reject">
+                                        <i class="ti ti-circle-x"></i>
+                                    </a>
+                                   </td>
                               </tr>`;
                   tableBody.append(newRow);
                 });
@@ -174,4 +177,23 @@ $(document).ready(function () {
             fetchAttendance(formattedFromDate, formattedToDate);
         }
     });
+
+    $(document).on('click', '.approve-btn, .reject-btn', function () {
+        const id = $(this).data('id');
+        const action = $(this).hasClass('approve-btn') ? 'approve' : 'reject';
+        $.ajax({
+            url: 'queries/admin-attendance.php',
+            type: 'POST',
+            data: { id: id, action: action, flag: 'attendanceAction' },
+            success: function(response) {
+                if (response.status == "success") {
+                    toastr.success("Request Updates Successfully");
+                    setTimeout(function () {
+                        fetchAttendanceRequest(formattedFromDate, formattedToDate);
+                    }, 3000);
+                    Swal.close();
+                }
+            }
+        });
+    });    
 });
