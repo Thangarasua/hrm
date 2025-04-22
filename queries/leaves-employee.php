@@ -19,6 +19,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
     if ($flag === "insert") {
 
+        $query = "SELECT * FROM `leave_requests` WHERE `employee_id` = '$employeeId' AND `leave_status` = 0 ORDER BY `leave_requests`.`id` DESC";
+        $result = mysqli_query($conn, $query);
+        $rowCount = mysqli_num_rows($result);
+        if($rowCount > 0){
+            echo json_encode(array('status' => 'failure', 'message' => 'Your last leave request was pending, contact Admin (or) HR.'));
+            exit;
+        }
+
         $leaveType = $_POST["leaveType"];
         $dayType = $_POST["dayType"];
         if ($dayType == 1) {
@@ -40,14 +48,16 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
         $query = "INSERT INTO `leave_requests` (`employee_id`, `leave_type_id`, `day_type`, `single_leave_date`, `single_leave_type`, `leave_from_date`, `leave_from_date_type`, `leave_to_date`, `leave_to_date_type`, `leave_reason`, `applied_at`, `leave_status`) VALUES ('$employeeId', '$leaveType', '$dayType', $singleDate, $singleDateDuration, $fromDate, $fromDateDuration, $toDate, $toDateDuration, '$leaveReason', '$currentDatetime', 0)";
         $result = mysqli_query($conn, $query);
+ 
         if ($result) {
             echo json_encode(array('status' => 'success', 'message' => 'Leave request added successfully'));
         } else {
             echo json_encode(array('status' => 'failure', 'message' => 'Leave request added failure'));
         }
         exit;
-    } elseif ($flag === 'getAll') {
-        $sql = "SELECT lr.*,ls.policy_name,e.official_name FROM `leave_requests` AS `lr` INNER JOIN `leave_settings` AS `ls` ON lr.leave_type_id = ls.id LEFT JOIN `employees` AS `e` ON lr.reviewed_by=e.employee_id";
+    } elseif ($flag === 'getAll') { 
+
+        $sql = "SELECT lr.*,ls.policy_name,e.official_name FROM `leave_requests` AS `lr` INNER JOIN `leave_settings` AS `ls` ON lr.leave_type_id = ls.id LEFT JOIN `employees` AS `e` ON lr.reviewed_by=e.employee_id WHERE lr.employee_id = '$employeeId'"; 
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
