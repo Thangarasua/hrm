@@ -230,7 +230,7 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".request-modify-attendance", function () {
-        const id = $(this).data("attendance-id");
+        const id = $(this).data("attendance-id") ? $(this).data("attendance-id") : 0;
         const date = $(this).data("date");
         var checkin = $(this).data("checkin");
         checkin = formatHHMM(checkin)
