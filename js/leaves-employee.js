@@ -34,6 +34,9 @@ $(document).ready(function () {
                     loadData("", "", "", "", "getAll");
                 } else {
                     toastr.error(response.message, "Error");
+                    $("#updateButton")
+                        .html("Add Leave")
+                        .prop("disabled", false);
                 }
             },
         });
@@ -108,12 +111,7 @@ $(document).ready(function () {
                                         <td>${row.applied_at}</td>
                                         <td>${row.leaveStatus}</td>
                                         </td>
-                                        <td>
-                                            <div class="action-icon d-inline-flex">
-                                                <a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit_leaves"><i class="ti ti-edit"></i></a>
-                                                <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash"></i></a>
-                                            </div>
-                                        </td>
+                                        <td></td>
                                     </tr>`;
                         tableBody.append(newRow);
                         // Reinitialize Bootstrap tooltips
