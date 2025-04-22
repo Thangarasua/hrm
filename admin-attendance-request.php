@@ -133,7 +133,7 @@ $personalInfo = getPersonalInfo($employeeId);
                                 <th>Check Out</th>
                                 <th>Production Hours</th>
                                 <th>Reason</th>
-                                <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
