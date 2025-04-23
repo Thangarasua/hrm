@@ -77,22 +77,20 @@ $(document).ready(function () {
                             <td>${row.doj}</td>
                             <td>
                               <div class="action-icon d-inline-flex">
-                                <a href="employee-details" data-id="${
-                                  row.employee_id
-                                }" class="view" id="employeeDetails">
+                                <a href="employee-details" data-id="${row.employee_id
+              }" class="view" id="employeeDetails">
                                   <i class="fa-solid fa-eye" title="view details"></i>
                                 </a>
-                                <a href="javascript:void(0)" data-id="${
-                                  row.employee_id
-                                }" class="edit">
+                                <a href="javascript:void(0)" data-id="${row.employee_id
+              }" class="edit">
                                   <i class="fa-solid fa-pen-to-square" title="edit details"></i>
                                 </a>
                               </div>
                             </td>
                           </tr>`;
             tableBody.append(newRow);
-             // Reinitialize Bootstrap tooltips
-              $('[data-bs-toggle="tooltip"]').tooltip();
+            // Reinitialize Bootstrap tooltips
+            $('[data-bs-toggle="tooltip"]').tooltip();
           });
         }
         /*-----data table common comments includes-----*/
@@ -110,38 +108,38 @@ $(document).ready(function () {
     let flag = "getAll";
     fetchEmployee(fromDate, toDate, dateRange, active, flag);
 
-//     if (val) {
-//       if (val === "1") {
-// fetchEmployee((fromDate = ""),(toDate = ""),(dateRange = ""),(active = "1"),(flag = "getAll")
-// );
-//       } else if (val === "0") {
-//         fetchEmployee(
-//           (fromDate = ""),
-//           (toDate = ""),
-//           (dateRange = ""),
-//           (active = "0"),
-//           (flag = "getAll")
-//         );
-//       } else if (val === "2") {
-//         fetchEmployee(
-//           (fromDate = ""),
-//           (toDate = ""),
-//           (dateRange = ""),
-//           (active = "2"),
-//           (flag = "getAll")
-//         );
-//       } else if (val === "3") {
-//         fetchEmployee(
-//           (fromDate = ""),
-//           (toDate = ""),
-//           (dateRange = ""),
-//           (active = "3"),
-//           (flag = "getAll")
-//         );
-//       } else {
-//       }
-//     } else {
-//     }
+    //     if (val) {
+    //       if (val === "1") {
+    // fetchEmployee((fromDate = ""),(toDate = ""),(dateRange = ""),(active = "1"),(flag = "getAll")
+    // );
+    //       } else if (val === "0") {
+    //         fetchEmployee(
+    //           (fromDate = ""),
+    //           (toDate = ""),
+    //           (dateRange = ""),
+    //           (active = "0"),
+    //           (flag = "getAll")
+    //         );
+    //       } else if (val === "2") {
+    //         fetchEmployee(
+    //           (fromDate = ""),
+    //           (toDate = ""),
+    //           (dateRange = ""),
+    //           (active = "2"),
+    //           (flag = "getAll")
+    //         );
+    //       } else if (val === "3") {
+    //         fetchEmployee(
+    //           (fromDate = ""),
+    //           (toDate = ""),
+    //           (dateRange = ""),
+    //           (active = "3"),
+    //           (flag = "getAll")
+    //         );
+    //       } else {
+    //       }
+    //     } else {
+    //     }
   });
 
   $("#role").change(function () {
@@ -169,7 +167,7 @@ $(document).ready(function () {
       toastr["warning"]("First select Hierarchy");
       return 0;
     }
-    var departmentId = $("#department").val(); 
+    var departmentId = $("#department").val();
     if (departmentId) {
       $.ajax({
         url: "queries/employees.php",
@@ -200,19 +198,19 @@ $(document).ready(function () {
       toastr.error('Kindly enter the personal name', "Error");
       $("#employeeOfficialName").val("");
       $("#officialNameCheckbox").prop("checked", false);
-    } 
+    }
   });
- 
-    $("#nextButton").click(function () {
-        $("#office-tab").tab("show"); // Open the "Official Information" tab
-    }); 
-    $("#previousButton").click(function () {
-        $("#basic-tab").tab("show"); // Open the "Official Information" tab
-    }); 
+
+  $("#nextButton").click(function () {
+    $("#office-tab").tab("show"); // Open the "Official Information" tab
+  });
+  $("#previousButton").click(function () {
+    $("#basic-tab").tab("show"); // Open the "Official Information" tab
+  });
 
 
   /** Function to Send Welcome Mail */
-  function wellcomeMail(data) { 
+  function wellcomeMail(data) {
     $.ajax({
       type: "POST",
       url: "mails/employees-mail.php",
@@ -265,7 +263,7 @@ $(document).ready(function () {
 
   $(document).on("click", "#employeeStatusUpdate", function (e) {
     e.preventDefault();
-    var employeeId = $(this).data("id"); 
+    var employeeId = $(this).data("id");
     var encryptedId = encryptEmployeeId(employeeId);
     window.location.href = `employee-details.php?empId=${encryptedId}`;
   });
@@ -274,12 +272,17 @@ $(document).ready(function () {
     e.preventDefault();
     $("#editModal").modal("show");
     var id = $(this).data("id");
-    $('#employeeId').val(id); 
+    $('#employeeId').val(id);
   });
 
   $(document).on("submit", "#updateStatus", function (e) {
     e.preventDefault();
-   
+
+    form = formValidate();
+    if (form == 0) {
+      return false;
+    }
+
     let formData = new FormData(this);
     formData.append("flag", "statusUpdate");
     $.ajax({
@@ -334,7 +337,7 @@ $(document).ready(function () {
         flag: "getCardValues",
       },
       success: function (res) {
-        if (res.status == "success") { 
+        if (res.status == "success") {
           $("#totalEmployees").html(res.data.total);
           $("#activeEmployees").html(res.data.active);
           $("#inActiveEmployees").html(res.data.inactive);
@@ -343,7 +346,7 @@ $(document).ready(function () {
         }
       },
     });
-  } 
+  }
   getCardDetails();
 });
 
@@ -353,3 +356,24 @@ $(document).ready(function () {
     console.log("Selected Date Range:", selectedDateRange); // Display in console
   });
 });
+
+function formValidate() {
+  $(".error").remove(); // Remove previous error messages
+
+  let relievingDate = $("#relievingDate").val().trim();
+  if (relievingDate.length == 0) {
+    $("#relievingDate").focus();
+    $("#relievingDate").closest(".mb-3").find(".form-label").after(
+      "<small class='error text-danger'> mandatory field.</small>"
+    );
+    return 0;
+  }
+  let relievingComments = $("#relievingComments").val().trim();
+  if (relievingComments.length == 0) {
+    $("#relievingComments").focus();
+    $("#relievingComments").closest(".mb-3").find(".form-label").after(
+      "<small class='error text-danger'> mandatory field.</small>"
+    );
+    return 0;
+  }
+}
