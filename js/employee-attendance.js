@@ -151,20 +151,23 @@ $(document).ready(function () {
                     } else {
                         hoursStatusClass = "badge-success";
                     }
-                    if (row.record_edit === 'Yes') {
+
+                    if (row.record_date === formattedToDate) {
+                        editOption = '<span class="badge bg-warning text-dark"></span>';
+                    } else if (row.record_edit === 'Yes') {
                         editOption = '<span class="badge bg-warning text-dark"><i class="ti ti-clock"></i></span>';
                     } else {
                         editOption = `<div class="action-icon d-inline-flex">
-                    <a href="#" class="me-2 request-modify-attendance"
-                        data-bs-toggle="modal"
-                        data-bs-target="#edit_attendance"
-                        data-attendance-id="${row.id}"
-                        data-date="${row.record_date}"
-                        data-checkin="${row.check_in}"
-                        data-checkout="${row.check_out}">
-                        <i class="ti ti-edit"></i>
-                    </a>
-                </div>`;
+                            <a href="#" class="me-2 request-modify-attendance"
+                                data-bs-toggle="modal"
+                                data-bs-target="#edit_attendance"
+                                data-attendance-id="${row.id}"
+                                data-date="${row.record_date}"
+                                data-checkin="${row.check_in}"
+                                data-checkout="${row.check_out}">
+                                <i class="ti ti-edit"></i>
+                            </a>
+                        </div>`;
                     }
                 
                   var newRow = `<tr>
