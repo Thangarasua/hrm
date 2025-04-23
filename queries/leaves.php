@@ -19,10 +19,16 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
 
     if ($flag === 'getAll') {
 
+        if (in_array($departmentId, [1, 2, 3, 5])) {
+            $departmentWise = "1";
+        } else {
+            $departmentWise = "e.department_id = $departmentId";
+        }
+
         $leavePolicy = (is_null($_POST['leavePolicy']) || $_POST['leavePolicy'] === '') ? '1' : "lr.leave_type_id = '" . $_POST['leavePolicy'] . "'"; 
         $dateRange = (is_null($_POST['dateRange']) || $_POST['dateRange'] === '') ? '1' : "lr.applied_at BETWEEN '" . $_POST['fromDate'] . " 00:00:00' AND '" . $_POST['toDate'] . " 23:59:00'";   
 
-        $sql = "SELECT lr.*,ls.policy_name,e.official_name AS employee,e1.official_name AS approved,dg.designation_title,pi.profile_photo FROM `leave_requests` AS `lr` INNER JOIN `leave_settings` AS `ls` ON lr.leave_type_id = ls.id LEFT JOIN `employees` AS `e` ON lr.employee_id=e.employee_id LEFT JOIN `employees` AS `e1` ON lr.employee_id=e1.employee_id LEFT JOIN `designations` AS `dg` ON dg.designation_id=e.designation_id LEFT JOIN `personal_info` AS `pi` ON pi.employee_id=e.employee_id WHERE $leavePolicy AND $dateRange";
+        $sql = "SELECT lr.*,ls.policy_name,e.official_name AS employee,e1.official_name AS approved,dg.designation_title,pi.profile_photo FROM `leave_requests` AS `lr` INNER JOIN `leave_settings` AS `ls` ON lr.leave_type_id = ls.id LEFT JOIN `employees` AS `e` ON lr.employee_id=e.employee_id LEFT JOIN `employees` AS `e1` ON lr.employee_id=e1.employee_id LEFT JOIN `designations` AS `dg` ON dg.designation_id=e.designation_id LEFT JOIN `personal_info` AS `pi` ON pi.employee_id=e.employee_id WHERE $leavePolicy AND $dateRange AND $departmentWise";
         
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {

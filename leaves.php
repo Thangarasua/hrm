@@ -30,10 +30,7 @@
 							<li><a href="javascript:void(0);" class="dropdown-item rounded-1" id="print_button"><i class="ti ti-file-type-xls me-1"></i>Export as Print </a></li>
 						</ul>
 					</div>
-				</div>
-				<div class="mb-2">
-					<a href="#" data-bs-toggle="modal" data-bs-target="#add_leaves" class="btn btn-primary d-flex align-items-center"><i class="ti ti-circle-plus me-2"></i>Add Leave</a>
-				</div>
+				</div> 
 				<div class="head-icons ms-2">
 					<a href="javascript:void(0);" class="" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Collapse" id="collapse-header">
 						<i class="ti ti-chevrons-up"></i>

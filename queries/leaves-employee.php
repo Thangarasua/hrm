@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
 
-                $row['official_name'] = (is_null($row['official_name'])) ? 'Still not work' : $row['official_name'];
+                $row['official_name'] = (is_null($row['official_name'])) ? '--' : $row['official_name'];
 
                 if ($row['day_type'] == 1) {
                     $row['fromDate'] = date("d M Y", strtotime($row['single_leave_date']));
@@ -140,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
                 if ($row['leave_status'] == 0) {
                     $row['reviewed_by'] = "--";
                     $row['reviewed_at'] = "--";
-                    $row['official_name'] = "Still not work";
+                    $row['official_name'] = "--";
                 } else {
                     $row['reviewed_by'] = $row['reviewed_by'];
                     $row['reviewed_at'] = $row['reviewed_at'];
