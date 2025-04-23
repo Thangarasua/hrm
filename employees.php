@@ -738,7 +738,7 @@
 
 <!-- Add Employee -->
 <div class="modal fade" id="editModal">
-	<div class="modal-dialog modal-dialog-centered modal-sm">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<div class="d-flex align-items-center">
@@ -761,6 +761,12 @@
 											<i class="ti ti-calendar text-gray-7"></i>
 										</span>
 									</div>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="mb-3">
+									<label class="form-label">Relieving Comments <span class="text-danger"> *</span></label>
+									 <textarea class="form-control" name="relievingComments" id="relievingComments" rows="3"></textarea>
 								</div>
 							</div>
 						</div>

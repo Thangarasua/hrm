@@ -124,10 +124,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         }
     } else if ($flag === "statusUpdate") {
         $employeeId = $_POST['employeeId'];
-        $relievingDate = $_POST['relievingDate'];
-        $relievingDate = date('Y-m-d', strtotime($relievingDate));
+        $relievingDate = date('Y-m-d', strtotime($_POST['relievingDate']));
+        $relievingComments = $_POST['relievingComments'];
 
-        $query = "UPDATE `employees` SET `status`='2',`relieving_date`='$relievingDate' WHERE `employee_id`='$employeeId'";
+        $query = "UPDATE `employees` SET `status`='2',`relieving_date`='$relievingDate',`relieving_comments`='$relievingComments' WHERE `employee_id`='$employeeId'";
         $result = mysqli_query($conn, $query);
         if ($result) {
             echo json_encode(array('status' => 'success', 'message' => 'Employee status update successfully'));
