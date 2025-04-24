@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $dayType = $_POST["dayType"];
         if ($dayType == 1) {
             $singleDate = !empty($_POST['singleDate']) ? "'" . date("Y-m-d", strtotime($_POST['singleDate'])) . "'" : "NULL";
-            $singleDateDuration = !empty($_POST['singleDateDuration']) ? $_POST["singleDateDuration"] : "NULL";
+            $singleDateDuration = !empty($_POST['singleDateDuration']) ? "'" . $_POST['singleDateDuration'] . "'" : "NULL";
             $fromDate = "NULL";
             $fromDateDuration = "NULL";
             $toDate = "NULL";
@@ -39,21 +39,22 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         } else {
             $singleDate = "NULL";
             $singleDateDuration = "NULL";
-            $fromDate = !empty($_POST['fromDate']) ? date("Y-m-d", strtotime($_POST['fromDate'])) : "NULL";
-            $fromDateDuration = !empty($_POST['fromDateDuration']) ? $_POST["fromDateDuration"] : "NULL";
-            $toDate = !empty($_POST['toDate']) ? date("Y-m-d", strtotime($_POST['toDate'])) : "NULL";
-            $toDateDuration = !empty($_POST['toDateDuration']) ? $_POST["toDateDuration"] : "NULL";
+            $fromDate = !empty($_POST['fromDate']) ? "'" . date("Y-m-d", strtotime($_POST['fromDate'])) . "'" : "NULL";
+            $fromDateDuration = !empty($_POST['fromDateDuration']) ? "'" . $_POST['fromDateDuration'] . "'" : "NULL";
+            $toDate = !empty($_POST['toDate']) ? "'" . date("Y-m-d", strtotime($_POST['toDate'])) . "'" : "NULL";
+            $toDateDuration = !empty($_POST['toDateDuration']) ? "'" . $_POST['toDateDuration'] . "'" : "NULL";
         }
         $leaveReason = $conn->real_escape_string(trim(preg_replace('/\s+/', ' ', $_POST['leaveReason'])));
 
-        $query = "INSERT INTO `leave_requests` (`employee_id`, `leave_type_id`, `day_type`, `single_leave_date`, `single_leave_type`, `leave_from_date`, `leave_from_date_type`, `leave_to_date`, `leave_to_date_type`, `leave_reason`, `applied_at`, `leave_status`) VALUES ('$employeeId', '$leaveType', '$dayType', $singleDate, '$singleDateDuration', '$fromDate', '$fromDateDuration', '$toDate', '$toDateDuration', '$leaveReason', '$currentDatetime', 0)"; 
+        $query = "INSERT INTO `leave_requests` (`employee_id`, `leave_type_id`, `day_type`, `single_leave_date`, `single_leave_type`, `leave_from_date`, `leave_from_date_type`, `leave_to_date`, `leave_to_date_type`, `leave_reason`, `applied_at`, `leave_status`) VALUES ('$employeeId', '$leaveType', '$dayType', $singleDate, $singleDateDuration, $fromDate, $fromDateDuration, $toDate, $toDateDuration, '$leaveReason', '$currentDatetime', 0)";
+
         $result = mysqli_query($conn, $query);
 
         if ($dayType == 1) {
             // Single-day leave
             $leaveStatus = ($singleDateDuration === "Full Day") ? "Leave" : "$singleDateDuration";
 
-            $insertQuery = "INSERT INTO attendance (`employee_id`, `record_date`, `status`) VALUES ('$employeeId', '$singleDate', '$leaveStatus')";
+            $insertQuery = "INSERT INTO attendance (`employee_id`, `record_date`, `status`) VALUES ('$employeeId', $singleDate, $leaveStatus)";
             mysqli_query($conn, $insertQuery);
         } else {
             // Multi-day leave
