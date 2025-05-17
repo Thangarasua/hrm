@@ -39,14 +39,14 @@
                     <p class="text-light">Stay motivated, keep growing !!!</p>
                 </div>
                 <div class="d-flex align-items-center flex-wrap mb-1">
-                    <a href="https://smarthr.dreamstechnologies.com/html/template/companies.html" class="btn btn-dark btn-md me-2 mb-2">Companies</a>
-                    <a href="https://smarthr.dreamstechnologies.com/html/template/packages.html" class="btn btn-light btn-md mb-2">All Packages</a>
+                    <a href="#" class="btn btn-dark btn-md me-2 mb-2">Companies</a>
+                    <a href="#" class="btn btn-light btn-md mb-2">All Packages</a>
                 </div>
             </div>
             <div class="welcome-bg">
-                <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/bg/welcome-bg-02.svg" alt="img" class="welcome-bg-01">
-                <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/bg/welcome-bg-03.svg" alt="img" class="welcome-bg-02">
-                <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/bg/welcome-bg-01.svg" alt="img" class="welcome-bg-03">
+                <img src="./assets/img/bg/welcome-bg-02.svg" alt="img" class="welcome-bg-01">
+                <img src="./assets/img/bg/welcome-bg-03.svg" alt="img" class="welcome-bg-02">
+                <img src="./assets/img/bg/welcome-bg-01.svg" alt="img" class="welcome-bg-03">
             </div>
         </div>
         <!-- /Welcome Wrap -->
@@ -269,13 +269,13 @@
                 <div class="card flex-fill">
                     <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
                         <h5 class="mb-2">Recent Transactions</h5>
-                        <a href="https://smarthr.dreamstechnologies.com/html/template/purchase-transaction.html" class="btn btn-light btn-md mb-2">View All</a>
+                        <a href="#" class="btn btn-light btn-md mb-2">View All</a>
                     </div>
                     <div class="card-body pb-2">
                         <div class="d-sm-flex justify-content-between flex-wrap mb-3">
                             <div class="d-flex align-items-center mb-2">
                                 <a href="javscript:void(0);" class="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0">
-                                    <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/company/company-02.svg" class="img-fluid w-auto h-auto" alt="img">
+                                    <img src="./assets/img/company/company-02.svg" class="img-fluid w-auto h-auto" alt="img">
                                 </a>
                                 <div class="ms-2 flex-fill">
                                     <h6 class="fs-medium text-truncate mb-1"><a href="javscript:void(0);">Stellar Dynamics</a></h6>
@@ -290,7 +290,7 @@
                         <div class="d-sm-flex justify-content-between flex-wrap mb-3">
                             <div class="d-flex align-items-center mb-2">
                                 <a href="javscript:void(0);" class="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0">
-                                    <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/company/company-03.svg" class="img-fluid w-auto h-auto" alt="img">
+                                    <img src="./assets/img/company/company-03.svg" class="img-fluid w-auto h-auto" alt="img">
                                 </a>
                                 <div class="ms-2 flex-fill">
                                     <h6 class="fs-medium text-truncate mb-1"><a href="javscript:void(0);">Quantum Nexus</a></h6>
@@ -305,7 +305,7 @@
                         <div class="d-sm-flex justify-content-between flex-wrap mb-3">
                             <div class="d-flex align-items-center mb-2">
                                 <a href="javscript:void(0);" class="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0">
-                                    <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/company/company-05.svg" class="img-fluid w-auto h-auto" alt="img">
+                                    <img src="./assets/img/company/company-05.svg" class="img-fluid w-auto h-auto" alt="img">
                                 </a>
                                 <div class="ms-2 flex-fill">
                                     <h6 class="fs-medium text-truncate mb-1"><a href="javscript:void(0);">Aurora Technologies</a></h6>
@@ -320,7 +320,7 @@
                         <div class="d-sm-flex justify-content-between flex-wrap mb-3">
                             <div class="d-flex align-items-center mb-2">
                                 <a href="javscript:void(0);" class="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0">
-                                    <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/company/company-07.svg" class="img-fluid w-auto h-auto" alt="img">
+                                    <img src="./assets/img/company/company-07.svg" class="img-fluid w-auto h-auto" alt="img">
                                 </a>
                                 <div class="ms-2 flex-fill">
                                     <h6 class="fs-medium text-truncate mb-1"><a href="javscript:void(0);">TerraFusion Energy</a></h6>
@@ -335,7 +335,7 @@
                         <div class="d-sm-flex justify-content-between flex-wrap mb-1">
                             <div class="d-flex align-items-center mb-2">
                                 <a href="javscript:void(0);" class="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0">
-                                    <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/company/company-08.svg" class="img-fluid w-auto h-auto" alt="img">
+                                    <img src="./assets/img/company/company-08.svg" class="img-fluid w-auto h-auto" alt="img">
                                 </a>
                                 <div class="ms-2 flex-fill">
                                     <h6 class="fs-medium text-truncate mb-1"><a href="javscript:void(0);">Epicurean Delights</a></h6>
@@ -357,13 +357,13 @@
                 <div class="card flex-fill">
                     <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
                         <h5 class="mb-2">Recently Registered</h5>
-                        <a href="https://smarthr.dreamstechnologies.com/html/template/purchase-transaction.html" class="btn btn-light btn-md mb-2">View All</a>
+                        <a href="#" class="btn btn-light btn-md mb-2">View All</a>
                     </div>
                     <div class="card-body pb-2">
                         <div class="d-sm-flex justify-content-between flex-wrap mb-3">
                             <div class="d-flex align-items-center mb-2">
                                 <a href="javscript:void(0);" class="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0">
-                                    <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/company-icon-11.svg" class="img-fluid w-auto h-auto" alt="img">
+                                    <img src="./assets/img/icons/company-icon-11.svg" class="img-fluid w-auto h-auto" alt="img">
                                 </a>
                                 <div class="ms-2 flex-fill">
                                     <h6 class="fs-medium text-truncate mb-1"><a href="javscript:void(0);">Pitch</a></h6>
@@ -378,7 +378,7 @@
                         <div class="d-sm-flex justify-content-between flex-wrap mb-3">
                             <div class="d-flex align-items-center mb-2">
                                 <a href="javscript:void(0);" class="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0">
-                                    <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/company-icon-12.svg" class="img-fluid w-auto h-auto" alt="img">
+                                    <img src="./assets/img/icons/company-icon-12.svg" class="img-fluid w-auto h-auto" alt="img">
                                 </a>
                                 <div class="ms-2 flex-fill">
                                     <h6 class="fs-medium text-truncate mb-1"><a href="javscript:void(0);">Initech</a></h6>
@@ -393,7 +393,7 @@
                         <div class="d-sm-flex justify-content-between flex-wrap mb-3">
                             <div class="d-flex align-items-center mb-2">
                                 <a href="javscript:void(0);" class="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0">
-                                    <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/company-icon-13.svg" class="img-fluid w-auto h-auto" alt="img">
+                                    <img src="./assets/img/icons/company-icon-13.svg" class="img-fluid w-auto h-auto" alt="img">
                                 </a>
                                 <div class="ms-2 flex-fill">
                                     <h6 class="fs-medium text-truncate mb-1"><a href="javscript:void(0);">Umbrella Corp</a></h6>
@@ -408,7 +408,7 @@
                         <div class="d-sm-flex justify-content-between flex-wrap mb-3">
                             <div class="d-flex align-items-center mb-2">
                                 <a href="javscript:void(0);" class="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0">
-                                    <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/company-icon-14.svg" class="img-fluid w-auto h-auto" alt="img">
+                                    <img src="./assets/img/icons/company-icon-14.svg" class="img-fluid w-auto h-auto" alt="img">
                                 </a>
                                 <div class="ms-2 flex-fill">
                                     <h6 class="fs-medium text-truncate mb-1"><a href="javscript:void(0);">Capital Partners</a></h6>
@@ -423,7 +423,7 @@
                         <div class="d-sm-flex justify-content-between flex-wrap mb-1">
                             <div class="d-flex align-items-center mb-2">
                                 <a href="javscript:void(0);" class="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0">
-                                    <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/company-icon-15.svg" class="img-fluid w-auto h-auto" alt="img">
+                                    <img src="./assets/img/icons/company-icon-15.svg" class="img-fluid w-auto h-auto" alt="img">
                                 </a>
                                 <div class="ms-2 flex-fill">
                                     <h6 class="fs-medium text-truncate mb-1"><a href="javscript:void(0);">Massive Dynamic</a></h6>
@@ -467,7 +467,7 @@
                                 <div class="d-sm-flex justify-content-between flex-wrap mb-3">
                                     <div class="d-flex align-items-center mb-2">
                                         <a href="javscript:void(0);" class="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0">
-                                            <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/company-icon-16.svg" class="img-fluid w-auto h-auto" alt="img">
+                                            <img src="./assets/img/icons/company-icon-16.svg" class="img-fluid w-auto h-auto" alt="img">
                                         </a>
                                         <div class="ms-2 flex-fill">
                                             <h6 class="fs-medium text-truncate mb-1"><a href="javscript:void(0);">Silicon Corp</a></h6>
@@ -482,7 +482,7 @@
                                 <div class="d-sm-flex justify-content-between flex-wrap mb-3">
                                     <div class="d-flex align-items-center mb-2">
                                         <a href="javscript:void(0);" class="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0">
-                                            <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/company-icon-14.svg" class="img-fluid w-auto h-auto" alt="img">
+                                            <img src="./assets/img/icons/company-icon-14.svg" class="img-fluid w-auto h-auto" alt="img">
                                         </a>
                                         <div class="ms-2 flex-fill">
                                             <h6 class="fs-medium text-truncate mb-1"><a href="javscript:void(0);">Hubspot</a></h6>
@@ -497,7 +497,7 @@
                                 <div class="d-sm-flex justify-content-between flex-wrap mb-3">
                                     <div class="d-flex align-items-center mb-2">
                                         <a href="javscript:void(0);" class="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0">
-                                            <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/company-icon-18.svg" class="img-fluid w-auto h-auto" alt="img">
+                                            <img src="./assets/img/icons/company-icon-18.svg" class="img-fluid w-auto h-auto" alt="img">
                                         </a>
                                         <div class="ms-2 flex-fill">
                                             <h6 class="fs-medium text-truncate mb-1"><a href="javscript:void(0);">Licon Industries</a></h6>
@@ -512,7 +512,7 @@
                                 <div class="d-flex justify-content-between flex-wrap mb-3">
                                     <div class="d-flex align-items-center mb-2">
                                         <a href="javscript:void(0);" class="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0">
-                                            <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/company/company-07.svg" class="img-fluid w-auto h-auto" alt="img">
+                                            <img src="./assets/img/company/company-07.svg" class="img-fluid w-auto h-auto" alt="img">
                                         </a>
                                         <div class="ms-2 flex-fill">
                                             <h6 class="fs-medium text-truncate mb-1"><a href="javscript:void(0);">TerraFusion Energy</a></h6>
@@ -527,7 +527,7 @@
                                 <div class="d-sm-flex justify-content-between flex-wrap mb-1">
                                     <div class="d-flex align-items-center mb-2">
                                         <a href="javscript:void(0);" class="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0">
-                                            <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/company/company-08.svg" class="img-fluid w-auto h-auto" alt="img">
+                                            <img src="./assets/img/company/company-08.svg" class="img-fluid w-auto h-auto" alt="img">
                                         </a>
                                         <div class="ms-2 flex-fill">
                                             <h6 class="fs-medium text-truncate mb-1"><a href="javscript:void(0);">Epicurean Delights</a></h6>
@@ -544,7 +544,7 @@
                                 <div class="d-flex justify-content-between mb-4">
                                     <div class="d-flex align-items-center overflow-hidden">
                                         <a href="javscript:void(0);" class="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0">
-                                            <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/company-icon-16.svg" class="img-fluid w-auto h-auto" alt="img">
+                                            <img src="./assets/img/icons/company-icon-16.svg" class="img-fluid w-auto h-auto" alt="img">
                                         </a>
                                         <div class="ms-2 flex-fill overflow-hidden">
                                             <h6 class="fs-medium text-truncate mb-1"><a href="javscript:void(0);">Silicon Corp</a></h6>
@@ -559,7 +559,7 @@
                                 <div class="d-flex justify-content-between mb-4">
                                     <div class="d-flex align-items-center overflow-hidden">
                                         <a href="javscript:void(0);" class="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0">
-                                            <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/company-icon-14.svg" class="img-fluid w-auto h-auto" alt="img">
+                                            <img src="./assets/img/icons/company-icon-14.svg" class="img-fluid w-auto h-auto" alt="img">
                                         </a>
                                         <div class="ms-2 flex-fill overflow-hidden">
                                             <h6 class="fs-medium text-truncate mb-1"><a href="javscript:void(0);">Hubspot</a></h6>
@@ -574,7 +574,7 @@
                                 <div class="d-flex justify-content-between mb-4">
                                     <div class="d-flex align-items-center overflow-hidden">
                                         <a href="javscript:void(0);" class="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0">
-                                            <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/company-icon-18.svg" class="img-fluid w-auto h-auto" alt="img">
+                                            <img src="./assets/img/icons/company-icon-18.svg" class="img-fluid w-auto h-auto" alt="img">
                                         </a>
                                         <div class="ms-2 flex-fill overflow-hidden">
                                             <h6 class="fs-medium text-truncate mb-1"><a href="javscript:void(0);">Licon Industries</a></h6>
@@ -589,7 +589,7 @@
                                 <div class="d-flex justify-content-between mb-4">
                                     <div class="d-flex align-items-center overflow-hidden">
                                         <a href="javscript:void(0);" class="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0">
-                                            <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/company/company-07.svg" class="img-fluid w-auto h-auto" alt="img">
+                                            <img src="./assets/img/company/company-07.svg" class="img-fluid w-auto h-auto" alt="img">
                                         </a>
                                         <div class="ms-2 flex-fill overflow-hidden">
                                             <h6 class="fs-medium text-truncate mb-1"><a href="javscript:void(0);">TerraFusion Energy</a></h6>
@@ -604,7 +604,7 @@
                                 <div class="d-flex justify-content-between mb-0">
                                     <div class="d-flex align-items-center overflow-hidden">
                                         <a href="javscript:void(0);" class="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0">
-                                            <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/company/company-08.svg" class="img-fluid w-auto h-auto" alt="img">
+                                            <img src="./assets/img/company/company-08.svg" class="img-fluid w-auto h-auto" alt="img">
                                         </a>
                                         <div class="ms-2 flex-fill overflow-hidden">
                                             <h6 class="fs-medium text-truncate mb-1"><a href="javscript:void(0);">Epicurean Delights</a></h6>

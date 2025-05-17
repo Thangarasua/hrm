@@ -79,7 +79,7 @@
 	<div class="sidebar-inner slimscroll">
 		<div id="sidebar-menu" class="sidebar-menu">
 			<ul>
-				<?php if (in_array($roleId, [3, 4, 5])) { ?>
+				<?php if (in_array($roleId, [3, 4, 5]) || in_array($designationId, [17, 18])) { ?>
 					<li class="menu-title"><span>MAIN MENU</span></li>
 					<li>
 						<ul>
@@ -160,7 +160,7 @@
 					</ul>
 				</li>
 				
-				<?php if (in_array($roleId, [3, 4, 5])) { ?>
+				<?php if (in_array($roleId, [3, 4, 5]) || in_array($designationId, [17, 18])) { ?>
 				<li class="menu-title"><span>LEAVE MANAGEMENT</span></li>
 				<li>
 					<ul>

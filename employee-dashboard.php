@@ -12,7 +12,7 @@
 						<nav>
 							<ol class="breadcrumb mb-0">
 								<li class="breadcrumb-item">
-									<a href="https://smarthr.dreamstechnologies.com/html/template/index.html"><i class="ti ti-smart-home"></i></a>
+									<a href="index"><i class="ti ti-smart-home"></i></a>
 								</li>
 								<li class="breadcrumb-item">
 									Dashboard
@@ -64,7 +64,7 @@
 							<div class="card-header bg-dark">
 								<div class="d-flex align-items-center">
 									<span class="avatar avatar-lg avatar-rounded border border-white border-2 flex-shrink-0 me-2">
-										<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-01.jpg" alt="Img">
+										<img src="./assets/img/users/user-01.jpg" alt="Img">
 									</span>
 									<div>
 										<h5 class="text-white mb-1">Stephan Peralt</h5>
@@ -84,7 +84,7 @@
 								</div>
 								<div class="mb-3">
 									<span class="d-block mb-1 fs-13">Email Address</span>
-									<p class="text-gray-9"><a href="https://smarthr.dreamstechnologies.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="eab99e8f9a8f988e8fdbd8deaa8f928b879a868fc4898587">[email&#160;protected]</a></p>
+									<p class="text-gray-9"><a href="#" class="__cf_email__" data-cfemail="eab99e8f9a8f988e8fdbd8deaa8f928b879a868fc4898587">[email&#160;protected]</a></p>
 								</div>
 								<div class="mb-3">
 									<span class="d-block mb-1 fs-13">Report Office</span>
@@ -470,7 +470,7 @@
 												<div>
 													<div class="d-flex align-items-center mb-3">
 														<a href="javascript:void(0);" class="avatar">
-															<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-32.jpg" class="img-fluid rounded-circle" alt="img">
+															<img src="./assets/img/users/user-32.jpg" class="img-fluid rounded-circle" alt="img">
 														</a>
 														<div class="ms-2">
 															<h6 class="fw-normal"><a href="javascript:void(0);">Anthony Lewis</a></h6>
@@ -493,13 +493,13 @@
 														</div>
 														<div class="avatar-list-stacked avatar-group-sm">
 															<span class="avatar avatar-rounded">
-																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-06.jpg" alt="img">
+																<img class="border border-white" src="./assets/img/profiles/avatar-06.jpg" alt="img">
 															</span>
 															<span class="avatar avatar-rounded">
-																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-07.jpg" alt="img">
+																<img class="border border-white" src="./assets/img/profiles/avatar-07.jpg" alt="img">
 															</span>
 															<span class="avatar avatar-rounded">
-																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-08.jpg" alt="img">
+																<img class="border border-white" src="./assets/img/profiles/avatar-08.jpg" alt="img">
 															</span>
 															<a class="avatar bg-primary avatar-rounded text-fixed-white fs-12 fw-medium" href="javascript:void(0);">
 																+2
@@ -536,7 +536,7 @@
 												<div>
 													<div class="d-flex align-items-center mb-3">
 														<a href="javascript:void(0);" class="avatar">
-															<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-33.jpg" class="img-fluid rounded-circle" alt="img">
+															<img src="./assets/img/users/user-33.jpg" class="img-fluid rounded-circle" alt="img">
 														</a>
 														<div class="ms-2">
 															<h6 class="fw-normal"><a href="javascript:void(0);">Anthony Lewis</a></h6>
@@ -559,13 +559,13 @@
 														</div>
 														<div class="avatar-list-stacked avatar-group-sm">
 															<span class="avatar avatar-rounded">
-																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-06.jpg" alt="img">
+																<img class="border border-white" src="./assets/img/profiles/avatar-06.jpg" alt="img">
 															</span>
 															<span class="avatar avatar-rounded">
-																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-07.jpg" alt="img">
+																<img class="border border-white" src="./assets/img/profiles/avatar-07.jpg" alt="img">
 															</span>
 															<span class="avatar avatar-rounded">
-																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-08.jpg" alt="img">
+																<img class="border border-white" src="./assets/img/profiles/avatar-08.jpg" alt="img">
 															</span>
 															<a class="avatar bg-primary avatar-rounded text-fixed-white fs-12 fw-medium" href="javascript:void(0);">
 																+2
@@ -626,13 +626,13 @@
 													<div class="d-flex align-items-center">
 														<div class="avatar-list-stacked avatar-group-sm">
 															<span class="avatar avatar-rounded">
-																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-13.jpg" alt="img">
+																<img class="border border-white" src="./assets/img/profiles/avatar-13.jpg" alt="img">
 															</span>
 															<span class="avatar avatar-rounded">
-																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-14.jpg" alt="img">
+																<img class="border border-white" src="./assets/img/profiles/avatar-14.jpg" alt="img">
 															</span>
 															<span class="avatar avatar-rounded">
-																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-15.jpg" alt="img">
+																<img class="border border-white" src="./assets/img/profiles/avatar-15.jpg" alt="img">
 															</span>
 														</div>
 													</div>
@@ -660,10 +660,10 @@
 													<div class="d-flex align-items-center">
 														<div class="avatar-list-stacked avatar-group-sm">
 															<span class="avatar avatar-rounded">
-																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-20.jpg" alt="img">
+																<img class="border border-white" src="./assets/img/profiles/avatar-20.jpg" alt="img">
 															</span>
 															<span class="avatar avatar-rounded">
-																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-21.jpg" alt="img">
+																<img class="border border-white" src="./assets/img/profiles/avatar-21.jpg" alt="img">
 															</span>
 														</div>
 													</div>
@@ -691,13 +691,13 @@
 													<div class="d-flex align-items-center">
 														<div class="avatar-list-stacked avatar-group-sm">
 															<span class="avatar avatar-rounded">
-																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-28.jpg" alt="img">
+																<img class="border border-white" src="./assets/img/profiles/avatar-28.jpg" alt="img">
 															</span>
 															<span class="avatar avatar-rounded">
-																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-29.jpg" alt="img">
+																<img class="border border-white" src="./assets/img/profiles/avatar-29.jpg" alt="img">
 															</span>
 															<span class="avatar avatar-rounded">
-																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-24.jpg" alt="img">
+																<img class="border border-white" src="./assets/img/profiles/avatar-24.jpg" alt="img">
 															</span>
 														</div>
 													</div>
@@ -725,13 +725,13 @@
 													<div class="d-flex align-items-center">
 														<div class="avatar-list-stacked avatar-group-sm">
 															<span class="avatar avatar-rounded">
-																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-23.jpg" alt="img">
+																<img class="border border-white" src="./assets/img/profiles/avatar-23.jpg" alt="img">
 															</span>
 															<span class="avatar avatar-rounded">
-																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-24.jpg" alt="img">
+																<img class="border border-white" src="./assets/img/profiles/avatar-24.jpg" alt="img">
 															</span>
 															<span class="avatar avatar-rounded">
-																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-25.jpg" alt="img">
+																<img class="border border-white" src="./assets/img/profiles/avatar-25.jpg" alt="img">
 															</span>
 														</div>
 													</div>
@@ -759,10 +759,10 @@
 													<div class="d-flex align-items-center">
 														<div class="avatar-list-stacked avatar-group-sm">
 															<span class="avatar avatar-rounded">
-																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-28.jpg" alt="img">
+																<img class="border border-white" src="./assets/img/profiles/avatar-28.jpg" alt="img">
 															</span>
 															<span class="avatar avatar-rounded">
-																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-29.jpg" alt="img">
+																<img class="border border-white" src="./assets/img/profiles/avatar-29.jpg" alt="img">
 															</span>
 														</div>
 													</div>
@@ -947,7 +947,7 @@
 									<div class="text-center">
 										<h5 class="text-white mb-4">Team Birthday</h5>
 										<span class="avatar avatar-xl avatar-rounded mb-2">
-											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-35.jpg" alt="Img">
+											<img src="./assets/img/users/user-35.jpg" alt="Img">
 										</span>
 										<div class="mb-3">
 											<h6 class="text-white fw-medium mb-1">Andrew Jermia</h6>
@@ -972,7 +972,7 @@
 										<h5 class="mb-1">Next Holiday</h5>
 										<p class="text-gray-9">Diwali, 15 Sep 2025</p>
 									</div>
-									<a href="https://smarthr.dreamstechnologies.com/html/template/holidays.html" class="btn btn-white btn-sm px-3">View All</a>
+									<a href="#" class="btn btn-white btn-sm px-3">View All</a>
 								</div>
 							</div>
 						</div>
@@ -993,7 +993,7 @@
 								<div class="d-flex align-items-center justify-content-between mb-4">
 									<div class="d-flex align-items-center">
 										<a href="javascript:void(0);" class="avatar flex-shrink-0">
-											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-27.jpg" class="rounded-circle border border-2" alt="img">
+											<img src="./assets/img/users/user-27.jpg" class="rounded-circle border border-2" alt="img">
 										</a>
 										<div class="ms-2">
 											<h6 class="fs-14 fw-medium text-truncate mb-1"><a href="#">Alexander Jermai</a></h6>
@@ -1009,7 +1009,7 @@
 								<div class="d-flex align-items-center justify-content-between mb-4">
 									<div class="d-flex align-items-center">
 										<a href="javascript:void(0);" class="avatar flex-shrink-0">
-											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-42.jpg" class="rounded-circle border border-2" alt="img">
+											<img src="./assets/img/users/user-42.jpg" class="rounded-circle border border-2" alt="img">
 										</a>
 										<div class="ms-2">
 											<h6 class="fs-14 fw-medium text-truncate mb-1"><a href="#">Doglas Martini</a></h6>
@@ -1025,7 +1025,7 @@
 								<div class="d-flex align-items-center justify-content-between mb-4">
 									<div class="d-flex align-items-center">
 										<a href="javascript:void(0);" class="avatar flex-shrink-0">
-											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-43.jpg" class="rounded-circle border border-2" alt="img">
+											<img src="./assets/img/users/user-43.jpg" class="rounded-circle border border-2" alt="img">
 										</a>
 										<div class="ms-2">
 											<h6 class="fs-14 fw-medium text-truncate mb-1"><a href="#">Daniel Esbella</a></h6>
@@ -1041,7 +1041,7 @@
 								<div class="d-flex align-items-center justify-content-between mb-4">
 									<div class="d-flex align-items-center">
 										<a href="javascript:void(0);" class="avatar flex-shrink-0">
-											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-11.jpg" class="rounded-circle border border-2" alt="img">
+											<img src="./assets/img/users/user-11.jpg" class="rounded-circle border border-2" alt="img">
 										</a>
 										<div class="ms-2">
 											<h6 class="fs-14 fw-medium text-truncate mb-1"><a href="#">Daniel Esbella</a></h6>
@@ -1057,7 +1057,7 @@
 								<div class="d-flex align-items-center justify-content-between mb-4">
 									<div class="d-flex align-items-center">
 										<a href="javascript:void(0);" class="avatar flex-shrink-0">
-											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-44.jpg" class="rounded-circle border border-2" alt="img">
+											<img src="./assets/img/users/user-44.jpg" class="rounded-circle border border-2" alt="img">
 										</a>
 										<div class="ms-2">
 											<h6 class="fs-14 fw-medium text-truncate mb-1"><a href="#">Stephan Peralt</a></h6>
@@ -1073,7 +1073,7 @@
 								<div class="d-flex align-items-center justify-content-between">
 									<div class="d-flex align-items-center">
 										<a href="javascript:void(0);" class="avatar flex-shrink-0">
-											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-54.jpg" class="rounded-circle border border-2" alt="img">
+											<img src="./assets/img/users/user-54.jpg" class="rounded-circle border border-2" alt="img">
 										</a>
 										<div class="ms-2">
 											<h6 class="fs-14 fw-medium text-truncate mb-1"><a href="#">Andrew Jermia</a></h6>
@@ -1102,20 +1102,20 @@
 							<div class="card-body">
 								<div class="d-flex align-items-start mb-4">
 									<a href="javascript:void(0);" class="avatar flex-shrink-0">
-										<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-27.jpg" class="rounded-circle border border-2" alt="img">
+										<img src="./assets/img/users/user-27.jpg" class="rounded-circle border border-2" alt="img">
 									</a>
 									<div class="ms-2">
 										<h6 class="fs-14 fw-medium text-truncate mb-1">Lex Murphy requested access to UNIX </h6>
 										<p class="fs-13 mb-2">Today at 9:42 AM</p>
 										<div class="d-flex align-items-center">
-											<a href="#" class="avatar avatar-sm border flex-shrink-0 me-2"><img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/social/pdf-icon.svg" class="w-auto h-auto" alt="Img"></a>
+											<a href="#" class="avatar avatar-sm border flex-shrink-0 me-2"><img src="./assets/img/social/pdf-icon.svg" class="w-auto h-auto" alt="Img"></a>
 											<h6 class="fw-normal"><a href="#">EY_review.pdf</a></h6>
 										</div>
 									</div>
 								</div>
 								<div class="d-flex align-items-start mb-4">
 									<a href="javascript:void(0);" class="avatar flex-shrink-0">
-										<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-28.jpg" class="rounded-circle border border-2" alt="img">
+										<img src="./assets/img/users/user-28.jpg" class="rounded-circle border border-2" alt="img">
 									</a>
 									<div class="ms-2">
 										<h6 class="fs-14 fw-medium text-truncate mb-1">Lex Murphy requested access to UNIX </h6>
@@ -1124,7 +1124,7 @@
 								</div>
 								<div class="d-flex align-items-start mb-4">
 									<a href="javascript:void(0);" class="avatar flex-shrink-0">
-										<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-29.jpg" class="rounded-circle border border-2" alt="img">
+										<img src="./assets/img/users/user-29.jpg" class="rounded-circle border border-2" alt="img">
 									</a>
 									<div class="ms-2">
 										<h6 class="fs-14 fw-medium text-truncate mb-1">Lex Murphy requested access to UNIX </h6>
@@ -1137,7 +1137,7 @@
 								</div>
 								<div class="d-flex align-items-start mb-4">
 									<a href="javascript:void(0);" class="avatar flex-shrink-0">
-										<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-30.jpg" class="rounded-circle border border-2" alt="img">
+										<img src="./assets/img/users/user-30.jpg" class="rounded-circle border border-2" alt="img">
 									</a>
 									<div class="ms-2">
 										<h6 class="fs-14 fw-medium text-truncate mb-1">Lex Murphy requested access to UNIX </h6>
@@ -1146,7 +1146,7 @@
 								</div>
 								<div class="d-flex align-items-start">
 									<a href="javascript:void(0);" class="avatar flex-shrink-0">
-										<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-33.jpg" class="rounded-circle border border-2" alt="img">
+										<img src="./assets/img/users/user-33.jpg" class="rounded-circle border border-2" alt="img">
 									</a>
 									<div class="ms-2">
 										<h6 class="fs-14 fw-medium text-truncate mb-1">Lex Murphy requested access to UNIX </h6>
@@ -1252,7 +1252,7 @@
 							<i class="ti ti-x"></i>
 						</button>
 					</div>
-					<form action="https://smarthr.dreamstechnologies.com/html/template/employee-dashboard.html">
+					<form action="employee-dashboard">
 						<div class="modal-body pb-0">
 							<div class="row">
 								<div class="col-md-12">
@@ -1339,7 +1339,7 @@
 							<i class="ti ti-x"></i>
 						</button>
 					</div>
-					<form action="https://smarthr.dreamstechnologies.com/html/template/employee-dashboard.html">
+					<form action="employee-dashboard">
 						<div class="modal-body">
 							<div class="row">
 								<div class="col-12">
@@ -1489,7 +1489,7 @@
 						<p class="mb-3">You want to delete all the marked items, this cant be undone once you delete.</p>
 						<div class="d-flex justify-content-center">
 							<a href="javascript:void(0);" class="btn btn-light me-3" data-bs-dismiss="modal">Cancel</a>
-							<a href="https://smarthr.dreamstechnologies.com/html/template/employee-dashboard.html" class="btn btn-danger">Yes, Delete</a>
+							<a href="#" class="btn btn-danger">Yes, Delete</a>
 						</div>
 					</div>
 				</div>

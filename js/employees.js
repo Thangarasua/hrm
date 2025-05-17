@@ -77,12 +77,10 @@ $(document).ready(function () {
                             <td>${row.doj}</td>
                             <td>
                               <div class="action-icon d-inline-flex">
-                                <a href="employee-details" data-id="${row.employee_id
-              }" class="view" id="employeeDetails">
+                                <a href="employee-details" data-id="${row.employee_id}" class="view" id="employeeDetails">
                                   <i class="fa-solid fa-eye" title="view details"></i>
                                 </a>
-                                <a href="javascript:void(0)" data-id="${row.employee_id
-              }" class="edit">
+                                <a href="javascript:void(0)" data-id="${row.employee_id}" class="edit">
                                   <i class="fa-solid fa-pen-to-square" title="edit details"></i>
                                 </a>
                               </div>
