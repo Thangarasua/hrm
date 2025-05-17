@@ -251,7 +251,7 @@ if (isset($_GET['id'])) {
 							<div class="col-md-8 m-auto">
 								<div class="mb-3">
 									<label class="form-label">Rejection Comments<span class="text-danger"> *</span></label>
-									<textarea class="form-control" name="rejection" id="rejection" rows="3"></textarea>
+									<textarea class="form-control" name="rejection" id="rejection" candidates></textarea>
 								</div>
 							</div>
 						</div>

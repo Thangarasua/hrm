@@ -11,7 +11,7 @@
 				<nav>
 					<ol class="breadcrumb mb-0">
 						<li class="breadcrumb-item">
-							<a href="https://smarthr.dreamstechnologies.com/html/template/index.html"><i class="ti ti-smart-home"></i></a>
+							<a href="index"><i class="ti ti-smart-home"></i></a>
 						</li>
 						<li class="breadcrumb-item">
 							HR
@@ -215,7 +215,7 @@
 					<i class="ti ti-x"></i>
 				</button>
 			</div>
-			<form action="https://smarthr.dreamstechnologies.com/html/template/policy.html">
+			<form action="policy">
 				<div class="modal-body pb-0">
 					<div class="row">
 						<div class="col-md-12">
@@ -248,7 +248,7 @@
 								<label class="form-label">Upload Policy</label>
 								<div class="policy-upload d-flex flex-column align-items-center">
 									<div class="policy-upload-bg mb-2 rounded-circle d-flex align-items-center justify-content-center bg-primary-transparent">
-										<span><img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/folder-open.svg" alt="Img" class="img-fluid"></span>
+										<span><img src="./assets/img/folder-open.svg" alt="Img" class="img-fluid"></span>
 									</div>
 									<h6 class="fs-12 fw-normal mb-2">Drag and drop your files</h6>
 									<div class="drag-upload-btn bg-primary mb-0">
@@ -280,7 +280,7 @@
 					<i class="ti ti-x"></i>
 				</button>
 			</div>
-			<form action="https://smarthr.dreamstechnologies.com/html/template/policy.html">
+			<form action="policy">
 				<div class="modal-body pb-0">
 					<div class="row">
 						<div class="col-md-12">
@@ -312,7 +312,7 @@
 								<label class="form-label">Upload Policy</label>
 								<div class="policy-upload d-flex flex-column align-items-center">
 									<div class="policy-upload-bg mb-2 rounded-circle d-flex align-items-center justify-content-center bg-primary-transparent">
-										<span><img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/folder-open.svg" alt="Img" class="img-fluid"></span>
+										<span><img src="./assets/img/folder-open.svg" alt="Img" class="img-fluid"></span>
 									</div>
 									<h6 class="fs-12 fw-normal mb-2">Drag and drop your files</h6>
 									<div class="drag-upload-btn bg-primary mb-0">
@@ -346,7 +346,7 @@
 				<p class="mb-3">You want to delete all the marked items, this cant be undone once you delete.</p>
 				<div class="d-flex justify-content-center">
 					<a href="javascript:void(0);" class="btn btn-light me-3" data-bs-dismiss="modal">Cancel</a>
-					<a href="https://smarthr.dreamstechnologies.com/html/template/policy.html" class="btn btn-danger">Yes, Delete</a>
+					<a href="./policy.html" class="btn btn-danger">Yes, Delete</a>
 				</div>
 			</div>
 		</div>

@@ -1238,7 +1238,7 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 			<div class="modal-body">
 				<div class="bg-light p-3 rounded d-flex align-items-center mb-3">
 					<span class="avatar avatar-lg flex-shrink-0 me-2">
-						<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/laptop.jpg" alt="img" class="ig-fluid rounded-circle">
+						<img src="./assets/img/laptop.jpg" alt="img" class="ig-fluid rounded-circle">
 					</span>
 					<div>
 						<h6>Dell Laptop - #343556656</h6>
@@ -1298,9 +1298,9 @@ $employeeRoleId = $_SESSION['hrm_roleId'];
 				<div>
 					<p class="fs-13 mb-2">Asset Images</p>
 					<div class="d-flex align-items-center">
-						<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/laptop-01.jpg" alt="img" class="img-fluid rounded me-2">
-						<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/laptop-2.jpg" alt="img" class="img-fluid rounded me-2">
-						<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/laptop-3.jpg" alt="img" class="img-fluid rounded">
+						<img src="./assets/img/laptop-01.jpg" alt="img" class="img-fluid rounded me-2">
+						<img src="./assets/img/laptop-2.jpg" alt="img" class="img-fluid rounded me-2">
+						<img src="./assets/img/laptop-3.jpg" alt="img" class="img-fluid rounded">
 					</div>
 				</div>
 			</div>
