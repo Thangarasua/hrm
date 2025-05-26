@@ -87,16 +87,16 @@ $personalInfo = getPersonalInfo($employeeId);
 									<div class="card-body">
 										<div class="border-bottom mb-2 pb-2">
 											<span class="avatar avatar-sm bg-primary mb-2"><i class="ti ti-clock-stop"></i></span>
-											<h2 class="mb-2">8.36 / <span class="fs-20 text-gray-5"> 9</span></h2>
+											<h2 class="mb-2"><span id="today-hours">--:--</span> / <span class="fs-20 text-gray-5"> 09</span></h2>
 											<p class="fw-medium text-truncate">Total Hours Today</p>
 										</div>
 										<div>
-											<p class="d-flex align-items-center fs-13">
+											<!-- <p class="d-flex align-items-center fs-13">
 												<span class="avatar avatar-xs rounded-circle bg-success flex-shrink-0 me-2">
 													<i class="ti ti-arrow-up fs-12"></i>
 												</span>
 												<span>5% This Week</span>
-											</p>
+											</p> -->
 										</div>
 									</div>
 								</div>
@@ -106,16 +106,16 @@ $personalInfo = getPersonalInfo($employeeId);
 									<div class="card-body">
 										<div class="border-bottom mb-2 pb-2">
 											<span class="avatar avatar-sm bg-dark mb-2"><i class="ti ti-clock-up"></i></span>
-											<h2 class="mb-2">10 / <span class="fs-20 text-gray-5"> 40</span></h2>
+											<h2 class="mb-2"><span id="week-hours">--:--</span> / <span class="fs-20 text-gray-5"> 48</span></h2>
 											<p class="fw-medium text-truncate">Total Hours Week</p>
 										</div>
 										<div>
-											<p class="d-flex align-items-center fs-13">
+											<!-- <p class="d-flex align-items-center fs-13">
 												<span class="avatar avatar-xs rounded-circle bg-success flex-shrink-0 me-2">
 													<i class="ti ti-arrow-up fs-12"></i>
 												</span>
 												<span>7% Last Week</span>
-											</p>
+											</p> -->
 										</div>
 									</div>
 								</div>
@@ -125,16 +125,16 @@ $personalInfo = getPersonalInfo($employeeId);
 									<div class="card-body">
 										<div class="border-bottom mb-2 pb-2">
 											<span class="avatar avatar-sm bg-info mb-2"><i class="ti ti-calendar-up"></i></span>
-											<h2 class="mb-2">75 / <span class="fs-20 text-gray-5"> 98</span></h2>
+											<h2 class="mb-2"><span id="month-hours">--:--</span> / <span class="fs-20 text-gray-5"> 98</span></h2>
 											<p class="fw-medium text-truncate">Total Hours Month</p>
 										</div>
 										<div>
-											<p class="d-flex align-items-center fs-13 text-truncate">
+											<!-- <p class="d-flex align-items-center fs-13 text-truncate">
 												<span class="avatar avatar-xs rounded-circle bg-danger flex-shrink-0 me-2">
 													<i class="ti ti-arrow-down fs-12"></i>
 												</span>
 												<span>8% Last Month</span>
-											</p>
+											</p> -->
 										</div>
 									</div>
 								</div>
@@ -144,16 +144,16 @@ $personalInfo = getPersonalInfo($employeeId);
 									<div class="card-body">
 										<div class="border-bottom mb-2 pb-2">
 											<span class="avatar avatar-sm bg-pink mb-2"><i class="ti ti-calendar-star"></i></span>
-											<h2 class="mb-2">16 / <span class="fs-20 text-gray-5"> 28</span></h2>
+											<h2 class="mb-2"><span id="month-overtime">--:--</span> / <span class="fs-20 text-gray-5"> 28</span></h2>
 											<p class="fw-medium text-truncate">Overtime this Month</p>
 										</div>
 										<div>
-											<p class="d-flex align-items-center fs-13 text-truncate">
+											<!-- <p class="d-flex align-items-center fs-13 text-truncate">
 												<span class="avatar avatar-xs rounded-circle bg-danger flex-shrink-0 me-2">
 													<i class="ti ti-arrow-down fs-12"></i>
 												</span>
 												<span>6% Last Month</span>
-											</p>
+											</p> -->
 										</div>
 									</div>
 								</div>
@@ -165,25 +165,25 @@ $personalInfo = getPersonalInfo($employeeId);
 											<div class="col-xl-3">
 												<div class="mb-3">
 													<p class="d-flex align-items-center mb-1"><i class="ti ti-point-filled text-dark-transparent me-1"></i>Total Working hours</p>
-													<h3>12h 36m</h3>
+													<h3 id="total-working-hours">--:--</h3>
 												</div>
 											</div>
 											<div class="col-xl-3">
 												<div class="mb-3">
 													<p class="d-flex align-items-center mb-1"><i class="ti ti-point-filled text-success me-1"></i>Productive Hours</p>
-													<h3>08h 36m</h3>
+													<h3 id="productive-hours">--:--</h3>
 												</div>
 											</div>
 											<div class="col-xl-3">
 												<div class="mb-3">
 													<p class="d-flex align-items-center mb-1"><i class="ti ti-point-filled text-warning me-1"></i>Break hours</p>
-													<h3>22m 15s</h3>
+													<h3 id="break-hours">--:--</h3>
 												</div>
 											</div>
 											<div class="col-xl-3">
 												<div class="mb-3">
 													<p class="d-flex align-items-center mb-1"><i class="ti ti-point-filled text-info me-1"></i>Overtime</p>
-													<h3>02h 15m</h3>
+													<h3 id="overtime-hours">--:--</h3>
 												</div>
 											</div>
 										</div>
