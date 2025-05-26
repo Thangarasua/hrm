@@ -122,6 +122,8 @@ $(document).ready(function () {
         return `${hours}:${minutes}`;
     }
 
+    fetchAttendanceReport();
+
     function fetchAttendance(fromDate, toDate) {
         $.ajax({
             url: "queries/employee-attendance.php",
@@ -268,5 +270,29 @@ $(document).ready(function () {
             }
         })
     });
+
+    function fetchAttendanceReport() {
+        $.ajax({
+        url: 'queries/fetch-attendance-report.php',
+        method: 'POST',
+        data: { employeeId: employeeId, flag: 'fetchReport' },
+        dataType: 'json',
+        success: function(data) {
+            // Update Cards
+            $('#today-hours').text(data.today_hours);
+            $('#week-hours').text(data.week_hours);
+            $('#month-hours').text(data.month_hours);
+            $('#month-overtime').text(data.month_overtime);
+
+            // Update Breakdown
+            $('#total-working-hours').text(data.today_hours);
+            $('#productive-hours').text(data.productive_today);
+            $('#break-hours').text(data.break_today);
+            $('#overtime-hours').text(data.overtime_today);
+
+            $('#production-hours').text('Production: ' + data.productive_today + ' hrs');
+        }
+    });
+    }
     
 });
