@@ -131,6 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
         $candidateContact = $_POST['candidateContact'];
         $raisedBy = $_POST['raisedBy'];
         $jobSno = $_POST['jobSno'];
+        $jobLocationAddress = $_POST['jobLocationAddress'];
 
         $lastTicketId = "SELECT `candidate_register_id` FROM `candidates` ORDER BY `candidate_id` DESC";
         $result = mysqli_query($conn, $lastTicketId);
@@ -163,6 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['flag'])) {
             $row['candidateName'] = $candidateName;
             $row['email'] = $candidateMail;
             $row['jobTitle'] = $jobTitle;
+            $row['jobLocationAddress'] = $jobLocationAddress;
 
             if ($result) {
                 echo json_encode(array(

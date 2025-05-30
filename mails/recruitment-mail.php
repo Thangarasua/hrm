@@ -39,7 +39,8 @@ try {
             $hrName = $_POST['hrName'];
             $HRphone = $_POST['HRphone'];
             $companyName = 'Markerz Global Solution';
-            $companyAddress = 'Velachery, Chennai, Tamil Nadu 600042';
+            // $companyAddress = 'Velachery, Chennai, Tamil Nadu 600042';
+            $companyAddress =  $_POST['jobLocationAddress'];
 
             //Recipients
             $mail->addAddress($_POST['email'], $_POST['candidateName']);
