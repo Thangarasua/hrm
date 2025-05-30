@@ -675,6 +675,15 @@ $(document).ready(function () {
   function formValidate3() {
     $(".error").remove(); // Remove previous error messages
 
+     let jobLocationAddress = $("#jobLocationAddress").val().trim();
+    if (jobLocationAddress.length == 0) {
+      $("#jobLocationAddress").focus();
+      $("#jobLocationAddress").closest(".mb-3").find(".form-label").after(
+        "<small class='error text-danger'> Enter Job Location Address</small>"
+      );
+      return 0;
+    }
+
     let candidateName = $("#candidateName").val().trim();
     if (candidateName.length == 0) {
       $("#candidateName").focus();

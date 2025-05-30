@@ -338,6 +338,12 @@ require_once("./includes/sidebar.php");
 										<input type="text" class="form-control" name="jobTitle" id="send_jobTitle" readonly>
 									</div>
 								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Job Location Address <span class="text-danger"> *</span></label>
+										<textarea class="form-control" name="jobLocationAddress" id="jobLocationAddress"></textarea>
+									</div>
+								</div>
 							</div>
 							<div class="col-md-8">
 								<div class="mb-3">
