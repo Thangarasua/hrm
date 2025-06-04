@@ -142,9 +142,11 @@ try {
             //Recipients
             $mail->addAddress($_POST['email'], $_POST['candidate_name']);
 
-            $mail->Subject = mb_encode_mimeheader("🎉Congratulations $candidate_name!🎊 Job Offer for $job_position at $companyName", 'UTF-8');
+            // $mail->Subject = mb_encode_mimeheader("🎉Congratulations $candidate_name!🎊 Job Offer for $job_position at $companyName", 'UTF-8');
+
+            $mail->Subject = mb_encode_mimeheader("🎉Training Period Notice and Conditional Offer – HR Recruiter at Markerz Global", 'UTF-8');
             //Content
-            $htmlContent = file_get_contents('./templates/interview-offer.html');
+            $htmlContent = file_get_contents('./templates/conditional-offer.html');
             $htmlContent = str_replace('{{id}}', $encryptID, $htmlContent);
             $htmlContent = str_replace('{{Name}}', $candidate_name, $htmlContent);
             $htmlContent = str_replace('{{Job Position}}', $job_position, $htmlContent);
