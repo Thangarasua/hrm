@@ -111,11 +111,6 @@
 									<li><a href="employees" class="employees">Employee Lists</a></li>
 									<li><a href="admin-attendance" class="admin-attendance">Employee Attendance</a></li>
 									<li><a href="admin-attendance-request" class="admin-attendance-request">Attendance Request</a></li>
-									<li><a href="departments" class="departments">Departments</a></li>
-									<li><a href="designations" class="designations">Designations</a></li>
-									<li><a href="roles" class="roles">Roles</a></li>
-									<li><a href="salary-structure" class="salary-structure">Salary Structure</a></li>
-									<li><a href="policy" class="policy">Policies</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -175,6 +170,27 @@
 							</ul>
 						</li> 
 					</ul>
+				</li>
+
+				<li class="menu-title"><span>Admin</span></li>
+					<li>
+						<ul>
+							<li class="submenu">
+								<a href="javascript:void(0);" class="sub-menu-title">
+									<i class="ti ti-users"></i><span>Admin</span>
+									<span class="menu-arrow"></span>
+								</a>
+								<ul>
+									<li><a href="branches" class="branches">Branch</a></li>
+									<li><a href="departments" class="departments">Departments</a></li>
+									<li><a href="designations" class="designations">Designations</a></li>
+									<li><a href="roles" class="roles">Roles</a></li>
+									<li><a href="salary-structure" class="salary-structure">Salary Structure</a></li>
+									<li><a href="policy" class="policy">Policies</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
 				</li>
 				<?php } ?>
 
