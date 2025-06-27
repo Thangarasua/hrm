@@ -109,7 +109,8 @@
 								</a>
 								<ul>
 									<li><a href="employees" class="employees">Employee Lists</a></li>
-									<li><a href="admin-attendance" class="admin-attendance">Employee Attendance</a></li>
+									<li><a href="admin-attendance" class="admin-attendance">HRM Attendance</a></li>
+									<li><a href="biometric-attendance" class="biometric-attendance">Biometric Attendance</a></li>
 									<li><a href="admin-attendance-request" class="admin-attendance-request">Attendance Request</a></li>
 								</ul>
 							</li>
